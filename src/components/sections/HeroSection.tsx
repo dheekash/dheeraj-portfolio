@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { MapPin, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { LinkButton } from "@/components/common/LinkButton";
 import { profile } from "@/data/profile";
 
@@ -421,36 +421,6 @@ export function HeroSection() {
               </div>
             </motion.div>
 
-            {/* 3. COMPANY TRUST STRIP */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.14 }}
-              className="mb-5"
-            >
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-3">
-                Experience at
-              </p>
-              <div className="flex flex-wrap items-center gap-2.5">
-                {[
-                  { name: "Amazon",          color: "#FF9900", initial: "A",  border: "border-amber-500/20",   bg: "bg-amber-500/6 hover:bg-amber-500/10",   text: "text-amber-700 dark:text-amber-400" },
-                  { name: "Amplify Analytix", color: "#2563EB", initial: "AA", border: "border-blue-500/20",    bg: "bg-blue-500/6 hover:bg-blue-500/10",    text: "text-blue-700 dark:text-blue-400" },
-                  { name: "Frontizo",         color: "#10B981", initial: "F",  border: "border-emerald-500/20", bg: "bg-emerald-500/6 hover:bg-emerald-500/10", text: "text-emerald-700 dark:text-emerald-400" },
-                ].map((co) => (
-                  <div key={co.name} className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border ${co.border} ${co.bg} transition-colors`}>
-                    <span className="w-4 h-4 rounded-md flex items-center justify-center text-[8px] font-black"
-                      style={{ backgroundColor: `${co.color}20`, color: co.color }}>
-                      {co.initial}
-                    </span>
-                    <span className={`text-xs font-bold tracking-tight ${co.text}`}>{co.name}</span>
-                  </div>
-                ))}
-                <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <MapPin size={10} />
-                  Bengaluru, India
-                </span>
-              </div>
-            </motion.div>
 
             {/* 4. VALUE PROP */}
             <motion.p
@@ -466,28 +436,6 @@ export function HeroSection() {
               {" "}that turn 100M+ records into decisions for 20+ stakeholders across 8 countries.
             </motion.p>
 
-            {/* 6. Stats strip */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.38 }}
-              className="grid grid-cols-3 sm:grid-cols-5 gap-2"
-            >
-              {profile.stats.map((s, i) => (
-                <motion.div
-                  key={s.label}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.42 + i * 0.06 }}
-                  className="rounded-xl p-3 text-center bg-card border border-border shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group"
-                >
-                  <div className="text-lg sm:text-xl font-extrabold text-blue-600 dark:text-blue-400 group-hover:text-blue-500 transition-colors tabular-nums">
-                    <Counter value={s.value} suffix={s.suffix} />
-                  </div>
-                  <p className="text-[10px] text-muted-foreground mt-0.5 leading-tight">{s.label}</p>
-                </motion.div>
-              ))}
-            </motion.div>
           </div>
 
           {/* ══ RIGHT — Visual with mouse parallax ══ */}
