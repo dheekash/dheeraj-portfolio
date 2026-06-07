@@ -260,7 +260,7 @@ export function DashboardGallerySection() {
               className={i === 0 ? "md:col-span-2 lg:col-span-1 lg:row-span-1" : ""}
             >
               {/* Card wrapper */}
-              <div className="h-full rounded-2xl border border-border bg-card/40 overflow-hidden hover:shadow-xl hover:border-blue-500/30 transition-all duration-300">
+              <div className="h-full rounded-2xl border border-border bg-card/40 overflow-hidden card-depth">
                 <DashboardPlaceholder dashboard={d} onClick={() => setActive(d)} />
                 {/* Card footer */}
                 <div className="px-5 py-4">

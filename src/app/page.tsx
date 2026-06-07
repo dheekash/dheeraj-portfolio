@@ -14,23 +14,88 @@ import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ThoughtLeadershipSection } from "@/components/sections/ThoughtLeadershipSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 
+function Divider() {
+  return <div className="section-divider" />;
+}
+
 export default function HomePage() {
   return (
     <>
+      {/* 1 — Hero */}
       <HeroSection />
-      <ImpactNumbersSection />
-      <ResumeSnapshotSection />
+
+      {/* 2 — Numbers + Snapshot (light alt bg) */}
+      <div className="section-alt">
+        <ImpactNumbersSection />
+        <Divider />
+        <ResumeSnapshotSection />
+      </div>
+
+      <Divider />
+
+      {/* 3 — About (default bg) */}
       <AboutSection />
-      <DashboardGallerySection />
+
+      <Divider />
+
+      {/* 4 — Dashboards (alt2 bg) */}
+      <div className="section-alt2">
+        <DashboardGallerySection />
+      </div>
+
+      <Divider />
+
+      {/* 5 — Projects (default bg) */}
       <ProjectsSection />
-      <ExperienceSection />
+
+      <Divider />
+
+      {/* 6 — Experience (alt bg) */}
+      <div className="section-alt">
+        <ExperienceSection />
+      </div>
+
+      <Divider />
+
+      {/* 7 — Skills (default bg) */}
       <SkillsSection />
-      <CertificationsSection />
+
+      <Divider />
+
+      {/* 8 — Certifications (alt2 bg) */}
+      <div className="section-alt2">
+        <CertificationsSection />
+      </div>
+
+      <Divider />
+
+      {/* 9 — Currently Learning (default bg) */}
       <CurrentlyLearningSection />
-      <EducationSection />
-      <ConsultingSection />
+
+      <Divider />
+
+      {/* 10 — Education + Consulting (alt bg) */}
+      <div className="section-alt">
+        <EducationSection />
+        <Divider />
+        <ConsultingSection />
+      </div>
+
+      <Divider />
+
+      {/* 11 — Testimonials (default bg) */}
       <TestimonialsSection />
-      <ThoughtLeadershipSection />
+
+      <Divider />
+
+      {/* 12 — Thought Leadership (alt2 bg) */}
+      <div className="section-alt2">
+        <ThoughtLeadershipSection />
+      </div>
+
+      <Divider />
+
+      {/* 13 — Contact (default bg) */}
       <ContactSection />
     </>
   );

@@ -76,6 +76,50 @@ function Counter({ value, suffix = "" }: { value: string; suffix?: string }) {
   return <div ref={ref}>{count}{suffix}</div>;
 }
 
+/* ── Animated data flow ── */
+const flowNodes = [
+  { label: "Raw Data Sources",    icon: "⬡", color: "#64748B" },
+  { label: "ETL / ADF Pipeline",  icon: "⚡", color: "#3B82F6" },
+  { label: "Snowflake / Fabric",  icon: "❄", color: "#29B5E8" },
+  { label: "dbt / SQLMesh",       icon: "⚙", color: "#FF694B" },
+  { label: "Power BI Model",      icon: "▦", color: "#F2C811" },
+  { label: "Executive Insights",  icon: "★", color: "#10B981" },
+];
+
+function DataFlow() {
+  return (
+    <div className="flex flex-col items-center gap-0 w-52">
+      {flowNodes.map((node, i) => (
+        <div key={node.label} className="flex flex-col items-center w-full">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 + i * 0.15, duration: 0.4, ease: "easeOut" as const }}
+            className="w-full flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-border bg-background/70 dark:bg-card/60 backdrop-blur-sm shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group"
+          >
+            <span className="text-base leading-none" style={{ color: node.color }}>{node.icon}</span>
+            <span className="text-xs font-semibold text-foreground/80 group-hover:text-foreground transition-colors">{node.label}</span>
+          </motion.div>
+          {i < flowNodes.length - 1 && (
+            <motion.div
+              initial={{ opacity: 0, scaleY: 0 }}
+              animate={{ opacity: 1, scaleY: 1 }}
+              transition={{ delay: 0.55 + i * 0.15, duration: 0.3 }}
+              className="flex flex-col items-center"
+              style={{ transformOrigin: "top" }}
+            >
+              <div className="w-px h-3 bg-border" />
+              <svg width="8" height="5" viewBox="0 0 8 5" fill="none">
+                <path d="M0 0L4 5L8 0" fill="var(--border)" />
+              </svg>
+            </motion.div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 /* ── Orbit ring ── */
 const techOrbit = [
   { label: "Fabric", color: "#0067C0", angle: 0 },
@@ -301,13 +345,14 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          {/* ── RIGHT — Orbit visual ── */}
+          {/* ── RIGHT — Orbit visual + data flow ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" as const }}
-            className="hidden lg:flex flex-col items-center gap-8"
+            className="hidden lg:flex flex-row items-center justify-center gap-8"
           >
+            <DataFlow />
             <OrbitRing />
 
             {/* Credential strip */}

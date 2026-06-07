@@ -1,7 +1,118 @@
 "use client";
 
+import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { skillCategories } from "@/data/skills";
+
+/* ── Skill Radar Chart ── */
+const radarSkills = [
+  { label: "Power BI / DAX", value: 95 },
+  { label: "Data Engineering", value: 92 },
+  { label: "SQL / Python", value: 88 },
+  { label: "Cloud / Azure", value: 85 },
+  { label: "Snowflake / dbt", value: 90 },
+  { label: "AI / ML", value: 72 },
+];
+
+function RadarChart() {
+  const [animated, setAnimated] = useState(false);
+  const ref = useRef<SVGSVGElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) setAnimated(true); }, { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const size = 240;
+  const cx = size / 2;
+  const cy = size / 2;
+  const maxR = 90;
+  const n = radarSkills.length;
+  const angle = (i: number) => (Math.PI * 2 * i) / n - Math.PI / 2;
+  const pt = (i: number, r: number) => ({
+    x: cx + r * Math.cos(angle(i)),
+    y: cy + r * Math.sin(angle(i)),
+  });
+  const poly = (pct: number) =>
+    radarSkills.map((s, i) => {
+      const p = pt(i, (s.value / 100) * maxR * pct);
+      return `${p.x},${p.y}`;
+    }).join(" ");
+
+  return (
+    <div className="flex flex-col items-center">
+      <svg ref={ref} width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="overflow-visible">
+        {/* Grid rings */}
+        {[0.25, 0.5, 0.75, 1].map((f) => (
+          <polygon
+            key={f}
+            points={radarSkills.map((_, i) => { const p = pt(i, maxR * f); return `${p.x},${p.y}`; }).join(" ")}
+            fill="none"
+            stroke="var(--border)"
+            strokeWidth="1"
+          />
+        ))}
+        {/* Axes */}
+        {radarSkills.map((_, i) => {
+          const p = pt(i, maxR);
+          return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="var(--border)" strokeWidth="1" />;
+        })}
+        {/* Filled area — animates in */}
+        <motion.polygon
+          points={animated ? poly(1) : poly(0)}
+          fill="rgba(59,130,246,0.15)"
+          stroke="#3B82F6"
+          strokeWidth="2"
+          strokeLinejoin="round"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: animated ? 1 : 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" as const }}
+          style={{ transition: "points 0.8s ease" }}
+        />
+        {/* Dots */}
+        {radarSkills.map((s, i) => {
+          const p = pt(i, (s.value / 100) * maxR);
+          return (
+            <motion.circle
+              key={s.label}
+              cx={p.x}
+              cy={p.y}
+              r={3.5}
+              fill="#3B82F6"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: animated ? 1 : 0, scale: animated ? 1 : 0 }}
+              transition={{ delay: 0.5 + i * 0.08, duration: 0.3 }}
+            />
+          );
+        })}
+        {/* Labels */}
+        {radarSkills.map((s, i) => {
+          const p = pt(i, maxR + 18);
+          const anchor = p.x < cx - 4 ? "end" : p.x > cx + 4 ? "start" : "middle";
+          return (
+            <text
+              key={s.label}
+              x={p.x}
+              y={p.y}
+              textAnchor={anchor}
+              dominantBaseline="middle"
+              fontSize="9"
+              fill="var(--muted-foreground)"
+              fontFamily="var(--font-sans)"
+              fontWeight="600"
+            >
+              {s.label}
+            </text>
+          );
+        })}
+      </svg>
+      <p className="text-xs text-muted-foreground mt-2 font-medium">Skill Proficiency Radar</p>
+    </div>
+  );
+}
 
 function fadeUp(delay = 0) {
   return {
@@ -110,11 +221,18 @@ export function SkillsSection() {
           })}
         </div>
 
-        {/* Experience bar summary */}
-        <motion.div
-          {...fadeUp(0.3)}
-          className="mt-10 grid sm:grid-cols-2 lg:grid-cols-5 gap-4"
-        >
+        {/* Radar + bars row */}
+        <div className="mt-12 grid lg:grid-cols-[280px_1fr] gap-10 items-center">
+          {/* Radar */}
+          <motion.div {...fadeUp(0.25)} className="flex justify-center">
+            <RadarChart />
+          </motion.div>
+
+          {/* Bars */}
+          <motion.div
+            {...fadeUp(0.3)}
+            className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4"
+          >
           {[
             { label: "Analytics & BI",       pct: 95, color: "bg-amber-500" },
             { label: "Data Engineering",      pct: 92, color: "bg-blue-500" },
@@ -145,7 +263,8 @@ export function SkillsSection() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

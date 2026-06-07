@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { StickyResumeButton } from "@/components/common/StickyResumeButton";
 import "./globals.css";
 
 const inter = Inter({
@@ -140,6 +141,7 @@ export default function RootLayout({
             <Navbar />
             <main>{children}</main>
             <Footer />
+            <StickyResumeButton />
           </TooltipProvider>
         </ThemeProvider>
         <Analytics />
