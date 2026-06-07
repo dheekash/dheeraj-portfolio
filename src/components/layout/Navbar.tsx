@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Download, Sun, Moon } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 import { LinkButton } from "@/components/common/LinkButton";
+import { ThemeSwitch } from "@/components/common/ThemeSwitch";
 import { cn } from "@/lib/utils";
 import { profile } from "@/data/profile";
-import { useTheme } from "@/components/providers/ThemeProvider";
 
 const navItems = [
   { label: "About",      href: "#about" },
@@ -22,7 +22,6 @@ export function Navbar() {
   const [scrolled, setScrolled]     = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [active, setActive]         = useState("");
-  const { theme, toggle }           = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -93,13 +92,7 @@ export function Navbar() {
             </LinkButton>
 
             {/* Theme toggle */}
-            <button
-              onClick={toggle}
-              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-all cursor-pointer"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
+            <ThemeSwitch />
 
             <button
               onClick={() => scrollTo("#contact")}
