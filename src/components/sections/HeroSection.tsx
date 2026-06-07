@@ -160,9 +160,9 @@ const techOrbit = [
 ];
 
 const floatingKpis = [
-  { value: "100M+", label: "Records",    color: "#3B82F6", pos: "top-4 -left-16"    },
-  { value: "50+",   label: "Dashboards", color: "#F59E0B", pos: "bottom-16 -left-16" },
-  { value: "13+",   label: "Certs",      color: "#10B981", pos: "top-4 -right-16"   },
+  { value: "10M+",  label: "Records",     color: "#3B82F6", pos: "top-4 -left-16"    },
+  { value: "20+",   label: "Dashboards",  color: "#F59E0B", pos: "bottom-16 -left-16" },
+  { value: "13+",   label: "Certs",       color: "#10B981", pos: "top-4 -right-16"   },
   { value: "20+",   label: "Stakeholders",color: "#8B5CF6", pos: "bottom-16 -right-16"},
 ];
 
@@ -433,7 +433,7 @@ export function HeroSection() {
               <span className="text-yellow-600 dark:text-yellow-400 font-semibold">Power BI</span> dashboards,{" "}
               <span className="text-cyan-600 dark:text-cyan-400 font-semibold">Snowflake</span> pipelines, and{" "}
               <span className="text-blue-600 dark:text-blue-400 font-semibold">Fabric</span> Lakehouses
-              {" "}that turn 100M+ records into decisions for 20+ stakeholders across 8 countries.
+              {" "}that turn 10M+ records into decisions for 20+ stakeholders across 15 countries.
             </motion.p>
 
           </div>
