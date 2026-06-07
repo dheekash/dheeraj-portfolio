@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { skillCategories } from "@/data/skills";
+import { getTechLogo } from "@/components/common/TechLogos";
 
 /* ── Skill Radar Chart ── */
 const radarSkills = [
@@ -203,18 +204,22 @@ export function SkillsSection() {
 
                 {/* Skills */}
                 <div className="p-5 flex flex-wrap gap-2">
-                  {cat.skills.map((sk, si) => (
-                    <motion.span
-                      key={sk.name}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.25, delay: ci * 0.08 + si * 0.04 }}
-                      className={`px-2.5 py-1 rounded-lg text-xs font-medium border ${c.pill} ${c.pillText} transition-colors cursor-default`}
-                    >
-                      {sk.name}
-                    </motion.span>
-                  ))}
+                  {cat.skills.map((sk, si) => {
+                    const Logo = getTechLogo(sk.name);
+                    return (
+                      <motion.span
+                        key={sk.name}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.25, delay: ci * 0.08 + si * 0.04 }}
+                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border ${c.pill} ${c.pillText} transition-colors cursor-default`}
+                      >
+                        {Logo && <Logo size={13} />}
+                        {sk.name}
+                      </motion.span>
+                    );
+                  })}
                 </div>
               </motion.div>
             );

@@ -6,6 +6,8 @@ import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import { CertificationsSection } from "@/components/sections/CertificationsSection";
+import { TechMarquee } from "@/components/sections/TechMarquee";
+
 function Divider() {
   return <div className="section-divider" />;
 }
@@ -16,7 +18,8 @@ export default function HomePage() {
       {/* 1 — Hero */}
       <HeroSection />
 
-      <Divider />
+      {/* Tech logo marquee */}
+      <TechMarquee />
 
       {/* 2 — Impact Metrics */}
       <div className="section-alt">

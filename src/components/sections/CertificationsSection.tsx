@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle, AlertCircle, Clock, ExternalLink, Award } from "lucide-react";
+import { CheckCircle, AlertCircle, ExternalLink } from "lucide-react";
+import { MicrosoftLogo, DatabricksLogo, SnowflakeLogo } from "@/components/common/TechLogos";
 import { certifications } from "@/data/certifications";
 import { isExpired } from "@/lib/utils";
 
@@ -17,9 +18,16 @@ function fadeUp(delay = 0) {
 
 const issuerStyle: Record<string, { bg: string; text: string; border: string; dot: string }> = {
   Microsoft:  { bg: "bg-blue-500/12",  text: "text-blue-300",  border: "border-blue-500/25",  dot: "#3B82F6" },
-  Databricks: { bg: "bg-red-500/12",   text: "text-red-300",   border: "border-red-500/25",   dot: "#EF4444" },
-  Snowflake:  { bg: "bg-cyan-500/12",  text: "text-cyan-300",  border: "border-cyan-500/25",  dot: "#06B6D4" },
+  Databricks: { bg: "bg-red-500/12",   text: "text-red-300",   border: "border-red-500/25",   dot: "#FF3621" },
+  Snowflake:  { bg: "bg-cyan-500/12",  text: "text-cyan-300",  border: "border-cyan-500/25",  dot: "#29B5E8" },
 };
+
+function IssuerLogo({ issuer, size = 22 }: { issuer: string; size?: number }) {
+  if (issuer === "Microsoft")  return <MicrosoftLogo size={size} />;
+  if (issuer === "Databricks") return <DatabricksLogo size={size} />;
+  if (issuer === "Snowflake")  return <SnowflakeLogo size={size} />;
+  return null;
+}
 
 const stats = [
   { value: "13+", label: "Certifications" },
@@ -112,10 +120,10 @@ export function CertificationsSection() {
                     )}
                   </div>
 
-                  {/* Icon */}
+                  {/* Issuer logo */}
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3 border"
                     style={{ backgroundColor: `${style.dot}15`, borderColor: `${style.dot}30` }}>
-                    <Award size={18} style={{ color: style.dot }} />
+                    <IssuerLogo issuer={cert.issuer} size={22} />
                   </div>
 
                   {/* Name */}
