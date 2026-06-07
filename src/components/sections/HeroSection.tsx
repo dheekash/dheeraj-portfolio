@@ -271,29 +271,46 @@ export function HeroSection() {
               </div>
             </motion.div>
 
-            {/* 3. WHY — Credibility line */}
+            {/* 3. WHY — Company logo trust strip */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.14 }}
-              className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-7 text-sm text-muted-foreground"
+              className="mb-7"
             >
-              <span className="font-bold text-foreground">6+ Years Experience</span>
-              <span className="text-border">·</span>
-              <span className="flex items-center gap-1.5">
-                <span className="w-4 h-4 rounded bg-amber-500/20 flex items-center justify-center text-[9px] font-black text-amber-600">A</span>
-                Amazon
-              </span>
-              <span className="text-border">·</span>
-              <span className="flex items-center gap-1.5">
-                <span className="w-4 h-4 rounded bg-blue-500/20 flex items-center justify-center text-[9px] font-black text-blue-600">AA</span>
-                Amplify Analytix
-              </span>
-              <span className="text-border">·</span>
-              <span className="flex items-center gap-1.5">
-                <MapPin size={11} className="text-muted-foreground" />
-                Bengaluru, India
-              </span>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground mb-3">
+                Experience at
+              </p>
+              <div className="flex flex-wrap items-center gap-3">
+                {/* Amazon */}
+                <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-amber-500/20 bg-amber-500/6 hover:bg-amber-500/10 transition-colors group">
+                  <svg width="16" height="16" viewBox="0 0 100 100" fill="none">
+                    <rect width="100" height="100" rx="12" fill="#FF9900" fillOpacity="0.15"/>
+                    <text x="50" y="68" textAnchor="middle" fontFamily="Arial Black, sans-serif" fontWeight="900" fontSize="52" fill="#FF9900">A</text>
+                  </svg>
+                  <span className="text-sm font-bold text-amber-700 dark:text-amber-400 tracking-tight">Amazon</span>
+                </div>
+                {/* Amplify Analytix */}
+                <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-blue-500/20 bg-blue-500/6 hover:bg-blue-500/10 transition-colors group">
+                  <svg width="16" height="16" viewBox="0 0 100 100" fill="none">
+                    <rect width="100" height="100" rx="12" fill="#2563EB" fillOpacity="0.15"/>
+                    <text x="50" y="65" textAnchor="middle" fontFamily="Arial Black, sans-serif" fontWeight="900" fontSize="38" fill="#2563EB">AA</text>
+                  </svg>
+                  <span className="text-sm font-bold text-blue-700 dark:text-blue-400 tracking-tight">Amplify Analytix</span>
+                </div>
+                {/* Frontizo */}
+                <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-emerald-500/20 bg-emerald-500/6 hover:bg-emerald-500/10 transition-colors group">
+                  <svg width="16" height="16" viewBox="0 0 100 100" fill="none">
+                    <rect width="100" height="100" rx="12" fill="#10B981" fillOpacity="0.15"/>
+                    <text x="50" y="68" textAnchor="middle" fontFamily="Arial Black, sans-serif" fontWeight="900" fontSize="52" fill="#10B981">F</text>
+                  </svg>
+                  <span className="text-sm font-bold text-emerald-700 dark:text-emerald-400 tracking-tight">Frontizo</span>
+                </div>
+                <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <MapPin size={11} />
+                  Bengaluru, India
+                </span>
+              </div>
             </motion.div>
 
             {/* 4. VALUE PROP — one sentence */}

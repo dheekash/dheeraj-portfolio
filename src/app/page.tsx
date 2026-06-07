@@ -2,6 +2,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { ImpactNumbersSection } from "@/components/sections/ImpactNumbersSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { BusinessImpactSection } from "@/components/sections/BusinessImpactSection";
+import { WhyMeSection } from "@/components/sections/WhyMeSection";
 import { DashboardGallerySection } from "@/components/sections/DashboardGallerySection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
@@ -40,31 +41,36 @@ export default function HomePage() {
 
       <Divider />
 
-      {/* 5 — Dashboard Gallery */}
+      {/* 5 — Why Work With Me */}
+      <WhyMeSection />
+
+      <Divider />
+
+      {/* 6 — Dashboard Gallery */}
       <DashboardGallerySection />
 
       <Divider />
 
-      {/* 6 — Featured Case Studies */}
+      {/* 7 — Featured Case Studies */}
       <div className="section-alt">
         <ProjectsSection />
       </div>
 
       <Divider />
 
-      {/* 7 — Professional Journey */}
+      {/* 8 — Professional Journey */}
       <ExperienceSection />
 
       <Divider />
 
-      {/* 8 — Tech Stack */}
+      {/* 9 — Tech Stack */}
       <div className="section-alt2">
         <SkillsSection />
       </div>
 
       <Divider />
 
-      {/* 9 — Featured Certifications */}
+      {/* 10 — Featured Certifications */}
       <CertificationsSection />
 
       <Divider />
