@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight, MapPin, ChevronDown } from "lucide-react";
 import { LinkButton } from "@/components/common/LinkButton";
-import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { ResumeDownloadButton } from "@/components/common/ResumeDownloadButton";
 import { profile } from "@/data/profile";
 
@@ -483,24 +482,6 @@ export function HeroSection() {
                 View Projects
                 <ArrowRight size={15} />
               </button>
-              <a
-                href="https://linkedin.com/in/kashyap-dheeraj"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl font-semibold text-sm border border-blue-500/20 bg-blue-500/8 hover:bg-blue-500/15 text-blue-500 dark:text-blue-400 transition-all hover:scale-[1.02]"
-                aria-label="LinkedIn"
-              >
-                <LinkedinIcon size={15} />
-              </a>
-              <a
-                href="https://github.com/dheekash"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl font-semibold text-sm border border-border bg-card hover:bg-muted text-foreground/60 transition-all hover:scale-[1.02]"
-                aria-label="GitHub"
-              >
-                <GithubIcon size={15} />
-              </a>
             </motion.div>
 
             {/* 6. Stats strip */}
