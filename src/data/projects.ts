@@ -157,13 +157,13 @@ export const projects: Project[] = [
     title: "Amazon Sales Forecasting Dashboard",
     subtitle: "Executive forecasting intelligence for Amazon seller operations",
     summary:
-      "Built a predictive sales forecasting dashboard processing 10M+ records, identifying $500K+ in revenue opportunities through advanced DAX analytics and Zebra BI visualizations.",
+      "Built a predictive sales forecasting dashboard processing 100M+ records, identifying $500K+ in revenue opportunities through advanced DAX analytics and Zebra BI visualizations.",
     problem:
       "Amazon's seller analytics team lacked a unified forecasting tool to project sales trends, identify revenue opportunities, and surface anomalies across the seller portfolio. Existing reporting was descriptive-only with no predictive capability.",
     solution:
       "Designed a Power BI solution backed by Snowflake, with Python-based time-series forecasting models generating forecast tables loaded into the semantic model. Zebra BI visuals provided executive-grade variance analysis and waterfall charts. Advanced DAX measures powered rolling forecasts, YoY comparisons, and anomaly flagging.",
     challenges: [
-      "Processing and modeling 10M+ records within Power BI performance constraints",
+      "Processing and modeling 100M+ records within Power BI performance constraints",
       "Designing DAX measures for complex time-intelligence calculations at scale",
       "Integrating Python forecasting output into Power BI refresh pipeline reliably",
       "Presenting statistical forecasts in a format accessible to non-technical sales leadership",
@@ -171,14 +171,14 @@ export const projects: Project[] = [
     results: [
       "Identified $500K+ in revenue opportunities through forecast gap analysis",
       "Dashboard adopted by senior sales leadership for weekly business reviews",
-      "Processing 10M+ records with sub-30-second load times",
+      "Processing 100M+ records with sub-30-second load times",
       "Reduced manual forecasting effort by 70%",
     ],
     businessImpact:
       "Sales leadership gained a single source of truth for revenue forecasting, enabling proactive seller engagement strategies. The $500K+ opportunity identification directly influenced resource allocation decisions.",
     techStack: ["Power BI", "Snowflake", "Zebra BI", "DAX", "Python", "SQL"],
     metrics: [
-      { value: "10M+", label: "Records Processed" },
+      { value: "100M+", label: "Records Processed" },
       { value: "$500K+", label: "Revenue Opportunities" },
       { value: "70%", label: "Manual Effort Reduced" },
       { value: "<30s", label: "Dashboard Load Time" },

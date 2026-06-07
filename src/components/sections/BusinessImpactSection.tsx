@@ -13,8 +13,8 @@ const impacts = [
     bg: "bg-amber-500/10",
     border: "border-amber-500/25",
     results: [
-      "Built Sales Forecasting Dashboard processing 10M+ records, identifying $500K+ revenue opportunities",
-      "Designed Power BI dashboards adopted by senior leadership across 8 regional markets",
+      "Built Sales Forecasting Dashboard processing 100M+ records, identifying $500K+ revenue opportunities",
+      "Designed Power BI dashboards adopted by senior leadership across 8 markets",
       "Developed predictive analytics models reducing investigation backlog significantly",
       "Led analytics workstream for cross-functional investigation teams of 20+ members",
     ],
@@ -29,7 +29,7 @@ const impacts = [
     border: "border-blue-500/25",
     results: [
       "Architected Microsoft Fabric Lakehouse reducing pipeline failure rate from 12% to under 1%",
-      "Delivered 20+ executive dashboards across global clients in 15 markets",
+      "Delivered 50+ executive dashboards across global clients in 8 markets",
       "Implemented SQLMesh transformations cutting maintenance overhead by 90%",
       "Engineered Power BI semantic models with 100+ DAX measures for 200+ end users",
     ],
@@ -44,7 +44,7 @@ const impacts = [
     border: "border-emerald-500/25",
     results: [
       "Delivered Customer Churn model with 89% recall — saved clients $300K+ annually",
-      "Built Global Manufacturing Analytics Suite serving 15 countries, 200+ users",
+      "Built Global Manufacturing Analytics Suite serving 8 countries, 200+ users",
       "Reduced stakeholder reporting refresh time from 4 hours to 15 minutes",
       "Supported data-driven decision making for 20+ senior stakeholders internationally",
     ],

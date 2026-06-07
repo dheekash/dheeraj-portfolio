@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const stats = [
-  { value: "6",   suffix: "+",  label: "Years Experience",       color: "text-blue-500",   bg: "bg-blue-500/10",   border: "border-blue-500/20" },
-  { value: "13",  suffix: "+",  label: "Certifications",         color: "text-amber-500",  bg: "bg-amber-500/10",  border: "border-amber-500/20" },
-  { value: "50",  suffix: "+",  label: "Dashboards Built",       color: "text-violet-500", bg: "bg-violet-500/10", border: "border-violet-500/20" },
-  { value: "8",   suffix: "+",  label: "Countries Supported",    color: "text-emerald-500",bg: "bg-emerald-500/10",border: "border-emerald-500/20" },
+  { value: "7",   suffix: "+",  label: "Years Experience",       color: "text-blue-500",   bg: "bg-blue-500/10",   border: "border-blue-500/20" },
+  { value: "13",  suffix: "",   label: "Certifications",         color: "text-amber-500",  bg: "bg-amber-500/10",  border: "border-amber-500/20" },
+  { value: "50",  suffix: "+",  label: "Dashboards Delivered",   color: "text-violet-500", bg: "bg-violet-500/10", border: "border-violet-500/20" },
+  { value: "8",   suffix: "",   label: "Countries Supported",    color: "text-emerald-500",bg: "bg-emerald-500/10",border: "border-emerald-500/20" },
   { value: "100", suffix: "M+", label: "Records Processed",      color: "text-cyan-500",   bg: "bg-cyan-500/10",   border: "border-cyan-500/20" },
-  { value: "20",  suffix: "+",  label: "Stakeholders Served",    color: "text-rose-500",   bg: "bg-rose-500/10",   border: "border-rose-500/20" },
+  { value: "20",  suffix: "+",  label: "Stakeholders Supported", color: "text-rose-500",   bg: "bg-rose-500/10",   border: "border-rose-500/20" },
 ];
 
 function AnimatedNumber({ value, suffix }: { value: string; suffix: string }) {
