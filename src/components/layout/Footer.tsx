@@ -27,7 +27,21 @@ export function Footer() {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center"
           >
-            <p className="text-blue-200 text-sm font-semibold uppercase tracking-[0.2em] mb-4">Ready to collaborate?</p>
+            {/* Data journey narrative */}
+            <div className="flex items-center justify-center gap-2 mb-8 flex-wrap">
+              {["Raw Data", "ETL Pipeline", "Data Warehouse", "Analytics Model", "Executive Insights", "Business Impact"].map((step, i, arr) => (
+                <div key={step} className="flex items-center gap-2">
+                  <span className="text-xs font-semibold text-blue-200/60 px-2.5 py-1 rounded-lg border border-white/10 bg-white/5">
+                    {step}
+                  </span>
+                  {i < arr.length - 1 && (
+                    <span className="text-blue-300/40 text-xs">→</span>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <p className="text-blue-200 text-sm font-semibold uppercase tracking-[0.2em] mb-4">Ready to build the next one?</p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-5 leading-tight">
               Ready to Transform Data
               <br />

@@ -41,20 +41,20 @@ export default function HomePage() {
 
       <Divider />
 
-      {/* 5 — Why Work With Me */}
-      <WhyMeSection />
-
-      <Divider />
-
-      {/* 6 — Dashboard Gallery */}
+      {/* 5 — Dashboard Gallery (star asset, shown early) */}
       <DashboardGallerySection />
 
       <Divider />
 
-      {/* 7 — Featured Case Studies */}
+      {/* 6 — Featured Case Studies */}
       <div className="section-alt">
         <ProjectsSection />
       </div>
+
+      <Divider />
+
+      {/* 7 — Why Companies Hire Me */}
+      <WhyMeSection />
 
       <Divider />
 

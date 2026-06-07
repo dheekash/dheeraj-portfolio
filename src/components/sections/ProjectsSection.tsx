@@ -102,55 +102,128 @@ function fadeUp(delay = 0) {
   };
 }
 
-/* ── Project card ── */
-function ProjectCard({ project, index, onClick }: { project: Project; index: number; onClick: () => void }) {
-  const isLarge = index === 0;
+/* ── Featured hero card (index 0) ── */
+function FeaturedCard({ project, onClick }: { project: Project; onClick: () => void }) {
+  const nodes = archFlows[project.id] ?? [];
+  return (
+    <motion.div
+      {...fadeUp(0)}
+      onClick={onClick}
+      className="col-span-full group relative rounded-3xl overflow-hidden cursor-pointer border border-border hover:border-white/16 bg-card transition-all duration-300 hover:shadow-2xl hover:shadow-black/20 hover:-translate-y-1"
+    >
+      {/* Gradient wash */}
+      <div className="absolute inset-0 opacity-40 group-hover:opacity-70 transition-opacity duration-500"
+        style={{ background: `radial-gradient(ellipse at top left, ${project.color}14 0%, transparent 55%)` }} />
 
+      <div className="relative grid md:grid-cols-[1fr_340px] lg:grid-cols-[1fr_400px] gap-0">
+        {/* LEFT — text */}
+        <div className="p-8 lg:p-10">
+          <div className="flex flex-wrap items-center gap-2 mb-5">
+            <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1 rounded-full font-bold"
+              style={{ backgroundColor: `${project.color}18`, color: project.color, border: `1px solid ${project.color}35` }}>
+              ★ Featured Enterprise Project
+            </span>
+            {project.confidential && (
+              <span className="text-xs px-2.5 py-1 rounded-full border border-white/10 bg-white/5 text-muted-foreground font-medium">
+                Enterprise Engagement
+              </span>
+            )}
+          </div>
+
+          <h3 className="text-2xl lg:text-3xl font-extrabold text-foreground group-hover:text-blue-200 transition-colors mb-2 leading-tight pr-6">
+            {project.title}
+          </h3>
+          <p className="text-base text-muted-foreground mb-7 leading-relaxed max-w-lg">{project.subtitle}</p>
+
+          {/* Big metrics */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-7">
+            {project.metrics.map((m) => (
+              <div key={m.label} className="rounded-2xl p-4 border border-white/8 bg-white/3 text-center">
+                <div className="text-xl font-extrabold tabular-nums" style={{ color: project.color }}>{m.value}</div>
+                <div className="text-[10px] text-muted-foreground mt-0.5 leading-tight">{m.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Tech tags */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.techStack.map((t) => (
+              <span key={t} className="text-xs px-2.5 py-1 rounded-lg border border-white/10 bg-white/5 text-muted-foreground font-medium">
+                {t}
+              </span>
+            ))}
+          </div>
+
+          <div className="inline-flex items-center gap-2 text-sm font-semibold transition-all group-hover:gap-3"
+            style={{ color: project.color }}>
+            <span>Open Full Case Study</span>
+            <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+          </div>
+        </div>
+
+        {/* RIGHT — mini architecture preview */}
+        <div className="hidden md:flex flex-col justify-center border-l border-white/8 p-8 gap-3"
+          style={{ background: `linear-gradient(135deg, ${project.color}06 0%, transparent 60%)` }}>
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-1 flex items-center gap-2">
+            <Layers size={10} style={{ color: project.color }} /> Architecture
+          </p>
+          {nodes.map((node, i) => (
+            <div key={node} className="flex flex-col items-start">
+              <div className="flex items-center gap-2 w-full">
+                <div className="w-1.5 h-1.5 rounded-full shrink-0"
+                  style={{
+                    backgroundColor: i === 0 || i === nodes.length - 1 ? project.color : "var(--border)",
+                    boxShadow: i === 0 || i === nodes.length - 1 ? `0 0 6px ${project.color}80` : "none",
+                  }} />
+                <span className="text-[11px] font-medium leading-tight"
+                  style={{ color: i === 0 || i === nodes.length - 1 ? project.color : "var(--muted-foreground)" }}>
+                  {node}
+                </span>
+              </div>
+              {i < nodes.length - 1 && (
+                <div className="ml-[2.5px] w-px h-3 ml-[5px]"
+                  style={{ background: `linear-gradient(to bottom, ${project.color}40, transparent)` }} />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Regular project card ── */
+function ProjectCard({ project, index, onClick }: { project: Project; index: number; onClick: () => void }) {
   return (
     <motion.div
       {...fadeUp(index * 0.08)}
       onClick={onClick}
-      className={`group relative rounded-2xl overflow-hidden cursor-pointer ${isLarge ? "md:col-span-2" : ""}`}
+      className="group relative rounded-2xl overflow-hidden cursor-pointer"
     >
-      {/* Gradient background */}
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         style={{ background: `radial-gradient(ellipse at top left, ${project.color}12, transparent 60%)` }}
       />
-
-      {/* Card body */}
       <div className="relative h-full border border-white/8 bg-card/50 backdrop-blur-sm rounded-2xl p-6 hover:border-white/14 transition-all duration-300 hover:shadow-2xl hover:shadow-black/30 hover:-translate-y-0.5">
 
-        {/* Top row */}
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-2 flex-wrap">
-            {project.featured && (
-              <span className="text-[11px] px-2.5 py-0.5 rounded-full font-semibold"
-                style={{ backgroundColor: `${project.color}20`, color: project.color, border: `1px solid ${project.color}35` }}>
-                Featured
-              </span>
-            )}
             {project.confidential && (
               <span className="text-[11px] px-2.5 py-0.5 rounded-full font-semibold border border-white/10 bg-white/5 text-muted-foreground">
                 Enterprise Engagement
               </span>
             )}
           </div>
-          <ArrowRight
-            size={16}
-            className="text-muted-foreground/40 group-hover:text-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
-          />
+          <ArrowRight size={16} className="text-muted-foreground/40 group-hover:text-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
         </div>
 
-        {/* Title */}
         <h3 className="text-lg font-bold text-foreground group-hover:text-blue-200 transition-colors mb-1.5 leading-tight pr-4">
           {project.title}
         </h3>
         <p className="text-sm text-muted-foreground mb-5 leading-relaxed line-clamp-2">{project.subtitle}</p>
 
-        {/* Metrics grid */}
-        <div className={`grid gap-2 mb-5 ${isLarge ? "grid-cols-4" : "grid-cols-2"}`}>
-          {project.metrics.slice(0, isLarge ? 4 : 4).map((m) => (
+        <div className="grid grid-cols-2 gap-2 mb-5">
+          {project.metrics.slice(0, 4).map((m) => (
             <div key={m.label} className="rounded-xl p-3 border border-white/6 bg-white/3 text-center">
               <div className="text-base font-extrabold tabular-nums" style={{ color: project.color }}>{m.value}</div>
               <div className="text-[10px] text-muted-foreground mt-0.5 leading-tight">{m.label}</div>
@@ -158,21 +231,15 @@ function ProjectCard({ project, index, onClick }: { project: Project; index: num
           ))}
         </div>
 
-        {/* Tech tags */}
         <div className="flex flex-wrap gap-1.5">
           {project.techStack.slice(0, 5).map((t) => (
-            <span key={t} className="text-xs px-2.5 py-0.5 rounded-md border border-white/8 bg-white/4 text-muted-foreground font-medium">
-              {t}
-            </span>
+            <span key={t} className="text-xs px-2.5 py-0.5 rounded-md border border-white/8 bg-white/4 text-muted-foreground font-medium">{t}</span>
           ))}
           {project.techStack.length > 5 && (
-            <span className="text-xs px-2.5 py-0.5 rounded-md border border-white/8 bg-white/4 text-muted-foreground">
-              +{project.techStack.length - 5}
-            </span>
+            <span className="text-xs px-2.5 py-0.5 rounded-md border border-white/8 bg-white/4 text-muted-foreground">+{project.techStack.length - 5}</span>
           )}
         </div>
 
-        {/* Hover CTA */}
         <div className="mt-4 flex items-center gap-1.5 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity"
           style={{ color: project.color }}>
           <ExternalLink size={11} /> View Full Case Study
@@ -313,9 +380,15 @@ export function ProjectsSection() {
           Real-world solutions delivering measurable business impact across global organisations.
         </motion.p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {projects.map((p, i) => (
-            <ProjectCard key={p.id} project={p} index={i} onClick={() => setActive(p)} />
+        {/* Featured hero card */}
+        <div className="grid grid-cols-1 gap-5 mb-5">
+          <FeaturedCard project={projects[0]} onClick={() => setActive(projects[0])} />
+        </div>
+
+        {/* Remaining projects */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-5">
+          {projects.slice(1).map((p, i) => (
+            <ProjectCard key={p.id} project={p} index={i + 1} onClick={() => setActive(p)} />
           ))}
         </div>
       </div>

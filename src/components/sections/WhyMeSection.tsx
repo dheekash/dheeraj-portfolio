@@ -7,33 +7,33 @@ import { profile } from "@/data/profile";
 
 const reasons = [
   {
-    title: "7+ Years Enterprise Experience",
-    body: "Delivered analytics solutions across Amazon, consulting, and product companies — not just side projects.",
+    title: "End-to-End Analytics Delivery",
+    body: "I own the full stack — from raw data ingestion and warehouse architecture through to the executive dashboard that drives decisions.",
     color: "#3B82F6",
   },
   {
-    title: "End-to-End BI Ownership",
-    body: "From raw data ingestion to executive dashboard — I own the full stack, not just one layer.",
+    title: "Executive Reporting at Scale",
+    body: "Built Power BI solutions adopted by senior leadership across 8 regional markets, serving 200+ end users globally.",
     color: "#F59E0B",
   },
   {
-    title: "Microsoft Fabric & Databricks Certified",
-    body: "13+ active certifications including DP-600, DP-700, PL-300, AZ-104, and Databricks DE Associate.",
+    title: "Power BI & Fabric Expertise",
+    body: "13+ active certifications: DP-600, DP-700, PL-300, Databricks DE Associate, SnowPro, AZ-104. Verified, not self-declared.",
     color: "#8B5CF6",
   },
   {
-    title: "Amazon Analytics Background",
-    body: "Built forecasting models and Power BI dashboards adopted by senior leadership across 8 regional markets.",
+    title: "Data Engineering Knowledge",
+    body: "Architected Fabric Lakehouses, Databricks pipelines, and Snowflake warehouses — not just dashboards on top of someone else's data.",
     color: "#10B981",
   },
   {
-    title: "Stakeholder-First Mindset",
-    body: "I translate complex data architectures into clear executive narratives — from analyst to boardroom.",
+    title: "Stakeholder Management",
+    body: "Worked directly with VPs, directors, and regional leads at Amazon. I present findings in business language, not technical jargon.",
     color: "#06B6D4",
   },
   {
-    title: "Global Scale Delivery",
-    body: "Supported 15+ countries, 200+ end users, and 20+ senior stakeholders across enterprise organisations.",
+    title: "Cloud Analytics Experience",
+    body: "Production deployments on Azure, Microsoft Fabric, Databricks, and Snowflake — enterprise-grade, not tutorial-grade.",
     color: "#EF4444",
   },
 ];
@@ -63,16 +63,16 @@ export function WhyMeSection() {
           <div className="lg:sticky lg:top-24">
             <motion.div {...fadeUp()} className="flex items-center gap-3 mb-5">
               <div className="w-10 h-px bg-gradient-to-r from-blue-500 to-transparent" />
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-500 font-mono">Why Hire Me</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-500 font-mono">Value Proposition</span>
             </motion.div>
 
             <motion.h2 {...fadeUp(0.05)} className="font-extrabold tracking-tight mb-5 leading-tight">
-              Why Work<br />
-              <span className="gradient-text">With Me?</span>
+              Why Companies<br />
+              <span className="gradient-text">Hire Me</span>
             </motion.h2>
 
             <motion.p {...fadeUp(0.1)} className="text-muted-foreground leading-relaxed mb-8 text-base">
-              I don&apos;t just build dashboards — I architect data systems that make organisations smarter, faster, and more profitable.
+              I don&apos;t just deliver dashboards. I architect data systems that reduce costs, accelerate decisions, and create measurable business outcomes.
             </motion.p>
 
             {/* Mini stat row */}
