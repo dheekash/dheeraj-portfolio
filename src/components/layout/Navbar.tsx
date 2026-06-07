@@ -2,10 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Download } from "lucide-react";
-import { LinkButton } from "@/components/common/LinkButton";
-import { ThemeSwitch } from "@/components/common/ThemeSwitch";
 import { Menu, X } from "lucide-react";
+import { ThemeSwitch } from "@/components/common/ThemeSwitch";
 import { cn } from "@/lib/utils";
 import { profile } from "@/data/profile";
 
@@ -88,17 +86,6 @@ export function Navbar() {
 
           {/* ── Right actions ── */}
           <div className="flex items-center gap-2 shrink-0">
-            {/* Resume — outlined blue */}
-            <LinkButton
-              href={profile.resumeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-[7px] rounded-lg text-sm font-semibold border border-blue-500/40 bg-blue-500/6 hover:bg-blue-500/12 text-blue-600 dark:text-blue-400 transition-all hover:border-blue-500/60"
-            >
-              <Download size={13} />
-              Resume
-            </LinkButton>
-
             {/* Theme toggle */}
             <ThemeSwitch />
 
@@ -134,15 +121,7 @@ export function Navbar() {
                 {item.label}
               </button>
             ))}
-            <div className="pt-3 px-1 flex flex-col gap-2">
-              <LinkButton
-                href={profile.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex justify-center items-center gap-2 py-2.5 rounded-xl text-sm font-semibold border border-blue-500/40 bg-blue-500/6 text-blue-500"
-              >
-                <Download size={14} /> View Resume
-              </LinkButton>
+            <div className="pt-3 px-1">
               <button
                 onClick={() => scrollTo("#contact")}
                 className="w-full py-2.5 rounded-xl text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all cursor-pointer"

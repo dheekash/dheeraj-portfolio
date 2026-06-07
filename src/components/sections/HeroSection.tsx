@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, Download, MapPin, ChevronDown } from "lucide-react";
+import { ArrowRight, MapPin, ChevronDown } from "lucide-react";
 import { LinkButton } from "@/components/common/LinkButton";
 import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
+import { ResumeDownloadButton } from "@/components/common/ResumeDownloadButton";
 import { profile } from "@/data/profile";
 
 /* ══════════════════════════════════════════════
@@ -483,15 +484,7 @@ export function HeroSection() {
               transition={{ duration: 0.5, delay: 0.27 }}
               className="flex flex-wrap gap-3 mb-9"
             >
-              <LinkButton
-                href={profile.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-2xl shadow-blue-600/35 hover:shadow-blue-500/40 transition-all hover:scale-[1.02] active:scale-[0.98] text-sm"
-              >
-                <Download size={15} />
-                View Resume
-              </LinkButton>
+              <ResumeDownloadButton />
               <button
                 onClick={() => scrollTo("#projects")}
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm border border-border bg-card hover:bg-muted text-foreground shadow-sm transition-all hover:scale-[1.02] cursor-pointer"
