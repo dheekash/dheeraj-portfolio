@@ -369,35 +369,26 @@ export function HeroSection() {
           {/* ══ LEFT — Text hierarchy ══ */}
           <div className="max-w-2xl">
 
-            {/* 1. WHO */}
+            {/* 1. AVAILABILITY BADGE only */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45 }}
-              className="flex items-center gap-3 mb-5"
+              className="mb-5"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-600/30">
-                <span className="text-white font-black text-sm">DK</span>
-              </div>
-              <div className="flex flex-wrap items-center gap-2">
-                <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
-                  Dheeraj Kashyap
-                </h2>
-                {/* Enhanced availability badge */}
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold ml-1 group relative cursor-default">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                  <span>Available</span>
-                  {/* Hover tooltip */}
-                  <div className="absolute left-0 top-full mt-2 z-20 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 w-max">
-                    <div className="bg-card border border-border rounded-xl shadow-xl px-3.5 py-2.5 text-xs text-foreground">
-                      <p className="font-bold text-emerald-500 mb-1.5">Available for:</p>
-                      {["Full-time roles", "Contract engagements", "Analytics consulting"].map((t) => (
-                        <div key={t} className="flex items-center gap-1.5 text-muted-foreground py-0.5">
-                          <span className="w-1 h-1 rounded-full bg-emerald-500 shrink-0" />
-                          {t}
-                        </div>
-                      ))}
-                    </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold group relative cursor-default">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                <span>Available</span>
+                {/* Hover tooltip */}
+                <div className="absolute left-0 top-full mt-2 z-20 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 w-max">
+                  <div className="bg-card border border-border rounded-xl shadow-xl px-3.5 py-2.5 text-xs text-foreground">
+                    <p className="font-bold text-emerald-500 mb-1.5">Available for:</p>
+                    {["Full-time roles", "Contract engagements", "Analytics consulting"].map((t) => (
+                      <div key={t} className="flex items-center gap-1.5 text-muted-foreground py-0.5">
+                        <span className="w-1 h-1 rounded-full bg-emerald-500 shrink-0" />
+                        {t}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
