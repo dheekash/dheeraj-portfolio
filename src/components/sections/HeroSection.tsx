@@ -161,10 +161,10 @@ const techOrbit = [
 ];
 
 const floatingKpis = [
-  { value: "100M+", label: "Records", color: "#3B82F6", pos: "top-4 -left-16" },
+  { value: "100M+", label: "Records",    color: "#3B82F6", pos: "top-4 -left-16"    },
   { value: "50+",   label: "Dashboards", color: "#F59E0B", pos: "bottom-16 -left-16" },
-  { value: "13+",   label: "Certs", color: "#10B981", pos: "top-4 -right-16" },
-  { value: "8",     label: "Countries", color: "#8B5CF6", pos: "bottom-16 -right-16" },
+  { value: "13+",   label: "Certs",      color: "#10B981", pos: "top-4 -right-16"   },
+  { value: "20+",   label: "Stakeholders",color: "#8B5CF6", pos: "bottom-16 -right-16"},
 ];
 
 function OrbitRing() {
@@ -212,9 +212,10 @@ function OrbitRing() {
           boxShadow: "0 8px 32px rgba(59,130,246,0.12), inset 0 1px 0 rgba(255,255,255,0.1)",
         }}
       >
-        <div className="text-center px-4">
+        <div className="text-center px-3 py-1">
+          {/* DK monogram */}
           <motion.div
-            className="w-20 h-20 xl:w-24 xl:h-24 rounded-full mx-auto flex items-center justify-center mb-3"
+            className="w-16 h-16 xl:w-18 xl:h-18 rounded-full mx-auto flex items-center justify-center mb-2.5"
             style={{
               background: "linear-gradient(135deg, rgba(37,99,235,0.3) 0%, rgba(79,70,229,0.2) 100%)",
               border: "2px solid rgba(96,165,250,0.35)",
@@ -223,12 +224,24 @@ function OrbitRing() {
             animate={{ boxShadow: ["0 0 20px rgba(59,130,246,0.20)", "0 0 40px rgba(59,130,246,0.35)", "0 0 20px rgba(59,130,246,0.20)"] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            <span className="text-3xl xl:text-4xl font-black bg-gradient-to-br from-blue-300 to-indigo-300 bg-clip-text text-transparent">DK</span>
+            <span className="text-2xl xl:text-3xl font-black bg-gradient-to-br from-blue-300 to-indigo-300 bg-clip-text text-transparent">DK</span>
           </motion.div>
-          <p className="text-[11px] text-blue-300/70 font-mono tracking-wider">7+ yrs · enterprise</p>
-          <div className="mt-2 flex justify-center gap-1">
-            {["#3B82F6","#F59E0B","#10B981"].map((c) => (
-              <span key={c} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: c, boxShadow: `0 0 4px ${c}` }} />
+          {/* Role */}
+          <p className="text-[10px] font-bold text-blue-300/80 uppercase tracking-[0.14em] mb-1.5">Analytics Architect</p>
+          {/* 7+ yrs */}
+          <p className="text-[11px] text-muted-foreground/60 font-mono mb-2.5">7+ Years · Enterprise</p>
+          {/* Core tool dots */}
+          <div className="flex flex-col gap-1 items-center">
+            {[
+              { label: "Power BI", color: "#F2C811" },
+              { label: "Snowflake", color: "#29B5E8" },
+              { label: "Fabric", color: "#0067C0" },
+              { label: "Azure", color: "#3B82F6" },
+            ].map((t) => (
+              <div key={t.label} className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: t.color, boxShadow: `0 0 4px ${t.color}` }} />
+                <span className="text-[9px] font-semibold" style={{ color: t.color }}>{t.label}</span>
+              </div>
             ))}
           </div>
         </div>
@@ -345,7 +358,7 @@ export function HeroSection() {
       </div>
 
       {/* ── Grid overlay ── */}
-      <div className="absolute inset-0 grid-bg opacity-60" />
+      <div className="absolute inset-0 grid-bg opacity-30" />
       <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
 
       <motion.div style={{ y, opacity }} className="relative z-10 container-max section-padding !pb-12">
@@ -365,14 +378,27 @@ export function HeroSection() {
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-600/30">
                 <span className="text-white font-black text-sm">DK</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
                   Dheeraj Kashyap
                 </h2>
-                <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold ml-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  Available
-                </span>
+                {/* Enhanced availability badge */}
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold ml-1 group relative cursor-default">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                  <span>Available</span>
+                  {/* Hover tooltip */}
+                  <div className="absolute left-0 top-full mt-2 z-20 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 w-max">
+                    <div className="bg-card border border-border rounded-xl shadow-xl px-3.5 py-2.5 text-xs text-foreground">
+                      <p className="font-bold text-emerald-500 mb-1.5">Available for:</p>
+                      {["Full-time roles", "Contract engagements", "Analytics consulting"].map((t) => (
+                        <div key={t} className="flex items-center gap-1.5 text-muted-foreground py-0.5">
+                          <span className="w-1 h-1 rounded-full bg-emerald-500 shrink-0" />
+                          {t}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
 
@@ -444,29 +470,29 @@ export function HeroSection() {
               {" "}that turn 100M+ records into decisions for 20+ stakeholders across 8 countries.
             </motion.p>
 
-            {/* 5. CTAs */}
+            {/* 5. CTAs — Resume primary, Projects secondary */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.27 }}
               className="flex flex-wrap gap-3 mb-9"
             >
-              <button
-                onClick={() => scrollTo("#projects")}
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-2xl shadow-blue-600/35 hover:shadow-blue-500/40 transition-all hover:scale-[1.02] active:scale-[0.98] text-sm cursor-pointer"
-              >
-                View Projects
-                <ArrowRight size={15} />
-              </button>
               <LinkButton
                 href={profile.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm border border-border bg-card hover:bg-muted text-foreground shadow-sm transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-2xl shadow-blue-600/35 hover:shadow-blue-500/40 transition-all hover:scale-[1.02] active:scale-[0.98] text-sm"
               >
                 <Download size={15} />
                 View Resume
               </LinkButton>
+              <button
+                onClick={() => scrollTo("#projects")}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm border border-border bg-card hover:bg-muted text-foreground shadow-sm transition-all hover:scale-[1.02] cursor-pointer"
+              >
+                View Projects
+                <ArrowRight size={15} />
+              </button>
               <a
                 href="https://linkedin.com/in/kashyap-dheeraj"
                 target="_blank"
@@ -521,7 +547,17 @@ export function HeroSection() {
           >
             <DataFlow />
 
-            <div className="relative">
+            <div className="relative flex flex-col items-center gap-3">
+              {/* Visualization label */}
+              <motion.p
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.4 }}
+                className="text-[10px] font-bold uppercase tracking-[0.22em] text-blue-400/60 font-mono"
+              >
+                Enterprise Analytics Ecosystem
+              </motion.p>
+
               <OrbitRing />
 
               {/* Cert strip below orbit */}
