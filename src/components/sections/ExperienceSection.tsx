@@ -1,8 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Briefcase } from "lucide-react";
+import { MapPin, Briefcase, Clock } from "lucide-react";
 import { experiences } from "@/data/experience";
+
+function getDuration(startYear: number, endYear: number | null): string {
+  const end = endYear ?? new Date().getFullYear();
+  const diff = end - startYear;
+  if (diff < 1) return "< 1 yr";
+  if (diff === 1) return "1 yr";
+  return `${diff}+ yrs`;
+}
 
 function fadeUp(delay = 0) {
   return {
@@ -13,10 +21,10 @@ function fadeUp(delay = 0) {
   };
 }
 
-const companyColors: Record<string, { accent: string; glow: string; dot: string }> = {
-  "amplify-analytix": { accent: "text-blue-500 dark:text-blue-400",    glow: "shadow-blue-500/15",    dot: "bg-blue-500 shadow-blue-500/60" },
-  "amazon":           { accent: "text-amber-600 dark:text-amber-400",   glow: "shadow-amber-500/10",   dot: "bg-amber-400 shadow-amber-400/50" },
-  "frontizo":         { accent: "text-emerald-600 dark:text-emerald-400", glow: "shadow-emerald-500/10", dot: "bg-emerald-500/70 shadow-emerald-500/30" },
+const companyColors: Record<string, { accent: string; glow: string; dot: string; border: string; bg: string }> = {
+  "amplify-analytix": { accent: "text-blue-500 dark:text-blue-400",      glow: "shadow-blue-500/20",    dot: "bg-blue-500 shadow-blue-500/60",    border: "border-blue-500/25",   bg: "bg-blue-500/4" },
+  "amazon":           { accent: "text-amber-500 dark:text-amber-400",     glow: "shadow-amber-500/20",   dot: "bg-amber-400 shadow-amber-400/60",  border: "border-amber-500/25",  bg: "bg-amber-500/4" },
+  "frontizo":         { accent: "text-emerald-500 dark:text-emerald-400", glow: "shadow-emerald-500/20", dot: "bg-emerald-500 shadow-emerald-500/60", border: "border-emerald-500/25", bg: "bg-emerald-500/4" },
 };
 
 const companyLogos: Record<string, { monogram: string; bg: string; text: string; border: string }> = {
@@ -86,7 +94,7 @@ export function ExperienceSection() {
 
                   {/* Card */}
                   <div className={`flex-1 pb-6 group`}>
-                    <div className={`p-6 rounded-2xl border border-border bg-card/50 backdrop-blur-sm hover:border-blue-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl ${col.glow}`}>
+                    <div className={`p-6 rounded-2xl border ${col.border} ${col.bg} backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl ${col.glow}`}>
 
                       {/* Header */}
                       <div className="flex items-start justify-between gap-3 mb-3">
@@ -110,7 +118,7 @@ export function ExperienceSection() {
                             </div>
                           </div>
                         </div>
-                        <div className="text-right shrink-0">
+                        <div className="text-right shrink-0 flex flex-col items-end gap-1.5">
                           {isCurrent ? (
                             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/15 border border-blue-500/30 text-blue-300">
                               <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
@@ -119,6 +127,11 @@ export function ExperienceSection() {
                           ) : (
                             <span className="text-xs text-muted-foreground font-mono">{exp.period}</span>
                           )}
+                          {/* Duration badge */}
+                          <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold border ${col.border} ${col.accent}`}>
+                            <Clock size={9} />
+                            {getDuration(exp.startYear, exp.endYear)}
+                          </span>
                         </div>
                       </div>
 
