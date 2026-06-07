@@ -6,8 +6,6 @@ import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import { CertificationsSection } from "@/components/sections/CertificationsSection";
-import { ContactSection } from "@/components/sections/ContactSection";
-
 function Divider() {
   return <div className="section-divider" />;
 }
@@ -61,10 +59,6 @@ export default function HomePage() {
       {/* 8 — Certifications */}
       <CertificationsSection />
 
-      <Divider />
-
-      {/* 9 — Contact */}
-      <ContactSection />
     </>
   );
 }
