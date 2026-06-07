@@ -1,228 +1,336 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, Download, ChevronDown, MapPin, Sparkles } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, Download, MapPin, ChevronDown, Sparkles, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LinkButton } from "@/components/common/LinkButton";
+import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
 
-const techLogos = [
-  { name: "Fabric", color: "#0067C0", bg: "rgba(0,103,192,0.15)" },
-  { name: "Databricks", color: "#FF3621", bg: "rgba(255,54,33,0.12)" },
-  { name: "Snowflake", color: "#29B5E8", bg: "rgba(41,181,232,0.12)" },
-  { name: "Power BI", color: "#F2C811", bg: "rgba(242,200,17,0.12)" },
-  { name: "dbt", color: "#FF694B", bg: "rgba(255,105,75,0.12)" },
-  { name: "Python", color: "#3776AB", bg: "rgba(55,118,171,0.12)" },
-  { name: "Azure", color: "#0078D4", bg: "rgba(0,120,212,0.12)" },
-  { name: "Delta", color: "#00ADD8", bg: "rgba(0,173,216,0.12)" },
+/* ── Typewriter ── */
+const roles = [
+  "BI & Analytics Engineer",
+  "Lakehouse Architect",
+  "Power BI Developer",
+  "Databricks Engineer",
+  "Analytics Consultant",
 ];
 
-function AnimatedCounter({ value, suffix = "" }: { value: string; suffix?: string }) {
-  const [display, setDisplay] = useState("0");
-  const [started, setStarted] = useState(false);
-  const ref = useRef<HTMLSpanElement>(null);
+function Typewriter() {
+  const [idx, setIdx] = useState(0);
+  const [text, setText] = useState("");
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting && !started) setStarted(true); },
-      { threshold: 0.1 }
-    );
+    const full = roles[idx];
+    const speed = deleting ? 35 : 70;
+    const timer = setTimeout(() => {
+      if (!deleting) {
+        setText(full.slice(0, text.length + 1));
+        if (text.length + 1 === full.length) setTimeout(() => setDeleting(true), 1800);
+      } else {
+        setText(full.slice(0, text.length - 1));
+        if (text.length - 1 === 0) { setDeleting(false); setIdx((i) => (i + 1) % roles.length); }
+      }
+    }, speed);
+    return () => clearTimeout(timer);
+  }, [text, deleting, idx]);
+
+  return (
+    <span className="gradient-text font-bold">
+      {text}
+      <span className="animate-[typewriter-blink_1s_step-end_infinite] ml-0.5 text-blue-400">|</span>
+    </span>
+  );
+}
+
+/* ── Animated counter ── */
+function Counter({ value, suffix = "" }: { value: string; suffix?: string }) {
+  const [count, setCount] = useState("0");
+  const [started, setStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
     const el = ref.current;
-    if (el) observer.observe(el);
-    return () => { if (el) observer.unobserve(el); };
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting && !started) setStarted(true); }, { threshold: 0.1 });
+    io.observe(el);
+    return () => io.disconnect();
   }, [started]);
 
   useEffect(() => {
     if (!started) return;
-    const numeric = parseFloat(value.replace(/[^0-9.]/g, ""));
-    const isDecimal = value.includes(".");
-    const duration = 2000;
-    const steps = 60;
-    let step = 0;
-    const timer = setInterval(() => {
-      step++;
-      const progress = step / steps;
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = numeric * eased;
-      setDisplay(isDecimal ? current.toFixed(1) : Math.floor(current).toString());
-      if (step >= steps) { setDisplay(value); clearInterval(timer); }
-    }, duration / steps);
-    return () => clearInterval(timer);
+    const num = parseFloat(value.replace(/[^0-9.]/g, ""));
+    let frame = 0;
+    const total = 80;
+    const id = setInterval(() => {
+      frame++;
+      const ease = 1 - Math.pow(1 - frame / total, 3);
+      setCount(value.includes(".") ? (num * ease).toFixed(1) : Math.floor(num * ease).toString());
+      if (frame >= total) { setCount(value); clearInterval(id); }
+    }, 20);
+    return () => clearInterval(id);
   }, [started, value]);
 
-  return <span ref={ref}>{display}{suffix}</span>;
+  return <div ref={ref}>{count}{suffix}</div>;
 }
 
-export function HeroSection() {
-  const handleScroll = (href: string) => {
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
-  };
+/* ── Orbit ring ── */
+const techOrbit = [
+  { label: "Fabric", color: "#0067C0", angle: 0 },
+  { label: "Databricks", color: "#FF3621", angle: 51 },
+  { label: "Snowflake", color: "#29B5E8", angle: 102 },
+  { label: "Power BI", color: "#F2C811", angle: 153 },
+  { label: "dbt", color: "#FF694B", angle: 205 },
+  { label: "Python", color: "#4B8BBE", angle: 256 },
+  { label: "Delta", color: "#00ADD8", angle: 307 },
+];
 
+function OrbitRing() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-16">
-      {/* Background layers */}
-      <div className="absolute inset-0 grid-bg opacity-40" />
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-950/20 via-transparent to-background" />
-
-      {/* Floating orbs */}
+    <div className="relative w-72 h-72 lg:w-96 lg:h-96 mx-auto">
+      {/* Rotating ring */}
       <motion.div
-        className="absolute top-1/4 -left-32 w-96 h-96 rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%)" }}
-        animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.6, 0.4] }}
-        transition={{ duration: 8, repeat: Infinity }}
+        className="absolute inset-0 rounded-full border border-blue-500/20"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
       />
       <motion.div
-        className="absolute bottom-1/3 -right-32 w-80 h-80 rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%)" }}
-        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 10, repeat: Infinity, delay: 2 }}
+        className="absolute inset-4 rounded-full border border-dashed border-blue-400/10"
+        animate={{ rotate: -360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       />
 
-      {/* Floating tech logos */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
-        {techLogos.map((tech, i) => {
-          const positions = [
-            { top: "15%", left: "8%" },
-            { top: "25%", right: "6%" },
-            { top: "60%", left: "5%" },
-            { top: "70%", right: "8%" },
-            { top: "40%", right: "3%" },
-            { top: "80%", left: "12%" },
-            { top: "10%", right: "15%" },
-            { top: "55%", left: "2%" },
-          ];
-          const pos = positions[i] || { top: "50%", left: "50%" };
-          return (
-            <motion.div
-              key={tech.name}
-              className="absolute hidden lg:flex items-center justify-center rounded-xl text-xs font-semibold px-3 py-1.5 border"
-              style={{
-                ...pos,
-                color: tech.color,
-                backgroundColor: tech.bg,
-                borderColor: `${tech.color}30`,
-              }}
-              animate={{ y: [0, -10, 0], opacity: [0.5, 0.8, 0.5] }}
-              transition={{ duration: 5 + i * 0.7, repeat: Infinity, delay: i * 0.4 }}
-            >
-              {tech.name}
-            </motion.div>
-          );
-        })}
-      </div>
-
-      <div className="container-max section-padding !py-0 relative z-10">
-        <div className="max-w-4xl">
-          {/* Eyebrow badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-6"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-300 text-sm font-medium">
-              <MapPin size={14} className="text-blue-400" />
-              Bengaluru, India
-              <span className="w-px h-3 bg-blue-500/40" />
-              <Sparkles size={12} className="text-amber-400" />
-              <span className="text-xs text-amber-300">Available for Senior Roles & Consulting</span>
-            </div>
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.05] mb-6"
-          >
-            Building Modern{" "}
-            <span className="gradient-text">Data Platforms</span>,{" "}
-            Analytics Products{" "}
-            <span className="text-foreground/70">&amp;</span>{" "}
-            <span className="gradient-text-amber">Executive Insights</span>
-          </motion.h1>
-
-          {/* Subheadline */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-8 max-w-2xl"
-          >
-            {profile.bio}
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-wrap gap-3 mb-14"
-          >
-            <Button
-              size="lg"
-              className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl shadow-blue-600/20 hover:shadow-blue-500/30 transition-all gap-2 cursor-pointer"
-              onClick={() => handleScroll("#projects")}
-            >
-              View Projects
-              <ArrowRight size={16} />
-            </Button>
-            <LinkButton
-              href={profile.resumeUrl}
-              download
-              size="lg"
-              variant="outline"
-              className="border-white/15 bg-white/5 hover:bg-white/10 text-foreground gap-2 backdrop-blur-sm"
-            >
-              <Download size={16} />
-              Download Resume
-            </LinkButton>
-            <Button
-              size="lg"
-              variant="ghost"
-              className="text-muted-foreground hover:text-foreground hover:bg-white/5"
-              onClick={() => handleScroll("#contact")}
-            >
-              Contact Me
-            </Button>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4"
-          >
-            {profile.stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.5 + i * 0.08 }}
-                className="glass rounded-xl p-4 text-center group hover:border-blue-500/30 transition-all"
-              >
-                <div className="text-2xl sm:text-3xl font-bold text-blue-400 group-hover:text-blue-300 transition-colors">
-                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                </div>
-                <p className="text-xs text-muted-foreground mt-1 leading-tight">{stat.label}</p>
-              </motion.div>
-            ))}
-          </motion.div>
+      {/* Center avatar */}
+      <div className="absolute inset-8 lg:inset-12 rounded-full overflow-hidden bg-gradient-to-br from-blue-600/20 via-blue-900/30 to-indigo-900/20 border border-blue-500/30 flex items-center justify-center glow-blue">
+        <div className="text-center">
+          <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-gradient-to-br from-blue-500/30 to-indigo-600/20 border-2 border-blue-400/30 mx-auto flex items-center justify-center mb-2">
+            <span className="text-2xl lg:text-3xl font-bold text-blue-300">DK</span>
+          </div>
+          <p className="text-xs text-blue-400/70 font-mono hidden lg:block">7+ yrs exp</p>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <span className="text-xs uppercase tracking-widest opacity-60">Scroll</span>
-        <ChevronDown size={16} className="opacity-60" />
+      {/* Orbiting tech pills */}
+      {techOrbit.map((t) => {
+        const rad = (t.angle * Math.PI) / 180;
+        const r = 48;
+        const x = 50 + r * Math.cos(rad);
+        const y = 50 + r * Math.sin(rad);
+        return (
+          <motion.div
+            key={t.label}
+            className="absolute -translate-x-1/2 -translate-y-1/2 px-2 py-1 rounded-md text-xs font-semibold border backdrop-blur-sm"
+            style={{
+              left: `${x}%`,
+              top: `${y}%`,
+              color: t.color,
+              backgroundColor: `${t.color}18`,
+              borderColor: `${t.color}35`,
+            }}
+            animate={{ scale: [1, 1.08, 1] }}
+            transition={{ duration: 3 + t.angle * 0.01, repeat: Infinity, delay: t.angle * 0.005 }}
+          >
+            {t.label}
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
+export function HeroSection() {
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 0.3], [0, 80]);
+  const opacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+
+  const scrollTo = (id: string) => document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
+
+  return (
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+
+      {/* ── Ambient blobs ── */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 65%)" }}
+          animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute -bottom-60 -right-40 w-[700px] h-[700px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 65%)" }}
+          animate={{ x: [0, -50, 0], y: [0, 40, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(245,158,11,0.04) 0%, transparent 65%)" }}
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 10, repeat: Infinity }}
+        />
+      </div>
+
+      {/* ── Grid overlay ── */}
+      <div className="absolute inset-0 grid-bg opacity-60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+
+      <motion.div style={{ y, opacity }} className="relative z-10 container-max section-padding !pb-12">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+          {/* ── LEFT — Text content ── */}
+          <div>
+            {/* Status pill */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full mb-8 glass-card"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-lg shadow-emerald-500/50" />
+              <MapPin size={13} className="text-muted-foreground" />
+              <span className="text-sm text-muted-foreground">Bengaluru, India</span>
+              <span className="w-px h-3.5 bg-border" />
+              <Sparkles size={12} className="text-amber-400" />
+              <span className="text-xs text-amber-300/90 font-medium">Open to Senior Roles</span>
+            </motion.div>
+
+            {/* Name */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.08 }}
+            >
+              <p className="text-sm font-semibold tracking-[0.18em] uppercase text-blue-400/80 mb-3 font-mono">
+                Dheeraj Kashyap
+              </p>
+              <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight leading-[1.04] mb-4">
+                <span className="gradient-text-white">Building Modern</span>{" "}
+                <br className="hidden sm:block" />
+                <span className="gradient-text">Data Platforms</span>
+              </h1>
+              <div className="text-2xl sm:text-3xl font-semibold text-foreground/70 mb-6 h-10 flex items-center">
+                <Typewriter />
+              </div>
+            </motion.div>
+
+            {/* Bio */}
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.16 }}
+              className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl"
+            >
+              7+ years delivering Lakehouse architectures, enterprise BI products, and
+              scalable data platforms using{" "}
+              <span className="text-blue-400">Microsoft Fabric</span>,{" "}
+              <span className="text-red-400">Databricks</span>,{" "}
+              <span className="text-cyan-400">Snowflake</span>, and{" "}
+              <span className="text-yellow-400">Power BI</span>.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.22 }}
+              className="flex flex-wrap gap-3 mb-10"
+            >
+              <button
+                onClick={() => scrollTo("#projects")}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm shadow-xl shadow-blue-600/30 hover:shadow-blue-500/40 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              >
+                View Projects
+                <ArrowRight size={15} />
+              </button>
+              <LinkButton
+                href={profile.resumeUrl}
+                download
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm border border-white/10 bg-white/5 hover:bg-white/10 text-foreground/90 backdrop-blur-sm transition-all hover:scale-[1.02] hover:border-white/20"
+              >
+                <Download size={15} />
+                Resume
+              </LinkButton>
+              <a
+                href="https://linkedin.com/in/kashyap-dheeraj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm border border-blue-500/20 bg-blue-500/8 hover:bg-blue-500/15 text-blue-400 transition-all hover:scale-[1.02]"
+              >
+                <LinkedinIcon size={15} />
+              </a>
+              <a
+                href="https://github.com/dheekash"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm border border-white/10 bg-white/5 hover:bg-white/10 text-foreground/60 transition-all hover:scale-[1.02]"
+              >
+                <GithubIcon size={15} />
+              </a>
+            </motion.div>
+
+            {/* Stats strip */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.35 }}
+              className="grid grid-cols-3 sm:grid-cols-5 gap-3"
+            >
+              {profile.stats.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 + i * 0.07 }}
+                  className="gradient-border rounded-xl p-3 text-center bg-card/40 backdrop-blur-sm hover:bg-card/60 transition-colors group"
+                >
+                  <div className="text-xl sm:text-2xl font-extrabold text-blue-400 group-hover:text-blue-300 transition-colors tabular-nums">
+                    <Counter value={s.value} suffix={s.suffix} />
+                  </div>
+                  <p className="text-[10px] text-muted-foreground mt-0.5 leading-tight">{s.label}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* ── RIGHT — Orbit visual ── */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" as const }}
+            className="hidden lg:flex flex-col items-center gap-8"
+          >
+            <OrbitRing />
+
+            {/* Credential strip */}
+            <div className="flex flex-wrap justify-center gap-2 max-w-sm">
+              {["DP-700", "DP-600", "Databricks DE", "SnowPro", "PL-300"].map((c) => (
+                <span
+                  key={c}
+                  className="text-xs px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/8 text-blue-300/80 font-medium"
+                >
+                  {c}
+                </span>
+              ))}
+              <span className="text-xs px-3 py-1 rounded-full border border-amber-500/20 bg-amber-500/8 text-amber-300/80 font-medium">
+                +8 more
+              </span>
+            </div>
+          </motion.div>
+        </div>
       </motion.div>
+
+      {/* Scroll cue */}
+      <motion.button
+        onClick={() => scrollTo("#about")}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-pointer"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2.5, repeat: Infinity }}
+      >
+        <span className="text-[10px] uppercase tracking-[0.2em] font-medium">Scroll</span>
+        <ChevronDown size={14} />
+      </motion.button>
     </section>
   );
 }
