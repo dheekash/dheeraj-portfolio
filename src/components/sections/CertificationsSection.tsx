@@ -28,10 +28,16 @@ const stats = [
   { value: "12",  label: "Active" },
 ];
 
+const FEATURED_COUNT = 6;
+
 export function CertificationsSection() {
   const [filter, setFilter] = useState("All");
+  const [showAll, setShowAll] = useState(false);
 
-  const filtered = filter === "All" ? certifications : certifications.filter((c) => c.category === filter);
+  const allFiltered = filter === "All" ? certifications : certifications.filter((c) => c.category === filter);
+  const featured = allFiltered.filter((c) => c.featured).slice(0, FEATURED_COUNT);
+  const rest = allFiltered.filter((c) => !featured.includes(c));
+  const filtered = showAll ? allFiltered : featured;
 
   return (
     <section id="certifications" className="section-padding relative overflow-hidden">
@@ -186,6 +192,27 @@ export function CertificationsSection() {
             })}
           </div>
         </AnimatePresence>
+
+        {/* Show more / less */}
+        {rest.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mt-6 text-center"
+          >
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border bg-card hover:bg-muted text-sm font-semibold text-foreground transition-all hover:scale-[1.02] cursor-pointer shadow-sm"
+            >
+              {showAll ? (
+                <>Show Less</>
+              ) : (
+                <>+ {rest.length} More Certifications</>
+              )}
+            </button>
+          </motion.div>
+        )}
       </div>
     </section>
   );

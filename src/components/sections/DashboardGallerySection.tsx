@@ -22,7 +22,7 @@ function DashboardPlaceholder({ dashboard, onClick }: { dashboard: Dashboard; on
       whileHover={{ y: -4 }}
       onClick={onClick}
       className="group relative rounded-2xl overflow-hidden cursor-pointer"
-      style={{ aspectRatio: "16/10" }}
+      style={{ aspectRatio: "16/9" }}
     >
       {/* Gradient bg */}
       <div
@@ -249,7 +249,7 @@ export function DashboardGallerySection() {
         </motion.div>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-2 gap-6">
           {dashboards.map((d, i) => (
             <motion.div
               key={d.id}

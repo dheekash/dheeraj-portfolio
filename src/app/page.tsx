@@ -3,6 +3,7 @@ import { ImpactNumbersSection } from "@/components/sections/ImpactNumbersSection
 import { ResumeSnapshotSection } from "@/components/sections/ResumeSnapshotSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { DashboardGallerySection } from "@/components/sections/DashboardGallerySection";
+import { BusinessImpactSection } from "@/components/sections/BusinessImpactSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
@@ -24,7 +25,7 @@ export default function HomePage() {
       {/* 1 — Hero */}
       <HeroSection />
 
-      {/* 2 — Numbers + Snapshot (light alt bg) */}
+      {/* 2 — Numbers + Snapshot */}
       <div className="section-alt">
         <ImpactNumbersSection />
         <Divider />
@@ -33,49 +34,56 @@ export default function HomePage() {
 
       <Divider />
 
-      {/* 3 — About (default bg) */}
+      {/* 3 — About */}
       <AboutSection />
 
       <Divider />
 
-      {/* 4 — Dashboards (alt2 bg) */}
+      {/* 4 — Business Impact (alt2) */}
       <div className="section-alt2">
-        <DashboardGallerySection />
+        <BusinessImpactSection />
       </div>
 
       <Divider />
 
-      {/* 5 — Projects (default bg) */}
-      <ProjectsSection />
+      {/* 5 — Dashboards */}
+      <DashboardGallerySection />
 
       <Divider />
 
-      {/* 6 — Experience (alt bg) */}
+      {/* 6 — Projects (alt bg) */}
       <div className="section-alt">
-        <ExperienceSection />
+        <ProjectsSection />
       </div>
 
       <Divider />
 
-      {/* 7 — Skills (default bg) */}
-      <SkillsSection />
+      {/* 7 — Experience */}
+      <ExperienceSection />
 
       <Divider />
 
-      {/* 8 — Certifications (alt2 bg) */}
+      {/* 8 — Skills (alt2 bg) */}
       <div className="section-alt2">
-        <CertificationsSection />
+        <SkillsSection />
       </div>
 
       <Divider />
 
-      {/* 9 — Currently Learning (default bg) */}
-      <CurrentlyLearningSection />
+      {/* 9 — Certifications */}
+      <CertificationsSection />
 
       <Divider />
 
-      {/* 10 — Education + Consulting (alt bg) */}
+      {/* 10 — Currently Learning (alt bg) */}
       <div className="section-alt">
+        <CurrentlyLearningSection />
+      </div>
+
+      <Divider />
+
+      {/* 11 — Education + Consulting (alt2) */}
+      <div className="section-alt2">
         <EducationSection />
         <Divider />
         <ConsultingSection />
@@ -83,19 +91,19 @@ export default function HomePage() {
 
       <Divider />
 
-      {/* 11 — Testimonials (default bg) */}
+      {/* 12 — Testimonials */}
       <TestimonialsSection />
 
       <Divider />
 
-      {/* 12 — Thought Leadership (alt2 bg) */}
-      <div className="section-alt2">
+      {/* 13 — Thought Leadership (alt) */}
+      <div className="section-alt">
         <ThoughtLeadershipSection />
       </div>
 
       <Divider />
 
-      {/* 13 — Contact (default bg) */}
+      {/* 14 — Contact */}
       <ContactSection />
     </>
   );

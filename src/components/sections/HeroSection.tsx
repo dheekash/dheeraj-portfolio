@@ -221,93 +221,122 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
 
       <motion.div style={{ y, opacity }} className="relative z-10 container-max section-padding !pb-12">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-[1fr_auto] gap-12 xl:gap-20 items-center">
 
-          {/* ── LEFT — Text content ── */}
-          <div>
-            {/* Status pill */}
+          {/* ── LEFT — Dominant text hierarchy ── */}
+          <div className="max-w-2xl">
+
+            {/* 1. WHO — Name first, large */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full mb-8 glass-card"
+              className="flex items-center gap-3 mb-5"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-lg shadow-emerald-500/50" />
-              <MapPin size={13} className="text-muted-foreground" />
-              <span className="text-sm text-muted-foreground">Bengaluru, India</span>
-              <span className="w-px h-3.5 bg-border" />
-              <Sparkles size={12} className="text-amber-400" />
-              <span className="text-xs text-amber-600 dark:text-amber-300/90 font-medium">Open to Senior Roles</span>
-            </motion.div>
-
-            {/* Name */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.08 }}
-            >
-              <p className="text-sm font-semibold tracking-[0.18em] uppercase text-blue-400/80 mb-3 font-mono">
-                Dheeraj Kashyap
-              </p>
-              <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight leading-[1.04] mb-4">
-                <span className="gradient-text-white">Turning Business Data</span>{" "}
-                <br className="hidden sm:block" />
-                <span className="gradient-text">Into Executive Decisions</span>
-              </h1>
-              <div className="text-xl sm:text-2xl font-semibold text-foreground/70 mb-6 h-9 flex items-center">
-                <Typewriter />
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-600/30">
+                <span className="text-white font-black text-sm">DK</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
+                  Dheeraj Kashyap
+                </h2>
+                <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold ml-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Available
+                </span>
               </div>
             </motion.div>
 
-            {/* Bio */}
+            {/* 2. WHAT — Title + roles */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.16 }}
-              className="mb-8 max-w-xl"
+              transition={{ duration: 0.55, delay: 0.07 }}
+              className="mb-5"
             >
-              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-3">
-                <strong className="text-foreground font-semibold">Analytics Engineer</strong> with 6+ years building enterprise analytics solutions across{" "}
-                <span className="text-amber-600 dark:text-amber-400 font-semibold">Amazon</span>, consulting, and data-driven organisations.
-              </p>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Specialized in{" "}
-                <span className="text-yellow-600 dark:text-yellow-400 font-medium">Power BI</span>,{" "}
-                <span className="text-slate-600 dark:text-slate-300 font-medium">SQL</span>,{" "}
-                <span className="text-cyan-600 dark:text-cyan-400 font-medium">Snowflake</span>,{" "}
-                <span className="text-blue-600 dark:text-blue-400 font-medium">Azure</span>, and{" "}
-                <span className="text-blue-700 dark:text-blue-300 font-medium">Microsoft Fabric</span> — delivering{" "}
-                dashboards, pipelines, and Lakehouse platforms trusted by 20+ stakeholders across 8 countries.
-              </p>
+              <h1 className="font-extrabold tracking-tight leading-[1.06] mb-3" style={{ fontSize: "clamp(2.4rem,5.5vw,4rem)" }}>
+                <span className="gradient-text-white dark:gradient-text-white" style={{ backgroundImage: "linear-gradient(135deg,#0F172A 0%,#334155 100%)" }}>
+                  Turning Enterprise Data
+                </span>
+                <br />
+                <span className="gradient-text">Into Executive Decisions</span>
+              </h1>
+              {/* Role badges */}
+              <div className="flex flex-wrap gap-2">
+                {["Business Analyst", "BI Developer", "Analytics Consultant", "Data Engineer"].map((r) => (
+                  <span key={r} className="px-3 py-1 rounded-full text-sm font-semibold border border-blue-500/25 bg-blue-500/8 text-blue-600 dark:text-blue-300">
+                    {r}
+                  </span>
+                ))}
+              </div>
             </motion.div>
 
-            {/* CTAs */}
+            {/* 3. WHY — Credibility line */}
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.22 }}
+              transition={{ duration: 0.5, delay: 0.14 }}
+              className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-7 text-sm text-muted-foreground"
+            >
+              <span className="font-bold text-foreground">6+ Years Experience</span>
+              <span className="text-border">·</span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-4 h-4 rounded bg-amber-500/20 flex items-center justify-center text-[9px] font-black text-amber-600">A</span>
+                Amazon
+              </span>
+              <span className="text-border">·</span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-4 h-4 rounded bg-blue-500/20 flex items-center justify-center text-[9px] font-black text-blue-600">AA</span>
+                Amplify Analytix
+              </span>
+              <span className="text-border">·</span>
+              <span className="flex items-center gap-1.5">
+                <MapPin size={11} className="text-muted-foreground" />
+                Bengaluru, India
+              </span>
+            </motion.div>
+
+            {/* 4. VALUE PROP — one sentence */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg"
+            >
+              I build{" "}
+              <span className="text-yellow-600 dark:text-yellow-400 font-semibold">Power BI</span> dashboards,{" "}
+              <span className="text-cyan-600 dark:text-cyan-400 font-semibold">Snowflake</span> pipelines, and{" "}
+              <span className="text-blue-600 dark:text-blue-400 font-semibold">Microsoft Fabric</span> Lakehouses
+              {" "}that help 20+ stakeholders in 8 countries make faster, better decisions.
+            </motion.p>
+
+            {/* 5. CTAs — primary dominant */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.26 }}
               className="flex flex-wrap gap-3 mb-10"
             >
-              <button
-                onClick={() => scrollTo("#projects")}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm shadow-xl shadow-blue-600/30 hover:shadow-blue-500/40 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-              >
-                View Projects
-                <ArrowRight size={15} />
-              </button>
               <LinkButton
                 href={profile.resumeUrl}
                 download
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm border border-white/10 bg-white/5 hover:bg-white/10 text-foreground/90 backdrop-blur-sm transition-all hover:scale-[1.02] hover:border-white/20"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-2xl shadow-blue-600/35 hover:shadow-blue-500/40 transition-all hover:scale-[1.02] active:scale-[0.98] text-sm"
               >
-                <Download size={15} />
-                Resume
+                <Download size={16} />
+                Download Resume
               </LinkButton>
+              <button
+                onClick={() => scrollTo("#dashboards")}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm border border-border bg-card hover:bg-muted text-foreground shadow-sm transition-all hover:scale-[1.02] cursor-pointer"
+              >
+                View Dashboards
+                <ArrowRight size={15} />
+              </button>
               <a
                 href="https://linkedin.com/in/kashyap-dheeraj"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm border border-blue-500/20 bg-blue-500/8 hover:bg-blue-500/15 text-blue-400 transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl font-semibold text-sm border border-blue-500/20 bg-blue-500/8 hover:bg-blue-500/15 text-blue-500 dark:text-blue-400 transition-all hover:scale-[1.02]"
               >
                 <LinkedinIcon size={15} />
               </a>
@@ -315,28 +344,28 @@ export function HeroSection() {
                 href="https://github.com/dheekash"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm border border-white/10 bg-white/5 hover:bg-white/10 text-foreground/60 transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl font-semibold text-sm border border-border bg-card hover:bg-muted text-foreground/60 transition-all hover:scale-[1.02]"
               >
                 <GithubIcon size={15} />
               </a>
             </motion.div>
 
-            {/* Stats strip */}
+            {/* 6. Stats strip — small, below CTAs */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.35 }}
-              className="grid grid-cols-3 sm:grid-cols-5 gap-3"
+              transition={{ duration: 0.8, delay: 0.38 }}
+              className="grid grid-cols-3 sm:grid-cols-5 gap-2.5"
             >
               {profile.stats.map((s, i) => (
                 <motion.div
                   key={s.label}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 + i * 0.07 }}
-                  className="gradient-border rounded-xl p-3 text-center bg-card/40 backdrop-blur-sm hover:bg-card/60 transition-colors group"
+                  transition={{ delay: 0.42 + i * 0.06 }}
+                  className="rounded-xl p-3 text-center bg-card border border-border shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group"
                 >
-                  <div className="text-xl sm:text-2xl font-extrabold text-blue-400 group-hover:text-blue-300 transition-colors tabular-nums">
+                  <div className="text-lg sm:text-xl font-extrabold text-blue-600 dark:text-blue-400 group-hover:text-blue-500 transition-colors tabular-nums">
                     <Counter value={s.value} suffix={s.suffix} />
                   </div>
                   <p className="text-[10px] text-muted-foreground mt-0.5 leading-tight">{s.label}</p>
