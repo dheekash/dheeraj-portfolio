@@ -89,15 +89,6 @@ export function Navbar() {
             {/* Theme toggle */}
             <ThemeSwitch />
 
-            {/* Contact — filled blue, softer shadow */}
-            <button
-              onClick={() => scrollTo("#contact")}
-              className="hidden lg:inline-flex items-center px-4 py-[7px] rounded-lg text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all cursor-pointer"
-              style={{ boxShadow: "0 8px 24px rgba(37,99,235,.18)" }}
-            >
-              Contact Me
-            </button>
-
             {/* Mobile hamburger */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
