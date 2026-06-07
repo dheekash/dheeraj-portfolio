@@ -99,10 +99,8 @@ export function Navbar() {
               Resume
             </LinkButton>
 
-            {/* Theme toggle — scaled down ~37% via CSS var override */}
-            <div style={{ "--toggle-size": "15px" } as React.CSSProperties}>
-              <ThemeSwitch />
-            </div>
+            {/* Theme toggle */}
+            <ThemeSwitch />
 
             {/* Contact — filled blue, softer shadow */}
             <button
