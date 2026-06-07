@@ -183,6 +183,47 @@ export function ContactSection() {
               Or email directly:{" "}
               <a href={`mailto:${profile.email}`} className="text-blue-400 hover:underline">{profile.email}</a>
             </p>
+
+            {/* Social quick-links under the form */}
+            <div className="pt-2 border-t border-border/50">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground/60 text-center mb-3">Connect</p>
+              <div className="grid grid-cols-2 gap-2.5">
+                <a
+                  href={profile.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-blue-500/25 bg-blue-500/6 hover:bg-blue-500/12 text-blue-500 hover:text-blue-400 text-xs font-semibold transition-all hover:scale-[1.02]"
+                >
+                  <LinkedinIcon size={14} />
+                  LinkedIn
+                </a>
+                <a
+                  href={profile.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-white/10 bg-white/4 hover:bg-white/8 text-foreground/70 hover:text-foreground text-xs font-semibold transition-all hover:scale-[1.02]"
+                >
+                  <GithubIcon size={14} />
+                  GitHub
+                </a>
+                <a
+                  href={`mailto:${profile.email}`}
+                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-white/10 bg-white/4 hover:bg-white/8 text-foreground/70 hover:text-foreground text-xs font-semibold transition-all hover:scale-[1.02]"
+                >
+                  <Mail size={14} />
+                  Email
+                </a>
+                <a
+                  href={profile.resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-amber-500/25 bg-amber-500/6 hover:bg-amber-500/12 text-amber-600 dark:text-amber-400 hover:text-amber-500 text-xs font-semibold transition-all hover:scale-[1.02]"
+                >
+                  <Download size={14} />
+                  Resume
+                </a>
+              </div>
+            </div>
           </motion.form>
         </div>
       </div>

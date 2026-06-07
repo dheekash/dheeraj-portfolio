@@ -248,40 +248,68 @@ export function DashboardGallerySection() {
           Add real screenshots to <code className="font-mono bg-amber-500/10 px-1 rounded">/public/dashboards/</code> to replace these placeholders
         </motion.div>
 
-        {/* Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
-          {dashboards.map((d, i) => (
+        {/* Featured dashboard — full width */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: "easeOut" as const }}
+          className="mb-6"
+        >
+          <div className="rounded-2xl border border-border bg-card/40 overflow-hidden card-depth">
+            {/* Featured badge */}
+            <div className="px-5 pt-4 pb-0 flex items-center gap-2">
+              <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-500">
+                ★ Featured Dashboard
+              </span>
+              <span className="text-[10px] text-muted-foreground font-mono">{dashboards[0].description}</span>
+            </div>
+            {/* Larger 16/7 placeholder */}
+            <div style={{ aspectRatio: "21/9" }}>
+              <DashboardPlaceholder dashboard={dashboards[0]} onClick={() => setActive(dashboards[0])} />
+            </div>
+            <div className="px-5 py-4 flex items-start justify-between gap-2">
+              <div>
+                <h3 className="font-bold text-foreground text-base mb-1.5 leading-tight">{dashboards[0].title}</h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {dashboards[0].tags.map((t) => (
+                    <span key={t} className="text-[10px] px-2 py-0.5 rounded-md border border-border bg-muted/50 text-muted-foreground font-medium">{t}</span>
+                  ))}
+                </div>
+              </div>
+              <button onClick={() => setActive(dashboards[0])}
+                className="shrink-0 p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-all cursor-pointer">
+                <BarChart2 size={16} />
+              </button>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Remaining dashboards — 2-col grid */}
+        <div className="grid md:grid-cols-2 gap-5">
+          {dashboards.slice(1).map((d, i) => (
             <motion.div
               key={d.id}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.09, ease: "easeOut" as const }}
-              className={i === 0 ? "md:col-span-2 lg:col-span-1 lg:row-span-1" : ""}
+              transition={{ duration: 0.5, delay: (i + 1) * 0.08, ease: "easeOut" as const }}
             >
-              {/* Card wrapper */}
               <div className="h-full rounded-2xl border border-border bg-card/40 overflow-hidden card-depth">
                 <DashboardPlaceholder dashboard={d} onClick={() => setActive(d)} />
-                {/* Card footer */}
-                <div className="px-5 py-4">
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <h3 className="font-bold text-foreground text-sm mb-1 leading-tight">{d.title}</h3>
-                      <div className="flex flex-wrap gap-1.5">
-                        {d.tags.slice(0, 3).map((t) => (
-                          <span key={t} className="text-[10px] px-2 py-0.5 rounded-md border border-border bg-muted/50 text-muted-foreground font-medium">
-                            {t}
-                          </span>
-                        ))}
-                      </div>
+                <div className="px-5 py-4 flex items-start justify-between gap-2">
+                  <div>
+                    <h3 className="font-bold text-foreground text-sm mb-1 leading-tight">{d.title}</h3>
+                    <div className="flex flex-wrap gap-1.5">
+                      {d.tags.slice(0, 3).map((t) => (
+                        <span key={t} className="text-[10px] px-2 py-0.5 rounded-md border border-border bg-muted/50 text-muted-foreground font-medium">{t}</span>
+                      ))}
                     </div>
-                    <button
-                      onClick={() => setActive(d)}
-                      className="shrink-0 p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-all cursor-pointer"
-                    >
-                      <BarChart2 size={16} />
-                    </button>
                   </div>
+                  <button onClick={() => setActive(d)}
+                    className="shrink-0 p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-all cursor-pointer">
+                    <BarChart2 size={16} />
+                  </button>
                 </div>
               </div>
             </motion.div>

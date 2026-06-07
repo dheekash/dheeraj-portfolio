@@ -1,8 +1,6 @@
 import { HeroSection } from "@/components/sections/HeroSection";
 import { ImpactNumbersSection } from "@/components/sections/ImpactNumbersSection";
-import { AboutSection } from "@/components/sections/AboutSection";
 import { BusinessImpactSection } from "@/components/sections/BusinessImpactSection";
-import { WhyMeSection } from "@/components/sections/WhyMeSection";
 import { DashboardGallerySection } from "@/components/sections/DashboardGallerySection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
@@ -29,53 +27,43 @@ export default function HomePage() {
 
       <Divider />
 
-      {/* 3 — About (education cards inline) */}
-      <AboutSection />
-
-      <Divider />
-
-      {/* 4 — Business Impact */}
+      {/* 3 — Business Impact + Why Companies Hire Me (merged) */}
       <div className="section-alt2">
         <BusinessImpactSection />
       </div>
 
       <Divider />
 
-      {/* 5 — Dashboard Gallery (star asset, shown early) */}
+      {/* 4 — Dashboard Gallery */}
       <DashboardGallerySection />
 
       <Divider />
 
-      {/* 6 — Featured Case Studies */}
+      {/* 5 — Case Studies */}
       <div className="section-alt">
         <ProjectsSection />
       </div>
 
       <Divider />
 
-      {/* 7 — Why Companies Hire Me */}
-      <WhyMeSection />
-
-      <Divider />
-
-      {/* 8 — Professional Journey */}
+      {/* 6 — Professional Journey */}
       <ExperienceSection />
 
       <Divider />
 
-      {/* 9 — Tech Stack */}
+      {/* 7 — Tech Stack */}
       <div className="section-alt2">
         <SkillsSection />
       </div>
 
       <Divider />
 
-      {/* 10 — Featured Certifications */}
+      {/* 8 — Certifications */}
       <CertificationsSection />
 
       <Divider />
 
-      {/* 10 — Contact */}
+      {/* 9 — Contact */}
       <ContactSection />
     </>
   );

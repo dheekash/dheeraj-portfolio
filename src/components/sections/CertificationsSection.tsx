@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, AlertCircle, Clock, ExternalLink, Award } from "lucide-react";
-import { certifications, certificationCategories } from "@/data/certifications";
+import { certifications } from "@/data/certifications";
 import { isExpired } from "@/lib/utils";
 
 function fadeUp(delay = 0) {
@@ -28,16 +28,14 @@ const stats = [
   { value: "12",  label: "Active" },
 ];
 
-const FEATURED_COUNT = 6;
+const FEATURED_COUNT = 4;
 
 export function CertificationsSection() {
-  const [filter, setFilter] = useState("All");
   const [showAll, setShowAll] = useState(false);
 
-  const allFiltered = filter === "All" ? certifications : certifications.filter((c) => c.category === filter);
-  const featured = allFiltered.filter((c) => c.featured).slice(0, FEATURED_COUNT);
-  const rest = allFiltered.filter((c) => !featured.includes(c));
-  const filtered = showAll ? allFiltered : featured;
+  const featured = certifications.filter((c) => c.featured).slice(0, FEATURED_COUNT);
+  const rest = certifications.filter((c) => !featured.includes(c));
+  const filtered = showAll ? certifications : featured;
 
   return (
     <section id="certifications" className="section-padding relative overflow-hidden">
@@ -68,29 +66,9 @@ export function CertificationsSection() {
           ))}
         </motion.div>
 
-        {/* Filter tabs */}
-        <motion.div {...fadeUp(0.15)} className="flex flex-wrap gap-2 mb-8">
-          {certificationCategories.map((cat) => {
-            const count = cat === "All" ? certifications.length : certifications.filter((c) => c.category === cat).length;
-            return (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                  filter === cat
-                    ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25"
-                    : "border border-white/10 bg-white/4 text-muted-foreground hover:text-foreground hover:border-white/20"
-                }`}
-              >
-                {cat} <span className="ml-1 opacity-60">({count})</span>
-              </button>
-            );
-          })}
-        </motion.div>
-
         {/* Cert grid */}
         <AnimatePresence mode="popLayout">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {filtered.map((cert, i) => {
               const expired = cert.expiryDate ? isExpired(cert.expiryDate) : false;
               const style = issuerStyle[cert.issuer] || { bg: "bg-white/5", text: "text-muted-foreground", border: "border-white/10", dot: "#6B7280" };

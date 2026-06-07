@@ -10,6 +10,8 @@ export const profile: Profile = {
   avatar: "/images/avatar.jpg",
   resumeUrl: "https://drive.google.com/file/d/1pQAObCk6ju8yfGEwoB12EWEhRkUZks-4/view?usp=sharing",
   calendlyUrl: "https://calendly.com/dheerajkashyap",
+  linkedinUrl: "https://linkedin.com/in/kashyap-dheeraj",
+  githubUrl: "https://github.com/dheekash",
   stats: [
     { value: "7", label: "Years Experience", suffix: "+" },
     { value: "15", label: "Countries Supported", suffix: "+" },

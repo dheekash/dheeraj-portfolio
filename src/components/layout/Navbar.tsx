@@ -9,13 +9,12 @@ import { cn } from "@/lib/utils";
 import { profile } from "@/data/profile";
 
 const navItems = [
-  { label: "About",      href: "#about" },
-  { label: "Dashboards", href: "#dashboards" },
-  { label: "Projects",   href: "#projects" },
-  { label: "Career",     href: "#experience" },
-  { label: "Skills",     href: "#skills" },
-  { label: "Certs",      href: "#certifications" },
-  { label: "Contact",    href: "#contact" },
+  { label: "Impact",      href: "#impact" },
+  { label: "Dashboards",  href: "#dashboards" },
+  { label: "Projects",    href: "#projects" },
+  { label: "Experience",  href: "#experience" },
+  { label: "Skills",      href: "#skills" },
+  { label: "Contact",     href: "#contact" },
 ];
 
 export function Navbar() {

@@ -9,6 +9,8 @@ export interface Profile {
   avatar: string;
   resumeUrl: string;
   calendlyUrl: string;
+  linkedinUrl: string;
+  githubUrl: string;
   stats: Stat[];
 }
 

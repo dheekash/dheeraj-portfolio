@@ -416,6 +416,12 @@ export function HeroSection() {
                 <br />
                 <span className="gradient-text">Into Executive Decisions</span>
               </h1>
+              {/* One-liner positioning tagline */}
+              <p className="text-sm text-muted-foreground/80 font-medium mb-3 leading-relaxed">
+                Business Analyst&nbsp;|&nbsp;BI Developer&nbsp;|&nbsp;Analytics Consultant specializing in{" "}
+                <span className="text-foreground/90">Power BI, Fabric, Snowflake, SQL</span> and{" "}
+                <span className="text-foreground/90">Python</span>
+              </p>
               <div className="flex flex-wrap gap-2">
                 {["Business Analyst", "BI Developer", "Analytics Consultant", "Data Engineer"].map((r) => (
                   <span key={r} className="px-3 py-1 rounded-full text-sm font-semibold border border-blue-500/25 bg-blue-500/8 text-blue-600 dark:text-blue-300">
