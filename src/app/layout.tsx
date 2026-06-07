@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -126,7 +127,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -134,11 +135,13 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <TooltipProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </TooltipProvider>
+        <ThemeProvider>
+          <TooltipProvider>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+          </TooltipProvider>
+        </ThemeProvider>
         <Analytics />
         <SpeedInsights />
       </body>

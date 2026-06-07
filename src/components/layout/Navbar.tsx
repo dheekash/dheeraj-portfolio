@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X, Download, Sun, Moon } from "lucide-react";
 import { LinkButton } from "@/components/common/LinkButton";
 import { cn } from "@/lib/utils";
 import { profile } from "@/data/profile";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 const navItems = [
   { label: "About",    href: "#about" },
@@ -21,6 +22,7 @@ export function Navbar() {
   const [scrolled, setScrolled]     = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [active, setActive]         = useState("");
+  const { theme, toggle }           = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -38,7 +40,7 @@ export function Navbar() {
     <header className={cn(
       "fixed top-0 inset-x-0 z-50 transition-all duration-500",
       scrolled
-        ? "glass border-b border-white/6 shadow-2xl shadow-black/30"
+        ? "glass border-b border-border shadow-lg"
         : "bg-transparent"
     )}>
       <nav className="container-max section-padding !py-0">
@@ -83,11 +85,20 @@ export function Navbar() {
             <LinkButton
               href={profile.resumeUrl}
               download
-              className="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-medium border border-white/10 bg-white/5 hover:bg-white/10 text-foreground/80 transition-all"
+              className="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-medium border border-border bg-muted/50 hover:bg-muted text-foreground/80 transition-all"
             >
               <Download size={13} />
               Resume
             </LinkButton>
+
+            {/* Theme toggle */}
+            <button
+              onClick={toggle}
+              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-all cursor-pointer"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
 
             <button
               onClick={() => scrollTo("#contact")}
@@ -99,7 +110,7 @@ export function Navbar() {
             {/* Mobile toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/6 transition-all cursor-pointer"
+              className="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-all cursor-pointer"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -109,7 +120,7 @@ export function Navbar() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="lg:hidden border-t border-white/8 py-4 space-y-0.5">
+          <div className="lg:hidden border-t border-border py-4 space-y-0.5">
             {navItems.map((item) => (
               <button
                 key={item.label}
