@@ -46,14 +46,15 @@ export function Footer() {
                 <Calendar size={16} />
                 Book a Call
               </a>
-              <LinkButton
+              <a
                 href={profile.resumeUrl}
-                download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-white/10 border border-white/25 text-white font-bold text-sm hover:bg-white/20 hover:scale-[1.02] transition-all backdrop-blur-sm"
               >
                 <Download size={16} />
-                Download Resume
-              </LinkButton>
+                View Resume
+              </a>
               <a
                 href={`mailto:${profile.email}`}
                 className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-white/10 border border-white/25 text-white font-bold text-sm hover:bg-white/20 hover:scale-[1.02] transition-all backdrop-blur-sm"

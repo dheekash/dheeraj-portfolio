@@ -84,7 +84,8 @@ export function Navbar() {
           <div className="flex items-center gap-2">
             <LinkButton
               href={profile.resumeUrl}
-              download
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-medium border border-border bg-muted/50 hover:bg-muted text-foreground/80 transition-all"
             >
               <Download size={13} />
@@ -133,7 +134,8 @@ export function Navbar() {
             <div className="pt-3 px-1 flex flex-col gap-2">
               <LinkButton
                 href={profile.resumeUrl}
-                download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex justify-center items-center gap-2 py-2.5 rounded-xl text-sm font-medium border border-white/10 bg-white/5 text-foreground/80"
               >
                 <Download size={14} /> Download Resume

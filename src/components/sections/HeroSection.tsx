@@ -319,11 +319,12 @@ export function HeroSection() {
             >
               <LinkButton
                 href={profile.resumeUrl}
-                download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-2xl shadow-blue-600/35 hover:shadow-blue-500/40 transition-all hover:scale-[1.02] active:scale-[0.98] text-sm"
               >
                 <Download size={16} />
-                Download Resume
+                View Resume
               </LinkButton>
               <button
                 onClick={() => scrollTo("#dashboards")}
