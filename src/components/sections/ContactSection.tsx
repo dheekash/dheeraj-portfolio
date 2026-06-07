@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, MapPin, Download, Calendar, CheckCircle, AlertCircle } from "lucide-react";
+import { Send, Mail, MapPin, Calendar, CheckCircle, AlertCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -124,14 +124,6 @@ export function ContactSection() {
               ))}
             </div>
 
-            {/* Resume */}
-            <LinkButton
-              href={profile.resumeUrl}
-              download
-              className="flex justify-center items-center gap-2 w-full py-3 rounded-xl text-sm font-semibold border border-white/12 bg-white/5 hover:bg-white/10 text-foreground/80 transition-all"
-            >
-              <Download size={15} /> Download Full Resume
-            </LinkButton>
           </motion.div>
 
           {/* Right — Form */}
@@ -212,15 +204,6 @@ export function ContactSection() {
                 >
                   <Mail size={14} />
                   Email
-                </a>
-                <a
-                  href={profile.resumeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-amber-500/25 bg-amber-500/6 hover:bg-amber-500/12 text-amber-600 dark:text-amber-400 hover:text-amber-500 text-xs font-semibold transition-all hover:scale-[1.02]"
-                >
-                  <Download size={14} />
-                  Resume
                 </a>
               </div>
             </div>
