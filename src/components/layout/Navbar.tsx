@@ -2,19 +2,19 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Download } from "lucide-react";
+import { Download } from "lucide-react";
 import { LinkButton } from "@/components/common/LinkButton";
 import { ThemeSwitch } from "@/components/common/ThemeSwitch";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { profile } from "@/data/profile";
 
 const navItems = [
-  { label: "Impact",      href: "#impact" },
-  { label: "Dashboards",  href: "#dashboards" },
-  { label: "Projects",    href: "#projects" },
-  { label: "Experience",  href: "#experience" },
-  { label: "Skills",      href: "#skills" },
-  { label: "Contact",     href: "#contact" },
+  { label: "Impact",     href: "#impact" },
+  { label: "Projects",   href: "#projects" },
+  { label: "Experience", href: "#experience" },
+  { label: "Skills",     href: "#skills" },
+  { label: "Contact",    href: "#contact" },
 ];
 
 export function Navbar() {
@@ -38,29 +38,37 @@ export function Navbar() {
     <header className={cn(
       "fixed top-0 inset-x-0 z-50 transition-all duration-500",
       scrolled
-        ? "glass border-b border-border shadow-lg"
-        : "bg-transparent"
+        ? "border-b border-white/8 shadow-sm"
+        : "bg-transparent",
+      scrolled
+        ? "bg-white/80 dark:bg-[#0A0F1E]/85 backdrop-blur-[14px]"
+        : ""
     )}>
       <nav className="container-max section-padding !py-0">
-        <div className="flex items-center justify-between h-16">
+        {/* h-[72px] — slimmer than before */}
+        <div className="flex items-center justify-between h-[72px]">
 
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group" aria-label="Home">
-            <div className="relative w-9 h-9 rounded-xl overflow-hidden"
-              style={{ background: "linear-gradient(135deg, #2563EB 0%, #4F46E5 100%)" }}>
+          {/* ── Logo ── */}
+          <Link href="/" className="flex items-center gap-4 group shrink-0" aria-label="Home">
+            <div
+              className="relative w-9 h-9 rounded-xl overflow-hidden shrink-0"
+              style={{ background: "linear-gradient(135deg, #2563EB 0%, #4F46E5 100%)" }}
+            >
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-white font-black text-sm tracking-tight">DK</span>
               </div>
               <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors" />
             </div>
             <div className="hidden sm:block leading-tight">
-              <p className="text-sm font-bold text-foreground/90 group-hover:text-foreground transition-colors">{profile.name}</p>
+              <p className="text-sm font-bold text-foreground/90 group-hover:text-foreground transition-colors">
+                {profile.name}
+              </p>
               <p className="text-[11px] text-muted-foreground font-medium">{profile.role}</p>
             </div>
           </Link>
 
-          {/* Desktop nav */}
-          <ul className="hidden lg:flex items-center gap-0.5">
+          {/* ── Desktop nav — truly centered ── */}
+          <ul className="hidden lg:flex items-center gap-0.5 absolute left-1/2 -translate-x-1/2">
             {navItems.map((item) => (
               <li key={item.label}>
                 <button
@@ -68,8 +76,8 @@ export function Navbar() {
                   className={cn(
                     "px-3.5 py-2 text-sm rounded-lg transition-all duration-200 cursor-pointer font-medium",
                     active === item.href
-                      ? "text-blue-400 bg-blue-500/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-white/6"
+                      ? "text-blue-500 bg-blue-500/10"
+                      : "text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/6"
                   )}
                 >
                   {item.label}
@@ -78,29 +86,34 @@ export function Navbar() {
             ))}
           </ul>
 
-          {/* Right actions */}
-          <div className="flex items-center gap-2">
+          {/* ── Right actions ── */}
+          <div className="flex items-center gap-2 shrink-0">
+            {/* Resume — outlined blue */}
             <LinkButton
               href={profile.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-medium border border-border bg-muted/50 hover:bg-muted text-foreground/80 transition-all"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-[7px] rounded-lg text-sm font-semibold border border-blue-500/40 bg-blue-500/6 hover:bg-blue-500/12 text-blue-600 dark:text-blue-400 transition-all hover:border-blue-500/60"
             >
               <Download size={13} />
               Resume
             </LinkButton>
 
-            {/* Theme toggle */}
-            <ThemeSwitch />
+            {/* Theme toggle — scaled down ~37% via CSS var override */}
+            <div style={{ "--toggle-size": "15px" } as React.CSSProperties}>
+              <ThemeSwitch />
+            </div>
 
+            {/* Contact — filled blue, softer shadow */}
             <button
               onClick={() => scrollTo("#contact")}
-              className="hidden lg:inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/25 hover:shadow-blue-500/30 transition-all cursor-pointer"
+              className="hidden lg:inline-flex items-center px-4 py-[7px] rounded-lg text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all cursor-pointer"
+              style={{ boxShadow: "0 8px 24px rgba(37,99,235,.18)" }}
             >
               Contact Me
             </button>
 
-            {/* Mobile toggle */}
+            {/* Mobile hamburger */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-all cursor-pointer"
@@ -111,9 +124,9 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Mobile menu */}
+        {/* ── Mobile menu ── */}
         {mobileOpen && (
-          <div className="lg:hidden border-t border-border py-4 space-y-0.5">
+          <div className="lg:hidden border-t border-white/8 py-4 space-y-0.5">
             {navItems.map((item) => (
               <button
                 key={item.label}
@@ -128,13 +141,14 @@ export function Navbar() {
                 href={profile.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex justify-center items-center gap-2 py-2.5 rounded-xl text-sm font-medium border border-white/10 bg-white/5 text-foreground/80"
+                className="flex justify-center items-center gap-2 py-2.5 rounded-xl text-sm font-semibold border border-blue-500/40 bg-blue-500/6 text-blue-500"
               >
-                <Download size={14} /> Download Resume
+                <Download size={14} /> View Resume
               </LinkButton>
               <button
                 onClick={() => scrollTo("#contact")}
                 className="w-full py-2.5 rounded-xl text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all cursor-pointer"
+                style={{ boxShadow: "0 8px 24px rgba(37,99,235,.18)" }}
               >
                 Contact Me
               </button>
