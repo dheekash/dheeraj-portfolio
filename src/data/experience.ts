@@ -1,0 +1,82 @@
+import type { Experience } from "@/types";
+
+export const experiences: Experience[] = [
+  {
+    id: "amplify-analytix",
+    company: "Amplify Analytix",
+    role: "BI & Analytics Engineer",
+    period: "2025 – Present",
+    startYear: 2025,
+    endYear: null,
+    location: "Bengaluru, India",
+    description:
+      "Leading enterprise analytics engineering initiatives, architecting Lakehouse solutions, and delivering high-impact BI products for global clients across multiple industries.",
+    highlights: [
+      "Architected end-to-end Microsoft Fabric Lakehouse solutions with Medallion architecture",
+      "Engineered enterprise-grade Power BI semantic models with 100+ DAX measures",
+      "Delivered analytics platforms supporting 15+ global markets and 200+ end users",
+      "Implemented SQLMesh data transformation pipelines reducing maintenance by 90%",
+      "Drove adoption of modern analytics stack: Databricks, Snowflake, dbt, and Delta Lake",
+    ],
+    techStack: [
+      "Microsoft Fabric",
+      "Databricks",
+      "Snowflake",
+      "Power BI",
+      "SQLMesh",
+      "dbt",
+      "Delta Lake",
+      "Azure Data Factory",
+      "PySpark",
+      "Python",
+    ],
+    type: "full-time",
+  },
+  {
+    id: "amazon",
+    company: "Amazon",
+    role: "Investigation Specialist & Analytics Lead",
+    period: "2020 – 2024",
+    startYear: 2020,
+    endYear: 2024,
+    location: "Bengaluru, India",
+    description:
+      "Transitioned from operations into data analytics, building self-service reporting tools, forecasting models, and executive dashboards that drove strategic decision-making across Amazon's seller ecosystem.",
+    highlights: [
+      "Built Amazon Sales Forecasting Dashboard processing 10M+ records, identifying $500K+ revenue opportunities",
+      "Developed predictive analytics models for seller performance using Python and Snowflake",
+      "Designed Power BI dashboards adopted by senior leadership across 8 regional markets",
+      "Led analytics workstream for cross-functional investigation teams",
+      "Collaborated with data science teams to integrate ML insights into operational BI tools",
+    ],
+    techStack: [
+      "Power BI",
+      "Snowflake",
+      "Zebra BI",
+      "DAX",
+      "Python",
+      "SQL",
+      "Excel",
+    ],
+    type: "full-time",
+  },
+  {
+    id: "frontizo",
+    company: "Frontizo Business Services",
+    role: "Customer Support Representative",
+    period: "2019 – 2020",
+    startYear: 2019,
+    endYear: 2020,
+    location: "Bengaluru, India",
+    description:
+      "Began career at an Amazon-operated facility, developing strong foundations in process excellence, data-driven customer insights, and stakeholder communication that later fueled a pivot into analytics.",
+    highlights: [
+      "Identified recurring process inefficiencies through data analysis, reducing escalation rates",
+      "Supported operational reporting initiatives and contributed to team KPI tracking",
+      "Built Excel-based dashboards for team performance monitoring",
+      "Developed strong problem-solving and stakeholder communication skills",
+    ],
+    techStack: ["Excel", "SQL Basics", "Reporting Tools"],
+    type: "full-time",
+  },
+];
