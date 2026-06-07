@@ -66,13 +66,13 @@ export function Navbar() {
           </Link>
 
           {/* ── Desktop nav — truly centered ── */}
-          <ul className="hidden lg:flex items-center gap-0.5 absolute left-1/2 -translate-x-1/2">
+          <ul className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
             {navItems.map((item) => (
               <li key={item.label}>
                 <button
                   onClick={() => scrollTo(item.href)}
                   className={cn(
-                    "px-3.5 py-2 text-sm rounded-lg transition-all duration-200 cursor-pointer font-medium",
+                    "px-5 py-2 text-sm rounded-lg transition-all duration-200 cursor-pointer font-medium tracking-wide",
                     active === item.href
                       ? "text-blue-500 bg-blue-500/10"
                       : "text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/6"
