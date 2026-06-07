@@ -438,46 +438,15 @@ export function HeroSection() {
 
           </div>
 
-          {/* ══ RIGHT — Visual with mouse parallax ══ */}
+          {/* ══ RIGHT — Orbit ring only ══ */}
           <motion.div
             initial={{ opacity: 0, scale: 0.88 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" as const }}
             style={{ x: springX, y: springY }}
-            className="hidden lg:flex flex-row items-center justify-center gap-6"
+            className="hidden lg:flex items-center justify-center"
           >
-            <DataFlow />
-
-            <div className="relative flex flex-col items-center gap-3">
-              {/* Visualization label */}
-              <motion.p
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.4 }}
-                className="text-[10px] font-bold uppercase tracking-[0.22em] text-blue-400/60 font-mono"
-              >
-                Enterprise Analytics Ecosystem
-              </motion.p>
-
-              <OrbitRing />
-
-              {/* Cert strip below orbit */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2, duration: 0.5 }}
-                className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-1.5 whitespace-nowrap"
-              >
-                {["DP-700", "DP-600", "PL-300", "SnowPro"].map((c) => (
-                  <span key={c} className="text-[10px] px-2 py-0.5 rounded-full border border-blue-500/20 bg-blue-500/8 text-blue-400/80 font-mono">
-                    {c}
-                  </span>
-                ))}
-                <span className="text-[10px] px-2 py-0.5 rounded-full border border-amber-500/20 bg-amber-500/8 text-amber-400/80 font-mono">
-                  +9
-                </span>
-              </motion.div>
-            </div>
+            <OrbitRing />
           </motion.div>
         </div>
       </motion.div>
