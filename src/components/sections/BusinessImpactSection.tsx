@@ -5,23 +5,8 @@ import { TrendingUp, CheckCircle2 } from "lucide-react";
 
 const impacts = [
   {
-    company: "Amazon",
-    period: "2020 – 2024",
-    role: "Investigation Specialist & Analytics Lead",
-    monogram: "AMZ",
-    color: "#F59E0B",
-    bg: "bg-amber-500/10",
-    border: "border-amber-500/25",
-    results: [
-      "Built Sales Forecasting Dashboard processing 100M+ records, identifying $500K+ revenue opportunities",
-      "Designed Power BI dashboards adopted by senior leadership across 8 markets",
-      "Developed predictive analytics models reducing investigation backlog significantly",
-      "Led analytics workstream for cross-functional investigation teams of 20+ members",
-    ],
-  },
-  {
     company: "Amplify Analytix",
-    period: "2025 – Present",
+    period: "Jan 2025 – Present",
     role: "BI & Analytics Engineer",
     monogram: "AA",
     color: "#3B82F6",
@@ -32,6 +17,21 @@ const impacts = [
       "Delivered 50+ executive dashboards across global clients in 8 markets",
       "Implemented SQLMesh transformations cutting maintenance overhead by 90%",
       "Engineered Power BI semantic models with 100+ DAX measures for 200+ end users",
+    ],
+  },
+  {
+    company: "Amazon",
+    period: "2020 – Dec 2024",
+    role: "Investigation Specialist & Analytics Lead",
+    monogram: "AMZ",
+    color: "#F59E0B",
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/25",
+    results: [
+      "Built Sales Forecasting Dashboard processing 100M+ records, identifying $500K+ revenue opportunities",
+      "Designed Power BI dashboards adopted by senior leadership across 8 markets",
+      "Developed predictive analytics models reducing investigation backlog significantly",
+      "Led analytics workstream for cross-functional investigation teams of 20+ members",
     ],
   },
   {
