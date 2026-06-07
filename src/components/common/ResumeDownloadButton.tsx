@@ -52,7 +52,7 @@ export function ResumeDownloadButton() {
         .rdl-title {
           font-size: 15px;
           font-weight: 700;
-          color: #fff;
+          color: rgb(91, 91, 240);
           transition: all 0.4s ease;
           position: absolute;
           right: 18px;
