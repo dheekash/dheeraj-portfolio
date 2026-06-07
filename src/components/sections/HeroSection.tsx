@@ -330,7 +330,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
+      className="relative min-h-screen flex flex-col overflow-hidden pt-[72px]"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -361,7 +361,7 @@ export function HeroSection() {
       <div className="absolute inset-0 grid-bg opacity-30" />
       <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
 
-      <motion.div style={{ y, opacity }} className="relative z-10 container-max section-padding !pb-12">
+      <motion.div style={{ y, opacity }} className="relative z-10 container-max section-padding !pt-10 !pb-16 my-auto">
         {/* Equal-weight grid: text 50% / visual 50% */}
         <div className="grid lg:grid-cols-2 gap-12 xl:gap-16 items-center">
 
