@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, MapPin, ChevronDown } from "lucide-react";
+import { MapPin, ChevronDown } from "lucide-react";
 import { LinkButton } from "@/components/common/LinkButton";
 import { ResumeDownloadButton } from "@/components/common/ResumeDownloadButton";
 import { profile } from "@/data/profile";
@@ -475,13 +475,6 @@ export function HeroSection() {
               className="flex flex-wrap gap-3 mb-9"
             >
               <ResumeDownloadButton />
-              <button
-                onClick={() => scrollTo("#projects")}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm border border-border bg-card hover:bg-muted text-foreground shadow-sm transition-all hover:scale-[1.02] cursor-pointer"
-              >
-                View Projects
-                <ArrowRight size={15} />
-              </button>
             </motion.div>
 
             {/* 6. Stats strip */}
