@@ -6,7 +6,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/10 bg-card/50 backdrop-blur-sm">
+    <footer className="border-t border-border bg-card/50 backdrop-blur-sm">
       <div className="container-max section-padding !py-10">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* Brand */}
@@ -35,7 +35,7 @@ export function Footer() {
               href="https://github.com/dheekash"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all"
+              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-all"
               aria-label="GitHub"
             >
               <GithubIcon size={16} />

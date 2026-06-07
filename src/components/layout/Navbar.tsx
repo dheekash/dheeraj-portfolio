@@ -9,13 +9,13 @@ import { profile } from "@/data/profile";
 import { useTheme } from "@/components/providers/ThemeProvider";
 
 const navItems = [
-  { label: "About",    href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Career",   href: "#experience" },
-  { label: "Skills",   href: "#skills" },
-  { label: "Certs",    href: "#certifications" },
-  { label: "Services", href: "#consulting" },
-  { label: "Contact",  href: "#contact" },
+  { label: "About",      href: "#about" },
+  { label: "Dashboards", href: "#dashboards" },
+  { label: "Projects",   href: "#projects" },
+  { label: "Career",     href: "#experience" },
+  { label: "Skills",     href: "#skills" },
+  { label: "Certs",      href: "#certifications" },
+  { label: "Contact",    href: "#contact" },
 ];
 
 export function Navbar() {

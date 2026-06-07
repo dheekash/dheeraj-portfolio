@@ -1,5 +1,7 @@
 import { HeroSection } from "@/components/sections/HeroSection";
+import { ImpactNumbersSection } from "@/components/sections/ImpactNumbersSection";
 import { AboutSection } from "@/components/sections/AboutSection";
+import { DashboardGallerySection } from "@/components/sections/DashboardGallerySection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
@@ -14,7 +16,9 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <ImpactNumbersSection />
       <AboutSection />
+      <DashboardGallerySection />
       <ProjectsSection />
       <ExperienceSection />
       <SkillsSection />
