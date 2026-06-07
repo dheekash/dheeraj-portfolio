@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { MapPin, ChevronDown } from "lucide-react";
 import { LinkButton } from "@/components/common/LinkButton";
-import { ResumeDownloadButton } from "@/components/common/ResumeDownloadButton";
 import { profile } from "@/data/profile";
 
 /* ══════════════════════════════════════════════
@@ -466,16 +465,6 @@ export function HeroSection() {
               <span className="text-blue-600 dark:text-blue-400 font-semibold">Fabric</span> Lakehouses
               {" "}that turn 100M+ records into decisions for 20+ stakeholders across 8 countries.
             </motion.p>
-
-            {/* 5. CTAs — Resume primary, Projects secondary */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.27 }}
-              className="flex flex-wrap gap-3 mb-9"
-            >
-              <ResumeDownloadButton />
-            </motion.div>
 
             {/* 6. Stats strip */}
             <motion.div
