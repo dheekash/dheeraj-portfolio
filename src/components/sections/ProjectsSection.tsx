@@ -6,6 +6,93 @@ import { ArrowRight, X, Layers, Zap, TrendingUp, ExternalLink } from "lucide-rea
 import { projects } from "@/data/projects";
 import type { Project } from "@/types";
 
+/* ── Architecture flow diagrams ── */
+const archFlows: Record<string, string[]> = {
+  "real-time-sales-intelligence": [
+    "Amazon/Retail APIs",
+    "Azure Data Factory (Ingest)",
+    "ADLS Gen2 (Raw Zone)",
+    "Databricks PySpark (Transform)",
+    "Delta Lake — Silver / Gold",
+    "Power BI Semantic Model",
+    "Executive Dashboard",
+  ],
+  "customer-churn-analytics": [
+    "CRM + Transactional DB",
+    "Python ETL Pipeline",
+    "Snowflake Data Warehouse",
+    "dbt (Feature Engineering)",
+    "Python ML — Churn Model (89% recall)",
+    "Power BI — Churn Risk Dashboard",
+    "Retention Actions & Alerts",
+  ],
+  "fabric-lakehouse-migration": [
+    "Legacy SQL Server / Data Warehouse",
+    "Azure Data Factory (Lift & Shift)",
+    "OneLake — Bronze Layer",
+    "SQLMesh Transformations",
+    "Delta Lake — Silver / Gold",
+    "Power BI Direct Lake Mode",
+    "Automated Monitoring & Alerts",
+  ],
+  "global-manufacturing-analytics": [
+    "ERP Systems (15 markets)",
+    "Azure Data Factory (15 connectors)",
+    "Snowflake Data Warehouse",
+    "dbt — Medallion Models",
+    "Power BI Semantic Model",
+    "Role-Level Security (200+ users)",
+    "Executive KPI Dashboards",
+  ],
+  "amazon-sales-forecasting": [
+    "Amazon Seller Central Data",
+    "Snowflake (10M+ records)",
+    "Python — Time-Series Forecasting",
+    "dbt — Forecast Tables",
+    "Zebra BI + Power BI",
+    "DAX — YoY / Rolling Variance",
+    "Opportunity Report ($500K+)",
+  ],
+};
+
+function ArchFlow({ projectId, color }: { projectId: string; color: string }) {
+  const nodes = archFlows[projectId];
+  if (!nodes) return null;
+  return (
+    <div>
+      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4 flex items-center gap-2">
+        <Layers size={12} className="text-blue-400" /> Architecture Flow
+      </p>
+      <div className="rounded-xl border border-border bg-muted/20 p-5">
+        <div className="flex flex-col items-center gap-0">
+          {nodes.map((node, i) => (
+            <div key={node} className="flex flex-col items-center w-full max-w-xs">
+              <div
+                className="w-full text-center px-4 py-2.5 rounded-xl text-xs font-semibold border transition-all"
+                style={{
+                  backgroundColor: i === 0 || i === nodes.length - 1 ? `${color}18` : "transparent",
+                  borderColor: i === 0 || i === nodes.length - 1 ? `${color}40` : "var(--border)",
+                  color: i === 0 || i === nodes.length - 1 ? color : "var(--muted-foreground)",
+                }}
+              >
+                {node}
+              </div>
+              {i < nodes.length - 1 && (
+                <div className="flex flex-col items-center py-0.5">
+                  <div className="w-px h-3" style={{ backgroundColor: `${color}40` }} />
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+                    <path d="M0 0L5 6L10 0" fill={`${color}60`} />
+                  </svg>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function fadeUp(delay = 0) {
   return {
     initial: { opacity: 0, y: 28 },
@@ -166,11 +253,8 @@ function Modal({ project, onClose }: { project: Project; onClose: () => void }) 
             <p className="text-sm text-muted-foreground leading-relaxed">{project.solution}</p>
           </div>
 
-          {/* Architecture placeholder */}
-          <div className="rounded-xl border border-dashed border-white/15 bg-white/2 p-8 text-center">
-            <Layers size={28} className="text-muted-foreground/25 mx-auto mb-2" />
-            <p className="text-xs text-muted-foreground/50">Architecture diagram — replace with your actual diagram</p>
-          </div>
+          {/* Architecture flow diagram */}
+          <ArchFlow projectId={project.id} color={project.color} />
 
           {/* Challenges */}
           <div>

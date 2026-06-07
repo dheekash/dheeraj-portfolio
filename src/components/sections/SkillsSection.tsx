@@ -18,28 +18,33 @@ const colorMap: Record<string, {
 }> = {
   blue: {
     border: "border-blue-500/20", bg: "bg-blue-500/5", headerBg: "bg-blue-500/10",
-    text: "text-blue-400", pill: "bg-blue-500/10 border-blue-500/20 hover:bg-blue-500/20",
-    pillText: "text-blue-300", glow: "hover:shadow-blue-500/8", bar: "bg-blue-500",
+    text: "text-blue-500 dark:text-blue-400", pill: "bg-blue-500/10 border-blue-500/20 hover:bg-blue-500/20",
+    pillText: "text-blue-600 dark:text-blue-300", glow: "hover:shadow-blue-500/10", bar: "bg-blue-500",
   },
   amber: {
     border: "border-amber-500/20", bg: "bg-amber-500/5", headerBg: "bg-amber-500/10",
-    text: "text-amber-400", pill: "bg-amber-500/10 border-amber-500/20 hover:bg-amber-500/20",
-    pillText: "text-amber-300", glow: "hover:shadow-amber-500/8", bar: "bg-amber-500",
+    text: "text-amber-600 dark:text-amber-400", pill: "bg-amber-500/10 border-amber-500/20 hover:bg-amber-500/20",
+    pillText: "text-amber-700 dark:text-amber-300", glow: "hover:shadow-amber-500/10", bar: "bg-amber-500",
   },
   violet: {
     border: "border-violet-500/20", bg: "bg-violet-500/5", headerBg: "bg-violet-500/10",
-    text: "text-violet-400", pill: "bg-violet-500/10 border-violet-500/20 hover:bg-violet-500/20",
-    pillText: "text-violet-300", glow: "hover:shadow-violet-500/8", bar: "bg-violet-500",
+    text: "text-violet-600 dark:text-violet-400", pill: "bg-violet-500/10 border-violet-500/20 hover:bg-violet-500/20",
+    pillText: "text-violet-700 dark:text-violet-300", glow: "hover:shadow-violet-500/10", bar: "bg-violet-500",
   },
   emerald: {
     border: "border-emerald-500/20", bg: "bg-emerald-500/5", headerBg: "bg-emerald-500/10",
-    text: "text-emerald-400", pill: "bg-emerald-500/10 border-emerald-500/20 hover:bg-emerald-500/20",
-    pillText: "text-emerald-300", glow: "hover:shadow-emerald-500/8", bar: "bg-emerald-500",
+    text: "text-emerald-600 dark:text-emerald-400", pill: "bg-emerald-500/10 border-emerald-500/20 hover:bg-emerald-500/20",
+    pillText: "text-emerald-700 dark:text-emerald-300", glow: "hover:shadow-emerald-500/10", bar: "bg-emerald-500",
+  },
+  rose: {
+    border: "border-rose-500/20", bg: "bg-rose-500/5", headerBg: "bg-rose-500/10",
+    text: "text-rose-600 dark:text-rose-400", pill: "bg-rose-500/10 border-rose-500/20 hover:bg-rose-500/20",
+    pillText: "text-rose-700 dark:text-rose-300", glow: "hover:shadow-rose-500/10", bar: "bg-rose-500",
   },
 };
 
 const iconMap: Record<string, string> = {
-  database: "⬡", "bar-chart-3": "▦", "code-2": "</>", brain: "◈",
+  database: "⬡", "bar-chart-3": "▦", "code-2": "</>", brain: "◈", cloud: "☁",
 };
 
 export function SkillsSection() {
@@ -61,7 +66,7 @@ export function SkillsSection() {
           A precision toolkit built across 7+ years of enterprise delivery — from raw ingestion to executive dashboards.
         </motion.p>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {skillCategories.map((cat, ci) => {
             const c = colorMap[cat.color] || colorMap.blue;
             return (
@@ -108,13 +113,14 @@ export function SkillsSection() {
         {/* Experience bar summary */}
         <motion.div
           {...fadeUp(0.3)}
-          className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="mt-10 grid sm:grid-cols-2 lg:grid-cols-5 gap-4"
         >
           {[
-            { label: "Data Engineering", pct: 95, color: "bg-blue-500" },
-            { label: "Business Intelligence", pct: 92, color: "bg-amber-500" },
-            { label: "Programming / SQL", pct: 88, color: "bg-violet-500" },
-            { label: "Machine Learning", pct: 75, color: "bg-emerald-500" },
+            { label: "Analytics & BI",       pct: 95, color: "bg-amber-500" },
+            { label: "Data Engineering",      pct: 92, color: "bg-blue-500" },
+            { label: "Programming / SQL",     pct: 88, color: "bg-violet-500" },
+            { label: "Cloud & Infra",         pct: 85, color: "bg-emerald-500" },
+            { label: "AI & ML",               pct: 72, color: "bg-rose-500" },
           ].map((bar, i) => (
             <motion.div
               key={bar.label}
@@ -122,13 +128,13 @@ export function SkillsSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 + i * 0.07 }}
-              className="p-4 rounded-xl border border-white/8 bg-card/30"
+              className="p-4 rounded-xl border border-border bg-card/30"
             >
               <div className="flex justify-between mb-2">
                 <span className="text-xs font-medium text-foreground/80">{bar.label}</span>
                 <span className="text-xs text-muted-foreground">{bar.pct}%</span>
               </div>
-              <div className="h-1.5 rounded-full bg-white/6 overflow-hidden">
+              <div className="h-1.5 rounded-full bg-muted overflow-hidden">
                 <motion.div
                   className={`h-full rounded-full ${bar.color}`}
                   initial={{ width: 0 }}

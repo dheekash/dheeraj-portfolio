@@ -14,9 +14,30 @@ function fadeUp(delay = 0) {
 }
 
 const companyColors: Record<string, { accent: string; glow: string; dot: string }> = {
-  "amplify-analytix": { accent: "text-blue-400",    glow: "shadow-blue-500/20",    dot: "bg-blue-500 shadow-blue-500/60" },
-  "amazon":           { accent: "text-amber-400",   glow: "shadow-amber-500/15",   dot: "bg-amber-400 shadow-amber-400/50" },
-  "frontizo":         { accent: "text-emerald-400", glow: "shadow-emerald-500/15", dot: "bg-emerald-500/70 shadow-emerald-500/30" },
+  "amplify-analytix": { accent: "text-blue-500 dark:text-blue-400",    glow: "shadow-blue-500/15",    dot: "bg-blue-500 shadow-blue-500/60" },
+  "amazon":           { accent: "text-amber-600 dark:text-amber-400",   glow: "shadow-amber-500/10",   dot: "bg-amber-400 shadow-amber-400/50" },
+  "frontizo":         { accent: "text-emerald-600 dark:text-emerald-400", glow: "shadow-emerald-500/10", dot: "bg-emerald-500/70 shadow-emerald-500/30" },
+};
+
+const companyLogos: Record<string, { monogram: string; bg: string; text: string; border: string }> = {
+  "amplify-analytix": {
+    monogram: "AA",
+    bg: "bg-blue-600",
+    text: "text-white",
+    border: "ring-2 ring-blue-400/30",
+  },
+  "amazon": {
+    monogram: "AMZ",
+    bg: "bg-amber-500",
+    text: "text-white",
+    border: "ring-2 ring-amber-400/30",
+  },
+  "frontizo": {
+    monogram: "FR",
+    bg: "bg-emerald-600",
+    text: "text-white",
+    border: "ring-2 ring-emerald-400/30",
+  },
 };
 
 export function ExperienceSection() {
@@ -65,17 +86,28 @@ export function ExperienceSection() {
 
                   {/* Card */}
                   <div className={`flex-1 pb-6 group`}>
-                    <div className={`p-6 rounded-2xl border border-white/8 bg-card/50 backdrop-blur-sm hover:border-white/14 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl ${col.glow}`}>
+                    <div className={`p-6 rounded-2xl border border-border bg-card/50 backdrop-blur-sm hover:border-blue-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl ${col.glow}`}>
 
                       {/* Header */}
                       <div className="flex items-start justify-between gap-3 mb-3">
-                        <div>
-                          <h3 className={`font-extrabold text-foreground text-lg leading-tight group-hover:${col.accent} transition-colors`}>
-                            {exp.role}
-                          </h3>
-                          <div className="flex items-center gap-1.5 mt-1">
-                            <Briefcase size={12} className={col.accent} />
-                            <span className={`${col.accent} font-semibold text-sm`}>{exp.company}</span>
+                        <div className="flex gap-3 items-start">
+                          {/* Company logo monogram */}
+                          {(() => {
+                            const logo = companyLogos[exp.id];
+                            return logo ? (
+                              <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-xs font-black ${logo.bg} ${logo.text} ${logo.border} mt-0.5`}>
+                                {logo.monogram}
+                              </div>
+                            ) : null;
+                          })()}
+                          <div>
+                            <h3 className="font-extrabold text-foreground text-base leading-tight">
+                              {exp.role}
+                            </h3>
+                            <div className="flex items-center gap-1.5 mt-0.5">
+                              <Briefcase size={11} className={col.accent} />
+                              <span className={`${col.accent} font-semibold text-sm`}>{exp.company}</span>
+                            </div>
                           </div>
                         </div>
                         <div className="text-right shrink-0">

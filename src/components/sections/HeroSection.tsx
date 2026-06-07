@@ -193,7 +193,7 @@ export function HeroSection() {
               <span className="text-sm text-muted-foreground">Bengaluru, India</span>
               <span className="w-px h-3.5 bg-border" />
               <Sparkles size={12} className="text-amber-400" />
-              <span className="text-xs text-amber-300/90 font-medium">Open to Senior Roles</span>
+              <span className="text-xs text-amber-600 dark:text-amber-300/90 font-medium">Open to Senior Roles</span>
             </motion.div>
 
             {/* Name */}
@@ -206,29 +206,36 @@ export function HeroSection() {
                 Dheeraj Kashyap
               </p>
               <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight leading-[1.04] mb-4">
-                <span className="gradient-text-white">Building Modern</span>{" "}
+                <span className="gradient-text-white">Turning Business Data</span>{" "}
                 <br className="hidden sm:block" />
-                <span className="gradient-text">Data Platforms</span>
+                <span className="gradient-text">Into Executive Decisions</span>
               </h1>
-              <div className="text-2xl sm:text-3xl font-semibold text-foreground/70 mb-6 h-10 flex items-center">
+              <div className="text-xl sm:text-2xl font-semibold text-foreground/70 mb-6 h-9 flex items-center">
                 <Typewriter />
               </div>
             </motion.div>
 
             {/* Bio */}
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.16 }}
-              className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl"
+              className="mb-8 max-w-xl"
             >
-              7+ years delivering Lakehouse architectures, enterprise BI products, and
-              scalable data platforms using{" "}
-              <span className="text-blue-400">Microsoft Fabric</span>,{" "}
-              <span className="text-red-400">Databricks</span>,{" "}
-              <span className="text-cyan-400">Snowflake</span>, and{" "}
-              <span className="text-yellow-400">Power BI</span>.
-            </motion.p>
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-3">
+                <strong className="text-foreground font-semibold">Analytics Engineer</strong> with 6+ years building enterprise analytics solutions across{" "}
+                <span className="text-amber-600 dark:text-amber-400 font-semibold">Amazon</span>, consulting, and data-driven organisations.
+              </p>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                Specialized in{" "}
+                <span className="text-yellow-600 dark:text-yellow-400 font-medium">Power BI</span>,{" "}
+                <span className="text-slate-600 dark:text-slate-300 font-medium">SQL</span>,{" "}
+                <span className="text-cyan-600 dark:text-cyan-400 font-medium">Snowflake</span>,{" "}
+                <span className="text-blue-600 dark:text-blue-400 font-medium">Azure</span>, and{" "}
+                <span className="text-blue-700 dark:text-blue-300 font-medium">Microsoft Fabric</span> — delivering{" "}
+                dashboards, pipelines, and Lakehouse platforms trusted by 20+ stakeholders across 8 countries.
+              </p>
+            </motion.div>
 
             {/* CTAs */}
             <motion.div

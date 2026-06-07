@@ -80,10 +80,14 @@ export function ContactSection() {
           <span className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-400 font-mono">Contact</span>
         </motion.div>
         <motion.h2 {...fadeUp(0.05)} className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
-          Let&apos;s Build Something <span className="gradient-text-amber">Data-Driven</span>
+          Hiring a <span className="gradient-text-amber">BI or Analytics Professional?</span>
         </motion.h2>
-        <motion.p {...fadeUp(0.1)} className="text-lg text-muted-foreground max-w-xl mb-14 leading-relaxed">
-          Available for senior analytics engineering roles, consulting engagements, and advisory projects.
+        <motion.p {...fadeUp(0.1)} className="text-lg text-muted-foreground max-w-2xl mb-14 leading-relaxed">
+          Looking for a <strong className="text-foreground font-semibold">Business Analyst</strong>,{" "}
+          <strong className="text-foreground font-semibold">BI Analyst</strong>,{" "}
+          <strong className="text-foreground font-semibold">Analytics Engineer</strong>, or{" "}
+          <strong className="text-foreground font-semibold">Data Consultant</strong>?{" "}
+          Let&apos;s discuss how data can drive measurable business outcomes for your organisation.
         </motion.p>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl">

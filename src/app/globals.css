@@ -127,7 +127,7 @@
 
 /* ─── Layout helpers ─── */
 @layer utilities {
-  .section-padding { @apply px-5 sm:px-8 lg:px-12 py-24 lg:py-32; }
+  .section-padding { @apply px-5 sm:px-8 lg:px-12 py-16 lg:py-24; }
   .container-max   { @apply max-w-7xl mx-auto; }
 
   /* ─── Text gradients ─── */
