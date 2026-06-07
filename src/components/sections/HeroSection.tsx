@@ -330,7 +330,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-[72px]"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
