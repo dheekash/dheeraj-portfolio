@@ -1,7 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,10 +9,12 @@ export async function POST(req: NextRequest) {
     }
 
     if (!process.env.RESEND_API_KEY) {
-      // Fallback: log and return success in dev if no API key
       console.log("Contact form submission (no Resend key):", { name, email, subject, message });
       return NextResponse.json({ success: true });
     }
+
+    const { Resend } = await import("resend");
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
