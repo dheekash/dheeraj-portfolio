@@ -123,12 +123,6 @@ export function Navbar() {
             <div className="flex items-center gap-2.5 shrink-0">
               <ThemeSwitch />
               <button
-                onClick={() => scrollTo("#contact")}
-                className="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/25 transition-all hover:scale-[1.02] cursor-pointer"
-              >
-                Hire Me
-              </button>
-              <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className="lg:hidden p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/8 transition-all cursor-pointer"
                 aria-label="Toggle menu"
