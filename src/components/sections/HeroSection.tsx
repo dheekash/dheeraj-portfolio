@@ -331,7 +331,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col overflow-visible"
+      className="relative min-h-screen flex flex-col overflow-hidden"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -362,7 +362,7 @@ export function HeroSection() {
       <div className="absolute inset-0 grid-bg opacity-30" />
       <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
 
-      <motion.div style={{ y, opacity }} className="relative z-10 container-max section-padding !pt-24 !pb-16">
+      <motion.div style={{ y, opacity }} className="relative z-10 container-max section-padding !pt-24 !pb-28">
         {/* Text 45% / Command center 55% */}
         <div className="grid lg:grid-cols-[45fr_55fr] gap-10 xl:gap-14 items-start">
 
@@ -488,8 +488,8 @@ export function HeroSection() {
         <ChevronDown size={14} />
       </motion.button>
 
-      {/* ── Tech marquee — pinned to bottom of hero viewport ── */}
-      <div className="mt-auto relative z-10">
+      {/* ── Tech marquee — absolute bottom of hero so it's always in viewport ── */}
+      <div className="absolute bottom-0 left-0 right-0 z-20">
         <TechMarquee />
       </div>
     </section>
