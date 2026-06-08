@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
-import { ResumeDownloadButton } from "@/components/common/ResumeDownloadButton";
 import { profile } from "@/data/profile";
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -122,10 +121,6 @@ export function Footer() {
                     </div>
                   </a>
                 ))}
-              </div>
-              <div className="pt-2">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground/60 mb-3">Resume</p>
-                <ResumeDownloadButton />
               </div>
             </motion.div>
 
