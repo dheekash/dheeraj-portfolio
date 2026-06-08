@@ -436,6 +436,29 @@ export function HeroSection() {
               {" "}that turn 100M+ records into decisions for 20+ stakeholders across 8 countries.
             </motion.p>
 
+            {/* CTA row */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.28 }}
+              className="flex flex-wrap gap-3"
+            >
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold shadow-lg shadow-blue-600/25 transition-all hover:scale-[1.02]"
+              >
+                Get in Touch
+              </a>
+              <a
+                href="/deck"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border bg-card hover:bg-muted text-sm font-semibold text-foreground transition-all hover:scale-[1.02]"
+              >
+                <span className="text-blue-400">▶</span> View Portfolio Deck
+              </a>
+            </motion.div>
+
           </div>
 
           {/* ══ RIGHT — Orbit ring only ══ */}
