@@ -6,6 +6,7 @@ import { ChevronDown } from "lucide-react";
 import { LinkButton } from "@/components/common/LinkButton";
 import { profile } from "@/data/profile";
 import { AnalyticsCommandCenter } from "@/components/sections/AnalyticsCommandCenter";
+import { TechMarquee } from "@/components/sections/TechMarquee";
 
 /* ══════════════════════════════════════════════
    TYPEWRITER
@@ -330,7 +331,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col overflow-hidden"
+      className="relative min-h-screen flex flex-col overflow-visible"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -478,7 +479,7 @@ export function HeroSection() {
       {/* ── Scroll cue ── */}
       <motion.button
         onClick={() => scrollTo("#about")}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-pointer"
+        className="absolute bottom-[4.5rem] left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-pointer z-20"
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2.5, repeat: Infinity }}
         aria-label="Scroll down"
@@ -486,6 +487,11 @@ export function HeroSection() {
         <span className="text-[10px] uppercase tracking-[0.2em] font-medium">Explore</span>
         <ChevronDown size={14} />
       </motion.button>
+
+      {/* ── Tech marquee — pinned to bottom of hero viewport ── */}
+      <div className="mt-auto relative z-10">
+        <TechMarquee />
+      </div>
     </section>
   );
 }

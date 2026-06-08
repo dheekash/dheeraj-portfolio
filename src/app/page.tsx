@@ -1,5 +1,4 @@
 import { HeroSection } from "@/components/sections/HeroSection";
-import { TechMarquee } from "@/components/sections/TechMarquee";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { ProjectsShowcase } from "@/components/sections/ProjectsShowcase";
 import { BusinessImpactSection } from "@/components/sections/BusinessImpactSection";
@@ -17,9 +16,6 @@ export default function HomePage() {
     <>
       {/* 1 — Hero with Analytics Command Center */}
       <HeroSection />
-
-      {/* Tech logo marquee separator */}
-      <TechMarquee />
 
       {/* 2 — Professional Journey (growing timeline animation) */}
       <ExperienceSection />
