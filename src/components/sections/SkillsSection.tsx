@@ -188,7 +188,7 @@ export function SkillsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.55, delay: ci * 0.1, ease: "easeOut" as const }}
-                className={`group relative rounded-2xl border ${c.border} ${c.bg} overflow-hidden hover:scale-[1.01] transition-all duration-300 hover:shadow-2xl ${c.glow}`}
+                className={`glass-card glass-highlight group relative rounded-2xl border ${c.border} overflow-hidden hover:scale-[1.02] transition-all duration-300 hover:shadow-2xl card-depth ${c.glow}`}
               >
                 {/* Shimmer on hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shimmer rounded-2xl" />
@@ -251,7 +251,7 @@ export function SkillsSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 + i * 0.07 }}
-              className="p-4 rounded-xl border border-border bg-card/30"
+              className="glass-card p-4 rounded-xl border border-border"
             >
               <div className="flex justify-between mb-2">
                 <span className="text-xs font-medium text-foreground/80">{bar.label}</span>

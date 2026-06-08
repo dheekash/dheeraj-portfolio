@@ -94,7 +94,7 @@ export function ExperienceSection() {
 
                   {/* Card */}
                   <div className={`flex-1 pb-6 group`}>
-                    <div className={`p-6 rounded-2xl border ${col.border} ${col.bg} backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl ${col.glow}`}>
+                    <div className={`glass-card glass-highlight p-6 rounded-2xl border ${col.border} transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl card-depth ${col.glow}`}>
 
                       {/* Header */}
                       <div className="flex items-start justify-between gap-3 mb-3">

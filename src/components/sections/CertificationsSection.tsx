@@ -66,7 +66,7 @@ export function CertificationsSection() {
         {/* Stats */}
         <motion.div {...fadeUp(0.12)} className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
           {stats.map((s) => (
-            <div key={s.label} className="relative p-5 rounded-2xl border border-blue-500/20 bg-blue-500/5 text-center overflow-hidden group">
+            <div key={s.label} className="glass-card glass-highlight relative p-5 rounded-2xl border border-blue-500/20 text-center overflow-hidden group card-depth">
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shimmer" />
               <div className="text-3xl font-extrabold gradient-text">{s.value}</div>
               <div className="text-xs text-muted-foreground mt-1">{s.label}</div>
@@ -89,10 +89,10 @@ export function CertificationsSection() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.92 }}
                   transition={{ duration: 0.3, delay: (i % 8) * 0.04 }}
-                  className={`group relative p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl ${
+                  className={`glass-card glass-highlight group relative p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl card-depth ${
                     cert.featured
-                      ? "border-blue-500/35 bg-blue-500/6 hover:border-blue-400/50 hover:shadow-blue-500/10"
-                      : "border-white/8 bg-card/50 hover:border-white/14"
+                      ? "border-blue-500/30 hover:border-blue-400/50 hover:shadow-blue-500/15"
+                      : "border-white/[0.09] hover:border-white/[0.15]"
                   }`}
                 >
                   {/* Latest badge */}

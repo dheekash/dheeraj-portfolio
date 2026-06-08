@@ -86,7 +86,7 @@ export function BusinessImpactSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" as const }}
-              className={`relative rounded-2xl border ${imp.border} ${imp.bg} p-6 card-depth`}
+              className={`glass-card glass-highlight relative rounded-2xl border ${imp.border} p-6 card-depth`}
             >
               <div className="flex items-start gap-3 mb-5">
                 <div
@@ -127,7 +127,7 @@ export function BusinessImpactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" as const }}
-          className="rounded-2xl border border-border bg-card/40 p-6"
+          className="glass-card rounded-2xl border border-border p-6"
         >
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground mb-4">Why Companies Hire Me</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">

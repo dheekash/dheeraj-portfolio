@@ -8,7 +8,7 @@ export function TechMarquee() {
   const items = [...MARQUEE_LOGOS, ...MARQUEE_LOGOS];
 
   return (
-    <div className="relative py-6 border-y border-border bg-card/30 overflow-hidden">
+    <div className="relative py-5 border-y border-border glass overflow-hidden">
       {/* fade edges */}
       <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
         style={{ background: "linear-gradient(to right, var(--background), transparent)" }} />

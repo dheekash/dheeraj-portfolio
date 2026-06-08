@@ -74,7 +74,7 @@ export function ImpactNumbersSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.07, ease: "easeOut" as const }}
-              className={`group relative flex flex-col items-center justify-center gap-1.5 py-6 px-3 rounded-2xl border ${s.border} ${s.bg} hover:scale-[1.04] transition-transform duration-300 cursor-default`}
+              className={`glass-card glass-highlight group relative flex flex-col items-center justify-center gap-1.5 py-6 px-3 rounded-2xl border ${s.border} hover:scale-[1.05] transition-all duration-300 cursor-default hover:-translate-y-1 card-depth`}
             >
               <span className={`text-3xl sm:text-4xl font-black tabular-nums leading-none ${s.color}`}>
                 <AnimatedNumber value={s.value} suffix={s.suffix} />

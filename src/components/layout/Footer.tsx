@@ -101,7 +101,7 @@ export function Footer() {
                 { icon: <Mail size={15} className="text-blue-400" />, label: "Email", value: profile.email, href: `mailto:${profile.email}` },
                 { icon: <MapPin size={15} className="text-blue-400" />, label: "Location", value: "Bengaluru, India", href: null },
               ].map((item) => (
-                <div key={item.label} className="flex items-center gap-3.5 p-4 rounded-xl border border-white/8 bg-card/30">
+                <div key={item.label} className="glass-card flex items-center gap-3.5 p-4 rounded-xl border border-white/[0.09]">
                   <div className="p-2.5 rounded-lg bg-blue-500/10 border border-blue-500/20 shrink-0">{item.icon}</div>
                   <div>
                     <p className="text-xs text-muted-foreground mb-0.5">{item.label}</p>
@@ -135,24 +135,24 @@ export function Footer() {
                 <div className="space-y-1.5">
                   <Label htmlFor="name" className="text-xs font-semibold text-muted-foreground">Name</Label>
                   <Input id="name" placeholder="Your name" value={form.name} onChange={set("name")} required
-                    className="bg-card/40 border-white/10 focus:border-blue-500/50 rounded-xl h-11" />
+                    className="glass-card border-white/[0.09] focus:border-blue-500/50 rounded-xl h-11" />
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="email" className="text-xs font-semibold text-muted-foreground">Email</Label>
                   <Input id="email" type="email" placeholder="you@company.com" value={form.email} onChange={set("email")} required
-                    className="bg-card/40 border-white/10 focus:border-blue-500/50 rounded-xl h-11" />
+                    className="glass-card border-white/[0.09] focus:border-blue-500/50 rounded-xl h-11" />
                 </div>
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="subject" className="text-xs font-semibold text-muted-foreground">Subject</Label>
                 <Input id="subject" placeholder="Role opportunity · Consulting enquiry · Other" value={form.subject} onChange={set("subject")} required
-                  className="bg-card/40 border-white/10 focus:border-blue-500/50 rounded-xl h-11" />
+                  className="glass-card border-white/[0.09] focus:border-blue-500/50 rounded-xl h-11" />
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="message" className="text-xs font-semibold text-muted-foreground">Message</Label>
                 <Textarea id="message" placeholder="Tell me about the role, project, or opportunity…" rows={5}
                   value={form.message} onChange={set("message")} required
-                  className="bg-card/40 border-white/10 focus:border-blue-500/50 rounded-xl resize-none" />
+                  className="glass-card border-white/[0.09] focus:border-blue-500/50 rounded-xl resize-none" />
               </div>
               {status === "success" && (
                 <div className="flex items-center gap-2.5 p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm">
@@ -240,7 +240,7 @@ export function Footer() {
       </div>
 
       {/* ── Footer bar ── */}
-      <div className="border-t border-border bg-card">
+      <div className="border-t border-border glass">
         <div className="container-max px-5 sm:px-8 lg:px-12 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">

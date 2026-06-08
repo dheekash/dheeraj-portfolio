@@ -7,6 +7,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { StickyResumeButton } from "@/components/common/StickyResumeButton";
+import { GlassBackground } from "@/components/layout/GlassBackground";
 import "./globals.css";
 
 const inter = Inter({
@@ -138,6 +139,7 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased`}>
         <ThemeProvider>
           <TooltipProvider>
+            <GlassBackground />
             <Navbar />
             <main>{children}</main>
             <Footer />
