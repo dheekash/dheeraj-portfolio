@@ -331,13 +331,13 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col overflow-hidden"
+      className="relative min-h-screen flex flex-col"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
 
       {/* ── Ambient blobs ── */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
         <motion.div
           className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full"
           style={{ background: "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 65%)" }}
