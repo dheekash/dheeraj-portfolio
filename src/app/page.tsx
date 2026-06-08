@@ -1,16 +1,12 @@
 import { HeroSection } from "@/components/sections/HeroSection";
-import { ImpactNumbersSection } from "@/components/sections/ImpactNumbersSection";
-import { BusinessImpactSection } from "@/components/sections/BusinessImpactSection";
-import { DashboardGallerySection } from "@/components/sections/DashboardGallerySection";
-import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { TechMarquee } from "@/components/sections/TechMarquee";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
+import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { BusinessImpactSection } from "@/components/sections/BusinessImpactSection";
+import { HowIWorkSection } from "@/components/sections/HowIWorkSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import { CertificationsSection } from "@/components/sections/CertificationsSection";
-import { TechMarquee } from "@/components/sections/TechMarquee";
-import { AnalyticsPipelineSection } from "@/components/sections/AnalyticsPipelineSection";
-import { HowIWorkSection } from "@/components/sections/HowIWorkSection";
-import { DomainExpertiseSection } from "@/components/sections/DomainExpertiseSection";
-import { CompanyRecognitionStrip } from "@/components/sections/CompanyRecognitionStrip";
+import { GlobalFootprintSection } from "@/components/sections/GlobalFootprintSection";
 
 function Divider() {
   return <div className="section-divider" />;
@@ -19,72 +15,50 @@ function Divider() {
 export default function HomePage() {
   return (
     <>
-      {/* 1 — Hero */}
+      {/* 1 — Hero (dark / command center) */}
       <HeroSection />
 
-      {/* Tech logo marquee */}
+      {/* Tech logo marquee separator */}
       <TechMarquee />
 
-      {/* 2 — Impact Metrics */}
-      <div className="section-alt">
-        <ImpactNumbersSection />
-      </div>
-
-      {/* Company recognition strip */}
-      <CompanyRecognitionStrip />
+      {/* 2 — Professional Journey */}
+      <ExperienceSection />
 
       <Divider />
 
-      {/* 3 — Analytics Pipeline (WOW section) */}
-      <AnalyticsPipelineSection />
-
-      <Divider />
-
-      {/* 4 — Business Impact + Why Companies Hire Me */}
-      <div className="section-alt2">
-        <BusinessImpactSection />
-      </div>
-
-      <Divider />
-
-      {/* 5 — Domain Expertise */}
-      <DomainExpertiseSection />
-
-      <Divider />
-
-      {/* 6 — Dashboard Gallery */}
-      <DashboardGallerySection />
-
-      <Divider />
-
-      {/* 7 — Case Studies */}
+      {/* 3 — Featured Projects (case studies) */}
       <div className="section-alt">
         <ProjectsSection />
       </div>
 
       <Divider />
 
-      {/* 8 — How I Work methodology */}
+      {/* 4 — Business & Domain Expertise */}
+      <BusinessImpactSection />
+
+      <Divider />
+
+      {/* 5 — How I Deliver Analytics */}
       <div className="section-alt2">
         <HowIWorkSection />
       </div>
 
       <Divider />
 
-      {/* 9 — Professional Journey */}
-      <ExperienceSection />
+      {/* 6 — Tech Stack */}
+      <SkillsSection />
 
       <Divider />
 
-      {/* 10 — Tech Stack */}
+      {/* 7 — Certifications */}
       <div className="section-alt">
-        <SkillsSection />
+        <CertificationsSection />
       </div>
 
       <Divider />
 
-      {/* 11 — Certifications */}
-      <CertificationsSection />
+      {/* 8 — Global Analytics Footprint */}
+      <GlobalFootprintSection />
 
     </>
   );

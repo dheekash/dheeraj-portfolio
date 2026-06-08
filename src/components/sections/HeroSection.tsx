@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring } from "fram
 import { ChevronDown } from "lucide-react";
 import { LinkButton } from "@/components/common/LinkButton";
 import { profile } from "@/data/profile";
+import { AnalyticsCommandCenter } from "@/components/sections/AnalyticsCommandCenter";
 
 /* ══════════════════════════════════════════════
    TYPEWRITER
@@ -361,8 +362,8 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
 
       <motion.div style={{ y, opacity }} className="relative z-10 container-max section-padding !pt-24 !pb-16">
-        {/* Equal-weight grid: text 50% / visual 50% */}
-        <div className="grid lg:grid-cols-2 gap-12 xl:gap-16 items-center">
+        {/* Text 45% / Command center 55% */}
+        <div className="grid lg:grid-cols-[45fr_55fr] gap-10 xl:gap-14 items-start">
 
           {/* ══ LEFT — Text hierarchy ══ */}
           <div className="max-w-2xl">
@@ -461,15 +462,15 @@ export function HeroSection() {
 
           </div>
 
-          {/* ══ RIGHT — Orbit ring only ══ */}
+          {/* ══ RIGHT — Analytics Command Center ══ */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.88 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" as const }}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" as const }}
             style={{ x: springX, y: springY }}
-            className="hidden lg:flex items-center justify-center"
+            className="hidden lg:flex items-start justify-center"
           >
-            <OrbitRing />
+            <AnalyticsCommandCenter />
           </motion.div>
         </div>
       </motion.div>
