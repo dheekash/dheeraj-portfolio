@@ -74,7 +74,6 @@ export const certifications: Certification[] = [
     ],
     category: "Analytics",
     status: "active",
-    featured: true,
   },
   {
     id: "pl-300",
@@ -93,6 +92,7 @@ export const certifications: Certification[] = [
     ],
     category: "Business Intelligence",
     status: "active",
+    featured: true,
   },
   {
     id: "dp-100",
