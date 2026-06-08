@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { MapPin, Briefcase, Clock } from "lucide-react";
 import { experiences } from "@/data/experience";
 
@@ -49,8 +50,17 @@ const companyLogos: Record<string, { monogram: string; bg: string; text: string;
 };
 
 export function ExperienceSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 70%", "end 30%"],
+  });
+
+  const lineScaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
   return (
-    <section id="experience" className="section-padding relative overflow-hidden">
+    <section ref={sectionRef} id="experience" className="section-padding relative overflow-hidden">
       <div className="absolute top-1/2 left-0 w-72 h-72 rounded-full opacity-10 blur-3xl pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(245,158,11,0.2), transparent 70%)" }} />
 
@@ -67,8 +77,15 @@ export function ExperienceSection() {
         </motion.p>
 
         <div className="relative max-w-3xl mx-auto">
-          {/* Vertical line */}
-          <div className="absolute left-5 sm:left-7 top-3 bottom-3 w-px bg-gradient-to-b from-blue-500/60 via-blue-500/20 to-transparent" />
+          {/* Vertical line — scroll-driven grow from top */}
+          <div className="absolute left-5 sm:left-7 top-3 bottom-3 w-px overflow-hidden">
+            {/* Static faint track so the line has something to grow over */}
+            <div className="absolute inset-0 bg-gradient-to-b from-blue-500/15 via-blue-500/8 to-transparent" />
+            <motion.div
+              className="absolute inset-0 origin-top bg-gradient-to-b from-blue-500/60 via-blue-500/30 to-transparent"
+              style={{ scaleY: lineScaleY, transformOrigin: "top" }}
+            />
+          </div>
 
           <div className="space-y-6">
             {experiences.map((exp, i) => {
@@ -81,12 +98,33 @@ export function ExperienceSection() {
                   initial={{ opacity: 0, x: -24 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.12, ease: "easeOut" as const }}
+                  transition={{ duration: 0.6, delay: i * 0.15, ease: "easeOut" as const }}
                   className="relative flex gap-6 sm:gap-8"
                 >
                   {/* Timeline dot */}
                   <div className="relative mt-5 shrink-0">
-                    <div className={`w-3.5 h-3.5 rounded-full border-2 border-background shadow-lg z-10 relative ${col.dot} ${isCurrent ? "ring-2 ring-offset-1 ring-offset-background ring-blue-500/50" : ""}`} />
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 15,
+                        delay: i * 0.15 + 0.2,
+                      }}
+                      className="relative z-10"
+                    >
+                      {isCurrent ? (
+                        <motion.div
+                          animate={{ scale: [1, 1.3, 1] }}
+                          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                          className={`w-3.5 h-3.5 rounded-full border-2 border-background shadow-lg ${col.dot} ring-2 ring-offset-1 ring-offset-background ring-blue-500/50`}
+                        />
+                      ) : (
+                        <div className={`w-3.5 h-3.5 rounded-full border-2 border-background shadow-lg ${col.dot}`} />
+                      )}
+                    </motion.div>
                     {isCurrent && (
                       <div className="absolute inset-0 rounded-full bg-blue-500/30 animate-ping" />
                     )}
