@@ -3,11 +3,8 @@ import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { StickyResumeButton } from "@/components/common/StickyResumeButton";
-import { GlassBackground } from "@/components/layout/GlassBackground";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import "./globals.css";
 
 const inter = Inter({
@@ -139,11 +136,7 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased`}>
         <ThemeProvider>
           <TooltipProvider>
-            <GlassBackground />
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-            <StickyResumeButton />
+            <SiteChrome>{children}</SiteChrome>
           </TooltipProvider>
         </ThemeProvider>
         <Analytics />
