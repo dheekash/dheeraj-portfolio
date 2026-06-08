@@ -32,7 +32,6 @@ export const certifications: Certification[] = [
     ],
     category: "Data Engineering",
     status: "active",
-    featured: true,
   },
   {
     id: "dp-700",
@@ -74,6 +73,7 @@ export const certifications: Certification[] = [
     ],
     category: "Analytics",
     status: "active",
+    featured: true,
   },
   {
     id: "pl-300",
