@@ -47,7 +47,7 @@ export function CertificationsSection() {
 
   return (
     <section id="certifications" className="section-padding relative overflow-hidden">
-      <div className="absolute top-0 right-1/4 w-80 h-80 rounded-full opacity-10 blur-3xl pointer-events-none"
+      <div data-parallax="-35" className="absolute top-0 right-1/4 w-80 h-80 rounded-full opacity-10 blur-3xl pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(59,130,246,0.3), transparent 70%)" }} />
 
       <div className="container-max">

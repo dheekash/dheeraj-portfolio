@@ -64,7 +64,7 @@ function fadeUp(delay = 0) {
 export function BusinessImpactSection() {
   return (
     <section id="impact" className="section-padding relative overflow-hidden">
-      <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full opacity-8 blur-3xl pointer-events-none"
+      <div data-parallax="-40" className="absolute top-0 right-1/4 w-96 h-96 rounded-full opacity-8 blur-3xl pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(16,185,129,0.2), transparent 70%)" }} />
 
       <div className="container-max">

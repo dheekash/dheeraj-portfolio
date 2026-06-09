@@ -349,7 +349,7 @@ export function HeroSection() {
       </div>
 
       {/* ── Grid overlay + edge fade ── */}
-      <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
+      <div data-parallax="-20" className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-background/80 pointer-events-none" />
 
       <motion.div style={{ y, opacity }} className="relative z-10 container-max section-padding !pt-24 !pb-28">

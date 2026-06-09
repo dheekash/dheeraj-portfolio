@@ -61,7 +61,7 @@ export function ExperienceSection() {
 
   return (
     <section ref={sectionRef} id="experience" className="section-padding relative overflow-hidden">
-      <div className="absolute top-1/2 left-0 w-72 h-72 rounded-full opacity-10 blur-3xl pointer-events-none"
+      <div data-parallax="-35" className="absolute top-1/2 left-0 w-72 h-72 rounded-full opacity-10 blur-3xl pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(245,158,11,0.2), transparent 70%)" }} />
 
       <div className="container-max">

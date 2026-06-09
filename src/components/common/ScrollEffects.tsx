@@ -81,7 +81,30 @@ export function ScrollEffects() {
       });
     }
 
-    /* ── 4. SECTION REVEALS ── */
+    /* ── 4. PARALLAX BACKGROUNDS ── */
+    // Elements with data-parallax="<yPercent>" drift at a different speed than scroll.
+    // Negative values = float upward slower than content (classic depth illusion).
+    const parallaxEls = document.querySelectorAll<HTMLElement>("[data-parallax]");
+    parallaxEls.forEach((el) => {
+      const yPct = parseFloat(el.getAttribute("data-parallax") ?? "0");
+      if (isNaN(yPct) || yPct === 0) return;
+      gsap.fromTo(
+        el,
+        { yPercent: 0 },
+        {
+          yPercent: yPct,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el.closest("section") ?? el.parentElement,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+    });
+
+    /* ── 5. SECTION REVEALS ── */
     // Auxia-style: each section's direct children animate in from
     // y: 32, opacity: 0, blur(5px) → visible, staggered, power4.out
     const sections = document.querySelectorAll("section");
