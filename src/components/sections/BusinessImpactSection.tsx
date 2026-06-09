@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { TrendingUp, CheckCircle2 } from "lucide-react";
 
+
 const impacts = [
   {
     company: "Amplify Analytix",
@@ -78,7 +79,7 @@ export function BusinessImpactSection() {
           Measurable outcomes delivered across Amazon, consulting engagements, and enterprise analytics engineering.
         </motion.p>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-10">
+        <div className="grid md:grid-cols-3 gap-6">
           {impacts.map((imp, i) => (
             <motion.div
               key={imp.company}
@@ -121,31 +122,6 @@ export function BusinessImpactSection() {
           ))}
         </div>
 
-        {/* ── Why Companies Hire Me — compact strip ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" as const }}
-          className="glass-card rounded-2xl border border-border p-6"
-        >
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground mb-4">Why Companies Hire Me</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {[
-              { text: "End-to-End Analytics Delivery",    color: "#3B82F6" },
-              { text: "Executive Reporting at Scale",       color: "#F59E0B" },
-              { text: "Power BI & Fabric Certified",        color: "#8B5CF6" },
-              { text: "Data Engineering Expertise",         color: "#10B981" },
-              { text: "Stakeholder Management",             color: "#06B6D4" },
-              { text: "Cloud-Native Architecture",          color: "#EF4444" },
-            ].map((r) => (
-              <div key={r.text} className="flex items-center gap-2.5 p-3 rounded-xl border border-border bg-muted/30 hover:bg-muted/50 transition-colors">
-                <CheckCircle2 size={14} className="shrink-0" style={{ color: r.color }} />
-                <span className="text-sm font-medium text-foreground/80">{r.text}</span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
