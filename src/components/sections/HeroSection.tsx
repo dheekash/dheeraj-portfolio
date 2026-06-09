@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { useWaveCanvas } from "@/hooks/useWaveCanvas";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { LinkButton } from "@/components/common/LinkButton";
@@ -308,6 +309,10 @@ export function HeroSection() {
   const y       = useTransform(scrollYProgress, [0, 0.3], [0, 80]);
   const opacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
 
+  /* ── Glowy wave canvas background ── */
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  useWaveCanvas(canvasRef);
+
   /* Mouse parallax for the right visual */
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -336,31 +341,16 @@ export function HeroSection() {
       onMouseLeave={handleMouseLeave}
     >
 
-      {/* ── Ambient blobs ── */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
-        <motion.div
-          className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 65%)" }}
-          animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute -bottom-60 -right-40 w-[700px] h-[700px] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 65%)" }}
-          animate={{ x: [0, -50, 0], y: [0, 40, 0] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(245,158,11,0.04) 0%, transparent 65%)" }}
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 10, repeat: Infinity }}
-        />
-      </div>
+      {/* ── Glowy wave canvas ── */}
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full pointer-events-none"
+      />
 
-      {/* ── Grid overlay ── */}
-      <div className="absolute inset-0 grid-bg opacity-30" />
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+      {/* ── Grid overlay + edge fade ── */}
+      <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-background/80 pointer-events-none" />
 
       <motion.div style={{ y, opacity }} className="relative z-10 container-max section-padding !pt-24 !pb-28">
         {/* Text 45% / Command center 55% */}
