@@ -3,9 +3,7 @@ import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { ProjectsShowcase } from "@/components/sections/ProjectsShowcase";
 import { BusinessImpactSection } from "@/components/sections/BusinessImpactSection";
 import { HowIWorkSection } from "@/components/sections/HowIWorkSection";
-import { SkillNetworkSection } from "@/components/sections/SkillNetworkSection";
 import { CertificationsSection } from "@/components/sections/CertificationsSection";
-import { GlobalFootprintSection } from "@/components/sections/GlobalFootprintSection";
 
 function Divider() {
   return <div className="section-divider" />;
@@ -39,20 +37,10 @@ export default function HomePage() {
 
       <Divider />
 
-      {/* 6 — Skill Network (animated node graph) */}
-      <SkillNetworkSection />
-
-      <Divider />
-
-      {/* 7 — Certifications */}
+      {/* 6 — Certifications */}
       <div className="section-alt">
         <CertificationsSection />
       </div>
-
-      <Divider />
-
-      {/* 8 — Global Analytics Footprint */}
-      <GlobalFootprintSection />
     </>
   );
 }
