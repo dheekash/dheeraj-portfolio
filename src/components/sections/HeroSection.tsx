@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { useWaveCanvas } from "@/hooks/useWaveCanvas";
+import { DotGlobeHero } from "@/components/ui/dot-globe-hero";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { LinkButton } from "@/components/common/LinkButton";
@@ -309,9 +309,6 @@ export function HeroSection() {
   const y       = useTransform(scrollYProgress, [0, 0.3], [0, 80]);
   const opacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
 
-  /* ── Glowy wave canvas background ── */
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  useWaveCanvas(canvasRef);
 
   /* Mouse parallax for the right visual */
   const mouseX = useMotionValue(0);
@@ -341,16 +338,18 @@ export function HeroSection() {
       onMouseLeave={handleMouseLeave}
     >
 
-      {/* ── Glowy wave canvas ── */}
-      <canvas
-        ref={canvasRef}
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full pointer-events-none"
-      />
+      {/* ── 3D Globe background ── */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <DotGlobeHero
+          rotationSpeed={0.003}
+          globeRadius={1.6}
+          className="!h-full opacity-60"
+        />
+      </div>
 
       {/* ── Grid overlay + edge fade ── */}
       <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-background/80 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-background/80 pointer-events-none" />
 
       <motion.div style={{ y, opacity }} className="relative z-10 container-max section-padding !pt-24 !pb-28">
         {/* Text 45% / Command center 55% */}
