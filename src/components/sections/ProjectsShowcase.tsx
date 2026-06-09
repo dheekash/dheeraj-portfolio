@@ -112,8 +112,9 @@ export function ProjectsShowcase() {
               transition={{ duration: 0.5 }}
               className="flex items-center gap-3 mb-5"
             >
-              <div className="w-10 h-px bg-gradient-to-r from-blue-500 to-transparent" />
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-400 font-mono">Case Studies</span>
+              <span className="text-xs font-medium tracking-[0.14em] text-primary font-mono">02</span>
+              <div className="w-8 h-px bg-border" />
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground font-mono">Case Studies</span>
             </motion.div>
             <div className="flex items-end justify-between gap-6 flex-wrap">
               <motion.h2
@@ -121,7 +122,7 @@ export function ProjectsShowcase() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.05 }}
-                className="text-4xl sm:text-5xl font-extrabold tracking-tight"
+                className="text-4xl sm:text-5xl font-bold"
               >
                 Featured <span className="gradient-text">Analytics Projects</span>
               </motion.h2>

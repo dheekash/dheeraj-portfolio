@@ -53,10 +53,11 @@ export function CertificationsSection() {
       <div className="container-max">
         {/* Section label */}
         <motion.div {...fadeUp()} className="flex items-center gap-3 mb-5">
-          <div className="w-10 h-px bg-gradient-to-r from-blue-500 to-transparent" />
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-400 font-mono">Certifications</span>
+          <span className="text-xs font-medium tracking-[0.14em] text-primary font-mono">05</span>
+          <div className="w-8 h-px bg-border" />
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground font-mono">Certifications</span>
         </motion.div>
-        <motion.h2 {...fadeUp(0.05)} className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+        <motion.h2 {...fadeUp(0.05)} className="text-4xl sm:text-5xl font-bold mb-4">
           13+ Professional <span className="gradient-text">Certifications</span>
         </motion.h2>
         <motion.p {...fadeUp(0.1)} className="text-lg text-muted-foreground max-w-2xl mb-10 leading-relaxed">

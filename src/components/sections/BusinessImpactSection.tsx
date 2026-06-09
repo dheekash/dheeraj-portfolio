@@ -65,14 +65,15 @@ export function BusinessImpactSection() {
   return (
     <section id="impact" className="section-padding relative overflow-hidden">
       <div data-parallax="-40" className="absolute top-0 right-1/4 w-96 h-96 rounded-full opacity-8 blur-3xl pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(16,185,129,0.2), transparent 70%)" }} />
+        style={{ background: "radial-gradient(circle, rgba(29,78,216,0.12), transparent 70%)" }} />
 
       <div className="container-max">
         <motion.div {...fadeUp()} className="flex items-center gap-3 mb-5">
-          <div className="w-10 h-px bg-gradient-to-r from-emerald-500 to-transparent" />
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-600 dark:text-emerald-400 font-mono">Proven Results</span>
+          <span className="text-xs font-medium tracking-[0.14em] text-primary font-mono">03</span>
+          <div className="w-8 h-px bg-border" />
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground font-mono">Proven Results</span>
         </motion.div>
-        <motion.h2 {...fadeUp(0.05)} className="font-extrabold tracking-tight mb-4">
+        <motion.h2 {...fadeUp(0.05)} className="font-bold mb-4">
           Business <span className="gradient-text">Impact</span>
         </motion.h2>
         <motion.p {...fadeUp(0.1)} className="text-muted-foreground max-w-2xl mb-12 leading-relaxed">

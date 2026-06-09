@@ -62,14 +62,15 @@ export function ExperienceSection() {
   return (
     <section ref={sectionRef} id="experience" className="section-padding relative overflow-hidden">
       <div data-parallax="-35" className="absolute top-1/2 left-0 w-72 h-72 rounded-full opacity-10 blur-3xl pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(245,158,11,0.2), transparent 70%)" }} />
+        style={{ background: "radial-gradient(circle, rgba(29,78,216,0.12), transparent 70%)" }} />
 
       <div className="container-max">
         <motion.div {...fadeUp()} className="flex items-center gap-3 mb-5">
-          <div className="w-10 h-px bg-gradient-to-r from-blue-500 to-transparent" />
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-400 font-mono">Career Timeline</span>
+          <span className="text-xs font-medium tracking-[0.14em] text-primary font-mono">01</span>
+          <div className="w-8 h-px bg-border" />
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground font-mono">Career Timeline</span>
         </motion.div>
-        <motion.h2 {...fadeUp(0.05)} className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+        <motion.h2 {...fadeUp(0.05)} className="text-4xl sm:text-5xl font-bold mb-4">
           Professional <span className="gradient-text">Journey</span>
         </motion.h2>
         <motion.p {...fadeUp(0.1)} className="text-lg text-muted-foreground max-w-2xl mb-14 leading-relaxed">

@@ -391,26 +391,15 @@ export function HeroSection() {
               transition={{ duration: 0.5, delay: 0.07 }}
               className="mb-4"
             >
-              <h1 className="font-extrabold tracking-tight leading-[1.06] mb-3" style={{ fontSize: "clamp(2.5rem,5.5vw,4.2rem)" }}>
-                <span style={{ backgroundImage: "linear-gradient(135deg,#0F172A 0%,#334155 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                  Turning Enterprise Data
-                </span>
+              <h1 className="font-bold mb-4 text-foreground" style={{ fontSize: "clamp(2.5rem,5.5vw,4.2rem)" }}>
+                Turning Enterprise Data
                 <br />
                 <span className="gradient-text">Into Executive Decisions</span>
               </h1>
               {/* One-liner positioning tagline */}
-              <p className="text-sm text-muted-foreground/80 font-medium mb-3 leading-relaxed">
-                Business Analyst&nbsp;|&nbsp;BI Developer&nbsp;|&nbsp;Analytics Consultant specializing in{" "}
-                <span className="text-foreground/90">Power BI, Fabric, Snowflake, SQL</span> and{" "}
-                <span className="text-foreground/90">Python</span>
+              <p className="text-sm text-muted-foreground font-mono tracking-tight">
+                Business Analyst · BI Developer · Analytics Consultant
               </p>
-              <div className="flex flex-wrap gap-2">
-                {["Business Analyst", "BI Developer", "Analytics Consultant", "Data Engineer"].map((r) => (
-                  <span key={r} className="px-3 py-1 rounded-full text-sm font-semibold border border-blue-500/25 bg-blue-500/8 text-blue-600 dark:text-blue-300">
-                    {r}
-                  </span>
-                ))}
-              </div>
             </motion.div>
 
 
@@ -421,11 +410,10 @@ export function HeroSection() {
               transition={{ duration: 0.5, delay: 0.20 }}
               className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-7 max-w-lg"
             >
-              I build{" "}
-              <span className="text-yellow-600 dark:text-yellow-400 font-semibold">Power BI</span> dashboards,{" "}
-              <span className="text-cyan-600 dark:text-cyan-400 font-semibold">Snowflake</span> pipelines, and{" "}
-              <span className="text-blue-600 dark:text-blue-400 font-semibold">Fabric</span> Lakehouses
-              {" "}that turn 100M+ records into decisions for 20+ stakeholders across 8 countries.
+              I build <span className="text-foreground font-semibold">Power BI</span> dashboards,{" "}
+              <span className="text-foreground font-semibold">Snowflake</span> pipelines, and{" "}
+              <span className="text-foreground font-semibold">Fabric</span> Lakehouses that turn
+              100M+ records into decisions for 20+ stakeholders across 8 countries.
             </motion.p>
 
             {/* CTA row */}
@@ -437,7 +425,7 @@ export function HeroSection() {
             >
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold shadow-lg shadow-blue-600/25 transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary hover:opacity-90 text-primary-foreground text-sm font-semibold transition-opacity"
               >
                 Get in Touch
               </a>
@@ -446,9 +434,9 @@ export function HeroSection() {
                 href="/deck"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border bg-card hover:bg-muted text-sm font-semibold text-foreground transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border bg-card hover:bg-muted text-sm font-semibold text-foreground transition-colors"
               >
-                <span className="text-blue-400">▶</span> View Portfolio Deck
+                View Portfolio Deck <span aria-hidden>→</span>
               </MagneticButton>
             </motion.div>
 
