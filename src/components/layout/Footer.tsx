@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
+import { Footerdemo } from "@/components/ui/footer-section";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -190,39 +191,8 @@ export function Footer() {
         </div>
       </div>
 
-      {/* ── Footer bar ── */}
-      <div className="border-t border-border glass">
-        <div className="container-max px-5 sm:px-8 lg:px-12 py-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
-                <span className="text-white font-bold text-xs">DK</span>
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-foreground">{profile.name}</p>
-                <p className="text-xs text-muted-foreground">{profile.role}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer"
-                className="p-2 rounded-lg text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 transition-all" aria-label="LinkedIn">
-                <LinkedinIcon size={16} />
-              </a>
-              <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer"
-                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-all" aria-label="GitHub">
-                <GithubIcon size={16} />
-              </a>
-              <a href={`mailto:${profile.email}`}
-                className="p-2 rounded-lg text-muted-foreground hover:text-amber-500 hover:bg-amber-500/10 transition-all" aria-label="Email">
-                <Mail size={16} />
-              </a>
-            </div>
-            <p className="text-xs text-muted-foreground text-center sm:text-right">
-              © {currentYear} {profile.name} · Built with Next.js &amp; Tailwind CSS
-            </p>
-          </div>
-        </div>
-      </div>
+      {/* ── Footer bar (shadcn footer-section) ── */}
+      <Footerdemo />
     </footer>
   );
 }
