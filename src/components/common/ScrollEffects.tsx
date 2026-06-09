@@ -3,18 +3,20 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 /**
- * ScrollEffects — two layered premium scroll animations:
+ * ScrollEffects — four layered premium scroll animations (Auxia-style):
  *
- * 1. Thin progress bar at the very top of the viewport (fills as you scroll)
- * 2. Velocity skew — the <main> element tilts slightly on fast scroll,
- *    snaps back with an elastic ease when you stop.
- *    Signature effect from Linear / Vercel landing pages.
+ * 1. Lenis smooth scroll — buttery inertia scrolling (smooth: 1.2)
+ * 2. Thin progress bar at viewport top (fills as you scroll)
+ * 3. Velocity skew — <main> tilts on fast scroll, elastic snap-back
+ * 4. Section reveals — each section's children fade + blur + slide up
+ *    on scroll entry (GSAP ScrollTrigger, power4.out)
  */
 export function ScrollEffects() {
   const barRef = useRef<HTMLDivElement>(null);
@@ -22,78 +24,124 @@ export function ScrollEffects() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    /* ── 1. SCROLL PROGRESS BAR ── */
-    const bar = barRef.current;
-
-    const updateBar = () => {
-      if (!bar) return;
-      const scrolled = window.scrollY;
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = total > 0 ? (scrolled / total) * 100 : 0;
-      bar.style.width = `${pct}%`;
-    };
-
-    window.addEventListener("scroll", updateBar, { passive: true });
-    updateBar();
-
-    /* ── 2. VELOCITY SKEW ── */
-    const main = document.querySelector("main") as HTMLElement | null;
-    if (!main) return;
-
-    // We track scroll velocity via a proxy object
-    const proxy = { y: 0 };
-    let lastY = window.scrollY;
-    let skewSetter = gsap.quickSetter(main, "skewY", "deg");
-    let clamp = gsap.utils.clamp(-6, 6);
-
-    const onScroll = () => {
-      const currentY = window.scrollY;
-      const velocity = (currentY - lastY) * 0.06; // scale factor → max ±~6°
-      lastY = currentY;
-      skewSetter(clamp(velocity));
-    };
-
-    // Elastic snap-back: use a slow tween that always goes toward 0
-    const snapBack = gsap.to(proxy, {
-      y: 0,
-      ease: "power3.out",
-      duration: 0.8,
-      paused: true,
-      onUpdate: () => skewSetter(proxy.y),
+    /* ── 1. LENIS SMOOTH SCROLL ── */
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      touchMultiplier: 2,
     });
 
+    // Pump Lenis through GSAP's RAF for perfect sync
+    const lenisTickerCb = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(lenisTickerCb);
+    gsap.ticker.lagSmoothing(0);
+
+    // Sync ScrollTrigger with Lenis scroll position
+    lenis.on("scroll", () => ScrollTrigger.update());
+
+    /* ── 2. SCROLL PROGRESS BAR ── */
+    const bar = barRef.current;
+    lenis.on("scroll", ({ scroll, limit }: { scroll: number; limit: number }) => {
+      if (!bar) return;
+      const pct = limit > 0 ? (scroll / limit) * 100 : 0;
+      bar.style.width = `${pct}%`;
+    });
+
+    /* ── 3. VELOCITY SKEW ── */
+    const main = document.querySelector("main") as HTMLElement | null;
+    let skewSetter: ((val: number) => void) | null = null;
+    let snapBack: gsap.core.Tween | null = null;
     let snapTimer: ReturnType<typeof setTimeout>;
-    const onScrollWithSnap = () => {
-      const currentY = window.scrollY;
-      const velocity = (currentY - lastY) * 0.06;
-      lastY = currentY;
-      skewSetter(clamp(velocity));
 
-      // After scroll stops for 120 ms, snap back to 0
-      clearTimeout(snapTimer);
-      snapTimer = setTimeout(() => {
-        proxy.y = clamp(velocity);
-        snapBack.restart();
-      }, 120);
-    };
+    if (main) {
+      const proxy = { y: 0 };
+      let lastScrollY = 0;
+      skewSetter = gsap.quickSetter(main, "skewY", "deg") as (val: number) => void;
+      const clamp = gsap.utils.clamp(-5, 5);
 
-    window.addEventListener("scroll", onScrollWithSnap, { passive: true });
+      snapBack = gsap.to(proxy, {
+        y: 0,
+        ease: "power3.out",
+        duration: 0.8,
+        paused: true,
+        onUpdate: () => skewSetter!(proxy.y),
+      });
+
+      lenis.on("scroll", ({ scroll }: { scroll: number }) => {
+        const velocity = (scroll - lastScrollY) * 0.05;
+        lastScrollY = scroll;
+        skewSetter!(clamp(velocity));
+
+        clearTimeout(snapTimer);
+        snapTimer = setTimeout(() => {
+          proxy.y = clamp(velocity);
+          snapBack!.restart();
+        }, 120);
+      });
+    }
+
+    /* ── 4. SECTION REVEALS ── */
+    // Auxia-style: each section's direct children animate in from
+    // y: 32, opacity: 0, blur(5px) → visible, staggered, power4.out
+    const sections = document.querySelectorAll("section");
+
+    const revealTriggers: ScrollTrigger[] = [];
+
+    sections.forEach((section) => {
+      // Animate the section container itself
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 88%",
+          end: "top 40%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      // First: the section wrapper slides up
+      tl.fromTo(
+        section,
+        { y: 24, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
+        0
+      );
+
+      // Then: direct children (headings, paragraphs, cards, grids) stagger in
+      const children = Array.from(section.children) as HTMLElement[];
+      if (children.length > 0) {
+        tl.fromTo(
+          children,
+          { y: 32, opacity: 0, filter: "blur(5px)" },
+          {
+            y: 0,
+            opacity: 1,
+            filter: "blur(0px)",
+            duration: 0.9,
+            stagger: 0.08,
+            ease: "power4.out",
+            clearProps: "filter",
+          },
+          0.1
+        );
+      }
+    });
 
     return () => {
-      window.removeEventListener("scroll", updateBar);
-      window.removeEventListener("scroll", onScrollWithSnap);
+      gsap.ticker.remove(lenisTickerCb);
+      lenis.destroy();
       clearTimeout(snapTimer);
-      snapBack.kill();
-      // Reset skew on unmount
-      gsap.set(main, { skewY: 0 });
+      snapBack?.kill();
+      if (main) gsap.set(main, { skewY: 0 });
+      revealTriggers.forEach((t) => t.kill());
+      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
 
   return (
-    /* Scroll progress bar — fixed at very top, above navbar */
     <div
-      className="fixed top-0 left-0 z-[9999] h-[3px] w-0 pointer-events-none"
       ref={barRef}
+      className="fixed top-0 left-0 z-[9999] h-[3px] w-0 pointer-events-none"
       style={{
         background: "linear-gradient(to right, #3b82f6, #6366f1, #8b5cf6)",
         boxShadow: "0 0 12px rgba(99,102,241,0.7)",
