@@ -5,6 +5,7 @@ import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { StickyResumeButton } from "@/components/common/StickyResumeButton";
 import { GlassBackground } from "./GlassBackground";
+import { ScrollEffects } from "@/components/common/ScrollEffects";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -16,6 +17,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      <ScrollEffects />
       <GlassBackground />
       <Navbar />
       <main>{children}</main>
