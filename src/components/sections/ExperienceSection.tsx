@@ -18,7 +18,7 @@ function fadeUp(delay = 0) {
     initial: { opacity: 0, y: 24 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-    transition: { duration: 0.6, delay, ease: "easeOut" as const },
+    transition: { duration: 0.45, delay, ease: "easeOut" as const },
   };
 }
 
@@ -99,7 +99,7 @@ export function ExperienceSection() {
                   initial={{ opacity: 0, x: -24 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.15, ease: "easeOut" as const }}
+                  transition={{ duration: 0.45, delay: i * 0.08, ease: "easeOut" as const }}
                   className="relative flex gap-6 sm:gap-8"
                 >
                   {/* Timeline dot */}

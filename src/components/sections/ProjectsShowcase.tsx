@@ -22,7 +22,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.6, delay: index * 0.06, ease: "easeOut" as const }}
+      transition={{ duration: 0.45, delay: index * 0.06, ease: "easeOut" as const }}
       whileHover={{ y: -8, boxShadow: `0 24px 60px ${colors.glow}` }}
       className={`glass-card glass-highlight flex-shrink-0 w-[340px] sm:w-[400px] rounded-2xl border ${colors.border} p-7 flex flex-col card-depth transition-all duration-300 cursor-pointer group`}
     >
@@ -67,7 +67,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
         <span className="text-xs font-semibold" style={{ color: project.color }}>View Case Study</span>
         <ArrowRight size={12} style={{ color: project.color }} className="group-hover:translate-x-1 transition-transform" />
         {project.confidential && (
-          <span className="ml-auto text-[10px] text-muted-foreground/50 font-mono">Confidential</span>
+          <span className="ml-auto text-[10px] text-muted-foreground/80 font-mono">Confidential</span>
         )}
       </div>
     </motion.div>

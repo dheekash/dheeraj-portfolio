@@ -58,7 +58,7 @@ export function ScrollEffects() {
       const proxy = { y: 0 };
       let lastScrollY = 0;
       skewSetter = gsap.quickSetter(main, "skewY", "deg") as (val: number) => void;
-      const clamp = gsap.utils.clamp(-5, 5);
+      const clamp = gsap.utils.clamp(-2.5, 2.5);
 
       snapBack = gsap.to(proxy, {
         y: 0,
@@ -126,7 +126,7 @@ export function ScrollEffects() {
       tl.fromTo(
         section,
         { y: 24, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
+        { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" },
         0
       );
 
@@ -140,8 +140,8 @@ export function ScrollEffects() {
             y: 0,
             opacity: 1,
             filter: "blur(0px)",
-            duration: 0.9,
-            stagger: 0.08,
+            duration: 0.5,
+            stagger: 0.06,
             ease: "power4.out",
             clearProps: "filter",
           },

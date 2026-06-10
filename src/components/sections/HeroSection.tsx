@@ -446,7 +446,7 @@ export function HeroSection() {
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" as const }}
+            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" as const }}
             style={{ x: springX, y: springY }}
             className="hidden lg:flex items-start justify-center"
           >

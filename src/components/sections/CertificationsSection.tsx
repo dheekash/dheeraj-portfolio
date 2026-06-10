@@ -12,7 +12,7 @@ function fadeUp(delay = 0) {
     initial: { opacity: 0, y: 24 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-    transition: { duration: 0.6, delay, ease: "easeOut" as const },
+    transition: { duration: 0.45, delay, ease: "easeOut" as const },
   };
 }
 
@@ -149,7 +149,7 @@ export function CertificationsSection() {
                     {cert.credentialId && (
                       <div className="flex justify-between">
                         <span>ID</span>
-                        <span className="font-mono text-muted-foreground/50 truncate max-w-[90px]">{cert.credentialId}</span>
+                        <span className="font-mono text-muted-foreground/80 truncate max-w-[90px]">{cert.credentialId}</span>
                       </div>
                     )}
                   </div>

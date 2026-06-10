@@ -52,7 +52,7 @@ function fadeUp(delay = 0) {
     initial: { opacity: 0, y: 28 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-    transition: { duration: 0.6, delay, ease: "easeOut" as const },
+    transition: { duration: 0.45, delay, ease: "easeOut" as const },
   };
 }
 
