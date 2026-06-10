@@ -11,13 +11,6 @@ import { profile } from "@/data/profile";
 
 type Status = "idle" | "loading" | "success" | "error";
 
-const navLinks = [
-  { label: "Experience", href: "#experience" },
-  { label: "Projects",   href: "#projects"   },
-  { label: "Impact",     href: "#impact"     },
-  { label: "Process",    href: "#process"    },
-  { label: "Certs",      href: "#certifications" },
-];
 
 export function Footer() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -174,19 +167,11 @@ export function Footer() {
       <div className="border-t border-border">
         <div className="container-max px-5 sm:px-8 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Dheeraj Kashyap · Built with Next.js &amp; Tailwind CSS
+            © {new Date().getFullYear()} Dheeraj Kashyap. All rights reserved.
           </p>
-          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            {navLinks.map((l) => (
-              <a key={l.label} href={l.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                {l.label}
-              </a>
-            ))}
-            <a href="/deck" className="text-sm font-medium text-primary hover:opacity-80 transition-opacity">
-              Portfolio Deck
-            </a>
-          </nav>
+          <p className="text-sm text-muted-foreground">
+            Bengaluru, India · <a href={`mailto:${profile.email}`} className="hover:text-foreground transition-colors">{profile.email}</a>
+          </p>
         </div>
       </div>
 

@@ -1,18 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { TrendingUp, CheckCircle2 } from "lucide-react";
-
 
 const impacts = [
   {
     company: "Amplify Analytix",
     period: "Jan 2025 – Present",
     role: "BI & Analytics Engineer",
-    monogram: "AA",
-    color: "#3B82F6",
-    bg: "bg-blue-500/10",
-    border: "border-blue-500/25",
     results: [
       "Architected Microsoft Fabric Lakehouse reducing pipeline failure rate from 12% to under 1%",
       "Delivered 50+ executive dashboards across global clients in 8 markets",
@@ -24,10 +18,6 @@ const impacts = [
     company: "Amazon",
     period: "2020 – Dec 2024",
     role: "Investigation Specialist & Analytics Lead",
-    monogram: "AMZ",
-    color: "#F59E0B",
-    bg: "bg-amber-500/10",
-    border: "border-amber-500/25",
     results: [
       "Built Sales Forecasting Dashboard processing 100M+ records, identifying $500K+ revenue opportunities",
       "Designed Power BI dashboards adopted by senior leadership across 8 markets",
@@ -39,10 +29,6 @@ const impacts = [
     company: "Enterprise Clients",
     period: "Consulting",
     role: "Analytics Consultant",
-    monogram: "EC",
-    color: "#10B981",
-    bg: "bg-emerald-500/10",
-    border: "border-emerald-500/25",
     results: [
       "Delivered Customer Churn model with 89% recall — saved clients $300K+ annually",
       "Built Global Manufacturing Analytics Suite serving 8 countries, 200+ users",
@@ -80,45 +66,26 @@ export function BusinessImpactSection() {
           Measurable outcomes delivered across Amazon, consulting engagements, and enterprise analytics engineering.
         </motion.p>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-px bg-border border border-border rounded-xl overflow-hidden">
           {impacts.map((imp, i) => (
             <motion.div
               key={imp.company}
-              initial={{ opacity: 0, y: 28 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" as const }}
-              className={`glass-card glass-highlight relative rounded-2xl border ${imp.border} p-6 card-depth`}
+              transition={{ duration: 0.45, delay: i * 0.08, ease: "easeOut" as const }}
+              className="bg-background p-7 transition-colors duration-200 hover:bg-muted/60"
             >
-              <div className="flex items-start gap-3 mb-5">
-                <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center text-white text-xs font-black shrink-0 shadow-md"
-                  style={{ backgroundColor: imp.color }}
-                >
-                  {imp.monogram}
-                </div>
-                <div>
-                  <h3 className="font-extrabold text-foreground leading-tight">{imp.company}</h3>
-                  <p className="text-xs text-muted-foreground mt-0.5">{imp.role}</p>
-                  <span
-                    className="inline-block mt-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full border"
-                    style={{ color: imp.color, borderColor: `${imp.color}40`, backgroundColor: `${imp.color}12` }}
-                  >
-                    {imp.period}
-                  </span>
-                </div>
-              </div>
-              <ul className="space-y-3">
+              <p className="font-mono text-xs text-muted-foreground mb-1">{imp.period}</p>
+              <h3 className="font-bold text-foreground text-lg leading-tight">{imp.company}</h3>
+              <p className="text-sm text-muted-foreground mb-6">{imp.role}</p>
+              <ul className="space-y-3.5">
                 {imp.results.map((r) => (
-                  <li key={r} className="flex gap-2.5 text-sm text-muted-foreground leading-snug">
-                    <CheckCircle2 size={14} className="shrink-0 mt-0.5" style={{ color: imp.color }} />
+                  <li key={r} className="text-sm text-muted-foreground leading-relaxed pl-4 border-l border-border">
                     {r}
                   </li>
                 ))}
               </ul>
-              <div className="absolute bottom-5 right-5 opacity-8" aria-hidden>
-                <TrendingUp size={40} style={{ color: imp.color }} />
-              </div>
             </motion.div>
           ))}
         </div>

@@ -15,7 +15,6 @@ import { LinkButton } from "@/components/common/LinkButton";
 import { profile } from "@/data/profile";
 import { AnalyticsCommandCenter } from "@/components/sections/AnalyticsCommandCenter";
 import { TechMarquee } from "@/components/sections/TechMarquee";
-import { MagneticButton } from "@/components/common/MagneticButton";
 
 /* ══════════════════════════════════════════════
    TYPEWRITER
@@ -436,15 +435,15 @@ export function HeroSection() {
               >
                 Get in Touch
               </a>
-              <MagneticButton
-                as="a"
+              <a
                 href="/deck"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border bg-card hover:bg-muted text-sm font-semibold text-foreground transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border bg-card hover:bg-muted text-sm font-semibold text-foreground transition-colors group"
               >
-                View Portfolio Deck <span aria-hidden>→</span>
-              </MagneticButton>
+                View Portfolio Deck{" "}
+                <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+              </a>
             </motion.div>
 
           </div>

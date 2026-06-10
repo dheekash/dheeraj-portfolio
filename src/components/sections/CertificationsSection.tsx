@@ -16,12 +16,6 @@ function fadeUp(delay = 0) {
   };
 }
 
-const issuerStyle: Record<string, { bg: string; text: string; border: string; dot: string }> = {
-  Microsoft:  { bg: "bg-blue-500/12",  text: "text-blue-300",  border: "border-blue-500/25",  dot: "#3B82F6" },
-  Databricks: { bg: "bg-red-500/12",   text: "text-red-300",   border: "border-red-500/25",   dot: "#FF3621" },
-  Snowflake:  { bg: "bg-cyan-500/12",  text: "text-cyan-300",  border: "border-cyan-500/25",  dot: "#29B5E8" },
-};
-
 function IssuerLogo({ issuer, size = 22 }: { issuer: string; size?: number }) {
   if (issuer === "Microsoft")  return <MicrosoftLogo size={size} />;
   if (issuer === "Databricks") return <DatabricksLogo size={size} />;
@@ -64,12 +58,11 @@ export function CertificationsSection() {
           A continuous learning journey across Microsoft Fabric, Databricks, Snowflake, Azure, and Power BI.
         </motion.p>
 
-        {/* Stats */}
-        <motion.div {...fadeUp(0.12)} className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+        {/* Stats — plain editorial row */}
+        <motion.div {...fadeUp(0.12)} className="flex flex-wrap gap-x-12 gap-y-4 mb-12 pb-8 border-b border-border">
           {stats.map((s) => (
-            <div key={s.label} className="glass-card glass-highlight relative p-5 rounded-2xl border border-blue-500/20 text-center overflow-hidden group card-depth">
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shimmer" />
-              <div className="text-3xl font-extrabold gradient-text">{s.value}</div>
+            <div key={s.label}>
+              <div className="text-3xl font-bold font-mono text-foreground">{s.value}</div>
               <div className="text-xs text-muted-foreground mt-1">{s.label}</div>
             </div>
           ))}
@@ -80,7 +73,6 @@ export function CertificationsSection() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {filtered.map((cert, i) => {
               const expired = cert.expiryDate ? isExpired(cert.expiryDate) : false;
-              const style = issuerStyle[cert.issuer] || { bg: "bg-white/5", text: "text-muted-foreground", border: "border-white/10", dot: "#6B7280" };
 
               return (
                 <motion.div
@@ -90,45 +82,29 @@ export function CertificationsSection() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.92 }}
                   transition={{ duration: 0.3, delay: (i % 8) * 0.04 }}
-                  className={`glass-card glass-highlight group relative p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl card-depth ${
-                    cert.featured
-                      ? "border-blue-500/30 hover:border-blue-400/50 hover:shadow-blue-500/15"
-                      : "border-white/[0.09] hover:border-white/[0.15]"
+                  className={`group relative p-5 rounded-xl border bg-card card-depth transition-colors duration-200 ${
+                    cert.featured ? "border-primary/30" : "border-border"
                   }`}
                 >
-                  {/* Latest badge */}
-                  {cert.featured && (
-                    <div className="absolute -top-2.5 right-4">
-                      <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-blue-600 text-white font-bold shadow-lg shadow-blue-600/30">
-                        Latest
-                      </span>
-                    </div>
-                  )}
-
                   {/* Issuer + status */}
-                  <div className="flex items-center justify-between mb-3.5">
-                    <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-md border ${style.bg} ${style.text} ${style.border}`}>
-                      {cert.issuer}
-                    </span>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <IssuerLogo issuer={cert.issuer} size={18} />
+                      <span className="text-xs font-medium text-muted-foreground">{cert.issuer}</span>
+                    </div>
                     {expired ? (
-                      <div title="Expired" className="flex items-center gap-1 text-xs text-red-400">
+                      <div title="Expired" className="flex items-center gap-1 text-xs text-red-500">
                         <AlertCircle size={13} />
                       </div>
                     ) : (
-                      <div title="Active" className="flex items-center gap-1 text-xs text-emerald-400">
+                      <div title="Active" className="flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400">
                         <CheckCircle size={13} />
                       </div>
                     )}
                   </div>
 
-                  {/* Issuer logo */}
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3 border"
-                    style={{ backgroundColor: `${style.dot}15`, borderColor: `${style.dot}30` }}>
-                    <IssuerLogo issuer={cert.issuer} size={22} />
-                  </div>
-
                   {/* Name */}
-                  <h3 className="font-bold text-foreground text-sm leading-snug mb-3 group-hover:text-blue-200 transition-colors line-clamp-2">
+                  <h3 className="font-bold text-foreground text-sm leading-snug mb-3 line-clamp-2">
                     {cert.name}
                   </h3>
 
@@ -155,20 +131,15 @@ export function CertificationsSection() {
                   </div>
 
                   {/* Skills */}
-                  <div className="flex flex-wrap gap-1">
-                    {cert.skills.slice(0, 3).map((s) => (
-                      <span key={s} className="text-[10px] px-1.5 py-0.5 rounded bg-white/4 border border-white/7 text-muted-foreground">{s}</span>
-                    ))}
-                    {cert.skills.length > 3 && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/4 border border-white/7 text-muted-foreground">+{cert.skills.length - 3}</span>
-                    )}
-                  </div>
+                  <p className="text-[11px] font-mono text-muted-foreground/80 leading-relaxed">
+                    {cert.skills.slice(0, 3).join("  ·  ")}
+                    {cert.skills.length > 3 && `  +${cert.skills.length - 3}`}
+                  </p>
 
                   {/* Verify link (hover) */}
                   {cert.verificationUrl && (
                     <a href={cert.verificationUrl} target="_blank" rel="noopener noreferrer"
-                      className="mt-3 flex items-center gap-1 text-xs opacity-0 group-hover:opacity-100 transition-opacity"
-                      style={{ color: style.dot }}
+                      className="mt-3 flex items-center gap-1 text-xs text-primary opacity-0 group-hover:opacity-100 transition-opacity"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <ExternalLink size={10} /> Verify Credential

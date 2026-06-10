@@ -176,17 +176,10 @@
     box-shadow: 0 10px 32px rgba(0,0,0,0.5);
   }
 
-  /* ─── Accent text (formerly gradients — now solid, editorial) ─── */
-  .gradient-text {
-    color: var(--primary);
-    background: none;
-  }
-  .dark .gradient-text { color: #5B8DEF; }
-  .gradient-text-amber {
-    color: #C2660A;
-    background: none;
-  }
-  .dark .gradient-text-amber { color: #E8943A; }
+  /* ─── Accent text — retired. Headings are single-color ink; the
+     two-tone split heading is the #1 generated-site tell. ─── */
+  .gradient-text { color: inherit; background: none; }
+  .gradient-text-amber { color: inherit; background: none; }
   .gradient-text-white {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.75) 100%);

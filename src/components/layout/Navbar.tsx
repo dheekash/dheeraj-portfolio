@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { ThemeSwitch } from "@/components/common/ThemeSwitch";
 import { cn } from "@/lib/utils";
-import { profile } from "@/data/profile";
 
 const navItems = [
   { label: "Experience",     href: "#experience" },
@@ -78,19 +77,14 @@ export function Navbar() {
           <div className="flex items-center justify-between h-[76px]">
 
             {/* ── Logo ── */}
-            <Link href="/" className="flex items-center gap-3 group shrink-0" aria-label="Home">
-              <div className="relative w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-primary">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm tracking-tight">DK</span>
-                </div>
-                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/15 transition-colors duration-200" />
-              </div>
-              <div className="hidden sm:block leading-tight">
-                <p className="text-base font-bold text-foreground/90 group-hover:text-foreground transition-colors">
-                  {profile.name}
-                </p>
-                <p className="text-xs text-muted-foreground font-medium">{profile.role}</p>
-              </div>
+            <Link href="/" className="group shrink-0 flex items-baseline gap-1.5" aria-label="Home">
+              <span
+                className="text-lg font-bold tracking-tight text-foreground"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                dheeraj kashyap
+              </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block translate-y-[-1px]" />
             </Link>
 
             {/* ── Desktop nav — centered ── */}
