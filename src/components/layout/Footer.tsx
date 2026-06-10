@@ -8,26 +8,24 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
-import { Footerdemo } from "@/components/ui/footer-section";
 
 type Status = "idle" | "loading" | "success" | "error";
 
-function fadeUp(delay = 0) {
-  return {
-    initial: { opacity: 0, y: 24 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.6, delay, ease: "easeOut" as const },
-  };
-}
+const navLinks = [
+  { label: "Experience", href: "#experience" },
+  { label: "Projects",   href: "#projects"   },
+  { label: "Impact",     href: "#impact"     },
+  { label: "Process",    href: "#process"    },
+  { label: "Certs",      href: "#certifications" },
+];
 
 export function Footer() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [status, setStatus] = useState<Status>("idle");
-  const currentYear = new Date().getFullYear();
 
-  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    setForm((f) => ({ ...f, [k]: e.target.value }));
+  const set = (k: keyof typeof form) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,159 +38,158 @@ export function Footer() {
       });
       setStatus(res.ok ? "success" : "error");
       if (res.ok) setForm({ name: "", email: "", subject: "", message: "" });
-    } catch { setStatus("error"); }
+    } catch {
+      setStatus("error");
+    }
   };
 
-  const connects = [
-    {
-      href: profile.linkedinUrl,
-      icon: <LinkedinIcon size={18} className="text-blue-400" />,
-      label: "LinkedIn",
-      sub: "linkedin.com/in/kashyap-dheeraj",
-      style: "border-blue-500/20 bg-blue-500/5 hover:border-blue-400/40 hover:bg-blue-500/10",
-    },
-    {
-      href: profile.githubUrl,
-      icon: <GithubIcon size={18} className="text-foreground/60" />,
-      label: "GitHub",
-      sub: "github.com/dheekash",
-      style: "border-white/10 bg-white/3 hover:border-white/20 hover:bg-white/6",
-    },
-    {
-      href: profile.calendlyUrl,
-      icon: <Calendar size={18} className="text-amber-400" />,
-      label: "Schedule a Call",
-      sub: "30 min via Calendly",
-      style: "border-amber-500/20 bg-amber-500/5 hover:border-amber-400/40 hover:bg-amber-500/10",
-    },
-  ];
-
   return (
-    <footer id="contact">
+    <footer id="contact" className="border-t border-border">
 
-      {/* ── Contact Section ── */}
-      <div className="relative section-padding overflow-hidden">
-        {/* Blobs */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(59,130,246,0.25), transparent 70%)" }} />
-        <div className="absolute bottom-0 right-0 w-72 h-72 rounded-full opacity-8 blur-3xl pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(245,158,11,0.2), transparent 70%)" }} />
+      {/* ── Main contact + nav block ── */}
+      <div className="container-max section-padding">
 
-        <div className="container-max">
-          <motion.div {...fadeUp()} className="flex items-center gap-3 mb-5">
-            <div className="w-10 h-px bg-gradient-to-r from-blue-500 to-transparent" />
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-400 font-mono">Contact</span>
+        {/* Top row: section label */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+          className="flex items-center gap-3 mb-10"
+        >
+          <span className="text-xs font-medium tracking-[0.14em] text-primary font-mono">06</span>
+          <div className="w-8 h-px bg-border" />
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground font-mono">Contact</span>
+        </motion.div>
+
+        {/* 2-col: left = info, right = form */}
+        <div className="grid lg:grid-cols-[1fr_1.4fr] gap-16 xl:gap-24">
+
+          {/* ── LEFT ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4 leading-tight">
+              Let&apos;s work<br />
+              <span className="gradient-text">together.</span>
+            </h2>
+            <p className="text-base text-muted-foreground leading-relaxed max-w-sm mb-10">
+              Open to full-time roles, contract engagements, and analytics consulting across Europe &amp; India.
+            </p>
+
+            {/* Contact details */}
+            <div className="space-y-3 mb-10">
+              <a href={`mailto:${profile.email}`}
+                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors group">
+                <Mail size={14} className="text-primary shrink-0" />
+                {profile.email}
+              </a>
+              <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                <MapPin size={14} className="text-primary shrink-0" />
+                {profile.location}
+              </div>
+              <a href={profile.calendlyUrl} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Calendar size={14} className="text-primary shrink-0" />
+                Schedule a 30-min call via Calendly
+              </a>
+            </div>
+
+            {/* Social links */}
+            <div className="flex items-center gap-4">
+              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                <LinkedinIcon size={16} /> LinkedIn
+              </a>
+              <span className="text-border">·</span>
+              <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                <GithubIcon size={16} /> GitHub
+              </a>
+            </div>
           </motion.div>
-          <motion.h2 {...fadeUp(0.05)} className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
-            Hiring a <span className="gradient-text-amber">BI or Analytics Professional?</span>
-          </motion.h2>
-          <motion.p {...fadeUp(0.1)} className="text-lg text-muted-foreground max-w-2xl mb-14 leading-relaxed">
-            Looking for a <strong className="text-foreground font-semibold">Business Analyst</strong>,{" "}
-            <strong className="text-foreground font-semibold">BI Analyst</strong>,{" "}
-            <strong className="text-foreground font-semibold">Analytics Engineer</strong>, or{" "}
-            <strong className="text-foreground font-semibold">Data Consultant</strong>?{" "}
-            Let&apos;s discuss how data can drive measurable business outcomes for your organisation.
-          </motion.p>
 
-          <div className="grid lg:grid-cols-2 gap-12 max-w-5xl">
-            {/* Left — contact info */}
-            <motion.div {...fadeUp(0.1)} className="space-y-5">
-              {[
-                { icon: <Mail size={15} className="text-blue-400" />, label: "Email", value: profile.email, href: `mailto:${profile.email}` },
-                { icon: <MapPin size={15} className="text-blue-400" />, label: "Location", value: "Bengaluru, India", href: null },
-              ].map((item) => (
-                <div key={item.label} className="glass-card flex items-center gap-3.5 p-4 rounded-xl border border-white/[0.09]">
-                  <div className="p-2.5 rounded-lg bg-blue-500/10 border border-blue-500/20 shrink-0">{item.icon}</div>
-                  <div>
-                    <p className="text-xs text-muted-foreground mb-0.5">{item.label}</p>
-                    {item.href
-                      ? <a href={item.href} className="text-sm font-semibold text-foreground hover:text-blue-300 transition-colors">{item.value}</a>
-                      : <p className="text-sm font-semibold text-foreground">{item.value}</p>}
-                  </div>
-                </div>
-              ))}
-              <div className="space-y-2.5 pt-2">
-                {connects.map((c) => (
-                  <a key={c.label} href={c.href} target="_blank" rel="noopener noreferrer"
-                    className={`flex items-center gap-3.5 p-3.5 rounded-xl border transition-all group ${c.style}`}>
-                    <div className="shrink-0">{c.icon}</div>
-                    <div>
-                      <p className="text-sm font-semibold text-foreground group-hover:text-blue-200 transition-colors">{c.label}</p>
-                      <p className="text-xs text-muted-foreground">{c.sub}</p>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Right — form */}
-            <motion.form {...fadeUp(0.15)} onSubmit={submit} className="space-y-4">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <Label htmlFor="name" className="text-xs font-semibold text-muted-foreground">Name</Label>
-                  <Input id="name" placeholder="Your name" value={form.name} onChange={set("name")} required
-                    className="glass-card border-white/[0.09] focus:border-blue-500/50 rounded-xl h-11" />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="email" className="text-xs font-semibold text-muted-foreground">Email</Label>
-                  <Input id="email" type="email" placeholder="you@company.com" value={form.email} onChange={set("email")} required
-                    className="glass-card border-white/[0.09] focus:border-blue-500/50 rounded-xl h-11" />
-                </div>
+          {/* ── RIGHT — Form ── */}
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.08 }}
+            onSubmit={submit}
+            className="space-y-5"
+          >
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <Label htmlFor="cf-name" className="text-xs font-semibold text-muted-foreground">Name</Label>
+                <Input id="cf-name" placeholder="Your name" value={form.name} onChange={set("name")} required
+                  className="h-11 border-border bg-card focus-visible:ring-primary/30 rounded-lg" />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="subject" className="text-xs font-semibold text-muted-foreground">Subject</Label>
-                <Input id="subject" placeholder="Role opportunity · Consulting enquiry · Other" value={form.subject} onChange={set("subject")} required
-                  className="glass-card border-white/[0.09] focus:border-blue-500/50 rounded-xl h-11" />
+                <Label htmlFor="cf-email" className="text-xs font-semibold text-muted-foreground">Email</Label>
+                <Input id="cf-email" type="email" placeholder="you@company.com" value={form.email} onChange={set("email")} required
+                  className="h-11 border-border bg-card focus-visible:ring-primary/30 rounded-lg" />
               </div>
-              <div className="space-y-1.5">
-                <Label htmlFor="message" className="text-xs font-semibold text-muted-foreground">Message</Label>
-                <Textarea id="message" placeholder="Tell me about the role, project, or opportunity…" rows={5}
-                  value={form.message} onChange={set("message")} required
-                  className="glass-card border-white/[0.09] focus:border-blue-500/50 rounded-xl resize-none" />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="cf-subject" className="text-xs font-semibold text-muted-foreground">Subject</Label>
+              <Input id="cf-subject" placeholder="Role opportunity · Consulting enquiry · Other" value={form.subject} onChange={set("subject")} required
+                className="h-11 border-border bg-card focus-visible:ring-primary/30 rounded-lg" />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="cf-message" className="text-xs font-semibold text-muted-foreground">Message</Label>
+              <Textarea id="cf-message" placeholder="Tell me about the role, project, or opportunity…" rows={5}
+                value={form.message} onChange={set("message")} required
+                className="border-border bg-card focus-visible:ring-primary/30 rounded-lg resize-none" />
+            </div>
+
+            {status === "success" && (
+              <div className="flex items-center gap-2.5 p-3.5 rounded-lg bg-emerald-500/8 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-sm">
+                <CheckCircle size={15} className="shrink-0" />
+                Message sent — I&apos;ll reply within 24 hours.
               </div>
-              {status === "success" && (
-                <div className="flex items-center gap-2.5 p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm">
-                  <CheckCircle size={16} /> Message sent — I&apos;ll reply within 24 hours.
-                </div>
-              )}
-              {status === "error" && (
-                <div className="flex items-center gap-2.5 p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-                  <AlertCircle size={16} /> Something went wrong. Email me directly at{" "}
-                  <a href={`mailto:${profile.email}`} className="underline">{profile.email}</a>
-                </div>
-              )}
-              <button type="submit" disabled={status === "loading"}
-                className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-xl shadow-blue-600/25 transition-all hover:scale-[1.01] disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer">
-                {status === "loading" ? "Sending…" : <><Send size={15} /> Send Message</>}
-              </button>
-              <p className="text-xs text-muted-foreground/60 text-center">
-                Or email directly:{" "}
-                <a href={`mailto:${profile.email}`} className="text-blue-400 hover:underline">{profile.email}</a>
-              </p>
-              <div className="pt-2 border-t border-border/50">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground/60 text-center mb-3">Connect</p>
-                <div className="grid grid-cols-3 gap-2.5">
-                  <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-blue-500/25 bg-blue-500/6 hover:bg-blue-500/12 text-blue-500 text-xs font-semibold transition-all hover:scale-[1.02]">
-                    <LinkedinIcon size={14} /> LinkedIn
-                  </a>
-                  <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-white/10 bg-white/4 hover:bg-white/8 text-foreground/70 text-xs font-semibold transition-all hover:scale-[1.02]">
-                    <GithubIcon size={14} /> GitHub
-                  </a>
-                  <a href={`mailto:${profile.email}`}
-                    className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-white/10 bg-white/4 hover:bg-white/8 text-foreground/70 text-xs font-semibold transition-all hover:scale-[1.02]">
-                    <Mail size={14} /> Email
-                  </a>
-                </div>
+            )}
+            {status === "error" && (
+              <div className="flex items-center gap-2.5 p-3.5 rounded-lg bg-red-500/8 border border-red-500/20 text-red-600 dark:text-red-400 text-sm">
+                <AlertCircle size={15} className="shrink-0" />
+                Something went wrong. Email me at{" "}
+                <a href={`mailto:${profile.email}`} className="underline ml-1">{profile.email}</a>
               </div>
-            </motion.form>
-          </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-primary hover:opacity-90 text-primary-foreground text-sm font-semibold transition-opacity disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            >
+              {status === "loading" ? "Sending…" : <><Send size={14} /> Send Message</>}
+            </button>
+          </motion.form>
         </div>
       </div>
 
-      {/* ── Footer bar (shadcn footer-section) ── */}
-      <Footerdemo />
+      {/* ── Bottom bar ── */}
+      <div className="border-t border-border">
+        <div className="container-max px-5 sm:px-8 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Dheeraj Kashyap · Built with Next.js &amp; Tailwind CSS
+          </p>
+          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            {navLinks.map((l) => (
+              <a key={l.label} href={l.href}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                {l.label}
+              </a>
+            ))}
+            <a href="/deck" className="text-sm font-medium text-primary hover:opacity-80 transition-opacity">
+              Portfolio Deck
+            </a>
+          </nav>
+        </div>
+      </div>
+
     </footer>
   );
 }
