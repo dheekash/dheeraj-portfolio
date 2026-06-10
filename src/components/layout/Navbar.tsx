@@ -8,11 +8,12 @@ import { cn } from "@/lib/utils";
 import { profile } from "@/data/profile";
 
 const navItems = [
-  { label: "Impact",     href: "#impact" },
-  { label: "Projects",   href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Skills",     href: "#skills" },
-  { label: "Contact",    href: "#contact" },
+  { label: "Experience",     href: "#experience" },
+  { label: "Projects",       href: "#projects" },
+  { label: "Impact",         href: "#impact" },
+  { label: "Process",        href: "#process" },
+  { label: "Certifications", href: "#certifications" },
+  { label: "Contact",        href: "#contact" },
 ];
 
 export function Navbar() {
@@ -62,17 +63,12 @@ export function Navbar() {
       <header
         className={cn(
           "w-full pointer-events-auto",
-          "transition-all duration-500",
-          "backdrop-blur-[28px] saturate-[1.8]",
-          "border-b",
+          "transition-all duration-300",
+          "backdrop-blur-[16px]",
+          "border-b border-border",
           scrolled
-            ? [
-                "shadow-lg shadow-black/10",
-                "bg-white/[0.90] border-white/[0.90] dark:bg-[#060D1F]/[0.90] dark:border-white/[0.10]",
-              ]
-            : [
-                "bg-white/[0.75] border-white/[0.70] dark:bg-[#060D1F]/[0.65] dark:border-white/[0.07]",
-              ],
+            ? "bg-background/90 shadow-sm"
+            : "bg-background/75",
           "relative"
         )}
       >
@@ -83,12 +79,9 @@ export function Navbar() {
 
             {/* ── Logo ── */}
             <Link href="/" className="flex items-center gap-3 group shrink-0" aria-label="Home">
-              <div
-                className="relative w-10 h-10 rounded-xl overflow-hidden shrink-0 shadow-lg"
-                style={{ background: "linear-gradient(135deg, #2563EB 0%, #4F46E5 100%)" }}
-              >
+              <div className="relative w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-primary">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-white font-black text-sm tracking-tight">DK</span>
+                  <span className="text-primary-foreground font-bold text-sm tracking-tight">DK</span>
                 </div>
                 <div className="absolute inset-0 bg-white/0 group-hover:bg-white/15 transition-colors duration-200" />
               </div>
@@ -107,10 +100,11 @@ export function Navbar() {
                   <button
                     onClick={() => scrollTo(item.href)}
                     className={cn(
-                      "px-5 py-2 text-[15px] rounded-xl transition-all duration-200 cursor-pointer font-semibold tracking-wide",
+                      "px-4 py-2.5 text-sm rounded-lg transition-colors duration-200 cursor-pointer font-medium",
+                      "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
                       active === item.href
-                        ? "text-blue-600 dark:text-blue-400 bg-blue-500/12 dark:bg-blue-500/15"
-                        : "text-foreground/70 hover:text-foreground hover:bg-black/[0.05] dark:hover:bg-white/[0.07]"
+                        ? "text-primary bg-primary/8"
+                        : "text-foreground/70 hover:text-foreground hover:bg-muted"
                     )}
                   >
                     {item.label}
@@ -124,8 +118,9 @@ export function Navbar() {
               <ThemeSwitch />
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="lg:hidden p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/8 transition-all cursor-pointer"
+                className="lg:hidden p-3 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 aria-label="Toggle menu"
+                aria-expanded={mobileOpen}
               >
                 {mobileOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
@@ -147,7 +142,7 @@ export function Navbar() {
               <div className="pt-2 px-1 pb-1">
                 <button
                   onClick={() => scrollTo("#contact")}
-                  className="w-full py-3 rounded-xl text-sm font-bold bg-blue-600 hover:bg-blue-500 text-white transition-all cursor-pointer shadow-lg shadow-blue-600/25"
+                  className="w-full py-3 rounded-lg text-sm font-semibold bg-primary hover:opacity-90 text-primary-foreground transition-opacity cursor-pointer"
                 >
                   Get In Touch
                 </button>

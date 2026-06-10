@@ -1,7 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { DotGlobeHero } from "@/components/ui/dot-globe-hero";
+import dynamic from "next/dynamic";
+
+// Three.js globe is ~500KB of JS — load it after hydration, off the
+// critical path, so hero text paints immediately (LCP).
+const DotGlobeHero = dynamic(
+  () => import("@/components/ui/dot-globe-hero").then((m) => m.DotGlobeHero),
+  { ssr: false }
+);
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { LinkButton } from "@/components/common/LinkButton";

@@ -24,6 +24,21 @@ export function ScrollEffects() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    // Accessibility: skip all JS-driven motion for users who opted out.
+    // The CSS media query only covers CSS animations — Lenis, the skew
+    // and GSAP reveals run in JS and must bail here explicitly.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const bar = barRef.current;
+      const updateBar = () => {
+        if (!bar) return;
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = `${total > 0 ? (window.scrollY / total) * 100 : 0}%`;
+      };
+      window.addEventListener("scroll", updateBar, { passive: true });
+      updateBar();
+      return () => window.removeEventListener("scroll", updateBar);
+    }
+
     /* ── 1. LENIS SMOOTH SCROLL ── */
     const lenis = new Lenis({
       duration: 1.2,
