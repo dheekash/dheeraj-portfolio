@@ -1,77 +1,95 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Calendar, Download } from "lucide-react";
+import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
 
 export function Footer() {
   return (
-    <footer id="contact" className="bg-ink text-paper">
-      <div className="container-page section-pad">
+    <footer id="contact" className="relative overflow-hidden border-t border-border">
+      {/* Closing nebula */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 85% at 50% 110%, rgba(56,189,248,0.14) 0%, rgba(129,140,248,0.07) 45%, transparent 75%)",
+        }}
+      />
+
+      <div className="container-page section-pad relative text-center">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 26 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto max-w-3xl"
         >
-          <div className="flex items-baseline gap-5 border-t-[3px] border-paper/90 pt-4 mb-[clamp(2.5rem,1.5rem+3vw,4rem)]">
-            <span className="font-mono text-xs text-[#E08A6F]">05</span>
-            <p className="font-serif text-2xl lg:text-3xl">Contact</p>
+          <p className="eyebrow mb-[clamp(1.25rem,2vw,2rem)]">Final word</p>
+          <h2 className="ink-fade mb-[clamp(1.5rem,2.5vw,2.25rem)]">
+            Let&apos;s turn data into <span className="signal-text">decisions.</span>
+          </h2>
+          <p className="text-[clamp(0.95rem,0.9rem+0.3vw,1.1rem)] leading-relaxed text-muted-foreground max-w-[52ch] mx-auto mb-[clamp(2rem,3.5vw,3rem)]">
+            Whether you&apos;re modernizing a Lakehouse, building executive
+            reporting, implementing Microsoft Fabric, or scaling enterprise
+            analytics — let&apos;s create systems that drive measurable business
+            outcomes.
+          </p>
+
+          <div className="flex flex-wrap justify-center items-center gap-[clamp(0.75rem,1.5vw,1.25rem)] mb-[clamp(2.5rem,4vw,4rem)]">
+            <a
+              href={profile.calendlyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity glow-signal focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+            >
+              <Calendar size={15} /> Schedule a Conversation
+            </a>
+            <a
+              href={profile.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full glass text-sm font-medium hover:border-foreground/25 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+            >
+              <Download size={14} /> Download Resume
+            </a>
           </div>
 
-          <h2 className="font-serif text-[clamp(2.4rem,6vw,5.5rem)] leading-[1.0] max-w-[16ch] mb-12">
-            Bring me a decision that needs{" "}
-            <span className="serif-italic text-[#E08A6F]">evidence.</span>
-          </h2>
-
-          <div className="grid lg:grid-cols-12 gap-10">
-            <div className="lg:col-span-6">
-              <p className="text-base leading-relaxed text-paper/70 max-w-prose mb-8">
-                I&apos;m open to senior BI &amp; analytics roles, contract
-                engagements and consulting. Write to me with the problem —
-                I&apos;ll reply with how I&apos;d approach it.
-              </p>
-              <a
-                href={`mailto:${profile.email}`}
-                className="font-serif text-xl lg:text-2xl underline decoration-1 underline-offset-8 decoration-paper/40 hover:decoration-[#E08A6F] hover:text-[#E08A6F] transition-colors break-all"
-              >
-                {profile.email}
-              </a>
-            </div>
-
-            <div className="lg:col-span-4 lg:col-start-9">
-              <ul className="text-sm">
-                {[
-                  { label: "LinkedIn", href: profile.linkedinUrl },
-                  { label: "GitHub", href: profile.githubUrl },
-                  { label: "Book a 30-minute call", href: profile.calendlyUrl },
-                  { label: "Résumé (PDF)", href: profile.resumeUrl },
-                ].map((l) => (
-                  <li key={l.label} className="border-t border-paper/20">
-                    <a
-                      href={l.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between py-3.5 text-paper/80 hover:text-[#E08A6F] transition-colors"
-                    >
-                      {l.label} <ArrowUpRight size={14} />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-muted-foreground">
+            <a
+              href={`mailto:${profile.email}`}
+              className="hover:text-foreground transition-colors"
+            >
+              {profile.email}
+            </a>
+            <a
+              href={profile.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
+            >
+              <LinkedinIcon size={15} /> LinkedIn <ArrowUpRight size={11} />
+            </a>
+            <a
+              href={profile.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
+            >
+              <GithubIcon size={15} /> GitHub <ArrowUpRight size={11} />
+            </a>
           </div>
         </motion.div>
       </div>
 
-      {/* Colophon */}
-      <div className="border-t border-paper/20">
-        <div className="container-page py-6 flex flex-col sm:flex-row justify-between gap-2">
-          <p className="font-mono text-[11px] text-paper/50">
+      <div className="relative border-t border-border">
+        <div className="container-page py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Dheeraj Kashyap · Bengaluru, India
           </p>
-          <p className="font-mono text-[11px] text-paper/50">
-            Set in Fraunces &amp; Inter · Designed and written by hand
+          <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground/70">
+            From raw data to executive decisions
           </p>
         </div>
       </div>

@@ -5,29 +5,25 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { profile } from "@/data/profile";
 
 const links = [
-  { href: "#brief", label: "The brief" },
-  { href: "#case-files", label: "Case files" },
-  { href: "#path", label: "The path" },
-  { href: "#method", label: "Method" },
+  { href: "#impact", label: "Impact" },
+  { href: "#case-studies", label: "Case Studies" },
+  { href: "#journey", label: "Journey" },
+  { href: "#ecosystem", label: "Ecosystem" },
+  { href: "#certifications", label: "Credentials" },
   { href: "#contact", label: "Contact" },
 ];
 
-/**
- * Masthead — a newspaper-style top bar rather than a floating glass nav.
- * Collapses into a full-width ruled menu on small screens.
- */
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close the menu if the viewport grows past the mobile breakpoint
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
     const onChange = () => mq.matches && setOpen(false);
@@ -37,29 +33,24 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 bg-background transition-shadow duration-300 ${
-        scrolled || open ? "border-b border-border" : "border-b border-transparent"
+      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
+        scrolled || open ? "glass-nav" : "bg-transparent border-b border-transparent"
       }`}
     >
-      <div className="container-page h-14 flex items-center justify-between gap-4">
+      <div className="container-page h-[3.75rem] flex items-center justify-between gap-4">
         <a
           href="#top"
-          className="font-serif text-[17px] font-semibold tracking-tight text-foreground shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+          className="text-[15px] font-semibold tracking-tight shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
         >
-          Dheeraj Kashyap
+          dheeraj kashyap<span className="signal-text">.</span>
         </a>
 
-        <p className="hidden xl:block kicker text-center flex-1 truncate">
-          Business Intelligence &amp; Analytics · Bengaluru
-        </p>
-
-        {/* Desktop / tablet links */}
-        <nav className="hidden md:flex items-center gap-2 shrink-0">
+        <nav className="hidden md:flex items-center gap-1">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="px-2.5 py-2 text-[13px] text-muted-foreground hover:text-rust transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              className="px-3 py-2 text-[13px] text-muted-foreground hover:text-foreground transition-colors rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
             >
               {l.label}
             </a>
@@ -68,46 +59,44 @@ export function Navbar() {
             href={profile.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-3 inline-flex items-center gap-1 text-[13px] font-medium text-foreground link-editorial"
+            className="ml-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-full glass text-[13px] font-medium hover:border-foreground/25 transition-colors"
           >
-            Résumé <ArrowUpRight size={12} />
+            Resume <ArrowUpRight size={12} />
           </a>
         </nav>
 
-        {/* Mobile toggle — 44px touch target */}
         <button
           onClick={() => setOpen(!open)}
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
-          className="md:hidden flex items-center justify-center w-11 h-11 -mr-2 text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+          className="md:hidden flex items-center justify-center w-11 h-11 -mr-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
-      {/* Mobile menu — ruled list, large touch rows */}
       {open && (
-        <nav className="md:hidden bg-background container-page pb-4" aria-label="Mobile">
-          <ul>
+        <nav className="md:hidden glass-nav border-t border-border" aria-label="Mobile">
+          <ul className="container-page py-3">
             {links.map((l) => (
-              <li key={l.href} className="rule-thin">
+              <li key={l.href}>
                 <a
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-center min-h-12 py-2 text-[15px] font-medium text-foreground hover:text-rust transition-colors"
+                  className="flex items-center min-h-12 text-[15px] font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {l.label}
                 </a>
               </li>
             ))}
-            <li className="rule-thin">
+            <li>
               <a
                 href={profile.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 min-h-12 py-2 text-[15px] font-medium text-rust"
+                className="flex items-center gap-1.5 min-h-12 text-[15px] font-medium signal-text"
               >
-                Résumé (PDF) <ArrowUpRight size={14} />
+                Download Resume <ArrowUpRight size={14} />
               </a>
             </li>
           </ul>

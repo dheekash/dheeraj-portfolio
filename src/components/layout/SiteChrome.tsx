@@ -20,6 +20,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       >
         Skip to content
       </a>
+      <div className="grain" aria-hidden />
       <Navbar />
       <main id="main-content">{children}</main>
       <Footer />

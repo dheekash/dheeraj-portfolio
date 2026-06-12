@@ -1,28 +1,30 @@
-import { CoverSection } from "@/components/sections/CoverSection";
-import { BriefSection } from "@/components/sections/BriefSection";
-import { CaseFilesSection } from "@/components/sections/CaseFilesSection";
-import { PathSection } from "@/components/sections/PathSection";
-import { MethodSection } from "@/components/sections/MethodSection";
+import { CinematicHero } from "@/components/sections/CinematicHero";
+import { ImpactMetricsSection } from "@/components/sections/ImpactMetricsSection";
+import { IntroSection } from "@/components/sections/IntroSection";
+import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
+import { CareerJourneySection } from "@/components/sections/CareerJourneySection";
+import { EcosystemSection } from "@/components/sections/EcosystemSection";
+import { CertificationsSection } from "@/components/sections/CertificationsSection";
+
+function Divider() {
+  return <div className="hairline container-page" />;
+}
 
 export default function HomePage() {
   return (
     <>
-      {/* Cover — masthead statement + table of contents */}
-      <CoverSection />
-
-      {/* 01 — The brief: narrative intro, key figures, portrait */}
-      <BriefSection />
-
-      {/* 02 — Case files: outcome-led stories with drawn diagrams */}
-      <CaseFilesSection />
-
-      {/* 03 — The path: career told as a chronology */}
-      <PathSection />
-
-      {/* 04 — Method: principles + the instruments */}
-      <MethodSection />
-
-      {/* 05 — Contact lives in the footer (ink plate) */}
+      <CinematicHero />
+      <ImpactMetricsSection />
+      <Divider />
+      <IntroSection />
+      <Divider />
+      <CaseStudiesSection />
+      <Divider />
+      <CareerJourneySection />
+      <Divider />
+      <EcosystemSection />
+      <Divider />
+      <CertificationsSection />
     </>
   );
 }
