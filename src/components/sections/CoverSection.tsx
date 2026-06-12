@@ -22,15 +22,15 @@ function fadeUp(delay = 0) {
 export function CoverSection() {
   return (
     <section id="top" className="relative">
-      <div className="container-page pt-16 lg:pt-24 pb-20 lg:pb-28">
+      <div className="container-page pt-[clamp(2.5rem,1.5rem+4vw,6rem)] pb-[clamp(4rem,2.5rem+5vw,7rem)]">
         {/* Dateline */}
-        <motion.div {...fadeUp(0)} className="flex items-baseline justify-between rule-thick pt-4 mb-16 lg:mb-24">
+        <motion.div {...fadeUp(0)} className="flex items-baseline justify-between rule-thick pt-4 mb-[clamp(3rem,2rem+5vw,6rem)]">
           <p className="kicker">A portfolio of decisions, not dashboards</p>
           <p className="kicker hidden sm:block">Bengaluru · {new Date().getFullYear()}</p>
         </motion.div>
 
         {/* Cover statement */}
-        <motion.h1 {...fadeUp(0.1)} className="max-w-[14ch] mb-12 lg:mb-16">
+        <motion.h1 {...fadeUp(0.1)} className="max-w-[14ch] mb-[clamp(2.5rem,1.5rem+4vw,4rem)]">
           Numbers that change{" "}
           <span className="serif-italic text-rust">minds.</span>
         </motion.h1>

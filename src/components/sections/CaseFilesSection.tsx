@@ -228,7 +228,7 @@ function reveal(delay = 0) {
 
 function CaseFileSpread({ cf, flip }: { cf: CaseFile; flip: boolean }) {
   return (
-    <article className="rule-thin pt-10 lg:pt-14 pb-16 lg:pb-24">
+    <article className="rule-thin pt-[clamp(2.5rem,1.5rem+3vw,3.5rem)] pb-[clamp(4rem,2.5rem+5vw,6rem)]">
       <motion.div {...reveal()} className="flex flex-wrap items-baseline gap-x-5 gap-y-1 mb-6">
         <span className="font-mono text-xs text-rust">{cf.num}</span>
         <span className="kicker">{cf.domain}</span>
@@ -237,7 +237,7 @@ function CaseFileSpread({ cf, flip }: { cf: CaseFile; flip: boolean }) {
 
       <motion.h3
         {...reveal(0.05)}
-        className={`text-[clamp(1.7rem,3.6vw,3rem)] leading-[1.06] max-w-[24ch] mb-10 lg:mb-14 ${
+        className={`text-[clamp(1.7rem,1.2rem+2.4vw,3rem)] leading-[1.06] max-w-[24ch] mb-[clamp(2rem,1rem+4vw,3.5rem)] ${
           flip ? "lg:ml-auto lg:text-right" : ""
         }`}
       >
@@ -263,7 +263,7 @@ function CaseFileSpread({ cf, flip }: { cf: CaseFile; flip: boolean }) {
           {...reveal(0.15)}
           className={`lg:col-span-5 ${flip ? "lg:order-1 lg:col-start-1" : "lg:col-start-7"}`}
         >
-          <figure className="border border-border bg-card p-6 lg:p-8 text-foreground">
+          <figure className="border border-border bg-card p-[clamp(1rem,0.5rem+2vw,2rem)] text-foreground">
             {cf.diagram}
             <figcaption className="mt-4 pt-3 rule-thin font-mono text-[11px] text-muted-foreground">
               {cf.figcaption}
@@ -287,12 +287,12 @@ function CaseFileSpread({ cf, flip }: { cf: CaseFile; flip: boolean }) {
 export function CaseFilesSection() {
   return (
     <section id="case-files">
-      <div className="container-page pt-20 lg:pt-28">
+      <div className="container-page section-pad-t">
         <motion.div {...reveal()} className="flex items-baseline gap-5 rule-thick pt-4 mb-4">
           <span className="font-mono text-xs text-rust">02</span>
           <h2 className="text-2xl lg:text-3xl">Case files</h2>
         </motion.div>
-        <motion.p {...reveal(0.05)} className="lede max-w-[44ch] mb-14 lg:mb-20 text-muted-foreground">
+        <motion.p {...reveal(0.05)} className="lede max-w-[44ch] mb-[clamp(3rem,2rem+4vw,5rem)] text-muted-foreground">
           Four engagements, told the way they actually happened: a business
           problem, a decision that needed evidence, and what changed.
         </motion.p>

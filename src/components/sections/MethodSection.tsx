@@ -49,14 +49,14 @@ function reveal(delay = 0) {
 export function MethodSection() {
   return (
     <section id="method">
-      <div className="container-page py-20 lg:py-28">
-        <motion.div {...reveal()} className="flex items-baseline gap-5 rule-thick pt-4 mb-14 lg:mb-20">
+      <div className="container-page section-pad">
+        <motion.div {...reveal()} className="flex items-baseline gap-5 rule-thick pt-4 mb-[clamp(3rem,2rem+4vw,5rem)]">
           <span className="font-mono text-xs text-rust">04</span>
           <h2 className="text-2xl lg:text-3xl">Method</h2>
         </motion.div>
 
         {/* Principles — typographic, numbered in roman numerals */}
-        <div className="grid sm:grid-cols-2 gap-x-14 gap-y-12 lg:gap-y-16 max-w-5xl mb-20 lg:mb-28">
+        <div className="grid sm:grid-cols-2 gap-x-[clamp(2rem,5vw,3.5rem)] gap-y-[clamp(2.5rem,2rem+3vw,4rem)] max-w-5xl mb-[clamp(4rem,2.5rem+6vw,7rem)]">
           {principles.map((p, i) => (
             <motion.div key={p.num} {...reveal(0.05 + i * 0.04)}>
               <p className="font-serif text-3xl text-rust mb-3">{p.num}.</p>

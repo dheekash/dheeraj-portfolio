@@ -43,6 +43,8 @@ function Portrait() {
             ref={imgRef}
             src="/images/headshot.jpg"
             alt="Dheeraj Kashyap"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover grayscale"
             onError={() => setFailed(true)}
           />
@@ -58,15 +60,15 @@ function Portrait() {
 export function BriefSection() {
   return (
     <section id="brief">
-      <div className="container-page py-20 lg:py-28">
-        <motion.div {...reveal()} className="flex items-baseline gap-5 rule-thick pt-4 mb-12 lg:mb-16">
+      <div className="container-page section-pad">
+        <motion.div {...reveal()} className="flex items-baseline gap-5 rule-thick pt-4 mb-[clamp(2.5rem,1.5rem+3vw,4rem)]">
           <span className="font-mono text-xs text-rust">01</span>
           <h2 className="text-2xl lg:text-3xl">The brief</h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-12 gap-x-10 gap-y-12">
           {/* Narrative */}
-          <motion.div {...reveal(0.05)} className="lg:col-span-6 max-w-prose">
+          <motion.div {...reveal(0.05)} className="sm:col-span-2 lg:col-span-6 max-w-prose">
             <p className="dropcap text-base leading-[1.85] mb-6">
               Most analytics portfolios show you tools. This one shows you
               decisions. I started my career answering customer escalations at
@@ -90,7 +92,7 @@ export function BriefSection() {
           </motion.div>
 
           {/* Key figures — ruled, static, annual-report style */}
-          <motion.div {...reveal(0.1)} className="lg:col-span-3 lg:col-start-8">
+          <motion.div {...reveal(0.1)} className="sm:col-span-1 lg:col-span-3 lg:col-start-8">
             <p className="kicker mb-4">In figures</p>
             <ul>
               {figures.map((f) => (
@@ -106,8 +108,10 @@ export function BriefSection() {
           </motion.div>
 
           {/* Portrait */}
-          <motion.div {...reveal(0.15)} className="lg:col-span-2 lg:col-start-11">
-            <Portrait />
+          <motion.div {...reveal(0.15)} className="sm:col-span-1 lg:col-span-2 lg:col-start-11">
+            <div className="max-w-[220px]">
+              <Portrait />
+            </div>
           </motion.div>
         </div>
       </div>

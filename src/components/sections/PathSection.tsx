@@ -42,12 +42,12 @@ function reveal(delay = 0) {
 export function PathSection() {
   return (
     <section id="path" className="bg-[#EFEAE0]">
-      <div className="container-page py-20 lg:py-28">
+      <div className="container-page section-pad">
         <motion.div {...reveal()} className="flex items-baseline gap-5 rule-thick pt-4 mb-4">
           <span className="font-mono text-xs text-rust">03</span>
           <h2 className="text-2xl lg:text-3xl">The path</h2>
         </motion.div>
-        <motion.p {...reveal(0.05)} className="lede max-w-[40ch] mb-14 lg:mb-20 text-muted-foreground">
+        <motion.p {...reveal(0.05)} className="lede max-w-[40ch] mb-[clamp(3rem,2rem+4vw,5rem)] text-muted-foreground">
           From answering escalations to architecting the systems that prevent
           them — in three chapters.
         </motion.p>
@@ -57,7 +57,7 @@ export function PathSection() {
             <motion.article
               key={c.years}
               {...reveal(0.05 + i * 0.05)}
-              className="grid sm:grid-cols-[140px_1fr] gap-x-10 gap-y-3 rule-thin py-10 lg:py-12"
+              className="grid sm:grid-cols-[minmax(7rem,9rem)_1fr] gap-x-[clamp(1.5rem,4vw,2.5rem)] gap-y-3 rule-thin py-[clamp(2rem,1.5rem+2vw,3rem)]"
             >
               <div>
                 <p className="font-serif text-2xl font-semibold tracking-tight">{c.years}</p>

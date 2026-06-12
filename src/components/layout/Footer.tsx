@@ -7,14 +7,14 @@ import { profile } from "@/data/profile";
 export function Footer() {
   return (
     <footer id="contact" className="bg-ink text-paper">
-      <div className="container-page py-20 lg:py-28">
+      <div className="container-page section-pad">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <div className="flex items-baseline gap-5 border-t-[3px] border-paper/90 pt-4 mb-12 lg:mb-16">
+          <div className="flex items-baseline gap-5 border-t-[3px] border-paper/90 pt-4 mb-[clamp(2.5rem,1.5rem+3vw,4rem)]">
             <span className="font-mono text-xs text-[#E08A6F]">05</span>
             <p className="font-serif text-2xl lg:text-3xl">Contact</p>
           </div>
