@@ -1,36 +1,28 @@
-import { HeroSection } from "@/components/sections/HeroSection";
-import { ImpactMetricsSection } from "@/components/sections/ImpactMetricsSection";
-import { FeaturedWorkSection } from "@/components/sections/FeaturedWorkSection";
-import { CareerJourneySection } from "@/components/sections/CareerJourneySection";
-import { SkillsArchitectureSection } from "@/components/sections/SkillsArchitectureSection";
-
-function Divider() {
-  return <div className="hairline container-max" />;
-}
+import { CoverSection } from "@/components/sections/CoverSection";
+import { BriefSection } from "@/components/sections/BriefSection";
+import { CaseFilesSection } from "@/components/sections/CaseFilesSection";
+import { PathSection } from "@/components/sections/PathSection";
+import { MethodSection } from "@/components/sections/MethodSection";
 
 export default function HomePage() {
   return (
     <>
-      {/* 1 — Brand statement + credibility */}
-      <HeroSection />
+      {/* Cover — masthead statement + table of contents */}
+      <CoverSection />
 
-      {/* 2 — Executive-level KPIs */}
-      <ImpactMetricsSection />
+      {/* 01 — The brief: narrative intro, key figures, portrait */}
+      <BriefSection />
 
-      <Divider />
+      {/* 02 — Case files: outcome-led stories with drawn diagrams */}
+      <CaseFilesSection />
 
-      {/* 3 — Case studies with before/after outcomes */}
-      <FeaturedWorkSection />
+      {/* 03 — The path: career told as a chronology */}
+      <PathSection />
 
-      <Divider />
+      {/* 04 — Method: principles + the instruments */}
+      <MethodSection />
 
-      {/* 4 — Career timeline */}
-      <CareerJourneySection />
-
-      <Divider />
-
-      {/* 5 — Layered skills ecosystem */}
-      <SkillsArchitectureSection />
+      {/* 05 — Contact lives in the footer (ink plate) */}
     </>
   );
 }

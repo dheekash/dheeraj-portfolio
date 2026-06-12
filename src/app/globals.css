@@ -9,7 +9,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
-  --font-heading: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), 'Fraunces', Georgia, serif;
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-rust: var(--rust);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -43,145 +46,128 @@
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 :root {
-  /* ── Dark by default — deep charcoal-navy, electric blue + cyan ── */
-  --background: #05070D;
-  --foreground: #F2F5FA;
-  --card: rgba(255, 255, 255, 0.028);
-  --card-foreground: #F2F5FA;
-  --popover: #0C111C;
-  --popover-foreground: #F2F5FA;
-  --primary: #4D8DFF;
-  --primary-foreground: #04060B;
-  --secondary: rgba(77, 141, 255, 0.10);
-  --secondary-foreground: #9DBFFF;
-  --muted: rgba(255, 255, 255, 0.04);
-  --muted-foreground: #8B95A9;
-  --accent: #22D3EE;
-  --accent-foreground: #04060B;
-  --destructive: #F87171;
-  --border: rgba(255, 255, 255, 0.08);
-  --input: rgba(255, 255, 255, 0.07);
-  --ring: #4D8DFF;
-  --chart-1: #4D8DFF;
-  --chart-2: #22D3EE;
-  --chart-3: #A78BFA;
-  --chart-4: #34D399;
-  --chart-5: #F59E0B;
-  --radius: 0.75rem;
-  --sidebar: #0C111C;
-  --sidebar-foreground: #F2F5FA;
-  --sidebar-primary: #4D8DFF;
-  --sidebar-primary-foreground: #04060B;
-  --sidebar-accent: rgba(77, 141, 255, 0.10);
-  --sidebar-accent-foreground: #9DBFFF;
-  --sidebar-border: rgba(255, 255, 255, 0.07);
-  --sidebar-ring: #4D8DFF;
-}
+  /* ── Editorial: warm paper, ink, one rust accent ── */
+  --paper: #F6F2EA;
+  --ink: #1C1A16;
+  --rust: #A8402A;
 
-/* Single dark theme — .dark kept for component compatibility */
-.dark { color-scheme: dark; }
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: #FCFAF5;
+  --card-foreground: var(--ink);
+  --popover: #FCFAF5;
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: rgba(28, 26, 22, 0.05);
+  --secondary-foreground: var(--ink);
+  --muted: rgba(28, 26, 22, 0.04);
+  --muted-foreground: #6E675C;
+  --accent: var(--rust);
+  --accent-foreground: #FFFFFF;
+  --destructive: #B3261E;
+  --border: rgba(28, 26, 22, 0.15);
+  --input: rgba(28, 26, 22, 0.12);
+  --ring: var(--rust);
+  --chart-1: #1C1A16;
+  --chart-2: #A8402A;
+  --chart-3: #6E675C;
+  --chart-4: #9C8F7A;
+  --chart-5: #C8BFAE;
+  --radius: 0.25rem;
+  --sidebar: #FCFAF5;
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: rgba(28, 26, 22, 0.05);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: rgba(28, 26, 22, 0.12);
+  --sidebar-ring: var(--rust);
+}
 
 @layer base {
   * { @apply border-border outline-ring/50; }
   html {
     scroll-behavior: smooth;
     @apply font-sans;
-    color-scheme: dark;
   }
   body {
     @apply bg-background text-foreground antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
-  ::selection { background: rgba(77, 141, 255, 0.30); }
-  h1, h2, h3, h4 {
-    font-family: var(--font-heading);
-    letter-spacing: -0.03em;
+  ::selection { background: rgba(168, 64, 42, 0.18); }
+  h1, h2, h3 {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 560;
+    letter-spacing: -0.015em;
     text-wrap: balance;
   }
-  h1 { font-size: clamp(2.75rem, 6.5vw, 5.25rem); line-height: 1.02; letter-spacing: -0.045em; font-weight: 600; }
-  h2 { font-size: clamp(1.9rem, 3.8vw, 3.25rem); line-height: 1.06; letter-spacing: -0.035em; font-weight: 600; }
-  h3 { font-size: clamp(1.1rem, 1.8vw, 1.35rem); line-height: 1.3; font-weight: 600; }
+  h1 { font-size: clamp(3rem, 9vw, 7.5rem); line-height: 0.98; }
+  h2 { font-size: clamp(2.1rem, 4.5vw, 3.9rem); line-height: 1.04; }
+  h3 { font-size: clamp(1.35rem, 2.4vw, 2rem); line-height: 1.15; }
 }
 
-/* ─── Layout system (8px base) ─── */
 @layer utilities {
-  .section-padding { @apply px-6 sm:px-10 lg:px-16 py-24 lg:py-32; }
-  .container-max   { @apply w-full max-w-[1200px] mx-auto; }
+  .container-page { @apply w-full max-w-[1280px] mx-auto px-6 sm:px-10 lg:px-16; }
 
-  .eyebrow {
-    @apply text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground font-mono;
-  }
+  /* ── Editorial rules ── */
+  .rule-thick { border-top: 3px solid var(--ink); }
+  .rule-thin  { border-top: 1px solid var(--border); }
 
-  /* ─── Headline ink gradient — white fading to dim, Linear-style ─── */
-  .ink-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(180deg, #FFFFFF 30%, rgba(255, 255, 255, 0.55) 100%);
-  }
-  .accent-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(100deg, #4D8DFF 0%, #22D3EE 100%);
+  .kicker {
+    @apply text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground font-mono;
   }
 
-  /* ─── Glass surfaces ─── */
-  .glass-nav {
-    backdrop-filter: blur(16px) saturate(1.5);
-    -webkit-backdrop-filter: blur(16px) saturate(1.5);
-    background: rgba(5, 7, 13, 0.72);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  .serif-italic {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-style: italic;
+    font-weight: 480;
   }
 
-  .glass-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.018) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  /* ── Large editorial lede ── */
+  .lede {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 440;
+    font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+    line-height: 1.45;
+    letter-spacing: -0.005em;
   }
 
-  .card-lift {
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
-  }
-  .card-lift:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.16);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(77, 141, 255, 0.08);
-  }
-
-  /* ─── Glow ─── */
-  .glow-primary {
-    box-shadow: 0 0 24px rgba(77, 141, 255, 0.35), 0 0 80px rgba(77, 141, 255, 0.12);
+  /* ── Drop cap for narrative openers ── */
+  .dropcap::first-letter {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    float: left;
+    font-size: 3.6em;
+    line-height: 0.82;
+    padding-right: 0.12em;
+    padding-top: 0.04em;
   }
 
-  /* ─── Subtle grid backdrop ─── */
-  .grid-bg {
-    background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 72px 72px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 80%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 80%);
+  /* ── Oversized figure (annual-report key number) ── */
+  .keyfig {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 560;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    font-variant-numeric: lining-nums;
   }
 
-  /* ─── Hairline divider ─── */
-  .hairline {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.10) 20%, rgba(255,255,255,0.10) 80%, transparent);
+  /* ── Underlined editorial link ── */
+  .link-editorial {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    text-decoration-color: rgba(28, 26, 22, 0.35);
+    transition: text-decoration-color 0.2s ease, color 0.2s ease;
   }
-
-  /* ─── Noise texture ─── */
-  .noise::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
-    pointer-events: none;
-    border-radius: inherit;
+  .link-editorial:hover {
+    color: var(--rust);
+    text-decoration-color: var(--rust);
   }
 }
 

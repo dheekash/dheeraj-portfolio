@@ -2,19 +2,19 @@
 
 import { createContext, useContext, useEffect } from "react";
 
-// Dark-only design system. Context kept for API compatibility.
-const ThemeContext = createContext<{ theme: "dark"; toggle: () => void }>({
-  theme: "dark",
+// Single editorial light theme. Context kept for API compatibility.
+const ThemeContext = createContext<{ theme: "light"; toggle: () => void }>({
+  theme: "light",
   toggle: () => {},
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    document.documentElement.classList.add("dark");
+    document.documentElement.classList.remove("dark");
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme: "dark", toggle: () => {} }}>
+    <ThemeContext.Provider value={{ theme: "light", toggle: () => {} }}>
       {children}
     </ThemeContext.Provider>
   );

@@ -1,90 +1,77 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Mail, Calendar, MapPin } from "lucide-react";
-import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
+import { ArrowUpRight } from "lucide-react";
 import { profile } from "@/data/profile";
 
 export function Footer() {
   return (
-    <footer id="contact" className="relative border-t border-border overflow-hidden">
-      {/* Bottom glow */}
-      <div
-        aria-hidden
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 100%, rgba(77,141,255,0.10) 0%, transparent 65%)",
-        }}
-      />
-
-      <div className="container-max section-padding relative">
+    <footer id="contact" className="bg-ink text-paper">
+      <div className="container-page py-20 lg:py-28">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="max-w-3xl"
+          transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <p className="eyebrow mb-6">Contact</p>
-          <h2 className="ink-gradient mb-6">
-            Let&apos;s turn your data into decisions.
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mb-10">
-            I&apos;m open to senior BI &amp; analytics roles, contract engagements,
-            and consulting. Tell me about the problem — I&apos;ll tell you how
-            I&apos;d approach it.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-4 mb-14">
-            <a
-              href={`mailto:${profile.email}`}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity glow-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-            >
-              <Mail size={16} /> {profile.email}
-            </a>
-            <a
-              href={profile.calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg border border-border text-sm font-medium text-foreground hover:border-foreground/30 hover:bg-muted transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-            >
-              <Calendar size={16} /> Book a 30-min call
-            </a>
+          <div className="flex items-baseline gap-5 border-t-[3px] border-paper/90 pt-4 mb-12 lg:mb-16">
+            <span className="font-mono text-xs text-[#E08A6F]">05</span>
+            <p className="font-serif text-2xl lg:text-3xl">Contact</p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
-            <a
-              href={profile.linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 hover:text-foreground transition-colors"
-            >
-              <LinkedinIcon size={16} /> LinkedIn <ArrowUpRight size={12} />
-            </a>
-            <a
-              href={profile.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 hover:text-foreground transition-colors"
-            >
-              <GithubIcon size={16} /> GitHub <ArrowUpRight size={12} />
-            </a>
-            <span className="inline-flex items-center gap-2">
-              <MapPin size={14} /> {profile.location}
-            </span>
+          <h2 className="font-serif text-[clamp(2.4rem,6vw,5.5rem)] leading-[1.0] max-w-[16ch] mb-12">
+            Bring me a decision that needs{" "}
+            <span className="serif-italic text-[#E08A6F]">evidence.</span>
+          </h2>
+
+          <div className="grid lg:grid-cols-12 gap-10">
+            <div className="lg:col-span-6">
+              <p className="text-base leading-relaxed text-paper/70 max-w-prose mb-8">
+                I&apos;m open to senior BI &amp; analytics roles, contract
+                engagements and consulting. Write to me with the problem —
+                I&apos;ll reply with how I&apos;d approach it.
+              </p>
+              <a
+                href={`mailto:${profile.email}`}
+                className="font-serif text-xl lg:text-2xl underline decoration-1 underline-offset-8 decoration-paper/40 hover:decoration-[#E08A6F] hover:text-[#E08A6F] transition-colors break-all"
+              >
+                {profile.email}
+              </a>
+            </div>
+
+            <div className="lg:col-span-4 lg:col-start-9">
+              <ul className="text-sm">
+                {[
+                  { label: "LinkedIn", href: profile.linkedinUrl },
+                  { label: "GitHub", href: profile.githubUrl },
+                  { label: "Book a 30-minute call", href: profile.calendlyUrl },
+                  { label: "Résumé (PDF)", href: profile.resumeUrl },
+                ].map((l) => (
+                  <li key={l.label} className="border-t border-paper/20">
+                    <a
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between py-3.5 text-paper/80 hover:text-[#E08A6F] transition-colors"
+                    >
+                      {l.label} <ArrowUpRight size={14} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </motion.div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="relative border-t border-border">
-        <div className="container-max px-6 sm:px-10 lg:px-16 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Dheeraj Kashyap. All rights reserved.
+      {/* Colophon */}
+      <div className="border-t border-paper/20">
+        <div className="container-page py-6 flex flex-col sm:flex-row justify-between gap-2">
+          <p className="font-mono text-[11px] text-paper/50">
+            © {new Date().getFullYear()} Dheeraj Kashyap · Bengaluru, India
           </p>
-          <p className="text-sm text-muted-foreground font-mono">
-            BI &amp; Analytics Engineer · Bengaluru
+          <p className="font-mono text-[11px] text-paper/50">
+            Set in Fraunces &amp; Inter · Designed and written by hand
           </p>
         </div>
       </div>

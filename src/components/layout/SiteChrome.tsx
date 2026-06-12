@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
-import { CursorGlow } from "@/components/common/CursorGlow";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -21,7 +20,6 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       >
         Skip to content
       </a>
-      <CursorGlow />
       <Navbar />
       <main id="main-content">{children}</main>
       <Footer />
