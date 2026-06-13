@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import {
-  BarChart3, Database, Code2, Cloud, Zap
-} from "lucide-react";
+  PythonLogo, SQLLogo, DbtLogo, AirflowLogo, SparkLogo,
+  SnowflakeLogo, BigQueryLogo, PowerBILogo, TableauLogo,
+  AWSLogo, AzureLogo, DockerLogo, KafkaLogo,
+  DatabricksLogo, FabricLogo,
+} from "@/components/common/TechLogos";
 
 function reveal(delay = 0) {
   return {
@@ -14,31 +17,61 @@ function reveal(delay = 0) {
   };
 }
 
+// [NEEDS REAL CONTENT] Add GCP logo to TechLogos.tsx or replace with a placeholder
+function GCPLogo({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" role="img" aria-label="Google Cloud Platform" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 6.5l3.5 2v4L12 14.5 8.5 12.5v-4z" fill="#4285F4"/>
+      <path d="M15.5 8.5l3 1.5v3l-3 1.5" fill="#34A853"/>
+      <path d="M8.5 8.5l-3 1.5v3l3 1.5" fill="#FBBC05"/>
+      <path d="M12 14.5v3.5" stroke="#EA4335" strokeWidth="1.5" strokeLinecap="round"/>
+      <circle cx="12" cy="20" r="1.5" fill="#EA4335"/>
+    </svg>
+  );
+}
+
+function PostgreSQLLogo({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" role="img" aria-label="PostgreSQL" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="12" cy="7" rx="8" ry="4" fill="none" stroke="#336791" strokeWidth="1.5"/>
+      <path d="M4 7v10c0 2.2 3.58 4 8 4s8-1.8 8-4V7" fill="none" stroke="#336791" strokeWidth="1.5"/>
+      <path d="M4 12c0 2.2 3.58 4 8 4s8-1.8 8-4" fill="none" stroke="#336791" strokeWidth="1.2" strokeDasharray="3 2"/>
+    </svg>
+  );
+}
+
 const categories = [
   {
-    label: "Business Intelligence",
-    Icon: BarChart3,
-    skills: ["Power BI", "DAX", "Zebra BI", "Semantic Models", "IBCS", "Paginated Reports", "DirectQuery", "Row-Level Security"],
-  },
-  {
     label: "Data Engineering",
-    Icon: Database,
-    skills: ["Microsoft Fabric", "Databricks", "Snowflake", "dbt", "SQLMesh", "Delta Lake", "OneLake", "Azure Data Factory", "Medallion Architecture"],
+    tools: [
+      { name: "Python",    Logo: PythonLogo    },
+      { name: "SQL",       Logo: SQLLogo       },
+      { name: "dbt",       Logo: DbtLogo       },
+      { name: "Airflow",   Logo: AirflowLogo   },
+      { name: "Spark",     Logo: SparkLogo     },
+      { name: "Kafka",     Logo: KafkaLogo     },
+      { name: "PostgreSQL",Logo: PostgreSQLLogo },
+      { name: "Databricks",Logo: DatabricksLogo },
+      { name: "Snowflake", Logo: SnowflakeLogo  },
+    ],
   },
   {
-    label: "Programming & SQL",
-    Icon: Code2,
-    skills: ["SQL", "Python", "PySpark", "DAX", "Power Query (M)", "KQL", "REST APIs"],
+    label: "Analytics & BI",
+    tools: [
+      { name: "Power BI",  Logo: PowerBILogo   },
+      { name: "Tableau",   Logo: TableauLogo   },
+      { name: "BigQuery",  Logo: BigQueryLogo  },
+      { name: "Fabric",    Logo: FabricLogo    },
+    ],
   },
   {
-    label: "Cloud & Infrastructure",
-    Icon: Cloud,
-    skills: ["Azure", "AWS", "ADLS Gen2", "Azure Synapse", "Azure SQL", "Git / CI/CD"],
-  },
-  {
-    label: "Automation & AI",
-    Icon: Zap,
-    skills: ["Power Automate", "SharePoint", "Azure ML", "Time-Series Forecasting", "Anomaly Detection", "Feature Engineering"],
+    label: "Infrastructure & Cloud",
+    tools: [
+      { name: "AWS",       Logo: AWSLogo    },
+      { name: "Azure",     Logo: AzureLogo  },
+      { name: "GCP",       Logo: GCPLogo    },
+      { name: "Docker",    Logo: DockerLogo },
+    ],
   },
 ];
 
@@ -46,35 +79,26 @@ export function SkillsSection() {
   return (
     <section id="skills">
       <div className="container-page section-pad">
-        <motion.p {...reveal()} className="eyebrow mb-4">Skills</motion.p>
-        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[22ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
-          The full stack of modern analytics.
+        <motion.p {...reveal()} className="eyebrow mb-4">Stack</motion.p>
+        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[18ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
+          What I work with
         </motion.h2>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+        <div className="space-y-[clamp(2rem,3vw,3.5rem)]">
           {categories.map((cat, ci) => (
-            <motion.div
-              key={cat.label}
-              {...reveal(0.05 + ci * 0.07)}
-              className="panel panel-lift rounded-2xl p-[clamp(1.25rem,2vw,1.75rem)] flex flex-col gap-4"
-            >
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-                  style={{ background: "color-mix(in srgb, var(--primary) 12%, transparent)", color: "var(--primary)" }}>
-                  <cat.Icon size={15} />
-                </span>
-                <p className="text-[13px] font-semibold leading-tight">{cat.label}</p>
-              </div>
-
-              <div className="flex flex-wrap gap-1.5">
-                {cat.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-2.5 py-1 rounded-md text-[11px] font-medium text-muted-foreground transition-colors duration-150 hover:text-foreground"
-                    style={{ background: "color-mix(in srgb, var(--primary) 6%, var(--card))", border: "1px solid var(--border)" }}
+            <motion.div key={cat.label} {...reveal(0.05 + ci * 0.08)}>
+              <p className="eyebrow mb-4">{cat.label}</p>
+              <div className="flex flex-wrap gap-3">
+                {cat.tools.map(({ name, Logo }) => (
+                  <div
+                    key={name}
+                    className="panel panel-lift rounded-xl px-4 py-3 flex flex-col items-center gap-2 min-w-[5rem]"
                   >
-                    {skill}
-                  </span>
+                    <Logo size={22} />
+                    <span className="text-[11px] font-medium text-muted-foreground leading-none text-center">
+                      {name}
+                    </span>
+                  </div>
                 ))}
               </div>
             </motion.div>

@@ -2,14 +2,22 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { X, ArrowUpRight, ExternalLink } from "lucide-react";
 
-/* ────────────────────────────────────────────────────────────────────
-   Hand-drawn, theme-aware diagrams. Ink = currentColor, accent = var(--dgrm).
-   ──────────────────────────────────────────────────────────────────── */
+function reveal(delay = 0) {
+  return {
+    initial: { opacity: 0, y: 26 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: "-80px" },
+    transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
+  };
+}
+
+/* ── SVG diagrams (theme-aware, unchanged) ─────────────────────────────── */
 
 function DiagramLatency() {
   return (
-    <svg viewBox="0 0 360 150" className="w-full h-auto" role="img" aria-label="Latency reduced from 6 hours to under 10 minutes">
+    <svg viewBox="0 0 360 150" className="w-full h-auto" role="img" aria-label="Reporting latency reduced from 6 hours to under 10 minutes">
       <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
         <text x="0" y="12" opacity="0.5">REPORTING LATENCY</text>
         <text x="0" y="48" opacity="0.65">before</text>
@@ -28,7 +36,7 @@ function DiagramLatency() {
 function DiagramChurn() {
   const cells = Array.from({ length: 40 });
   return (
-    <svg viewBox="0 0 360 170" className="w-full h-auto" role="img" aria-label="Customers ranked by churn risk; outreach targets the highest-risk segment">
+    <svg viewBox="0 0 360 170" className="w-full h-auto" role="img" aria-label="2M customers ranked by churn risk; daily outreach list with 89% recall">
       <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
         <text x="0" y="12" opacity="0.5">2M CUSTOMERS, RANKED BY CHURN RISK</text>
         {cells.map((_, i) => {
@@ -53,7 +61,7 @@ function DiagramChurn() {
 
 function DiagramReliability() {
   return (
-    <svg viewBox="0 0 360 160" className="w-full h-auto" role="img" aria-label="Pipeline failure rate falling from 12 percent to under 1 percent across migration phases">
+    <svg viewBox="0 0 360 160" className="w-full h-auto" role="img" aria-label="Pipeline failure rate falling from 12% to under 1% through migration phases">
       <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
         <text x="0" y="12" opacity="0.5">MONTHLY PIPELINE FAILURE RATE</text>
         <path d="M 30 26 V 126 H 340" stroke="currentColor" strokeWidth="1" opacity="0.3" fill="none" />
@@ -79,7 +87,7 @@ function DiagramHub() {
     return { x: 180 + Math.cos(angle) * 80, y: 78 + Math.sin(angle) * 56 };
   });
   return (
-    <svg viewBox="0 0 360 170" className="w-full h-auto" role="img" aria-label="Fifteen country systems converging on one governed semantic model serving 200 users">
+    <svg viewBox="0 0 360 170" className="w-full h-auto" role="img" aria-label="15 country ERP systems converging on one governed semantic model serving 200 users">
       <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
         <text x="0" y="12" opacity="0.5">15 COUNTRIES → ONE SEMANTIC MODEL</text>
         {spokes.map((s, i) => (
@@ -97,261 +105,96 @@ function DiagramHub() {
   );
 }
 
-/* ──────────────────────────────────────────────────────────────────── */
+/* ── Study data ─────────────────────────────────────────────────────────── */
 
-function reveal(delay = 0) {
-  return {
-    initial: { opacity: 0, y: 26 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-80px" },
-    transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
-  };
-}
+type Study = {
+  id: string;
+  num: string;
+  domain: string;
+  title: string;
+  challenge: string;
+  built: string;
+  outcome: string;
+  stack: string[];
+  Diagram: () => React.ReactElement;
+  detailPoints: string[];
+  githubUrl?: string;
+};
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div>
-      <p className="eyebrow mb-2">{label}</p>
-      <p className="text-sm leading-relaxed text-muted-foreground">{children}</p>
-    </div>
-  );
-}
-
-function ImpactList({ items }: { items: string[] }) {
-  return (
-    <ul className="space-y-2.5">
-      {items.map((r) => (
-        <li key={r} className="text-sm leading-relaxed pl-3.5 border-l-2 border-primary/50">
-          {r}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function Stack({ items }: { items: string[] }) {
-  return (
-    <p className="font-mono text-[11px] text-muted-foreground/80 leading-relaxed">
-      {items.join("  ·  ")}
-    </p>
-  );
-}
-
-function Kicker({ num, domain }: { num: string; domain: string }) {
-  return (
-    <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1 mb-5">
-      <span className="font-mono text-xs accent-text">CASE STUDY {num}</span>
-      <span className="eyebrow">{domain}</span>
-    </div>
-  );
-}
-
-/* ── 01: split spread — narrative left, giant figure + diagram right ── */
-function StudyOne() {
-  return (
-    <motion.article {...reveal()} className="border-t-2 border-foreground pt-[clamp(1.5rem,2.5vw,2.5rem)] pb-[clamp(2rem,3vw,3.5rem)]">
-      <Kicker num="01" domain="Revenue intelligence" />
-      <div className="grid lg:grid-cols-12 gap-x-[clamp(2rem,4vw,5rem)] gap-y-10">
-        <div className="lg:col-span-6">
-          <h3 className="text-[clamp(1.6rem,1.2rem+2vw,2.75rem)] font-semibold tracking-tight leading-tight mb-7 max-w-[20ch]">
-            Real-Time Sales Intelligence Platform
-          </h3>
-          <div className="space-y-6 mb-8">
-            <Field label="Challenge">
-              Sales reporting lagged by six hours across eight regional markets —
-              every market kept private spreadsheets to compensate.
-            </Field>
-            <Field label="Constraints">
-              Twelve heterogeneous source systems, schema drift, and a hard
-              sub-10-minute SLA with full lineage preserved.
-            </Field>
-            <Field label="Solution">
-              A Databricks Lakehouse processing 5M+ daily transactions through
-              Bronze, Silver, and Gold layers with automated quality monitoring
-              and DirectQuery semantic models.
-            </Field>
-          </div>
-          <p className="eyebrow mb-2">Architecture</p>
-          <p className="font-mono text-[11px] text-muted-foreground mb-8">
-            12 sources → ADF → Auto Loader → Delta Live Tables → Gold → Power BI
-          </p>
-          <Stack items={["Databricks", "Azure Data Factory", "PySpark", "MLflow", "Power BI"]} />
-        </div>
-        <div className="lg:col-span-5 lg:col-start-8">
-          <div className="font-mono tabular-nums font-semibold tracking-tight leading-none text-[clamp(3rem,2rem+4vw,6rem)] mb-2">
-            6h<span className="accent-text">→</span>10m
-          </div>
-          <p className="text-sm text-muted-foreground mb-8">decision latency, before and after</p>
-          <div className="panel rounded-2xl p-[clamp(1.25rem,2vw,2rem)] mb-8 text-foreground">
-            <DiagramLatency />
-          </div>
-          <ImpactList
-            items={[
-              "Reduced latency from 6 hours to under 10 minutes",
-              "Increased forecast accuracy by 22%",
-              "Reduced pipeline failures by 95%",
-            ]}
-          />
-        </div>
-      </div>
-    </motion.article>
-  );
-}
-
-/* ── 02: tinted full-bleed panel, diagram-led, mirrored ── */
-function StudyTwo() {
-  return (
-    <motion.article {...reveal()} className="pb-[clamp(2rem,3vw,3.5rem)]">
-      <div className="rounded-3xl panel overflow-hidden">
-        <div className="grid lg:grid-cols-12 gap-y-10 p-[clamp(1.5rem,1rem+3vw,4rem)]"
-          style={{ background: "linear-gradient(135deg, color-mix(in srgb, var(--primary) 6%, transparent), transparent 55%)" }}>
-          <div className="lg:col-span-5 lg:pr-[clamp(1rem,3vw,3rem)]">
-            <div className="panel rounded-2xl p-[clamp(1.25rem,2vw,2rem)] text-foreground bg-background">
-              <DiagramChurn />
-            </div>
-          </div>
-          <div className="lg:col-span-6 lg:col-start-7">
-            <Kicker num="02" domain="Customer retention" />
-            <h3 className="text-[clamp(1.6rem,1.2rem+2vw,2.75rem)] font-semibold tracking-tight leading-tight mb-7 max-w-[20ch]">
-              Customer Churn Analytics Pipeline
-            </h3>
-            <div className="grid sm:grid-cols-2 gap-6 mb-8">
-              <Field label="Challenge">
-                Identify high-risk customers before churn occurs — the client
-                only learned of unhappiness at cancellation.
-              </Field>
-              <Field label="Constraints">
-                Fragmented CRM, billing, and usage data; CS team capacity capped
-                the daily outreach list.
-              </Field>
-              <Field label="Solution">
-                An AutoML churn platform over 2M+ customer records and 60+
-                behavioral indicators, served as a ranked daily call list.
-              </Field>
-              <div>
-                <p className="eyebrow mb-2">Architecture</p>
-                <p className="font-mono text-[11px] text-muted-foreground">
-                  CRM + usage → Snowflake → dbt features → AutoML → Power BI
-                </p>
-              </div>
-            </div>
-            <div className="mb-8">
-              <ImpactList
-                items={[
-                  "89% recall on at-risk customers",
-                  "Reduced churn by 18%",
-                  "Saved $300K annually",
-                ]}
-              />
-            </div>
-            <Stack items={["Databricks", "Snowflake", "dbt", "Power BI"]} />
-          </div>
-        </div>
-      </div>
-    </motion.article>
-  );
-}
-
-/* ── 03: phased horizontal narrative under a full-width chart ── */
-function StudyThree() {
-  return (
-    <motion.article {...reveal()} className="border-t border-border pt-[clamp(1.5rem,2.5vw,2.5rem)] pb-[clamp(2rem,3vw,3.5rem)]">
-      <Kicker num="03" domain="Platform modernisation" />
-      <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4 mb-9">
-        <h3 className="text-[clamp(1.6rem,1.2rem+2vw,2.75rem)] font-semibold tracking-tight leading-tight max-w-[22ch]">
-          Enterprise Fabric Lakehouse Migration
-        </h3>
-        <div className="font-mono tabular-nums font-semibold tracking-tight leading-none text-[clamp(2.25rem,1.75rem+2.5vw,4rem)]">
-          12%<span className="accent-text">→</span>&lt;1%
-        </div>
-      </div>
-
-      <div className="panel rounded-2xl p-[clamp(1.25rem,2vw,2.25rem)] text-foreground mb-10">
-        <DiagramReliability />
-      </div>
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-[clamp(1.5rem,3vw,3rem)] gap-y-8">
-        <Field label="Challenge">
-          Legacy ETL was unreliable and expensive — 12% of monthly runs failed,
-          and the data team had become a night shift.
-        </Field>
-        <Field label="Constraints">
-          Zero downtime allowed: legacy and new platforms ran in parallel until
-          every number reconciled.
-        </Field>
-        <Field label="Solution">
-          A Fabric Medallion Architecture consolidating six source systems into
-          OneLake, with 200+ transformations rebuilt as tested SQLMesh models.
-        </Field>
-        <div>
-          <div className="mb-6">
-            <ImpactList
-              items={[
-                "Failures reduced from 12% to <1%",
-                "Maintenance effort reduced 90%",
-                "Compute cost reduced 15%",
-              ]}
-            />
-          </div>
-          <Stack items={["Microsoft Fabric", "OneLake", "SQLMesh", "Delta Lake"]} />
-        </div>
-      </div>
-    </motion.article>
-  );
-}
-
-/* ── 04: hub diagram center-stage, narrative wrapped right ── */
-function StudyFour() {
-  return (
-    <motion.article {...reveal()} className="border-t border-border pt-[clamp(1.5rem,2.5vw,2.5rem)]">
-      <Kicker num="04" domain="Operational visibility" />
-      <div className="grid lg:grid-cols-12 gap-x-[clamp(2rem,4vw,5rem)] gap-y-10 items-center">
-        <div className="lg:col-span-5 order-2 lg:order-1">
-          <div className="panel rounded-2xl p-[clamp(1.25rem,2vw,2rem)] text-foreground mb-8">
-            <DiagramHub />
-          </div>
-          <div className="grid grid-cols-3 gap-px bg-border border border-border rounded-xl overflow-hidden">
-            {[
-              { v: "15min", l: "refresh, from 4 hrs" },
-              { v: "94%", l: "performance gain" },
-              { v: "200+", l: "active users" },
-            ].map((m) => (
-              <div key={m.l} className="bg-background px-[clamp(0.75rem,1.5vw,1.25rem)] py-[clamp(0.8rem,1.2vw,1.1rem)]">
-                <div className="font-mono tabular-nums font-semibold text-[clamp(1rem,0.9rem+0.7vw,1.4rem)] accent-text">{m.v}</div>
-                <p className="mt-1 text-[11px] text-muted-foreground leading-snug">{m.l}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="lg:col-span-6 lg:col-start-7 order-1 lg:order-2">
-          <h3 className="text-[clamp(1.6rem,1.2rem+2vw,2.75rem)] font-semibold tracking-tight leading-tight mb-7 max-w-[20ch]">
-            Global Manufacturing Analytics Suite
-          </h3>
-          <div className="space-y-6 mb-8">
-            <Field label="Challenge">
-              Factory reporting required four hours per refresh cycle, and
-              fifteen country ERPs disagreed about every KPI.
-            </Field>
-            <Field label="Constraints">
-              Row-level security across regional, country, and global access for
-              200+ users — without forking the model.
-            </Field>
-            <Field label="Solution">
-              A governed analytics ecosystem: one Snowflake warehouse, one dbt
-              layer, one semantic model with standardized KPI definitions
-              across all fifteen countries.
-            </Field>
-          </div>
-          <p className="eyebrow mb-2">Architecture</p>
-          <p className="font-mono text-[11px] text-muted-foreground mb-8">
-            15 ERPs → ADF → Snowflake → dbt → semantic model (RLS) → Power BI
-          </p>
-          <Stack items={["Power BI", "Snowflake", "dbt", "Azure Data Factory"]} />
-        </div>
-      </div>
-    </motion.article>
-  );
-}
+const studies: Study[] = [
+  {
+    id: "01",
+    num: "01",
+    domain: "Revenue intelligence",
+    title: "Real-Time Sales Intelligence Platform",
+    challenge: "Sales teams were making decisions on 6-hour-old data. By the time batch reports arrived, inventory gaps had already cost revenue.",
+    built: "A Databricks streaming pipeline processing 5M+ daily transactions across 8 markets, feeding Power BI DirectQuery dashboards with near-real-time visibility.",
+    outcome: "Reduced reporting time from 6 hours to under 10 minutes — saving ~$90K/yr in analyst hours and enabling same-day decisions across 8 regional markets.",
+    stack: ["Databricks", "Azure Data Factory", "PySpark", "Delta Live Tables", "Power BI"],
+    Diagram: DiagramLatency,
+    detailPoints: [
+      "Architected Bronze → Silver → Gold Medallion pipeline with automated quality monitoring",
+      "Handled schema evolution across 12 heterogeneous source systems",
+      "Achieved sub-10-minute SLA with full audit trail and data lineage",
+      "Reduced pipeline failures by 95% over the legacy batch approach",
+      "Increased forecast accuracy by 22% through intraday signal availability",
+    ],
+  },
+  {
+    id: "02",
+    num: "02",
+    domain: "Customer retention",
+    title: "Customer Churn Analytics Pipeline",
+    challenge: "The customer success team only learned about churn after cancellations happened — there was no early-warning system and no way to intervene.",
+    built: "An end-to-end ML pipeline using Databricks and Snowflake that ranked 2M+ customers by churn risk daily, delivering a prioritised intervention list to the CS team.",
+    outcome: "Churn dropped 18% within 6 months — retaining approximately $300K in annual revenue and shifting the CS team from reactive to proactive.",
+    stack: ["Databricks", "Snowflake", "dbt", "MLflow", "Power BI", "Python"],
+    Diagram: DiagramChurn,
+    detailPoints: [
+      "Built feature store in Snowflake from fragmented CRM, billing, and usage data",
+      "Achieved 89% recall on at-risk customers without overwhelming CS capacity",
+      "Automated daily inference pipeline across 2M+ customer records",
+      "Integrated ML predictions into Power BI without exposing model complexity to end users",
+      "Reduced manual forecasting effort by 70%",
+    ],
+  },
+  {
+    id: "03",
+    num: "03",
+    domain: "Platform modernisation",
+    title: "Enterprise Fabric Lakehouse Migration",
+    challenge: "A legacy data warehouse was failing 12% of pipeline runs every month. The data team spent more time firefighting than building new analytics.",
+    built: "A phased migration to Microsoft Fabric with a Medallion architecture and 200+ SQLMesh-managed transformation models — run in parallel with the legacy system until every number reconciled.",
+    outcome: "Pipeline failures dropped from 12% to under 1%. Maintenance effort fell 90%, freeing the team to build new capabilities instead of fixing old ones.",
+    stack: ["Microsoft Fabric", "SQLMesh", "Delta Lake", "OneLake", "Power BI", "Python"],
+    Diagram: DiagramReliability,
+    detailPoints: [
+      "Migrated 5+ years of historical data with zero data loss and full lineage preservation",
+      "Re-engineered 200+ legacy SQL transformations into tested, versioned SQLMesh models",
+      "Zero downtime: legacy and new platform ran in parallel through full validation",
+      "Compute costs reduced by 15% through Fabric capacity optimisation",
+      "Established automated testing and data quality gates at each Medallion layer",
+    ],
+  },
+  {
+    id: "04",
+    num: "04",
+    domain: "Operational visibility",
+    title: "Global Manufacturing Analytics Suite",
+    challenge: "15 country teams ran their own spreadsheet reports. Executive roll-ups took 4+ hours and still didn't agree — everyone had a different version of the truth.",
+    built: "A unified Snowflake warehouse with dbt transformation layers and Power BI semantic models with row-level security — one governed truth for 200+ users across 15 markets.",
+    outcome: "Refresh time dropped from 4 hours to 15 minutes. Eliminated 40+ manual Excel reports and gave executives real-time cross-market benchmarking for the first time.",
+    stack: ["Power BI", "Snowflake", "dbt", "Azure Data Factory", "SQL", "DAX"],
+    Diagram: DiagramHub,
+    detailPoints: [
+      "Harmonised data from 15 regional ERP systems with different schemas",
+      "Designed row-level security for 200+ users across regional, country, and global access tiers",
+      "Achieved 15-minute refresh SLA on a complex multi-join semantic model",
+      "Built executive dashboard surfacing operational KPIs accessible to non-technical leadership",
+      "Enabled real-time cross-market performance benchmarking for the first time",
+    ],
+  },
+];
 
 type Filter = "All" | "Power BI" | "Microsoft Fabric" | "Databricks" | "Snowflake" | "Analytics Engineering" | "Business Intelligence";
 
@@ -367,18 +210,180 @@ const STUDY_TAGS: Record<string, Filter[]> = {
   "04": ["Power BI", "Snowflake", "Business Intelligence"],
 };
 
+/* ── Case study modal ───────────────────────────────────────────────────── */
+
+function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+        <motion.div
+          className="relative panel rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-y-auto"
+          initial={{ opacity: 0, scale: 0.96, y: 16 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.96, y: 16 }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="p-[clamp(1.5rem,3vw,2.5rem)]">
+            <div className="flex items-start justify-between gap-4 mb-6">
+              <div>
+                <p className="eyebrow mb-2">Case study {study.num} · {study.domain}</p>
+                <h3 className="text-xl font-semibold leading-tight">{study.title}</h3>
+              </div>
+              <button
+                onClick={onClose}
+                aria-label="Close"
+                className="flex-shrink-0 w-9 h-9 rounded-full panel flex items-center justify-center hover:border-primary/30 transition-colors"
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            <div className="panel rounded-2xl p-5 text-foreground mb-6">
+              <study.Diagram />
+            </div>
+
+            <div className="space-y-5 mb-6">
+              <div>
+                <p className="eyebrow mb-2">The challenge</p>
+                <p className="text-sm leading-relaxed text-muted-foreground">{study.challenge}</p>
+              </div>
+              <div>
+                <p className="eyebrow mb-2">What I built</p>
+                <p className="text-sm leading-relaxed text-muted-foreground">{study.built}</p>
+              </div>
+              <div>
+                <p className="eyebrow mb-2">Business outcome</p>
+                <p className="text-sm leading-relaxed text-foreground font-medium">{study.outcome}</p>
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <p className="eyebrow mb-3">Key results</p>
+              <ul className="space-y-2">
+                {study.detailPoints.map((pt) => (
+                  <li key={pt} className="text-sm text-muted-foreground leading-relaxed pl-3.5 border-l-2 border-primary/50">
+                    {pt}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex flex-wrap gap-2 pt-4 border-t border-border">
+              {study.stack.map((t) => (
+                <span key={t} className="px-2.5 py-1 rounded-md text-[11px] font-medium panel text-muted-foreground">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+/* ── Project card ───────────────────────────────────────────────────────── */
+
+function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
+  return (
+    <motion.article
+      {...reveal()}
+      className="panel panel-lift rounded-2xl overflow-hidden"
+    >
+      {/* Diagram preview */}
+      <div className="border-b border-border p-[clamp(1.25rem,2vw,2rem)] text-foreground bg-background">
+        <study.Diagram />
+      </div>
+
+      <div className="p-[clamp(1.25rem,2vw,1.75rem)]">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="font-mono text-[10px] accent-text">CASE STUDY {study.num}</span>
+          <span className="eyebrow">{study.domain}</span>
+        </div>
+
+        <h3 className="text-[clamp(1.1rem,1rem+0.6vw,1.4rem)] font-semibold leading-snug mb-4 max-w-[28ch]">
+          {study.title}
+        </h3>
+
+        <div className="space-y-3 mb-5">
+          <div>
+            <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-1">
+              The challenge
+            </p>
+            <p className="text-sm leading-relaxed text-muted-foreground">{study.challenge}</p>
+          </div>
+          <div>
+            <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-1">
+              What I built
+            </p>
+            <p className="text-sm leading-relaxed text-muted-foreground">{study.built}</p>
+          </div>
+          <div className="panel rounded-xl px-4 py-3" style={{ borderLeft: "3px solid var(--primary)" }}>
+            <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-1">
+              Business outcome
+            </p>
+            <p className="text-sm leading-relaxed font-medium">{study.outcome}</p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-1.5 mb-5">
+          {study.stack.map((t) => (
+            <span key={t} className="px-2.5 py-1 rounded-md text-[11px] font-medium text-muted-foreground"
+              style={{ background: "color-mix(in srgb, var(--primary) 7%, var(--card))", border: "1px solid var(--border)" }}>
+              {t}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap gap-2 pt-4 border-t border-border">
+          {study.githubUrl ? (
+            <a
+              href={study.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full panel text-sm font-medium hover:border-primary/30 transition-colors"
+            >
+              See on GitHub <ExternalLink size={13} />
+            </a>
+          ) : (
+            <button
+              onClick={onOpen}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+            >
+              View case study <ArrowUpRight size={14} />
+            </button>
+          )}
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+/* ── Main section ───────────────────────────────────────────────────────── */
+
 export function CaseStudiesSection() {
   const [active, setActive] = useState<Filter>("All");
+  const [openStudy, setOpenStudy] = useState<Study | null>(null);
 
   const visible = (id: string) =>
     active === "All" || (STUDY_TAGS[id]?.includes(active) ?? false);
+
+  const visibleStudies = studies.filter((s) => visible(s.id));
 
   return (
     <section id="case-studies">
       <div className="container-page section-pad">
         <motion.p {...reveal()} className="eyebrow mb-4">Flagship work</motion.p>
-        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[20ch] mb-[clamp(2rem,3.5vw,3.5rem)]">
-          From raw data to executive decisions.
+        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[18ch] mb-[clamp(2rem,3.5vw,3.5rem)]">
+          Selected projects
         </motion.h2>
 
         {/* Filter bar */}
@@ -386,7 +391,7 @@ export function CaseStudiesSection() {
           {...reveal(0.08)}
           className="flex flex-wrap gap-2 mb-[clamp(2.5rem,4vw,5rem)]"
           role="group"
-          aria-label="Filter projects"
+          aria-label="Filter projects by technology"
         >
           {FILTERS.map((f) => (
             <button
@@ -411,19 +416,28 @@ export function CaseStudiesSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="grid md:grid-cols-2 gap-6"
           >
-            {visible("01") && <StudyOne />}
-            {visible("02") && <StudyTwo />}
-            {visible("03") && <StudyThree />}
-            {visible("04") && <StudyFour />}
-            {!visible("01") && !visible("02") && !visible("03") && !visible("04") && (
-              <p className="text-muted-foreground text-sm py-12 text-center">
+            {visibleStudies.length > 0 ? (
+              visibleStudies.map((study) => (
+                <StudyCard
+                  key={study.id}
+                  study={study}
+                  onOpen={() => setOpenStudy(study)}
+                />
+              ))
+            ) : (
+              <p className="text-muted-foreground text-sm py-12 col-span-2 text-center">
                 No projects match this filter yet.
               </p>
             )}
           </motion.div>
         </AnimatePresence>
       </div>
+
+      {openStudy && (
+        <StudyModal study={openStudy} onClose={() => setOpenStudy(null)} />
+      )}
     </section>
   );
 }

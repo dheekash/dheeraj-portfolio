@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
-import { LinkedinIcon } from "@/components/common/SocialIcons";
+import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
 
 const links = [
@@ -21,19 +21,14 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
 
-  // Show on scroll up, hide on scroll down (once past the hero)
   useEffect(() => {
     let last = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 16);
-      if (open) {
-        setHidden(false);
-      } else if (y > last && y > 320) {
-        setHidden(true);
-      } else if (y < last) {
-        setHidden(false);
-      }
+      if (open) { setHidden(false); }
+      else if (y > last && y > 320) { setHidden(true); }
+      else if (y < last) { setHidden(false); }
       last = y;
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -47,7 +42,6 @@ export function Navbar() {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  // Highlight the section currently in view
   useEffect(() => {
     const sections = links
       .map((l) => document.getElementById(l.id))
@@ -102,28 +96,34 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-2.5">
           <ThemeToggle />
+          <a
+            href={profile.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <GithubIcon size={14} /> GitHub
+          </a>
           <a
             href={profile.linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="flex items-center justify-center w-10 h-10 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[13px] text-muted-foreground hover:text-foreground transition-colors"
           >
-            <LinkedinIcon size={15} />
+            <LinkedinIcon size={14} /> LinkedIn
           </a>
           <a
-            href={profile.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background text-[13px] font-medium hover:opacity-90 transition-opacity"
+            href="#contact"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-primary-foreground text-[13px] font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
           >
-            Download Resume <ArrowUpRight size={12} />
+            Hire me <ArrowUpRight size={13} />
           </a>
         </div>
 
-        {/* Mobile: toggle + burger */}
         <div className="lg:hidden flex items-center gap-1.5">
           <ThemeToggle />
           <button
@@ -151,14 +151,21 @@ export function Navbar() {
                 </a>
               </li>
             ))}
-            <li className="flex items-center gap-5 pt-2">
+            <li className="flex flex-wrap items-center gap-4 pt-2 border-t border-border mt-1">
+              <a
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-1.5 min-h-12 text-[15px] font-semibold accent-text"
+              >
+                Hire me <ArrowUpRight size={14} />
+              </a>
               <a
                 href={profile.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 min-h-12 text-[15px] font-medium accent-text"
+                className="flex items-center gap-1.5 min-h-12 text-[15px] font-medium text-muted-foreground"
               >
-                Download Resume <ArrowUpRight size={14} />
+                Resume <ArrowUpRight size={14} />
               </a>
               <a
                 href={profile.linkedinUrl}
@@ -167,6 +174,14 @@ export function Navbar() {
                 className="flex items-center gap-1.5 min-h-12 text-[15px] text-muted-foreground"
               >
                 <LinkedinIcon size={15} /> LinkedIn
+              </a>
+              <a
+                href={profile.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 min-h-12 text-[15px] text-muted-foreground"
+              >
+                <GithubIcon size={15} /> GitHub
               </a>
             </li>
           </ul>

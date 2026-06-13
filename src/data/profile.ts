@@ -13,11 +13,11 @@ export const profile: Profile = {
   linkedinUrl: "https://linkedin.com/in/kashyap-dheeraj",
   githubUrl: "https://github.com/dheekash",
   stats: [
-    { value: "5",   label: "Records Processed Daily",          suffix: "M+" },
-    { value: "20",  label: "Analytics Solutions Delivered",     suffix: "+"  },
-    { value: "100", label: "Stakeholders Supported",           suffix: "+"  },
-    { value: "180", label: "Reporting Efficiency Improvement", suffix: "%"  },
-    { value: "6",   label: "Years Experience",                 suffix: "+"  },
-    { value: "13",  label: "Certifications",                   suffix: ""   },
+    { value: "5",   label: "Records processed daily",     suffix: "M+" },
+    { value: "188", label: "Pipelines built",              suffix: "+"  },
+    { value: "100", label: "Stakeholders supported",       suffix: "+"  },
+    { value: "180", label: "Reporting efficiency gain",    suffix: "%"  },
+    { value: "6",   label: "Years of experience",          suffix: "+"  },
+    { value: "13",  label: "Certifications",               suffix: ""   },
   ],
 };

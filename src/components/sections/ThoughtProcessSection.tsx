@@ -3,12 +3,26 @@
 import { motion } from "framer-motion";
 
 const steps = [
-  { num: "01", title: "Understand the business question", note: "What decision is actually being made — and what does it cost to get it wrong?" },
-  { num: "02", title: "Identify decision makers", note: "Who acts on the answer, in what meeting, on what cadence." },
-  { num: "03", title: "Define success metrics", note: "Agree the number that proves it worked, before any code is written." },
-  { num: "04", title: "Build trustworthy data foundations", note: "Tested pipelines, versioned transformations, lineage that survives audit." },
-  { num: "05", title: "Design executive-ready reporting", note: "One governed semantic layer; every audience reads the same truth." },
-  { num: "06", title: "Drive adoption and action", note: "An unused dashboard is a failed project. Adoption is the deliverable." },
+  {
+    num: "01",
+    title: "I start with the business problem, not the data problem.",
+    note: "Before touching a dataset, I ask: what decision is this meant to support, and what does it cost the business to get it wrong?",
+  },
+  {
+    num: "02",
+    title: "I define what success looks like before writing a line of code.",
+    note: "I agree on the metric that proves the project worked — with the stakeholder, before any engineering begins.",
+  },
+  {
+    num: "03",
+    title: "I build data foundations that survive audit.",
+    note: "Tested pipelines, version-controlled transformations, full lineage — so the number in the dashboard is one people will actually stake a decision on.",
+  },
+  {
+    num: "04",
+    title: "I measure adoption, not just delivery.",
+    note: "An unused dashboard is a failed project. I stay involved until the reporting is embedded in the team's real workflow.",
+  },
 ];
 
 function reveal(delay = 0) {
@@ -20,10 +34,6 @@ function reveal(delay = 0) {
   };
 }
 
-/**
- * The framework as a connected circuit: a 2×3 grid threaded by a signal
- * rail, each node numbered like a schematic — not six text cards.
- */
 export function ThoughtProcessSection() {
   return (
     <section id="process" className="relative overflow-hidden">
@@ -33,38 +43,34 @@ export function ThoughtProcessSection() {
         style={{ background: "radial-gradient(ellipse 50% 55% at 20% 35%, var(--nebula-2) 0%, transparent 70%)" }}
       />
       <div className="container-page section-pad relative">
-        <motion.p {...reveal()} className="eyebrow mb-4">Method</motion.p>
+        <motion.p {...reveal()} className="eyebrow mb-4">Process</motion.p>
         <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[16ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
-          How I solve data problems.
+          My approach
         </motion.h2>
 
-        <div className="relative">
-          {/* Signal rail behind the grid (desktop) */}
-          <div
-            aria-hidden
-            className="hidden lg:block absolute left-0 right-0 top-1/2 h-px"
-            style={{ background: "linear-gradient(90deg, transparent, color-mix(in srgb, var(--primary) 40%, transparent) 15%, color-mix(in srgb, var(--primary) 40%, transparent) 85%, transparent)" }}
-          />
-
-          <ol className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-[clamp(1.5rem,3vw,3rem)] gap-y-[clamp(2rem,3vw,3rem)] relative">
-            {steps.map((s, i) => (
-              <motion.li key={s.num} {...reveal(0.05 + i * 0.06)} className="relative">
-                {/* Node marker */}
-                <div className="flex items-center gap-4 mb-3.5">
-                  <span className="relative flex items-center justify-center w-[2.6rem] h-[2.6rem] rounded-full border border-border bg-background font-mono text-xs accent-text shrink-0">
-                    {s.num}
-                    <span aria-hidden className="absolute inset-0 rounded-full border border-primary/25 scale-125" />
-                  </span>
-                  <span aria-hidden className="hairline flex-1 hidden sm:block" />
-                </div>
-                <h3 className="text-[clamp(1.05rem,1rem+0.4vw,1.3rem)] font-semibold mb-2 max-w-[22ch]">
+        <ol className="space-y-0 max-w-4xl">
+          {steps.map((s, i) => (
+            <motion.li
+              key={s.num}
+              {...reveal(0.06 + i * 0.08)}
+              className={`grid md:grid-cols-[6rem_1fr] gap-x-8 gap-y-2 py-[clamp(1.5rem,2.5vw,2.5rem)] ${
+                i > 0 ? "border-t border-border" : ""
+              }`}
+            >
+              <div className="flex items-start gap-3 md:gap-0 md:pt-0.5">
+                <span className="font-mono text-[clamp(2rem,1.5rem+1.5vw,3rem)] font-bold tabular-nums leading-none accent-text">
+                  {s.num}
+                </span>
+              </div>
+              <div>
+                <h3 className="text-[clamp(1.05rem,1rem+0.5vw,1.3rem)] font-semibold leading-snug mb-2 max-w-[46ch]">
                   {s.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed max-w-[36ch]">{s.note}</p>
-              </motion.li>
-            ))}
-          </ol>
-        </div>
+                <p className="text-sm text-muted-foreground leading-relaxed max-w-[52ch]">{s.note}</p>
+              </div>
+            </motion.li>
+          ))}
+        </ol>
       </div>
     </section>
   );

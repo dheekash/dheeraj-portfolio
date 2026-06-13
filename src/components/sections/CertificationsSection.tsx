@@ -3,48 +3,52 @@
 import { motion } from "framer-motion";
 import { MicrosoftLogo, DatabricksLogo, SnowflakeLogo } from "@/components/common/TechLogos";
 
-/**
- * A learning journey, not a card wall: 13 real credentials set as ruled
- * ladder rows by specialization, strung in the order they were earned.
- */
 const tracks = [
   {
     track: "Cloud & Platform Foundations",
     arc: "2021",
     certs: [
-      { name: "Power Platform Fundamentals", code: "Aug 2021", issuer: "Microsoft" },
-      { name: "Azure AI Fundamentals", code: "Sep 2021", issuer: "Microsoft" },
-      { name: "Azure Fundamentals", code: "Dec 2021", issuer: "Microsoft" },
-      { name: "Microsoft 365 Fundamentals", code: "Dec 2021", issuer: "Microsoft" },
-      { name: "Azure Administrator · AZ-104", code: "Dec 2021", issuer: "Microsoft" },
+      { name: "Power Platform Fundamentals",   code: "PL-900",  issuer: "Microsoft", date: "Aug 2021" },
+      { name: "Azure AI Fundamentals",         code: "AI-900",  issuer: "Microsoft", date: "Sep 2021" },
+      { name: "Azure Fundamentals",            code: "AZ-900",  issuer: "Microsoft", date: "Dec 2021" },
+      { name: "Microsoft 365 Fundamentals",    code: "MS-900",  issuer: "Microsoft", date: "Dec 2021" },
+      { name: "Azure Administrator",           code: "AZ-104",  issuer: "Microsoft", date: "Dec 2021" },
     ],
   },
   {
     track: "Analytics & BI",
     arc: "2021–2024",
     certs: [
-      { name: "Power BI Data Analyst · PL-300", code: "Sep 2021", issuer: "Microsoft" },
-      { name: "Fabric Analytics Engineer · DP-600", code: "Dec 2024", issuer: "Microsoft" },
+      { name: "Power BI Data Analyst",         code: "PL-300",  issuer: "Microsoft", date: "Sep 2021" },
+      { name: "Fabric Analytics Engineer",     code: "DP-600",  issuer: "Microsoft", date: "Dec 2024" },
     ],
   },
   {
     track: "Data & AI",
     arc: "2022–2023",
     certs: [
-      { name: "Azure Data Fundamentals", code: "Feb 2022", issuer: "Microsoft" },
-      { name: "Security, Compliance & Identity", code: "Feb 2022", issuer: "Microsoft" },
-      { name: "Azure Data Scientist · DP-100", code: "Feb 2023", issuer: "Microsoft" },
+      { name: "Azure Data Fundamentals",       code: "DP-900",  issuer: "Microsoft", date: "Feb 2022" },
+      { name: "Security, Compliance & Identity",code: "SC-900", issuer: "Microsoft", date: "Feb 2022" },
+      { name: "Azure Data Scientist",          code: "DP-100",  issuer: "Microsoft", date: "Feb 2023" },
     ],
   },
   {
     track: "Platform Engineering",
     arc: "2025–2026",
     certs: [
-      { name: "Fabric Data Engineer · DP-700", code: "Jun 2025", issuer: "Microsoft" },
-      { name: "SnowPro Associate: Platform", code: "Jan 2026", issuer: "Snowflake" },
-      { name: "Databricks Data Engineer Associate", code: "May 2026", issuer: "Databricks" },
+      { name: "Fabric Data Engineer",          code: "DP-700",  issuer: "Microsoft", date: "Jun 2025" },
+      { name: "SnowPro Associate: Platform",   code: "Core",    issuer: "Snowflake", date: "Jan 2026" },
+      { name: "Data Engineer Associate",       code: "DE-A",    issuer: "Databricks",date: "May 2026" },
     ],
   },
+];
+
+const featured = [
+  { name: "Power BI Data Analyst",     code: "PL-300", issuer: "Microsoft"  as const, date: "Sep 2021" },
+  { name: "Fabric Analytics Engineer", code: "DP-600", issuer: "Microsoft"  as const, date: "Dec 2024" },
+  { name: "Fabric Data Engineer",      code: "DP-700", issuer: "Microsoft"  as const, date: "Jun 2025" },
+  { name: "Azure Data Scientist",      code: "DP-100", issuer: "Microsoft"  as const, date: "Feb 2023" },
+  { name: "SnowPro Associate",         code: "Core",   issuer: "Snowflake"  as const, date: "Jan 2026" },
 ];
 
 function IssuerLogo({ issuer }: { issuer: string }) {
@@ -63,25 +67,17 @@ function reveal(delay = 0) {
   };
 }
 
-const featured = [
-  { name: "Power BI Data Analyst",         code: "PL-300", issuer: "Microsoft" as const, date: "Sep 2021" },
-  { name: "Fabric Analytics Engineer",     code: "DP-600", issuer: "Microsoft" as const, date: "Dec 2024" },
-  { name: "Fabric Data Engineer",          code: "DP-700", issuer: "Microsoft" as const, date: "Jun 2025" },
-  { name: "Azure Data Scientist",          code: "DP-100", issuer: "Microsoft" as const, date: "Feb 2023" },
-  { name: "SnowPro Associate: Platform",   code: "Core",   issuer: "Snowflake" as const, date: "Jan 2026" },
-];
-
 export function CertificationsSection() {
   return (
     <section id="certifications">
       <div className="container-page section-pad">
-        <motion.p {...reveal()} className="eyebrow mb-4">Certifications</motion.p>
-        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[20ch] mb-[clamp(1.5rem,2.5vw,2rem)]">
-          Credentialed where the work happens.
+        <motion.p {...reveal()} className="eyebrow mb-4">Credentials</motion.p>
+        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[14ch] mb-[clamp(1.5rem,2.5vw,2rem)]">
+          Certifications
         </motion.h2>
         <motion.p {...reveal(0.1)} className="text-muted-foreground max-w-[52ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
-          13 certifications across five years — cloud foundations first, then analytics,
-          then platform engineering. Each one earned while shipping the technology it covers.
+          13 certifications across five years — each earned while actively shipping the technology
+          it covers, not just studying for an exam.
         </motion.p>
 
         {/* Featured credentials */}
@@ -89,17 +85,15 @@ export function CertificationsSection() {
           <p className="eyebrow mb-5">Key credentials</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
             {featured.map((c) => (
-              <div
-                key={c.code}
-                className="panel panel-lift rounded-2xl px-5 py-4 flex flex-col gap-3"
-              >
+              <div key={`${c.code}-${c.name}`} className="panel panel-lift rounded-2xl px-5 py-4 flex flex-col gap-3">
                 <div className="flex items-center justify-between">
                   <IssuerLogo issuer={c.issuer} />
                   <span className="font-mono text-[10px] accent-text font-semibold">{c.code}</span>
                 </div>
                 <div>
                   <p className="text-[13px] font-semibold leading-tight mb-1">{c.name}</p>
-                  <p className="font-mono text-[10px] text-muted-foreground">{c.date}</p>
+                  <p className="font-mono text-[10px] text-muted-foreground">{c.issuer}</p>
+                  <p className="font-mono text-[10px] text-muted-foreground mt-0.5">{c.date}</p>
                 </div>
               </div>
             ))}
@@ -134,6 +128,7 @@ export function CertificationsSection() {
                       <div>
                         <p className="text-[13px] font-medium leading-tight">{c.name}</p>
                         <p className="font-mono text-[10px] accent-text mt-0.5">{c.code}</p>
+                        <p className="font-mono text-[10px] text-muted-foreground mt-0.5">{c.issuer} · {c.date}</p>
                       </div>
                     </div>
                   ))}
