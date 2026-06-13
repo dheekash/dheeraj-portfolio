@@ -1,11 +1,63 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { DataStreamCanvas } from "@/components/common/DataStreamCanvas";
 import { MagneticButton } from "@/components/common/MagneticButton";
 import { profile } from "@/data/profile";
+
+/**
+ * Framed portrait. Reads /images/headshot.jpg and falls back to a "DK"
+ * monogram until a real photo is dropped in (404s before hydration, so
+ * we re-check on mount). Grayscale with a signal-tinted frame to sit
+ * inside the cinematic palette without clashing.
+ */
+function HeroPortrait() {
+  const [failed, setFailed] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const img = imgRef.current;
+    if (img && img.complete && img.naturalWidth === 0) setFailed(true);
+  }, []);
+
+  return (
+    <div className="relative mx-auto w-full max-w-[min(22rem,80vw)] lg:max-w-none">
+      {/* Glow behind the frame */}
+      <div
+        aria-hidden
+        className="absolute -inset-4 rounded-[2rem] pointer-events-none"
+        style={{ background: "radial-gradient(60% 60% at 60% 30%, var(--nebula-1), transparent 70%)" }}
+      />
+      <figure className="relative aspect-[4/5] rounded-[1.5rem] overflow-hidden panel">
+        {failed ? (
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-[clamp(3rem,8vw,5rem)] font-semibold tracking-tight text-muted-foreground/40">
+              DK
+            </span>
+          </div>
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            ref={imgRef}
+            src="/images/headshot.jpg"
+            alt="Dheeraj Kashyap"
+            loading="eager"
+            decoding="async"
+            className="w-full h-full object-cover grayscale contrast-[1.05]"
+            onError={() => setFailed(true)}
+          />
+        )}
+        {/* Bottom caption chip */}
+        <figcaption className="absolute inset-x-3 bottom-3 panel rounded-xl px-4 py-2.5 backdrop-blur">
+          <p className="text-sm font-semibold leading-tight">{profile.name}</p>
+          <p className="text-[11px] text-muted-foreground mt-0.5">{profile.role}</p>
+        </figcaption>
+      </figure>
+    </div>
+  );
+}
 
 const headlines = [
   <>Where data engineering meets <span className="accent-text">business impact.</span></>,
@@ -47,7 +99,8 @@ export function CinematicHero() {
         }}
       />
 
-      <div className="container-page relative py-[clamp(6.5rem,4rem+8vw,11rem)]">
+      <div className="container-page relative py-[clamp(6.5rem,4rem+8vw,11rem)] grid lg:grid-cols-12 gap-x-[clamp(2rem,4vw,4rem)] gap-y-12 items-center">
+        <div className="lg:col-span-7 xl:col-span-7">
         <motion.p {...fadeUp(0)} className="eyebrow mb-[clamp(1.25rem,2vw,2rem)]">
           Dheeraj Kashyap · Business Analyst @ Amplify Analytix · 13× Certified
         </motion.p>
@@ -99,6 +152,17 @@ export function CinematicHero() {
         <motion.p {...fadeUp(0.4)} className="font-mono text-[clamp(0.65rem,0.6rem+0.2vw,0.8rem)] tracking-[0.22em] uppercase text-muted-foreground/70">
           Power BI · Microsoft Fabric · Databricks · Snowflake
         </motion.p>
+        </div>
+
+        {/* Portrait */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="lg:col-span-5 order-first lg:order-none"
+        >
+          <HeroPortrait />
+        </motion.div>
       </div>
     </section>
   );
