@@ -34,15 +34,14 @@ function Figure({
   );
 }
 
-/**
- * Editorial figures spread — one dominant number, the rest set like a
- * ruled annual-report margin column. Deliberately asymmetric.
- */
 export function ImpactSection() {
   return (
     <section id="impact">
       <div className="container-page section-pad">
-        <motion.div {...reveal()} className="rule-thick pt-4 flex items-baseline justify-between gap-6 mb-[clamp(2.5rem,4vw,4.5rem)]">
+        <motion.div
+          {...reveal()}
+          className="rule-thick pt-4 flex items-baseline justify-between gap-6 mb-[clamp(2.5rem,4vw,4.5rem)]"
+        >
           <p className="eyebrow">Impact, measured</p>
           <p className="eyebrow hidden sm:block">2019 — present</p>
         </motion.div>
@@ -54,33 +53,44 @@ export function ImpactSection() {
               <Figure to={5} suffix="M+" />
             </div>
             <p className="mt-4 max-w-[34ch] text-muted-foreground leading-relaxed">
-              Daily transactions processed through Lakehouse pipelines I&apos;ve
-              architected — at 99.9% reliability.
+              Records processed daily through Lakehouse pipelines — at 99.9% reliability
+              across 15 countries.
             </p>
           </motion.div>
 
-          {/* Secondary figures, ruled column */}
+          {/* Secondary figures — ruled column */}
           <motion.div {...reveal(0.12)} className="lg:col-span-4">
             {[
-              { to: 7, suffix: "+", l: "Years experience across analytics & data platforms" },
-              { to: 15, suffix: "+", l: "Countries supported from single governed models" },
-              { to: 20, suffix: "+", l: "Enterprise data products delivered end-to-end" },
+              { to: 20,  suffix: "+", l: "Analytics solutions delivered end-to-end" },
+              { to: 100, suffix: "+", l: "Stakeholders supported across global organizations" },
+              { to: 6,   suffix: "+", l: "Years experience across analytics & data engineering" },
             ].map((f) => (
-              <div key={f.l} className="border-t border-border py-[clamp(1rem,1.5vw,1.5rem)] flex items-baseline gap-6">
-                <Figure to={f.to} suffix={f.suffix} className="text-[clamp(2rem,1.5rem+1.8vw,3.25rem)] shrink-0 min-w-[3ch]" />
+              <div
+                key={f.l}
+                className="border-t border-border py-[clamp(1rem,1.5vw,1.5rem)] flex items-baseline gap-6"
+              >
+                <Figure
+                  to={f.to}
+                  suffix={f.suffix}
+                  className="text-[clamp(2rem,1.5rem+1.8vw,3.25rem)] shrink-0 min-w-[3ch]"
+                />
                 <span className="text-sm text-muted-foreground leading-snug">{f.l}</span>
               </div>
             ))}
           </motion.div>
 
-          {/* Tertiary, offset */}
+          {/* Tertiary — offset */}
           <motion.div {...reveal(0.18)} className="lg:col-span-3">
             {[
-              { to: 100, suffix: "+", l: "DAX measures in production semantic models" },
-              { to: 100, suffix: "%", l: "Client retention rate" },
+              { to: 180, suffix: "%", l: "Reporting efficiency improvement" },
+              { to: 13,  suffix: "",  l: "Professional certifications earned" },
             ].map((f) => (
               <div key={f.l} className="border-t border-border py-[clamp(1rem,1.5vw,1.5rem)]">
-                <Figure to={f.to} suffix={f.suffix} className="text-[clamp(1.75rem,1.4rem+1.4vw,2.75rem)]" />
+                <Figure
+                  to={f.to}
+                  suffix={f.suffix}
+                  className="text-[clamp(1.75rem,1.4rem+1.4vw,2.75rem)]"
+                />
                 <p className="mt-1.5 text-sm text-muted-foreground leading-snug">{f.l}</p>
               </div>
             ))}

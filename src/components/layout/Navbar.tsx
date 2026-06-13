@@ -7,11 +7,12 @@ import { LinkedinIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
 
 const links = [
-  { href: "#case-studies", id: "case-studies", label: "Case Studies" },
-  { href: "#journey", id: "journey", label: "Career Journey" },
-  { href: "#architecture", id: "architecture", label: "Architecture" },
-  { href: "#certifications", id: "certifications", label: "Certifications" },
-  { href: "#contact", id: "contact", label: "Contact" },
+  { href: "#about",         id: "about",         label: "About"          },
+  { href: "#case-studies",  id: "case-studies",  label: "Projects"       },
+  { href: "#journey",       id: "journey",       label: "Experience"     },
+  { href: "#architecture",  id: "architecture",  label: "Architecture"   },
+  { href: "#certifications",id: "certifications",label: "Certifications" },
+  { href: "#contact",       id: "contact",       label: "Contact"        },
 ];
 
 export function Navbar() {

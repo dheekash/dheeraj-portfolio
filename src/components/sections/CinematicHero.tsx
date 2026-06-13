@@ -2,17 +2,26 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Mail } from "lucide-react";
 import { DataStreamCanvas } from "@/components/common/DataStreamCanvas";
 import { MagneticButton } from "@/components/common/MagneticButton";
 import { profile } from "@/data/profile";
+import {
+  PowerBILogo, FabricLogo, DatabricksLogo, SnowflakeLogo,
+  PythonLogo, SQLLogo, AzureLogo, AWSLogo,
+} from "@/components/common/TechLogos";
 
-/**
- * Framed portrait. Reads /images/headshot.jpg and falls back to a "DK"
- * monogram until a real photo is dropped in (404s before hydration, so
- * we re-check on mount). Grayscale with a signal-tinted frame to sit
- * inside the cinematic palette without clashing.
- */
+const techStack = [
+  { label: "Power BI",   Logo: PowerBILogo    },
+  { label: "Fabric",     Logo: FabricLogo     },
+  { label: "Databricks", Logo: DatabricksLogo },
+  { label: "Snowflake",  Logo: SnowflakeLogo  },
+  { label: "SQL",        Logo: SQLLogo        },
+  { label: "Python",     Logo: PythonLogo     },
+  { label: "Azure",      Logo: AzureLogo      },
+  { label: "AWS",        Logo: AWSLogo        },
+];
+
 function HeroPortrait() {
   const [failed, setFailed] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -24,7 +33,6 @@ function HeroPortrait() {
 
   return (
     <div className="relative mx-auto w-full max-w-[min(22rem,80vw)] lg:max-w-none">
-      {/* Glow behind the frame */}
       <div
         aria-hidden
         className="absolute -inset-4 rounded-[2rem] pointer-events-none"
@@ -32,10 +40,13 @@ function HeroPortrait() {
       />
       <figure className="relative aspect-[4/5] rounded-[1.5rem] overflow-hidden panel">
         {failed ? (
-          <div className="w-full h-full flex items-center justify-center">
-            <span className="text-[clamp(3rem,8vw,5rem)] font-semibold tracking-tight text-muted-foreground/40">
+          <div className="w-full h-full flex flex-col items-center justify-center gap-3">
+            <span className="text-[clamp(3rem,8vw,5rem)] font-semibold tracking-tight text-muted-foreground/30">
               DK
             </span>
+            <p className="text-[10px] text-muted-foreground/30 font-mono tracking-[0.2em] uppercase">
+              Add headshot.jpg
+            </p>
           </div>
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
@@ -49,7 +60,6 @@ function HeroPortrait() {
             onError={() => setFailed(true)}
           />
         )}
-        {/* Bottom caption chip */}
         <figcaption className="absolute inset-x-3 bottom-3 panel rounded-xl px-4 py-2.5 backdrop-blur">
           <p className="text-sm font-semibold leading-tight">{profile.name}</p>
           <p className="text-[11px] text-muted-foreground mt-0.5">{profile.role}</p>
@@ -85,11 +95,9 @@ export function CinematicHero() {
 
   return (
     <section id="top" className="relative overflow-hidden min-h-[min(56rem,100svh)] flex items-center">
-      {/* Living data topology */}
       <div aria-hidden className="absolute inset-0">
         <DataStreamCanvas />
       </div>
-      {/* Theme-aware atmosphere + legibility wash */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
@@ -101,57 +109,79 @@ export function CinematicHero() {
 
       <div className="container-page relative py-[clamp(6.5rem,4rem+8vw,11rem)] grid lg:grid-cols-12 gap-x-[clamp(2rem,4vw,4rem)] gap-y-12 items-center">
         <div className="lg:col-span-7 xl:col-span-7">
-        <motion.p {...fadeUp(0)} className="eyebrow mb-[clamp(1.25rem,2vw,2rem)]">
-          Dheeraj Kashyap · Business Analyst @ Amplify Analytix · 13× Certified
-        </motion.p>
+          <motion.p {...fadeUp(0)} className="eyebrow mb-[clamp(1.25rem,2vw,2rem)]">
+            Dheeraj Kashyap · BI &amp; Analytics Engineer · 13× Certified
+          </motion.p>
 
-        {/* Rotating headline — reserved block height, no layout shift */}
-        <div className="relative mb-[clamp(1.75rem,3vw,2.5rem)] min-h-[2.05em] [font-size:clamp(3rem,1.5rem+6.5vw,8rem)]">
-          <AnimatePresence mode="wait">
-            <motion.h1
-              key={idx}
-              initial={{ opacity: 0, y: 22, filter: "blur(6px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -16, filter: "blur(6px)" }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="hero-title ink-fade max-w-[15ch]"
+          <div className="relative mb-[clamp(1.75rem,3vw,2.5rem)] min-h-[2.05em] [font-size:clamp(3rem,1.5rem+6.5vw,8rem)]">
+            <AnimatePresence mode="wait">
+              <motion.h1
+                key={idx}
+                initial={{ opacity: 0, y: 22, filter: "blur(6px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -16, filter: "blur(6px)" }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="hero-title ink-fade max-w-[15ch]"
+              >
+                {headlines[idx]}
+              </motion.h1>
+            </AnimatePresence>
+          </div>
+
+          <motion.p
+            {...fadeUp(0.15)}
+            className="max-w-[55ch] leading-relaxed text-muted-foreground mb-[clamp(1.5rem,2vw,2rem)]"
+          >
+            BI &amp; Analytics Engineer with 6+ years designing analytics platforms,
+            building enterprise data pipelines, and delivering reporting solutions
+            that help stakeholders make faster, more informed decisions.
+          </motion.p>
+
+          {/* Tech stack badges */}
+          <motion.div
+            {...fadeUp(0.22)}
+            className="flex flex-wrap items-center gap-2 mb-[clamp(2rem,3vw,3rem)]"
+          >
+            {techStack.map(({ label, Logo }) => (
+              <span
+                key={label}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg panel text-[12px] font-medium text-muted-foreground hover:text-foreground hover:border-primary/30 transition-colors duration-150"
+              >
+                <Logo size={13} />
+                {label}
+              </span>
+            ))}
+          </motion.div>
+
+          {/* CTAs */}
+          <motion.div
+            {...fadeUp(0.3)}
+            className="flex flex-wrap items-center gap-[clamp(0.75rem,1.5vw,1.25rem)] mb-[clamp(1.25rem,2vw,1.75rem)]"
+          >
+            <MagneticButton
+              href="#case-studies"
+              className="items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 glow-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
             >
-              {headlines[idx]}
-            </motion.h1>
-          </AnimatePresence>
-        </div>
+              View Projects <ArrowRight size={15} />
+            </MagneticButton>
+            <a
+              href={profile.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full panel text-sm font-medium text-foreground hover:border-foreground/30 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+            >
+              Download Resume <ArrowUpRight size={14} />
+            </a>
+          </motion.div>
 
-        <motion.p
-          {...fadeUp(0.15)}
-          className="max-w-[58ch] leading-relaxed text-muted-foreground mb-[clamp(2rem,3vw,3rem)]"
-        >
-          I turn raw, messy data into pipelines, dashboards, and decisions.
-          Across BI, data engineering, and machine learning, I design Lakehouse
-          platforms, build CI/CD data environments, and deliver end-to-end
-          reporting that global teams depend on daily — built on Microsoft
-          Fabric, Databricks, Snowflake, and Power BI.
-        </motion.p>
-
-        <motion.div {...fadeUp(0.28)} className="flex flex-wrap items-center gap-[clamp(0.75rem,1.5vw,1.25rem)] mb-[clamp(2.5rem,4vw,4rem)]">
-          <MagneticButton
-            href="#case-studies"
-            className="items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 glow-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+          <motion.a
+            {...fadeUp(0.38)}
+            href="#contact"
+            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors duration-150 group"
           >
-            View Case Studies <ArrowRight size={15} />
-          </MagneticButton>
-          <a
-            href={profile.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full panel text-sm font-medium text-foreground hover:border-foreground/30 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-          >
-            Download Resume <ArrowUpRight size={14} />
-          </a>
-        </motion.div>
-
-        <motion.p {...fadeUp(0.4)} className="font-mono text-[clamp(0.65rem,0.6rem+0.2vw,0.8rem)] tracking-[0.22em] uppercase text-muted-foreground/70">
-          Power BI · Microsoft Fabric · Databricks · Snowflake
-        </motion.p>
+            <Mail size={13} className="group-hover:scale-110 transition-transform duration-150" />
+            or contact me directly
+          </motion.a>
         </div>
 
         {/* Portrait */}

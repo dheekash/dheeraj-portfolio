@@ -63,21 +63,52 @@ function reveal(delay = 0) {
   };
 }
 
+const featured = [
+  { name: "Power BI Data Analyst",         code: "PL-300", issuer: "Microsoft" as const, date: "Sep 2021" },
+  { name: "Fabric Analytics Engineer",     code: "DP-600", issuer: "Microsoft" as const, date: "Dec 2024" },
+  { name: "Fabric Data Engineer",          code: "DP-700", issuer: "Microsoft" as const, date: "Jun 2025" },
+  { name: "Azure Data Scientist",          code: "DP-100", issuer: "Microsoft" as const, date: "Feb 2023" },
+  { name: "SnowPro Associate: Platform",   code: "Core",   issuer: "Snowflake" as const, date: "Jan 2026" },
+];
+
 export function CertificationsSection() {
   return (
     <section id="certifications">
       <div className="container-page section-pad">
-        <motion.p {...reveal()} className="eyebrow mb-4">Learning journey</motion.p>
+        <motion.p {...reveal()} className="eyebrow mb-4">Certifications</motion.p>
         <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[20ch] mb-[clamp(1.5rem,2.5vw,2rem)]">
           Credentialed where the work happens.
         </motion.h2>
         <motion.p {...reveal(0.1)} className="text-muted-foreground max-w-[52ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
-          Thirteen certifications, five years — cloud foundations first, then
-          analytics, then platform depth. Each one earned while shipping the
-          technology it covers.
+          13 certifications across five years — cloud foundations first, then analytics,
+          then platform engineering. Each one earned while shipping the technology it covers.
         </motion.p>
 
+        {/* Featured credentials */}
+        <motion.div {...reveal(0.12)} className="mb-[clamp(2.5rem,4vw,5rem)]">
+          <p className="eyebrow mb-5">Key credentials</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+            {featured.map((c) => (
+              <div
+                key={c.code}
+                className="panel panel-lift rounded-2xl px-5 py-4 flex flex-col gap-3"
+              >
+                <div className="flex items-center justify-between">
+                  <IssuerLogo issuer={c.issuer} />
+                  <span className="font-mono text-[10px] accent-text font-semibold">{c.code}</span>
+                </div>
+                <div>
+                  <p className="text-[13px] font-semibold leading-tight mb-1">{c.name}</p>
+                  <p className="font-mono text-[10px] text-muted-foreground">{c.date}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Full track list */}
         <div className="max-w-6xl">
+          <p className="eyebrow mb-5">All certifications</p>
           {tracks.map((t, ti) => (
             <motion.div
               key={t.track}
@@ -88,15 +119,17 @@ export function CertificationsSection() {
                 <p className="font-mono text-[10px] uppercase tracking-[0.2em] accent-text mb-1">
                   {String(ti + 1).padStart(2, "0")} · {t.arc}
                 </p>
-                <h3 className="text-lg font-semibold">{t.track}</h3>
+                <h3 className="text-[15px] font-semibold">{t.track}</h3>
               </div>
 
-              {/* Credentials strung on a line */}
               <div className="relative flex flex-wrap items-stretch gap-y-4">
                 <span aria-hidden className="absolute left-0 right-0 top-1/2 h-px bg-border hidden md:block" />
                 <div className="relative flex flex-wrap gap-x-[clamp(1.5rem,3vw,3.5rem)] gap-y-4 w-full">
                   {t.certs.map((c) => (
-                    <div key={c.code} className="relative panel rounded-xl px-4 py-3 flex items-center gap-3">
+                    <div
+                      key={c.code}
+                      className="relative panel rounded-xl px-4 py-3 flex items-center gap-3"
+                    >
                       <IssuerLogo issuer={c.issuer} />
                       <div>
                         <p className="text-[13px] font-medium leading-tight">{c.name}</p>
