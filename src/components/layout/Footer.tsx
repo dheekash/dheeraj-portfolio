@@ -8,13 +8,12 @@ import { profile } from "@/data/profile";
 export function Footer() {
   return (
     <footer id="contact" className="relative overflow-hidden border-t border-border">
-      {/* Closing nebula */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 85% at 50% 110%, rgba(56,189,248,0.14) 0%, rgba(129,140,248,0.07) 45%, transparent 75%)",
+            "radial-gradient(ellipse 70% 85% at 50% 115%, var(--nebula-1) 0%, var(--nebula-2) 45%, transparent 75%)",
         }}
       />
 
@@ -28,9 +27,9 @@ export function Footer() {
         >
           <p className="eyebrow mb-[clamp(1.25rem,2vw,2rem)]">Final word</p>
           <h2 className="ink-fade mb-[clamp(1.5rem,2.5vw,2.25rem)]">
-            Let&apos;s turn data into <span className="signal-text">decisions.</span>
+            Let&apos;s turn data into <span className="accent-text">decisions.</span>
           </h2>
-          <p className="text-[clamp(0.95rem,0.9rem+0.3vw,1.1rem)] leading-relaxed text-muted-foreground max-w-[52ch] mx-auto mb-[clamp(2rem,3.5vw,3rem)]">
+          <p className="leading-relaxed text-muted-foreground max-w-[52ch] mx-auto mb-[clamp(2rem,3.5vw,3rem)]">
             Whether you&apos;re modernizing a Lakehouse, building executive
             reporting, implementing Microsoft Fabric, or scaling enterprise
             analytics — let&apos;s create systems that drive measurable business
@@ -42,7 +41,7 @@ export function Footer() {
               href={profile.calendlyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity glow-signal focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              className="inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity glow-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
             >
               <Calendar size={15} /> Schedule a Conversation
             </a>
@@ -50,17 +49,14 @@ export function Footer() {
               href={profile.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full glass text-sm font-medium hover:border-foreground/25 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              className="inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full panel text-sm font-medium hover:border-foreground/30 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
             >
               <Download size={14} /> Download Resume
             </a>
           </div>
 
           <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-muted-foreground">
-            <a
-              href={`mailto:${profile.email}`}
-              className="hover:text-foreground transition-colors"
-            >
+            <a href={`mailto:${profile.email}`} className="hover:text-foreground transition-colors">
               {profile.email}
             </a>
             <a

@@ -1,23 +1,46 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BadgeCheck } from "lucide-react";
 import { MicrosoftLogo, DatabricksLogo, SnowflakeLogo } from "@/components/common/TechLogos";
 
-const certs = [
-  { issuer: "Databricks", name: "Databricks Certified Data Engineer Associate" },
-  { issuer: "Microsoft", name: "Fabric Analytics Engineer Associate", code: "DP-600" },
-  { issuer: "Microsoft", name: "Power BI Data Analyst Associate", code: "PL-300" },
-  { issuer: "Microsoft", name: "Fabric Data Engineer Associate", code: "DP-700" },
-  { issuer: "Snowflake", name: "SnowPro Core Associate" },
-  { issuer: "Microsoft", name: "Azure Data Scientist Associate", code: "DP-100" },
-  { issuer: "Microsoft", name: "Azure Administrator Associate", code: "AZ-104" },
+/**
+ * A learning journey, not a card wall: four specialization tracks set as
+ * ruled ladder rows, credentials strung chronologically along each line.
+ */
+const tracks = [
+  {
+    track: "Cloud",
+    arc: "Foundation",
+    certs: [{ name: "Azure Administrator Associate", code: "AZ-104", issuer: "Microsoft" }],
+  },
+  {
+    track: "Analytics",
+    arc: "Specialization",
+    certs: [
+      { name: "Power BI Data Analyst Associate", code: "PL-300", issuer: "Microsoft" },
+      { name: "Fabric Analytics Engineer Associate", code: "DP-600", issuer: "Microsoft" },
+    ],
+  },
+  {
+    track: "Data Engineering",
+    arc: "Depth",
+    certs: [
+      { name: "Fabric Data Engineer Associate", code: "DP-700", issuer: "Microsoft" },
+      { name: "SnowPro Core Associate", code: "SnowPro", issuer: "Snowflake" },
+      { name: "Databricks Data Engineer Associate", code: "DEA", issuer: "Databricks" },
+    ],
+  },
+  {
+    track: "Data Science",
+    arc: "Frontier",
+    certs: [{ name: "Azure Data Scientist Associate", code: "DP-100", issuer: "Microsoft" }],
+  },
 ];
 
 function IssuerLogo({ issuer }: { issuer: string }) {
-  if (issuer === "Microsoft") return <MicrosoftLogo size={18} />;
-  if (issuer === "Databricks") return <DatabricksLogo size={18} />;
-  if (issuer === "Snowflake") return <SnowflakeLogo size={18} />;
+  if (issuer === "Microsoft") return <MicrosoftLogo size={14} />;
+  if (issuer === "Databricks") return <DatabricksLogo size={14} />;
+  if (issuer === "Snowflake") return <SnowflakeLogo size={14} />;
   return null;
 }
 
@@ -26,7 +49,7 @@ function reveal(delay = 0) {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, margin: "-50px" },
-    transition: { duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
 
@@ -34,30 +57,44 @@ export function CertificationsSection() {
   return (
     <section id="certifications">
       <div className="container-page section-pad">
-        <motion.p {...reveal()} className="eyebrow mb-4">
-          Credentials
-        </motion.p>
-        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[20ch] mb-[clamp(2.5rem,4vw,4rem)]">
-          Certified across the modern data stack.
+        <motion.p {...reveal()} className="eyebrow mb-4">Learning journey</motion.p>
+        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[20ch] mb-[clamp(1.5rem,2.5vw,2rem)]">
+          Credentialed where the work happens.
         </motion.h2>
+        <motion.p {...reveal(0.1)} className="text-muted-foreground max-w-[52ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
+          Cloud foundation first, then analytics, then platform depth — each
+          certification earned while shipping the technology it covers.
+        </motion.p>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-[clamp(0.75rem,1.25vw,1.25rem)]">
-          {certs.map((c, i) => (
+        <div className="max-w-6xl">
+          {tracks.map((t, ti) => (
             <motion.div
-              key={c.name}
-              {...reveal(0.04 * i)}
-              className="glass card-lift rounded-2xl p-[clamp(1.25rem,1.8vw,1.75rem)] flex flex-col"
+              key={t.track}
+              {...reveal(0.05 + ti * 0.06)}
+              className="grid md:grid-cols-[minmax(9rem,14rem)_1fr] gap-x-[clamp(1.5rem,3vw,3rem)] gap-y-3 border-t border-border py-[clamp(1.5rem,2.2vw,2.25rem)]"
             >
-              <div className="flex items-center justify-between mb-4">
-                <span className="inline-flex items-center gap-2 text-xs text-muted-foreground">
-                  <IssuerLogo issuer={c.issuer} /> {c.issuer}
-                </span>
-                <BadgeCheck size={15} className="text-primary" />
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] accent-text mb-1">
+                  {String(ti + 1).padStart(2, "0")} · {t.arc}
+                </p>
+                <h3 className="text-lg font-semibold">{t.track}</h3>
               </div>
-              <h3 className="text-[0.95rem] font-semibold leading-snug">{c.name}</h3>
-              {c.code && (
-                <p className="mt-auto pt-3 font-mono text-[11px] text-primary/80">{c.code}</p>
-              )}
+
+              {/* Credentials strung on a line */}
+              <div className="relative flex flex-wrap items-stretch gap-y-4">
+                <span aria-hidden className="absolute left-0 right-0 top-1/2 h-px bg-border hidden md:block" />
+                <div className="relative flex flex-wrap gap-x-[clamp(1.5rem,3vw,3.5rem)] gap-y-4 w-full">
+                  {t.certs.map((c) => (
+                    <div key={c.code} className="relative panel rounded-xl px-4 py-3 flex items-center gap-3">
+                      <IssuerLogo issuer={c.issuer} />
+                      <div>
+                        <p className="text-[13px] font-medium leading-tight">{c.name}</p>
+                        <p className="font-mono text-[10px] accent-text mt-0.5">{c.code}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>

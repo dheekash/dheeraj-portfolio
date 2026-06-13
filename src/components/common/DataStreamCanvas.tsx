@@ -22,6 +22,23 @@ export function DataStreamCanvas({ className = "" }: { className?: string }) {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // Theme-aware palette, re-read when the .dark class flips
+    let palette = { node: "", edge: "", pulse: "" };
+    const readPalette = () => {
+      const s = getComputedStyle(document.documentElement);
+      palette = {
+        node: s.getPropertyValue("--net-node").trim() || "rgba(37,99,235,0.42)",
+        edge: s.getPropertyValue("--net-edge").trim() || "37, 99, 235",
+        pulse: s.getPropertyValue("--net-pulse").trim() || "rgba(37,99,235,0.85)",
+      };
+    };
+    readPalette();
+    const mo = new MutationObserver(() => {
+      readPalette();
+      frame(false);
+    });
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
     let nodes: Node[] = [];
     let pulses: Pulse[] = [];
     let raf = 0;
@@ -85,7 +102,7 @@ export function DataStreamCanvas({ className = "" }: { className?: string }) {
           const d = Math.hypot(dx, dy);
           if (d < LINK_DIST) {
             const alpha = (1 - d / LINK_DIST) * 0.16;
-            ctx.strokeStyle = `rgba(125, 165, 230, ${alpha})`;
+            ctx.strokeStyle = `rgba(${palette.edge}, ${alpha})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
@@ -97,7 +114,7 @@ export function DataStreamCanvas({ className = "" }: { className?: string }) {
 
       // Nodes
       for (const n of nodes) {
-        ctx.fillStyle = "rgba(148, 190, 255, 0.55)";
+        ctx.fillStyle = palette.node;
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
         ctx.fill();
@@ -119,8 +136,8 @@ export function DataStreamCanvas({ className = "" }: { className?: string }) {
         const x = a.x + (b.x - a.x) * p.t;
         const y = a.y + (b.y - a.y) * p.t;
         const grad = ctx.createRadialGradient(x, y, 0, x, y, 7);
-        grad.addColorStop(0, "rgba(94, 210, 250, 0.9)");
-        grad.addColorStop(1, "rgba(94, 210, 250, 0)");
+        grad.addColorStop(0, palette.pulse);
+        grad.addColorStop(1, "rgba(0, 0, 0, 0)");
         ctx.fillStyle = grad;
         ctx.beginPath();
         ctx.arc(x, y, 7, 0, Math.PI * 2);
@@ -139,6 +156,17 @@ export function DataStreamCanvas({ className = "" }: { className?: string }) {
     // Always paint one synchronous frame so the hero is never blank,
     // even before RAF ticks (or if it never does under reduced motion).
     frame(false);
+
+    // Layout can settle after mount while RAF/ResizeObserver are throttled
+    // (background tabs, embedded webviews) — retry on plain timers too.
+    const retries = [60, 250, 1000].map((ms) =>
+      setTimeout(() => {
+        if (w === 0) {
+          resize();
+          frame(false);
+        }
+      }, ms)
+    );
 
     if (!reduced) {
       raf = requestAnimationFrame(loop);
@@ -172,7 +200,9 @@ export function DataStreamCanvas({ className = "" }: { className?: string }) {
     return () => {
       running = false;
       cancelAnimationFrame(raf);
+      retries.forEach(clearTimeout);
       window.removeEventListener("resize", onWinResize);
+      mo.disconnect();
       ro.disconnect();
       io.disconnect();
     };

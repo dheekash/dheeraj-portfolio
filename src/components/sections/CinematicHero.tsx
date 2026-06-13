@@ -7,10 +7,10 @@ import { DataStreamCanvas } from "@/components/common/DataStreamCanvas";
 import { profile } from "@/data/profile";
 
 const headlines = [
-  <>Turning complex data into <span className="signal-text">business growth.</span></>,
-  <>Building decision systems, <span className="signal-text">not dashboards.</span></>,
-  <>Architecting data platforms <span className="signal-text">that scale.</span></>,
-  <>Where data engineering meets <span className="signal-text">business impact.</span></>,
+  <>Where data engineering meets <span className="accent-text">business impact.</span></>,
+  <>Turning complex data into <span className="accent-text">business growth.</span></>,
+  <>Building decision systems, <span className="accent-text">not dashboards.</span></>,
+  <>Architecting data platforms <span className="accent-text">that scale.</span></>,
 ];
 
 function fadeUp(delay = 0) {
@@ -26,33 +26,33 @@ export function CinematicHero() {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => setIdx((i) => (i + 1) % headlines.length), 4600);
+    const t = setInterval(() => setIdx((i) => (i + 1) % headlines.length), 5000);
     return () => clearInterval(t);
   }, []);
 
   return (
-    <section id="top" className="relative overflow-hidden min-h-[min(58rem,100svh)] flex items-center">
+    <section id="top" className="relative overflow-hidden min-h-[min(56rem,100svh)] flex items-center">
       {/* Living data topology */}
       <div aria-hidden className="absolute inset-0">
         <DataStreamCanvas />
       </div>
-      {/* Atmosphere: signal nebula + vignette so copy stays legible */}
+      {/* Theme-aware atmosphere + legibility wash */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 65% 55% at 70% 22%, rgba(56,189,248,0.13) 0%, rgba(129,140,248,0.06) 45%, transparent 72%), radial-gradient(ellipse 90% 70% at 30% 80%, rgba(7,8,11,0.92) 0%, rgba(7,8,11,0.45) 55%, transparent 100%)",
+            "radial-gradient(ellipse 65% 55% at 72% 20%, var(--nebula-1) 0%, var(--nebula-2) 45%, transparent 72%), linear-gradient(100deg, var(--background) 8%, color-mix(in srgb, var(--background) 55%, transparent) 55%, transparent 100%)",
         }}
       />
 
-      <div className="container-page relative py-[clamp(6rem,4rem+8vw,10rem)]">
+      <div className="container-page relative py-[clamp(6.5rem,4rem+8vw,11rem)]">
         <motion.p {...fadeUp(0)} className="eyebrow mb-[clamp(1.25rem,2vw,2rem)]">
-          Dheeraj Kashyap · BI &amp; Analytics Engineer
+          Dheeraj Kashyap · BI &amp; Analytics Engineer · Analytics Architect
         </motion.p>
 
-        {/* Rotating headline — fixed block height so layout never shifts */}
-        <div className="relative mb-[clamp(1.75rem,3vw,2.5rem)] min-h-[2.1em]">
+        {/* Rotating headline — reserved block height, no layout shift */}
+        <div className="relative mb-[clamp(1.75rem,3vw,2.5rem)] min-h-[2.05em] [font-size:clamp(3rem,1.5rem+6.5vw,8rem)]">
           <AnimatePresence mode="wait">
             <motion.h1
               key={idx}
@@ -60,7 +60,7 @@ export function CinematicHero() {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, y: -16, filter: "blur(6px)" }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="ink-fade max-w-[16ch]"
+              className="hero-title ink-fade max-w-[15ch]"
             >
               {headlines[idx]}
             </motion.h1>
@@ -69,18 +69,19 @@ export function CinematicHero() {
 
         <motion.p
           {...fadeUp(0.15)}
-          className="max-w-[58ch] text-[clamp(1rem,0.9rem+0.5vw,1.2rem)] leading-relaxed text-muted-foreground mb-[clamp(2rem,3vw,3rem)]"
+          className="max-w-[58ch] leading-relaxed text-muted-foreground mb-[clamp(2rem,3vw,3rem)]"
         >
-          7+ years architecting enterprise data platforms, Lakehouse ecosystems,
-          and executive reporting products across e-commerce, manufacturing,
-          consulting, and global marketplaces — trusted by stakeholders in 15+
-          countries to turn fragmented data into measurable outcomes.
+          Analytics and BI engineer with 7+ years architecting enterprise data
+          platforms, Lakehouse ecosystems, and executive reporting products
+          across e-commerce, manufacturing, consulting, and global
+          marketplaces — trusted by stakeholders in 15+ countries to turn
+          fragmented data into measurable outcomes.
         </motion.p>
 
         <motion.div {...fadeUp(0.28)} className="flex flex-wrap items-center gap-[clamp(0.75rem,1.5vw,1.25rem)] mb-[clamp(2.5rem,4vw,4rem)]">
           <a
             href="#case-studies"
-            className="inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity glow-signal focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+            className="inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity glow-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
           >
             View Case Studies <ArrowRight size={15} />
           </a>
@@ -88,7 +89,7 @@ export function CinematicHero() {
             href={profile.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full glass text-sm font-medium text-foreground hover:border-foreground/25 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+            className="inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full panel text-sm font-medium text-foreground hover:border-foreground/30 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
           >
             Download Resume <ArrowUpRight size={14} />
           </a>
