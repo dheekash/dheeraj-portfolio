@@ -185,10 +185,12 @@
     .container-page { max-width: min(83vw, 135rem); }
   }
 
-  .section-pad   { padding-block: clamp(4rem, 2.5rem + 5vw, 8rem); }
+  /* Tighter section rhythm — was clamp(4rem,2.5rem+5vw,8rem) */
+  .section-pad { padding-block: clamp(3rem, 1.75rem + 3.5vw, 6rem); }
 
   .hero-title {
-    font-size: clamp(3rem, 1.5rem + 6.5vw, 8rem);
+    /* Reduced from clamp(3rem,1.5rem+6.5vw,8rem) — hero was visually too dominant */
+    font-size: clamp(2.5rem, 1.25rem + 5vw, 6rem);
     line-height: 0.98;
     letter-spacing: -0.045em;
     font-weight: 650;

@@ -149,7 +149,7 @@ function Kicker({ num, domain }: { num: string; domain: string }) {
 /* ── 01: split spread — narrative left, giant figure + diagram right ── */
 function StudyOne() {
   return (
-    <motion.article {...reveal()} className="border-t-2 border-foreground pt-[clamp(1.5rem,2.5vw,2.5rem)] pb-[clamp(3rem,4vw,5rem)]">
+    <motion.article {...reveal()} className="border-t-2 border-foreground pt-[clamp(1.5rem,2.5vw,2.5rem)] pb-[clamp(2rem,3vw,3.5rem)]">
       <Kicker num="01" domain="Revenue intelligence" />
       <div className="grid lg:grid-cols-12 gap-x-[clamp(2rem,4vw,5rem)] gap-y-10">
         <div className="lg:col-span-6">
@@ -201,7 +201,7 @@ function StudyOne() {
 /* ── 02: tinted full-bleed panel, diagram-led, mirrored ── */
 function StudyTwo() {
   return (
-    <motion.article {...reveal()} className="pb-[clamp(3rem,4vw,5rem)]">
+    <motion.article {...reveal()} className="pb-[clamp(2rem,3vw,3.5rem)]">
       <div className="rounded-3xl panel overflow-hidden">
         <div className="grid lg:grid-cols-12 gap-y-10 p-[clamp(1.5rem,1rem+3vw,4rem)]"
           style={{ background: "linear-gradient(135deg, color-mix(in srgb, var(--primary) 6%, transparent), transparent 55%)" }}>
@@ -255,7 +255,7 @@ function StudyTwo() {
 /* ── 03: phased horizontal narrative under a full-width chart ── */
 function StudyThree() {
   return (
-    <motion.article {...reveal()} className="border-t border-border pt-[clamp(1.5rem,2.5vw,2.5rem)] pb-[clamp(3rem,4vw,5rem)]">
+    <motion.article {...reveal()} className="border-t border-border pt-[clamp(1.5rem,2.5vw,2.5rem)] pb-[clamp(2rem,3vw,3.5rem)]">
       <Kicker num="03" domain="Platform modernisation" />
       <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4 mb-9">
         <h3 className="text-[clamp(1.6rem,1.2rem+2vw,2.75rem)] font-semibold tracking-tight leading-tight max-w-[22ch]">

@@ -63,8 +63,8 @@ export function CareerEvolutionSection() {
       />
       <div className="container-page section-pad relative">
         <motion.p {...reveal()} className="eyebrow mb-4">Career evolution</motion.p>
-        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[18ch] mb-[clamp(3rem,5vw,5rem)]">
-          From operations to analytics engineering.
+        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[18ch] mb-[clamp(2rem,3.5vw,4rem)]">
+          The professional journey.
         </motion.h2>
 
         <div ref={ref} className="relative max-w-5xl">
