@@ -90,10 +90,10 @@ function HeroPortrait() {
 }
 
 const headlines = [
+  <>Transforming complex data into <span className="accent-text">business decisions.</span></>,
+  <>Building analytics platforms <span className="accent-text">that scale.</span></>,
   <>Where data engineering meets <span className="accent-text">business impact.</span></>,
-  <>Turning complex data into <span className="accent-text">business growth.</span></>,
-  <>Building decision systems, <span className="accent-text">not dashboards.</span></>,
-  <>Architecting data platforms <span className="accent-text">that scale.</span></>,
+  <>Decision systems, <span className="accent-text">not just dashboards.</span></>,
 ];
 
 function fadeUp(delay = 0) {
@@ -131,7 +131,7 @@ export function CinematicHero() {
         {/* ── Left: all text content ── */}
         <div className="lg:col-span-7">
           <motion.p {...fadeUp(0)} className="eyebrow mb-[clamp(0.75rem,1vw,1.25rem)]">
-            Dheeraj Kashyap · BI &amp; Analytics Engineer · 13× Certified
+            Dheeraj Kashyap · Business Intelligence &amp; Analytics Engineer · 13× Certified
           </motion.p>
 
           {/* Rotating headline */}
@@ -154,9 +154,9 @@ export function CinematicHero() {
             {...fadeUp(0.15)}
             className="max-w-[52ch] leading-relaxed text-muted-foreground mb-[clamp(1rem,1.2vw,1.5rem)]"
           >
-            BI &amp; Analytics Engineer with 6+ years designing analytics platforms,
-            building enterprise data pipelines, and delivering reporting solutions
-            that help stakeholders make faster, more informed decisions.
+            Transforming complex business data into scalable analytics solutions,
+            automated workflows, and executive-ready insights — across Power BI,
+            Microsoft Fabric, Databricks, Snowflake, Azure, and AWS.
           </motion.p>
 
           {/* Tech stack badges */}

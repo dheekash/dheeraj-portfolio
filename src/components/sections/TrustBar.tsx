@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 
 const orgs = [
-  { name: "Amazon",           detail: "Risk & Investigation · 2020–2024",          current: false },
-  { name: "Amplify Analytix", detail: "BI & Analytics Engineering · 2025–present", current: true  },
-  { name: "Frontizo",         detail: "Customer Operations · 2019–2020",            current: false },
+  { name: "Amazon",           detail: "Risk & Investigation · 2020–2024",                    current: false },
+  { name: "Amplify Analytix", detail: "Business Intelligence & Analytics Eng. · 2025–present", current: true  },
+  { name: "Frontizo",         detail: "Customer Operations · 2019–2020",                      current: false },
 ];
 
 export function TrustBar() {

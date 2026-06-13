@@ -2,6 +2,7 @@ import { CinematicHero } from "@/components/sections/CinematicHero";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ImpactSection } from "@/components/sections/ImpactSection";
+import { SkillsSection } from "@/components/sections/SkillsSection";
 import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { CareerEvolutionSection } from "@/components/sections/CareerEvolutionSection";
 import { ThoughtProcessSection } from "@/components/sections/ThoughtProcessSection";
@@ -21,6 +22,8 @@ export default function HomePage() {
       <AboutSection />
       <Divider />
       <ImpactSection />
+      <Divider />
+      <SkillsSection />
       <Divider />
       <CaseStudiesSection />
       <Divider />

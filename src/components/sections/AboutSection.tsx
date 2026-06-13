@@ -38,7 +38,7 @@ const progression = [
     org: "Amplify Analytix",
     years: "2025–present",
     current: true,
-    note: "Lakehouse platforms, data engineering, analytics at enterprise scale",
+    note: "Lakehouse platforms, data engineering, Power BI, analytics at enterprise scale",
   },
 ];
 
@@ -53,7 +53,7 @@ export function AboutSection() {
       <div className="container-page section-pad">
         <motion.p {...reveal()} className="eyebrow mb-4">About</motion.p>
         <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[18ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
-          From operations to analytics engineering.
+          From operations to enterprise analytics.
         </motion.h2>
 
         <div className="grid lg:grid-cols-12 gap-x-[clamp(2rem,5vw,6rem)] gap-y-12 items-start">

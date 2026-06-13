@@ -125,9 +125,9 @@ export function CertificationsSection() {
               <div className="relative flex flex-wrap items-stretch gap-y-4">
                 <span aria-hidden className="absolute left-0 right-0 top-1/2 h-px bg-border hidden md:block" />
                 <div className="relative flex flex-wrap gap-x-[clamp(1.5rem,3vw,3.5rem)] gap-y-4 w-full">
-                  {t.certs.map((c) => (
+                  {t.certs.map((c, ci) => (
                     <div
-                      key={c.code}
+                      key={`${c.name}-${ci}`}
                       className="relative panel rounded-xl px-4 py-3 flex items-center gap-3"
                     >
                       <IssuerLogo issuer={c.issuer} />

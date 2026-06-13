@@ -2,9 +2,9 @@ import type { Profile } from "@/types";
 
 export const profile: Profile = {
   name: "Dheeraj Kashyap",
-  role: "BI & Analytics Engineer",
-  tagline: "Turning complex data into business growth.",
-  bio: `BI & Analytics Engineer at Amplify Analytix and 13×-certified data professional. I design Lakehouse platforms, build CI/CD data environments, and deliver end-to-end analytics — from raw ingestion through to executive-ready reporting that global teams depend on daily.`,
+  role: "Business Intelligence & Analytics Engineer",
+  tagline: "Transforming complex business data into scalable analytics solutions, automated workflows, and executive-ready insights.",
+  bio: `Business Intelligence & Analytics Engineer at Amplify Analytix and 13×-certified data professional. I design Lakehouse platforms, build CI/CD data environments, and deliver end-to-end analytics — from raw ingestion through to executive-ready reporting that global teams depend on daily.`,
   location: "Greater Bengaluru Area, India",
   email: "kash.dheeraj.yap@gmail.com",
   avatar: "/images/avatar.jpg",

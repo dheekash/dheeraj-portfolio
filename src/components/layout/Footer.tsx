@@ -30,7 +30,7 @@ export function Footer() {
           >
             <p className="eyebrow mb-[clamp(1.25rem,2vw,2rem)]">Let&apos;s work together</p>
             <h2 className="ink-fade mb-[clamp(1.5rem,2.5vw,2.25rem)]">
-              Let&apos;s build better decisions <span className="accent-text">with data.</span>
+              Let&apos;s build something <span className="accent-text">impactful together.</span>
             </h2>
             <p className="leading-relaxed text-muted-foreground max-w-[52ch] mb-[clamp(2rem,3.5vw,3rem)]">
               Whether you&apos;re modernizing a Lakehouse, building executive reporting,

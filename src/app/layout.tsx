@@ -88,7 +88,7 @@ const jsonLd = {
   jobTitle: "BI & Analytics Engineer",
   worksFor: { "@type": "Organization", name: "Amplify Analytix" },
   description:
-    "Business Analyst at Amplify Analytix — designing Lakehouse platforms, CI/CD data environments, and executive reporting with Microsoft Fabric, Databricks, Snowflake, and Power BI.",
+    "Business Intelligence & Analytics Engineer at Amplify Analytix — designing Lakehouse platforms, CI/CD data environments, and executive reporting with Microsoft Fabric, Databricks, Snowflake, and Power BI.",
   url: siteUrl,
   email: "kash.dheeraj.yap@gmail.com",
   address: {
