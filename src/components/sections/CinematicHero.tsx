@@ -135,7 +135,7 @@ export function CinematicHero() {
           </motion.p>
 
           {/* Rotating headline */}
-          <div className="relative mb-[clamp(1.25rem,1.5vw,2rem)] min-h-[2.05em] [font-size:clamp(2.5rem,1.25rem+5vw,6rem)]">
+          <div className="relative mb-[clamp(1.25rem,1.5vw,2rem)] min-h-[2.05em] [font-size:clamp(2rem,1rem+3vw,4.5rem)]">
             <AnimatePresence mode="wait">
               <motion.h1
                 key={idx}
