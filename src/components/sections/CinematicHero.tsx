@@ -48,7 +48,7 @@ export function CinematicHero() {
 
       <div className="container-page relative py-[clamp(6.5rem,4rem+8vw,11rem)]">
         <motion.p {...fadeUp(0)} className="eyebrow mb-[clamp(1.25rem,2vw,2rem)]">
-          Dheeraj Kashyap · BI &amp; Analytics Engineer · Analytics Architect
+          Dheeraj Kashyap · Business Analyst @ Amplify Analytix · 13× Certified
         </motion.p>
 
         {/* Rotating headline — reserved block height, no layout shift */}
@@ -71,11 +71,11 @@ export function CinematicHero() {
           {...fadeUp(0.15)}
           className="max-w-[58ch] leading-relaxed text-muted-foreground mb-[clamp(2rem,3vw,3rem)]"
         >
-          Analytics and BI engineer with 7+ years architecting enterprise data
-          platforms, Lakehouse ecosystems, and executive reporting products
-          across e-commerce, manufacturing, consulting, and global
-          marketplaces — trusted by stakeholders in 15+ countries to turn
-          fragmented data into measurable outcomes.
+          I turn raw, messy data into pipelines, dashboards, and decisions.
+          Across BI, data engineering, and machine learning, I design Lakehouse
+          platforms, build CI/CD data environments, and deliver end-to-end
+          reporting that global teams depend on daily — built on Microsoft
+          Fabric, Databricks, Snowflake, and Power BI.
         </motion.p>
 
         <motion.div {...fadeUp(0.28)} className="flex flex-wrap items-center gap-[clamp(0.75rem,1.5vw,1.25rem)] mb-[clamp(2.5rem,4vw,4rem)]">

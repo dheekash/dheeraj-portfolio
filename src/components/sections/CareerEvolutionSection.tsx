@@ -6,33 +6,33 @@ import { motion, useScroll, useTransform } from "framer-motion";
 const stages = [
   {
     label: "Customer Operations",
-    org: "Frontizo · 2019",
-    impact: "Reduced AHT by 31% and hit 94% contact resolution — by keeping score in spreadsheets nobody asked for.",
+    org: "Frontizo · 2019–2020",
+    impact: "Optimised support processes to lift first-contact resolution and CSAT, and presented Voice-of-Customer analytics that drove policy changes — my first taste of turning interactions into evidence.",
   },
   {
-    label: "Investigation Analytics",
-    org: "Amazon · 2020",
-    impact: "Cut investigation time by 35 minutes per case and lifted throughput 30% with self-serve reporting.",
+    label: "Risk Investigation",
+    org: "Amazon · 2020–2024",
+    impact: "Investigated high-risk cases across customer and merchant accounts using operational workflows, pattern recognition, and policy-compliance frameworks at large case volumes.",
   },
   {
-    label: "Fraud Intelligence",
-    org: "Amazon",
-    impact: "Built fraud detection models that interrogated marketplace data adversarially — every number a verified claim.",
+    label: "Fraud & Pattern Analysis",
+    org: "Amazon · Investigation Specialist",
+    impact: "Analysed transactional and behavioural patterns to detect fraud and escalate emerging risk — earning Employee of the Quarter. Every number had to survive cross-examination.",
   },
   {
     label: "Business Intelligence",
-    org: "Amazon · Analytics Lead",
-    impact: "Led a 15-person analytics team and shipped executive BI used in weekly business reviews across 8 markets.",
+    org: "Amplify Analytix · 2025",
+    impact: "Built Power BI reporting suites (DirectQuery, Composite Models) and IBCS-compliant Zebra BI visuals for enterprise clients, eliminating hours of manual consolidation.",
   },
   {
     label: "Data Platforms",
-    org: "Amplify Analytix · 2025",
-    impact: "Architected Fabric Lakehouse ecosystems and governed semantic layers for global enterprise clients.",
+    org: "Amplify Analytix",
+    impact: "Engineered Medallion (Bronze/Silver/Gold) pipelines on Microsoft Fabric — Dataflows Gen2, Lakehouse, OneLake — with CI/CD SQLMesh environments and Delta Lake incremental loading.",
   },
   {
     label: "Enterprise Analytics Engineering",
     org: "Amplify Analytix · present",
-    impact: "20+ enterprise data products across 15 countries — at 100% client retention.",
+    impact: "Authored extensive DAX measures, enforced RLS and OLS across global markets, optimised Star Schema models, and drove strategic account reviews that improved client retention.",
   },
 ];
 

@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default:
-      "Dheeraj Kashyap | BI & Analytics Engineer — Microsoft Fabric, Databricks, Snowflake, Power BI",
+      "Dheeraj Kashyap | Business Analyst & BI Engineer — Microsoft Fabric, Databricks, Snowflake, Power BI",
     template: "%s | Dheeraj Kashyap",
   },
   description:
-    "Senior BI & Analytics Engineer with 7+ years of experience delivering Lakehouse architectures, enterprise reporting, and scalable data platforms using Microsoft Fabric, Databricks, Snowflake, and Power BI.",
+    "Dheeraj Kashyap — Business Analyst at Amplify Analytix and 13× certified data professional, designing Lakehouse platforms, CI/CD data environments, and executive reporting with Microsoft Fabric, Databricks, Snowflake, and Power BI.",
   keywords: [
     "BI Engineer",
     "Analytics Engineer",
@@ -56,23 +56,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Dheeraj Kashyap",
-    title: "Dheeraj Kashyap | BI & Analytics Engineer",
+    title: "Dheeraj Kashyap | Business Analyst & BI Engineer",
     description:
-      "Senior BI & Analytics Engineer specializing in Microsoft Fabric, Databricks, Snowflake, Power BI, and Lakehouse Architecture.",
+      "Business Analyst at Amplify Analytix · 13× certified across Microsoft Fabric, Databricks, Snowflake, and Power BI.",
     images: [
       {
         url: `${siteUrl}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "Dheeraj Kashyap — BI & Analytics Engineer",
+        alt: "Dheeraj Kashyap — Business Analyst & BI Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dheeraj Kashyap | BI & Analytics Engineer",
+    title: "Dheeraj Kashyap | Business Analyst & BI Engineer",
     description:
-      "Senior BI & Analytics Engineer — Microsoft Fabric, Databricks, Snowflake, Power BI.",
+      "Business Analyst at Amplify Analytix — Microsoft Fabric, Databricks, Snowflake, Power BI.",
     images: [`${siteUrl}/og-image.png`],
   },
   robots: {
@@ -93,9 +93,10 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Dheeraj Kashyap",
-  jobTitle: "BI & Analytics Engineer",
+  jobTitle: "Business Analyst",
+  worksFor: { "@type": "Organization", name: "Amplify Analytix" },
   description:
-    "Senior BI & Analytics Engineer specializing in Microsoft Fabric, Databricks, Snowflake, Power BI, and Lakehouse Architecture.",
+    "Business Analyst at Amplify Analytix — designing Lakehouse platforms, CI/CD data environments, and executive reporting with Microsoft Fabric, Databricks, Snowflake, and Power BI.",
   url: siteUrl,
   email: "kash.dheeraj.yap@gmail.com",
   address: {
@@ -123,6 +124,8 @@ const jsonLd = {
   ],
   alumniOf: [
     { "@type": "CollegeOrUniversity", name: "Deakin University" },
+    { "@type": "CollegeOrUniversity", name: "The University of Texas at Austin" },
+    { "@type": "CollegeOrUniversity", name: "Great Lakes Institute of Management" },
     { "@type": "CollegeOrUniversity", name: "REVA University" },
   ],
 };

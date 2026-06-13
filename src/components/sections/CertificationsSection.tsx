@@ -4,36 +4,46 @@ import { motion } from "framer-motion";
 import { MicrosoftLogo, DatabricksLogo, SnowflakeLogo } from "@/components/common/TechLogos";
 
 /**
- * A learning journey, not a card wall: four specialization tracks set as
- * ruled ladder rows, credentials strung chronologically along each line.
+ * A learning journey, not a card wall: 13 real credentials set as ruled
+ * ladder rows by specialization, strung in the order they were earned.
  */
 const tracks = [
   {
-    track: "Cloud",
-    arc: "Foundation",
-    certs: [{ name: "Azure Administrator Associate", code: "AZ-104", issuer: "Microsoft" }],
-  },
-  {
-    track: "Analytics",
-    arc: "Specialization",
+    track: "Cloud & Platform Foundations",
+    arc: "2021",
     certs: [
-      { name: "Power BI Data Analyst Associate", code: "PL-300", issuer: "Microsoft" },
-      { name: "Fabric Analytics Engineer Associate", code: "DP-600", issuer: "Microsoft" },
+      { name: "Power Platform Fundamentals", code: "Aug 2021", issuer: "Microsoft" },
+      { name: "Azure AI Fundamentals", code: "Sep 2021", issuer: "Microsoft" },
+      { name: "Azure Fundamentals", code: "Dec 2021", issuer: "Microsoft" },
+      { name: "Microsoft 365 Fundamentals", code: "Dec 2021", issuer: "Microsoft" },
+      { name: "Azure Administrator · AZ-104", code: "Dec 2021", issuer: "Microsoft" },
     ],
   },
   {
-    track: "Data Engineering",
-    arc: "Depth",
+    track: "Analytics & BI",
+    arc: "2021–2024",
     certs: [
-      { name: "Fabric Data Engineer Associate", code: "DP-700", issuer: "Microsoft" },
-      { name: "SnowPro Core Associate", code: "SnowPro", issuer: "Snowflake" },
-      { name: "Databricks Data Engineer Associate", code: "DEA", issuer: "Databricks" },
+      { name: "Power BI Data Analyst · PL-300", code: "Sep 2021", issuer: "Microsoft" },
+      { name: "Fabric Analytics Engineer · DP-600", code: "Dec 2024", issuer: "Microsoft" },
     ],
   },
   {
-    track: "Data Science",
-    arc: "Frontier",
-    certs: [{ name: "Azure Data Scientist Associate", code: "DP-100", issuer: "Microsoft" }],
+    track: "Data & AI",
+    arc: "2022–2023",
+    certs: [
+      { name: "Azure Data Fundamentals", code: "Feb 2022", issuer: "Microsoft" },
+      { name: "Security, Compliance & Identity", code: "Feb 2022", issuer: "Microsoft" },
+      { name: "Azure Data Scientist · DP-100", code: "Feb 2023", issuer: "Microsoft" },
+    ],
+  },
+  {
+    track: "Platform Engineering",
+    arc: "2025–2026",
+    certs: [
+      { name: "Fabric Data Engineer · DP-700", code: "Jun 2025", issuer: "Microsoft" },
+      { name: "SnowPro Associate: Platform", code: "Jan 2026", issuer: "Snowflake" },
+      { name: "Databricks Data Engineer Associate", code: "May 2026", issuer: "Databricks" },
+    ],
   },
 ];
 
@@ -62,8 +72,9 @@ export function CertificationsSection() {
           Credentialed where the work happens.
         </motion.h2>
         <motion.p {...reveal(0.1)} className="text-muted-foreground max-w-[52ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
-          Cloud foundation first, then analytics, then platform depth — each
-          certification earned while shipping the technology it covers.
+          Thirteen certifications, five years — cloud foundations first, then
+          analytics, then platform depth. Each one earned while shipping the
+          technology it covers.
         </motion.p>
 
         <div className="max-w-6xl">
