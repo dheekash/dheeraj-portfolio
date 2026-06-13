@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
+import { ScrollExperience } from "@/components/common/ScrollExperience";
+import { CustomCursor } from "@/components/common/CustomCursor";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -21,6 +23,8 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         Skip to content
       </a>
       <div className="grain" aria-hidden />
+      <ScrollExperience />
+      <CustomCursor />
       <Navbar />
       <main id="main-content">{children}</main>
       <Footer />

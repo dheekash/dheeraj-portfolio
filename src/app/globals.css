@@ -249,6 +249,47 @@
   .rule-thick { border-top: 2.5px solid var(--foreground); }
 }
 
+/* ── Custom cursor (desktop only; JS adds .has-custom-cursor) ── */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 9999px;
+  margin-left: -0.25rem;
+  margin-top: -0.25rem;
+  transition: opacity 0.25s ease;
+}
+.cursor-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--primary);
+}
+.cursor-ring {
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 1.5px solid color-mix(in srgb, var(--primary) 70%, transparent);
+  transition: opacity 0.25s ease, width 0.25s ease, height 0.25s ease,
+              margin 0.25s ease, background-color 0.25s ease;
+}
+.cursor-ring--active {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-left: -1.25rem;
+  margin-top: -1.25rem;
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+}
+@media (pointer: fine) {
+  .has-custom-cursor,
+  .has-custom-cursor a,
+  .has-custom-cursor button,
+  .has-custom-cursor [role="button"] {
+    cursor: none;
+  }
+}
+
 /* ── Film grain (subtler on paper, fuller in the dark) ── */
 .grain {
   position: fixed;

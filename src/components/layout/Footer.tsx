@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Calendar, Download } from "lucide-react";
 import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
+import { MagneticButton } from "@/components/common/MagneticButton";
 import { profile } from "@/data/profile";
 
 export function Footer() {
@@ -37,14 +38,14 @@ export function Footer() {
           </p>
 
           <div className="flex flex-wrap justify-center items-center gap-[clamp(0.75rem,1.5vw,1.25rem)] mb-[clamp(2.5rem,4vw,4rem)]">
-            <a
+            <MagneticButton
               href={profile.calendlyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity glow-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              className="items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 glow-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
             >
               <Calendar size={15} /> Schedule a Conversation
-            </a>
+            </MagneticButton>
             <a
               href={profile.resumeUrl}
               target="_blank"

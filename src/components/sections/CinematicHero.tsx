@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { DataStreamCanvas } from "@/components/common/DataStreamCanvas";
+import { MagneticButton } from "@/components/common/MagneticButton";
 import { profile } from "@/data/profile";
 
 const headlines = [
@@ -79,12 +80,12 @@ export function CinematicHero() {
         </motion.p>
 
         <motion.div {...fadeUp(0.28)} className="flex flex-wrap items-center gap-[clamp(0.75rem,1.5vw,1.25rem)] mb-[clamp(2.5rem,4vw,4rem)]">
-          <a
+          <MagneticButton
             href="#case-studies"
-            className="inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity glow-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+            className="items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.2vw,1rem)] rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 glow-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
           >
             View Case Studies <ArrowRight size={15} />
-          </a>
+          </MagneticButton>
           <a
             href={profile.resumeUrl}
             target="_blank"

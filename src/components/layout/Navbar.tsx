@@ -7,23 +7,37 @@ import { LinkedinIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
 
 const links = [
-  { href: "#case-studies", label: "Case Studies" },
-  { href: "#journey", label: "Career Journey" },
-  { href: "#architecture", label: "Architecture" },
-  { href: "#certifications", label: "Certifications" },
-  { href: "#contact", label: "Contact" },
+  { href: "#case-studies", id: "case-studies", label: "Case Studies" },
+  { href: "#journey", id: "journey", label: "Career Journey" },
+  { href: "#architecture", id: "architecture", label: "Architecture" },
+  { href: "#certifications", id: "certifications", label: "Certifications" },
+  { href: "#contact", id: "contact", label: "Contact" },
 ];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
 
+  // Show on scroll up, hide on scroll down (once past the hero)
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
-    onScroll();
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 16);
+      if (open) {
+        setHidden(false);
+      } else if (y > last && y > 320) {
+        setHidden(true);
+      } else if (y < last) {
+        setHidden(false);
+      }
+      last = y;
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [open]);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1024px)");
@@ -32,11 +46,30 @@ export function Navbar() {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
+  // Highlight the section currently in view
+  useEffect(() => {
+    const sections = links
+      .map((l) => document.getElementById(l.id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (sections.length === 0) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const vis = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (vis) setActive(vis.target.id);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5] }
+    );
+    sections.forEach((s) => io.observe(s));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
-        scrolled || open ? "glass-nav" : "bg-transparent border-b border-transparent"
-      }`}
+      className={`fixed top-0 inset-x-0 z-50 transition-[transform,background-color,border-color] duration-300 ${
+        hidden ? "-translate-y-full" : "translate-y-0"
+      } ${scrolled || open ? "glass-nav" : "bg-transparent border-b border-transparent"}`}
     >
       <div className="container-page h-[3.75rem] flex items-center justify-between gap-4">
         <a
@@ -51,9 +84,19 @@ export function Navbar() {
             <a
               key={l.href}
               href={l.href}
-              className="px-3 py-2 text-[13px] text-muted-foreground hover:text-foreground transition-colors rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              aria-current={active === l.id ? "true" : undefined}
+              className={`relative px-3 py-2 text-[13px] transition-colors rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
+                active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               {l.label}
+              {active === l.id && (
+                <span
+                  aria-hidden
+                  className="absolute left-3 right-3 -bottom-0.5 h-px"
+                  style={{ background: "var(--primary)" }}
+                />
+              )}
             </a>
           ))}
         </nav>
