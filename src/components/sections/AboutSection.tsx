@@ -13,11 +13,18 @@ function reveal(delay = 0) {
 
 const progression = [
   {
+    role: "Customer Operations",
+    org: "Frontizo",
+    years: "2019–2020",
+    current: false,
+    note: "Voice-of-customer analytics, support operations, first-contact resolution",
+  },
+  {
     role: "Investigation Specialist",
     org: "Amazon",
     years: "2020–2024",
     current: false,
-    note: "Pattern recognition, fraud detection, operational data at scale",
+    note: "Fraud detection, transactional pattern analysis, operational data at scale",
   },
   {
     role: "Business Analyst",

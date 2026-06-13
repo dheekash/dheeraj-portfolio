@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 /* ────────────────────────────────────────────────────────────────────
    Hand-drawn, theme-aware diagrams. Ink = currentColor, accent = var(--dgrm).
@@ -352,19 +353,76 @@ function StudyFour() {
   );
 }
 
+type Filter = "All" | "Power BI" | "Microsoft Fabric" | "Databricks" | "Snowflake" | "Analytics Engineering" | "Business Intelligence";
+
+const FILTERS: Filter[] = [
+  "All", "Power BI", "Microsoft Fabric", "Databricks", "Snowflake",
+  "Analytics Engineering", "Business Intelligence",
+];
+
+const STUDY_TAGS: Record<string, Filter[]> = {
+  "01": ["Power BI", "Databricks", "Analytics Engineering"],
+  "02": ["Power BI", "Databricks", "Snowflake"],
+  "03": ["Microsoft Fabric", "Analytics Engineering"],
+  "04": ["Power BI", "Snowflake", "Business Intelligence"],
+};
+
 export function CaseStudiesSection() {
+  const [active, setActive] = useState<Filter>("All");
+
+  const visible = (id: string) =>
+    active === "All" || (STUDY_TAGS[id]?.includes(active) ?? false);
+
   return (
     <section id="case-studies">
       <div className="container-page section-pad">
         <motion.p {...reveal()} className="eyebrow mb-4">Flagship work</motion.p>
-        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[20ch] mb-[clamp(3rem,5vw,5.5rem)]">
+        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[20ch] mb-[clamp(2rem,3.5vw,3.5rem)]">
           From raw data to executive decisions.
         </motion.h2>
 
-        <StudyOne />
-        <StudyTwo />
-        <StudyThree />
-        <StudyFour />
+        {/* Filter bar */}
+        <motion.div
+          {...reveal(0.08)}
+          className="flex flex-wrap gap-2 mb-[clamp(2.5rem,4vw,5rem)]"
+          role="group"
+          aria-label="Filter projects"
+        >
+          {FILTERS.map((f) => (
+            <button
+              key={f}
+              onClick={() => setActive(f)}
+              aria-pressed={active === f}
+              className={`px-3.5 py-1.5 rounded-full text-[12px] font-medium transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
+                active === f
+                  ? "bg-primary text-primary-foreground"
+                  : "panel text-muted-foreground hover:text-foreground hover:border-primary/30"
+              }`}
+            >
+              {f}
+            </button>
+          ))}
+        </motion.div>
+
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {visible("01") && <StudyOne />}
+            {visible("02") && <StudyTwo />}
+            {visible("03") && <StudyThree />}
+            {visible("04") && <StudyFour />}
+            {!visible("01") && !visible("02") && !visible("03") && !visible("04") && (
+              <p className="text-muted-foreground text-sm py-12 text-center">
+                No projects match this filter yet.
+              </p>
+            )}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

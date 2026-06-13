@@ -37,6 +37,9 @@ export function Footer() {
               implementing Microsoft Fabric, or scaling enterprise analytics — I design
               systems that drive measurable outcomes.
             </p>
+            <p className="text-[13px] text-muted-foreground/70 font-mono mb-[clamp(1.5rem,2.5vw,2rem)] -mt-[clamp(1rem,1.5vw,1.5rem)]">
+              Typically responds within 24 hours.
+            </p>
 
             <div className="flex flex-wrap items-center gap-[clamp(0.75rem,1.5vw,1.25rem)] mb-[clamp(2rem,3vw,2.5rem)]">
               <MagneticButton
@@ -99,10 +102,9 @@ export function Footer() {
               <p className="eyebrow mb-3">Open to</p>
               <ul className="space-y-2">
                 {[
-                  "BI Engineer roles",
-                  "Analytics Engineer roles",
-                  "Data Analyst roles",
-                  "Consulting opportunities",
+                  "Full-time BI & Analytics roles",
+                  "Contract opportunities",
+                  "Consulting engagements",
                   "Freelance analytics projects",
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2.5 text-[13px] text-muted-foreground">
