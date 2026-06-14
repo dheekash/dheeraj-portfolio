@@ -37,7 +37,7 @@ export function Footer() {
             className="lg:col-span-7"
           >
             <h2 className="mb-4">
-              Let&apos;s build better <span className="accent-text">data products.</span>
+              Let&apos;s build analytics systems <span className="accent-text">that scale.</span>
             </h2>
             <p className="leading-relaxed text-muted-foreground max-w-[52ch] mb-[clamp(2rem,3.5vw,3rem)]">
               Whether you need a Senior BI Engineer to architect your Fabric Lakehouse, a consulting
