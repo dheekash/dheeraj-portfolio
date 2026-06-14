@@ -79,8 +79,7 @@ export function SkillsSection() {
   return (
     <section id="skills">
       <div className="container-page section-pad">
-        <motion.p {...reveal()} className="eyebrow mb-4">Stack</motion.p>
-        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[18ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
+        <motion.h2 {...reveal()} className="max-w-[18ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
           What I work with
         </motion.h2>
 

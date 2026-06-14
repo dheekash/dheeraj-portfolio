@@ -15,20 +15,16 @@ const quickFacts = [
   { label: "Location",          value: "Bengaluru, India" },
   { label: "Experience",        value: "6+ years"         },
   { label: "Industries served", value: "Retail, Manufacturing, E-commerce, Finance" },
-  { label: "Availability",      value: "Open — full-time & freelance" },
+  { label: "Availability",      value: "Open: full-time and freelance" },
 ];
 
-const specializations = [
-  "Power BI", "Microsoft Fabric", "Databricks", "Snowflake",
-  "SQL", "Python", "Azure", "AWS", "dbt", "SQLMesh", "DAX", "Data Modeling",
-];
 
 export function AboutSection() {
   return (
     <section id="about">
       <div className="container-page section-pad">
         <motion.p {...reveal()} className="eyebrow mb-4">About</motion.p>
-        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[14ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
+        <motion.h2 {...reveal(0.05)} className="max-w-[14ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
           My background
         </motion.h2>
 
@@ -40,7 +36,7 @@ export function AboutSection() {
               className="text-[clamp(1rem,0.9rem+0.3vw,1.15rem)] leading-relaxed text-muted-foreground"
             >
               I started in operations and spent years close to the business problems that bad data
-              creates. That&apos;s why I build pipelines that don&apos;t just move data — they make
+              creates. That&apos;s why I build pipelines that don&apos;t just move data. They make
               it usable by the people who need it most.
             </motion.p>
             <motion.p
@@ -53,19 +49,6 @@ export function AboutSection() {
               depend on every day.
             </motion.p>
 
-            <motion.div {...reveal(0.16)} className="pt-[clamp(0.75rem,1.5vw,1.25rem)]">
-              <p className="eyebrow mb-4">Core specializations</p>
-              <div className="flex flex-wrap gap-2">
-                {specializations.map((s) => (
-                  <span
-                    key={s}
-                    className="px-3 py-1.5 rounded-lg panel text-[13px] font-medium hover:border-primary/40 transition-colors duration-150"
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
           </div>
 
           {/* Quick facts */}

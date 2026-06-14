@@ -14,7 +14,7 @@ const timeline = [
     period: "2020–2022",
     role: "Investigation Specialist",
     company: "Amazon",
-    achievement: "Investigated fraud at scale — developed the habit of questioning every number before trusting it.",
+    achievement: "Investigated fraud at scale and developed the habit of questioning every number before trusting it.",
     current: false,
   },
   {
@@ -54,7 +54,7 @@ export function CareerEvolutionSection() {
     <section id="journey">
       <div className="container-page section-pad">
         <motion.p {...reveal()} className="eyebrow mb-4">Career</motion.p>
-        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[14ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
+        <motion.h2 {...reveal(0.05)} className="max-w-[14ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
           Experience
         </motion.h2>
 

@@ -129,7 +129,7 @@ const studies: Study[] = [
     title: "Real-Time Sales Intelligence Platform",
     challenge: "Sales teams were making decisions on 6-hour-old data. By the time batch reports arrived, inventory gaps had already cost revenue.",
     built: "A Databricks streaming pipeline processing 5M+ daily transactions across 8 markets, feeding Power BI DirectQuery dashboards with near-real-time visibility.",
-    outcome: "Reduced reporting time from 6 hours to under 10 minutes — saving ~$90K/yr in analyst hours and enabling same-day decisions across 8 regional markets.",
+    outcome: "Reduced reporting time from 6 hours to under 10 minutes, saving ~$90K/yr in analyst hours and enabling same-day decisions across 8 regional markets.",
     stack: ["Databricks", "Azure Data Factory", "PySpark", "Delta Live Tables", "Power BI"],
     Diagram: DiagramLatency,
     detailPoints: [
@@ -145,9 +145,9 @@ const studies: Study[] = [
     num: "02",
     domain: "Customer retention",
     title: "Customer Churn Analytics Pipeline",
-    challenge: "The customer success team only learned about churn after cancellations happened — there was no early-warning system and no way to intervene.",
+    challenge: "The customer success team only learned about churn after cancellations happened; there was no early-warning system and no way to intervene.",
     built: "An end-to-end ML pipeline using Databricks and Snowflake that ranked 2M+ customers by churn risk daily, delivering a prioritised intervention list to the CS team.",
-    outcome: "Churn dropped 18% within 6 months — retaining approximately $300K in annual revenue and shifting the CS team from reactive to proactive.",
+    outcome: "Churn dropped 18% within 6 months, retaining approximately $300K in annual revenue and shifting the CS team from reactive to proactive.",
     stack: ["Databricks", "Snowflake", "dbt", "MLflow", "Power BI", "Python"],
     Diagram: DiagramChurn,
     detailPoints: [
@@ -164,7 +164,7 @@ const studies: Study[] = [
     domain: "Platform modernisation",
     title: "Enterprise Fabric Lakehouse Migration",
     challenge: "A legacy data warehouse was failing 12% of pipeline runs every month. The data team spent more time firefighting than building new analytics.",
-    built: "A phased migration to Microsoft Fabric with a Medallion architecture and 200+ SQLMesh-managed transformation models — run in parallel with the legacy system until every number reconciled.",
+    built: "A phased migration to Microsoft Fabric with a Medallion architecture and 200+ SQLMesh-managed transformation models, run in parallel with the legacy system until every number reconciled.",
     outcome: "Pipeline failures dropped from 12% to under 1%. Maintenance effort fell 90%, freeing the team to build new capabilities instead of fixing old ones.",
     stack: ["Microsoft Fabric", "SQLMesh", "Delta Lake", "OneLake", "Power BI", "Python"],
     Diagram: DiagramReliability,
@@ -181,8 +181,8 @@ const studies: Study[] = [
     num: "04",
     domain: "Operational visibility",
     title: "Global Manufacturing Analytics Suite",
-    challenge: "15 country teams ran their own spreadsheet reports. Executive roll-ups took 4+ hours and still didn't agree — everyone had a different version of the truth.",
-    built: "A unified Snowflake warehouse with dbt transformation layers and Power BI semantic models with row-level security — one governed truth for 200+ users across 15 markets.",
+    challenge: "15 country teams ran their own spreadsheet reports. Executive roll-ups took 4+ hours and still didn't agree; everyone had a different version of the truth.",
+    built: "A unified Snowflake warehouse with dbt transformation layers and Power BI semantic models with row-level security, delivering one governed truth for 200+ users across 15 markets.",
     outcome: "Refresh time dropped from 4 hours to 15 minutes. Eliminated 40+ manual Excel reports and gave executives real-time cross-market benchmarking for the first time.",
     stack: ["Power BI", "Snowflake", "dbt", "Azure Data Factory", "SQL", "DAX"],
     Diagram: DiagramHub,
@@ -382,7 +382,7 @@ export function CaseStudiesSection() {
     <section id="case-studies">
       <div className="container-page section-pad">
         <motion.p {...reveal()} className="eyebrow mb-4">Flagship work</motion.p>
-        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[18ch] mb-[clamp(2rem,3.5vw,3.5rem)]">
+        <motion.h2 {...reveal(0.05)} className="max-w-[18ch] mb-[clamp(2rem,3.5vw,3.5rem)]">
           Selected projects
         </motion.h2>
 

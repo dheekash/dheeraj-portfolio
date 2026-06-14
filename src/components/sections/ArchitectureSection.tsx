@@ -30,15 +30,14 @@ export function ArchitectureSection() {
   return (
     <section id="architecture">
       <div className="container-page section-pad">
-        <motion.p {...reveal()} className="eyebrow mb-4">Architecture</motion.p>
-        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[20ch] mb-4">
+        <motion.h2 {...reveal()} className="max-w-[20ch] mb-4">
           How it all connects
         </motion.h2>
 
         {/* Plain-English caption for non-technical visitors */}
         <motion.p {...reveal(0.08)} className="text-muted-foreground max-w-[60ch] text-sm leading-relaxed mb-[clamp(3rem,5vw,5.5rem)]">
-          This diagram shows how data flows from your existing business systems — ERPs, APIs,
-          and databases — through a governed, tested pipeline all the way to the dashboards your
+          This diagram shows how data flows from your existing business systems (ERPs, APIs,
+          and databases) through a governed, tested pipeline all the way to the dashboards your
           team uses every day. Every stage is version-controlled and auditable, so you can always
           trust what you see in the report.
         </motion.p>

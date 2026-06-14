@@ -36,13 +36,12 @@ export function Footer() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-7"
           >
-            <p className="eyebrow mb-[clamp(1.25rem,2vw,2rem)]">Get in touch</p>
-            <h2 className="ink-fade mb-4">
+            <h2 className="mb-4">
               Ready to work <span className="accent-text">together?</span>
             </h2>
             <p className="leading-relaxed text-muted-foreground max-w-[52ch] mb-[clamp(2rem,3.5vw,3rem)]">
-              Whether you need a full-time data engineer or a freelance partner for your next build
-              — I&apos;d love to hear about it.
+              Whether you need a full-time data engineer or a freelance partner for your next build,
+              I&apos;d love to hear about it.
             </p>
 
             {/* Three primary CTAs */}

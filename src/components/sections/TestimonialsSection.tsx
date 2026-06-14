@@ -24,7 +24,7 @@ const testimonials = [
   },
   {
     quote:
-      "He didn't just build dashboards — he understood our business first and then built exactly what we needed to make decisions faster. Our churn is down and our CS team actually uses the reports he delivered.",
+      "He didn't just build dashboards. He understood our business first and then built exactly what we needed to make decisions faster. Our churn is down and our CS team actually uses the reports he delivered.",
     name: "Arjun P.",
     role: "VP Customer Success",
     company: "SaaS Company",
@@ -44,8 +44,7 @@ export function TestimonialsSection() {
   return (
     <section id="testimonials">
       <div className="container-page section-pad">
-        <motion.p {...reveal()} className="eyebrow mb-4">Social proof</motion.p>
-        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[18ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
+        <motion.h2 {...reveal()} className="max-w-[18ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
           What clients say
         </motion.h2>
 
@@ -55,7 +54,7 @@ export function TestimonialsSection() {
           className="mb-8 px-4 py-3 rounded-xl border border-amber-400/40 bg-amber-50/50 dark:bg-amber-900/10"
         >
           <p className="text-[12px] font-mono text-amber-700 dark:text-amber-400">
-            [NEEDS REAL CONTENT] — Replace placeholder quotes below with real testimonials before publishing.
+            [NEEDS REAL CONTENT]: Replace placeholder quotes below with real testimonials before publishing.
           </p>
         </motion.div>
 
@@ -67,7 +66,7 @@ export function TestimonialsSection() {
               className="panel panel-lift rounded-2xl p-[clamp(1.25rem,2vw,1.75rem)] flex flex-col gap-5"
             >
               {/* Quote marks */}
-              <span aria-hidden className="text-4xl leading-none accent-text font-serif select-none">&ldquo;</span>
+              <span aria-hidden className="text-4xl leading-none accent-text select-none" style={{ fontVariant: "normal" }}>&ldquo;</span>
 
               <blockquote className="text-[14px] leading-relaxed text-muted-foreground flex-1 -mt-3">
                 {t.quote}

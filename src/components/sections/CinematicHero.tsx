@@ -6,21 +6,6 @@ import { ArrowRight, ArrowUpRight, Calendar, Mail } from "lucide-react";
 import { DataStreamCanvas } from "@/components/common/DataStreamCanvas";
 import { MagneticButton } from "@/components/common/MagneticButton";
 import { profile } from "@/data/profile";
-import {
-  PowerBILogo, FabricLogo, DatabricksLogo, SnowflakeLogo,
-  PythonLogo, SQLLogo, AzureLogo, AWSLogo,
-} from "@/components/common/TechLogos";
-
-const techStack = [
-  { label: "Power BI",   Logo: PowerBILogo    },
-  { label: "Fabric",     Logo: FabricLogo     },
-  { label: "Databricks", Logo: DatabricksLogo },
-  { label: "Snowflake",  Logo: SnowflakeLogo  },
-  { label: "SQL",        Logo: SQLLogo        },
-  { label: "Python",     Logo: PythonLogo     },
-  { label: "Azure",      Logo: AzureLogo      },
-  { label: "AWS",        Logo: AWSLogo        },
-];
 
 const heroStats = [
   { num: "5M+",  label: "Records processed daily"    },
@@ -82,7 +67,7 @@ function HeroPortrait() {
         <img
           ref={imgRef}
           src="/images/headshot.jpg"
-          alt="Dheeraj Kashyap — Business Intelligence & Analytics Engineer"
+          alt="Dheeraj Kashyap, Business Intelligence and Analytics Engineer"
           loading="eager"
           decoding="async"
           className="w-full h-full object-cover"
@@ -160,27 +145,12 @@ export function CinematicHero() {
           {/* Subtext */}
           <motion.p
             {...fadeUp(0.1)}
-            className="max-w-[56ch] text-[clamp(0.9rem,0.85rem+0.25vw,1.05rem)] leading-relaxed text-muted-foreground mb-[clamp(1.25rem,1.5vw,1.75rem)]"
+            className="max-w-[50ch] text-[clamp(0.9rem,0.85rem+0.25vw,1.05rem)] leading-relaxed text-muted-foreground mb-[clamp(1.5rem,1.8vw,2rem)]"
           >
-            Business Intelligence &amp; Analytics Engineer · 5M+ records · 188+ pipelines built ·{" "}
-            <span className="text-foreground font-medium">Open to freelance &amp; full-time</span>
+            Turning raw business data into trusted pipelines, decisions, and reports that enterprise
+            teams depend on every day.{" "}
+            <span className="text-foreground font-medium">Open to full-time and freelance.</span>
           </motion.p>
-
-          {/* Tech stack badges */}
-          <motion.div
-            {...fadeUp(0.15)}
-            className="flex flex-wrap items-center gap-2 mb-[clamp(1.25rem,1.5vw,1.75rem)]"
-          >
-            {techStack.map(({ label, Logo }) => (
-              <span
-                key={label}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg panel text-[12px] font-medium text-muted-foreground hover:text-foreground hover:border-primary/30 transition-colors duration-150"
-              >
-                <Logo size={13} />
-                {label}
-              </span>
-            ))}
-          </motion.div>
 
           {/* CTAs */}
           <motion.div

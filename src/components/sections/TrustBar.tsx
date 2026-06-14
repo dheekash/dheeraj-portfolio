@@ -76,8 +76,8 @@ export function TrustBar() {
           >
             <p className="text-[clamp(0.85rem,0.8rem+0.25vw,1rem)] leading-relaxed text-muted-foreground">
               <span className="font-semibold text-foreground">Amazon · 4.5 years.</span>{" "}
-              Built the analytical instinct that underpins everything I design today —
-              improving investigation workflows, operational reporting, and cross-functional
+              Built the analytical instinct that underpins everything I design today, through
+              investigation workflows, operational reporting, and cross-functional
               decision-making at one of the world&apos;s most data-intensive organizations.
             </p>
           </div>

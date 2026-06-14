@@ -11,12 +11,12 @@ const steps = [
   {
     num: "02",
     title: "I define what success looks like before writing a line of code.",
-    note: "I agree on the metric that proves the project worked — with the stakeholder, before any engineering begins.",
+    note: "I agree on the metric that proves the project worked, with the stakeholder, before any engineering begins.",
   },
   {
     num: "03",
     title: "I build data foundations that survive audit.",
-    note: "Tested pipelines, version-controlled transformations, full lineage — so the number in the dashboard is one people will actually stake a decision on.",
+    note: "Tested pipelines, version-controlled transformations, full lineage, so the number in the dashboard is one people will actually stake a decision on.",
   },
   {
     num: "04",
@@ -43,8 +43,7 @@ export function ThoughtProcessSection() {
         style={{ background: "radial-gradient(ellipse 50% 55% at 20% 35%, var(--nebula-2) 0%, transparent 70%)" }}
       />
       <div className="container-page section-pad relative">
-        <motion.p {...reveal()} className="eyebrow mb-4">Process</motion.p>
-        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[16ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
+        <motion.h2 {...reveal()} className="max-w-[16ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
           My approach
         </motion.h2>
 

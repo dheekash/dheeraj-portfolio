@@ -72,11 +72,11 @@ export function CertificationsSection() {
     <section id="certifications">
       <div className="container-page section-pad">
         <motion.p {...reveal()} className="eyebrow mb-4">Credentials</motion.p>
-        <motion.h2 {...reveal(0.05)} className="ink-fade max-w-[14ch] mb-[clamp(1.5rem,2.5vw,2rem)]">
+        <motion.h2 {...reveal(0.05)} className="max-w-[14ch] mb-[clamp(1.5rem,2.5vw,2rem)]">
           Certifications
         </motion.h2>
         <motion.p {...reveal(0.1)} className="text-muted-foreground max-w-[52ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
-          13 certifications across five years — each earned while actively shipping the technology
+          13 certifications across five years, each earned while actively shipping the technology
           it covers, not just studying for an exam.
         </motion.p>
 
