@@ -13,7 +13,7 @@ function reveal(delay = 0) {
   };
 }
 
-/* ── SVG diagrams (theme-aware, unchanged) ─────────────────────────────── */
+/* ── SVG diagrams ────────────────────────────────────────────────────────── */
 
 function DiagramLatency() {
   return (
@@ -81,25 +81,93 @@ function DiagramReliability() {
   );
 }
 
-function DiagramHub() {
-  const spokes = Array.from({ length: 15 }, (_, i) => {
-    const angle = (i / 15) * Math.PI * 2 - Math.PI / 2;
-    return { x: 180 + Math.cos(angle) * 80, y: 78 + Math.sin(angle) * 56 };
-  });
+function DiagramFileFlow() {
+  const stages = ["Mailbox", "Validator", "Router", "Blob", "SQL"];
   return (
-    <svg viewBox="0 0 360 170" className="w-full h-auto" role="img" aria-label="15 country ERP systems converging on one governed semantic model serving 200 users">
+    <svg viewBox="0 0 360 150" className="w-full h-auto" role="img" aria-label="Automated file pipeline from vendor mailbox to SQL database">
       <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
-        <text x="0" y="12" opacity="0.5">15 COUNTRIES → ONE SEMANTIC MODEL</text>
-        {spokes.map((s, i) => (
-          <g key={i}>
-            <line x1={s.x} y1={s.y} x2="180" y2="78" stroke="currentColor" strokeWidth="0.8" opacity="0.25" />
-            <circle cx={s.x} cy={s.y} r="3" fill="none" stroke="currentColor" strokeOpacity="0.6" strokeWidth="1.1" />
-          </g>
-        ))}
-        <circle cx="180" cy="78" r="16" fill="var(--dgrm)" />
-        <text x="180" y="81" textAnchor="middle" fill="var(--background)" fontSize="8">RLS</text>
-        <text x="0" y="158" opacity="0.65">refresh: 4 hrs → 15 min</text>
-        <text x="360" y="158" textAnchor="end" fill="var(--dgrm)">200+ users, one truth</text>
+        <text x="0" y="12" opacity="0.5">500+ DAILY FILES · 15 VENDORS · ZERO MANUAL STEPS</text>
+        {stages.map((label, i) => {
+          const x = 10 + i * 70;
+          const isEnd = i === stages.length - 1;
+          return (
+            <g key={label}>
+              <rect x={x} y="40" width="52" height="28" rx="4"
+                fill={isEnd ? "var(--dgrm)" : "none"}
+                stroke={isEnd ? "var(--dgrm)" : "currentColor"}
+                strokeOpacity={isEnd ? 1 : 0.45}
+                strokeWidth="1" />
+              <text x={x + 26} y="57" textAnchor="middle"
+                fill={isEnd ? "var(--background)" : "currentColor"}
+                opacity={isEnd ? 1 : 0.7}
+                fontSize="8">
+                {label}
+              </text>
+              {i < stages.length - 1 && (
+                <path d={`M ${x + 52} 54 L ${x + 66} 54`}
+                  stroke="var(--dgrm)" strokeWidth="1.2" markerEnd="url(#arr)" opacity="0.7" />
+              )}
+            </g>
+          );
+        })}
+        <defs>
+          <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="var(--dgrm)" opacity="0.7" />
+          </marker>
+        </defs>
+        <text x="0" y="108" opacity="0.65">before: 3 hrs/day manual processing</text>
+        <text x="0" y="124" fill="var(--dgrm)">after: 99.8% automated · &lt;5 min per batch</text>
+        <text x="0" y="142" opacity="0.4">finance team: data analysis, not file-wrangling</text>
+      </g>
+    </svg>
+  );
+}
+
+function DiagramFraud() {
+  const bars = [24, 24, 24, 24, 24, 0.08]; // hours, last bar is <5min normalized to tiny
+  return (
+    <svg viewBox="0 0 360 160" className="w-full h-auto" role="img" aria-label="Fraud detection latency cut from 24 hours to under 5 minutes">
+      <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
+        <text x="0" y="12" opacity="0.5">FRAUD DETECTION LATENCY</text>
+        <text x="0" y="54" opacity="0.65">before</text>
+        <rect x="56" y="42" width="285" height="16" fill="currentColor" opacity="0.12" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1" />
+        <text x="347" y="53" textAnchor="end" opacity="0.65">24 hrs</text>
+        <text x="0" y="92" opacity="0.65">after</text>
+        <rect x="56" y="80" width="6" height="16" fill="var(--dgrm)" />
+        <text x="68" y="91" fill="var(--dgrm)">&lt;5 min</text>
+        <path d="M 0 112 H 348" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" strokeDasharray="2 5" />
+        <text x="0" y="130" opacity="0.5">KAFKA EVENTS → DATABRICKS ML → REAL-TIME ALERT</text>
+        <text x="0" y="150" fill="var(--dgrm)">$1.2M+ flagged · first 90 days</text>
+      </g>
+    </svg>
+  );
+}
+
+function DiagramMRR() {
+  const sources = ["Stripe", "Chargebee", "Zuora", "Recurly", "Paddle", "Maxio", "Braintree", "Custom"];
+  return (
+    <svg viewBox="0 0 360 165" className="w-full h-auto" role="img" aria-label="8 billing sources unified into a single MRR model">
+      <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
+        <text x="0" y="12" opacity="0.5">8 BILLING SOURCES → ONE VERIFIED MRR MODEL</text>
+        {sources.map((s, i) => {
+          const row = Math.floor(i / 4);
+          const col = i % 4;
+          const x = col * 84;
+          const y = 24 + row * 28;
+          return (
+            <g key={s}>
+              <rect x={x} y={y} width="74" height="18" rx="3"
+                fill="none" stroke="currentColor" strokeOpacity="0.35" strokeWidth="1" />
+              <text x={x + 37} y={y + 12} textAnchor="middle" opacity="0.65">{s}</text>
+              <path d={`M ${x + 37} ${y + 18} L 180 100`} stroke="currentColor" strokeOpacity="0.15" strokeWidth="0.8" />
+            </g>
+          );
+        })}
+        <circle cx="180" cy="110" r="16" fill="var(--dgrm)" opacity="0.9" />
+        <text x="180" y="113" textAnchor="middle" fill="var(--background)" fontSize="8">dbt</text>
+        <text x="0" y="145" opacity="0.65">close time: 4 days</text>
+        <text x="180" y="145" fill="var(--dgrm)">→ 2 hours</text>
+        <text x="0" y="160" opacity="0.4">zero reconciliation errors since launch</text>
       </g>
     </svg>
   );
@@ -133,7 +201,7 @@ const studies: Study[] = [
     stack: ["Databricks", "Azure Data Factory", "PySpark", "Delta Live Tables", "Power BI"],
     Diagram: DiagramLatency,
     detailPoints: [
-      "Architected Bronze → Silver → Gold Medallion pipeline with automated quality monitoring",
+      "Architected Bronze to Silver to Gold Medallion pipeline with automated quality monitoring",
       "Handled schema evolution across 12 heterogeneous source systems",
       "Achieved sub-10-minute SLA with full audit trail and data lineage",
       "Reduced pipeline failures by 95% over the legacy batch approach",
@@ -179,19 +247,55 @@ const studies: Study[] = [
   {
     id: "04",
     num: "04",
-    domain: "Operational visibility",
-    title: "Global Manufacturing Analytics Suite",
-    challenge: "15 country teams ran their own spreadsheet reports. Executive roll-ups took 4+ hours and still didn't agree; everyone had a different version of the truth.",
-    built: "A unified Snowflake warehouse with dbt transformation layers and Power BI semantic models with row-level security, delivering one governed truth for 200+ users across 15 markets.",
-    outcome: "Refresh time dropped from 4 hours to 15 minutes. Eliminated 40+ manual Excel reports and gave executives real-time cross-market benchmarking for the first time.",
-    stack: ["Power BI", "Snowflake", "dbt", "Azure Data Factory", "SQL", "DAX"],
-    Diagram: DiagramHub,
+    domain: "Process automation",
+    title: "Automated File Ingestion Pipeline",
+    challenge: "Finance processed 500+ daily files from 15 vendors by hand, taking 3 hours every morning before any analysis could begin.",
+    built: "Python and Azure Logic Apps automated pipeline that monitors mailboxes, validates file schemas, routes to correct storage paths, and triggers downstream SQL processing without manual intervention.",
+    outcome: "Three hours of daily manual work eliminated. File processing accuracy improved to 99.8%. Finance team now spends mornings on analysis, not file-wrangling.",
+    stack: ["Python", "Azure Logic Apps", "Azure Blob Storage", "Power Automate", "SQL"],
+    Diagram: DiagramFileFlow,
     detailPoints: [
-      "Harmonised data from 15 regional ERP systems with different schemas",
-      "Designed row-level security for 200+ users across regional, country, and global access tiers",
-      "Achieved 15-minute refresh SLA on a complex multi-join semantic model",
-      "Built executive dashboard surfacing operational KPIs accessible to non-technical leadership",
-      "Enabled real-time cross-market performance benchmarking for the first time",
+      "Eliminated 3 hours of daily manual file handling across a 5-person finance team",
+      "Built schema validation layer catching malformed files before they reach the database",
+      "Achieved 99.8% processing accuracy vs. ~96% manual accuracy",
+      "Reduced end-of-month close prep time by 60%",
+      "Enabled same-day availability of vendor data instead of next-day manual processing",
+    ],
+  },
+  {
+    id: "05",
+    num: "05",
+    domain: "Risk and compliance",
+    title: "Real-Time Fraud Monitoring Platform",
+    challenge: "Fraud detection ran on daily batch reports. By the time patterns were flagged, losses had already occurred and the intervention window had closed.",
+    built: "Kafka streaming pipeline processing transaction events in real time, feeding a Databricks anomaly detection model and a live Power BI monitoring dashboard for the risk team.",
+    outcome: "Detection latency cut from 24 hours to under 5 minutes. Over $1.2M in suspicious transactions flagged and investigated in the first 90 days of operation.",
+    stack: ["Apache Kafka", "Databricks", "PySpark", "Azure Event Hubs", "Power BI", "Python"],
+    Diagram: DiagramFraud,
+    detailPoints: [
+      "Reduced fraud detection latency from 24 hours to under 5 minutes",
+      "Processed 100K+ transaction events per hour through the Kafka pipeline",
+      "Anomaly detection model achieved 94% precision, minimising false-positive workload for analysts",
+      "$1.2M+ in suspicious transactions surfaced and investigated in first 90 days",
+      "Live Power BI dashboard with auto-refresh gave risk team real-time operational visibility",
+    ],
+  },
+  {
+    id: "06",
+    num: "06",
+    domain: "Revenue analytics",
+    title: "Unified MRR Reporting Pipeline",
+    challenge: "Finance calculated Monthly Recurring Revenue manually from 8 disconnected billing systems. A 4-day close process with frequent reconciliation errors.",
+    built: "dbt pipeline that consolidates 8 billing source feeds via Fivetran into a single verified MRR model with automated cohort analysis, churn attribution, and expansion tracking.",
+    outcome: "Close process cut from 4 days to 2 hours. Zero reconciliation errors since launch. Finance now closes books same-week instead of the following Monday.",
+    stack: ["dbt", "Snowflake", "Fivetran", "Python", "Power BI", "SQL"],
+    Diagram: DiagramMRR,
+    detailPoints: [
+      "Unified 8 billing systems into one authoritative MRR definition agreed with Finance",
+      "Automated cohort analysis, churn attribution, and expansion MRR tracking",
+      "Monthly close time reduced from 4 days to 2 hours",
+      "Zero reconciliation errors since pipeline launch",
+      "Power BI dashboard adopted by CFO team as single source of truth for board reporting",
     ],
   },
 ];
@@ -207,10 +311,12 @@ const STUDY_TAGS: Record<string, Filter[]> = {
   "01": ["Power BI", "Databricks", "Analytics Engineering"],
   "02": ["Power BI", "Databricks", "Snowflake"],
   "03": ["Microsoft Fabric", "Analytics Engineering"],
-  "04": ["Power BI", "Snowflake", "Business Intelligence"],
+  "04": ["Analytics Engineering", "Business Intelligence"],
+  "05": ["Databricks", "Analytics Engineering"],
+  "06": ["Snowflake", "Business Intelligence", "Analytics Engineering"],
 };
 
-/* ── Case study modal ───────────────────────────────────────────────────── */
+/* ── Modal ──────────────────────────────────────────────────────────────── */
 
 function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
   return (
@@ -290,46 +396,39 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
   );
 }
 
-/* ── Project card ───────────────────────────────────────────────────────── */
+/* ── Card ───────────────────────────────────────────────────────────────── */
 
 function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
   return (
     <motion.article
       {...reveal()}
-      className="panel panel-lift rounded-2xl overflow-hidden"
+      className="panel panel-lift rounded-2xl overflow-hidden flex flex-col"
     >
-      {/* Diagram preview */}
       <div className="border-b border-border p-[clamp(1.25rem,2vw,2rem)] text-foreground bg-background">
         <study.Diagram />
       </div>
 
-      <div className="p-[clamp(1.25rem,2vw,1.75rem)]">
+      <div className="p-[clamp(1.25rem,2vw,1.75rem)] flex flex-col flex-1">
         <div className="flex items-center gap-3 mb-4">
           <span className="font-mono text-[10px] accent-text">CASE STUDY {study.num}</span>
           <span className="eyebrow">{study.domain}</span>
         </div>
 
-        <h3 className="text-[clamp(1.1rem,1rem+0.6vw,1.4rem)] font-semibold leading-snug mb-4 max-w-[28ch]">
+        <h3 className="text-[clamp(1.1rem,1rem+0.6vw,1.35rem)] font-semibold leading-snug mb-4 max-w-[28ch]">
           {study.title}
         </h3>
 
-        <div className="space-y-3 mb-5">
+        <div className="space-y-3 mb-5 flex-1">
           <div>
-            <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-1">
-              The challenge
-            </p>
+            <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-1">The challenge</p>
             <p className="text-sm leading-relaxed text-muted-foreground">{study.challenge}</p>
           </div>
           <div>
-            <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-1">
-              What I built
-            </p>
+            <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-1">What I built</p>
             <p className="text-sm leading-relaxed text-muted-foreground">{study.built}</p>
           </div>
           <div className="panel rounded-xl px-4 py-3" style={{ borderLeft: "3px solid var(--primary)" }}>
-            <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-1">
-              Business outcome
-            </p>
+            <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-1">Business outcome</p>
             <p className="text-sm leading-relaxed font-medium">{study.outcome}</p>
           </div>
         </div>
@@ -367,7 +466,7 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
   );
 }
 
-/* ── Main section ───────────────────────────────────────────────────────── */
+/* ── Section ────────────────────────────────────────────────────────────── */
 
 export function CaseStudiesSection() {
   const [active, setActive] = useState<Filter>("All");
@@ -386,7 +485,6 @@ export function CaseStudiesSection() {
           Selected projects
         </motion.h2>
 
-        {/* Filter bar */}
         <motion.div
           {...reveal(0.08)}
           className="flex flex-wrap gap-2 mb-[clamp(2.5rem,4vw,5rem)]"
