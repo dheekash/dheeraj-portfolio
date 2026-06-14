@@ -111,7 +111,7 @@ export function CinematicHero() {
             <motion.div {...fadeUp(0)} className="inline-flex items-center gap-2 mb-[clamp(1rem,1.5vw,1.5rem)]">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
               <span className="text-[12px] font-medium text-emerald-700 dark:text-emerald-400 tracking-[0.02em]">
-                Senior BI &amp; Analytics Engineer · Available
+                BI &amp; Analytics Engineer · Available
               </span>
             </motion.div>
 
@@ -141,7 +141,7 @@ export function CinematicHero() {
             >
               Helping organizations build scalable data platforms and executive analytics products
               on Microsoft Fabric, Databricks, and Snowflake.{" "}
-              <span className="text-foreground font-medium">Open to senior BI and Analytics Engineering roles.</span>
+              <span className="text-foreground font-medium">Open to BI and Analytics Engineering roles.</span>
             </motion.p>
 
             {/* CTAs */}

@@ -40,7 +40,7 @@ export function Footer() {
               Let&apos;s build analytics systems <span className="accent-text">that scale.</span>
             </h2>
             <p className="leading-relaxed text-muted-foreground max-w-[52ch] mb-[clamp(2rem,3.5vw,3rem)]">
-              Whether you need a Senior BI Engineer to architect your Fabric Lakehouse, a consulting
+              Whether you need a BI Engineer to architect your Fabric Lakehouse, a consulting
               partner for your next enterprise analytics build, or a freelance specialist for Power BI
               and Databricks delivery — I&apos;d love to hear about it.
             </p>
@@ -120,7 +120,7 @@ export function Footer() {
               <p className="eyebrow mb-3">Open to</p>
               <ul className="space-y-2 mb-5">
                 {[
-                  "Senior BI & Analytics Engineering roles",
+                  "BI & Analytics Engineering roles",
                   "Enterprise Fabric / Databricks consulting",
                   "Analytics platform architecture projects",
                   "Power BI and data product delivery",
