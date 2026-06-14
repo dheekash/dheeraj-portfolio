@@ -1,6 +1,4 @@
 import { CinematicHero } from "@/components/sections/CinematicHero";
-import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
-import { TrustedBySection } from "@/components/sections/TrustedBySection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { TechStackSection } from "@/components/sections/TechStackSection";
 import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
@@ -16,10 +14,6 @@ export default function HomePage() {
   return (
     <>
       <CinematicHero />
-      <Divider />
-      <TestimonialsSection />
-      <Divider />
-      <TrustedBySection />
       <Divider />
       <AboutSection />
       <Divider />
