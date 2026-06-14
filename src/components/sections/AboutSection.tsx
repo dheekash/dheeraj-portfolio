@@ -13,7 +13,7 @@ function reveal(delay = 0) {
 
 const quickFacts = [
   { label: "Location",          value: "Bengaluru, India" },
-  { label: "Experience",        value: "6+ years"         },
+  { label: "Experience",        value: "7+ years"         },
   { label: "Industries served", value: "Retail, Manufacturing, E-commerce, Finance" },
   { label: "Availability",      value: "Open: full-time and freelance" },
 ];
