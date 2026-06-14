@@ -3,7 +3,7 @@ import { AboutSection } from "@/components/sections/AboutSection";
 import { TechStackSection } from "@/components/sections/TechStackSection";
 import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { CareerEvolutionSection } from "@/components/sections/CareerEvolutionSection";
-import { ConsultingLeadershipSection } from "@/components/sections/ConsultingLeadershipSection";
+
 import { CertificationsSection } from "@/components/sections/CertificationsSection";
 
 function Divider() {
@@ -22,8 +22,7 @@ export default function HomePage() {
       <CaseStudiesSection />
       <Divider />
       <CareerEvolutionSection />
-      <Divider />
-      <ConsultingLeadershipSection />
+
       <Divider />
       <CertificationsSection />
     </>
