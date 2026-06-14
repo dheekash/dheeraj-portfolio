@@ -37,11 +37,12 @@ export function Footer() {
             className="lg:col-span-7"
           >
             <h2 className="mb-4">
-              Ready to work <span className="accent-text">together?</span>
+              Let&apos;s build better <span className="accent-text">data products.</span>
             </h2>
             <p className="leading-relaxed text-muted-foreground max-w-[52ch] mb-[clamp(2rem,3.5vw,3rem)]">
-              Whether you need a full-time data engineer or a freelance partner for your next build,
-              I&apos;d love to hear about it.
+              Whether you need a Senior BI Engineer to architect your Fabric Lakehouse, a consulting
+              partner for your next enterprise analytics build, or a freelance specialist for Power BI
+              and Databricks delivery — I&apos;d love to hear about it.
             </p>
 
             {/* Three primary CTAs */}
@@ -119,10 +120,10 @@ export function Footer() {
               <p className="eyebrow mb-3">Open to</p>
               <ul className="space-y-2 mb-5">
                 {[
-                  "Full-time BI & Analytics roles",
-                  "Contract opportunities",
-                  "Consulting engagements",
-                  "Freelance analytics projects",
+                  "Senior BI & Analytics Engineering roles",
+                  "Enterprise Fabric / Databricks consulting",
+                  "Analytics platform architecture projects",
+                  "Power BI and data product delivery",
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2.5 text-[13px] text-muted-foreground">
                     <span className="w-1 h-1 rounded-full bg-primary flex-shrink-0" />

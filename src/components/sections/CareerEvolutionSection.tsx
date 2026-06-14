@@ -7,35 +7,40 @@ const timeline = [
     period: "2019–2020",
     role: "Customer Support Representative",
     company: "Frontizo Business Services",
-    achievement: "Built Excel dashboards to track team KPIs; first exposure to turning operational data into decisions.",
+    achievement: "Built Excel dashboards to track team KPIs. First exposure to turning operational data into decisions that improved team performance.",
+    badge: null,
     current: false,
   },
   {
     period: "2020–2022",
     role: "Investigation Specialist",
     company: "Amazon",
-    achievement: "Investigated fraud at scale and developed the habit of questioning every number before trusting it.",
+    achievement: "Investigated fraud at scale across global seller operations. Built the analytical instinct to question every number before trusting it in a decision.",
+    badge: null,
     current: false,
   },
   {
     period: "2022–2024",
     role: "Analytics Lead",
     company: "Amazon",
-    achievement: "Built forecasting dashboards processing 100M+ records; identified $500K+ in revenue opportunities for seller leadership.",
+    achievement: "Built forecasting dashboards processing 100M+ records for seller leadership across 10 marketplaces. Identified $500K+ in revenue opportunities. Reduced manual reporting effort by 70%.",
+    badge: "100M+ records · 10 marketplaces · $500K+ identified",
     current: false,
   },
   {
     period: "2025",
     role: "Business Data Analyst",
     company: "Amplify Analytix",
-    achievement: "Delivered enterprise Power BI reporting suites; eliminated hours of manual consolidation for global clients.",
+    achievement: "Delivered enterprise Power BI reporting suites for global clients. Eliminated hours of daily manual consolidation and established governance standards.",
+    badge: null,
     current: false,
   },
   {
     period: "2025–present",
     role: "BI & Analytics Engineer",
     company: "Amplify Analytix",
-    achievement: "Architecting Lakehouse platforms on Microsoft Fabric and Databricks; 200+ enterprise users across 15 countries.",
+    achievement: "Architecting Microsoft Fabric Lakehouse platforms with Medallion architecture. Delivering 20+ data products for 200+ enterprise users across 15 countries with 100% client retention.",
+    badge: "15 countries · 20+ products · 200+ users",
     current: true,
   },
 ];
@@ -112,6 +117,18 @@ export function CareerEvolutionSection() {
                   <p className="text-[13px] text-muted-foreground leading-relaxed max-w-[52ch]">
                     {item.achievement}
                   </p>
+                  {item.badge && (
+                    <p
+                      className="mt-2 inline-block font-mono text-[10px] px-2.5 py-1 rounded-md"
+                      style={{
+                        background: "color-mix(in srgb, var(--primary) 8%, var(--card))",
+                        color: "var(--primary)",
+                        border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)",
+                      }}
+                    >
+                      {item.badge}
+                    </p>
+                  )}
                 </div>
               </motion.li>
             ))}

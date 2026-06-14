@@ -8,24 +8,24 @@ import { MagneticButton } from "@/components/common/MagneticButton";
 import { profile } from "@/data/profile";
 
 const headlines = [
-  "I build data systems that help companies make faster, smarter decisions.",
-  "I turn raw data into pipelines, dashboards, and decisions that scale.",
-  "I architect analytics platforms that enterprise teams actually use.",
-  "I design data infrastructure built on trust, not just speed.",
+  "I build enterprise data platforms that power real-time decisions at scale.",
+  "I architect Lakehouse solutions on Fabric, Databricks, and Snowflake.",
+  "I turn complex data estates into governed analytics products teams trust.",
+  "I design data infrastructure that executives stake business decisions on.",
 ];
 
 /* Primary metrics shown large in the right column */
 const primaryMetrics = [
-  { end: 5,   suffix: "M+",  label: "Records processed daily" },
-  { end: 188, suffix: "+",   label: "Pipelines built"          },
-  { end: 180, suffix: "%",   label: "Efficiency gain"          },
+  { end: 7,  suffix: "+",  label: "Years experience"        },
+  { end: 15, suffix: "+",  label: "Countries supported"     },
+  { end: 20, suffix: "+",  label: "Data products delivered" },
 ];
 
 /* Secondary metrics in the bottom stat row */
 const secondaryMetrics = [
-  { num: "6+",  label: "Years experience"       },
-  { num: "13",  label: "Certifications earned"  },
-  { num: "100+",label: "Stakeholders supported" },
+  { num: "5M+",  label: "Daily records processed" },
+  { num: "13",   label: "Certifications earned"   },
+  { num: "100%", label: "Client retention"        },
 ];
 
 /* Counter using Motion's value system — no React state churn during animation */
@@ -107,11 +107,11 @@ export function CinematicHero() {
           {/* ── Left: headline + subtext + CTAs ── */}
           <div className="max-w-[58ch]">
 
-            {/* Availability dot — not an eyebrow, a status indicator */}
+            {/* Availability dot — status indicator */}
             <motion.div {...fadeUp(0)} className="inline-flex items-center gap-2 mb-[clamp(1rem,1.5vw,1.5rem)]">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
               <span className="text-[12px] font-medium text-emerald-700 dark:text-emerald-400 tracking-[0.02em]">
-                Currently available for projects
+                Senior BI &amp; Analytics Engineer · Available
               </span>
             </motion.div>
 
@@ -139,9 +139,9 @@ export function CinematicHero() {
               {...fadeUp(0.12)}
               className="text-[clamp(0.9rem,0.85rem+0.3vw,1.1rem)] leading-relaxed text-muted-foreground mb-[clamp(1.75rem,2.2vw,2.5rem)] max-w-[46ch]"
             >
-              Six years of pipeline engineering at Amazon scale. Now building Lakehouse
-              platforms for enterprise clients at Amplify Analytix.{" "}
-              <span className="text-foreground font-medium">Open to full-time and freelance.</span>
+              Helping organizations build scalable data platforms and executive analytics products
+              on Microsoft Fabric, Databricks, and Snowflake.{" "}
+              <span className="text-foreground font-medium">Open to senior BI and Analytics Engineering roles.</span>
             </motion.p>
 
             {/* CTAs */}

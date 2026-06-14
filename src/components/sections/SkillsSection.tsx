@@ -31,32 +31,53 @@ function GCPLogo({ size = 20 }: { size?: number }) {
 
 type Tool = { name: string; Logo?: (props: { size?: number }) => React.ReactElement };
 
-/* Tool chip — logo + name */
 function Chip({ name, Logo }: Tool) {
   return (
-    <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg panel panel-lift text-sm font-medium text-foreground">
-      {Logo && <Logo size={16} />}
+    <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg panel panel-lift">
+      {Logo && <Logo size={15} />}
       <span className="text-[12px] text-muted-foreground font-medium leading-none">{name}</span>
     </div>
   );
 }
 
-/* Six-category bento grid */
-const categories: { label: string; tools: Tool[]; accent?: boolean; wide?: boolean }[] = [
+const categories: {
+  label: string;
+  span?: "full" | "half";
+  tinted?: boolean;
+  accent?: boolean;
+  tools: Tool[];
+}[] = [
   {
     label: "Analytics & BI",
-    wide: true,
+    span: "half",
     tools: [
-      { name: "Power BI",  Logo: PowerBILogo  },
-      { name: "Fabric",    Logo: FabricLogo   },
-      { name: "BigQuery",  Logo: BigQueryLogo  },
-      { name: "Tableau",   Logo: TableauLogo   },
-      { name: "DAX"                            },
-      { name: "Paginated Reports"              },
+      { name: "Power BI",          Logo: PowerBILogo   },
+      { name: "Microsoft Fabric",  Logo: FabricLogo    },
+      { name: "Tableau",           Logo: TableauLogo   },
+      { name: "BigQuery",          Logo: BigQueryLogo  },
+      { name: "DAX"                                    },
+      { name: "Paginated Reports"                      },
+      { name: "Zebra BI"                               },
     ],
   },
   {
-    label: "Cloud",
+    label: "Data Engineering",
+    span: "half",
+    tools: [
+      { name: "Databricks",        Logo: DatabricksLogo },
+      { name: "Snowflake",         Logo: SnowflakeLogo  },
+      { name: "dbt",               Logo: DbtLogo        },
+      { name: "SQLMesh"                                 },
+      { name: "Apache Kafka",      Logo: KafkaLogo      },
+      { name: "Azure Data Factory"                      },
+      { name: "Apache Spark",      Logo: SparkLogo      },
+      { name: "Delta Lake"                              },
+      { name: "Airflow",           Logo: AirflowLogo    },
+    ],
+  },
+  {
+    label: "Cloud & Infrastructure",
+    tinted: true,
     tools: [
       { name: "Azure",  Logo: AzureLogo  },
       { name: "AWS",    Logo: AWSLogo    },
@@ -65,93 +86,50 @@ const categories: { label: string; tools: Tool[]; accent?: boolean; wide?: boole
     ],
   },
   {
-    label: "Data Engineering",
-    tools: [
-      { name: "Python",     Logo: PythonLogo     },
-      { name: "SQL",        Logo: SQLLogo         },
-      { name: "dbt",        Logo: DbtLogo         },
-      { name: "Airflow",    Logo: AirflowLogo     },
-      { name: "PySpark",    Logo: SparkLogo       },
-      { name: "Kafka",      Logo: KafkaLogo       },
-      { name: "Databricks", Logo: DatabricksLogo  },
-      { name: "Snowflake",  Logo: SnowflakeLogo   },
-      { name: "SQLMesh"                           },
-    ],
-  },
-  {
-    label: "Visualization",
-    tools: [
-      { name: "Power BI",  Logo: PowerBILogo  },
-      { name: "Tableau",   Logo: TableauLogo  },
-      { name: "Zebra BI"                      },
-      { name: "Matplotlib"                    },
-      { name: "Seaborn"                       },
-    ],
-  },
-  {
     label: "Programming",
     tools: [
-      { name: "Python",  Logo: PythonLogo },
-      { name: "SQL",     Logo: SQLLogo    },
-      { name: "DAX"                       },
-      { name: "M Query"                   },
-      { name: "Pandas"                    },
-      { name: "NumPy"                     },
+      { name: "Python",   Logo: PythonLogo },
+      { name: "SQL",      Logo: SQLLogo    },
+      { name: "PySpark"                    },
+      { name: "DAX"                        },
+      { name: "M Query"                    },
+      { name: "Pandas"                     },
     ],
   },
   {
-    label: "AI & ML",
+    label: "Machine Learning",
     accent: true,
     tools: [
-      { name: "MLflow"              },
-      { name: "scikit-learn"        },
-      { name: "Azure ML"            },
-      { name: "Statistical Modeling"},
-      { name: "Anomaly Detection"   },
-      { name: "Forecasting"         },
+      { name: "MLflow"               },
+      { name: "scikit-learn"         },
+      { name: "Azure ML"             },
+      { name: "Forecasting"          },
+      { name: "Anomaly Detection"    },
+      { name: "Statistical Modeling" },
     ],
   },
 ];
 
 export function SkillsSection() {
+  const [analytics, dataEng, cloud, programming, ml] = categories;
+
   return (
     <section id="skills">
       <div className="container-page section-pad">
-        <motion.h2 {...reveal()} className="max-w-[18ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
-          What I work with
+        <motion.h2 {...reveal()} className="max-w-[18ch] mb-3">
+          Technology ecosystem
         </motion.h2>
+        <motion.p {...reveal(0.06)} className="text-muted-foreground text-sm leading-relaxed max-w-[52ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
+          The full platform stack I architect and engineer — from ingestion through to executive-facing analytics products.
+        </motion.p>
 
-        {/* Bento grid: row-1 wide+narrow, row-2 three equal, row-3 full-width accent */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-          {/* Row 1: Analytics (2/3) + Cloud (1/3) */}
-          <motion.div
-            {...reveal(0.05)}
-            className="md:col-span-2 rounded-2xl panel p-[clamp(1.25rem,2vw,2rem)]"
-          >
-            <p className="eyebrow mb-4">{categories[0].label}</p>
-            <div className="flex flex-wrap gap-2">
-              {categories[0].tools.map((t) => <Chip key={t.name} {...t} />)}
-            </div>
-          </motion.div>
-
-          <motion.div
-            {...reveal(0.09)}
-            className="rounded-2xl panel p-[clamp(1.25rem,2vw,2rem)]"
-            style={{ background: "color-mix(in srgb, var(--primary) 4%, var(--card))" }}
-          >
-            <p className="eyebrow mb-4">{categories[1].label}</p>
-            <div className="flex flex-wrap gap-2">
-              {categories[1].tools.map((t) => <Chip key={t.name} {...t} />)}
-            </div>
-          </motion.div>
-
-          {/* Row 2: Data Engineering + Visualization + Programming */}
-          {categories.slice(2, 5).map((cat, i) => (
+        {/* Row 1: Analytics + Data Engineering — equal halves */}
+        <div className="grid md:grid-cols-2 gap-4 mb-4">
+          {[analytics, dataEng].map((cat, i) => (
             <motion.div
               key={cat.label}
-              {...reveal(0.12 + i * 0.06)}
-              className="rounded-2xl panel p-[clamp(1.25rem,2vw,2rem)]"
+              {...reveal(0.05 + i * 0.06)}
+              className="panel rounded-2xl p-[clamp(1.25rem,2vw,2rem)]"
             >
               <p className="eyebrow mb-4">{cat.label}</p>
               <div className="flex flex-wrap gap-2">
@@ -159,21 +137,42 @@ export function SkillsSection() {
               </div>
             </motion.div>
           ))}
+        </div>
 
-          {/* Row 3: AI & ML full width with accent gradient */}
+        {/* Row 2: Cloud (1/3) + Programming (1/3) + ML (1/3) */}
+        <div className="grid md:grid-cols-3 gap-4">
           <motion.div
-            {...reveal(0.26)}
-            className="md:col-span-3 rounded-2xl p-[clamp(1.25rem,2vw,2rem)]"
+            {...reveal(0.14)}
+            className="panel rounded-2xl p-[clamp(1.25rem,2vw,2rem)]"
+            style={{ background: "color-mix(in srgb, var(--primary) 3%, var(--card))" }}
+          >
+            <p className="eyebrow mb-4">{cloud.label}</p>
+            <div className="flex flex-wrap gap-2">
+              {cloud.tools.map((t) => <Chip key={t.name} {...t} />)}
+            </div>
+          </motion.div>
+
+          <motion.div
+            {...reveal(0.18)}
+            className="panel rounded-2xl p-[clamp(1.25rem,2vw,2rem)]"
+          >
+            <p className="eyebrow mb-4">{programming.label}</p>
+            <div className="flex flex-wrap gap-2">
+              {programming.tools.map((t) => <Chip key={t.name} {...t} />)}
+            </div>
+          </motion.div>
+
+          <motion.div
+            {...reveal(0.22)}
+            className="rounded-2xl p-[clamp(1.25rem,2vw,2rem)]"
             style={{
               background: "linear-gradient(135deg, color-mix(in srgb, var(--primary) 8%, var(--card)) 0%, color-mix(in srgb, var(--primary) 3%, var(--card)) 100%)",
-              border: "1px solid color-mix(in srgb, var(--primary) 20%, var(--border))",
+              border: "1px solid color-mix(in srgb, var(--primary) 22%, var(--border))",
             }}
           >
-            <p className="eyebrow mb-4" style={{ color: "var(--primary)" }}>
-              {categories[5].label}
-            </p>
+            <p className="eyebrow mb-4" style={{ color: "var(--primary)" }}>{ml.label}</p>
             <div className="flex flex-wrap gap-2">
-              {categories[5].tools.map((t) => <Chip key={t.name} {...t} />)}
+              {ml.tools.map((t) => <Chip key={t.name} {...t} />)}
             </div>
           </motion.div>
         </div>
