@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, JetBrains_Mono, Instrument_Serif } from "next/font/google";
+import { Geist, JetBrains_Mono, Instrument_Serif, Kanit } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -25,6 +25,13 @@ const instrumentSerif = Instrument_Serif({
   weight: ["400"],
   style: ["normal", "italic"],
   variable: "--font-display",
+  display: "swap",
+});
+
+const kanit = Kanit({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-kanit",
   display: "swap",
 });
 
@@ -149,7 +156,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${geist.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} font-sans antialiased`}>
+      <body className={`${geist.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} ${kanit.variable} font-sans antialiased`}>
         <ThemeProvider>
           <TooltipProvider>
             <SiteChrome>{children}</SiteChrome>
