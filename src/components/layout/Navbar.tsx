@@ -62,9 +62,9 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-[transform,background-color,border-color] duration-300 ${
+      className={`fixed top-0 inset-x-0 z-50 transition-[transform,background-color,border-color,box-shadow,backdrop-filter] duration-300 ${
         hidden ? "-translate-y-full" : "translate-y-0"
-      } ${scrolled || open ? "glass-nav" : "bg-transparent border-b border-transparent"}`}
+      } ${scrolled || open ? "glass-nav" : "liquid-glass border-b border-white/10"}`}
     >
       <div className="container-page h-[3.75rem] flex items-center justify-between gap-4">
         <a
