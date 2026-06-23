@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 import { MicrosoftLogo, DatabricksLogo, SnowflakeLogo } from "@/components/common/TechLogos";
 
 function reveal(delay = 0) {
@@ -15,7 +14,14 @@ function reveal(delay = 0) {
 }
 
 type Issuer = "Microsoft" | "Snowflake" | "Databricks";
-type Cert = { name: string; code: string; issuer: Issuer; date: string };
+
+interface Cert {
+  name: string;
+  code: string;
+  issuer: Issuer;
+  date: string;
+  featured?: boolean;
+}
 
 function IssuerLogo({ issuer }: { issuer: Issuer }) {
   if (issuer === "Microsoft") return <MicrosoftLogo size={14} />;
@@ -23,96 +29,142 @@ function IssuerLogo({ issuer }: { issuer: Issuer }) {
   return <SnowflakeLogo size={14} />;
 }
 
-const featured: Cert[] = [
-  { name: "Fabric Analytics Engineer", code: "DP-600", issuer: "Microsoft", date: "Dec 2024" },
-  { name: "Power BI Data Analyst",     code: "PL-300", issuer: "Microsoft", date: "Sep 2021" },
-  { name: "Azure Data Scientist",      code: "DP-100", issuer: "Microsoft", date: "Feb 2023" },
-  { name: "Azure Administrator",       code: "AZ-104", issuer: "Microsoft", date: "Dec 2021" },
+const certGroups: { category: string; color: string; certs: Cert[] }[] = [
+  {
+    category: "Power BI",
+    color: "rgba(21,145,220,0.12)",
+    certs: [
+      { name: "Power BI Data Analyst", code: "PL-300", issuer: "Microsoft", date: "Sep 2021", featured: true },
+      { name: "Power Platform Fundamentals", code: "PL-900", issuer: "Microsoft", date: "Aug 2021" },
+    ],
+  },
+  {
+    category: "Microsoft Fabric",
+    color: "rgba(124,58,237,0.1)",
+    certs: [
+      { name: "Fabric Analytics Engineer", code: "DP-600", issuer: "Microsoft", date: "Dec 2024", featured: true },
+      { name: "Fabric Data Engineer", code: "DP-700", issuer: "Microsoft", date: "Jun 2025", featured: true },
+    ],
+  },
+  {
+    category: "Azure",
+    color: "rgba(8,145,178,0.1)",
+    certs: [
+      { name: "Azure Administrator", code: "AZ-104", issuer: "Microsoft", date: "Dec 2021", featured: true },
+      { name: "Azure Fundamentals", code: "AZ-900", issuer: "Microsoft", date: "Dec 2021" },
+      { name: "Azure AI Fundamentals", code: "AI-900", issuer: "Microsoft", date: "Sep 2021" },
+    ],
+  },
+  {
+    category: "Data & AI",
+    color: "rgba(217,119,6,0.1)",
+    certs: [
+      { name: "Azure Data Scientist", code: "DP-100", issuer: "Microsoft", date: "Feb 2023", featured: true },
+      { name: "Azure Data Fundamentals", code: "DP-900", issuer: "Microsoft", date: "Feb 2022" },
+      { name: "Security, Compliance & Identity", code: "SC-900", issuer: "Microsoft", date: "Feb 2022" },
+      { name: "Microsoft 365 Fundamentals", code: "MS-900", issuer: "Microsoft", date: "Dec 2021" },
+    ],
+  },
+  {
+    category: "Platform Engineering",
+    color: "rgba(5,150,105,0.1)",
+    certs: [
+      { name: "SnowPro Associate: Core", code: "SnowPro", issuer: "Snowflake", date: "Jan 2026" },
+      { name: "Data Engineer Associate", code: "DE-A", issuer: "Databricks", date: "May 2026" },
+    ],
+  },
 ];
 
-const additional: Cert[] = [
-  { name: "Fabric Data Engineer",            code: "DP-700",  issuer: "Microsoft",  date: "Jun 2025" },
-  { name: "Data Engineer Associate",         code: "DE-A",    issuer: "Databricks", date: "May 2026" },
-  { name: "SnowPro Associate: Platform",     code: "Core",    issuer: "Snowflake",  date: "Jan 2026" },
-  { name: "Azure Data Fundamentals",         code: "DP-900",  issuer: "Microsoft",  date: "Feb 2022" },
-  { name: "Security, Compliance & Identity", code: "SC-900",  issuer: "Microsoft",  date: "Feb 2022" },
-  { name: "Power Platform Fundamentals",     code: "PL-900",  issuer: "Microsoft",  date: "Aug 2021" },
-  { name: "Azure AI Fundamentals",           code: "AI-900",  issuer: "Microsoft",  date: "Sep 2021" },
-  { name: "Azure Fundamentals",              code: "AZ-900",  issuer: "Microsoft",  date: "Dec 2021" },
-  { name: "Microsoft 365 Fundamentals",      code: "MS-900",  issuer: "Microsoft",  date: "Dec 2021" },
-];
+function CertCard({ cert }: { cert: Cert }) {
+  return (
+    <div
+      className={`panel rounded-xl px-4 py-3.5 flex flex-col gap-2.5 ${
+        cert.featured ? "panel-lift" : ""
+      }`}
+    >
+      <div className="flex items-center justify-between">
+        <IssuerLogo issuer={cert.issuer} />
+        {cert.featured && (
+          <span
+            className="text-[9px] font-mono font-semibold uppercase tracking-[0.12em] px-2 py-0.5 rounded-full"
+            style={{
+              background: "color-mix(in srgb, var(--primary) 12%, var(--card))",
+              color: "var(--primary)",
+            }}
+          >
+            Featured
+          </span>
+        )}
+      </div>
+      <div>
+        <p className="text-[12px] font-semibold leading-snug mb-0.5">{cert.name}</p>
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="font-mono text-[10px] accent-text font-semibold">{cert.code}</span>
+          <span className="text-muted-foreground/40 text-[10px]">·</span>
+          <span className="font-mono text-[10px] text-muted-foreground">{cert.issuer}</span>
+          <span className="text-muted-foreground/40 text-[10px]">·</span>
+          <span className="font-mono text-[10px] text-muted-foreground">{cert.date}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function CertificationsSection() {
-  const [open, setOpen] = useState(false);
-
   return (
     <section id="certifications">
       <div className="container-page section-pad">
-        <motion.p {...reveal()} className="eyebrow mb-4">Credentials</motion.p>
+        <motion.p {...reveal()} className="eyebrow mb-4">
+          Credentials
+        </motion.p>
         <motion.h2 {...reveal(0.05)} className="max-w-[14ch] mb-3">
           Certifications
         </motion.h2>
         <motion.p {...reveal(0.08)} className="text-muted-foreground max-w-[52ch] text-sm mb-[clamp(2rem,3.5vw,3.5rem)]">
-          13 certifications across five years — each earned while actively shipping the technology it covers.
+          13 certifications across 5 years — each earned while actively shipping the technology it covers.
+          11 Microsoft, 1 Snowflake, 1 Databricks.
         </motion.p>
 
-        {/* 4 featured */}
-        <motion.div {...reveal(0.1)} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          {featured.map((c) => (
-            <div key={c.code} className="panel panel-lift rounded-2xl px-5 py-4 flex flex-col gap-3">
-              <div className="flex items-center justify-between">
-                <IssuerLogo issuer={c.issuer} />
-                <span className="font-mono text-[10px] accent-text font-semibold">{c.code}</span>
+        <div className="flex flex-col gap-[clamp(1.5rem,2.5vw,2.5rem)]">
+          {certGroups.map((group, gi) => (
+            <motion.div key={group.category} {...reveal(0.1 + gi * 0.06)}>
+              {/* Category header */}
+              <div className="flex items-center gap-3 mb-3">
+                <span
+                  className="px-3 py-1 rounded-full text-[11px] font-semibold font-mono uppercase tracking-[0.1em]"
+                  style={{
+                    background: group.color,
+                    color: "var(--foreground)",
+                  }}
+                >
+                  {group.category}
+                </span>
+                <span className="text-[11px] text-muted-foreground">
+                  {group.certs.length} cert{group.certs.length !== 1 ? "s" : ""}
+                </span>
               </div>
-              <div>
-                <p className="text-[13px] font-semibold leading-tight mb-1">{c.name}</p>
-                <p className="font-mono text-[10px] text-muted-foreground">{c.issuer}</p>
-                <p className="font-mono text-[10px] text-muted-foreground mt-0.5">{c.date}</p>
+
+              {/* Cert cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                {group.certs.map((cert) => (
+                  <CertCard key={cert.code} cert={cert} />
+                ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Accordion: +9 additional */}
-        <motion.div {...reveal(0.14)} className="border border-border rounded-2xl overflow-hidden">
-          <button
-            onClick={() => setOpen(!open)}
-            className="w-full flex items-center justify-between px-[clamp(1.25rem,2vw,1.75rem)] py-4 text-left hover:bg-[color:color-mix(in_srgb,var(--primary)_3%,var(--card))] transition-colors"
-            aria-expanded={open}
+        {/* Verify link */}
+        <motion.div {...reveal(0.35)} className="mt-[clamp(2rem,3vw,3rem)]">
+          <a
+            href="https://learn.microsoft.com/en-us/users/dheerajkashyap/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-[13px] text-muted-foreground hover:text-primary transition-colors"
           >
-            <span className="text-[13px] font-medium text-muted-foreground">
-              +{additional.length} additional certifications
-            </span>
-            <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }}>
-              <ChevronDown size={16} className="text-muted-foreground" />
-            </motion.span>
-          </button>
-
-          <AnimatePresence initial={false}>
-            {open && (
-              <motion.div
-                key="certs-panel"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                style={{ overflow: "hidden" }}
-              >
-                <div className="border-t border-border grid sm:grid-cols-2 lg:grid-cols-3 gap-3 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(1rem,1.5vw,1.5rem)]">
-                  {additional.map((c) => (
-                    <div key={c.code} className="panel rounded-xl px-4 py-3 flex items-center gap-3">
-                      <IssuerLogo issuer={c.issuer} />
-                      <div>
-                        <p className="text-[12px] font-medium leading-tight">{c.name}</p>
-                        <p className="font-mono text-[10px] accent-text mt-0.5">{c.code}</p>
-                        <p className="font-mono text-[10px] text-muted-foreground mt-0.5">{c.issuer} · {c.date}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+            <ExternalLink size={13} />
+            Verify on Microsoft Learn
+          </a>
         </motion.div>
       </div>
     </section>

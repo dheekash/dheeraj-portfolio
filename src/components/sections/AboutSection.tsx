@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import { profile } from "@/data/profile";
 
 const ABOUT_TEXT =
-  "Seven years across Amazon's global operations and enterprise analytics consulting. I design Lakehouse platforms on Microsoft Fabric and Databricks, build Power BI semantic models that executives stake decisions on, and architect the dbt and Snowflake pipelines behind them. I'm the person who translates what the CFO needs into what the data engineer actually builds.";
+  "Microsoft-certified BI & Analytics Engineer with seven years at the intersection of enterprise data and business intelligence. At Amazon, I transformed fraud investigation data into analytics systems serving ten global marketplaces. Now at Amplify Analytix, I design Lakehouse architectures on Microsoft Fabric, build Power BI semantic models CFOs stake decisions on, and engineer Snowflake pipelines processing five million records daily — across fifteen countries with a hundred percent client retention.";
 
 /* Each character animates from dim to full opacity as the section scrolls into view */
 function AnimatedChar({

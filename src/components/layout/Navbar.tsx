@@ -7,12 +7,12 @@ import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
 
 const links = [
-  { href: "#about",         id: "about",         label: "About"          },
-  { href: "#skills",        id: "skills",        label: "Skills"         },
-  { href: "#case-studies",  id: "case-studies",  label: "Projects"       },
-  { href: "#journey",       id: "journey",       label: "Experience"     },
-  { href: "#certifications",id: "certifications",label: "Certifications" },
-  { href: "#contact",       id: "contact",       label: "Contact"        },
+  { href: "#about",          id: "about",          label: "About"          },
+  { href: "#stack",          id: "stack",          label: "Stack"          },
+  { href: "#journey",        id: "journey",        label: "Experience"     },
+  { href: "#case-studies",   id: "case-studies",   label: "Projects"       },
+  { href: "#certifications", id: "certifications", label: "Certifications" },
+  { href: "#contact",        id: "contact",        label: "Contact"        },
 ];
 
 export function Navbar() {

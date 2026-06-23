@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, motionValue, animate, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Calendar, Mail } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Mail } from "lucide-react";
 import { MagneticButton } from "@/components/common/MagneticButton";
 import { profile } from "@/data/profile";
 
@@ -10,21 +10,21 @@ const VIDEO_SRC =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4";
 
 const headlines = [
-  "I build enterprise data platforms that power real-time decisions at scale.",
-  "I architect Lakehouse solutions on Fabric, Databricks, and Snowflake.",
-  "I turn complex data estates into governed analytics products teams trust.",
-  "I design data infrastructure that executives stake business decisions on.",
+  "Building enterprise analytics platforms that power decisions at scale.",
+  "Architecting Microsoft Fabric Lakehouses and Power BI semantic models.",
+  "Turning raw data estates into governed analytics products teams trust.",
+  "Designing data infrastructure that CFOs stake business decisions on.",
 ];
 
 const primaryMetrics = [
   { end: 7,  suffix: "+",  label: "Years experience"        },
-  { end: 15, suffix: "+",  label: "Countries supported"     },
-  { end: 20, suffix: "+",  label: "Data products delivered" },
+  { end: 13, suffix: "",   label: "Certifications earned"   },
+  { end: 20, suffix: "+",  label: "Solutions delivered"     },
 ];
 
 const secondaryMetrics = [
-  { num: "5M+",  label: "Daily records processed" },
-  { num: "13",   label: "Certifications earned"   },
+  { num: "5M+",  label: "Records processed daily" },
+  { num: "15+",  label: "Countries supported"     },
   { num: "100%", label: "Client retention"        },
 ];
 
@@ -108,7 +108,7 @@ export function CinematicHero() {
             <motion.div {...fadeUp(0)} className="inline-flex items-center gap-2 mb-[clamp(1rem,1.5vw,1.5rem)]">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
               <span className="text-[12px] font-medium text-emerald-300 tracking-[0.02em]">
-                BI &amp; Analytics Engineer · Available
+                Microsoft Certified · Available for Hire
               </span>
             </motion.div>
 
@@ -143,20 +143,19 @@ export function CinematicHero() {
               {...fadeUp(0.12)}
               className="text-[clamp(0.9rem,0.85rem+0.3vw,1.1rem)] leading-relaxed text-white/60 mb-[clamp(1.75rem,2.2vw,2.5rem)] max-w-[46ch]"
             >
-              Helping organizations build scalable data platforms and executive analytics products
-              on Microsoft Fabric, Databricks, and Snowflake.{" "}
+              Microsoft-certified BI & Analytics Engineer — 7 years delivering Lakehouse platforms,
+              Power BI semantic models, and analytics pipelines on Fabric, Databricks, and Snowflake
+              across 15 countries.{" "}
               <span className="text-white/90 font-medium">Open to BI and Analytics Engineering roles.</span>
             </motion.p>
 
             {/* CTAs */}
             <motion.div {...fadeUp(0.22)} className="flex flex-wrap items-center gap-3">
               <MagneticButton
-                href={profile.calendlyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#case-studies"
                 className="items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.1vw,1rem)] rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
               >
-                <Calendar size={14} /> Book a Call
+                View Projects
                 <ArrowRight size={13} />
               </MagneticButton>
 
