@@ -7,32 +7,68 @@ const timeline = [
     period: "2019–2020",
     role: "Customer Support Representative",
     company: "Frontizo Business Services",
-    achievement: "Built Excel dashboards to track team KPIs. First exposure to turning operational data into decisions that improved team performance.",
+    location: "Bengaluru, India",
+    type: "Full-time",
+    summary: "Began career at an Amazon-operated facility. Built Excel dashboards to surface team KPIs and identified recurring process inefficiencies through data analysis.",
+    highlights: [
+      "Built Excel reporting models to track team KPIs and reduce escalation rates",
+      "Developed strong analytical instincts by questioning operational data daily",
+      "Foundation for the pivot into data and analytics engineering",
+    ],
+    stack: ["Excel", "SQL Basics"],
     badge: null,
     current: false,
   },
   {
     period: "2020–2024",
-    role: "Investigation Specialist",
+    role: "Investigation Specialist → Analytics Lead",
     company: "Amazon",
-    achievement: "Investigated fraud at scale across global seller operations. Built forecasting dashboards processing 100M+ records for leadership across 10 marketplaces, identifying $500K+ in revenue opportunities.",
+    location: "Bengaluru, India",
+    type: "Full-time",
+    summary: "Progressed from fraud investigation into building self-service analytics platforms for seller leadership across 10+ global marketplaces. Delivered reporting infrastructure that processed 100M+ daily records and surfaced $500K+ in revenue opportunities.",
+    highlights: [
+      "Built Sales Forecasting Dashboard processing 100M+ daily records across 10 marketplaces",
+      "Identified $500K+ in revenue opportunities through predictive analytics models in Python and Snowflake",
+      "Developed Power BI dashboards adopted by sales leadership for weekly business reviews",
+      "Reduced manual reporting effort by 70% through automated pipeline and alert systems",
+      "Collaborated with data science teams to integrate ML insights into operational BI tools",
+    ],
+    stack: ["Power BI", "Snowflake", "Python", "SQL", "DAX", "Zebra BI"],
     badge: "100M+ records · 10 marketplaces · $500K+ identified",
     current: false,
   },
   {
-    period: "2025",
+    period: "Jan 2025",
     role: "Business Data Analyst",
     company: "Amplify Analytix",
-    achievement: "Delivered enterprise Power BI reporting suites for global clients. Eliminated hours of daily manual consolidation and established governance standards.",
+    location: "Bengaluru, India",
+    type: "Full-time",
+    summary: "Joined Amplify Analytix to deliver enterprise Power BI reporting suites for global clients. Established governance standards and eliminated hours of daily manual consolidation.",
+    highlights: [
+      "Delivered Power BI reporting suites for clients across manufacturing and finance sectors",
+      "Implemented row-level security, audit logging, and data governance standards",
+      "Eliminated hours of daily manual file consolidation through automated ingestion pipelines",
+    ],
+    stack: ["Power BI", "DAX", "SQL", "Azure Data Factory"],
     badge: null,
     current: false,
   },
   {
-    period: "2025–present",
+    period: "2025 – Present",
     role: "BI & Analytics Engineer",
     company: "Amplify Analytix",
-    achievement: "Architecting Microsoft Fabric Lakehouse platforms with Medallion architecture. Delivering 20+ data products for 200+ enterprise users across 15 countries with 100% client retention.",
-    badge: "15 countries · 20+ products · 200+ users",
+    location: "Bengaluru, India",
+    type: "Full-time",
+    summary: "Architecting Microsoft Fabric Lakehouse platforms and delivering end-to-end analytics products for enterprise clients across 15 countries. Leading platform design, semantic modeling, and cross-functional delivery.",
+    highlights: [
+      "Architected Microsoft Fabric Lakehouse with Medallion architecture — 6 source systems, OneLake",
+      "Engineered Power BI semantic models with 100+ DAX measures for C-suite reporting",
+      "Migrated legacy SQL warehouse to SQLMesh — pipeline failures from 12% to under 1%",
+      "Delivered 20+ data products for 200+ enterprise users across 15 countries",
+      "Led Databricks and Snowflake platform deployments for global analytics clients",
+    ],
+    stack: ["Microsoft Fabric", "Power BI", "Databricks", "Snowflake", "dbt", "SQLMesh", "PySpark", "Azure"],
+    badge: "15 countries · 20+ products · 100% client retention",
     current: true,
   },
 ];
@@ -55,76 +91,113 @@ export function CareerEvolutionSection() {
           Experience
         </motion.h2>
 
-        <div className="relative max-w-4xl">
-          {/* Vertical connector line */}
-          <div
-            aria-hidden
-            className="absolute left-[calc(clamp(4rem,10vw,7rem)+0.5px)] top-2 bottom-2 w-px bg-border hidden sm:block"
-          />
+        <div className="relative max-w-5xl space-y-0">
+          {timeline.map((item, i) => (
+            <motion.div
+              key={`${item.period}-${item.role}`}
+              {...reveal(0.05 + i * 0.07)}
+              className={`relative grid sm:grid-cols-[clamp(5rem,12vw,9rem)_1px_1fr] gap-x-6 items-start ${
+                i > 0 ? "pt-[clamp(2rem,3vw,3rem)]" : ""
+              }`}
+            >
+              {/* Period column */}
+              <div className="sm:text-right pt-1">
+                <span className="font-mono text-[11px] text-muted-foreground tracking-[0.05em] leading-snug whitespace-nowrap">
+                  {item.period}
+                </span>
+              </div>
 
-          <ol className="space-y-0">
-            {timeline.map((item, i) => (
-              <motion.li
-                key={`${item.period}-${item.role}`}
-                {...reveal(0.05 + i * 0.07)}
-                className={`relative sm:grid sm:grid-cols-[clamp(4rem,10vw,7rem)_1.5rem_1fr] sm:gap-x-6 items-start py-[clamp(1.25rem,2vw,1.75rem)] ${
-                  i > 0 ? "border-t border-border sm:border-none" : ""
-                }`}
-              >
-                {/* Period */}
-                <div className="mb-1 sm:mb-0 sm:text-right sm:pt-0.5">
-                  <span className="font-mono text-[11px] text-muted-foreground tracking-[0.06em] leading-snug">
-                    {item.period}
-                  </span>
-                </div>
+              {/* Vertical line + dot */}
+              <div className="hidden sm:flex flex-col items-center">
+                <span
+                  className={`w-3 h-3 rounded-full border-2 border-background flex-shrink-0 mt-1 ${
+                    item.current ? "bg-primary" : "bg-muted-foreground/35"
+                  }`}
+                />
+                {i < timeline.length - 1 && (
+                  <span className="flex-1 w-px bg-border mt-1" style={{ minHeight: "calc(100% + clamp(2rem,3vw,3rem))" }} />
+                )}
+              </div>
 
-                {/* Dot */}
-                <div className="hidden sm:flex items-start justify-center pt-[3px]">
-                  <span
-                    className={`w-3 h-3 rounded-full border-2 border-background flex-shrink-0 ${
-                      item.current ? "bg-primary" : "bg-muted-foreground/40"
-                    } ${item.current ? "glow-accent" : ""}`}
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="pl-0">
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5 mb-1.5">
-                    <h3
-                      className={`text-[clamp(0.9rem,0.85rem+0.4vw,1.1rem)] font-semibold leading-snug ${
-                        item.current ? "text-foreground" : ""
-                      }`}
-                    >
-                      {item.role}
-                    </h3>
-                    {item.current && (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono"
-                        style={{ background: "color-mix(in srgb, var(--primary) 12%, transparent)", color: "var(--primary)", border: "1px solid color-mix(in srgb, var(--primary) 25%, transparent)" }}>
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                        now
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-[13px] text-muted-foreground mb-1.5 font-medium">{item.company}</p>
-                  <p className="text-[13px] text-muted-foreground leading-relaxed max-w-[52ch]">
-                    {item.achievement}
-                  </p>
-                  {item.badge && (
-                    <p
-                      className="mt-2 inline-block font-mono text-[10px] px-2.5 py-1 rounded-md"
+              {/* Content */}
+              <div className="pb-2">
+                {/* Role + current badge */}
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1">
+                  <h3 className={`text-[clamp(0.9rem,0.85rem+0.35vw,1.05rem)] font-semibold leading-snug ${item.current ? "text-foreground" : ""}`}>
+                    {item.role}
+                  </h3>
+                  {item.current && (
+                    <span
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono"
                       style={{
-                        background: "color-mix(in srgb, var(--primary) 8%, var(--card))",
+                        background: "color-mix(in srgb, var(--primary) 12%, transparent)",
                         color: "var(--primary)",
-                        border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)",
+                        border: "1px solid color-mix(in srgb, var(--primary) 25%, transparent)",
                       }}
                     >
-                      {item.badge}
-                    </p>
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                      now
+                    </span>
                   )}
                 </div>
-              </motion.li>
-            ))}
-          </ol>
+
+                {/* Company + meta */}
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mb-3">
+                  <p className="text-[13px] font-medium text-muted-foreground">{item.company}</p>
+                  <span className="text-border hidden sm:inline">·</span>
+                  <p className="text-[12px] text-muted-foreground/70 font-mono">{item.location}</p>
+                </div>
+
+                {/* Summary */}
+                <p className="text-[13px] text-muted-foreground leading-relaxed mb-3 max-w-[58ch]">
+                  {item.summary}
+                </p>
+
+                {/* Highlights */}
+                <ul className="space-y-1.5 mb-4">
+                  {item.highlights.map((h) => (
+                    <li key={h} className="flex items-start gap-2.5 text-[12.5px] text-muted-foreground leading-relaxed">
+                      <span
+                        className="w-1 h-1 rounded-full flex-shrink-0 mt-[0.45rem]"
+                        style={{ background: "var(--primary)" }}
+                      />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Stack chips */}
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {item.stack.map((t) => (
+                    <span
+                      key={t}
+                      className="text-[11px] font-mono text-muted-foreground px-2 py-0.5 rounded"
+                      style={{
+                        background: "color-mix(in srgb, var(--primary) 6%, var(--card))",
+                        border: "1px solid var(--border)",
+                      }}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Impact badge */}
+                {item.badge && (
+                  <p
+                    className="inline-block font-mono text-[10px] px-2.5 py-1 rounded-md"
+                    style={{
+                      background: "color-mix(in srgb, var(--primary) 8%, var(--card))",
+                      color: "var(--primary)",
+                      border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)",
+                    }}
+                  >
+                    {item.badge}
+                  </p>
+                )}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

@@ -26,8 +26,8 @@ function IssuerLogo({ issuer }: { issuer: Issuer }) {
 const featured: Cert[] = [
   { name: "Fabric Analytics Engineer", code: "DP-600", issuer: "Microsoft", date: "Dec 2024" },
   { name: "Power BI Data Analyst",     code: "PL-300", issuer: "Microsoft", date: "Sep 2021" },
-  { name: "Azure Administrator",       code: "AZ-104", issuer: "Microsoft", date: "Dec 2021" },
   { name: "Azure Data Scientist",      code: "DP-100", issuer: "Microsoft", date: "Feb 2023" },
+  { name: "Azure Administrator",       code: "AZ-104", issuer: "Microsoft", date: "Dec 2021" },
 ];
 
 const additional: Cert[] = [

@@ -1,9 +1,7 @@
 import { CinematicHero } from "@/components/sections/CinematicHero";
 import { AboutSection } from "@/components/sections/AboutSection";
-import { TechStackSection } from "@/components/sections/TechStackSection";
-import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { CareerEvolutionSection } from "@/components/sections/CareerEvolutionSection";
-
+import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { CertificationsSection } from "@/components/sections/CertificationsSection";
 
 function Divider() {
@@ -17,12 +15,9 @@ export default function HomePage() {
       <Divider />
       <AboutSection />
       <Divider />
-      <TechStackSection />
+      <CareerEvolutionSection />
       <Divider />
       <CaseStudiesSection />
-      <Divider />
-      <CareerEvolutionSection />
-
       <Divider />
       <CertificationsSection />
     </>
