@@ -2,48 +2,47 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, MapPin, Briefcase, Award, Globe } from "lucide-react";
 import { profile } from "@/data/profile";
 
 const ABOUT_TEXT =
   "Microsoft-certified BI & Analytics Engineer. Five years shipping Lakehouse platforms, Power BI semantic models, and analytics pipelines on Microsoft Fabric and Snowflake — across 15 countries with 100% client retention.";
 
 const SKILLS = [
-  "Power BI",
-  "SQL",
-  "Python",
-  "Microsoft Fabric",
-  "Azure",
-  "Data Modeling",
-  "Dashboard Development",
-  "DAX",
-  "ETL",
-  "Snowflake",
+  "Power BI", "SQL", "Python", "Microsoft Fabric",
+  "Azure", "Data Modeling", "DAX", "ETL", "Snowflake", "dbt",
 ];
 
+const SNAPSHOT = [
+  { icon: Briefcase, label: "Current Role",   value: "BI & Analytics Engineer", sub: "Amplify Analytix" },
+  { icon: Award,     label: "Certifications", value: "13 Microsoft + Platform",  sub: "PL-300 · DP-600 · AZ-104 · DP-700" },
+  { icon: Globe,     label: "Global Reach",   value: "15 Countries",             sub: "Enterprise clients · 100% retention" },
+  { icon: MapPin,    label: "Location",        value: "Bengaluru, India",         sub: "Open to remote & hybrid roles" },
+];
+
+function reveal(delay = 0) {
+  return {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: "-40px" },
+    transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
+  };
+}
+
 function AnimatedChar({
-  char,
-  index,
-  total,
-  progress,
+  char, index, total, progress,
 }: {
-  char: string;
-  index: number;
-  total: number;
-  progress: MotionValue<number>;
+  char: string; index: number; total: number; progress: MotionValue<number>;
 }) {
   const start = Math.max(0, (index / total) - 0.1);
   const end   = Math.min(1, (index / total) + 0.05);
-  const opacity = useTransform(progress, [start, end], [0.15, 1]);
+  const opacity = useTransform(progress, [start, end], [0.18, 1]);
 
   if (char === " ") return <span style={{ display: "inline-block" }}>&nbsp;</span>;
-
   return (
     <span style={{ position: "relative", display: "inline-block" }}>
       <span style={{ opacity: 0 }}>{char}</span>
-      <motion.span style={{ opacity, position: "absolute", left: 0, top: 0 }}>
-        {char}
-      </motion.span>
+      <motion.span style={{ opacity, position: "absolute", left: 0, top: 0 }}>{char}</motion.span>
     </span>
   );
 }
@@ -54,84 +53,104 @@ export function AboutSection() {
     target: sectionRef,
     offset: ["start 0.85", "end 0.2"],
   });
-
   const chars = ABOUT_TEXT.split("");
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="relative overflow-hidden px-5 sm:px-8 md:px-10 py-[clamp(3.5rem,6vw,6rem)]"
-    >
+    <section id="about" ref={sectionRef} className="relative overflow-hidden">
+      <div className="container-page section-pad">
+        <div className="grid lg:grid-cols-2 gap-x-[clamp(3rem,6vw,7rem)] gap-y-12 items-start">
 
-      <div className="relative z-10 max-w-4xl w-full mx-auto flex flex-col items-center gap-10 text-center">
-
-        {/* Display heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "60px" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }}
-          className="leading-none tracking-tight font-normal"
-          style={{
-            fontFamily: "var(--font-display, 'Instrument Serif', serif)",
-            fontSize: "clamp(3rem, 8vw, 7.5rem)",
-          }}
-        >
-          About me
-        </motion.h2>
-
-        {/* Scroll-driven character reveal */}
-        <p
-          className="font-medium leading-relaxed max-w-[65ch] text-pretty"
-          style={{
-            color: "var(--foreground)",
-            fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
-          }}
-        >
-          {chars.map((char, i) => (
-            <AnimatedChar
-              key={i}
-              char={char}
-              index={i}
-              total={chars.length}
-              progress={scrollYProgress}
-            />
-          ))}
-        </p>
-
-        {/* Skill pills */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "40px" }}
-          transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] as const }}
-          className="flex flex-wrap justify-center gap-2"
-        >
-          {SKILLS.map((skill) => (
-            <span
-              key={skill}
-              className="px-3 py-1 rounded-full text-[12px] font-medium panel"
+          {/* ── Left: heading + bio + skills ── */}
+          <div>
+            <motion.h2
+              {...reveal()}
+              className="mb-6 leading-none tracking-tight font-normal"
+              style={{ fontFamily: "var(--font-display, 'Instrument Serif', serif)" }}
             >
-              {skill}
-            </span>
-          ))}
-        </motion.div>
+              About me
+            </motion.h2>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "50px" }}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] as const }}
-        >
-          <a
-            href={`mailto:${profile.email}`}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity glow-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-          >
-            Get in touch <ArrowUpRight size={15} />
-          </a>
-        </motion.div>
+            {/* Scroll-driven character reveal */}
+            <p
+              className="text-[clamp(1rem,1.1vw,1.1rem)] leading-relaxed text-muted-foreground mb-8 max-w-[52ch] text-pretty"
+            >
+              {chars.map((char, i) => (
+                <AnimatedChar key={i} char={char} index={i} total={chars.length} progress={scrollYProgress} />
+              ))}
+            </p>
+
+            {/* Skill pills */}
+            <motion.div {...reveal(0.1)} className="flex flex-wrap gap-2 mb-8">
+              {SKILLS.map((skill) => (
+                <span key={skill} className="px-3 py-1 rounded-full text-[12px] font-medium panel">
+                  {skill}
+                </span>
+              ))}
+            </motion.div>
+
+            <motion.div {...reveal(0.18)}>
+              <a
+                href={`mailto:${profile.email}`}
+                className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              >
+                Get in touch <ArrowUpRight size={14} />
+              </a>
+            </motion.div>
+          </div>
+
+          {/* ── Right: professional snapshot ── */}
+          <motion.div {...reveal(0.08)} className="flex flex-col gap-3">
+            <p className="eyebrow mb-1">Professional Snapshot</p>
+
+            {/* Stat row: years + certs */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="panel rounded-2xl p-5">
+                <p
+                  className="font-mono font-bold leading-none tabular-nums mb-1"
+                  style={{ fontSize: "clamp(2.4rem,3.5vw,3.2rem)", color: "var(--primary)" }}
+                >
+                  7+
+                </p>
+                <p className="text-[13px] font-semibold text-foreground">Years Experience</p>
+                <p className="text-[11px] text-muted-foreground mt-0.5">Analytics & BI engineering</p>
+              </div>
+              <div className="panel rounded-2xl p-5">
+                <p
+                  className="font-mono font-bold leading-none tabular-nums mb-1"
+                  style={{ fontSize: "clamp(2.4rem,3.5vw,3.2rem)", color: "var(--primary)" }}
+                >
+                  13
+                </p>
+                <p className="text-[13px] font-semibold text-foreground">Certifications</p>
+                <p className="text-[11px] text-muted-foreground mt-0.5">Microsoft · Snowflake · Databricks</p>
+              </div>
+            </div>
+
+            {/* Snapshot rows */}
+            {SNAPSHOT.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.label}
+                  {...reveal(0.12 + i * 0.06)}
+                  className="panel rounded-xl px-4 py-3.5 flex items-center gap-4"
+                >
+                  <div
+                    className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ background: "color-mix(in srgb, var(--primary) 10%, transparent)" }}
+                  >
+                    <Icon size={16} style={{ color: "var(--primary)" }} />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[11px] text-muted-foreground font-mono uppercase tracking-[0.1em] mb-0.5">{item.label}</p>
+                    <p className="text-[13px] font-semibold text-foreground leading-snug">{item.value}</p>
+                    <p className="text-[11px] text-muted-foreground leading-snug">{item.sub}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
