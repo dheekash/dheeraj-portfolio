@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Database, Settings, Layers, BarChart3, TrendingUp } from "lucide-react";
 import {
   PythonLogo, SQLLogo, DbtLogo, SparkLogo,
   SnowflakeLogo, PowerBILogo, AzureLogo,
@@ -99,46 +98,28 @@ const techLogos: {
   { name: "dbt",        Logo: DbtLogo,        bg: "rgba(255,105,75,0.10)"  },
 ];
 
-const pipeline: {
-  label: string;
-  sublabel: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  icon: any;
-  color: string;
-}[] = [
-  { label: "Source Systems", sublabel: "CRM · ERP · APIs",    icon: Database,  color: "#1591DC" },
-  { label: "SQL / Snowflake", sublabel: "Ingest & store",     icon: Database,  color: "#29B5E8" },
-  { label: "ETL / ADF",      sublabel: "Transform & clean",   icon: Settings,  color: "#7c3aed" },
-  { label: "Semantic Layer", sublabel: "DAX models",          icon: Layers,    color: "#d97706" },
-  { label: "Power BI",       sublabel: "Dashboards",          icon: BarChart3, color: "#F2C811" },
-  { label: "Decisions",      sublabel: "Business outcomes",   icon: TrendingUp,color: "#059669" },
-];
 
 export function TechStackSection() {
   return (
     <section id="skills">
       <div className="container-page section-pad">
-        <motion.h2 {...reveal()} className="max-w-[22ch] mb-3">
-          Skills & Technology Stack
+
+        {/* ── Core Expertise ── */}
+        <motion.h2 {...reveal()} className="mb-3">
+          Core Expertise
         </motion.h2>
-        <motion.p {...reveal(0.05)} className="text-muted-foreground text-sm leading-relaxed max-w-[52ch] mb-[clamp(1.75rem,3vw,3rem)]">
-          Full-stack analytics engineering, from raw ingestion through governed semantic models to
-          executive-facing dashboards.
+        <motion.p {...reveal(0.05)} className="text-muted-foreground text-sm leading-relaxed max-w-[52ch] mb-[clamp(1.5rem,2.5vw,2.5rem)]">
+          Full-stack analytics engineering — from raw data ingestion through governed semantic models to executive-facing dashboards.
         </motion.p>
 
-        {/* Skills table */}
-        <div className="border border-border rounded-2xl overflow-hidden mb-[clamp(1.75rem,3vw,3rem)]">
+        <div className="border border-border rounded-2xl overflow-hidden mb-[clamp(2.5rem,4vw,4rem)]">
           {rows.map((row, i) => (
             <motion.div
               key={row.category}
               {...reveal(0.04 + i * 0.05)}
               className={`grid sm:grid-cols-[clamp(8rem,14vw,13rem)_1fr] gap-x-6 gap-y-2.5 px-[clamp(1rem,2vw,1.75rem)] py-[clamp(0.75rem,1.2vw,1rem)] items-start ${
                 i > 0 ? "border-t border-border" : ""
-              } ${
-                i % 2 === 1
-                  ? "bg-[color:color-mix(in_srgb,var(--primary)_2%,var(--card))]"
-                  : ""
-              }`}
+              } ${i % 2 === 1 ? "bg-[color:color-mix(in_srgb,var(--primary)_2%,var(--card))]" : ""}`}
             >
               <p className="eyebrow pt-1 whitespace-nowrap">{row.category}</p>
               <div className="flex flex-wrap gap-1.5">
@@ -148,11 +129,9 @@ export function TechStackSection() {
           ))}
         </div>
 
-        {/* Core platforms logo grid */}
-        <motion.div {...reveal(0.28)} className="mb-[clamp(1.75rem,3vw,3rem)]">
-          <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-muted-foreground mb-3">
-            Core Platforms
-          </p>
+        {/* ── Technology Stack ── */}
+        <motion.div {...reveal(0.28)}>
+          <p className="eyebrow mb-4">Technology Stack</p>
           <div className="grid grid-cols-4 sm:grid-cols-8 gap-2.5">
             {techLogos.map((t) => {
               const Logo = t.Logo;
@@ -176,42 +155,6 @@ export function TechStackSection() {
           </div>
         </motion.div>
 
-        {/* End-to-end pipeline diagram */}
-        <motion.div {...reveal(0.36)}>
-          <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-muted-foreground mb-3">
-            End-to-End Analytics Architecture
-          </p>
-          <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
-            <div className="inline-flex items-center gap-1 min-w-max">
-              {pipeline.map((step, i) => {
-                const Icon = step.icon;
-                return (
-                  <div key={step.label} className="flex items-center gap-1">
-                    <div
-                      className="flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl border"
-                      style={{
-                        background: `${step.color}0F`,
-                        borderColor: `${step.color}30`,
-                        minWidth: "6.5rem",
-                      }}
-                    >
-                      <Icon size={14} style={{ color: step.color }} />
-                      <p className="text-[11px] font-semibold text-center leading-snug">
-                        {step.label}
-                      </p>
-                      <p className="text-[9.5px] text-muted-foreground text-center leading-snug">
-                        {step.sublabel}
-                      </p>
-                    </div>
-                    {i < pipeline.length - 1 && (
-                      <ArrowRight size={11} className="text-muted-foreground/35 flex-shrink-0" />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

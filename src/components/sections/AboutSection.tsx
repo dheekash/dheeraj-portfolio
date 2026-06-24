@@ -62,11 +62,7 @@ export function AboutSection() {
 
           {/* ── Left: heading + bio + skills ── */}
           <div>
-            <motion.h2
-              {...reveal()}
-              className="mb-6 leading-none tracking-tight font-normal"
-              style={{ fontFamily: "var(--font-display, 'Instrument Serif', serif)" }}
-            >
+            <motion.h2 {...reveal()} className="mb-6">
               About me
             </motion.h2>
 

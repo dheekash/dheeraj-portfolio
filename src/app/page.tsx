@@ -14,9 +14,10 @@ export default function HomePage() {
   return (
     <>
       <CinematicHero />
-      <TechStackSection />
       <Divider />
       <AboutSection />
+      <Divider />
+      <TechStackSection />
       <Divider />
       <CaseStudiesSection />
       <Divider />

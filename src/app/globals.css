@@ -47,49 +47,49 @@
 }
 
 :root {
-  /* ── LIGHT: recommended palette ── */
-  --background: #EDF6FC;
-  --foreground: #1F2937;
+  /* ── LIGHT: premium SaaS palette ── */
+  --background: #F8FAFC;
+  --foreground: #0F172A;
   --card: #FFFFFF;
-  --card-foreground: #1F2937;
+  --card-foreground: #0F172A;
   --popover: #FFFFFF;
-  --popover-foreground: #1F2937;
-  --primary: #2F6BFF;
+  --popover-foreground: #0F172A;
+  --primary: #2563EB;
   --primary-foreground: #FFFFFF;
-  --secondary: rgba(47, 107, 255, 0.09);
-  --secondary-foreground: #2F6BFF;
-  --muted: rgba(31, 41, 55, 0.05);
-  --muted-foreground: #6B7280;
-  --accent: #00A67E;
+  --secondary: rgba(37, 99, 235, 0.08);
+  --secondary-foreground: #2563EB;
+  --muted: rgba(15, 23, 42, 0.04);
+  --muted-foreground: #64748B;
+  --accent: #2563EB;
   --accent-foreground: #FFFFFF;
   --destructive: #DC2626;
-  --border: rgba(47, 107, 255, 0.14);
-  --input: rgba(47, 107, 255, 0.10);
-  --ring: #2F6BFF;
-  --chart-1: #2F6BFF;
-  --chart-2: #00A67E;
-  --chart-3: #1F2937;
+  --border: rgba(15, 23, 42, 0.10);
+  --input: rgba(15, 23, 42, 0.08);
+  --ring: #2563EB;
+  --chart-1: #2563EB;
+  --chart-2: #64748B;
+  --chart-3: #0F172A;
   --chart-4: #10B981;
-  --chart-5: #FFF4E6;
+  --chart-5: #F1F5F9;
   --radius: 0.75rem;
   --sidebar: #FFFFFF;
-  --sidebar-foreground: #1F2937;
-  --sidebar-primary: #2F6BFF;
+  --sidebar-foreground: #0F172A;
+  --sidebar-primary: #2563EB;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: rgba(47, 107, 255, 0.09);
-  --sidebar-accent-foreground: #2F6BFF;
-  --sidebar-border: rgba(47, 107, 255, 0.12);
-  --sidebar-ring: #2F6BFF;
+  --sidebar-accent: rgba(37, 99, 235, 0.08);
+  --sidebar-accent-foreground: #2563EB;
+  --sidebar-border: rgba(15, 23, 42, 0.10);
+  --sidebar-ring: #2563EB;
 
   /* Diagram + hero canvas accents */
-  --dgrm: #2F6BFF;
-  --net-node: rgba(47, 107, 255, 0.45);
-  --net-edge: 47, 107, 255;
-  --net-pulse: rgba(0, 166, 126, 0.9);
-  --grain-opacity: 0.020;
-  --nebula-1: rgba(47, 107, 255, 0.11);
-  --nebula-2: rgba(0, 166, 126, 0.05);
-  --highlight: #FFF4E6;
+  --dgrm: #2563EB;
+  --net-node: rgba(37, 99, 235, 0.45);
+  --net-edge: 37, 99, 235;
+  --net-pulse: rgba(37, 99, 235, 0.8);
+  --grain-opacity: 0.015;
+  --nebula-1: rgba(37, 99, 235, 0.10);
+  --nebula-2: rgba(100, 116, 139, 0.05);
+  --highlight: #EFF6FF;
 }
 
 .dark {
