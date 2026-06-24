@@ -61,18 +61,8 @@ export function AboutSection() {
     <section
       id="about"
       ref={sectionRef}
-      className="dark relative overflow-hidden px-5 sm:px-8 md:px-10 py-[clamp(3.5rem,6vw,6rem)]"
-      style={{ background: "var(--background)" }}
+      className="relative overflow-hidden px-5 sm:px-8 md:px-10 py-[clamp(3.5rem,6vw,6rem)]"
     >
-      {/* Subtle nebula glow */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 65% 55% at 50% 50%, var(--nebula-1) 0%, var(--nebula-2) 55%, transparent 80%)",
-        }}
-      />
 
       <div className="relative z-10 max-w-4xl w-full mx-auto flex flex-col items-center gap-10 text-center">
 
@@ -86,10 +76,6 @@ export function AboutSection() {
           style={{
             fontFamily: "var(--font-display, 'Instrument Serif', serif)",
             fontSize: "clamp(3rem, 8vw, 7.5rem)",
-            background: "linear-gradient(175deg, var(--foreground) 30%, var(--muted-foreground) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
           }}
         >
           About me
@@ -125,7 +111,7 @@ export function AboutSection() {
           {SKILLS.map((skill) => (
             <span
               key={skill}
-              className="px-3 py-1 rounded-full text-[12px] font-medium text-white/80 border border-white/15 bg-white/8"
+              className="px-3 py-1 rounded-full text-[12px] font-medium panel"
             >
               {skill}
             </span>
