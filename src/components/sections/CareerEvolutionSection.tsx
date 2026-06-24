@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const timeline = [
   {
-    period: "2019 - 2020",
+    period: "Mar 2019 - Mar 2020",
     role: "Customer Support Analyst (Data & Reporting)",
     company: "Frontizo Business Services",
     location: "Bengaluru, India",
@@ -21,7 +21,7 @@ const timeline = [
     current: false,
   },
   {
-    period: "2020 - 2024",
+    period: "Mar 2020 - Jun 2024",
     role: "Risk Data Analyst",
     company: "Amazon",
     location: "Bengaluru, India",
