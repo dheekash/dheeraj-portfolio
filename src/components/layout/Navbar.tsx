@@ -74,7 +74,7 @@ export function Navbar() {
           Dheeraj Kashyap<span className="accent-text">.</span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-3">
           {links.map((l) => (
             <a
               key={l.href}
