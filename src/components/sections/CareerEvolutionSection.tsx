@@ -4,15 +4,16 @@ import { motion } from "framer-motion";
 
 const timeline = [
   {
-    period: "2019–2020",
+    period: "2019 - 2020",
     role: "Customer Support Representative",
     company: "Frontizo Business Services",
     location: "Bengaluru, India",
     type: "Full-time",
-    summary: "Began career at an Amazon-operated facility. Built Excel dashboards to surface team KPIs and identified recurring process inefficiencies through data analysis.",
+    summary:
+      "Began career at an Amazon-operated facility. Built Excel dashboards to surface team KPIs and identified recurring process inefficiencies through data analysis.",
     highlights: [
       "Built Excel reporting models to track team KPIs and reduce escalation rates",
-      "Developed strong analytical instincts by questioning operational data daily",
+      "Developed analytical instincts by questioning operational data daily",
       "Foundation for the pivot into data and analytics engineering",
     ],
     stack: ["Excel", "SQL Basics"],
@@ -20,17 +21,18 @@ const timeline = [
     current: false,
   },
   {
-    period: "2020–2024",
-    role: "Investigation Specialist → Analytics Lead",
+    period: "2020 - 2024",
+    role: "Investigation Specialist - Analytics Lead",
     company: "Amazon",
     location: "Bengaluru, India",
     type: "Full-time",
-    summary: "Progressed from fraud investigation into building self-service analytics platforms for seller leadership across 10+ global marketplaces. Delivered reporting infrastructure that processed 100M+ daily records and surfaced $500K+ in revenue opportunities.",
+    summary:
+      "Progressed from fraud investigation into building self-service analytics platforms for seller leadership across 10+ global marketplaces. Delivered reporting infrastructure that processed 100M+ daily records and surfaced $500K+ in revenue opportunities.",
     highlights: [
       "Built Sales Forecasting Dashboard processing 100M+ daily records across 10 marketplaces",
-      "Identified $500K+ in revenue opportunities through predictive analytics models in Python and Snowflake",
+      "Identified $500K+ in revenue opportunities through predictive analytics in Python and Snowflake",
       "Developed Power BI dashboards adopted by sales leadership for weekly business reviews",
-      "Reduced manual reporting effort by 70% through automated pipeline and alert systems",
+      "Reduced manual reporting effort by 70% through automated pipelines and alert systems",
       "Collaborated with data science teams to integrate ML insights into operational BI tools",
     ],
     stack: ["Power BI", "Snowflake", "Python", "SQL", "DAX", "Zebra BI"],
@@ -43,7 +45,8 @@ const timeline = [
     company: "Amplify Analytix",
     location: "Bengaluru, India",
     type: "Full-time",
-    summary: "Joined Amplify Analytix to deliver enterprise Power BI reporting suites for global clients. Established governance standards and eliminated hours of daily manual consolidation.",
+    summary:
+      "Joined Amplify Analytix to deliver enterprise Power BI reporting suites for global clients. Established governance standards and eliminated hours of daily manual consolidation.",
     highlights: [
       "Delivered Power BI reporting suites for clients across manufacturing and finance sectors",
       "Implemented row-level security, audit logging, and data governance standards",
@@ -54,20 +57,30 @@ const timeline = [
     current: false,
   },
   {
-    period: "2025 – Present",
+    period: "2025 - Present",
     role: "BI & Analytics Engineer",
     company: "Amplify Analytix",
     location: "Bengaluru, India",
     type: "Full-time",
-    summary: "Architecting Microsoft Fabric Lakehouse platforms and delivering end-to-end analytics products for enterprise clients across 15 countries. Leading platform design, semantic modeling, and cross-functional delivery.",
+    summary:
+      "Architecting Microsoft Fabric Lakehouse platforms and delivering end-to-end analytics products for enterprise clients across 15 countries. Leading platform design, semantic modeling, and cross-functional delivery.",
     highlights: [
-      "Architected Microsoft Fabric Lakehouse with Medallion architecture — 6 source systems, OneLake",
+      "Architected Microsoft Fabric Lakehouse with Medallion architecture - 6 source systems, OneLake",
       "Engineered Power BI semantic models with 100+ DAX measures for C-suite reporting",
-      "Migrated legacy SQL warehouse to SQLMesh — pipeline failures from 12% to under 1%",
+      "Migrated legacy SQL warehouse to SQLMesh, cutting pipeline failures from 12% to under 1%",
       "Delivered 20+ data products for 200+ enterprise users across 15 countries",
       "Led Databricks and Snowflake platform deployments for global analytics clients",
     ],
-    stack: ["Microsoft Fabric", "Power BI", "Databricks", "Snowflake", "dbt", "SQLMesh", "PySpark", "Azure"],
+    stack: [
+      "Microsoft Fabric",
+      "Power BI",
+      "Databricks",
+      "Snowflake",
+      "dbt",
+      "SQLMesh",
+      "PySpark",
+      "Azure",
+    ],
     badge: "15 countries · 20+ products · 100% client retention",
     current: true,
   },
@@ -86,8 +99,7 @@ export function CareerEvolutionSection() {
   return (
     <section id="journey">
       <div className="container-page section-pad">
-        <motion.p {...reveal()} className="eyebrow mb-4">Career</motion.p>
-        <motion.h2 {...reveal(0.05)} className="max-w-[14ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
+        <motion.h2 {...reveal()} className="max-w-[14ch] mb-[clamp(2rem,3.5vw,4rem)]">
           Experience
         </motion.h2>
 
@@ -102,7 +114,7 @@ export function CareerEvolutionSection() {
             >
               {/* Period column */}
               <div className="sm:text-right pt-1">
-                <span className="font-mono text-[11px] text-muted-foreground tracking-[0.05em] leading-snug whitespace-nowrap">
+                <span className="font-mono text-[12px] text-muted-foreground tracking-[0.04em] leading-snug whitespace-nowrap">
                   {item.period}
                 </span>
               </div>
@@ -115,15 +127,18 @@ export function CareerEvolutionSection() {
                   }`}
                 />
                 {i < timeline.length - 1 && (
-                  <span className="flex-1 w-px bg-border mt-1" style={{ minHeight: "calc(100% + clamp(2rem,3vw,3rem))" }} />
+                  <span
+                    className="flex-1 w-px bg-border mt-1"
+                    style={{ minHeight: "calc(100% + clamp(2rem,3vw,3rem))" }}
+                  />
                 )}
               </div>
 
               {/* Content */}
               <div className="pb-2">
                 {/* Role + current badge */}
-                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1">
-                  <h3 className={`text-[clamp(0.9rem,0.85rem+0.35vw,1.05rem)] font-semibold leading-snug ${item.current ? "text-foreground" : ""}`}>
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1.5">
+                  <h3 className="text-[clamp(1rem,0.95rem+0.3vw,1.1rem)] font-semibold leading-snug">
                     {item.role}
                   </h3>
                   {item.current && (
@@ -143,20 +158,23 @@ export function CareerEvolutionSection() {
 
                 {/* Company + meta */}
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mb-3">
-                  <p className="text-[13px] font-medium text-muted-foreground">{item.company}</p>
-                  <span className="text-border hidden sm:inline">·</span>
+                  <p className="text-sm font-medium text-muted-foreground">{item.company}</p>
+                  <span className="text-border hidden sm:inline text-xs">·</span>
                   <p className="text-[12px] text-muted-foreground/70 font-mono">{item.location}</p>
                 </div>
 
                 {/* Summary */}
-                <p className="text-[13px] text-muted-foreground leading-relaxed mb-3 max-w-[58ch]">
+                <p className="text-sm text-muted-foreground leading-relaxed mb-3.5 max-w-[58ch]">
                   {item.summary}
                 </p>
 
                 {/* Highlights */}
-                <ul className="space-y-1.5 mb-4">
+                <ul className="space-y-2 mb-4">
                   {item.highlights.map((h) => (
-                    <li key={h} className="flex items-start gap-2.5 text-[12.5px] text-muted-foreground leading-relaxed">
+                    <li
+                      key={h}
+                      className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed"
+                    >
                       <span
                         className="w-1 h-1 rounded-full flex-shrink-0 mt-[0.45rem]"
                         style={{ background: "var(--primary)" }}
@@ -171,7 +189,7 @@ export function CareerEvolutionSection() {
                   {item.stack.map((t) => (
                     <span
                       key={t}
-                      className="text-[11px] font-mono text-muted-foreground px-2 py-0.5 rounded"
+                      className="text-[11.5px] font-mono text-muted-foreground px-2 py-0.5 rounded"
                       style={{
                         background: "color-mix(in srgb, var(--primary) 6%, var(--card))",
                         border: "1px solid var(--border)",
@@ -185,7 +203,7 @@ export function CareerEvolutionSection() {
                 {/* Impact badge */}
                 {item.badge && (
                   <p
-                    className="inline-block font-mono text-[10px] px-2.5 py-1 rounded-md"
+                    className="inline-block font-mono text-[10.5px] px-2.5 py-1 rounded-md"
                     style={{
                       background: "color-mix(in srgb, var(--primary) 8%, var(--card))",
                       color: "var(--primary)",

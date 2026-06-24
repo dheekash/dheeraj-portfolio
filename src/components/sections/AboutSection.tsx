@@ -6,9 +6,21 @@ import { ArrowUpRight } from "lucide-react";
 import { profile } from "@/data/profile";
 
 const ABOUT_TEXT =
-  "Microsoft-certified BI & Analytics Engineer with seven years at the intersection of enterprise data and business intelligence. At Amazon, I transformed fraud investigation data into analytics systems serving ten global marketplaces. Now at Amplify Analytix, I design Lakehouse architectures on Microsoft Fabric, build Power BI semantic models CFOs stake decisions on, and engineer Snowflake pipelines processing five million records daily — across fifteen countries with a hundred percent client retention.";
+  "Microsoft-certified BI & Analytics Engineer. Five years shipping Lakehouse platforms, Power BI semantic models, and analytics pipelines on Microsoft Fabric and Snowflake — across 15 countries with 100% client retention.";
 
-/* Each character animates from dim to full opacity as the section scrolls into view */
+const SKILLS = [
+  "Power BI",
+  "SQL",
+  "Python",
+  "Microsoft Fabric",
+  "Azure",
+  "Data Modeling",
+  "Dashboard Development",
+  "DAX",
+  "ETL",
+  "Snowflake",
+];
+
 function AnimatedChar({
   char,
   index,
@@ -22,7 +34,7 @@ function AnimatedChar({
 }) {
   const start = Math.max(0, (index / total) - 0.1);
   const end   = Math.min(1, (index / total) + 0.05);
-  const opacity = useTransform(progress, [start, end], [0.18, 1]);
+  const opacity = useTransform(progress, [start, end], [0.15, 1]);
 
   if (char === " ") return <span style={{ display: "inline-block" }}>&nbsp;</span>;
 
@@ -40,21 +52,19 @@ export function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start 0.85", "end 0.15"],
+    offset: ["start 0.85", "end 0.2"],
   });
 
   const chars = ABOUT_TEXT.split("");
 
   return (
-    /* Force dark mode so the navy background and white text render correctly
-       regardless of the user's light/dark preference */
     <section
       id="about"
       ref={sectionRef}
-      className="dark relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-5 sm:px-8 md:px-10 py-24"
+      className="dark relative overflow-hidden px-5 sm:px-8 md:px-10 py-[clamp(3.5rem,6vw,6rem)]"
       style={{ background: "var(--background)" }}
     >
-      {/* Subtle radial nebula glow — matches the hero palette */}
+      {/* Subtle nebula glow */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
@@ -64,38 +74,33 @@ export function AboutSection() {
         }}
       />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-3xl w-full flex flex-col items-center gap-14 sm:gap-18 md:gap-20 text-center">
+      <div className="relative z-10 max-w-3xl w-full mx-auto flex flex-col items-center gap-10 text-center">
 
-        {/* Large display heading — Instrument Serif, gradient fill */}
-        <motion.div
+        {/* Display heading */}
+        <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "60px" }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }}
+          className="leading-none tracking-tight font-normal"
+          style={{
+            fontFamily: "var(--font-display, 'Instrument Serif', serif)",
+            fontSize: "clamp(3rem, 8vw, 7.5rem)",
+            background: "linear-gradient(175deg, var(--foreground) 30%, var(--muted-foreground) 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
         >
-          <p className="eyebrow mb-5">About</p>
-          <h2
-            className="leading-none tracking-tight font-normal"
-            style={{
-              fontFamily: "var(--font-display, 'Instrument Serif', serif)",
-              fontSize: "clamp(3.5rem, 10vw, 9rem)",
-              background: "linear-gradient(175deg, var(--foreground) 30%, var(--muted-foreground) 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            About me
-          </h2>
-        </motion.div>
+          About me
+        </motion.h2>
 
-        {/* Scroll-driven character-by-character reveal */}
+        {/* Scroll-driven character reveal */}
         <p
-          className="font-medium leading-relaxed max-w-[56ch]"
+          className="font-medium leading-relaxed max-w-[52ch]"
           style={{
             color: "var(--foreground)",
-            fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
+            fontSize: "clamp(1rem, 1.6vw, 1.2rem)",
           }}
         >
           {chars.map((char, i) => (
@@ -109,7 +114,25 @@ export function AboutSection() {
           ))}
         </p>
 
-        {/* CTA — portfolio-style primary button */}
+        {/* Skill pills */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "40px" }}
+          transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] as const }}
+          className="flex flex-wrap justify-center gap-2"
+        >
+          {SKILLS.map((skill) => (
+            <span
+              key={skill}
+              className="px-3 py-1 rounded-full text-[12px] font-medium panel"
+            >
+              {skill}
+            </span>
+          ))}
+        </motion.div>
+
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

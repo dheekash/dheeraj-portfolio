@@ -1,11 +1,10 @@
 import { CinematicHero } from "@/components/sections/CinematicHero";
-import { RecruiterSnapshot } from "@/components/sections/RecruiterSnapshot";
+import { TechStackSection } from "@/components/sections/TechStackSection";
 import { AboutSection } from "@/components/sections/AboutSection";
-import { SkillsArchitectureSection } from "@/components/sections/SkillsArchitectureSection";
-import { CareerEvolutionSection } from "@/components/sections/CareerEvolutionSection";
-import { FabricExpertiseSection } from "@/components/sections/FabricExpertiseSection";
 import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
+import { CareerEvolutionSection } from "@/components/sections/CareerEvolutionSection";
 import { CertificationsSection } from "@/components/sections/CertificationsSection";
+import { FabricExpertiseSection } from "@/components/sections/FabricExpertiseSection";
 
 function Divider() {
   return <div className="hairline container-page" />;
@@ -15,19 +14,17 @@ export default function HomePage() {
   return (
     <>
       <CinematicHero />
-      <RecruiterSnapshot />
+      <TechStackSection />
       <Divider />
       <AboutSection />
       <Divider />
-      <SkillsArchitectureSection />
+      <CaseStudiesSection />
       <Divider />
       <CareerEvolutionSection />
       <Divider />
-      <FabricExpertiseSection />
-      <Divider />
-      <CaseStudiesSection />
-      <Divider />
       <CertificationsSection />
+      <Divider />
+      <FabricExpertiseSection />
     </>
   );
 }

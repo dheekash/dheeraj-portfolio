@@ -17,32 +17,43 @@ const headlines = [
 ];
 
 const primaryMetrics = [
-  { end: 7,  suffix: "+",  label: "Years experience"        },
-  { end: 13, suffix: "",   label: "Certifications earned"   },
-  { end: 20, suffix: "+",  label: "Solutions delivered"     },
+  { end: 5.6, suffix: "+",  label: "Years experience",         decimals: 1 },
+  { end: 10,  suffix: "",   label: "Microsoft certifications",  decimals: 0 },
+  { end: 20,  suffix: "+",  label: "Analytics projects",        decimals: 0 },
+  { end: 100, suffix: "+",  label: "SQL scripts developed",     decimals: 0 },
 ];
 
-const secondaryMetrics = [
-  { num: "5M+",  label: "Records processed daily" },
-  { num: "15+",  label: "Countries supported"     },
-  { num: "100%", label: "Client retention"        },
-];
 
-function AnimatedCounter({ end, suffix, delay = 0 }: { end: number; suffix: string; delay?: number }) {
+function AnimatedCounter({
+  end,
+  suffix,
+  delay = 0,
+  decimals = 0,
+}: {
+  end: number;
+  suffix: string;
+  delay?: number;
+  decimals?: number;
+}) {
   const nodeRef = useRef<HTMLSpanElement>(null);
   const prefersReduced = useReducedMotion();
 
   useEffect(() => {
     const node = nodeRef.current;
     if (!node) return;
-    if (prefersReduced) { node.textContent = end + suffix; return; }
+    if (prefersReduced) {
+      node.textContent = end.toFixed(decimals) + suffix;
+      return;
+    }
     const mv = motionValue(0);
-    const unsub = mv.on("change", (v) => { if (node) node.textContent = Math.round(v) + suffix; });
+    const unsub = mv.on("change", (v) => {
+      if (node) node.textContent = v.toFixed(decimals) + suffix;
+    });
     const controls = animate(mv, end, { duration: 2.2, delay, ease: [0.16, 1, 0.3, 1] });
     return () => { controls.stop(); unsub(); };
-  }, [end, suffix, delay, prefersReduced]);
+  }, [end, suffix, delay, prefersReduced, decimals]);
 
-  return <span ref={nodeRef}>{0}{suffix}</span>;
+  return <span ref={nodeRef}>{(0).toFixed(decimals)}{suffix}</span>;
 }
 
 function fadeUp(delay = 0) {
@@ -64,10 +75,9 @@ export function CinematicHero() {
   }, [prefersReduced]);
 
   return (
-    /* Force dark rendering over video so text is always white */
     <section id="top" className="dark relative overflow-hidden min-h-[min(48rem,96svh)] flex items-center">
 
-      {/* ── Video background ── */}
+      {/* Video background */}
       <video
         autoPlay
         loop
@@ -78,13 +88,13 @@ export function CinematicHero() {
         src={VIDEO_SRC}
       />
 
-      {/* Cinematic overlay — deepens video so text sits cleanly */}
+      {/* Cinematic overlay */}
       <div
         aria-hidden
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(108deg, rgba(7,15,28,0.82) 0%, rgba(7,15,28,0.55) 52%, rgba(7,15,28,0.35) 100%)",
+            "linear-gradient(108deg, rgba(7,15,28,0.88) 0%, rgba(7,15,28,0.65) 52%, rgba(7,15,28,0.45) 100%)",
         }}
       />
 
@@ -99,9 +109,9 @@ export function CinematicHero() {
       />
 
       <div className="container-page relative z-10 py-[clamp(4.5rem,2.5rem+5vw,8rem)] w-full">
-        <div className="grid lg:grid-cols-[1fr_clamp(14rem,28vw,22rem)] gap-x-[clamp(3rem,6vw,7rem)] gap-y-12 items-start">
+        <div className="grid lg:grid-cols-[1fr_clamp(12rem,24vw,20rem)] gap-x-[clamp(3rem,6vw,7rem)] gap-y-12 items-start">
 
-          {/* ── Left: headline + subtext + CTAs ── */}
+          {/* Left: headline + subtext + CTAs */}
           <div className="max-w-[58ch]">
 
             {/* Availability badge */}
@@ -112,7 +122,7 @@ export function CinematicHero() {
               </span>
             </motion.div>
 
-            {/* Rotating headline — Instrument Serif display font */}
+            {/* Rotating headline */}
             <div
               className="relative mb-[clamp(1.25rem,1.8vw,2rem)]"
               style={{ minHeight: "clamp(4.8rem, 1rem + 9vw, 11rem)" }}
@@ -141,11 +151,10 @@ export function CinematicHero() {
             {/* Subtext */}
             <motion.p
               {...fadeUp(0.12)}
-              className="text-[clamp(0.9rem,0.85rem+0.3vw,1.1rem)] leading-relaxed text-white/60 mb-[clamp(1.75rem,2.2vw,2.5rem)] max-w-[46ch]"
+              className="text-[clamp(0.9rem,0.85rem+0.3vw,1.05rem)] leading-relaxed text-white/75 mb-[clamp(1.75rem,2.2vw,2.5rem)] max-w-[46ch]"
             >
-              Microsoft-certified BI & Analytics Engineer — 7 years delivering Lakehouse platforms,
-              Power BI semantic models, and analytics pipelines on Fabric, Databricks, and Snowflake
-              across 15 countries.{" "}
+              Power BI · Microsoft Fabric · Snowflake · Azure · Python.{" "}
+              5+ years building enterprise analytics platforms that drive real business decisions.{" "}
               <span className="text-white/90 font-medium">Open to BI and Analytics Engineering roles.</span>
             </motion.p>
 
@@ -159,7 +168,6 @@ export function CinematicHero() {
                 <ArrowRight size={13} />
               </MagneticButton>
 
-              {/* Liquid-glass secondary CTA */}
               <a
                 href={profile.resumeUrl}
                 target="_blank"
@@ -170,31 +178,36 @@ export function CinematicHero() {
               </a>
 
               <a
-                href="#contact"
-                className="inline-flex items-center gap-1.5 px-[clamp(0.75rem,1.2vw,1rem)] py-[clamp(0.8rem,1.1vw,1rem)] text-sm text-white/50 hover:text-white transition-colors duration-150 group"
+                href={`mailto:${profile.email}`}
+                className="inline-flex items-center gap-1.5 px-[clamp(1rem,1.5vw,1.25rem)] py-[clamp(0.8rem,1.1vw,1rem)] rounded-full border border-white/20 text-sm font-medium text-white/80 hover:text-white hover:border-white/40 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
               >
-                <Mail size={13} className="group-hover:scale-110 transition-transform" />
-                Contact
+                <Mail size={13} />
+                Contact Me
               </a>
             </motion.div>
           </div>
 
-          {/* ── Right: large typographic metrics ── */}
+          {/* Right: typographic metrics (desktop only) */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.0, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:flex flex-col gap-[clamp(1.75rem,3vw,3.25rem)] pt-1"
+            className="hidden lg:flex flex-col gap-[clamp(1.25rem,2.2vw,2.5rem)] pt-1"
           >
             {primaryMetrics.map((m, i) => (
               <div key={m.label}>
                 <p
                   className="font-mono tabular-nums font-bold leading-none tracking-tight text-white"
-                  style={{ fontSize: "clamp(3rem, 2rem + 2.5vw, 5rem)" }}
+                  style={{ fontSize: "clamp(2.5rem, 1.5rem + 2vw, 4.2rem)" }}
                 >
-                  <AnimatedCounter end={m.end} suffix={m.suffix} delay={0.5 + i * 0.15} />
+                  <AnimatedCounter
+                    end={m.end}
+                    suffix={m.suffix}
+                    delay={0.5 + i * 0.12}
+                    decimals={m.decimals}
+                  />
                 </p>
-                <p className="text-[12px] text-white/50 mt-1 tracking-[0.04em] font-medium">
+                <p className="text-[11px] text-white/50 mt-1 tracking-[0.04em] font-medium">
                   {m.label}
                 </p>
               </div>
@@ -202,26 +215,15 @@ export function CinematicHero() {
           </motion.div>
         </div>
 
-        {/* ── Bottom: secondary metrics strip ── */}
+        {/* Mobile metrics strip (primary metrics, hidden on lg where they're in right column) */}
         <motion.div
           {...fadeUp(0.38)}
-          className="mt-[clamp(2.5rem,4vw,5rem)] pt-[clamp(1.25rem,1.8vw,2rem)] border-t border-white/10 grid grid-cols-2 sm:grid-cols-3 gap-x-[clamp(1.5rem,4vw,5rem)] gap-y-4"
+          className="mt-[clamp(2rem,3.5vw,4rem)] pt-[clamp(1rem,1.5vw,1.5rem)] border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-x-[clamp(1.25rem,3vw,3rem)] gap-y-4 lg:hidden"
         >
-          <div className="contents lg:hidden">
-            {primaryMetrics.map((m, i) => (
-              <div key={m.label}>
-                <p className="font-mono tabular-nums font-bold text-[clamp(1.5rem,1rem+2vw,2.5rem)] leading-none text-white">
-                  <AnimatedCounter end={m.end} suffix={m.suffix} delay={0.3 + i * 0.1} />
-                </p>
-                <p className="text-[11px] text-white/50 mt-1">{m.label}</p>
-              </div>
-            ))}
-          </div>
-
-          {secondaryMetrics.map((m) => (
+          {primaryMetrics.map((m, i) => (
             <div key={m.label}>
-              <p className="font-mono tabular-nums font-semibold text-[clamp(1.1rem,1rem+0.6vw,1.5rem)] leading-none text-white">
-                {m.num}
+              <p className="font-mono tabular-nums font-bold text-[clamp(1.4rem,1rem+2vw,2.2rem)] leading-none text-white">
+                <AnimatedCounter end={m.end} suffix={m.suffix} delay={0.3 + i * 0.1} decimals={m.decimals} />
               </p>
               <p className="text-[11px] text-white/50 mt-1">{m.label}</p>
             </div>
