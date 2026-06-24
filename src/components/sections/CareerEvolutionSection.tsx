@@ -40,24 +40,7 @@ const timeline = [
     current: false,
   },
   {
-    period: "Jan 2025",
-    role: "Business Data Analyst",
-    company: "Amplify Analytix",
-    location: "Bengaluru, India",
-    type: "Full-time",
-    summary:
-      "Joined Amplify Analytix to deliver enterprise Power BI reporting suites for global clients. Established governance standards and eliminated hours of daily manual consolidation.",
-    highlights: [
-      "Delivered Power BI reporting suites for clients across manufacturing and finance sectors",
-      "Implemented row-level security, audit logging, and data governance standards",
-      "Eliminated hours of daily manual file consolidation through automated ingestion pipelines",
-    ],
-    stack: ["Power BI", "DAX", "SQL", "Azure Data Factory"],
-    badge: null,
-    current: false,
-  },
-  {
-    period: "2025 - Present",
+    period: "Jan 2025 - Present",
     role: "BI & Analytics Engineer",
     company: "Amplify Analytix",
     location: "Bengaluru, India",
@@ -69,6 +52,7 @@ const timeline = [
       "Engineered Power BI semantic models with 100+ DAX measures for C-suite reporting",
       "Migrated legacy SQL warehouse to SQLMesh, cutting pipeline failures from 12% to under 1%",
       "Delivered 20+ data products for 200+ enterprise users across 15 countries",
+      "Implemented row-level security, audit logging, and data governance standards",
       "Led Databricks and Snowflake platform deployments for global analytics clients",
     ],
     stack: [
@@ -80,6 +64,7 @@ const timeline = [
       "SQLMesh",
       "PySpark",
       "Azure",
+      "Azure Data Factory",
     ],
     badge: "15 countries · 20+ products · 100% client retention",
     current: true,
