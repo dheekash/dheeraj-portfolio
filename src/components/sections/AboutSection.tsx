@@ -74,7 +74,7 @@ export function AboutSection() {
         }}
       />
 
-      <div className="relative z-10 max-w-3xl w-full mx-auto flex flex-col items-center gap-10 text-center">
+      <div className="relative z-10 max-w-4xl w-full mx-auto flex flex-col items-center gap-10 text-center">
 
         {/* Display heading */}
         <motion.h2
@@ -97,10 +97,10 @@ export function AboutSection() {
 
         {/* Scroll-driven character reveal */}
         <p
-          className="font-medium leading-relaxed max-w-[52ch]"
+          className="font-medium leading-relaxed max-w-[65ch] text-pretty"
           style={{
             color: "var(--foreground)",
-            fontSize: "clamp(1rem, 1.6vw, 1.2rem)",
+            fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
           }}
         >
           {chars.map((char, i) => (
@@ -125,7 +125,7 @@ export function AboutSection() {
           {SKILLS.map((skill) => (
             <span
               key={skill}
-              className="px-3 py-1 rounded-full text-[12px] font-medium panel"
+              className="px-3 py-1 rounded-full text-[12px] font-medium text-white/80 border border-white/15 bg-white/8"
             >
               {skill}
             </span>
