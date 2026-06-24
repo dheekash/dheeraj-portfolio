@@ -19,8 +19,8 @@ const headlines = [
 const primaryMetrics = [
   { end: 7,   suffix: "+",  label: "Years experience",         decimals: 0 },
   { end: 10,  suffix: "",   label: "Microsoft certifications",  decimals: 0 },
-  { end: 20,  suffix: "+",  label: "Analytics projects",        decimals: 0 },
-  { end: 100, suffix: "+",  label: "SQL scripts developed",     decimals: 0 },
+  { end: 20,  suffix: "+",  label: "Enterprise solutions",       decimals: 0 },
+  { end: 100, suffix: "+",  label: "Reports & dashboards",      decimals: 0 },
 ];
 
 
