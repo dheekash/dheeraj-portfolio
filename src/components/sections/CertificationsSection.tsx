@@ -76,7 +76,7 @@ const certGroups: { category: string; color: string; certs: Cert[] }[] = [
   },
 ];
 
-const FEATURED_CODES = ["PL-300", "DP-600", "AZ-104", "DP-100"];
+const FEATURED_CODES = ["PL-300", "DP-600", "DP-700", "DE-A"];
 
 const featuredCerts: (Cert & { groupColor: string })[] = certGroups.flatMap((g) =>
   g.certs
