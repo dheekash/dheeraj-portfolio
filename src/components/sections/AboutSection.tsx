@@ -6,7 +6,7 @@ import { ArrowUpRight, MapPin, Briefcase, Award, Globe } from "lucide-react";
 import { profile } from "@/data/profile";
 
 const ABOUT_TEXT =
-  "I started in customer support, noticed the data was telling a different story than the reports, and never looked back. Seven years later I architect Lakehouse platforms, build semantic models CFOs stake decisions on, and write pipelines that actually stay running. I care less about the tech stack and more about whether the dashboard answers the question it was built to answer.";
+  "I started in customer support. The data told a different story than the reports, so I switched to analytics. Seven years later, I build Lakehouse platforms, semantic models, and pipelines for enterprise clients across 15 countries. My focus is simple: does the dashboard answer the question it was built to answer?";
 
 const SKILLS = [
   "Power BI", "SQL", "Python", "Microsoft Fabric",
