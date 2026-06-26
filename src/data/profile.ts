@@ -8,7 +8,7 @@ export const profile: Profile = {
   location: "Greater Bengaluru Area, India",
   email: "kash.dheeraj.yap@gmail.com",
   avatar: "/images/avatar.jpg",
-  resumeUrl: "https://drive.google.com/file/d/1pQAObCk6ju8yfGEwoB12EWEhRkUZks-4/view?usp=sharing",
+  resumeUrl: "https://drive.google.com/drive/folders/19vtRAxQ_9qxrMl5zFy9hLcHkPlGPXICG",
   calendlyUrl: "https://calendly.com/dheerajkashyap",
   linkedinUrl: "https://linkedin.com/in/kashyap-dheeraj",
   githubUrl: "https://github.com/dheekash",
