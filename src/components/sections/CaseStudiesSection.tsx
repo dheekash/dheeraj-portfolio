@@ -103,6 +103,36 @@ function DiagramManufacturing() {
   );
 }
 
+function DiagramSelfServe() {
+  const layers = [
+    { label: "Sources", items: ["CRM", "Billing", "Usage"], y: 12 },
+    { label: "Warehouse", items: ["Snowflake Gold"], y: 60 },
+    { label: "Semantic", items: ["Power BI Dataset · 100+ measures"], y: 108 },
+  ];
+  return (
+    <svg viewBox="0 0 360 170" className="w-full h-auto" role="img" aria-label="Self-serve BI platform layers">
+      <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
+        {layers.map((l) => (
+          <g key={l.label}>
+            <text x="0" y={l.y} opacity="0.45">{l.label.toUpperCase()}</text>
+            {l.items.map((item, i) => (
+              <rect key={item} x={i * 115} y={l.y + 6} width="108" height="22"
+                fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
+            ))}
+            {l.items.map((item, i) => (
+              <text key={`t-${item}`} x={i * 115 + 6} y={l.y + 22} fontSize="8.5">{item}</text>
+            ))}
+          </g>
+        ))}
+        <line x1="54" y1="82" x2="54" y2="106" stroke="var(--dgrm)" strokeWidth="1" strokeDasharray="3 2" />
+        <line x1="54" y1="130" x2="54" y2="154" stroke="var(--dgrm)" strokeWidth="1" strokeDasharray="3 2" />
+        <text x="0" y="160" opacity="0.65">100M+ daily records · 70% less manual work</text>
+        <text x="255" y="162" fontSize="14" fontWeight="600" fill="var(--dgrm)">−70%</text>
+      </g>
+    </svg>
+  );
+}
+
 function DiagramChurn() {
   const cells = Array.from({ length: 40 });
   return (
@@ -178,6 +208,23 @@ const studies: Study[] = [
       "$1.2M+ flagged in first 90 days",
       "Detection latency: 24 hours → under 5 minutes",
       "Live Power BI dashboard with auto-refresh for real-time risk visibility",
+    ],
+  },
+  {
+    id: "07", num: "03", domain: "Business intelligence",
+    capability: "Self-Serve Analytics",
+    title: "Seller Analytics Self-Serve Platform — Amazon",
+    challenge: "Seller leadership across 10+ global marketplaces depended on analysts for every data request. Reports were stale, one-off, and took days to produce — bottlenecking decisions at scale.",
+    built: "Unified Snowflake Gold layer aggregating 100M+ daily transaction records from 10 marketplaces, Power BI semantic dataset with 100+ DAX measures, and automated SQL pipelines replacing manual extracts. Python-based predictive models surfaced revenue opportunity signals directly in the dashboard.",
+    outcome: "Manual reporting effort cut 70%. Sales leadership moved to fully self-serve weekly reviews. $500K+ in revenue opportunities identified through predictive analytics in the first year.",
+    stack: ["Power BI", "Snowflake", "Python", "SQL", "DAX", "Scikit-learn", "Azure"],
+    Diagram: DiagramSelfServe,
+    detailPoints: [
+      "100M+ daily records aggregated across 10 global marketplaces into a single Snowflake Gold layer",
+      "100+ DAX measures — self-serve slicing for sales leadership, no analyst bottleneck",
+      "Automated SQL pipelines replaced 70% of manual reporting effort",
+      "$500K+ in revenue opportunities surfaced through Python predictive models",
+      "Adopted by seller leadership for weekly business reviews across all regional markets",
     ],
   },
   {
