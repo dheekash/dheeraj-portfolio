@@ -153,8 +153,10 @@ export function CinematicHero() {
               {...fadeUp(0.12)}
               className="text-[clamp(0.9rem,0.85rem+0.3vw,1.05rem)] leading-relaxed text-white/75 mb-[clamp(1.75rem,2.2vw,2.5rem)] max-w-[46ch]"
             >
-              Power BI · Microsoft Fabric · Snowflake · Azure · Python.{" "}
-              5+ years building enterprise analytics platforms that drive real business decisions.{" "}
+              I turn messy data estates into analytics platforms people actually use —{" "}
+              Lakehouses, semantic models, pipelines, the lot.{" "}
+              Seven years in, 13 Microsoft certifications, and still the person in the room who asks{" "}
+              <em>"but what decision does this dashboard help you make?"</em>{" "}
               <span className="text-white/90 font-medium">Open to BI and Analytics Engineering roles.</span>
             </motion.p>
 

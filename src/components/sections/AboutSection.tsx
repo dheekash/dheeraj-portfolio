@@ -6,7 +6,7 @@ import { ArrowUpRight, MapPin, Briefcase, Award, Globe } from "lucide-react";
 import { profile } from "@/data/profile";
 
 const ABOUT_TEXT =
-  "Microsoft-certified BI & Analytics Engineer. Five years shipping Lakehouse platforms, Power BI semantic models, and analytics pipelines on Microsoft Fabric and Snowflake — across 15 countries with 100% client retention.";
+  "I started in customer support, noticed the data was telling a different story than the reports, and never looked back. Seven years later I architect Lakehouse platforms, build semantic models CFOs stake decisions on, and write pipelines that actually stay running. I care less about the tech stack and more about whether the dashboard answers the question it was built to answer.";
 
 const SKILLS = [
   "Power BI", "SQL", "Python", "Microsoft Fabric",
