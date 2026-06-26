@@ -56,6 +56,53 @@ function DiagramFraud() {
   );
 }
 
+function DiagramSales() {
+  return (
+    <svg viewBox="0 0 360 160" className="w-full h-auto" role="img" aria-label="Data latency reduced from 6 hours to under 10 minutes">
+      <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
+        <text x="0" y="12" opacity="0.5">DATA LATENCY · 8 REGIONAL MARKETS</text>
+        <text x="0" y="54" opacity="0.65">before</text>
+        <rect x="56" y="42" width="285" height="16" fill="currentColor" opacity="0.12" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1" />
+        <text x="347" y="53" textAnchor="end" opacity="0.65">6 hrs</text>
+        <text x="0" y="92" opacity="0.65">after</text>
+        <rect x="56" y="80" width="8" height="16" fill="var(--dgrm)" />
+        <text x="70" y="91" fill="var(--dgrm)">&lt;10 min</text>
+        <path d="M 0 112 H 348" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" strokeDasharray="2 5" />
+        <text x="0" y="130" opacity="0.5">BRONZE → SILVER → GOLD · DELTA LIVE TABLES</text>
+        <text x="0" y="150" fill="var(--dgrm)">5M+ daily transactions · 95% fewer pipeline failures</text>
+      </g>
+    </svg>
+  );
+}
+
+function DiagramManufacturing() {
+  const bars = [72, 68, 74, 71, 78, 80, 83, 85, 87, 89, 91, 92];
+  const maxH = 60;
+  return (
+    <svg viewBox="0 0 360 160" className="w-full h-auto" role="img" aria-label="OEE improvement across 15 markets">
+      <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
+        <text x="0" y="12" opacity="0.5">OEE TREND · 200+ FACTORY-FLOOR USERS</text>
+        {bars.map((v, i) => {
+          const h = (v / 100) * maxH;
+          const x = 10 + i * 28;
+          const isNew = i >= 8;
+          return (
+            <g key={i}>
+              <rect x={x} y={95 - h} width="18" height={h}
+                fill={isNew ? "var(--dgrm)" : "currentColor"} opacity={isNew ? 0.9 : 0.2} />
+              {i === 7 && <line x1={x + 20} y1="28" x2={x + 20} y2="100" stroke="var(--dgrm)" strokeWidth="1" strokeDasharray="3 3" opacity="0.6" />}
+            </g>
+          );
+        })}
+        <text x="238" y="22" fill="var(--dgrm)" fontSize="8">ADF+dbt deployed</text>
+        <path d="M 230 26 L 238 22" stroke="var(--dgrm)" strokeWidth="1" />
+        <text x="0" y="115" opacity="0.5">REPORT REFRESH: 4 HRS → 15 MIN · 94% FASTER</text>
+        <text x="0" y="140" opacity="0.65">dbt SCD Type 2 · ISO compliance · 15 markets</text>
+      </g>
+    </svg>
+  );
+}
+
 function DiagramChurn() {
   const cells = Array.from({ length: 40 });
   return (
@@ -134,7 +181,41 @@ const studies: Study[] = [
     ],
   },
   {
-    id: "02", num: "03", domain: "Customer intelligence",
+    id: "04", num: "04", domain: "Sales intelligence",
+    capability: "Real-Time Analytics",
+    title: "Real-Time Sales Intelligence Platform",
+    challenge: "Eight regional markets were running on 6-hour-old sales data. Demand signals were stale by the time managers acted, leading to missed opportunities and reactive decisions.",
+    built: "Databricks Delta Live Tables workflow processing 5M+ daily transactions through Bronze, Silver, and Gold layers with schema auto-evolution and DLT quality expectations. XGBoost forecasting models tracked via MLflow under Unity Catalog governance, surfaced via Power BI composite models on the Gold layer.",
+    outcome: "Data latency from 6 hours to under 10 minutes. Pipeline failures reduced 95%. Sales volume prediction accuracy up 22%. Regional managers can now slice live figures without analyst intervention.",
+    stack: ["Databricks", "Delta Live Tables", "MLflow", "Azure Data Factory", "PySpark", "Power BI", "ADLS Gen2"],
+    Diagram: DiagramSales,
+    detailPoints: [
+      "5M+ daily transactions through Bronze, Silver, and Gold Medallion layers",
+      "Schema auto-evolution and DLT data quality expectations — 95% fewer pipeline failures",
+      "XGBoost forecasting models with 22% improvement in prediction accuracy",
+      "Unity Catalog governance across all model artifacts and feature sets",
+      "Self-serve Power BI composite models — no analyst bottleneck for regional managers",
+    ],
+  },
+  {
+    id: "06", num: "05", domain: "Manufacturing analytics",
+    capability: "Enterprise BI",
+    title: "Global Manufacturing Analytics Suite — Rockwool",
+    challenge: "200+ factory-floor users across 15 markets were working from stale morning exports. Report refresh took 4 hours, KPI definitions conflicted between plant controllers and corporate finance, and there was no audit trail for ISO compliance.",
+    built: "Chained ADF pipelines, dbt transformations with SCD Type 2 history, and Power BI incremental refresh. Modeled production yield, downtime, and OEE metrics with full audit trails. SharePoint integration for file-based data sources.",
+    outcome: "Report refresh from 4 hours to 15 minutes — 94% faster. 200+ users moved from stale exports to live operational figures. KPI conflicts resolved. Full ISO audit trail delivered.",
+    stack: ["Power BI", "Snowflake", "dbt", "Azure Data Factory", "SharePoint", "DAX"],
+    Diagram: DiagramManufacturing,
+    detailPoints: [
+      "Report refresh: 4 hours → 15 minutes (94% improvement)",
+      "200+ factory-floor users across 15 global markets on live data",
+      "dbt SCD Type 2 history — full audit trail for ISO compliance",
+      "Resolved longstanding KPI conflicts between plant controllers and corporate finance",
+      "ADF + dbt + Power BI incremental refresh chained end-to-end",
+    ],
+  },
+  {
+    id: "02", num: "06", domain: "Customer intelligence",
     capability: "Data Science",
     title: "Customer Segmentation & Churn Platform",
     challenge: "The customer success team only learned about churn after cancellations. No early-warning system, no way to prioritise outreach, no data on who to save.",
