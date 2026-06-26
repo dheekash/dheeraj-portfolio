@@ -33,14 +33,14 @@ const cards = [
     icon: MapPin,
     label: "Location",
     value: "Bengaluru, India",
-    sub: "IST Â· UTC+5:30",
+    sub: "IST · UTC+5:30",
     accent: false,
   },
   {
     icon: Award,
     label: "Certifications",
     value: "13 Credentials",
-    sub: "11 Microsoft Â· 1 Snowflake Â· 1 Databricks",
+    sub: "11 Microsoft · 1 Snowflake · 1 Databricks",
     accent: false,
   },
   {

@@ -35,7 +35,7 @@ const layers = [
     step: "04",
     label: "Lakehouse",
     sublabel: "Medallion architecture",
-    tech: ["SQLMesh", "dbt", "PySpark", "Silver Â· Gold"],
+    tech: ["SQLMesh", "dbt", "PySpark", "Silver · Gold"],
   },
   {
     step: "05",

@@ -14,8 +14,8 @@ const SKILLS = [
 
 const SNAPSHOT = [
   { icon: Briefcase, label: "Current Role",   value: "BI & Analytics Engineer", sub: "Amplify Analytix" },
-  { icon: Award,     label: "Certifications", value: "13 Microsoft + Platform",  sub: "PL-300 Â· DP-600 Â· AZ-104 Â· DP-700" },
-  { icon: Globe,     label: "Global Reach",   value: "15 Countries",             sub: "Enterprise clients Â· 100% retention" },
+  { icon: Award,     label: "Certifications", value: "13 Microsoft + Platform",  sub: "PL-300 · DP-600 · AZ-104 · DP-700" },
+  { icon: Globe,     label: "Global Reach",   value: "15 Countries",             sub: "Enterprise clients · 100% retention" },
   { icon: MapPin,    label: "Location",        value: "Bengaluru, India",         sub: "Open to remote & hybrid roles" },
 ];
 
@@ -88,7 +88,7 @@ export function AboutSection() {
                   13
                 </p>
                 <p className="text-[13px] font-semibold text-foreground">Certifications</p>
-                <p className="text-[11px] text-muted-foreground mt-0.5">Microsoft Â· Snowflake Â· Databricks</p>
+                <p className="text-[11px] text-muted-foreground mt-0.5">Microsoft · Snowflake · Databricks</p>
               </div>
             </div>
 

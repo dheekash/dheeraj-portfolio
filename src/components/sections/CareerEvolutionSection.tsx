@@ -30,7 +30,7 @@ const timeline = [
       "Azure",
       "Azure Data Factory",
     ],
-    badge: "15 countries Â· 20+ products Â· 100% client retention",
+    badge: "15 countries · 20+ products · 100% client retention",
     current: true,
   },
   {
@@ -49,7 +49,7 @@ const timeline = [
       "Replaced manual reporting with automated SQL pipelines. Cut reporting effort by 70%.",
     ],
     stack: ["Power BI", "Snowflake", "Python", "SQL", "DAX", "Random Forest", "Scikit-learn"],
-    badge: "100M+ records Â· 30% fraud reduction Â· 15-person team lead",
+    badge: "100M+ records · 30% fraud reduction · 15-person team lead",
     current: false,
   },
   {
@@ -145,7 +145,7 @@ export function CareerEvolutionSection() {
                 {/* Company + meta */}
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mb-3">
                   <p className="text-sm font-medium text-muted-foreground">{item.company}</p>
-                  <span className="text-border hidden sm:inline text-xs">Â·</span>
+                  <span className="text-border hidden sm:inline text-xs">·</span>
                   <p className="text-[12px] text-muted-foreground/70 font-mono">{item.location}</p>
                 </div>
 

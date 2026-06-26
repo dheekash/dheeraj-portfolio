@@ -109,9 +109,9 @@ function CertCard({ cert, groupColor }: { cert: Cert; groupColor?: string }) {
         <p className="text-[12.5px] font-semibold leading-snug mb-0.5">{cert.name}</p>
         <div className="flex items-center gap-2 flex-wrap">
           <span className="font-mono text-[10px] accent-text font-semibold">{cert.code}</span>
-          <span className="text-muted-foreground/40 text-[10px]">Â·</span>
+          <span className="text-muted-foreground/40 text-[10px]">·</span>
           <span className="font-mono text-[10px] text-muted-foreground">{cert.issuer}</span>
-          <span className="text-muted-foreground/40 text-[10px]">Â·</span>
+          <span className="text-muted-foreground/40 text-[10px]">·</span>
           <span className="font-mono text-[10px] text-muted-foreground">{cert.date}</span>
         </div>
       </div>

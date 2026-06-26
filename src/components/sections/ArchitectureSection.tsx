@@ -4,13 +4,13 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const stages = [
-  { name: "Source Systems",    tech: "ERP Â· CRM Â· APIs Â· Events",                               note: "Where the raw signal lives"          },
-  { name: "Data Ingestion",    tech: "Azure Data Factory Â· Auto Loader",                          note: "Reliable, observable movement"       },
-  { name: "Lakehouse",         tech: "Microsoft Fabric Â· Databricks Â· OneLake Â· Delta Lake",      note: "One governed storage layer"          },
-  { name: "Transformation",    tech: "SQLMesh Â· dbt Â· PySpark Â· SQL Â· Python",                   note: "Tested, versioned business logic"    },
-  { name: "Semantic Models",   tech: "Power BI Â· DAX Â· row-level security",                      note: "One definition of every KPI"         },
-  { name: "Reporting",         tech: "Power BI Â· Zebra BI Â· paginated reports",                  note: "Decision-grade interfaces"           },
-  { name: "Business Decisions",tech: "Snowflake-backed forecasting Â· anomaly detection",          note: "Where the value lands"               },
+  { name: "Source Systems",    tech: "ERP · CRM · APIs · Events",                               note: "Where the raw signal lives"          },
+  { name: "Data Ingestion",    tech: "Azure Data Factory · Auto Loader",                          note: "Reliable, observable movement"       },
+  { name: "Lakehouse",         tech: "Microsoft Fabric · Databricks · OneLake · Delta Lake",      note: "One governed storage layer"          },
+  { name: "Transformation",    tech: "SQLMesh · dbt · PySpark · SQL · Python",                   note: "Tested, versioned business logic"    },
+  { name: "Semantic Models",   tech: "Power BI · DAX · row-level security",                      note: "One definition of every KPI"         },
+  { name: "Reporting",         tech: "Power BI · Zebra BI · paginated reports",                  note: "Decision-grade interfaces"           },
+  { name: "Business Decisions",tech: "Snowflake-backed forecasting · anomaly detection",          note: "Where the value lands"               },
 ];
 
 function reveal(delay = 0) {

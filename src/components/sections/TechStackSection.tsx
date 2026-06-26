@@ -130,7 +130,7 @@ function LogoTile({ name, Logo, bg, years, level }: typeof techLogos[number]) {
           }}
         >
           <p className="text-[9px] font-mono font-semibold" style={{ color: "var(--primary)" }}>
-            {years} Â· {level}
+            {years} · {level}
           </p>
         </div>
       )}
@@ -174,7 +174,7 @@ export function TechStackSection() {
                       background: cat.color,
                       border: "1px solid color-mix(in srgb, var(--border) 60%, transparent)",
                     }}
-                    title={`${t.years} Â· ${t.level}`}
+                    title={`${t.years} · ${t.level}`}
                   >
                     {t.Logo && <t.Logo size={11} />}
                     {t.name}

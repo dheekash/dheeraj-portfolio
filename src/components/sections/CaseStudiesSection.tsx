@@ -50,7 +50,7 @@ function DiagramFraud() {
         <text x="68" y="91" fill="var(--dgrm)">&lt;5 min</text>
         <path d="M 0 112 H 348" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" strokeDasharray="2 5" />
         <text x="0" y="130" opacity="0.5">KAFKA â†’ DATABRICKS ML â†’ REAL-TIME ALERT</text>
-        <text x="0" y="150" fill="var(--dgrm)">$1.2M+ flagged Â· first 90 days</text>
+        <text x="0" y="150" fill="var(--dgrm)">$1.2M+ flagged · first 90 days</text>
       </g>
     </svg>
   );
@@ -60,7 +60,7 @@ function DiagramSales() {
   return (
     <svg viewBox="0 0 360 160" className="w-full h-auto" role="img" aria-label="Data latency reduced from 6 hours to under 10 minutes">
       <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
-        <text x="0" y="12" opacity="0.5">DATA LATENCY Â· 8 REGIONAL MARKETS</text>
+        <text x="0" y="12" opacity="0.5">DATA LATENCY · 8 REGIONAL MARKETS</text>
         <text x="0" y="54" opacity="0.65">before</text>
         <rect x="56" y="42" width="285" height="16" fill="currentColor" opacity="0.12" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1" />
         <text x="347" y="53" textAnchor="end" opacity="0.65">6 hrs</text>
@@ -68,8 +68,8 @@ function DiagramSales() {
         <rect x="56" y="80" width="8" height="16" fill="var(--dgrm)" />
         <text x="70" y="91" fill="var(--dgrm)">&lt;10 min</text>
         <path d="M 0 112 H 348" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" strokeDasharray="2 5" />
-        <text x="0" y="130" opacity="0.5">BRONZE â†’ SILVER â†’ GOLD Â· DELTA LIVE TABLES</text>
-        <text x="0" y="150" fill="var(--dgrm)">5M+ daily transactions Â· 95% fewer pipeline failures</text>
+        <text x="0" y="130" opacity="0.5">BRONZE â†’ SILVER â†’ GOLD · DELTA LIVE TABLES</text>
+        <text x="0" y="150" fill="var(--dgrm)">5M+ daily transactions · 95% fewer pipeline failures</text>
       </g>
     </svg>
   );
@@ -81,7 +81,7 @@ function DiagramManufacturing() {
   return (
     <svg viewBox="0 0 360 160" className="w-full h-auto" role="img" aria-label="OEE improvement across 15 markets">
       <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
-        <text x="0" y="12" opacity="0.5">OEE TREND Â· 200+ FACTORY-FLOOR USERS</text>
+        <text x="0" y="12" opacity="0.5">OEE TREND · 200+ FACTORY-FLOOR USERS</text>
         {bars.map((v, i) => {
           const h = (v / 100) * maxH;
           const x = 10 + i * 28;
@@ -96,8 +96,8 @@ function DiagramManufacturing() {
         })}
         <text x="238" y="22" fill="var(--dgrm)" fontSize="8">ADF+dbt deployed</text>
         <path d="M 230 26 L 238 22" stroke="var(--dgrm)" strokeWidth="1" />
-        <text x="0" y="115" opacity="0.5">REPORT REFRESH: 4 HRS â†’ 15 MIN Â· 94% FASTER</text>
-        <text x="0" y="140" opacity="0.65">dbt SCD Type 2 Â· ISO compliance Â· 15 markets</text>
+        <text x="0" y="115" opacity="0.5">REPORT REFRESH: 4 HRS â†’ 15 MIN · 94% FASTER</text>
+        <text x="0" y="140" opacity="0.65">dbt SCD Type 2 · ISO compliance · 15 markets</text>
       </g>
     </svg>
   );
@@ -130,7 +130,7 @@ function DiagramSelfServe() {
         {/* Semantic row â€” y=88..112 */}
         <text x="0" y="98" opacity="0.45" fontSize="7.5">SEMANTIC MODEL</text>
         <rect x="0" y="102" width="230" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
-        <text x="6" y="115">Power BI Dataset Â· 100+ measures</text>
+        <text x="6" y="115">Power BI Dataset · 100+ measures</text>
 
         {/* Stat row â€” y=128..170 */}
         <text x="0" y="140" opacity="0.55" fontSize="8">100M+ daily records</text>
@@ -158,7 +158,7 @@ function DiagramChurn() {
           );
         })}
         <path d="M 4 90 V 98 H 60 V 90" stroke="var(--dgrm)" strokeWidth="1.2" fill="none" />
-        <text x="4" y="112" fill="var(--dgrm)">daily outreach list Â· 89% recall</text>
+        <text x="4" y="112" fill="var(--dgrm)">daily outreach list · 89% recall</text>
         <text x="0" y="146" opacity="0.65">churn, 6 months later:</text>
         <text x="150" y="148" fontSize="22" fontWeight="600" fill="var(--dgrm)">âˆ’18%</text>
         <text x="230" y="146" opacity="0.5">â‰ˆ $300K retained</text>
@@ -314,7 +314,7 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <p className="eyebrow">{study.domain}</p>
-                  <span className="text-[10px] font-mono text-muted-foreground/50">Â·</span>
+                  <span className="text-[10px] font-mono text-muted-foreground/50">·</span>
                   <p className="text-[10px] font-mono uppercase tracking-[0.15em] accent-text">{study.capability}</p>
                 </div>
                 <h3 className="text-xl font-semibold leading-tight">{study.title}</h3>

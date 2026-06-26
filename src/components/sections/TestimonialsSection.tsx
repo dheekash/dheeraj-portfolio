@@ -83,7 +83,7 @@ export function TestimonialsSection() {
                 <div>
                   <p className="text-[13px] font-semibold leading-tight">{t.name}</p>
                   <p className="text-[11px] text-muted-foreground leading-snug">
-                    {t.role} Â· {t.company}
+                    {t.role} · {t.company}
                   </p>
                 </div>
               </footer>
