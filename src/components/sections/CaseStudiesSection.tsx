@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowUpRight } from "lucide-react";
+import { X, ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 
 function reveal(delay = 0) {
   return {
@@ -13,7 +13,7 @@ function reveal(delay = 0) {
   };
 }
 
-/* â”€â”€ SVG diagrams â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â"€â"€ SVG diagrams â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 
 function DiagramReliability() {
   return (
@@ -31,7 +31,7 @@ function DiagramReliability() {
             <text x={p.x} y="140" textAnchor="middle" opacity="0.6">{p.l}</text>
           </g>
         ))}
-        <text x="0" y="158" opacity="0.5">6 SOURCE SYSTEMS â†’ ONELAKE â†’ POWER BI</text>
+        <text x="0" y="158" opacity="0.5">6 SOURCE SYSTEMS â†' ONELAKE â†' POWER BI</text>
       </g>
     </svg>
   );
@@ -49,7 +49,7 @@ function DiagramFraud() {
         <rect x="56" y="80" width="6" height="16" fill="var(--dgrm)" />
         <text x="68" y="91" fill="var(--dgrm)">&lt;5 min</text>
         <path d="M 0 112 H 348" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" strokeDasharray="2 5" />
-        <text x="0" y="130" opacity="0.5">KAFKA â†’ DATABRICKS ML â†’ REAL-TIME ALERT</text>
+        <text x="0" y="130" opacity="0.5">KAFKA â†' DATABRICKS ML â†' REAL-TIME ALERT</text>
         <text x="0" y="150" fill="var(--dgrm)">$1.2M+ flagged · first 90 days</text>
       </g>
     </svg>
@@ -68,7 +68,7 @@ function DiagramSales() {
         <rect x="56" y="80" width="8" height="16" fill="var(--dgrm)" />
         <text x="70" y="91" fill="var(--dgrm)">&lt;10 min</text>
         <path d="M 0 112 H 348" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" strokeDasharray="2 5" />
-        <text x="0" y="130" opacity="0.5">BRONZE â†’ SILVER â†’ GOLD · DELTA LIVE TABLES</text>
+        <text x="0" y="130" opacity="0.5">BRONZE â†' SILVER â†' GOLD · DELTA LIVE TABLES</text>
         <text x="0" y="150" fill="var(--dgrm)">5M+ daily transactions · 95% fewer pipeline failures</text>
       </g>
     </svg>
@@ -96,7 +96,7 @@ function DiagramManufacturing() {
         })}
         <text x="238" y="22" fill="var(--dgrm)" fontSize="8">ADF+dbt deployed</text>
         <path d="M 230 26 L 238 22" stroke="var(--dgrm)" strokeWidth="1" />
-        <text x="0" y="115" opacity="0.5">REPORT REFRESH: 4 HRS â†’ 15 MIN · 94% FASTER</text>
+        <text x="0" y="115" opacity="0.5">REPORT REFRESH: 4 HRS â†' 15 MIN · 94% FASTER</text>
         <text x="0" y="140" opacity="0.65">dbt SCD Type 2 · ISO compliance · 15 markets</text>
       </g>
     </svg>
@@ -107,7 +107,7 @@ function DiagramSelfServe() {
   return (
     <svg viewBox="0 0 360 170" className="w-full h-auto" role="img" aria-label="Self-serve BI platform layers">
       <g fontFamily="var(--font-mono)" fontSize="8.5" fill="currentColor">
-        {/* Sources row â€” y=0..28 */}
+        {/* Sources row â€" y=0..28 */}
         <text x="0" y="10" opacity="0.45" fontSize="7.5">SOURCES</text>
         <rect x="0"   y="14" width="90" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
         <rect x="96"  y="14" width="90" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
@@ -119,7 +119,7 @@ function DiagramSelfServe() {
         {/* Arrow */}
         <line x1="45" y1="32" x2="45" y2="44" stroke="var(--dgrm)" strokeWidth="1" strokeDasharray="3 2" />
 
-        {/* Warehouse row â€” y=44..68 */}
+        {/* Warehouse row â€" y=44..68 */}
         <text x="0" y="54" opacity="0.45" fontSize="7.5">WAREHOUSE</text>
         <rect x="0" y="58" width="175" height="18" fill="none" stroke="var(--dgrm)" strokeOpacity="0.4" strokeWidth="1" rx="3" />
         <text x="6" y="71">Snowflake Gold</text>
@@ -127,14 +127,14 @@ function DiagramSelfServe() {
         {/* Arrow */}
         <line x1="45" y1="76" x2="45" y2="88" stroke="var(--dgrm)" strokeWidth="1" strokeDasharray="3 2" />
 
-        {/* Semantic row â€” y=88..112 */}
+        {/* Semantic row â€" y=88..112 */}
         <text x="0" y="98" opacity="0.45" fontSize="7.5">SEMANTIC MODEL</text>
         <rect x="0" y="102" width="230" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
         <text x="6" y="115">Power BI Dataset · 100+ measures</text>
 
-        {/* Stat row â€” y=128..170 */}
+        {/* Stat row â€" y=128..170 */}
         <text x="0" y="140" opacity="0.55" fontSize="8">100M+ daily records</text>
-        <text x="0" y="155" fontSize="13" fontWeight="600" fill="var(--dgrm)">âˆ’70%</text>
+        <text x="0" y="155" fontSize="13" fontWeight="600" fill="var(--dgrm)">âˆ'70%</text>
         <text x="32" y="155" opacity="0.55" fontSize="8"> manual work</text>
       </g>
     </svg>
@@ -160,14 +160,14 @@ function DiagramChurn() {
         <path d="M 4 90 V 98 H 60 V 90" stroke="var(--dgrm)" strokeWidth="1.2" fill="none" />
         <text x="4" y="112" fill="var(--dgrm)">daily outreach list · 89% recall</text>
         <text x="0" y="146" opacity="0.65">churn, 6 months later:</text>
-        <text x="150" y="148" fontSize="22" fontWeight="600" fill="var(--dgrm)">âˆ’18%</text>
+        <text x="150" y="148" fontSize="22" fontWeight="600" fill="var(--dgrm)">âˆ'18%</text>
         <text x="230" y="146" opacity="0.5">â‰ˆ $300K retained</text>
       </g>
     </svg>
   );
 }
 
-/* â”€â”€ Types & data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â"€â"€ Types & data â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 
 type Study = {
   id: string;
@@ -181,6 +181,7 @@ type Study = {
   stack: string[];
   Diagram: () => React.ReactElement;
   detailPoints: string[];
+  codeSnippet?: { lang: string; label: string; code: string };
 };
 
 const studies: Study[] = [
@@ -193,6 +194,30 @@ const studies: Study[] = [
     outcome: "Pipeline failures dropped from 12% to under 1%. Maintenance effort reduced by 90%. Legacy and new platform ran in parallel throughout validation. Zero downtime.",
     stack: ["Microsoft Fabric", "SQLMesh", "Delta Lake", "OneLake", "Power BI", "DAX"],
     Diagram: DiagramReliability,
+    codeSnippet: {
+      lang: "sql",
+      label: "SQLMesh — Silver quality gate",
+      code: `-- models/silver/s_orders.sql
+MODEL (
+  name silver.s_orders,
+  kind INCREMENTAL_BY_TIME_RANGE (
+    time_column event_date
+  ),
+  audits (
+    NOT_NULL(columns := [order_id, customer_id]),
+    ACCEPTED_RANGE(column := revenue, min_v := 0)
+  )
+);
+
+SELECT
+  order_id,
+  customer_id,
+  revenue,
+  CAST(event_ts AS DATE) AS event_date
+FROM bronze.raw_orders
+WHERE event_ts >= @start_ds
+  AND event_ts < @end_ds`,
+    },
     detailPoints: [
       "5+ years of historical data migrated with zero data loss.",
       "200+ legacy SQL transformations rebuilt as tested SQLMesh models.",
@@ -210,11 +235,43 @@ const studies: Study[] = [
     outcome: "Detection latency cut from 24 hours to under 5 minutes. $1.2M+ in suspicious transactions flagged in the first 90 days of operation.",
     stack: ["Apache Kafka", "Databricks", "PySpark", "Azure Event Hubs", "Power BI", "Python"],
     Diagram: DiagramFraud,
+    codeSnippet: {
+      lang: "python",
+      label: "PySpark — Streaming anomaly score",
+      code: `from pyspark.sql import functions as F
+from pyspark.ml import PipelineModel
+
+model = PipelineModel.load("/mnt/models/fraud_rf_v3")
+
+stream = (
+  spark.readStream
+    .format("kafka")
+    .option("kafka.bootstrap.servers", KAFKA_BROKERS)
+    .option("subscribe", "txn-events")
+    .load()
+)
+
+scored = model.transform(
+  stream.select(F.from_json("value", TXN_SCHEMA).alias("t"))
+        .select("t.*")
+)
+
+(
+  scored
+    .filter("prediction = 1.0")
+    .select("txn_id", "amount", "probability", "event_ts")
+    .writeStream
+    .format("delta")
+    .outputMode("append")
+    .option("checkpointLocation", CHECKPOINT)
+    .table("gold.fraud_alerts")
+)`,
+    },
     detailPoints: [
       "100K+ transaction events per hour through the Kafka streaming pipeline",
       "Anomaly detection at 94% precision, minimising false-positive alert fatigue",
       "$1.2M+ flagged in first 90 days",
-      "Detection latency: 24 hours â†’ under 5 minutes",
+      "Detection latency: 24 hours â†' under 5 minutes",
       "Live Power BI dashboard with auto-refresh for real-time risk visibility",
     ],
   },
@@ -227,6 +284,39 @@ const studies: Study[] = [
     outcome: "Manual reporting effort cut 70%. Sales leadership moved to self-serve weekly reviews. $500K+ in revenue opportunities identified in the first year.",
     stack: ["Power BI", "Snowflake", "Python", "SQL", "DAX", "Scikit-learn", "Azure"],
     Diagram: DiagramSelfServe,
+    codeSnippet: {
+      lang: "dax",
+      label: "DAX — Revenue vs. Prior Period",
+      code: `Revenue vs Prior Period =
+VAR _current =
+    CALCULATE(
+        [Total Revenue],
+        DATESINPERIOD(
+            'Date'[Date],
+            LASTDATE('Date'[Date]),
+            -1,
+            MONTH
+        )
+    )
+VAR _prior =
+    CALCULATE(
+        [Total Revenue],
+        DATESINPERIOD(
+            'Date'[Date],
+            LASTDATE('Date'[Date]),
+            -2,
+            MONTH
+        ) -
+        DATESINPERIOD(
+            'Date'[Date],
+            LASTDATE('Date'[Date]),
+            -1,
+            MONTH
+        )
+    )
+RETURN
+    DIVIDE(_current - _prior, _prior)`,
+    },
     detailPoints: [
       "100M+ daily records aggregated across 10 global marketplaces into one Snowflake Gold layer.",
       "100+ DAX measures. Sales leadership slices data without waiting on an analyst.",
@@ -288,7 +378,46 @@ const studies: Study[] = [
   },
 ];
 
-/* â”€â”€ Modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â"€â"€ Code snippet block â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
+
+type Snippet = { lang: string; label: string; code: string };
+function CodeBlock({ snippet }: { snippet: Snippet }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="rounded-xl overflow-hidden" style={{ border: "1px solid var(--border)" }}>
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center justify-between px-4 py-3 hover:bg-muted/40 transition-colors"
+        style={{ background: "color-mix(in srgb, var(--card) 80%, var(--muted))" }}
+      >
+        <div className="flex items-center gap-2.5">
+          <span
+            className="text-[9px] font-mono uppercase tracking-[0.15em] px-1.5 py-0.5 rounded"
+            style={{
+              background: "color-mix(in srgb, var(--primary) 12%, transparent)",
+              color: "var(--primary)",
+              border: "1px solid color-mix(in srgb, var(--primary) 22%, transparent)",
+            }}
+          >
+            {snippet.lang}
+          </span>
+          <span className="text-[12px] font-mono text-muted-foreground">{snippet.label}</span>
+        </div>
+        {open ? <ChevronUp size={14} className="text-muted-foreground" /> : <ChevronDown size={14} className="text-muted-foreground" />}
+      </button>
+      {open && (
+        <pre
+          className="p-4 text-[11px] font-mono leading-relaxed overflow-x-auto"
+          style={{ background: "color-mix(in srgb, var(--card) 50%, var(--background))", color: "var(--foreground)" }}
+        >
+          <code>{snippet.code}</code>
+        </pre>
+      )}
+    </div>
+  );
+}
+
+/* â"€â"€ Modal â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 
 function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
   return (
@@ -351,6 +480,12 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
                 ))}
               </ul>
             </div>
+            {study.codeSnippet && (
+              <div className="mb-6">
+                <p className="eyebrow mb-3">Code pattern</p>
+                <CodeBlock snippet={study.codeSnippet} />
+              </div>
+            )}
             <div className="flex flex-wrap gap-2 pt-4 border-t border-border">
               {study.stack.map((t) => (
                 <span key={t} className="px-2.5 py-1 rounded-md text-[11px] font-medium panel text-muted-foreground">{t}</span>
@@ -363,7 +498,7 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
   );
 }
 
-/* â”€â”€ Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â"€â"€ Card â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 
 function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
   return (
@@ -415,7 +550,7 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
   );
 }
 
-/* â”€â”€ Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â"€â"€ Section â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 
 export function CaseStudiesSection() {
   const [openStudy, setOpenStudy] = useState<Study | null>(null);

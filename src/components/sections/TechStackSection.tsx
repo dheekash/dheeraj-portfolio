@@ -134,6 +134,60 @@ const techLogos: {
   { name: "dbt",        Logo: DbtLogo,        bg: "rgba(255,105,75,0.10)",  years: "2 yrs", level: "Advanced" },
 ];
 
+const platformGuide = [
+  {
+    platform: "Microsoft Fabric",
+    tagline: "All-in-one Lakehouse on OneLake",
+    bg: "rgba(0,120,212,0.08)",
+    border: "rgba(0,120,212,0.2)",
+    accent: "rgba(0,120,212,0.8)",
+    reach: [
+      "Client is Microsoft-first (Azure, M365, Teams)",
+      "Power BI is the primary BI tool",
+      "Need one governed data platform for all workloads",
+      "Budget is allocated to Microsoft E5 or Fabric capacity",
+    ],
+    skip: [
+      "Heavy Python/Spark ML workflows that need MLflow parity",
+      "Multi-cloud or non-Azure storage mandate",
+    ],
+  },
+  {
+    platform: "Databricks",
+    tagline: "Unified analytics for ML-heavy pipelines",
+    bg: "rgba(255,54,33,0.06)",
+    border: "rgba(255,54,33,0.18)",
+    accent: "rgba(255,54,33,0.8)",
+    reach: [
+      "ML and feature engineering are first-class requirements",
+      "PySpark workloads at significant scale",
+      "MLflow experiment tracking and model registry needed",
+      "Unity Catalog governance across multiple clouds",
+    ],
+    skip: [
+      "Power BI is the reporting layer (import mode limits apply)",
+      "No ML requirements and budget is tight",
+    ],
+  },
+  {
+    platform: "Snowflake",
+    tagline: "Cloud-agnostic SQL analytics warehouse",
+    bg: "rgba(41,181,232,0.07)",
+    border: "rgba(41,181,232,0.2)",
+    accent: "rgba(41,181,232,0.8)",
+    reach: [
+      "Multi-cloud requirement (AWS + Azure + GCP)",
+      "SQL-first team with no PySpark investment",
+      "dbt is the primary transformation layer",
+      "Data sharing across external partners or vendors",
+    ],
+    skip: [
+      "Fabric is already licensed (OneLake overlap)",
+      "Real-time streaming is a core requirement",
+    ],
+  },
+];
+
 function LogoTile({ name, Logo, bg, years, level }: typeof techLogos[number]) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -176,7 +230,7 @@ export function TechStackSection() {
     <section id="skills">
       <div className="container-page section-pad">
 
-        {/* â”€â”€ Core Expertise â”€â”€ */}
+        {/* â"€â"€ Core Expertise â"€â"€ */}
         <motion.h2 {...reveal()} className="mb-3">
           Core Expertise
         </motion.h2>
@@ -218,12 +272,61 @@ export function TechStackSection() {
           ))}
         </div>
 
-        {/* â”€â”€ Technology Stack â”€â”€ */}
-        <motion.div {...reveal(0.28)}>
+        {/* â"€â"€ Technology Stack â"€â"€ */}
+        <motion.div {...reveal(0.28)} className="mb-[clamp(2.5rem,4vw,4rem)]">
           <p className="eyebrow mb-4">Technology Stack</p>
           <div className="grid grid-cols-4 sm:grid-cols-8 gap-2.5">
             {techLogos.map((t) => (
               <LogoTile key={t.name} {...t} />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* â"€â"€ Platform Decision Guide â"€â"€ */}
+        <motion.div {...reveal(0.34)}>
+          <p className="eyebrow mb-4">Platform Decision Guide</p>
+          <p className="text-muted-foreground text-sm mb-5 max-w-[52ch]">
+            How I choose between Fabric, Databricks, and Snowflake based on project constraints.
+          </p>
+          <div className="grid sm:grid-cols-3 gap-4">
+            {platformGuide.map((p, i) => (
+              <motion.div
+                key={p.platform}
+                {...reveal(0.36 + i * 0.06)}
+                className="panel rounded-2xl overflow-hidden flex flex-col"
+              >
+                <div
+                  className="px-5 py-4"
+                  style={{ background: p.bg, borderBottom: `1px solid ${p.border}` }}
+                >
+                  <p className="text-[13px] font-semibold text-foreground">{p.platform}</p>
+                  <p className="text-[11px] font-mono text-muted-foreground mt-0.5">{p.tagline}</p>
+                </div>
+                <div className="px-5 py-4 flex flex-col gap-4 flex-1">
+                  <div>
+                    <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground mb-2">Reach for it when</p>
+                    <ul className="space-y-1.5">
+                      {p.reach.map((r) => (
+                        <li key={r} className="flex items-start gap-2 text-[11.5px] text-muted-foreground">
+                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style={{ background: p.accent }} />
+                          {r}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground mb-2">Skip it when</p>
+                    <ul className="space-y-1.5">
+                      {p.skip.map((s) => (
+                        <li key={s} className="flex items-start gap-2 text-[11.5px] text-muted-foreground/60">
+                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5 bg-muted-foreground/30" />
+                          {s}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>

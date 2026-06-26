@@ -3,6 +3,7 @@ import { TechStackSection } from "@/components/sections/TechStackSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { FabricExpertiseSection } from "@/components/sections/FabricExpertiseSection";
 import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
+import { LiveMetricsSection } from "@/components/sections/LiveMetricsSection";
 import { CareerEvolutionSection } from "@/components/sections/CareerEvolutionSection";
 import { CertificationsSection } from "@/components/sections/CertificationsSection";
 
@@ -18,10 +19,11 @@ export default function HomePage() {
       <div className="section-alt">
         <CaseStudiesSection />
       </div>
-      <CareerEvolutionSection />
+      <LiveMetricsSection />
       <div className="section-alt">
-        <CertificationsSection />
+        <CareerEvolutionSection />
       </div>
+      <CertificationsSection />
     </>
   );
 }
