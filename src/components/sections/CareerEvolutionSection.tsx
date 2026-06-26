@@ -142,10 +142,6 @@ export function CareerEvolutionSection() {
                   )}
                 </div>
 
-                {"roleSubtitle" in item && item.roleSubtitle && (
-                  <p className="text-[11px] text-muted-foreground font-mono mb-1.5">{item.roleSubtitle}</p>
-                )}
-
                 {/* Company + meta */}
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mb-3">
                   <p className="text-sm font-medium text-muted-foreground">{item.company}</p>
