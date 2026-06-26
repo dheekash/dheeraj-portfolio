@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X, Download } from "lucide-react";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
@@ -16,15 +16,18 @@ const links = [
 ];
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("");
+  const [scrolled, setScrolled]   = useState(false);
+  const [hidden, setHidden]       = useState(false);
+  const [open, setOpen]           = useState(false);
+  const [active, setActive]       = useState("");
+  const [progress, setProgress]   = useState(0);
 
   useEffect(() => {
     let last = window.scrollY;
     const onScroll = () => {
-      const y = window.scrollY;
+      const y   = window.scrollY;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? Math.min(100, (y / max) * 100) : 0);
       setScrolled(y > 16);
       if (open) { setHidden(false); }
       else if (y > last && y > 320) { setHidden(true); }
@@ -66,6 +69,15 @@ export function Navbar() {
         hidden ? "-translate-y-full" : "translate-y-0"
       } ${scrolled || open ? "glass-nav" : "liquid-glass border-b border-white/10"}`}
     >
+      {/* Scroll progress bar */}
+      <div
+        className="absolute top-0 left-0 h-[2px] z-10 transition-[width] duration-100"
+        style={{
+          width: `${progress}%`,
+          background: "var(--primary)",
+        }}
+      />
+
       <div className="container-page h-[3.75rem] flex items-center justify-between gap-4">
         <a
           href="#top"
@@ -74,7 +86,7 @@ export function Navbar() {
           Dheeraj Kashyap<span className="accent-text">.</span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-3">
+        <nav className="hidden lg:flex items-center gap-1">
           {links.map((l) => (
             <a
               key={l.href}
@@ -88,7 +100,7 @@ export function Navbar() {
               {active === l.id && (
                 <span
                   aria-hidden
-                  className="absolute left-3 right-3 -bottom-0.5 h-px"
+                  className="absolute left-3 right-3 -bottom-0.5 h-[2px] rounded-full transition-all duration-300"
                   style={{ background: "var(--primary)" }}
                 />
               )}
@@ -96,7 +108,7 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-2.5">
+        <div className="hidden lg:flex items-center gap-2">
           <ThemeToggle />
           <a
             href={profile.githubUrl}
@@ -115,6 +127,14 @@ export function Navbar() {
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[13px] text-muted-foreground hover:text-foreground transition-colors"
           >
             <LinkedinIcon size={14} /> LinkedIn
+          </a>
+          <a
+            href={profile.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-border text-[13px] font-medium text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+          >
+            <Download size={12} /> Resume
           </a>
           <a
             href="#contact"
@@ -145,9 +165,14 @@ export function Navbar() {
                 <a
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-center min-h-12 text-[15px] font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  className={`flex items-center min-h-12 text-[15px] font-medium transition-colors ${
+                    active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  }`}
                 >
                   {l.label}
+                  {active === l.id && (
+                    <span className="ml-2 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                  )}
                 </a>
               </li>
             ))}
@@ -165,7 +190,7 @@ export function Navbar() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 min-h-12 text-[15px] font-medium text-muted-foreground"
               >
-                Resume <ArrowUpRight size={14} />
+                <Download size={14} /> Resume
               </a>
               <a
                 href={profile.linkedinUrl}

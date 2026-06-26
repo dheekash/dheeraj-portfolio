@@ -17,11 +17,13 @@ const headlines = [
 ];
 
 const primaryMetrics = [
-  { end: 7,   suffix: "+",  label: "Years experience",         decimals: 0 },
-  { end: 13,  suffix: "",   label: "Microsoft credentials earned", decimals: 0 },
-  { end: 20,  suffix: "+",  label: "Enterprise solutions",       decimals: 0 },
-  { end: 100, suffix: "+",  label: "Reports & dashboards",      decimals: 0 },
+  { end: 7,   suffix: "+",  label: "Years experience",            decimals: 0, icon: "⏱" },
+  { end: 13,  suffix: "",   label: "Microsoft credentials earned", decimals: 0, icon: "🏅" },
+  { end: 20,  suffix: "+",  label: "Enterprise solutions",         decimals: 0, icon: "🏢" },
+  { end: 100, suffix: "+",  label: "Reports & dashboards",         decimals: 0, icon: "📊" },
 ];
+
+const trustedBy = ["Amazon", "Microsoft", "Amplify Analytix"];
 
 
 function AnimatedCounter({
@@ -109,7 +111,7 @@ export function CinematicHero() {
       />
 
       <div className="container-page relative z-10 py-[clamp(4.5rem,2.5rem+5vw,8rem)] w-full">
-        <div className="grid lg:grid-cols-[1fr_clamp(12rem,24vw,20rem)] gap-x-[clamp(3rem,6vw,7rem)] gap-y-12 items-start">
+        <div className="grid lg:grid-cols-[1fr_clamp(18rem,28vw,24rem)] gap-x-[clamp(2rem,4vw,5rem)] gap-y-12 items-start">
 
           {/* Left: headline + subtext + CTAs */}
           <div className="max-w-[58ch]">
@@ -164,43 +166,69 @@ export function CinematicHero() {
             <motion.div {...fadeUp(0.22)} className="flex flex-wrap items-center gap-3">
               <MagneticButton
                 href="#case-studies"
-                className="items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.1vw,1rem)] rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                className="items-center gap-2 px-[clamp(1.5rem,2.2vw,2rem)] py-3.5 rounded-full bg-primary text-primary-foreground text-[15px] font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
               >
                 View Projects
-                <ArrowRight size={13} />
+                <ArrowRight size={14} />
               </MagneticButton>
 
               <a
                 href={profile.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="liquid-glass inline-flex items-center gap-2 px-[clamp(1.25rem,2vw,1.75rem)] py-[clamp(0.8rem,1.1vw,1rem)] rounded-full text-sm font-medium text-white hover:scale-[1.03] transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                className="inline-flex items-center gap-2 px-[clamp(1.5rem,2.2vw,2rem)] py-3.5 rounded-full border border-white/30 text-[15px] font-medium text-white hover:bg-white/10 hover:border-white/50 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
               >
-                Download Resume <ArrowUpRight size={13} />
+                Download Resume <ArrowUpRight size={14} />
               </a>
 
               <a
                 href={`mailto:${profile.email}`}
-                className="inline-flex items-center gap-1.5 px-[clamp(1rem,1.5vw,1.25rem)] py-[clamp(0.8rem,1.1vw,1rem)] rounded-full border border-white/20 text-sm font-medium text-white/80 hover:text-white hover:border-white/40 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                className="inline-flex items-center gap-1.5 px-[clamp(1rem,1.5vw,1.25rem)] py-3.5 rounded-full border border-white/15 text-[15px] font-medium text-white/70 hover:text-white hover:border-white/35 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
               >
-                <Mail size={13} />
-                Contact Me
+                <Mail size={14} />
+                Contact
               </a>
+            </motion.div>
+
+            {/* Trust strip */}
+            <motion.div {...fadeUp(0.32)} className="mt-[clamp(1.75rem,2.5vw,2.5rem)]">
+              <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-white/35 mb-3">
+                Worked with
+              </p>
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                {trustedBy.map((name) => (
+                  <span
+                    key={name}
+                    className="text-[13px] font-semibold text-white/50 tracking-tight hover:text-white/75 transition-colors"
+                  >
+                    {name}
+                  </span>
+                ))}
+              </div>
             </motion.div>
           </div>
 
-          {/* Right: typographic metrics (desktop only) */}
+          {/* Right: stat cards (desktop only) */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.0, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:flex flex-col gap-[clamp(1.25rem,2.2vw,2.5rem)] pt-1"
+            className="hidden lg:grid grid-cols-2 gap-3 pt-1 content-start"
           >
             {primaryMetrics.map((m, i) => (
-              <div key={m.label}>
+              <div
+                key={m.label}
+                className="rounded-2xl px-4 py-4 flex flex-col gap-1.5 transition-transform duration-300 hover:-translate-y-1"
+                style={{
+                  background: "rgba(255,255,255,0.07)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  backdropFilter: "blur(8px)",
+                }}
+              >
+                <span className="text-lg leading-none">{m.icon}</span>
                 <p
                   className="font-mono tabular-nums font-bold leading-none tracking-tight text-white"
-                  style={{ fontSize: "clamp(2.5rem, 1.5rem + 2vw, 4.2rem)" }}
+                  style={{ fontSize: "clamp(1.8rem, 1rem + 1.8vw, 2.8rem)" }}
                 >
                   <AnimatedCounter
                     end={m.end}
@@ -209,7 +237,7 @@ export function CinematicHero() {
                     decimals={m.decimals}
                   />
                 </p>
-                <p className="text-[11px] text-white/50 mt-1 tracking-[0.04em] font-medium">
+                <p className="text-[11px] text-white/55 tracking-[0.03em] font-medium leading-snug">
                   {m.label}
                 </p>
               </div>
@@ -217,17 +245,22 @@ export function CinematicHero() {
           </motion.div>
         </div>
 
-        {/* Mobile metrics strip (primary metrics, hidden on lg where they're in right column) */}
+        {/* Mobile metrics strip */}
         <motion.div
           {...fadeUp(0.38)}
-          className="mt-[clamp(2rem,3.5vw,4rem)] pt-[clamp(1rem,1.5vw,1.5rem)] border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-x-[clamp(1.25rem,3vw,3rem)] gap-y-4 lg:hidden"
+          className="mt-[clamp(2rem,3.5vw,4rem)] pt-[clamp(1rem,1.5vw,1.5rem)] border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-3 lg:hidden"
         >
           {primaryMetrics.map((m, i) => (
-            <div key={m.label}>
-              <p className="font-mono tabular-nums font-bold text-[clamp(1.4rem,1rem+2vw,2.2rem)] leading-none text-white">
+            <div
+              key={m.label}
+              className="rounded-xl px-3 py-3"
+              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)" }}
+            >
+              <span className="text-base mb-1 block">{m.icon}</span>
+              <p className="font-mono tabular-nums font-bold text-[clamp(1.4rem,1rem+2vw,2rem)] leading-none text-white">
                 <AnimatedCounter end={m.end} suffix={m.suffix} delay={0.3 + i * 0.1} decimals={m.decimals} />
               </p>
-              <p className="text-[11px] text-white/50 mt-1">{m.label}</p>
+              <p className="text-[10px] text-white/50 mt-1 leading-snug">{m.label}</p>
             </div>
           ))}
         </motion.div>

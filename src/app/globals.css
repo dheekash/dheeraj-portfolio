@@ -150,6 +150,7 @@
     font-feature-settings: "rlig" 1, "calt" 1;
     overflow-x: clip;
     font-size: clamp(1rem, 0.95rem + 0.25vw, 1.2rem);
+    line-height: 1.75;
   }
   ::selection { background: color-mix(in srgb, var(--primary) 25%, transparent); }
   h1, h2, h3 {
@@ -251,6 +252,14 @@
   }
 
   .rule-thick { border-top: 2.5px solid var(--foreground); }
+
+  /* Alternating section tint */
+  .section-alt {
+    background: color-mix(in srgb, var(--primary) 2.5%, var(--background));
+  }
+  .dark .section-alt {
+    background: color-mix(in srgb, var(--primary) 4%, var(--background));
+  }
 
   /* ── Liquid glass — cinematic frosted surface ── */
   .liquid-glass {

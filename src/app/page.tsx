@@ -6,26 +6,22 @@ import { CareerEvolutionSection } from "@/components/sections/CareerEvolutionSec
 import { CertificationsSection } from "@/components/sections/CertificationsSection";
 import { FabricExpertiseSection } from "@/components/sections/FabricExpertiseSection";
 
-function Divider() {
-  return <div className="hairline container-page" />;
-}
-
 export default function HomePage() {
   return (
     <>
       <CinematicHero />
-      <Divider />
       <AboutSection />
-      <Divider />
-      <TechStackSection />
-      <Divider />
+      <div className="section-alt">
+        <TechStackSection />
+      </div>
       <CaseStudiesSection />
-      <Divider />
-      <CareerEvolutionSection />
-      <Divider />
+      <div className="section-alt">
+        <CareerEvolutionSection />
+      </div>
       <CertificationsSection />
-      <Divider />
-      <FabricExpertiseSection />
+      <div className="section-alt">
+        <FabricExpertiseSection />
+      </div>
     </>
   );
 }

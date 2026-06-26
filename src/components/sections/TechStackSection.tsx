@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   PythonLogo, SQLLogo, DbtLogo, SparkLogo,
@@ -17,68 +18,68 @@ function reveal(delay = 0) {
   };
 }
 
-type Tool = { name: string; Logo?: (props: { size?: number }) => React.ReactElement };
+type Tool = {
+  name: string;
+  Logo?: (props: { size?: number }) => React.ReactElement;
+  years?: string;
+  level?: string;
+};
 
-function Chip({ name, Logo }: Tool) {
-  return (
-    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg panel text-[12px] font-medium text-muted-foreground">
-      {Logo && <Logo size={13} />}
-      {name}
-    </span>
-  );
-}
-
-const rows: { category: string; tools: Tool[] }[] = [
+const categories: { title: string; color: string; tools: Tool[] }[] = [
   {
-    category: "Analytics & BI",
+    title: "Analytics & BI",
+    color: "rgba(242,200,17,0.15)",
     tools: [
-      { name: "Power BI",          Logo: PowerBILogo    },
-      { name: "Microsoft Fabric",  Logo: FabricLogo     },
-      { name: "DAX"                                     },
-      { name: "Power Query",       Logo: PowerQueryLogo },
-      { name: "Excel",             Logo: ExcelLogo      },
-      { name: "Paginated Reports"                       },
+      { name: "Power BI",          Logo: PowerBILogo,    years: "6 yrs", level: "Expert"       },
+      { name: "Microsoft Fabric",  Logo: FabricLogo,     years: "2 yrs", level: "Advanced"     },
+      { name: "DAX",                                      years: "5 yrs", level: "Expert"       },
+      { name: "Power Query",       Logo: PowerQueryLogo, years: "5 yrs", level: "Advanced"     },
+      { name: "Excel",             Logo: ExcelLogo,      years: "7 yrs", level: "Expert"       },
+      { name: "Paginated Reports",                        years: "3 yrs", level: "Advanced"     },
     ],
   },
   {
-    category: "Data Engineering",
+    title: "Data Engineering",
+    color: "rgba(59,130,246,0.12)",
     tools: [
-      { name: "SQL",    Logo: SQLLogo    },
-      { name: "Python", Logo: PythonLogo },
-      { name: "PySpark",Logo: SparkLogo  },
-      { name: "dbt",    Logo: DbtLogo    },
-      { name: "ETL / ADF"                },
-      { name: "SQLMesh"                  },
-      { name: "Delta Lake"               },
+      { name: "SQL",      Logo: SQLLogo,    years: "7 yrs", level: "Expert"   },
+      { name: "Python",   Logo: PythonLogo, years: "5 yrs", level: "Advanced" },
+      { name: "PySpark",  Logo: SparkLogo,  years: "3 yrs", level: "Advanced" },
+      { name: "dbt",      Logo: DbtLogo,    years: "2 yrs", level: "Advanced" },
+      { name: "ADF / ETL",                  years: "4 yrs", level: "Advanced" },
+      { name: "SQLMesh",                    years: "1 yr",  level: "Proficient"},
+      { name: "Delta Lake",                 years: "2 yrs", level: "Advanced" },
     ],
   },
   {
-    category: "Cloud & Platforms",
+    title: "Cloud & Platforms",
+    color: "rgba(0,120,212,0.10)",
     tools: [
-      { name: "Azure",      Logo: AzureLogo      },
-      { name: "Snowflake",  Logo: SnowflakeLogo  },
-      { name: "Databricks", Logo: DatabricksLogo },
-      { name: "OneLake"                          },
-      { name: "ADLS Gen2"                        },
+      { name: "Azure",      Logo: AzureLogo,      years: "4 yrs", level: "Advanced" },
+      { name: "Snowflake",  Logo: SnowflakeLogo,  years: "3 yrs", level: "Advanced" },
+      { name: "Databricks", Logo: DatabricksLogo, years: "2 yrs", level: "Advanced" },
+      { name: "OneLake",                           years: "1 yr",  level: "Proficient"},
+      { name: "ADLS Gen2",                         years: "3 yrs", level: "Advanced" },
     ],
   },
   {
-    category: "Architecture",
+    title: "Architecture",
+    color: "rgba(16,185,129,0.10)",
     tools: [
-      { name: "Data Modeling"           },
-      { name: "Star Schema"             },
-      { name: "Medallion Architecture" },
-      { name: "Direct Lake"             },
-      { name: "Semantic Modeling"       },
+      { name: "Medallion Architecture", years: "3 yrs", level: "Expert"    },
+      { name: "Star Schema",            years: "6 yrs", level: "Expert"    },
+      { name: "Semantic Modeling",      years: "5 yrs", level: "Expert"    },
+      { name: "Direct Lake",            years: "1 yr",  level: "Advanced"  },
+      { name: "Data Modeling",          years: "6 yrs", level: "Expert"    },
     ],
   },
   {
-    category: "Automation",
+    title: "Automation & DevOps",
+    color: "rgba(139,92,246,0.10)",
     tools: [
-      { name: "Power Automate", Logo: MicrosoftLogo },
-      { name: "Power Query",    Logo: PowerQueryLogo },
-      { name: "Azure DevOps"                        },
-      { name: "CI / CD"                             },
+      { name: "Power Automate", Logo: MicrosoftLogo, years: "3 yrs", level: "Advanced"  },
+      { name: "Azure DevOps",                         years: "2 yrs", level: "Proficient"},
+      { name: "CI / CD",                              years: "2 yrs", level: "Proficient"},
     ],
   },
 ];
@@ -87,17 +88,55 @@ const techLogos: {
   name: string;
   Logo: (props: { size?: number }) => React.ReactElement;
   bg: string;
+  years: string;
+  level: string;
 }[] = [
-  { name: "Power BI",   Logo: PowerBILogo,    bg: "rgba(242,200,17,0.12)"  },
-  { name: "Fabric",     Logo: FabricLogo,     bg: "rgba(0,120,212,0.10)"   },
-  { name: "Azure",      Logo: AzureLogo,      bg: "rgba(0,120,212,0.10)"   },
-  { name: "Snowflake",  Logo: SnowflakeLogo,  bg: "rgba(41,181,232,0.12)"  },
-  { name: "Python",     Logo: PythonLogo,     bg: "rgba(55,118,171,0.12)"  },
-  { name: "Databricks", Logo: DatabricksLogo, bg: "rgba(255,54,33,0.08)"   },
-  { name: "SQL",        Logo: SQLLogo,        bg: "rgba(59,130,246,0.10)"  },
-  { name: "dbt",        Logo: DbtLogo,        bg: "rgba(255,105,75,0.10)"  },
+  { name: "Power BI",   Logo: PowerBILogo,    bg: "rgba(242,200,17,0.12)",  years: "6 yrs", level: "Expert"   },
+  { name: "Fabric",     Logo: FabricLogo,     bg: "rgba(0,120,212,0.10)",   years: "2 yrs", level: "Advanced" },
+  { name: "Azure",      Logo: AzureLogo,      bg: "rgba(0,120,212,0.10)",   years: "4 yrs", level: "Advanced" },
+  { name: "Snowflake",  Logo: SnowflakeLogo,  bg: "rgba(41,181,232,0.12)",  years: "3 yrs", level: "Advanced" },
+  { name: "Python",     Logo: PythonLogo,     bg: "rgba(55,118,171,0.12)",  years: "5 yrs", level: "Advanced" },
+  { name: "Databricks", Logo: DatabricksLogo, bg: "rgba(255,54,33,0.08)",   years: "2 yrs", level: "Advanced" },
+  { name: "SQL",        Logo: SQLLogo,        bg: "rgba(59,130,246,0.10)",  years: "7 yrs", level: "Expert"   },
+  { name: "dbt",        Logo: DbtLogo,        bg: "rgba(255,105,75,0.10)",  years: "2 yrs", level: "Advanced" },
 ];
 
+function LogoTile({ name, Logo, bg, years, level }: typeof techLogos[number]) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="panel rounded-xl p-3 flex flex-col items-center gap-1.5 cursor-default transition-all duration-300 hover:-translate-y-1 hover:shadow-md relative overflow-hidden"
+      style={{
+        borderColor: hovered ? "color-mix(in srgb, var(--primary) 35%, var(--border))" : undefined,
+      }}
+    >
+      <div
+        className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-300"
+        style={{ background: bg, transform: hovered ? "rotate(6deg) scale(1.1)" : "none" }}
+      >
+        <Logo size={18} />
+      </div>
+      <span className="text-[10px] text-muted-foreground text-center leading-tight font-medium">
+        {name}
+      </span>
+      {hovered && (
+        <div
+          className="absolute inset-x-0 bottom-0 py-1.5 text-center"
+          style={{
+            background: "color-mix(in srgb, var(--primary) 8%, var(--card))",
+            borderTop: "1px solid color-mix(in srgb, var(--primary) 18%, transparent)",
+          }}
+        >
+          <p className="text-[9px] font-mono font-semibold" style={{ color: "var(--primary)" }}>
+            {years} · {level}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function TechStackSection() {
   return (
@@ -109,21 +148,38 @@ export function TechStackSection() {
           Core Expertise
         </motion.h2>
         <motion.p {...reveal(0.05)} className="text-muted-foreground text-sm leading-relaxed max-w-[52ch] mb-[clamp(1.5rem,2.5vw,2.5rem)]">
-          Full-stack analytics engineering — from raw data ingestion through governed semantic models to executive-facing dashboards.
+          Full-stack analytics engineering. Raw data ingestion through governed semantic models to executive-facing dashboards.
         </motion.p>
 
-        <div className="border border-border rounded-2xl overflow-hidden mb-[clamp(2.5rem,4vw,4rem)]">
-          {rows.map((row, i) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-[clamp(2.5rem,4vw,4rem)]">
+          {categories.map((cat, i) => (
             <motion.div
-              key={row.category}
-              {...reveal(0.04 + i * 0.05)}
-              className={`grid sm:grid-cols-[clamp(8rem,14vw,13rem)_1fr] gap-x-6 gap-y-2.5 px-[clamp(1rem,2vw,1.75rem)] py-[clamp(0.75rem,1.2vw,1rem)] items-start ${
-                i > 0 ? "border-t border-border" : ""
-              } ${i % 2 === 1 ? "bg-[color:color-mix(in_srgb,var(--primary)_2%,var(--card))]" : ""}`}
+              key={cat.title}
+              {...reveal(0.04 + i * 0.06)}
+              className="panel rounded-2xl p-5 flex flex-col gap-3 panel-lift"
             >
-              <p className="eyebrow pt-1 whitespace-nowrap">{row.category}</p>
+              <div className="flex items-center gap-2.5">
+                <span
+                  className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                  style={{ background: cat.color.replace("0.1", "0.7").replace("0.12", "0.7").replace("0.15","0.7") }}
+                />
+                <p className="text-[12px] font-semibold text-foreground tracking-tight">{cat.title}</p>
+              </div>
               <div className="flex flex-wrap gap-1.5">
-                {row.tools.map((t) => <Chip key={t.name} {...t} />)}
+                {cat.tools.map((t) => (
+                  <span
+                    key={t.name}
+                    className="group relative inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11.5px] font-medium text-muted-foreground transition-colors cursor-default hover:text-foreground"
+                    style={{
+                      background: cat.color,
+                      border: "1px solid color-mix(in srgb, var(--border) 60%, transparent)",
+                    }}
+                    title={`${t.years} · ${t.level}`}
+                  >
+                    {t.Logo && <t.Logo size={11} />}
+                    {t.name}
+                  </span>
+                ))}
               </div>
             </motion.div>
           ))}
@@ -133,25 +189,9 @@ export function TechStackSection() {
         <motion.div {...reveal(0.28)}>
           <p className="eyebrow mb-4">Technology Stack</p>
           <div className="grid grid-cols-4 sm:grid-cols-8 gap-2.5">
-            {techLogos.map((t) => {
-              const Logo = t.Logo;
-              return (
-                <div
-                  key={t.name}
-                  className="panel rounded-xl p-2.5 flex flex-col items-center gap-1.5 hover:border-primary/30 transition-colors"
-                >
-                  <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: t.bg }}
-                  >
-                    <Logo size={17} />
-                  </div>
-                  <span className="text-[10px] text-muted-foreground text-center leading-tight font-medium">
-                    {t.name}
-                  </span>
-                </div>
-              );
-            })}
+            {techLogos.map((t) => (
+              <LogoTile key={t.name} {...t} />
+            ))}
           </div>
         </motion.div>
 
