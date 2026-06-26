@@ -4,43 +4,6 @@ import { motion } from "framer-motion";
 
 const timeline = [
   {
-    period: "Mar 2019 - Mar 2020",
-    role: "Customer Support Analyst (Data & Reporting)",
-    company: "Frontizo Business Services",
-    location: "Bengaluru, India",
-    type: "Full-time",
-    summary:
-      "Began career at an Amazon-operated BPO facility. Built Excel dashboards to surface team KPIs, slashed average handling time, and drove resolution rates that became a benchmark for the floor.",
-    highlights: [
-      "Built Excel dashboards tracking KPIs for 20+ associates — adopted floor-wide within one quarter",
-      "Reduced Average Handling Time (AHT) by 31% through process re-engineering and structured call flows",
-      "Achieved 94% Contact Resolution Rate against an 82% site benchmark",
-      "Identified recurring escalation patterns through trend analysis; fed findings into team coaching cadence",
-    ],
-    stack: ["Excel", "SQL Basics", "Data Analysis"],
-    badge: null,
-    current: false,
-  },
-  {
-    period: "Mar 2020 - Jun 2024",
-    role: "Risk Data Analyst",
-    company: "Amazon",
-    location: "Bengaluru, India",
-    type: "Full-time",
-    summary:
-      "Grew from fraud investigation into building self-service analytics platforms for seller leadership across 10+ global marketplaces. Shipped fraud models in production, led a 15-person team, and cut case resolution time by 35 minutes per case.",
-    highlights: [
-      "Built and deployed Random Forest and Logistic Regression fraud models — reduced fraud incidence 30%",
-      "Led a 15-person analyst team; cut average case resolution time from 65 min to 30 min per case",
-      "Engineered Power BI dashboards processing 100M+ daily records, adopted by sales leadership globally",
-      "Delivered predictive analytics in Python and Snowflake that surfaced $500K+ in revenue opportunities",
-      "Reduced manual reporting effort by 70% through automated SQL pipelines and scheduled alert systems",
-    ],
-    stack: ["Power BI", "Snowflake", "Python", "SQL", "DAX", "Random Forest", "Scikit-learn"],
-    badge: "100M+ records · 30% fraud reduction · 15-person team lead",
-    current: false,
-  },
-  {
     period: "Jan 2025 - Present",
     role: "BI & Analytics Engineer",
     company: "Amplify Analytix",
@@ -69,6 +32,43 @@ const timeline = [
     ],
     badge: "15 countries · 20+ products · 100% client retention",
     current: true,
+  },
+  {
+    period: "Mar 2020 - Jun 2024",
+    role: "Risk Data Analyst",
+    company: "Amazon",
+    location: "Bengaluru, India",
+    type: "Full-time",
+    summary:
+      "Grew from fraud investigation into building self-service analytics platforms for seller leadership across 10+ global marketplaces. Shipped fraud models in production, led a 15-person team, and cut case resolution time by 35 minutes per case.",
+    highlights: [
+      "Built and deployed Random Forest and Logistic Regression fraud models — reduced fraud incidence 30%",
+      "Led a 15-person analyst team; cut average case resolution time from 65 min to 30 min per case",
+      "Engineered Power BI dashboards processing 100M+ daily records, adopted by sales leadership globally",
+      "Delivered predictive analytics in Python and Snowflake that surfaced $500K+ in revenue opportunities",
+      "Reduced manual reporting effort by 70% through automated SQL pipelines and scheduled alert systems",
+    ],
+    stack: ["Power BI", "Snowflake", "Python", "SQL", "DAX", "Random Forest", "Scikit-learn"],
+    badge: "100M+ records · 30% fraud reduction · 15-person team lead",
+    current: false,
+  },
+  {
+    period: "Mar 2019 - Mar 2020",
+    role: "Customer Support Analyst (Data & Reporting)",
+    company: "Frontizo Business Services",
+    location: "Bengaluru, India",
+    type: "Full-time",
+    summary:
+      "Began career at an Amazon-operated BPO facility. Built Excel dashboards to surface team KPIs, slashed average handling time, and drove resolution rates that became a benchmark for the floor.",
+    highlights: [
+      "Built Excel dashboards tracking KPIs for 20+ associates — adopted floor-wide within one quarter",
+      "Reduced Average Handling Time (AHT) by 31% through process re-engineering and structured call flows",
+      "Achieved 94% Contact Resolution Rate against an 82% site benchmark",
+      "Identified recurring escalation patterns through trend analysis; fed findings into team coaching cadence",
+    ],
+    stack: ["Excel", "SQL Basics", "Data Analysis"],
+    badge: null,
+    current: false,
   },
 ];
 
