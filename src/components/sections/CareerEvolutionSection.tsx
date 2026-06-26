@@ -36,6 +36,7 @@ const timeline = [
   {
     period: "Mar 2020 - Jun 2024",
     role: "Risk Data Analyst",
+    roleSubtitle: "Fraud investigation → self-serve seller analytics platform",
     company: "Amazon",
     location: "Bengaluru, India",
     type: "Full-time",
@@ -123,7 +124,7 @@ export function CareerEvolutionSection() {
               {/* Content */}
               <div className="pb-2">
                 {/* Role + current badge */}
-                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1.5">
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1">
                   <h3 className="text-[clamp(1rem,0.95rem+0.3vw,1.1rem)] font-semibold leading-snug">
                     {item.role}
                   </h3>
@@ -141,6 +142,10 @@ export function CareerEvolutionSection() {
                     </span>
                   )}
                 </div>
+
+                {"roleSubtitle" in item && item.roleSubtitle && (
+                  <p className="text-[11px] text-muted-foreground font-mono mb-1.5">{item.roleSubtitle}</p>
+                )}
 
                 {/* Company + meta */}
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mb-3">

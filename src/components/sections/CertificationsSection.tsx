@@ -71,6 +71,7 @@ const certGroups: { category: string; color: string; certs: Cert[] }[] = [
     color: "rgba(5,150,105,0.1)",
     certs: [
       { name: "SnowPro Associate: Core", code: "SnowPro", issuer: "Snowflake",  date: "Jan 2026" },
+      // TODO: confirm cert date "May 2026" is accurate — notably more recent than surrounding certs
       { name: "Data Engineer Associate", code: "DE-A",    issuer: "Databricks", date: "May 2026" },
     ],
   },

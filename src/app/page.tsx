@@ -1,10 +1,10 @@
 import { CinematicHero } from "@/components/sections/CinematicHero";
 import { TechStackSection } from "@/components/sections/TechStackSection";
 import { AboutSection } from "@/components/sections/AboutSection";
+import { FabricExpertiseSection } from "@/components/sections/FabricExpertiseSection";
 import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { CareerEvolutionSection } from "@/components/sections/CareerEvolutionSection";
 import { CertificationsSection } from "@/components/sections/CertificationsSection";
-import { FabricExpertiseSection } from "@/components/sections/FabricExpertiseSection";
 
 export default function HomePage() {
   return (
@@ -14,13 +14,13 @@ export default function HomePage() {
       <div className="section-alt">
         <TechStackSection />
       </div>
-      <CaseStudiesSection />
+      <FabricExpertiseSection />
       <div className="section-alt">
-        <CareerEvolutionSection />
+        <CaseStudiesSection />
       </div>
-      <CertificationsSection />
+      <CareerEvolutionSection />
       <div className="section-alt">
-        <FabricExpertiseSection />
+        <CertificationsSection />
       </div>
     </>
   );

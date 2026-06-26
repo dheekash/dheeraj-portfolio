@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight, MapPin, Briefcase, Award, Globe } from "lucide-react";
 import { profile } from "@/data/profile";
 
@@ -29,34 +28,10 @@ function reveal(delay = 0) {
   };
 }
 
-function AnimatedChar({
-  char, index, total, progress,
-}: {
-  char: string; index: number; total: number; progress: MotionValue<number>;
-}) {
-  const start = Math.max(0, (index / total) - 0.1);
-  const end   = Math.min(1, (index / total) + 0.05);
-  const opacity = useTransform(progress, [start, end], [0.18, 1]);
-
-  if (char === " ") return <span style={{ display: "inline-block" }}>&nbsp;</span>;
-  return (
-    <span style={{ position: "relative", display: "inline-block" }}>
-      <span style={{ opacity: 0 }}>{char}</span>
-      <motion.span style={{ opacity, position: "absolute", left: 0, top: 0 }}>{char}</motion.span>
-    </span>
-  );
-}
-
 export function AboutSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start 0.85", "end 0.2"],
-  });
-  const chars = ABOUT_TEXT.split("");
 
   return (
-    <section id="about" ref={sectionRef} className="relative overflow-hidden">
+    <section id="about" className="relative overflow-hidden">
       <div className="container-page section-pad">
         <div className="grid lg:grid-cols-2 gap-x-[clamp(3rem,6vw,7rem)] gap-y-12 items-start">
 
@@ -66,13 +41,8 @@ export function AboutSection() {
               About me
             </motion.h2>
 
-            {/* Scroll-driven character reveal */}
-            <p
-              className="text-[clamp(1rem,1.1vw,1.1rem)] leading-relaxed text-muted-foreground mb-8 max-w-[52ch] text-pretty"
-            >
-              {chars.map((char, i) => (
-                <AnimatedChar key={i} char={char} index={i} total={chars.length} progress={scrollYProgress} />
-              ))}
+            <p className="text-[clamp(1rem,1.1vw,1.1rem)] leading-relaxed text-muted-foreground mb-8 max-w-[52ch] text-pretty">
+              {ABOUT_TEXT}
             </p>
 
             {/* Skill pills */}

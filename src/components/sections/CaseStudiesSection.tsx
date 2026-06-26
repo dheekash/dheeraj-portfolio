@@ -104,30 +104,38 @@ function DiagramManufacturing() {
 }
 
 function DiagramSelfServe() {
-  const layers = [
-    { label: "Sources", items: ["CRM", "Billing", "Usage"], y: 12 },
-    { label: "Warehouse", items: ["Snowflake Gold"], y: 60 },
-    { label: "Semantic", items: ["Power BI Dataset · 100+ measures"], y: 108 },
-  ];
   return (
     <svg viewBox="0 0 360 170" className="w-full h-auto" role="img" aria-label="Self-serve BI platform layers">
-      <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
-        {layers.map((l) => (
-          <g key={l.label}>
-            <text x="0" y={l.y} opacity="0.45">{l.label.toUpperCase()}</text>
-            {l.items.map((item, i) => (
-              <rect key={item} x={i * 115} y={l.y + 6} width="108" height="22"
-                fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
-            ))}
-            {l.items.map((item, i) => (
-              <text key={`t-${item}`} x={i * 115 + 6} y={l.y + 22} fontSize="8.5">{item}</text>
-            ))}
-          </g>
-        ))}
-        <line x1="54" y1="82" x2="54" y2="106" stroke="var(--dgrm)" strokeWidth="1" strokeDasharray="3 2" />
-        <line x1="54" y1="130" x2="54" y2="154" stroke="var(--dgrm)" strokeWidth="1" strokeDasharray="3 2" />
-        <text x="0" y="160" opacity="0.65">100M+ daily records · 70% less manual work</text>
-        <text x="255" y="162" fontSize="14" fontWeight="600" fill="var(--dgrm)">−70%</text>
+      <g fontFamily="var(--font-mono)" fontSize="8.5" fill="currentColor">
+        {/* Sources row — y=0..28 */}
+        <text x="0" y="10" opacity="0.45" fontSize="7.5">SOURCES</text>
+        <rect x="0"   y="14" width="90" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
+        <rect x="96"  y="14" width="90" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
+        <rect x="192" y="14" width="90" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
+        <text x="6"   y="27">CRM</text>
+        <text x="102" y="27">Billing</text>
+        <text x="198" y="27">Usage</text>
+
+        {/* Arrow */}
+        <line x1="45" y1="32" x2="45" y2="44" stroke="var(--dgrm)" strokeWidth="1" strokeDasharray="3 2" />
+
+        {/* Warehouse row — y=44..68 */}
+        <text x="0" y="54" opacity="0.45" fontSize="7.5">WAREHOUSE</text>
+        <rect x="0" y="58" width="175" height="18" fill="none" stroke="var(--dgrm)" strokeOpacity="0.4" strokeWidth="1" rx="3" />
+        <text x="6" y="71">Snowflake Gold</text>
+
+        {/* Arrow */}
+        <line x1="45" y1="76" x2="45" y2="88" stroke="var(--dgrm)" strokeWidth="1" strokeDasharray="3 2" />
+
+        {/* Semantic row — y=88..112 */}
+        <text x="0" y="98" opacity="0.45" fontSize="7.5">SEMANTIC MODEL</text>
+        <rect x="0" y="102" width="230" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
+        <text x="6" y="115">Power BI Dataset · 100+ measures</text>
+
+        {/* Stat row — y=128..170 */}
+        <text x="0" y="140" opacity="0.55" fontSize="8">100M+ daily records</text>
+        <text x="0" y="155" fontSize="13" fontWeight="600" fill="var(--dgrm)">−70%</text>
+        <text x="32" y="155" opacity="0.55" fontSize="8"> manual work</text>
       </g>
     </svg>
   );
