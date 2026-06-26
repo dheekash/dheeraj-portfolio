@@ -36,7 +36,6 @@ const timeline = [
   {
     period: "Mar 2020 - Jun 2024",
     role: "Risk Data Analyst",
-    roleSubtitle: "Fraud investigation â†’ self-serve seller analytics platform",
     company: "Amazon",
     location: "Bengaluru, India",
     type: "Full-time",

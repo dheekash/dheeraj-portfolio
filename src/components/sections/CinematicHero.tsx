@@ -23,7 +23,7 @@ const primaryMetrics = [
   { end: 100, suffix: "+",  label: "Reports & dashboards",         decimals: 0, icon: "📊" },
 ];
 
-const trustedBy = ["Amazon", "Microsoft", "Amplify Analytix"];
+const trustedBy = ["Amazon", "Amplify Analytix"];
 
 
 function AnimatedCounter({
