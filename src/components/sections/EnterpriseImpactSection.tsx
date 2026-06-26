@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 
@@ -6,7 +6,7 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 24 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-60px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
@@ -14,7 +14,7 @@ function reveal(delay = 0) {
 const companies = [
   {
     name: "Amplify Analytix",
-    period: "2025 – Present",
+    period: "2025 â€“ Present",
     role: "BI & Analytics Engineer",
     tagline:
       "Designing enterprise analytics platforms, Lakehouse architectures, and Power BI reporting suites for global clients across 15 countries.",
@@ -34,10 +34,10 @@ const companies = [
   },
   {
     name: "Amazon",
-    period: "2020 – 2024",
+    period: "2020 â€“ 2024",
     role: "Analytics Lead",
     tagline:
-      "Led analytics at scale across 10+ global marketplaces — forecasting, fraud investigation, and operational reporting for seller leadership.",
+      "Led analytics at scale across 10+ global marketplaces â€” forecasting, fraud investigation, and operational reporting for seller leadership.",
     metrics: [
       { value: "10+",   label: "Marketplaces covered"           },
       { value: "5M+",   label: "Records processed daily"        },
@@ -45,7 +45,7 @@ const companies = [
     ],
     achievements: [
       "Built forecasting dashboards processing 100M+ records for Amazon's global seller leadership",
-      "Led fraud investigation analytics across the seller ecosystem — reducing investigation time significantly",
+      "Led fraud investigation analytics across the seller ecosystem â€” reducing investigation time significantly",
       "Developed KPI frameworks adopted by cross-functional operations and analytics teams",
       "Reduced manual reporting effort by 70% through automated pipeline and self-serve BI adoption",
     ],
@@ -167,3 +167,4 @@ export function EnterpriseImpactSection() {
     </section>
   );
 }
+

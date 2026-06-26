@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { Database, Workflow, Layers, BarChart3, Zap, Monitor, GitBranch, Shield } from "lucide-react";
@@ -7,7 +7,7 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-50px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
@@ -35,13 +35,13 @@ const capabilities = [
     icon: BarChart3,
     title: "Semantic Models",
     description:
-      "Enterprise-grade DAX models with star schema, row-level security, field parameters, and calculation groups — built for executive consumption, not just exploration.",
+      "Enterprise-grade DAX models with star schema, row-level security, field parameters, and calculation groups â€” built for executive consumption, not just exploration.",
   },
   {
     icon: Zap,
     title: "Direct Lake Mode",
     description:
-      "Zero-copy analytics directly on OneLake parquet files — no import, no DirectQuery latency, automatic framing fallback, and V-Order optimization.",
+      "Zero-copy analytics directly on OneLake parquet files â€” no import, no DirectQuery latency, automatic framing fallback, and V-Order optimization.",
   },
   {
     icon: Monitor,
@@ -53,7 +53,7 @@ const capabilities = [
     icon: GitBranch,
     title: "Deployment Pipelines",
     description:
-      "CI/CD for Fabric artifacts across Development / Test / Production environments — with Git integration (Azure DevOps / GitHub) and automated deployment rules.",
+      "CI/CD for Fabric artifacts across Development / Test / Production environments â€” with Git integration (Azure DevOps / GitHub) and automated deployment rules.",
   },
   {
     icon: Shield,
@@ -75,7 +75,7 @@ export function FabricExpertiseSection() {
         </motion.h2>
         <motion.p {...reveal(0.08)} className="text-muted-foreground max-w-[52ch] text-sm mb-[clamp(2rem,3.5vw,3.5rem)]">
           Certified DP-600 Fabric Analytics Engineer. I have shipped production solutions across
-          every Fabric workload — from raw ingestion to governed semantic models.
+          every Fabric workload â€” from raw ingestion to governed semantic models.
         </motion.p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -108,3 +108,4 @@ export function FabricExpertiseSection() {
     </section>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 
@@ -6,7 +6,7 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 18 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-50px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
@@ -14,7 +14,7 @@ function reveal(delay = 0) {
 const clients = [
   {
     name: "Amazon",
-    period: "2020 – 2024",
+    period: "2020 â€“ 2024",
     tag: "Global E-commerce",
     summary:
       "Forecasting, fraud-investigation analytics, and operational reporting across 10+ global seller marketplaces.",
@@ -22,7 +22,7 @@ const clients = [
   },
   {
     name: "Amplify Analytix",
-    period: "2025 – Present",
+    period: "2025 â€“ Present",
     tag: "Analytics Consulting",
     summary:
       "Enterprise Lakehouse architecture, Power BI semantic models, and data platform engineering for clients across 15 countries.",
@@ -87,3 +87,4 @@ export function TrustedBySection() {
     </section>
   );
 }
+

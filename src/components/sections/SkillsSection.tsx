@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import {
@@ -12,7 +12,7 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-60px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
@@ -120,10 +120,10 @@ export function SkillsSection() {
           Technology ecosystem
         </motion.h2>
         <motion.p {...reveal(0.06)} className="text-muted-foreground text-sm leading-relaxed max-w-[52ch] mb-[clamp(2.5rem,4vw,4.5rem)]">
-          The full platform stack I architect and engineer — from ingestion through to executive-facing analytics products.
+          The full platform stack I architect and engineer â€” from ingestion through to executive-facing analytics products.
         </motion.p>
 
-        {/* Row 1: Analytics + Data Engineering — equal halves */}
+        {/* Row 1: Analytics + Data Engineering â€” equal halves */}
         <div className="grid md:grid-cols-2 gap-4 mb-4">
           {[analytics, dataEng].map((cat, i) => (
             <motion.div
@@ -180,3 +180,4 @@ export function SkillsSection() {
     </section>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -13,7 +13,7 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 16 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-60px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
@@ -130,7 +130,7 @@ function LogoTile({ name, Logo, bg, years, level }: typeof techLogos[number]) {
           }}
         >
           <p className="text-[9px] font-mono font-semibold" style={{ color: "var(--primary)" }}>
-            {years} · {level}
+            {years} Â· {level}
           </p>
         </div>
       )}
@@ -143,7 +143,7 @@ export function TechStackSection() {
     <section id="skills">
       <div className="container-page section-pad">
 
-        {/* ── Core Expertise ── */}
+        {/* â”€â”€ Core Expertise â”€â”€ */}
         <motion.h2 {...reveal()} className="mb-3">
           Core Expertise
         </motion.h2>
@@ -174,7 +174,7 @@ export function TechStackSection() {
                       background: cat.color,
                       border: "1px solid color-mix(in srgb, var(--border) 60%, transparent)",
                     }}
-                    title={`${t.years} · ${t.level}`}
+                    title={`${t.years} Â· ${t.level}`}
                   >
                     {t.Logo && <t.Logo size={11} />}
                     {t.name}
@@ -185,7 +185,7 @@ export function TechStackSection() {
           ))}
         </div>
 
-        {/* ── Technology Stack ── */}
+        {/* â”€â”€ Technology Stack â”€â”€ */}
         <motion.div {...reveal(0.28)}>
           <p className="eyebrow mb-4">Technology Stack</p>
           <div className="grid grid-cols-4 sm:grid-cols-8 gap-2.5">
@@ -199,3 +199,4 @@ export function TechStackSection() {
     </section>
   );
 }
+

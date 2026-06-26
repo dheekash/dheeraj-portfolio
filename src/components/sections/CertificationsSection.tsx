@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,7 +9,7 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-50px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
@@ -71,7 +71,7 @@ const certGroups: { category: string; color: string; certs: Cert[] }[] = [
     color: "rgba(5,150,105,0.1)",
     certs: [
       { name: "SnowPro Associate: Core", code: "SnowPro", issuer: "Snowflake",  date: "Jan 2026" },
-      // TODO: confirm cert date "May 2026" is accurate — notably more recent than surrounding certs
+      // TODO: confirm cert date "May 2026" is accurate â€” notably more recent than surrounding certs
       { name: "Data Engineer Associate", code: "DE-A",    issuer: "Databricks", date: "May 2026" },
     ],
   },
@@ -109,9 +109,9 @@ function CertCard({ cert, groupColor }: { cert: Cert; groupColor?: string }) {
         <p className="text-[12.5px] font-semibold leading-snug mb-0.5">{cert.name}</p>
         <div className="flex items-center gap-2 flex-wrap">
           <span className="font-mono text-[10px] accent-text font-semibold">{cert.code}</span>
-          <span className="text-muted-foreground/40 text-[10px]">·</span>
+          <span className="text-muted-foreground/40 text-[10px]">Â·</span>
           <span className="font-mono text-[10px] text-muted-foreground">{cert.issuer}</span>
-          <span className="text-muted-foreground/40 text-[10px]">·</span>
+          <span className="text-muted-foreground/40 text-[10px]">Â·</span>
           <span className="font-mono text-[10px] text-muted-foreground">{cert.date}</span>
         </div>
       </div>
@@ -134,7 +134,7 @@ export function CertificationsSection() {
           technology it covers. 11 Microsoft, 1 Snowflake, 1 Databricks.
         </motion.p>
 
-        {/* Featured 4 certs — always visible */}
+        {/* Featured 4 certs â€” always visible */}
         <motion.div {...reveal(0.08)}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
             {featuredCerts.map((cert) => (
@@ -215,3 +215,4 @@ export function CertificationsSection() {
     </section>
   );
 }
+

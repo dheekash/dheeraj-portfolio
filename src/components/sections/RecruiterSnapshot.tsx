@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { Award, Briefcase, Calendar, MapPin, Activity, Code2 } from "lucide-react";
@@ -7,7 +7,7 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 18 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-40px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
@@ -33,14 +33,14 @@ const cards = [
     icon: MapPin,
     label: "Location",
     value: "Bengaluru, India",
-    sub: "IST · UTC+5:30",
+    sub: "IST Â· UTC+5:30",
     accent: false,
   },
   {
     icon: Award,
     label: "Certifications",
     value: "13 Credentials",
-    sub: "11 Microsoft · 1 Snowflake · 1 Databricks",
+    sub: "11 Microsoft Â· 1 Snowflake Â· 1 Databricks",
     accent: false,
   },
   {
@@ -98,7 +98,7 @@ export function RecruiterSnapshot() {
             );
           })}
 
-          {/* Stack card — spans 1 or 2 cols on lg */}
+          {/* Stack card â€” spans 1 or 2 cols on lg */}
           <motion.div
             {...reveal(cards.length * 0.06)}
             className="panel panel-lift rounded-2xl px-5 py-4 flex items-start gap-4 sm:col-span-2 lg:col-span-1"
@@ -131,3 +131,4 @@ export function RecruiterSnapshot() {
     </section>
   );
 }
+

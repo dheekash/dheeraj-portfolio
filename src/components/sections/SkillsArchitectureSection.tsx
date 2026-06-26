@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
@@ -7,7 +7,7 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-50px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
@@ -76,8 +76,8 @@ export function SkillsArchitectureSection() {
           How I architect data systems
         </motion.h2>
         <motion.p {...reveal(0.08)} className="text-muted-foreground max-w-[52ch] text-sm mb-[clamp(2.5rem,4vw,4rem)]">
-          A layered architecture approach — from raw ingestion to boardroom dashboards. Every tool chosen
-          for production reliability, not résumé padding.
+          A layered architecture approach â€” from raw ingestion to boardroom dashboards. Every tool chosen
+          for production reliability, not rÃ©sumÃ© padding.
         </motion.p>
 
         <div className="max-w-3xl mx-auto lg:mx-0">
@@ -146,3 +146,4 @@ export function SkillsArchitectureSection() {
     </section>
   );
 }
+

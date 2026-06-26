@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 
@@ -30,13 +30,13 @@ const timeline = [
       "Azure",
       "Azure Data Factory",
     ],
-    badge: "15 countries · 20+ products · 100% client retention",
+    badge: "15 countries Â· 20+ products Â· 100% client retention",
     current: true,
   },
   {
     period: "Mar 2020 - Jun 2024",
     role: "Risk Data Analyst",
-    roleSubtitle: "Fraud investigation → self-serve seller analytics platform",
+    roleSubtitle: "Fraud investigation â†’ self-serve seller analytics platform",
     company: "Amazon",
     location: "Bengaluru, India",
     type: "Full-time",
@@ -50,7 +50,7 @@ const timeline = [
       "Replaced manual reporting with automated SQL pipelines. Cut reporting effort by 70%.",
     ],
     stack: ["Power BI", "Snowflake", "Python", "SQL", "DAX", "Random Forest", "Scikit-learn"],
-    badge: "100M+ records · 30% fraud reduction · 15-person team lead",
+    badge: "100M+ records Â· 30% fraud reduction Â· 15-person team lead",
     current: false,
   },
   {
@@ -77,7 +77,7 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 22 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-60px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
@@ -150,7 +150,7 @@ export function CareerEvolutionSection() {
                 {/* Company + meta */}
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mb-3">
                   <p className="text-sm font-medium text-muted-foreground">{item.company}</p>
-                  <span className="text-border hidden sm:inline text-xs">·</span>
+                  <span className="text-border hidden sm:inline text-xs">Â·</span>
                   <p className="text-[12px] text-muted-foreground/70 font-mono">{item.location}</p>
                 </div>
 
@@ -212,3 +212,4 @@ export function CareerEvolutionSection() {
     </section>
   );
 }
+

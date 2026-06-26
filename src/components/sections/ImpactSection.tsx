@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { useCounter } from "@/hooks/useCounter";
@@ -7,7 +7,7 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-60px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
@@ -43,7 +43,7 @@ export function ImpactSection() {
           className="rule-thick pt-4 flex items-baseline justify-between gap-6 mb-[clamp(2.5rem,4vw,4.5rem)]"
         >
           <p className="eyebrow">Impact, measured</p>
-          <p className="eyebrow hidden sm:block">2019 — present</p>
+          <p className="eyebrow hidden sm:block">2019 â€” present</p>
         </motion.div>
 
         <div className="grid lg:grid-cols-12 gap-x-[clamp(2rem,4vw,5rem)] gap-y-[clamp(2.5rem,4vw,4rem)] items-end">
@@ -53,12 +53,12 @@ export function ImpactSection() {
               <Figure to={5} suffix="M+" />
             </div>
             <p className="mt-4 max-w-[34ch] text-muted-foreground leading-relaxed">
-              Records processed daily through Lakehouse pipelines — at 99.9% reliability
+              Records processed daily through Lakehouse pipelines â€” at 99.9% reliability
               across 15 countries.
             </p>
           </motion.div>
 
-          {/* Secondary figures — ruled column */}
+          {/* Secondary figures â€” ruled column */}
           <motion.div {...reveal(0.12)} className="lg:col-span-4">
             {[
               { to: 20,  suffix: "+", l: "Analytics solutions delivered end-to-end" },
@@ -79,7 +79,7 @@ export function ImpactSection() {
             ))}
           </motion.div>
 
-          {/* Tertiary — offset */}
+          {/* Tertiary â€” offset */}
           <motion.div {...reveal(0.18)} className="lg:col-span-3">
             {[
               { to: 180, suffix: "%", l: "Reporting efficiency improvement" },
@@ -100,3 +100,4 @@ export function ImpactSection() {
     </section>
   );
 }
+

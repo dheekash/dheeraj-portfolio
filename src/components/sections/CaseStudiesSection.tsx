@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,12 +8,12 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 26 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-80px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
 
-/* ── SVG diagrams ─────────────────────────────────────────────────────────── */
+/* â”€â”€ SVG diagrams â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function DiagramReliability() {
   return (
@@ -31,7 +31,7 @@ function DiagramReliability() {
             <text x={p.x} y="140" textAnchor="middle" opacity="0.6">{p.l}</text>
           </g>
         ))}
-        <text x="0" y="158" opacity="0.5">6 SOURCE SYSTEMS → ONELAKE → POWER BI</text>
+        <text x="0" y="158" opacity="0.5">6 SOURCE SYSTEMS â†’ ONELAKE â†’ POWER BI</text>
       </g>
     </svg>
   );
@@ -49,8 +49,8 @@ function DiagramFraud() {
         <rect x="56" y="80" width="6" height="16" fill="var(--dgrm)" />
         <text x="68" y="91" fill="var(--dgrm)">&lt;5 min</text>
         <path d="M 0 112 H 348" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" strokeDasharray="2 5" />
-        <text x="0" y="130" opacity="0.5">KAFKA → DATABRICKS ML → REAL-TIME ALERT</text>
-        <text x="0" y="150" fill="var(--dgrm)">$1.2M+ flagged · first 90 days</text>
+        <text x="0" y="130" opacity="0.5">KAFKA â†’ DATABRICKS ML â†’ REAL-TIME ALERT</text>
+        <text x="0" y="150" fill="var(--dgrm)">$1.2M+ flagged Â· first 90 days</text>
       </g>
     </svg>
   );
@@ -60,7 +60,7 @@ function DiagramSales() {
   return (
     <svg viewBox="0 0 360 160" className="w-full h-auto" role="img" aria-label="Data latency reduced from 6 hours to under 10 minutes">
       <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
-        <text x="0" y="12" opacity="0.5">DATA LATENCY · 8 REGIONAL MARKETS</text>
+        <text x="0" y="12" opacity="0.5">DATA LATENCY Â· 8 REGIONAL MARKETS</text>
         <text x="0" y="54" opacity="0.65">before</text>
         <rect x="56" y="42" width="285" height="16" fill="currentColor" opacity="0.12" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1" />
         <text x="347" y="53" textAnchor="end" opacity="0.65">6 hrs</text>
@@ -68,8 +68,8 @@ function DiagramSales() {
         <rect x="56" y="80" width="8" height="16" fill="var(--dgrm)" />
         <text x="70" y="91" fill="var(--dgrm)">&lt;10 min</text>
         <path d="M 0 112 H 348" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" strokeDasharray="2 5" />
-        <text x="0" y="130" opacity="0.5">BRONZE → SILVER → GOLD · DELTA LIVE TABLES</text>
-        <text x="0" y="150" fill="var(--dgrm)">5M+ daily transactions · 95% fewer pipeline failures</text>
+        <text x="0" y="130" opacity="0.5">BRONZE â†’ SILVER â†’ GOLD Â· DELTA LIVE TABLES</text>
+        <text x="0" y="150" fill="var(--dgrm)">5M+ daily transactions Â· 95% fewer pipeline failures</text>
       </g>
     </svg>
   );
@@ -81,7 +81,7 @@ function DiagramManufacturing() {
   return (
     <svg viewBox="0 0 360 160" className="w-full h-auto" role="img" aria-label="OEE improvement across 15 markets">
       <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
-        <text x="0" y="12" opacity="0.5">OEE TREND · 200+ FACTORY-FLOOR USERS</text>
+        <text x="0" y="12" opacity="0.5">OEE TREND Â· 200+ FACTORY-FLOOR USERS</text>
         {bars.map((v, i) => {
           const h = (v / 100) * maxH;
           const x = 10 + i * 28;
@@ -96,8 +96,8 @@ function DiagramManufacturing() {
         })}
         <text x="238" y="22" fill="var(--dgrm)" fontSize="8">ADF+dbt deployed</text>
         <path d="M 230 26 L 238 22" stroke="var(--dgrm)" strokeWidth="1" />
-        <text x="0" y="115" opacity="0.5">REPORT REFRESH: 4 HRS → 15 MIN · 94% FASTER</text>
-        <text x="0" y="140" opacity="0.65">dbt SCD Type 2 · ISO compliance · 15 markets</text>
+        <text x="0" y="115" opacity="0.5">REPORT REFRESH: 4 HRS â†’ 15 MIN Â· 94% FASTER</text>
+        <text x="0" y="140" opacity="0.65">dbt SCD Type 2 Â· ISO compliance Â· 15 markets</text>
       </g>
     </svg>
   );
@@ -107,7 +107,7 @@ function DiagramSelfServe() {
   return (
     <svg viewBox="0 0 360 170" className="w-full h-auto" role="img" aria-label="Self-serve BI platform layers">
       <g fontFamily="var(--font-mono)" fontSize="8.5" fill="currentColor">
-        {/* Sources row — y=0..28 */}
+        {/* Sources row â€” y=0..28 */}
         <text x="0" y="10" opacity="0.45" fontSize="7.5">SOURCES</text>
         <rect x="0"   y="14" width="90" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
         <rect x="96"  y="14" width="90" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
@@ -119,7 +119,7 @@ function DiagramSelfServe() {
         {/* Arrow */}
         <line x1="45" y1="32" x2="45" y2="44" stroke="var(--dgrm)" strokeWidth="1" strokeDasharray="3 2" />
 
-        {/* Warehouse row — y=44..68 */}
+        {/* Warehouse row â€” y=44..68 */}
         <text x="0" y="54" opacity="0.45" fontSize="7.5">WAREHOUSE</text>
         <rect x="0" y="58" width="175" height="18" fill="none" stroke="var(--dgrm)" strokeOpacity="0.4" strokeWidth="1" rx="3" />
         <text x="6" y="71">Snowflake Gold</text>
@@ -127,14 +127,14 @@ function DiagramSelfServe() {
         {/* Arrow */}
         <line x1="45" y1="76" x2="45" y2="88" stroke="var(--dgrm)" strokeWidth="1" strokeDasharray="3 2" />
 
-        {/* Semantic row — y=88..112 */}
+        {/* Semantic row â€” y=88..112 */}
         <text x="0" y="98" opacity="0.45" fontSize="7.5">SEMANTIC MODEL</text>
         <rect x="0" y="102" width="230" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
-        <text x="6" y="115">Power BI Dataset · 100+ measures</text>
+        <text x="6" y="115">Power BI Dataset Â· 100+ measures</text>
 
-        {/* Stat row — y=128..170 */}
+        {/* Stat row â€” y=128..170 */}
         <text x="0" y="140" opacity="0.55" fontSize="8">100M+ daily records</text>
-        <text x="0" y="155" fontSize="13" fontWeight="600" fill="var(--dgrm)">−70%</text>
+        <text x="0" y="155" fontSize="13" fontWeight="600" fill="var(--dgrm)">âˆ’70%</text>
         <text x="32" y="155" opacity="0.55" fontSize="8"> manual work</text>
       </g>
     </svg>
@@ -158,16 +158,16 @@ function DiagramChurn() {
           );
         })}
         <path d="M 4 90 V 98 H 60 V 90" stroke="var(--dgrm)" strokeWidth="1.2" fill="none" />
-        <text x="4" y="112" fill="var(--dgrm)">daily outreach list · 89% recall</text>
+        <text x="4" y="112" fill="var(--dgrm)">daily outreach list Â· 89% recall</text>
         <text x="0" y="146" opacity="0.65">churn, 6 months later:</text>
-        <text x="150" y="148" fontSize="22" fontWeight="600" fill="var(--dgrm)">−18%</text>
-        <text x="230" y="146" opacity="0.5">≈ $300K retained</text>
+        <text x="150" y="148" fontSize="22" fontWeight="600" fill="var(--dgrm)">âˆ’18%</text>
+        <text x="230" y="146" opacity="0.5">â‰ˆ $300K retained</text>
       </g>
     </svg>
   );
 }
 
-/* ── Types & data ─────────────────────────────────────────────────────────── */
+/* â”€â”€ Types & data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 type Study = {
   id: string;
@@ -214,7 +214,7 @@ const studies: Study[] = [
       "100K+ transaction events per hour through the Kafka streaming pipeline",
       "Anomaly detection at 94% precision, minimising false-positive alert fatigue",
       "$1.2M+ flagged in first 90 days",
-      "Detection latency: 24 hours → under 5 minutes",
+      "Detection latency: 24 hours â†’ under 5 minutes",
       "Live Power BI dashboard with auto-refresh for real-time risk visibility",
     ],
   },
@@ -288,7 +288,7 @@ const studies: Study[] = [
   },
 ];
 
-/* ── Modal ────────────────────────────────────────────────────────────────── */
+/* â”€â”€ Modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
   return (
@@ -314,7 +314,7 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <p className="eyebrow">{study.domain}</p>
-                  <span className="text-[10px] font-mono text-muted-foreground/50">·</span>
+                  <span className="text-[10px] font-mono text-muted-foreground/50">Â·</span>
                   <p className="text-[10px] font-mono uppercase tracking-[0.15em] accent-text">{study.capability}</p>
                 </div>
                 <h3 className="text-xl font-semibold leading-tight">{study.title}</h3>
@@ -363,7 +363,7 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
   );
 }
 
-/* ── Card ─────────────────────────────────────────────────────────────────── */
+/* â”€â”€ Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
   return (
@@ -415,7 +415,7 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
   );
 }
 
-/* ── Section ──────────────────────────────────────────────────────────────── */
+/* â”€â”€ Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 export function CaseStudiesSection() {
   const [openStudy, setOpenStudy] = useState<Study | null>(null);
@@ -441,3 +441,4 @@ export function CaseStudiesSection() {
     </section>
   );
 }
+

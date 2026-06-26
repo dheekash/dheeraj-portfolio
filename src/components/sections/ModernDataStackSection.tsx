@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
@@ -7,7 +7,7 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-60px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
@@ -35,7 +35,7 @@ const layers = [
     step: "04",
     label: "Lakehouse",
     sublabel: "Medallion architecture",
-    tech: ["SQLMesh", "dbt", "PySpark", "Silver · Gold"],
+    tech: ["SQLMesh", "dbt", "PySpark", "Silver Â· Gold"],
   },
   {
     step: "05",
@@ -78,12 +78,12 @@ export function ModernDataStackSection() {
           Modern data stack
         </motion.h2>
         <motion.p {...reveal(0.07)} className="text-muted-foreground text-sm leading-relaxed max-w-[60ch] mb-[clamp(3rem,5vw,5rem)]">
-          Every platform I build follows a governed, end-to-end flow — from raw source systems
+          Every platform I build follows a governed, end-to-end flow â€” from raw source systems
           through a tested Medallion architecture to executive-ready analytics. Version-controlled,
           observable, and auditable at every stage.
         </motion.p>
 
-        {/* ── Flow diagram ── */}
+        {/* â”€â”€ Flow diagram â”€â”€ */}
         <div className="relative mb-[clamp(3rem,5vw,5rem)]">
           {/* Desktop: horizontal scroll if needed */}
           <div className="flex flex-col md:flex-row items-stretch md:items-start gap-0 md:gap-0 overflow-x-auto pb-2">
@@ -143,11 +143,11 @@ export function ModernDataStackSection() {
             {...reveal(0.55)}
             className="font-mono text-[10px] text-muted-foreground mt-3 tracking-[0.12em] uppercase"
           >
-            Source → Bronze → Silver → Gold → Semantic → Delivery
+            Source â†’ Bronze â†’ Silver â†’ Gold â†’ Semantic â†’ Delivery
           </motion.p>
         </div>
 
-        {/* ── Tech stack by category ── */}
+        {/* â”€â”€ Tech stack by category â”€â”€ */}
         <motion.div {...reveal(0.3)} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {techStack.map((cat) => (
             <div
@@ -170,3 +170,4 @@ export function ModernDataStackSection() {
     </section>
   );
 }
+

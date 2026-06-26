@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 
@@ -29,7 +29,7 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 22 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-60px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
@@ -74,3 +74,4 @@ export function ThoughtProcessSection() {
     </section>
   );
 }
+

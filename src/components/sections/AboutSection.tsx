@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, MapPin, Briefcase, Award, Globe } from "lucide-react";
@@ -14,8 +14,8 @@ const SKILLS = [
 
 const SNAPSHOT = [
   { icon: Briefcase, label: "Current Role",   value: "BI & Analytics Engineer", sub: "Amplify Analytix" },
-  { icon: Award,     label: "Certifications", value: "13 Microsoft + Platform",  sub: "PL-300 · DP-600 · AZ-104 · DP-700" },
-  { icon: Globe,     label: "Global Reach",   value: "15 Countries",             sub: "Enterprise clients · 100% retention" },
+  { icon: Award,     label: "Certifications", value: "13 Microsoft + Platform",  sub: "PL-300 Â· DP-600 Â· AZ-104 Â· DP-700" },
+  { icon: Globe,     label: "Global Reach",   value: "15 Countries",             sub: "Enterprise clients Â· 100% retention" },
   { icon: MapPin,    label: "Location",        value: "Bengaluru, India",         sub: "Open to remote & hybrid roles" },
 ];
 
@@ -23,7 +23,7 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-40px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
@@ -35,7 +35,7 @@ export function AboutSection() {
       <div className="container-page section-pad">
         <div className="grid lg:grid-cols-2 gap-x-[clamp(3rem,6vw,7rem)] gap-y-12 items-start">
 
-          {/* ── Left: heading + bio + skills ── */}
+          {/* â”€â”€ Left: heading + bio + skills â”€â”€ */}
           <div>
             <motion.h2 {...reveal()} className="mb-6">
               About me
@@ -64,7 +64,7 @@ export function AboutSection() {
             </motion.div>
           </div>
 
-          {/* ── Right: professional snapshot ── */}
+          {/* â”€â”€ Right: professional snapshot â”€â”€ */}
           <motion.div {...reveal(0.08)} className="flex flex-col gap-3">
             <p className="eyebrow mb-1">Professional Snapshot</p>
 
@@ -88,7 +88,7 @@ export function AboutSection() {
                   13
                 </p>
                 <p className="text-[13px] font-semibold text-foreground">Certifications</p>
-                <p className="text-[11px] text-muted-foreground mt-0.5">Microsoft · Snowflake · Databricks</p>
+                <p className="text-[11px] text-muted-foreground mt-0.5">Microsoft Â· Snowflake Â· Databricks</p>
               </div>
             </div>
 
@@ -121,3 +121,4 @@ export function AboutSection() {
     </section>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 
@@ -6,7 +6,7 @@ function reveal(delay = 0) {
   return {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-60px" },
+    viewport: { once: true, margin: "0px" },
     transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] as const },
   };
 }
@@ -48,7 +48,7 @@ export function TestimonialsSection() {
           What clients say
         </motion.h2>
 
-        {/* [NEEDS REAL CONTENT] placeholder notice — remove once real quotes are in */}
+        {/* [NEEDS REAL CONTENT] placeholder notice â€” remove once real quotes are in */}
         <motion.div
           {...reveal(0.06)}
           className="mb-8 px-4 py-3 rounded-xl border border-amber-400/40 bg-amber-50/50 dark:bg-amber-900/10"
@@ -83,7 +83,7 @@ export function TestimonialsSection() {
                 <div>
                   <p className="text-[13px] font-semibold leading-tight">{t.name}</p>
                   <p className="text-[11px] text-muted-foreground leading-snug">
-                    {t.role} · {t.company}
+                    {t.role} Â· {t.company}
                   </p>
                 </div>
               </footer>
@@ -94,3 +94,4 @@ export function TestimonialsSection() {
     </section>
   );
 }
+
