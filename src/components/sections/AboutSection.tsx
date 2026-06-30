@@ -7,10 +7,6 @@ import { profile } from "@/data/profile";
 const ABOUT_TEXT =
   "I started in customer support. The data told a different story than the reports, so I switched to analytics. Seven years later, I build Lakehouse platforms, semantic models, and pipelines for enterprise clients across 15 countries. My focus is simple: does the dashboard answer the question it was built to answer?";
 
-const SKILLS = [
-  "Power BI", "SQL", "Python", "Microsoft Fabric",
-  "Azure", "Data Modeling", "DAX", "ETL", "Snowflake", "dbt",
-];
 
 const SNAPSHOT = [
   { icon: Briefcase, label: "Current Role",   value: "BI & Analytics Engineer", sub: "Amplify Analytix" },
@@ -45,14 +41,6 @@ export function AboutSection() {
               {ABOUT_TEXT}
             </p>
 
-            {/* Skill pills */}
-            <motion.div {...reveal(0.1)} className="flex flex-wrap gap-2 mb-8">
-              {SKILLS.map((skill) => (
-                <span key={skill} className="px-3 py-1 rounded-full text-[12px] font-medium panel">
-                  {skill}
-                </span>
-              ))}
-            </motion.div>
 
             <motion.div {...reveal(0.18)}>
               <a
@@ -68,29 +56,6 @@ export function AboutSection() {
           <motion.div {...reveal(0.08)} className="flex flex-col gap-3">
             <p className="eyebrow mb-1">Professional Snapshot</p>
 
-            {/* Stat row: years + certs */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="panel rounded-2xl p-5">
-                <p
-                  className="font-mono font-bold leading-none tabular-nums mb-1"
-                  style={{ fontSize: "clamp(2.4rem,3.5vw,3.2rem)", color: "var(--primary)" }}
-                >
-                  7+
-                </p>
-                <p className="text-[13px] font-semibold text-foreground">Years Experience</p>
-                <p className="text-[11px] text-muted-foreground mt-0.5">Analytics & BI engineering</p>
-              </div>
-              <div className="panel rounded-2xl p-5">
-                <p
-                  className="font-mono font-bold leading-none tabular-nums mb-1"
-                  style={{ fontSize: "clamp(2.4rem,3.5vw,3.2rem)", color: "var(--primary)" }}
-                >
-                  13
-                </p>
-                <p className="text-[13px] font-semibold text-foreground">Certifications</p>
-                <p className="text-[11px] text-muted-foreground mt-0.5">Microsoft · Snowflake · Databricks</p>
-              </div>
-            </div>
 
             {/* Snapshot rows */}
             {SNAPSHOT.map((item, i) => {

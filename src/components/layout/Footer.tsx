@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Check, Download, Mail } from "lucide-react";
+import { ArrowUpRight, Check, Mail } from "lucide-react";
 import { LinkedinIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
 
@@ -58,14 +58,6 @@ export function Footer() {
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full panel text-sm font-medium hover:border-primary/30 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
               >
                 <LinkedinIcon size={14} /> LinkedIn <ArrowUpRight size={12} />
-              </a>
-              <a
-                href={profile.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full panel text-sm font-medium hover:border-primary/30 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-              >
-                <Download size={14} /> Resume
               </a>
             </div>
           </motion.div>

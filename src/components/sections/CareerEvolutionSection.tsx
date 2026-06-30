@@ -19,18 +19,6 @@ const timeline = [
       "Shortened dashboard delivery by 40%, from stakeholder brief to published report.",
       "Delivered 20+ data products for 200+ enterprise users across 15 countries. 100% client retention.",
     ],
-    stack: [
-      "Microsoft Fabric",
-      "Power BI",
-      "Databricks",
-      "Snowflake",
-      "dbt",
-      "SQLMesh",
-      "PySpark",
-      "Azure",
-      "Azure Data Factory",
-    ],
-    badge: "15 countries · 20+ products · 100% client retention",
     current: true,
   },
   {
@@ -48,8 +36,6 @@ const timeline = [
       "Delivered predictive analytics in Python and Snowflake. Surfaced $500K+ in revenue opportunities.",
       "Replaced manual reporting with automated SQL pipelines. Cut reporting effort by 70%.",
     ],
-    stack: ["Power BI", "Snowflake", "Python", "SQL", "DAX", "Random Forest", "Scikit-learn"],
-    badge: "100M+ records · 30% fraud reduction · 15-person team lead",
     current: false,
   },
   {
@@ -66,8 +52,6 @@ const timeline = [
       "Achieved 94% Contact Resolution Rate. Site benchmark was 82%.",
       "Spotted recurring escalation patterns through trend analysis. Findings fed into team coaching.",
     ],
-    stack: ["Excel", "SQL Basics", "Data Analysis"],
-    badge: null,
     current: false,
   },
 ];
@@ -170,35 +154,7 @@ export function CareerEvolutionSection() {
                   ))}
                 </ul>
 
-                {/* Stack chips */}
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                  {item.stack.map((t) => (
-                    <span
-                      key={t}
-                      className="text-[11.5px] font-mono text-muted-foreground px-2 py-0.5 rounded"
-                      style={{
-                        background: "color-mix(in srgb, var(--primary) 6%, var(--card))",
-                        border: "1px solid var(--border)",
-                      }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
 
-                {/* Impact badge */}
-                {item.badge && (
-                  <p
-                    className="inline-block font-mono text-[10.5px] px-2.5 py-1 rounded-md"
-                    style={{
-                      background: "color-mix(in srgb, var(--primary) 8%, var(--card))",
-                      color: "var(--primary)",
-                      border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)",
-                    }}
-                  >
-                    {item.badge}
-                  </p>
-                )}
               </div>
             </motion.div>
           ))}

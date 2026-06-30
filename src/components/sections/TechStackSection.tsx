@@ -1,6 +1,5 @@
 ﻿"use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   PythonLogo, SQLLogo, DbtLogo, SparkLogo,
@@ -110,22 +109,6 @@ const categories: { title: string; color: string; tools: Tool[] }[] = [
   },
 ];
 
-const techLogos: {
-  name: string;
-  Logo: (props: { size?: number }) => React.ReactElement;
-  bg: string;
-  years: string;
-  level: string;
-}[] = [
-  { name: "Power BI",   Logo: PowerBILogo,    bg: "rgba(242,200,17,0.12)",  years: "6 yrs", level: "Expert"   },
-  { name: "Fabric",     Logo: FabricLogo,     bg: "rgba(0,120,212,0.10)",   years: "2 yrs", level: "Advanced" },
-  { name: "Azure",      Logo: AzureLogo,      bg: "rgba(0,120,212,0.10)",   years: "4 yrs", level: "Advanced" },
-  { name: "Snowflake",  Logo: SnowflakeLogo,  bg: "rgba(41,181,232,0.12)",  years: "3 yrs", level: "Advanced" },
-  { name: "Python",     Logo: PythonLogo,     bg: "rgba(55,118,171,0.12)",  years: "5 yrs", level: "Advanced" },
-  { name: "Databricks", Logo: DatabricksLogo, bg: "rgba(255,54,33,0.08)",   years: "2 yrs", level: "Advanced" },
-  { name: "SQL",        Logo: SQLLogo,        bg: "rgba(59,130,246,0.10)",  years: "7 yrs", level: "Expert"   },
-  { name: "dbt",        Logo: DbtLogo,        bg: "rgba(255,105,75,0.10)",  years: "2 yrs", level: "Advanced" },
-];
 
 const platformGuide = [
   {
@@ -181,42 +164,6 @@ const platformGuide = [
   },
 ];
 
-function LogoTile({ name, Logo, bg, years, level }: typeof techLogos[number]) {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="panel rounded-xl p-3 flex flex-col items-center gap-1.5 cursor-default transition-all duration-300 hover:-translate-y-1 hover:shadow-md relative overflow-hidden"
-      style={{
-        borderColor: hovered ? "color-mix(in srgb, var(--primary) 35%, var(--border))" : undefined,
-      }}
-    >
-      <div
-        className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-300"
-        style={{ background: bg, transform: hovered ? "rotate(6deg) scale(1.1)" : "none" }}
-      >
-        <Logo size={18} />
-      </div>
-      <span className="text-[10px] text-muted-foreground text-center leading-tight font-medium">
-        {name}
-      </span>
-      {hovered && (
-        <div
-          className="absolute inset-x-0 bottom-0 py-1.5 text-center"
-          style={{
-            background: "color-mix(in srgb, var(--primary) 8%, var(--card))",
-            borderTop: "1px solid color-mix(in srgb, var(--primary) 18%, transparent)",
-          }}
-        >
-          <p className="text-[9px] font-mono font-semibold" style={{ color: "var(--primary)" }}>
-            {years} · {level}
-          </p>
-        </div>
-      )}
-    </div>
-  );
-}
 
 export function TechStackSection() {
   return (
@@ -265,18 +212,8 @@ export function TechStackSection() {
           ))}
         </div>
 
-        {/* â"€â"€ Technology Stack â"€â"€ */}
-        <motion.div {...reveal(0.28)} className="mb-[clamp(2.5rem,4vw,4rem)]">
-          <p className="text-[13px] font-semibold text-foreground mb-4">Technology Stack</p>
-          <div className="grid grid-cols-4 sm:grid-cols-8 gap-2.5">
-            {techLogos.map((t) => (
-              <LogoTile key={t.name} {...t} />
-            ))}
-          </div>
-        </motion.div>
-
-        {/* â"€â"€ Platform Decision Guide â"€â"€ */}
-        <motion.div {...reveal(0.34)}>
+        {/* ── Platform Decision Guide ── */}
+        <motion.div {...reveal(0.28)}>
           <p className="text-[13px] font-semibold text-foreground mb-4">Platform Decision Guide</p>
           <p className="text-muted-foreground text-sm mb-5 max-w-[52ch]">
             How I choose between Fabric, Databricks, and Snowflake based on project constraints.
