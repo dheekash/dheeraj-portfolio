@@ -38,7 +38,6 @@ const categories: { title: string; color: string; tools: Tool[] }[] = [
       { name: "Paginated Reports",                        years: "3 yrs", level: "Advanced"  },
       { name: "KPI Modeling",                             years: "5 yrs", level: "Expert"    },
       { name: "Report Design",                            years: "6 yrs", level: "Expert"    },
-      { name: "Storytelling with Data",                   years: "5 yrs", level: "Advanced"  },
     ],
   },
   {
@@ -53,10 +52,7 @@ const categories: { title: string; color: string; tools: Tool[] }[] = [
       { name: "SQLMesh",                        years: "1 yr",  level: "Proficient"},
       { name: "Delta Lake",                     years: "2 yrs", level: "Advanced"  },
       { name: "Apache Kafka",                   years: "2 yrs", level: "Proficient"},
-      { name: "Data Quality",                   years: "4 yrs", level: "Advanced"  },
       { name: "Incremental Load",               years: "4 yrs", level: "Expert"    },
-      { name: "MLflow",                         years: "2 yrs", level: "Proficient"},
-      { name: "Scikit-learn",                   years: "3 yrs", level: "Proficient"},
     ],
   },
   {
@@ -84,8 +80,6 @@ const categories: { title: string; color: string; tools: Tool[] }[] = [
       { name: "Data Modeling",           years: "6 yrs", level: "Expert"   },
       { name: "SCD Type 2",             years: "3 yrs", level: "Advanced" },
       { name: "Data Governance",         years: "3 yrs", level: "Advanced" },
-      { name: "Row-Level Security",      years: "4 yrs", level: "Expert"   },
-      { name: "Data Lineage",            years: "2 yrs", level: "Advanced" },
     ],
   },
   {
@@ -111,8 +105,7 @@ const categories: { title: string; color: string; tools: Tool[] }[] = [
       { name: "Client Presentations",     years: "5 yrs", level: "Advanced"  },
       { name: "Agile / Scrum",            years: "4 yrs", level: "Advanced"  },
       { name: "Project Planning",         years: "4 yrs", level: "Advanced"  },
-      { name: "Mentoring",                years: "3 yrs", level: "Advanced"  },
-      { name: "Technical Documentation",  years: "5 yrs", level: "Advanced"  },
+
     ],
   },
 ];
@@ -274,7 +267,7 @@ export function TechStackSection() {
 
         {/* â"€â"€ Technology Stack â"€â"€ */}
         <motion.div {...reveal(0.28)} className="mb-[clamp(2.5rem,4vw,4rem)]">
-          <p className="eyebrow mb-4">Technology Stack</p>
+          <p className="text-[13px] font-semibold text-foreground mb-4">Technology Stack</p>
           <div className="grid grid-cols-4 sm:grid-cols-8 gap-2.5">
             {techLogos.map((t) => (
               <LogoTile key={t.name} {...t} />
@@ -284,7 +277,7 @@ export function TechStackSection() {
 
         {/* â"€â"€ Platform Decision Guide â"€â"€ */}
         <motion.div {...reveal(0.34)}>
-          <p className="eyebrow mb-4">Platform Decision Guide</p>
+          <p className="text-[13px] font-semibold text-foreground mb-4">Platform Decision Guide</p>
           <p className="text-muted-foreground text-sm mb-5 max-w-[52ch]">
             How I choose between Fabric, Databricks, and Snowflake based on project constraints.
           </p>

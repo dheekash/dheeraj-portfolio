@@ -14,7 +14,7 @@ const SKILLS = [
 
 const SNAPSHOT = [
   { icon: Briefcase, label: "Current Role",   value: "BI & Analytics Engineer", sub: "Amplify Analytix" },
-  { icon: Award,     label: "Certifications", value: "13 Microsoft + Platform",  sub: "PL-300 · DP-600 · AZ-104 · DP-700" },
+  { icon: Award,     label: "Certifications", value: "13 Microsoft + Platform",  sub: "PL-300 · DP-600 · DP-700 · DE-A" },
   { icon: Globe,     label: "Global Reach",   value: "15 Countries",             sub: "Enterprise clients · 100% retention" },
   { icon: MapPin,    label: "Location",        value: "Bengaluru, India",         sub: "Open to remote & hybrid roles" },
 ];

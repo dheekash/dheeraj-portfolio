@@ -111,13 +111,11 @@ export function LiveMetricsSection() {
   return (
     <section id="metrics">
       <div className="container-page section-pad">
-        <motion.p {...reveal()} className="eyebrow mb-4">
-          Numbers from production
-        </motion.p>
-        <motion.h2 {...reveal(0.05)} className="max-w-[20ch] mb-3">
+
+        <motion.h2 {...reveal()} className="max-w-[20ch] mb-3">
           Real project impact
         </motion.h2>
-        <motion.p {...reveal(0.08)} className="text-muted-foreground text-sm max-w-[52ch] mb-[clamp(2rem,3.5vw,3.5rem)]">
+        <motion.p {...reveal(0.05)} className="text-muted-foreground text-sm max-w-[52ch] mb-[clamp(2rem,3.5vw,3.5rem)]">
           Metrics pulled from delivered solutions. Every number is from a system in production.
         </motion.p>
 

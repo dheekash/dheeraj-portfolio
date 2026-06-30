@@ -1,29 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence, motionValue, animate, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Mail } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { motion, motionValue, animate, useReducedMotion } from "framer-motion";
+import { ArrowRight, ArrowUpRight, Clock, Award, Building2, BarChart3 } from "lucide-react";
 import { MagneticButton } from "@/components/common/MagneticButton";
 import { profile } from "@/data/profile";
 
 const VIDEO_SRC =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4";
 
-const headlines = [
-  "Building enterprise analytics platforms that power decisions at scale.",
-  "Architecting Microsoft Fabric Lakehouses and Power BI semantic models.",
-  "Turning raw data estates into governed analytics products teams trust.",
-  "Designing data infrastructure that CFOs stake business decisions on.",
-];
-
 const primaryMetrics = [
-  { end: 7,   suffix: "+",  label: "Years experience",            decimals: 0, icon: "⏱" },
-  { end: 13,  suffix: "",   label: "Microsoft credentials earned", decimals: 0, icon: "🏅" },
-  { end: 20,  suffix: "+",  label: "Enterprise solutions",         decimals: 0, icon: "🏢" },
-  { end: 100, suffix: "+",  label: "Reports & dashboards",         decimals: 0, icon: "📊" },
+  { end: 7,   suffix: "+",  label: "Years experience",       decimals: 0, Icon: Clock     },
+  { end: 13,  suffix: "",   label: "Microsoft credentials",  decimals: 0, Icon: Award     },
+  { end: 20,  suffix: "+",  label: "Enterprise solutions",   decimals: 0, Icon: Building2 },
+  { end: 100, suffix: "+",  label: "Reports & dashboards",   decimals: 0, Icon: BarChart3 },
 ];
-
-const trustedBy = ["Amazon", "Amplify Analytix"];
 
 
 function AnimatedCounter({
@@ -67,14 +58,7 @@ function fadeUp(delay = 0) {
 }
 
 export function CinematicHero() {
-  const [idx, setIdx] = useState(0);
   const prefersReduced = useReducedMotion();
-
-  useEffect(() => {
-    if (prefersReduced) return;
-    const t = setInterval(() => setIdx((i) => (i + 1) % headlines.length), 5500);
-    return () => clearInterval(t);
-  }, [prefersReduced]);
 
   return (
     <section id="top" className="dark relative overflow-hidden min-h-[min(48rem,96svh)] flex items-center">
@@ -116,39 +100,28 @@ export function CinematicHero() {
           {/* Left: headline + subtext + CTAs */}
           <div className="max-w-[58ch]">
 
-            {/* Availability badge */}
-            <motion.div {...fadeUp(0)} className="inline-flex items-center gap-2 mb-[clamp(1rem,1.5vw,1.5rem)]">
+            {/* Name + live status */}
+            <motion.div {...fadeUp(0)} className="flex items-center gap-2.5 mb-[clamp(1rem,1.5vw,1.5rem)]">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
-              <span className="text-[12px] font-medium text-emerald-300 tracking-[0.02em]">
-                Microsoft Certified · Available for Hire
+              <span className="text-[13px] font-medium text-white/65 tracking-[0.01em]">
+                Dheeraj Kashyap · BI & Analytics Engineer · Available for hire
               </span>
             </motion.div>
 
-            {/* Rotating headline */}
-            <div
-              className="relative mb-[clamp(1.25rem,1.8vw,2rem)]"
-              style={{ minHeight: "clamp(4.8rem, 1rem + 9vw, 11rem)" }}
+            {/* Single clear headline — static for clarity (Hick's Law) */}
+            <motion.h1
+              {...fadeUp(0.08)}
+              className="max-w-[22ch] text-white mb-[clamp(1.25rem,1.8vw,2rem)]"
+              style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 700,
+                fontSize: "clamp(2.2rem, 1rem + 3.4vw, 4.8rem)",
+                lineHeight: 1.0,
+                letterSpacing: "-0.03em",
+              }}
             >
-              <AnimatePresence mode="wait">
-                <motion.h1
-                  key={idx}
-                  initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -18, filter: "blur(8px)" }}
-                  transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-                  className="max-w-[24ch] text-white"
-                  style={{
-                    fontFamily: "var(--font-display, 'Instrument Serif', serif)",
-                    fontWeight: 400,
-                    fontSize: "clamp(2.1rem, 1rem + 3.4vw, 4.8rem)",
-                    lineHeight: 1.0,
-                    letterSpacing: "-0.03em",
-                  }}
-                >
-                  {headlines[idx]}
-                </motion.h1>
-              </AnimatePresence>
-            </div>
+              Building analytics platforms that power enterprise decisions.
+            </motion.h1>
 
             {/* Subtext */}
             <motion.p
@@ -163,6 +136,7 @@ export function CinematicHero() {
             </motion.p>
 
             {/* CTAs */}
+            {/* 2 CTAs — primary + secondary (Hick's Law: clear single choice) */}
             <motion.div {...fadeUp(0.22)} className="flex flex-wrap items-center gap-3">
               <MagneticButton
                 href="#case-studies"
@@ -180,31 +154,6 @@ export function CinematicHero() {
               >
                 Download Resume <ArrowUpRight size={14} />
               </a>
-
-              <a
-                href={`mailto:${profile.email}`}
-                className="inline-flex items-center gap-1.5 px-[clamp(1rem,1.5vw,1.25rem)] py-3.5 rounded-full border border-white/15 text-[15px] font-medium text-white/70 hover:text-white hover:border-white/35 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-              >
-                <Mail size={14} />
-                Contact
-              </a>
-            </motion.div>
-
-            {/* Trust strip */}
-            <motion.div {...fadeUp(0.32)} className="mt-[clamp(1.75rem,2.5vw,2.5rem)]">
-              <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-white/35 mb-3">
-                Worked with
-              </p>
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-                {trustedBy.map((name) => (
-                  <span
-                    key={name}
-                    className="text-[13px] font-semibold text-white/50 tracking-tight hover:text-white/75 transition-colors"
-                  >
-                    {name}
-                  </span>
-                ))}
-              </div>
             </motion.div>
           </div>
 
@@ -225,7 +174,7 @@ export function CinematicHero() {
                   backdropFilter: "blur(8px)",
                 }}
               >
-                <span className="text-lg leading-none">{m.icon}</span>
+                <m.Icon size={14} style={{ color: "rgba(255,255,255,0.5)" }} />
                 <p
                   className="font-mono tabular-nums font-bold leading-none tracking-tight text-white"
                   style={{ fontSize: "clamp(1.8rem, 1rem + 1.8vw, 2.8rem)" }}
@@ -256,7 +205,7 @@ export function CinematicHero() {
               className="rounded-xl px-3 py-3"
               style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)" }}
             >
-              <span className="text-base mb-1 block">{m.icon}</span>
+              <m.Icon size={12} style={{ color: "rgba(255,255,255,0.45)", marginBottom: "0.25rem" }} />
               <p className="font-mono tabular-nums font-bold text-[clamp(1.4rem,1rem+2vw,2rem)] leading-none text-white">
                 <AnimatedCounter end={m.end} suffix={m.suffix} delay={0.3 + i * 0.1} decimals={m.decimals} />
               </p>

@@ -175,15 +175,15 @@ export function FabricExpertiseSection() {
 
         {/* Architecture diagram */}
         <motion.div {...reveal(0.1)} className="mb-[clamp(2.5rem,4vw,4rem)]">
-          <p className="eyebrow mb-4">Platform Architecture</p>
+          <p className="text-[13px] font-semibold text-foreground mb-4">Platform Architecture</p>
           <div className="panel rounded-2xl p-[clamp(1.25rem,2vw,2rem)]">
             <ArchDiagram />
           </div>
         </motion.div>
 
         {/* Capability cards */}
-        <motion.p {...reveal(0.12)} className="eyebrow mb-4">Workload Coverage</motion.p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-[clamp(2.5rem,4vw,4rem)]">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 mb-[clamp(2.5rem,4vw,4rem)]">
           {capabilities.map((cap, i) => {
             const Icon = cap.icon;
             return (
@@ -209,7 +209,7 @@ export function FabricExpertiseSection() {
 
         {/* Governance & data quality callout */}
         <motion.div {...reveal(0.18)}>
-          <p className="eyebrow mb-4">Governance & Data Quality</p>
+          <p className="text-[13px] font-semibold text-foreground mb-4">Governance & Data Quality</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {govItems.map((item, i) => (
               <motion.div
