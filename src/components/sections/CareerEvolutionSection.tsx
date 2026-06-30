@@ -41,7 +41,11 @@ const timeline = [
     type: "Full-time",
     summary:
       "Started at an Amazon-operated BPO. Built Excel dashboards to track team KPIs, cut average handling time by 31%, and pushed contact resolution to 94% against an 82% site benchmark.",
-    highlights: [],
+    highlights: [
+      "Built Excel dashboards tracking KPIs for 20+ associates. Adopted across the floor within one quarter.",
+      "Reduced Average Handling Time by 31% through process changes and structured call flows.",
+      "Achieved 94% Contact Resolution Rate against an 82% site benchmark.",
+    ],
     current: false,
   },
 ];

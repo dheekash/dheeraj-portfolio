@@ -15,9 +15,9 @@ export default function HomePage() {
       <div className="section-alt">
         <TechStackSection />
       </div>
-      <CaseStudiesSection />
+      <FabricExpertiseSection />
       <div className="section-alt">
-        <FabricExpertiseSection />
+        <CaseStudiesSection />
       </div>
       <LiveMetricsSection />
       <div className="section-alt">

@@ -76,18 +76,7 @@ export function CinematicHero() {
             Building analytics platforms that power enterprise decisions.
           </motion.h1>
 
-          <motion.p
-            {...fadeUp(0.12)}
-            className="text-[clamp(0.9rem,0.85rem+0.3vw,1.05rem)] leading-relaxed text-white/75 mb-[clamp(1.75rem,2.2vw,2.5rem)] max-w-[46ch]"
-          >
-            I build analytics platforms people use.{" "}
-            Lakehouses, semantic models, pipelines.{" "}
-            Seven years in, 13 Microsoft certifications, and still the person asking:{" "}
-            <em>&ldquo;What decision does this dashboard help you make?&rdquo;</em>{" "}
-            <span className="text-white/90 font-medium">Open to BI and Analytics Engineering roles.</span>
-          </motion.p>
-
-          <motion.div {...fadeUp(0.22)} className="flex flex-wrap items-center gap-3">
+          <motion.div {...fadeUp(0.16)} className="flex flex-wrap items-center gap-3">
             <MagneticButton
               href="#case-studies"
               className="items-center gap-2 px-[clamp(1.5rem,2.2vw,2rem)] py-3.5 rounded-full bg-primary text-primary-foreground text-[15px] font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"

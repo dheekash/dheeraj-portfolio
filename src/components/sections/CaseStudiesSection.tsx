@@ -556,7 +556,7 @@ export function CaseStudiesSection() {
         </motion.h2>
 
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {studies.map((study) => (
+          {studies.slice(0, 3).map((study) => (
             <StudyCard key={study.id} study={study} onOpen={() => setOpenStudy(study)} />
           ))}
         </div>
