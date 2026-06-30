@@ -531,14 +531,6 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
           <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-1">Outcome</p>
           <p className="text-sm leading-relaxed font-medium">{study.outcome}</p>
         </div>
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {study.stack.map((t) => (
-            <span key={t} className="px-2.5 py-1 rounded-md text-[11px] font-medium text-muted-foreground"
-              style={{ background: "color-mix(in srgb, var(--primary) 7%, var(--card))", border: "1px solid var(--border)" }}>
-              {t}
-            </span>
-          ))}
-        </div>
         <button
           onClick={onOpen}
           className="self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"

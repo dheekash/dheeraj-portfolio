@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Menu, X, Download } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
@@ -128,20 +128,6 @@ export function Navbar() {
           >
             <LinkedinIcon size={14} /> LinkedIn
           </a>
-          <a
-            href={profile.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-border text-[13px] font-medium text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-          >
-            <Download size={12} /> Resume
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-primary-foreground text-[13px] font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-          >
-            Hire me <ArrowUpRight size={13} />
-          </a>
         </div>
 
         <div className="lg:hidden flex items-center gap-1.5">
@@ -177,21 +163,6 @@ export function Navbar() {
               </li>
             ))}
             <li className="flex flex-wrap items-center gap-4 pt-2 border-t border-border mt-1">
-              <a
-                href="#contact"
-                onClick={() => setOpen(false)}
-                className="flex items-center gap-1.5 min-h-12 text-[15px] font-semibold accent-text"
-              >
-                Hire me <ArrowUpRight size={14} />
-              </a>
-              <a
-                href={profile.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 min-h-12 text-[15px] font-medium text-muted-foreground"
-              >
-                <Download size={14} /> Resume
-              </a>
               <a
                 href={profile.linkedinUrl}
                 target="_blank"

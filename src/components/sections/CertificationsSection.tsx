@@ -1,8 +1,6 @@
-﻿"use client";
+"use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
+import { motion } from "framer-motion";
 import { MicrosoftLogo, DatabricksLogo, SnowflakeLogo } from "@/components/common/TechLogos";
 
 function reveal(delay = 0) {
@@ -71,13 +69,12 @@ const certGroups: { category: string; color: string; certs: Cert[] }[] = [
     color: "rgba(5,150,105,0.1)",
     certs: [
       { name: "SnowPro Associate: Core", code: "SnowPro", issuer: "Snowflake",  date: "Jan 2026" },
-      // TODO: confirm cert date "May 2026" is accurate â€” notably more recent than surrounding certs
       { name: "Data Engineer Associate", code: "DE-A",    issuer: "Databricks", date: "May 2026" },
     ],
   },
 ];
 
-const FEATURED_CODES = ["PL-300", "DP-600", "DP-700", "DE-A"];
+const FEATURED_CODES = ["PL-300", "DP-600", "DP-700", "DE-A", "SnowPro"];
 
 const featuredCerts: (Cert & { groupColor: string })[] = certGroups.flatMap((g) =>
   g.certs
@@ -120,7 +117,6 @@ function CertCard({ cert, groupColor }: { cert: Cert; groupColor?: string }) {
 }
 
 export function CertificationsSection() {
-  const [showAll, setShowAll] = useState(false);
   const totalCount = certGroups.reduce((s, g) => s + g.certs.length, 0);
 
   return (
@@ -134,85 +130,14 @@ export function CertificationsSection() {
           technology it covers. 11 Microsoft, 1 Snowflake, 1 Databricks.
         </motion.p>
 
-        {/* Featured 4 certs â€” always visible */}
         <motion.div {...reveal(0.08)}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
             {featuredCerts.map((cert) => (
               <CertCard key={cert.code} cert={cert} groupColor={cert.groupColor} />
             ))}
           </div>
         </motion.div>
-
-        {/* Expanded: full grouped view */}
-        <AnimatePresence>
-          {showAll && (
-            <motion.div
-              key="all-certs"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="overflow-hidden"
-            >
-              <div className="flex flex-col gap-[clamp(1.25rem,2vw,2rem)] pt-2 pb-4">
-                {certGroups.map((group) => {
-                  const nonFeatured = group.certs.filter((c) => !FEATURED_CODES.includes(c.code));
-                  if (nonFeatured.length === 0) return null;
-                  return (
-                    <div key={group.category}>
-                      <div className="flex items-center gap-3 mb-3">
-                        <span
-                          className="px-3 py-1 rounded-full text-[11px] font-semibold font-mono uppercase tracking-[0.1em]"
-                          style={{ background: group.color, color: "var(--foreground)" }}
-                        >
-                          {group.category}
-                        </span>
-                        <span className="text-[11px] text-muted-foreground">
-                          {nonFeatured.length} additional
-                        </span>
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                        {nonFeatured.map((cert) => (
-                          <CertCard key={cert.code} cert={cert} />
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Expand / collapse toggle */}
-        <motion.div {...reveal(0.15)} className="flex items-center gap-4 mt-2">
-          <button
-            onClick={() => setShowAll((v) => !v)}
-            className="inline-flex items-center gap-1.5 text-[13px] font-medium text-muted-foreground hover:text-primary transition-colors"
-          >
-            {showAll ? (
-              <>
-                Show less <ChevronUp size={14} />
-              </>
-            ) : (
-              <>
-                View all {totalCount} certifications <ChevronDown size={14} />
-              </>
-            )}
-          </button>
-
-          <a
-            href="https://learn.microsoft.com/en-us/users/dheerajkashyap/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[13px] text-muted-foreground hover:text-primary transition-colors"
-          >
-            <ExternalLink size={13} />
-            Verify on Microsoft Learn
-          </a>
-        </motion.div>
       </div>
     </section>
   );
 }
-

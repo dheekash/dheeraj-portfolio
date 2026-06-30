@@ -14,10 +14,7 @@ const timeline = [
     highlights: [
       "Architected Microsoft Fabric Lakehouse with Medallion architecture across 6 source systems. Cut 15+ hrs/week of manual work.",
       "Migrated legacy SQL warehouse to SQLMesh. Pipeline failures dropped from 12% to under 1%.",
-      "Boosted pipeline throughput 25% through parallelisation and incremental load patterns.",
-      "Reduced cloud compute costs 15% through Fabric capacity scheduling and query tuning.",
       "Shortened dashboard delivery by 40%, from stakeholder brief to published report.",
-      "Delivered 20+ data products for 200+ enterprise users across 15 countries. 100% client retention.",
     ],
     current: true,
   },
@@ -33,8 +30,6 @@ const timeline = [
       "Built and deployed Random Forest and Logistic Regression fraud models. Reduced fraud incidence 30%.",
       "Led a 15-person analyst team. Cut average case resolution time from 65 min to 30 min per case.",
       "Built Power BI dashboards processing 100M+ daily records. Adopted by sales leadership globally.",
-      "Delivered predictive analytics in Python and Snowflake. Surfaced $500K+ in revenue opportunities.",
-      "Replaced manual reporting with automated SQL pipelines. Cut reporting effort by 70%.",
     ],
     current: false,
   },
@@ -46,12 +41,7 @@ const timeline = [
     type: "Full-time",
     summary:
       "Started at an Amazon-operated BPO. Built Excel dashboards to track team KPIs, cut average handling time by 31%, and pushed contact resolution to 94% against an 82% site benchmark.",
-    highlights: [
-      "Built Excel dashboards tracking KPIs for 20+ associates. Adopted across the floor within one quarter.",
-      "Reduced Average Handling Time by 31% through process changes and structured call flows.",
-      "Achieved 94% Contact Resolution Rate. Site benchmark was 82%.",
-      "Spotted recurring escalation patterns through trend analysis. Findings fed into team coaching.",
-    ],
+    highlights: [],
     current: false,
   },
 ];
@@ -139,20 +129,22 @@ export function CareerEvolutionSection() {
                 </p>
 
                 {/* Highlights */}
-                <ul className="space-y-2 mb-4">
-                  {item.highlights.map((h) => (
-                    <li
-                      key={h}
-                      className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed"
-                    >
-                      <span
-                        className="w-1 h-1 rounded-full flex-shrink-0 mt-[0.45rem]"
-                        style={{ background: "var(--primary)" }}
-                      />
-                      {h}
-                    </li>
-                  ))}
-                </ul>
+                {item.highlights.length > 0 && (
+                  <ul className="space-y-2 mb-4">
+                    {item.highlights.map((h) => (
+                      <li
+                        key={h}
+                        className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed"
+                      >
+                        <span
+                          className="w-1 h-1 rounded-full flex-shrink-0 mt-[0.45rem]"
+                          style={{ background: "var(--primary)" }}
+                        />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                )}
 
 
               </div>
