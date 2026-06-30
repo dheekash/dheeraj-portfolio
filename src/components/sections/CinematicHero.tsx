@@ -8,6 +8,20 @@ import { profile } from "@/data/profile";
 const VIDEO_SRC =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4";
 
+const credentials = [
+  "11× Microsoft Certified",
+  "DP-600 Fabric Engineer",
+  "Power BI Expert",
+  "6+ Years",
+];
+
+const stats = [
+  { value: "40+",  label: "dashboards" },
+  { value: "13",   label: "certifications" },
+  { value: "3",    label: "companies" },
+  { value: "15",   label: "countries" },
+];
+
 function fadeUp(delay = 0) {
   return {
     initial: { opacity: 0, y: 28, filter: "blur(4px)" },
@@ -37,7 +51,7 @@ export function CinematicHero() {
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(108deg, rgba(7,15,28,0.88) 0%, rgba(7,15,28,0.65) 52%, rgba(7,15,28,0.45) 100%)",
+            "linear-gradient(108deg, rgba(7,15,28,0.90) 0%, rgba(7,15,28,0.70) 52%, rgba(7,15,28,0.50) 100%)",
         }}
       />
 
@@ -52,9 +66,9 @@ export function CinematicHero() {
       />
 
       <div className="container-page relative z-10 py-[clamp(4.5rem,2.5rem+5vw,8rem)] w-full">
-        <div className="max-w-[58ch]">
+        <div className="max-w-[62ch]">
 
-          {/* Name + live status */}
+          {/* 1 — Status strip */}
           <motion.div {...fadeUp(0)} className="flex items-center gap-2.5 mb-[clamp(1rem,1.5vw,1.5rem)]">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
             <span className="text-[13px] font-medium text-white/65 tracking-[0.01em]">
@@ -62,9 +76,10 @@ export function CinematicHero() {
             </span>
           </motion.div>
 
+          {/* 2 — Headline */}
           <motion.h1
             {...fadeUp(0.08)}
-            className="max-w-[22ch] text-white mb-[clamp(1.25rem,1.8vw,2rem)]"
+            className="max-w-[22ch] text-white mb-[clamp(1.25rem,1.6vw,1.75rem)]"
             style={{
               fontFamily: "var(--font-display)",
               fontWeight: 700,
@@ -76,23 +91,55 @@ export function CinematicHero() {
             Building analytics platforms that power enterprise decisions.
           </motion.h1>
 
-          <motion.div {...fadeUp(0.16)} className="flex flex-wrap items-center gap-3">
-            <MagneticButton
-              href="#case-studies"
-              className="items-center gap-2 px-[clamp(1.5rem,2.2vw,2rem)] py-3.5 rounded-full bg-primary text-primary-foreground text-[15px] font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-            >
-              View Projects
-              <ArrowRight size={14} />
-            </MagneticButton>
+          {/* 3 — Credential pills */}
+          <motion.div {...fadeUp(0.14)} className="flex flex-wrap gap-2 mb-[clamp(1.25rem,1.8vw,2rem)]">
+            {credentials.map((tag) => (
+              <span
+                key={tag}
+                className="text-[11px] font-mono text-white/60 rounded-full px-3 py-1 tracking-[0.02em]"
+                style={{ border: "1px solid rgba(255,255,255,0.18)" }}
+              >
+                {tag}
+              </span>
+            ))}
+          </motion.div>
 
+          {/* 4 — Proof stats */}
+          <motion.div
+            {...fadeUp(0.19)}
+            className="flex flex-wrap gap-x-6 gap-y-2 mb-[clamp(1.75rem,2.2vw,2.5rem)]"
+          >
+            {stats.map((s) => (
+              <div key={s.label} className="flex items-baseline gap-1.5">
+                <span
+                  className="font-mono font-bold text-white tabular-nums"
+                  style={{ fontSize: "clamp(1.1rem,0.9rem+0.6vw,1.4rem)" }}
+                >
+                  {s.value}
+                </span>
+                <span className="text-[12px] text-white/45 tracking-[0.02em]">{s.label}</span>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* 5 — CTAs */}
+          <motion.div {...fadeUp(0.24)} className="flex flex-wrap items-center gap-3">
             <a
               href={profile.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-[clamp(1.5rem,2.2vw,2rem)] py-3.5 rounded-full border border-white/30 text-[15px] font-medium text-white hover:bg-white/10 hover:border-white/50 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              className="inline-flex items-center gap-2 px-[clamp(1.5rem,2.2vw,2rem)] py-3.5 rounded-full bg-primary text-primary-foreground text-[15px] font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
             >
               Download Resume <ArrowUpRight size={14} />
             </a>
+
+            <MagneticButton
+              href="#case-studies"
+              className="items-center gap-2 px-[clamp(1.5rem,2.2vw,2rem)] py-3.5 rounded-full border border-white/30 text-[15px] font-medium text-white hover:bg-white/10 hover:border-white/50 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+            >
+              View Projects
+              <ArrowRight size={14} />
+            </MagneticButton>
           </motion.div>
         </div>
       </div>

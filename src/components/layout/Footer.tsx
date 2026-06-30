@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Mail } from "lucide-react";
-import { LinkedinIcon } from "@/components/common/SocialIcons";
+import { ArrowUpRight, Mail, ArrowUp } from "lucide-react";
+import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
 
 export function Footer() {
@@ -34,7 +34,7 @@ export function Footer() {
             Based in Bengaluru (IST, UTC+5:30) — usually replies within 24 hours.
           </p>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3 mb-[clamp(2rem,3vw,2.5rem)]">
             <a
               href={`mailto:${profile.email}`}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
@@ -49,6 +49,30 @@ export function Footer() {
             >
               <LinkedinIcon size={14} /> LinkedIn <ArrowUpRight size={12} />
             </a>
+            <a
+              href={profile.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full panel text-sm font-medium hover:border-primary/30 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+            >
+              Resume <ArrowUpRight size={12} />
+            </a>
+            <a
+              href={profile.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full panel text-sm font-medium hover:border-primary/30 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+            >
+              <GithubIcon size={14} /> GitHub <ArrowUpRight size={12} />
+            </a>
+          </div>
+
+          {/* Availability status */}
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
+            <span className="text-[12px] font-mono text-muted-foreground/70 tracking-[0.03em]">
+              Currently available · Bengaluru, India · IST (UTC+5:30)
+            </span>
           </div>
         </motion.div>
       </div>
@@ -61,6 +85,13 @@ export function Footer() {
           <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground/70">
             From raw data to executive decisions
           </p>
+          <a
+            href="#top"
+            aria-label="Back to top"
+            className="flex items-center gap-1.5 text-[12px] font-mono text-muted-foreground/60 hover:text-muted-foreground transition-colors"
+          >
+            <ArrowUp size={12} /> Back to top
+          </a>
         </div>
       </div>
     </footer>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 
@@ -9,6 +9,7 @@ const timeline = [
     company: "Amplify Analytix",
     location: "Bengaluru, India",
     type: "Full-time",
+    stack: ["Microsoft Fabric", "SQLMesh", "Power BI", "DAX", "Azure", "Delta Lake", "ADF"],
     summary:
       "Building Fabric Lakehouse platforms and analytics products for enterprise clients across 15 countries. Cut 15+ hours of weekly manual work, reduced compute costs 15%, and shortened dashboard delivery by 40%.",
     highlights: [
@@ -24,6 +25,7 @@ const timeline = [
     company: "Amazon",
     location: "Bengaluru, India",
     type: "Full-time",
+    stack: ["Power BI", "Python", "SQL", "Snowflake", "Databricks", "Scikit-learn"],
     summary:
       "Moved from fraud investigation into building self-serve analytics platforms for seller leadership across 10+ global marketplaces. Shipped fraud models to production, led a 15-person team, and cut case resolution time by 35 minutes.",
     highlights: [
@@ -39,6 +41,7 @@ const timeline = [
     company: "Frontizo Business Services",
     location: "Bengaluru, India",
     type: "Full-time",
+    stack: ["Excel", "SQL", "Power Query"],
     summary:
       "Started at an Amazon-operated BPO. Built Excel dashboards to track team KPIs, cut average handling time by 31%, and pushed contact resolution to 94% against an 82% site benchmark.",
     highlights: [
@@ -128,9 +131,25 @@ export function CareerEvolutionSection() {
                 </div>
 
                 {/* Summary */}
-                <p className="text-sm text-muted-foreground leading-relaxed mb-3.5 max-w-[58ch]">
+                <p className="text-sm text-muted-foreground leading-relaxed mb-3 max-w-[58ch]">
                   {item.summary}
                 </p>
+
+                {/* Tech stack chips */}
+                <div className="flex flex-wrap gap-1.5 mb-3.5">
+                  {item.stack.map((t) => (
+                    <span
+                      key={t}
+                      className="text-[11px] font-mono text-muted-foreground/70 px-2 py-0.5 rounded-md"
+                      style={{
+                        background: "color-mix(in srgb, var(--muted) 60%, transparent)",
+                        border: "1px solid color-mix(in srgb, var(--border) 60%, transparent)",
+                      }}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
 
                 {/* Highlights */}
                 {item.highlights.length > 0 && (
@@ -149,8 +168,6 @@ export function CareerEvolutionSection() {
                     ))}
                   </ul>
                 )}
-
-
               </div>
             </motion.div>
           ))}
@@ -159,4 +176,3 @@ export function CareerEvolutionSection() {
     </section>
   );
 }
-
