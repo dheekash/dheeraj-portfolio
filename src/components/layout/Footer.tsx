@@ -31,7 +31,7 @@ export function Footer() {
           </h2>
           <p className="leading-relaxed text-muted-foreground max-w-[50ch] mb-[clamp(2rem,3vw,2.5rem)]">
             Open to BI & Analytics Engineering roles and enterprise Fabric / Databricks consulting.
-            Based in Bengaluru (IST, UTC+5:30) — usually replies within 24 hours.
+            Based in Bengaluru (IST, UTC+5:30). Usually replies within 24 hours.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 mb-[clamp(2rem,3vw,2.5rem)]">

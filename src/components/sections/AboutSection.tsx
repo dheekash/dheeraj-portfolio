@@ -41,7 +41,7 @@ export function AboutSection() {
           {...reveal(0.05)}
           className="text-[clamp(1rem,1.1vw,1.15rem)] leading-relaxed text-muted-foreground max-w-[60ch] text-pretty mb-8"
         >
-          I started in customer support — the data told a different story than the reports, so I switched to analytics.
+          I started in customer support. The data told a different story than the reports, so I switched to analytics.
           Seven years later, I build Lakehouse platforms, semantic models, and pipelines for enterprise clients across 15 countries.
           My focus is simple: does the dashboard answer the question it was built to answer?
         </motion.p>
