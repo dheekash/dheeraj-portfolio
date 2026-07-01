@@ -179,7 +179,7 @@ type Study = {
   challenge: string;
   built: string;
   outcome: string;
-  keyMetric: { value: string; label: string };
+  keyMetric: { value: string; label: string; color: string };
   stack: string[];
   Diagram: () => React.ReactElement;
   detailPoints: string[];
@@ -195,7 +195,7 @@ const studies: Study[] = [
     challenge: "A legacy data warehouse was failing 12% of pipeline runs monthly. Six source systems had no unified schema, no lineage, and no quality gates.",
     built: "Phased migration to Microsoft Fabric with Medallion architecture (Bronze/Silver/Gold), 200+ SQLMesh transformation models, automated quality checks at each layer, and Power BI semantic models on top.",
     outcome: "Pipeline failures dropped from 12% to under 1%. Maintenance effort reduced by 90%. Legacy and new platform ran in parallel throughout validation. Zero downtime.",
-    keyMetric: { value: "12% → <1%", label: "pipeline failure rate" },
+    keyMetric: { value: "12% → <1%", label: "pipeline failure rate", color: "16,185,129" },
     stack: ["Microsoft Fabric", "SQLMesh", "Delta Lake", "OneLake", "Power BI", "DAX"],
     Diagram: DiagramReliability,
     codeSnippet: {
@@ -238,7 +238,7 @@ WHERE event_ts >= @start_ds
     challenge: "Fraud detection ran on daily batch reports. By the time patterns surfaced, losses had occurred and intervention windows had closed.",
     built: "Kafka streaming pipeline processing transaction events in real time through Databricks anomaly detection, surfaced on a live Power BI dashboard with sub-5-minute refresh for the risk team.",
     outcome: "Detection latency cut from 24 hours to under 5 minutes. $1.2M+ in suspicious transactions flagged in the first 90 days of operation.",
-    keyMetric: { value: "$1.2M+", label: "flagged in 90 days" },
+    keyMetric: { value: "$1.2M+", label: "flagged in 90 days", color: "239,68,68" },
     stack: ["Apache Kafka", "Databricks", "PySpark", "Azure Event Hubs", "Power BI", "Python"],
     Diagram: DiagramFraud,
     codeSnippet: {
@@ -289,7 +289,7 @@ scored = model.transform(
     challenge: "Seller leadership across 10+ global marketplaces depended on analysts for every data request. Reports were stale and took days to produce. Decisions waited on people, not data.",
     built: "A unified Snowflake Gold layer aggregating 100M+ daily transaction records from 10 marketplaces. A Power BI semantic dataset with 100+ DAX measures. Automated SQL pipelines replacing manual extracts. Python predictive models surfacing revenue signals directly in the dashboard.",
     outcome: "Manual reporting effort cut 70%. Sales leadership moved to self-serve weekly reviews. $500K+ in revenue opportunities identified in the first year.",
-    keyMetric: { value: "−70%", label: "manual reporting effort" },
+    keyMetric: { value: "−70%", label: "manual reporting effort", color: "16,185,129" },
     stack: ["Power BI", "Snowflake", "Python", "SQL", "DAX", "Scikit-learn", "Azure"],
     Diagram: DiagramSelfServe,
     codeSnippet: {
@@ -341,7 +341,7 @@ RETURN
     challenge: "Eight regional markets were running on 6-hour-old sales data. Demand signals were stale by the time managers acted, leading to missed opportunities and reactive decisions.",
     built: "Databricks Delta Live Tables workflow processing 5M+ daily transactions through Bronze, Silver, and Gold layers with schema auto-evolution and DLT quality expectations. XGBoost forecasting models tracked via MLflow under Unity Catalog governance, surfaced via Power BI composite models on the Gold layer.",
     outcome: "Data latency dropped from 6 hours to under 10 minutes. Pipeline failures reduced 95%. Sales volume forecast accuracy improved 22%. Regional managers slice live figures without waiting on an analyst.",
-    keyMetric: { value: "6 hrs → 10 min", label: "data latency" },
+    keyMetric: { value: "6 hrs → 10 min", label: "data latency", color: "37,99,235" },
     stack: ["Databricks", "Delta Live Tables", "MLflow", "Azure Data Factory", "PySpark", "Power BI", "ADLS Gen2"],
     Diagram: DiagramSales,
     detailPoints: [
@@ -360,7 +360,7 @@ RETURN
     challenge: "200+ factory-floor users across 15 markets worked from stale morning exports. Report refresh took 4 hours. KPI definitions conflicted between plant controllers and corporate finance. No audit trail existed for ISO compliance.",
     built: "Chained ADF pipelines, dbt transformations with SCD Type 2 history, and Power BI incremental refresh. Modeled production yield, downtime, and OEE metrics with full audit trails. SharePoint integration for file-based sources.",
     outcome: "Report refresh cut from 4 hours to 15 minutes, 94% faster. 200+ users moved from stale exports to live figures. KPI conflicts resolved. Full ISO audit trail in place.",
-    keyMetric: { value: "94%", label: "faster report refresh" },
+    keyMetric: { value: "94%", label: "faster report refresh", color: "16,185,129" },
     stack: ["Power BI", "Snowflake", "dbt", "Azure Data Factory", "SharePoint", "DAX"],
     Diagram: DiagramManufacturing,
     detailPoints: [
@@ -379,7 +379,7 @@ RETURN
     challenge: "The customer success team only learned about churn after cancellations. No early-warning system, no way to prioritise outreach, no data on who to save.",
     built: "End-to-end ML pipeline using Databricks and Snowflake ranking 2M+ customers daily by churn risk, delivering a prioritised intervention list directly into the CS team's Power BI workspace.",
     outcome: "Churn dropped 18% within 6 months, retaining approximately $300K in annual revenue. CS team shifted from reactive firefighting to proactive retention.",
-    keyMetric: { value: "−18%", label: "customer churn" },
+    keyMetric: { value: "−18%", label: "customer churn", color: "239,68,68" },
     stack: ["Databricks", "Snowflake", "dbt", "MLflow", "Power BI", "Python"],
     Diagram: DiagramChurn,
     detailPoints: [
@@ -544,13 +544,13 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
           <div
             className="rounded-xl px-4 py-3 flex items-center gap-4"
             style={{
-              background: "color-mix(in srgb, var(--primary) 8%, var(--card))",
-              border: "1px solid color-mix(in srgb, var(--primary) 22%, transparent)",
+              background: `rgba(${study.keyMetric.color},0.08)`,
+              border: `1px solid rgba(${study.keyMetric.color},0.22)`,
             }}
           >
             <span
               className="font-mono font-bold tabular-nums leading-none flex-shrink-0"
-              style={{ fontSize: "clamp(1.4rem,1rem+1vw,1.8rem)", color: "var(--primary)" }}
+              style={{ fontSize: "clamp(1.4rem,1rem+1vw,1.8rem)", color: `rgb(${study.keyMetric.color})` }}
             >
               {study.keyMetric.value}
             </span>

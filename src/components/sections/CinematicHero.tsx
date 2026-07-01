@@ -92,15 +92,15 @@ export function CinematicHero() {
           </motion.h1>
 
           {/* 3 — Credential pills */}
-          <motion.div {...fadeUp(0.14)} className="flex flex-wrap gap-2 mb-[clamp(1.25rem,1.8vw,2rem)]">
+          <motion.div {...fadeUp(0.14)} className="flex flex-wrap gap-2 mb-[clamp(2rem,2.6vw,3rem)]">
             {credentials.map((tag) => (
               <span
                 key={tag}
-                className="text-[11px] font-mono text-white/85 rounded-full px-3 py-1 tracking-[0.02em] font-medium"
+                className="text-[11px] font-mono text-white/90 rounded-full px-3 py-1 tracking-[0.02em] font-semibold"
                 style={{
-                  background: "rgba(0,0,0,0.45)",
-                  border: "1px solid rgba(255,255,255,0.22)",
-                  backdropFilter: "blur(8px)",
+                  background: "rgba(0,0,0,0.55)",
+                  border: "1px solid rgba(255,255,255,0.25)",
+                  backdropFilter: "blur(10px)",
                 }}
               >
                 {tag}
@@ -111,8 +111,8 @@ export function CinematicHero() {
           {/* 4 — Proof stats */}
           <motion.div
             {...fadeUp(0.19)}
-            className="flex flex-wrap gap-x-8 gap-y-3 mb-[clamp(1.75rem,2.2vw,2.5rem)] pt-[clamp(1rem,1.4vw,1.5rem)]"
-            style={{ borderTop: "1px solid rgba(255,255,255,0.12)" }}
+            className="flex flex-wrap gap-x-8 gap-y-3 mb-[clamp(1.75rem,2.2vw,2.5rem)] pt-[clamp(1.25rem,1.6vw,1.75rem)]"
+            style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }}
           >
             {stats.map((s) => (
               <div key={s.label} className="flex flex-col gap-1">

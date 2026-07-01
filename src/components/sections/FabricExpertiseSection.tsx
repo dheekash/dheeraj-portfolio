@@ -11,7 +11,6 @@ function reveal(delay = 0) {
   };
 }
 
-/* ── Architecture diagram ── */
 function ArchDiagram() {
   const layers = [
     {
@@ -83,10 +82,10 @@ function ArchDiagram() {
               </div>
             </div>
             {i < layers.length - 1 && (
-              <div className="flex flex-col items-center py-1">
-                <div className="w-px h-4" style={{ background: "var(--border)" }} />
+              <div className="flex flex-col items-center py-1.5">
+                <div className="w-[2px] h-5" style={{ background: "color-mix(in srgb, var(--primary) 40%, var(--border))" }} />
                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
-                  <path d="M5 6L0 0h10L5 6z" fill="var(--muted-foreground)" opacity="0.4" />
+                  <path d="M5 6L0 0h10L5 6z" fill="var(--primary)" opacity="0.55" />
                 </svg>
               </div>
             )}
@@ -97,7 +96,6 @@ function ArchDiagram() {
   );
 }
 
-/* ── Governance callout — 4 items ── */
 const govItems = [
   { label: "Row-Level Security",  detail: "Dynamic RLS on all semantic models. Users see only their data." },
   { label: "Data Quality Gates",  detail: "dbt / DLT expectations at Bronze, Silver, and Gold. Failures block promotion." },
@@ -119,34 +117,43 @@ export function FabricExpertiseSection() {
           Production solutions across every Fabric workload, from raw ingestion to governed semantic models.
         </motion.p>
 
-        {/* Architecture diagram */}
-        <motion.div {...reveal(0.1)} className="mb-[clamp(2.5rem,4vw,4rem)]">
-          <p className="text-[13px] font-semibold text-foreground mb-4">Platform Architecture</p>
-          <div className="panel rounded-2xl p-[clamp(1.25rem,2vw,2rem)]">
+        {/* Architecture + Governance unified container */}
+        <motion.div
+          {...reveal(0.1)}
+          className="mb-[clamp(2rem,3vw,3rem)] rounded-2xl overflow-hidden"
+          style={{ border: "1px solid var(--border)" }}
+        >
+          <div className="p-[clamp(1.25rem,2vw,2rem)]">
+            <p className="text-[13px] font-semibold text-foreground mb-4">Platform Architecture</p>
             <ArchDiagram />
           </div>
-        </motion.div>
 
-        {/* Governance & data quality callout */}
-        <motion.div {...reveal(0.14)}>
-          <p className="text-[13px] font-semibold text-foreground mb-4">Governance & Data Quality</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {govItems.map((item, i) => (
-              <motion.div
-                key={item.label}
-                {...reveal(0.16 + i * 0.04)}
-                className="panel rounded-xl px-4 py-4 flex gap-3"
-              >
-                <span
-                  className="w-1.5 flex-shrink-0 rounded-full mt-1"
-                  style={{ background: "var(--primary)", alignSelf: "stretch", maxHeight: "1.5rem" }}
-                />
-                <div>
-                  <p className="text-[12.5px] font-semibold text-foreground mb-0.5">{item.label}</p>
-                  <p className="text-[11.5px] text-muted-foreground leading-relaxed">{item.detail}</p>
-                </div>
-              </motion.div>
-            ))}
+          <div
+            className="px-[clamp(1.25rem,2vw,2rem)] py-5"
+            style={{
+              borderTop: "1px solid color-mix(in srgb, var(--primary) 20%, var(--border))",
+              background: "color-mix(in srgb, var(--primary) 4%, var(--card))",
+            }}
+          >
+            <p className="text-[13px] font-semibold text-foreground mb-4">Governance & Data Quality</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {govItems.map((item, i) => (
+                <motion.div
+                  key={item.label}
+                  {...reveal(0.16 + i * 0.04)}
+                  className="panel rounded-xl px-4 py-4 flex gap-3"
+                >
+                  <span
+                    className="w-1.5 flex-shrink-0 rounded-full mt-1"
+                    style={{ background: "var(--primary)", alignSelf: "stretch", maxHeight: "1.5rem" }}
+                  />
+                  <div>
+                    <p className="text-[12.5px] font-semibold text-foreground mb-0.5">{item.label}</p>
+                    <p className="text-[11.5px] text-muted-foreground leading-relaxed">{item.detail}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.div>
 

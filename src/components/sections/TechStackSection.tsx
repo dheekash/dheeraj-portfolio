@@ -162,19 +162,19 @@ export function TechStackSection() {
           Full-stack analytics engineering. Raw data ingestion through governed semantic models to executive-facing dashboards.
         </motion.p>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-[clamp(2.5rem,4vw,4rem)]">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-[clamp(2.5rem,4vw,4rem)]">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.title}
               {...reveal(0.04 + i * 0.06)}
               className="panel rounded-2xl p-5 flex flex-col gap-3 panel-lift"
             >
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-3">
                 <span
-                  className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                  className="w-3 h-3 rounded-full flex-shrink-0"
                   style={{ background: cat.color.replace("0.1", "0.7").replace("0.12", "0.7").replace("0.15","0.7") }}
                 />
-                <p className="text-[12px] font-semibold text-foreground tracking-tight">{cat.title}</p>
+                <p className="text-[13px] font-bold text-foreground tracking-tight">{cat.title}</p>
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {cat.tools.map((t) => (
@@ -219,9 +219,9 @@ export function TechStackSection() {
                 <div className="px-5 py-5 flex flex-col gap-5 flex-1">
                   <div>
                     <p className="text-[12px] font-mono uppercase tracking-[0.12em] font-bold mb-3" style={{ color: p.accent.replace("0.8", "1") }}>Reach for it when</p>
-                    <ul className="space-y-2.5">
+                    <ul className="space-y-3">
                       {p.reach.map((r) => (
-                        <li key={r} className="flex items-start gap-2.5 text-[13.5px] text-foreground/90 leading-snug font-medium">
+                        <li key={r} className="flex items-start gap-2.5 text-[14px] text-foreground/90 leading-relaxed font-medium">
                           <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[0.4rem]" style={{ background: p.accent }} />
                           {r}
                         </li>
@@ -230,9 +230,9 @@ export function TechStackSection() {
                   </div>
                   <div className="pt-4" style={{ borderTop: "1px solid var(--border)" }}>
                     <p className="text-[12px] font-mono uppercase tracking-[0.12em] text-muted-foreground font-bold mb-3">Skip it when</p>
-                    <ul className="space-y-2.5">
+                    <ul className="space-y-3">
                       {p.skip.map((s) => (
-                        <li key={s} className="flex items-start gap-2.5 text-[13.5px] text-muted-foreground/80 leading-snug">
+                        <li key={s} className="flex items-start gap-2.5 text-[14px] text-muted-foreground leading-relaxed">
                           <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[0.4rem] bg-muted-foreground/40" />
                           {s}
                         </li>

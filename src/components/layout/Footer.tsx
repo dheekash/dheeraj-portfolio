@@ -38,17 +38,20 @@ export function Footer() {
           </p>
 
           <div className="flex flex-wrap items-center gap-3 mb-[clamp(2rem,3vw,2.5rem)]">
+            {/* Primary CTA */}
             <a
               href={`mailto:${profile.email}?subject=BI%20%26%20Analytics%20Engineer%20%E2%80%94%20Let%27s%20connect`}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
             >
               <Mail size={14} /> Email me
             </a>
+            {/* Secondary CTAs */}
             <a
               href={profile.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full panel text-sm font-medium hover:border-primary/30 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              style={{ border: "1px solid var(--border)" }}
             >
               <LinkedinIcon size={14} /> LinkedIn <ArrowUpRight size={12} />
             </a>
@@ -56,7 +59,8 @@ export function Footer() {
               href={profile.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full panel text-sm font-medium hover:border-primary/30 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              style={{ border: "1px solid var(--border)" }}
             >
               Resume <ArrowUpRight size={12} />
             </a>
@@ -64,16 +68,17 @@ export function Footer() {
               href={profile.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full panel text-sm font-medium hover:border-primary/30 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              style={{ border: "1px solid var(--border)" }}
             >
               <GithubIcon size={14} /> GitHub <ArrowUpRight size={12} />
             </a>
           </div>
 
           {/* Availability status */}
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
-            <span className="text-[12px] font-mono text-muted-foreground/70 tracking-[0.03em]">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
+            <span className="text-[13px] font-medium text-foreground/70 tracking-[0.01em]">
               Currently available · Bengaluru, India · IST (UTC+5:30)
             </span>
           </div>
@@ -82,10 +87,10 @@ export function Footer() {
 
       <div className="relative border-t border-border">
         <div className="container-page py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-muted-foreground/80">
             © {new Date().getFullYear()} Dheeraj Kashyap · Bengaluru, India
           </p>
-          <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground/70">
+          <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground/80">
             From raw data to executive decisions
           </p>
           <a

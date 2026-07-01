@@ -46,10 +46,18 @@ export function AboutSection() {
           My focus is simple: does the dashboard answer the question it was built to answer?
         </motion.p>
 
-        <div className="grid sm:grid-cols-2 gap-x-12 gap-y-6">
+        {/* Credibility unit — specializations + cert badge in one panel */}
+        <motion.div
+          {...reveal(0.08)}
+          className="rounded-2xl p-5 grid sm:grid-cols-2 gap-x-10 gap-y-6"
+          style={{
+            background: "color-mix(in srgb, var(--primary) 5%, var(--card))",
+            border: "1px solid color-mix(in srgb, var(--primary) 14%, var(--border))",
+          }}
+        >
           {/* Specializations */}
-          <motion.div {...reveal(0.08)}>
-            <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-muted-foreground/55 mb-3">
+          <div>
+            <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-foreground/55 font-semibold mb-3">
               Specialized in
             </p>
             <ul className="flex flex-col gap-2">
@@ -63,12 +71,12 @@ export function AboutSection() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
           {/* Industries + cert callout */}
-          <motion.div {...reveal(0.11)} className="flex flex-col gap-6">
+          <div className="flex flex-col gap-5">
             <div>
-              <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-muted-foreground/55 mb-3">
+              <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-foreground/55 font-semibold mb-3">
                 Industries
               </p>
               <div className="flex flex-wrap gap-1.5">
@@ -90,8 +98,8 @@ export function AboutSection() {
             <div
               className="rounded-xl px-4 py-3.5 flex items-center gap-3"
               style={{
-                background: "color-mix(in srgb, var(--primary) 8%, var(--card))",
-                border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)",
+                background: "color-mix(in srgb, var(--primary) 10%, var(--card))",
+                border: "1px solid color-mix(in srgb, var(--primary) 25%, transparent)",
               }}
             >
               <span
@@ -105,8 +113,8 @@ export function AboutSection() {
                 <p className="text-[11px] font-mono text-muted-foreground mt-0.5">DP-600 · PL-300 · AZ-104 · DP-700 · DP-100</p>
               </div>
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
 
         <motion.p
           {...reveal(0.14)}

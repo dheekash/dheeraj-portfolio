@@ -81,7 +81,7 @@ export function CareerEvolutionSection() {
             >
               {/* Period column */}
               <div className="sm:text-right pt-1">
-                <span className="font-mono text-[12px] text-foreground/65 tracking-[0.04em] leading-snug whitespace-nowrap font-medium">
+                <span className="font-mono text-[12px] text-foreground/80 tracking-[0.04em] leading-snug font-semibold whitespace-nowrap">
                   {item.period}
                 </span>
               </div>
@@ -110,15 +110,15 @@ export function CareerEvolutionSection() {
                   </h3>
                   {item.current && (
                     <span
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold"
                       style={{
-                        background: "color-mix(in srgb, var(--primary) 12%, transparent)",
+                        background: "color-mix(in srgb, var(--primary) 18%, transparent)",
                         color: "var(--primary)",
-                        border: "1px solid color-mix(in srgb, var(--primary) 25%, transparent)",
+                        border: "1px solid color-mix(in srgb, var(--primary) 40%, transparent)",
                       }}
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                      now
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse flex-shrink-0" />
+                      Current role
                     </span>
                   )}
                 </div>
@@ -140,7 +140,7 @@ export function CareerEvolutionSection() {
                   {item.stack.map((t) => (
                     <span
                       key={t}
-                      className="text-[11px] font-mono text-foreground/60 px-2 py-0.5 rounded-md"
+                      className="text-[11px] font-mono text-foreground/70 px-2 py-0.5 rounded-md"
                       style={{
                         background: "color-mix(in srgb, var(--muted) 60%, transparent)",
                         border: "1px solid color-mix(in srgb, var(--border) 60%, transparent)",

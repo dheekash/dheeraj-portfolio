@@ -93,13 +93,14 @@ function CertCard({ cert, groupColor }: { cert: Cert; groupColor?: string }) {
         <IssuerLogo issuer={cert.issuer} />
         {cert.featured && (
           <span
-            className="text-[9px] font-mono font-semibold uppercase tracking-[0.12em] px-2 py-0.5 rounded-full"
+            className="text-[9px] font-mono font-semibold uppercase tracking-[0.12em] px-2 py-0.5 rounded-full cursor-default"
             style={{
               background: "color-mix(in srgb, var(--primary) 12%, var(--card))",
               color: "var(--primary)",
             }}
+            title="High-signal credential — core to the BI & Analytics Engineering role"
           >
-            Featured
+            Core cert
           </span>
         )}
       </div>
@@ -111,16 +112,16 @@ function CertCard({ cert, groupColor }: { cert: Cert; groupColor?: string }) {
               href={cert.verifyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[11px] font-bold px-1.5 py-0.5 rounded hover:opacity-80 transition-opacity"
+              className="font-mono text-[12px] font-bold px-2 py-1 rounded hover:opacity-80 transition-opacity"
               style={{
                 background: "color-mix(in srgb, var(--primary) 14%, var(--card))",
                 color: "var(--primary)",
               }}
-              title="Verify certification"
+              title="View certification on Microsoft Learn"
             >{cert.code} ↗</a>
           ) : (
             <span
-              className="font-mono text-[11px] font-bold px-1.5 py-0.5 rounded"
+              className="font-mono text-[12px] font-bold px-2 py-1 rounded"
               style={{
                 background: "color-mix(in srgb, var(--primary) 14%, var(--card))",
                 color: "var(--primary)",
