@@ -77,15 +77,6 @@ const metrics = [
     accent: "rgba(124,58,237,1)",
   },
   {
-    value: 70,
-    suffix: "%",
-    label: "Manual reporting cut",
-    sub: "Amazon Seller Analytics",
-    color: "rgba(16,185,129,0.08)",
-    border: "rgba(16,185,129,0.2)",
-    accent: "rgba(16,185,129,1)",
-  },
-  {
     value: 100,
     suffix: "M+",
     label: "Daily transaction records",
@@ -119,7 +110,7 @@ export function LiveMetricsSection() {
           Metrics pulled from delivered solutions. Every number is from a system in production.
         </motion.p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {metrics.map((m, i) => (
             <motion.div
               key={m.label}
