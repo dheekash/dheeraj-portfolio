@@ -9,10 +9,12 @@ const VIDEO_SRC =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4";
 
 const credentials = [
-  "11× Microsoft Certified",
-  "DP-600 Fabric Engineer",
-  "Power BI Expert",
-  "6+ Years",
+  "DP-600 · Fabric Analytics Engineer",
+  "PL-300 · Power BI Data Analyst",
+  "DP-700 · Fabric Data Engineer",
+  "DP-100 · Azure Data Scientist",
+  "SnowPro Core · Snowflake",
+  "DE Associate · Databricks",
 ];
 
 const stats = [
