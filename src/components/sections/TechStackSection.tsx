@@ -163,46 +163,49 @@ export function TechStackSection() {
         </motion.p>
 
         <motion.div {...reveal(0.08)}>
-          <div className="grid sm:grid-cols-3 gap-4">
-            {platformGuide.map((p, i) => (
-              <motion.div
-                key={p.platform}
-                {...reveal(0.36 + i * 0.06)}
-                className="panel rounded-2xl overflow-hidden flex flex-col"
-              >
-                <div
-                  className="px-5 py-4"
-                  style={{ background: p.bg, borderBottom: `1px solid ${p.border}` }}
+          {/* Snap carousel on mobile → 3-col grid on sm+ */}
+          <div className="overflow-x-auto -mx-[clamp(1.25rem,0.75rem+3vw,4.5rem)] px-[clamp(1.25rem,0.75rem+3vw,4.5rem)] pb-3 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0">
+            <div className="flex gap-4 snap-x snap-mandatory sm:grid sm:grid-cols-3 sm:snap-none">
+              {platformGuide.map((p, i) => (
+                <motion.div
+                  key={p.platform}
+                  {...reveal(0.36 + i * 0.06)}
+                  className="panel rounded-2xl overflow-hidden flex flex-col snap-start flex-shrink-0 w-[min(80vw,320px)] sm:w-auto"
                 >
-                  <p className="text-[13px] font-semibold text-foreground">{p.platform}</p>
-                  <p className="text-[11px] font-mono text-muted-foreground mt-0.5">{p.tagline}</p>
-                </div>
-                <div className="px-5 py-5 flex flex-col gap-5 flex-1">
-                  <div>
-                    <p className="text-[12px] font-mono uppercase tracking-[0.12em] font-bold mb-3" style={{ color: p.accent.replace("0.8", "1") }}>Reach for it when</p>
-                    <ul className="space-y-3">
-                      {p.reach.map((r) => (
-                        <li key={r} className="flex items-start gap-2.5 text-[14px] text-foreground/90 leading-relaxed font-medium">
-                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[0.4rem]" style={{ background: p.accent }} />
-                          {r}
-                        </li>
-                      ))}
-                    </ul>
+                  <div
+                    className="px-5 py-4"
+                    style={{ background: p.bg, borderBottom: `1px solid ${p.border}` }}
+                  >
+                    <p className="text-[13px] font-semibold text-foreground">{p.platform}</p>
+                    <p className="text-[11px] font-mono text-muted-foreground mt-0.5">{p.tagline}</p>
                   </div>
-                  <div className="pt-4" style={{ borderTop: "1px solid var(--border)" }}>
-                    <p className="text-[12px] font-mono uppercase tracking-[0.12em] text-muted-foreground font-bold mb-3">Skip it when</p>
-                    <ul className="space-y-3">
-                      {p.skip.map((s) => (
-                        <li key={s} className="flex items-start gap-2.5 text-[14px] text-muted-foreground leading-relaxed">
-                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[0.4rem] bg-muted-foreground/40" />
-                          {s}
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="px-5 py-5 flex flex-col gap-5 flex-1">
+                    <div>
+                      <p className="text-[12px] font-mono uppercase tracking-[0.12em] font-bold mb-3" style={{ color: p.accent.replace("0.8", "1") }}>Reach for it when</p>
+                      <ul className="space-y-3">
+                        {p.reach.map((r) => (
+                          <li key={r} className="flex items-start gap-2.5 text-[14px] text-foreground/90 leading-relaxed font-medium">
+                            <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[0.4rem]" style={{ background: p.accent }} />
+                            {r}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="pt-4" style={{ borderTop: "1px solid var(--border)" }}>
+                      <p className="text-[12px] font-mono uppercase tracking-[0.12em] text-muted-foreground font-bold mb-3">Skip it when</p>
+                      <ul className="space-y-3">
+                        {p.skip.map((s) => (
+                          <li key={s} className="flex items-start gap-2.5 text-[14px] text-muted-foreground leading-relaxed">
+                            <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[0.4rem] bg-muted-foreground/40" />
+                            {s}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.div>
 

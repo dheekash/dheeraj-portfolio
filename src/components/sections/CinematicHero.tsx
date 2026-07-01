@@ -71,8 +71,9 @@ export function CinematicHero() {
           {/* 1 — Status strip */}
           <motion.div {...fadeUp(0)} className="flex items-center gap-2.5 mb-[clamp(1rem,1.5vw,1.5rem)]">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
-            <span className="text-[13px] font-medium text-white/65 tracking-[0.01em]">
-              Dheeraj Kashyap · BI & Analytics Engineer · Available for hire
+            <span className="text-[13px] font-medium text-white/65 tracking-[0.01em] truncate">
+              <span className="sm:hidden">BI &amp; Analytics Engineer · Open to hire</span>
+              <span className="hidden sm:inline">Dheeraj Kashyap · BI &amp; Analytics Engineer · Available for hire</span>
             </span>
           </motion.div>
 
