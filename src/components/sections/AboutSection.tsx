@@ -32,90 +32,96 @@ export function AboutSection() {
   return (
     <section id="about" className="relative overflow-hidden">
       <div className="container-page section-pad">
-        <motion.h2 {...reveal()} className="mb-6">
-          About me
-        </motion.h2>
+        <div className="grid lg:grid-cols-2 gap-x-16 gap-y-10 items-start">
 
-        {/* Role statement */}
-        <motion.p
-          {...reveal(0.05)}
-          className="text-[clamp(1rem,1.1vw,1.15rem)] leading-relaxed text-muted-foreground max-w-[60ch] text-pretty mb-8"
-        >
-          I started in customer support. The data told a different story than the reports, so I switched to analytics.
-          Seven years later, I build Lakehouse platforms, semantic models, and pipelines for enterprise clients across 15 countries.
-          My focus is simple: does the dashboard answer the question it was built to answer?
-        </motion.p>
-
-        {/* Credibility unit — specializations + industries + cert badge */}
-        <motion.div
-          {...reveal(0.08)}
-          className="rounded-2xl p-5 grid sm:grid-cols-2 gap-x-10 gap-y-6"
-          style={{
-            background: "color-mix(in srgb, var(--primary) 5%, var(--card))",
-            border: "1px solid color-mix(in srgb, var(--primary) 14%, var(--border))",
-          }}
-        >
-          {/* Specializations — core identity */}
+          {/* Left — bio */}
           <div>
-            <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-foreground/55 font-semibold mb-3">
-              Specialized in
-            </p>
-            <ul className="flex flex-col gap-2">
-              {specializations.map((s) => (
-                <li key={s} className="flex items-center gap-2.5 text-[13.5px] font-medium text-foreground">
-                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--primary)" }} />
-                  {s}
-                </li>
-              ))}
-            </ul>
+            <motion.h2 {...reveal()} className="mb-6">
+              About me
+            </motion.h2>
+
+            <motion.p
+              {...reveal(0.05)}
+              className="text-[clamp(1rem,1.1vw,1.15rem)] leading-relaxed text-muted-foreground text-pretty mb-8"
+            >
+              I started in customer support. The data told a different story than the reports, so I switched to analytics.
+              Seven years later, I build Lakehouse platforms, semantic models, and pipelines for enterprise clients across 15 countries.
+              My focus is simple: does the dashboard answer the question it was built to answer?
+            </motion.p>
+
+            <motion.p
+              {...reveal(0.1)}
+              className="font-mono text-[11px] tracking-[0.08em] text-muted-foreground/80"
+            >
+              Bengaluru, India · IST (UTC+5:30)
+            </motion.p>
           </div>
 
-          {/* Industries + cert callout */}
-          <div className="flex flex-col gap-5">
+          {/* Right — credibility panel */}
+          <motion.div
+            {...reveal(0.08)}
+            className="rounded-2xl p-5 grid sm:grid-cols-2 gap-x-10 gap-y-6"
+            style={{
+              background: "color-mix(in srgb, var(--primary) 5%, var(--card))",
+              border: "1px solid color-mix(in srgb, var(--primary) 14%, var(--border))",
+            }}
+          >
+            {/* Specializations */}
             <div>
               <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-foreground/55 font-semibold mb-3">
-                Industries
+                Specialized in
               </p>
-              <div className="flex flex-wrap gap-1.5">
-                {industries.map((ind) => (
-                  <span
-                    key={ind}
-                    className="text-[12px] font-medium text-muted-foreground px-2.5 py-1 rounded-lg"
-                    style={{
-                      background: "color-mix(in srgb, var(--primary) 8%, var(--card))",
-                      border: "1px solid color-mix(in srgb, var(--border) 70%, transparent)",
-                    }}
-                  >
-                    {ind}
-                  </span>
+              <ul className="flex flex-col gap-2">
+                {specializations.map((s) => (
+                  <li key={s} className="flex items-center gap-2.5 text-[13.5px] font-medium text-foreground">
+                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--primary)" }} />
+                    {s}
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
 
-            <div
-              className="rounded-xl px-4 py-3.5 flex items-center gap-3"
-              style={{
-                background: "color-mix(in srgb, var(--primary) 10%, var(--card))",
-                border: "1px solid color-mix(in srgb, var(--primary) 25%, transparent)",
-              }}
-            >
-              <span className="font-mono font-bold text-[1.6rem] leading-none tabular-nums" style={{ color: "var(--primary)" }}>
-                11×
-              </span>
+            {/* Industries + cert badge */}
+            <div className="flex flex-col gap-5">
               <div>
-                <p className="text-[13px] font-semibold text-foreground leading-snug">Microsoft Certified</p>
-                <p className="text-[11px] font-mono text-muted-foreground mt-0.5">DP-600 · PL-300 · AZ-104 · DP-700 · DP-100</p>
+                <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-foreground/55 font-semibold mb-3">
+                  Industries
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {industries.map((ind) => (
+                    <span
+                      key={ind}
+                      className="text-[12px] font-medium text-muted-foreground px-2.5 py-1 rounded-lg"
+                      style={{
+                        background: "color-mix(in srgb, var(--primary) 8%, var(--card))",
+                        border: "1px solid color-mix(in srgb, var(--border) 70%, transparent)",
+                      }}
+                    >
+                      {ind}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div
+                className="rounded-xl px-4 py-3.5 flex items-center gap-3"
+                style={{
+                  background: "color-mix(in srgb, var(--primary) 10%, var(--card))",
+                  border: "1px solid color-mix(in srgb, var(--primary) 25%, transparent)",
+                }}
+              >
+                <span className="font-mono font-bold text-[1.6rem] leading-none tabular-nums" style={{ color: "var(--primary)" }}>
+                  11×
+                </span>
+                <div>
+                  <p className="text-[13px] font-semibold text-foreground leading-snug">Microsoft Certified</p>
+                  <p className="text-[11px] font-mono text-muted-foreground mt-0.5">DP-600 · PL-300 · AZ-104 · DP-700 · DP-100</p>
+                </div>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        <motion.p
-          {...reveal(0.14)}
-          className="font-mono text-[11px] tracking-[0.08em] text-muted-foreground/80 mt-8"
-        >
-          Bengaluru, India · IST (UTC+5:30)
-        </motion.p>
+        </div>
       </div>
     </section>
   );
