@@ -7,12 +7,11 @@ import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
 
 const links = [
-  { href: "#about",          id: "about",          label: "About"          },
-  { href: "#skills",         id: "skills",         label: "Skills"         },
-  { href: "#case-studies",   id: "case-studies",   label: "Projects"       },
-  { href: "#journey",        id: "journey",        label: "Experience"     },
-  { href: "#certifications", id: "certifications", label: "Certifications" },
-  { href: "#contact",        id: "contact",        label: "Contact"        },
+  { href: "#about",        id: "about",        label: "About"      },
+  { href: "#skills",       id: "skills",       label: "Skills"     },
+  { href: "#case-studies", id: "case-studies", label: "Projects"   },
+  { href: "#journey",      id: "journey",      label: "Experience" },
+  { href: "#contact",      id: "contact",      label: "Contact"    },
 ];
 
 export function Navbar() {
@@ -110,24 +109,6 @@ export function Navbar() {
 
         <div className="hidden lg:flex items-center gap-2">
           <ThemeToggle />
-          <a
-            href={profile.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[13px] text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <GithubIcon size={14} /> GitHub
-          </a>
-          <a
-            href={profile.linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[13px] text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <LinkedinIcon size={14} /> LinkedIn
-          </a>
           <a
             href={profile.resumeUrl}
             target="_blank"
