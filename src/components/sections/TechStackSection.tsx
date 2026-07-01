@@ -29,82 +29,66 @@ const categories: { title: string; color: string; tools: Tool[] }[] = [
     title: "Analytics & BI",
     color: "rgba(242,200,17,0.15)",
     tools: [
-      { name: "Power BI",          Logo: PowerBILogo,    years: "6 yrs", level: "Expert"    },
-      { name: "Microsoft Fabric",  Logo: FabricLogo,     years: "2 yrs", level: "Advanced"  },
-      { name: "DAX",                                      years: "5 yrs", level: "Expert"    },
-      { name: "Power Query",       Logo: PowerQueryLogo, years: "5 yrs", level: "Advanced"  },
-      { name: "Excel",             Logo: ExcelLogo,      years: "7 yrs", level: "Expert"    },
-      { name: "Paginated Reports",                        years: "3 yrs", level: "Advanced"  },
-      { name: "KPI Modeling",                             years: "5 yrs", level: "Expert"    },
-      { name: "Report Design",                            years: "6 yrs", level: "Expert"    },
+      { name: "Power BI",         Logo: PowerBILogo,    years: "6 yrs", level: "Expert"   },
+      { name: "Microsoft Fabric", Logo: FabricLogo,     years: "2 yrs", level: "Advanced" },
+      { name: "DAX",                                     years: "5 yrs", level: "Expert"   },
+      { name: "Power Query",      Logo: PowerQueryLogo, years: "5 yrs", level: "Advanced" },
+      { name: "Excel",            Logo: ExcelLogo,      years: "7 yrs", level: "Expert"   },
     ],
   },
   {
     title: "Data Engineering",
     color: "rgba(59,130,246,0.12)",
     tools: [
-      { name: "SQL",         Logo: SQLLogo,    years: "7 yrs", level: "Expert"    },
-      { name: "Python",      Logo: PythonLogo, years: "5 yrs", level: "Advanced"  },
-      { name: "PySpark",     Logo: SparkLogo,  years: "3 yrs", level: "Advanced"  },
-      { name: "dbt",         Logo: DbtLogo,    years: "2 yrs", level: "Advanced"  },
-      { name: "ADF / ETL",                     years: "4 yrs", level: "Advanced"  },
-      { name: "SQLMesh",                        years: "1 yr",  level: "Proficient"},
-      { name: "Delta Lake",                     years: "2 yrs", level: "Advanced"  },
-      { name: "Apache Kafka",                   years: "2 yrs", level: "Proficient"},
-      { name: "Incremental Load",               years: "4 yrs", level: "Expert"    },
+      { name: "SQL",       Logo: SQLLogo,    years: "7 yrs", level: "Expert"   },
+      { name: "Python",    Logo: PythonLogo, years: "5 yrs", level: "Advanced" },
+      { name: "PySpark",   Logo: SparkLogo,  years: "3 yrs", level: "Advanced" },
+      { name: "dbt",       Logo: DbtLogo,    years: "2 yrs", level: "Advanced" },
+      { name: "ADF / ETL",                   years: "4 yrs", level: "Advanced" },
     ],
   },
   {
     title: "Cloud & Platforms",
     color: "rgba(0,120,212,0.10)",
     tools: [
-      { name: "Azure",        Logo: AzureLogo,      years: "4 yrs", level: "Advanced"  },
-      { name: "Snowflake",    Logo: SnowflakeLogo,  years: "3 yrs", level: "Advanced"  },
-      { name: "Databricks",   Logo: DatabricksLogo, years: "2 yrs", level: "Advanced"  },
-      { name: "OneLake",                             years: "1 yr",  level: "Proficient"},
-      { name: "ADLS Gen2",                           years: "3 yrs", level: "Advanced"  },
-      { name: "Azure Event Hubs",                    years: "2 yrs", level: "Proficient"},
-      { name: "Unity Catalog",                       years: "1 yr",  level: "Proficient"},
-      { name: "SharePoint",                          years: "3 yrs", level: "Advanced"  },
+      { name: "Azure",      Logo: AzureLogo,      years: "4 yrs", level: "Advanced"  },
+      { name: "Snowflake",  Logo: SnowflakeLogo,  years: "3 yrs", level: "Advanced"  },
+      { name: "Databricks", Logo: DatabricksLogo, years: "2 yrs", level: "Advanced"  },
+      { name: "OneLake",                           years: "1 yr",  level: "Proficient"},
+      { name: "ADLS Gen2",                         years: "3 yrs", level: "Advanced"  },
     ],
   },
   {
     title: "Architecture",
     color: "rgba(16,185,129,0.10)",
     tools: [
-      { name: "Medallion Architecture",  years: "3 yrs", level: "Expert"   },
-      { name: "Star Schema",             years: "6 yrs", level: "Expert"   },
-      { name: "Semantic Modeling",       years: "5 yrs", level: "Expert"   },
-      { name: "Direct Lake",             years: "1 yr",  level: "Advanced" },
-      { name: "Data Modeling",           years: "6 yrs", level: "Expert"   },
-      { name: "SCD Type 2",             years: "3 yrs", level: "Advanced" },
-      { name: "Data Governance",         years: "3 yrs", level: "Advanced" },
+      { name: "Medallion Architecture", years: "3 yrs", level: "Expert"   },
+      { name: "Star Schema",            years: "6 yrs", level: "Expert"   },
+      { name: "Semantic Modeling",      years: "5 yrs", level: "Expert"   },
+      { name: "Direct Lake",            years: "1 yr",  level: "Advanced" },
+      { name: "Data Modeling",          years: "6 yrs", level: "Expert"   },
     ],
   },
   {
     title: "Automation & DevOps",
     color: "rgba(139,92,246,0.10)",
     tools: [
-      { name: "Power Automate", Logo: MicrosoftLogo, years: "3 yrs", level: "Advanced"  },
-      { name: "Azure DevOps",                         years: "2 yrs", level: "Proficient"},
-      { name: "CI / CD",                              years: "2 yrs", level: "Proficient"},
-      { name: "Git / GitHub",                         years: "4 yrs", level: "Advanced"  },
-      { name: "Scheduled Alerts",                     years: "4 yrs", level: "Advanced"  },
-      { name: "Pipeline Monitoring",                  years: "3 yrs", level: "Advanced"  },
+      { name: "Power Automate",    Logo: MicrosoftLogo, years: "3 yrs", level: "Advanced"  },
+      { name: "Azure DevOps",                            years: "2 yrs", level: "Proficient"},
+      { name: "CI / CD",                                 years: "2 yrs", level: "Proficient"},
+      { name: "Git / GitHub",                            years: "4 yrs", level: "Advanced"  },
+      { name: "Pipeline Monitoring",                     years: "3 yrs", level: "Advanced"  },
     ],
   },
   {
     title: "Leadership & Delivery",
     color: "rgba(239,68,68,0.10)",
     tools: [
-      { name: "Team Leadership",          years: "4 yrs", level: "Advanced"  },
-      { name: "Stakeholder Management",   years: "5 yrs", level: "Expert"    },
-      { name: "Requirements Gathering",   years: "5 yrs", level: "Expert"    },
-      { name: "Cross-functional Delivery",years: "4 yrs", level: "Advanced"  },
-      { name: "Client Presentations",     years: "5 yrs", level: "Advanced"  },
-      { name: "Agile / Scrum",            years: "4 yrs", level: "Advanced"  },
-      { name: "Project Planning",         years: "4 yrs", level: "Advanced"  },
-
+      { name: "Team Leadership",       years: "4 yrs", level: "Advanced" },
+      { name: "Stakeholder Management",years: "5 yrs", level: "Expert"   },
+      { name: "Client Presentations",  years: "5 yrs", level: "Advanced" },
+      { name: "Agile / Scrum",         years: "4 yrs", level: "Advanced" },
+      { name: "Project Planning",      years: "4 yrs", level: "Advanced" },
     ],
   },
 ];
@@ -232,23 +216,23 @@ export function TechStackSection() {
                   <p className="text-[13px] font-semibold text-foreground">{p.platform}</p>
                   <p className="text-[11px] font-mono text-muted-foreground mt-0.5">{p.tagline}</p>
                 </div>
-                <div className="px-5 py-4 flex flex-col gap-4 flex-1">
+                <div className="px-5 py-5 flex flex-col gap-5 flex-1">
                   <div>
-                    <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground mb-2">Reach for it when</p>
-                    <ul className="space-y-1.5">
+                    <p className="text-[11px] font-mono uppercase tracking-[0.15em] font-semibold mb-3" style={{ color: p.accent.replace("0.8", "1") }}>Reach for it when</p>
+                    <ul className="space-y-2">
                       {p.reach.map((r) => (
-                        <li key={r} className="flex items-start gap-2 text-[11.5px] text-muted-foreground">
+                        <li key={r} className="flex items-start gap-2.5 text-[13px] text-foreground/80 leading-snug">
                           <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style={{ background: p.accent }} />
                           {r}
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div>
-                    <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground mb-2">Skip it when</p>
-                    <ul className="space-y-1.5">
+                  <div className="pt-4" style={{ borderTop: "1px solid var(--border)" }}>
+                    <p className="text-[11px] font-mono uppercase tracking-[0.15em] text-muted-foreground/60 mb-3">Skip it when</p>
+                    <ul className="space-y-2">
                       {p.skip.map((s) => (
-                        <li key={s} className="flex items-start gap-2 text-[11.5px] text-muted-foreground/60">
+                        <li key={s} className="flex items-start gap-2.5 text-[13px] text-muted-foreground leading-snug">
                           <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5 bg-muted-foreground/30" />
                           {s}
                         </li>

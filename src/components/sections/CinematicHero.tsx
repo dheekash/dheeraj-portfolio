@@ -107,17 +107,18 @@ export function CinematicHero() {
           {/* 4 — Proof stats */}
           <motion.div
             {...fadeUp(0.19)}
-            className="flex flex-wrap gap-x-6 gap-y-2 mb-[clamp(1.75rem,2.2vw,2.5rem)]"
+            className="flex flex-wrap gap-x-8 gap-y-3 mb-[clamp(1.75rem,2.2vw,2.5rem)] pt-[clamp(1rem,1.4vw,1.5rem)]"
+            style={{ borderTop: "1px solid rgba(255,255,255,0.12)" }}
           >
             {stats.map((s) => (
-              <div key={s.label} className="flex items-baseline gap-1.5">
+              <div key={s.label} className="flex flex-col gap-0.5">
                 <span
-                  className="font-mono font-bold text-white tabular-nums"
-                  style={{ fontSize: "clamp(1.1rem,0.9rem+0.6vw,1.4rem)" }}
+                  className="font-mono font-bold text-white tabular-nums leading-none"
+                  style={{ fontSize: "clamp(1.5rem,1.1rem+1.2vw,2.2rem)" }}
                 >
                   {s.value}
                 </span>
-                <span className="text-[12px] text-white/45 tracking-[0.02em]">{s.label}</span>
+                <span className="text-[12px] text-white/55 tracking-[0.04em] font-medium">{s.label}</span>
               </div>
             ))}
           </motion.div>
