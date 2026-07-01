@@ -17,7 +17,7 @@ const specializations = [
   "SQL",
   "Azure",
   "Python",
-  "Snowflake",
+  "Databricks",
 ];
 
 const industries = [
