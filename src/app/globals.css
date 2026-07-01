@@ -177,15 +177,15 @@
   /* Fluid container — widens on big displays instead of floating narrow */
   .container-page {
     width: 100%;
-    max-width: min(90rem, 100%);
+    max-width: min(96rem, 100%);
     margin-inline: auto;
-    padding-inline: clamp(1.25rem, 0.75rem + 3vw, 4.5rem);
+    padding-inline: clamp(1.25rem, 0.5rem + 2vw, 3rem);
   }
   @media (min-width: 1440px) {
-    .container-page { max-width: min(85vw, 110rem); }
+    .container-page { max-width: min(90vw, 120rem); }
   }
   @media (min-width: 1920px) {
-    .container-page { max-width: min(83vw, 135rem); }
+    .container-page { max-width: min(88vw, 150rem); }
   }
 
   /* Standardised 80px section rhythm */
