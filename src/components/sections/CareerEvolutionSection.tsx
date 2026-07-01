@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 const timeline = [
   {
@@ -17,10 +18,12 @@ const timeline = [
       "Migrated legacy SQL warehouse to SQLMesh. Pipeline failures dropped from 12% to under 1%.",
       "Shortened dashboard delivery by 40%, from stakeholder brief to published report.",
     ],
+    caseStudyLink: "#case-studies",
     current: true,
   },
   {
     period: "Mar 2020 - Jun 2024",
+    caseStudyLink: undefined,
     role: "Risk Data Analyst",
     company: "Amazon",
     location: "Bengaluru, India",
@@ -43,12 +46,8 @@ const timeline = [
     type: "Full-time",
     stack: ["Excel", "SQL", "Power Query"],
     summary:
-      "Started at an Amazon-operated BPO. Built Excel dashboards to track team KPIs, cut average handling time by 31%, and pushed contact resolution to 94% against an 82% site benchmark.",
-    highlights: [
-      "Built Excel dashboards tracking KPIs for 20+ associates. Adopted across the floor within one quarter.",
-      "Reduced Average Handling Time by 31% through process changes and structured call flows.",
-      "Achieved 94% Contact Resolution Rate against an 82% site benchmark.",
-    ],
+      "Amazon-operated BPO. Built Excel dashboards for 20+ associates, cut average handling time 31%, pushed contact resolution to 94% vs 82% site benchmark.",
+    highlights: [],
     current: false,
   },
 ];
@@ -167,6 +166,17 @@ export function CareerEvolutionSection() {
                       </li>
                     ))}
                   </ul>
+                )}
+
+                {/* Case study link */}
+                {"caseStudyLink" in item && item.caseStudyLink && (
+                  <a
+                    href={item.caseStudyLink}
+                    className="inline-flex items-center gap-1.5 text-[12px] font-mono font-semibold mb-4"
+                    style={{ color: "var(--primary)" }}
+                  >
+                    See featured project <ArrowUpRight size={12} />
+                  </a>
                 )}
               </div>
             </motion.div>

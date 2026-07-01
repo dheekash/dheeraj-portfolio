@@ -129,29 +129,19 @@ export function FabricExpertiseSection() {
           </div>
 
           <div
-            className="px-[clamp(1.25rem,2vw,2rem)] py-5"
+            className="px-[clamp(1.25rem,2vw,2rem)] py-4"
             style={{
               borderTop: "1px solid color-mix(in srgb, var(--primary) 20%, var(--border))",
               background: "color-mix(in srgb, var(--primary) 4%, var(--card))",
             }}
           >
-            <p className="text-[13px] font-semibold text-foreground mb-4">Governance & Data Quality</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              {govItems.map((item, i) => (
-                <motion.div
-                  key={item.label}
-                  {...reveal(0.16 + i * 0.04)}
-                  className="panel rounded-xl px-4 py-4 flex gap-3"
-                >
-                  <span
-                    className="w-1.5 flex-shrink-0 rounded-full mt-1"
-                    style={{ background: "var(--primary)", alignSelf: "stretch", maxHeight: "1.5rem" }}
-                  />
-                  <div>
-                    <p className="text-[12.5px] font-semibold text-foreground mb-0.5">{item.label}</p>
-                    <p className="text-[11.5px] text-muted-foreground leading-relaxed">{item.detail}</p>
-                  </div>
-                </motion.div>
+            <p className="text-[11px] font-mono uppercase tracking-[0.12em] text-foreground/50 font-semibold mb-3">Governance & Data Quality</p>
+            <div className="flex flex-wrap gap-x-6 gap-y-2">
+              {govItems.map((item) => (
+                <span key={item.label} className="flex items-center gap-2 text-[12px] text-muted-foreground" title={item.detail}>
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--primary)" }} />
+                  {item.label}
+                </span>
               ))}
             </div>
           </div>

@@ -154,54 +154,15 @@ export function TechStackSection() {
     <section id="skills">
       <div className="container-page section-pad">
 
-        {/* â"€â"€ Core Expertise â"€â"€ */}
+        {/* ── Platform Decision Guide ── */}
         <motion.h2 {...reveal()} className="mb-3">
-          Core Expertise
+          Platform Decision Guide
         </motion.h2>
         <motion.p {...reveal(0.05)} className="text-muted-foreground text-sm leading-relaxed max-w-[52ch] mb-[clamp(1.5rem,2.5vw,2.5rem)]">
-          Full-stack analytics engineering. Raw data ingestion through governed semantic models to executive-facing dashboards.
+          How I choose between Fabric, Databricks, and Snowflake based on project constraints.
         </motion.p>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-[clamp(2.5rem,4vw,4rem)]">
-          {categories.map((cat, i) => (
-            <motion.div
-              key={cat.title}
-              {...reveal(0.04 + i * 0.06)}
-              className="panel rounded-2xl p-5 flex flex-col gap-3 panel-lift"
-            >
-              <div className="flex items-center gap-3">
-                <span
-                  className="w-3 h-3 rounded-full flex-shrink-0"
-                  style={{ background: cat.color.replace("0.1", "0.7").replace("0.12", "0.7").replace("0.15","0.7") }}
-                />
-                <p className="text-[13px] font-bold text-foreground tracking-tight">{cat.title}</p>
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {cat.tools.map((t) => (
-                  <span
-                    key={t.name}
-                    className="group relative inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11.5px] font-medium text-muted-foreground transition-colors cursor-default hover:text-foreground"
-                    style={{
-                      background: cat.color,
-                      border: "1px solid color-mix(in srgb, var(--border) 60%, transparent)",
-                    }}
-                    title={`${t.years} · ${t.level}`}
-                  >
-                    {t.Logo && <t.Logo size={11} />}
-                    {t.name}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* ── Platform Decision Guide ── */}
-        <motion.div {...reveal(0.28)}>
-          <p className="text-[13px] font-semibold text-foreground mb-4">Platform Decision Guide</p>
-          <p className="text-muted-foreground text-sm mb-5 max-w-[52ch]">
-            How I choose between Fabric, Databricks, and Snowflake based on project constraints.
-          </p>
+        <motion.div {...reveal(0.08)}>
           <div className="grid sm:grid-cols-3 gap-4">
             {platformGuide.map((p, i) => (
               <motion.div
@@ -244,6 +205,45 @@ export function TechStackSection() {
             ))}
           </div>
         </motion.div>
+
+        {/* ── Core Expertise ── */}
+        <motion.h2 {...reveal(0.04)} className="mb-3 mt-[clamp(3rem,5vw,5rem)]">
+          Core Expertise
+        </motion.h2>
+        <motion.p {...reveal(0.08)} className="text-muted-foreground text-sm leading-relaxed max-w-[52ch] mb-[clamp(1.5rem,2.5vw,2.5rem)]">
+          Full-stack analytics engineering. Raw data ingestion through governed semantic models to executive-facing dashboards.
+        </motion.p>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {categories.map((cat, i) => (
+            <motion.div
+              key={cat.title}
+              {...reveal(0.1 + i * 0.06)}
+              className="panel rounded-2xl p-5 flex flex-col gap-3 panel-lift"
+            >
+              <div className="flex items-center gap-3">
+                <span className="w-3 h-3 rounded-full flex-shrink-0 bg-foreground/20" />
+                <p className="text-[13px] font-bold text-foreground tracking-tight">{cat.title}</p>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {cat.tools.map((t) => (
+                  <span
+                    key={t.name}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11.5px] font-medium text-muted-foreground cursor-default hover:text-foreground transition-colors"
+                    style={{
+                      background: "color-mix(in srgb, var(--muted) 50%, transparent)",
+                      border: "1px solid color-mix(in srgb, var(--border) 60%, transparent)",
+                    }}
+                    title={`${t.years} · ${t.level}`}
+                  >
+                    {t.Logo && <t.Logo size={11} />}
+                    {t.name}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
       </div>
     </section>
