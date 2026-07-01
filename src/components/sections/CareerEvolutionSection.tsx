@@ -81,7 +81,7 @@ export function CareerEvolutionSection() {
             >
               {/* Period column */}
               <div className="sm:text-right pt-1">
-                <span className="font-mono text-[12px] text-muted-foreground tracking-[0.04em] leading-snug whitespace-nowrap">
+                <span className="font-mono text-[12px] text-foreground/65 tracking-[0.04em] leading-snug whitespace-nowrap font-medium">
                   {item.period}
                 </span>
               </div>

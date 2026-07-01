@@ -218,22 +218,22 @@ export function TechStackSection() {
                 </div>
                 <div className="px-5 py-5 flex flex-col gap-5 flex-1">
                   <div>
-                    <p className="text-[11px] font-mono uppercase tracking-[0.15em] font-semibold mb-3" style={{ color: p.accent.replace("0.8", "1") }}>Reach for it when</p>
-                    <ul className="space-y-2">
+                    <p className="text-[12px] font-mono uppercase tracking-[0.12em] font-bold mb-3" style={{ color: p.accent.replace("0.8", "1") }}>Reach for it when</p>
+                    <ul className="space-y-2.5">
                       {p.reach.map((r) => (
-                        <li key={r} className="flex items-start gap-2.5 text-[13px] text-foreground/80 leading-snug">
-                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style={{ background: p.accent }} />
+                        <li key={r} className="flex items-start gap-2.5 text-[13.5px] text-foreground/90 leading-snug font-medium">
+                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[0.4rem]" style={{ background: p.accent }} />
                           {r}
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div className="pt-4" style={{ borderTop: "1px solid var(--border)" }}>
-                    <p className="text-[11px] font-mono uppercase tracking-[0.15em] text-muted-foreground/60 mb-3">Skip it when</p>
-                    <ul className="space-y-2">
+                    <p className="text-[12px] font-mono uppercase tracking-[0.12em] text-muted-foreground font-bold mb-3">Skip it when</p>
+                    <ul className="space-y-2.5">
                       {p.skip.map((s) => (
-                        <li key={s} className="flex items-start gap-2.5 text-[13px] text-muted-foreground leading-snug">
-                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5 bg-muted-foreground/30" />
+                        <li key={s} className="flex items-start gap-2.5 text-[13.5px] text-muted-foreground/80 leading-snug">
+                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[0.4rem] bg-muted-foreground/40" />
                           {s}
                         </li>
                       ))}

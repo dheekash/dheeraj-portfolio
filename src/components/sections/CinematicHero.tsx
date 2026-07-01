@@ -111,14 +111,14 @@ export function CinematicHero() {
             style={{ borderTop: "1px solid rgba(255,255,255,0.12)" }}
           >
             {stats.map((s) => (
-              <div key={s.label} className="flex flex-col gap-0.5">
+              <div key={s.label} className="flex flex-col gap-1">
                 <span
-                  className="font-mono font-bold text-white tabular-nums leading-none"
-                  style={{ fontSize: "clamp(1.5rem,1.1rem+1.2vw,2.2rem)" }}
+                  className="font-mono font-black text-white tabular-nums leading-none"
+                  style={{ fontSize: "clamp(1.7rem,1.2rem+1.4vw,2.4rem)", textShadow: "0 0 20px rgba(255,255,255,0.15)" }}
                 >
                   {s.value}
                 </span>
-                <span className="text-[12px] text-white/55 tracking-[0.04em] font-medium">{s.label}</span>
+                <span className="text-[12px] text-white/70 tracking-[0.06em] font-semibold uppercase">{s.label}</span>
               </div>
             ))}
           </motion.div>

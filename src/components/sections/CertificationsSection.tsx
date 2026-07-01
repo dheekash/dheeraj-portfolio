@@ -103,13 +103,19 @@ function CertCard({ cert, groupColor }: { cert: Cert; groupColor?: string }) {
         )}
       </div>
       <div>
-        <p className="text-[12.5px] font-semibold leading-snug mb-0.5">{cert.name}</p>
+        <p className="text-[13px] font-semibold leading-snug mb-1">{cert.name}</p>
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-mono text-[10px] accent-text font-semibold">{cert.code}</span>
+          <span
+            className="font-mono text-[11px] font-bold px-1.5 py-0.5 rounded"
+            style={{
+              background: "color-mix(in srgb, var(--primary) 14%, var(--card))",
+              color: "var(--primary)",
+            }}
+          >{cert.code}</span>
           <span className="text-muted-foreground/40 text-[10px]">·</span>
-          <span className="font-mono text-[10px] text-muted-foreground">{cert.issuer}</span>
+          <span className="font-mono text-[11px] text-muted-foreground/70">{cert.issuer}</span>
           <span className="text-muted-foreground/40 text-[10px]">·</span>
-          <span className="font-mono text-[10px] text-muted-foreground">{cert.date}</span>
+          <span className="font-mono text-[11px] text-muted-foreground/70">{cert.date}</span>
         </div>
       </div>
     </div>
