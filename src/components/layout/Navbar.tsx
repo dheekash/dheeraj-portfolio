@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
@@ -109,14 +109,6 @@ export function Navbar() {
 
         <div className="hidden lg:flex items-center gap-2">
           <ThemeToggle />
-          <a
-            href={profile.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-primary-foreground text-[13px] font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ml-1"
-          >
-            Resume <ArrowUpRight size={12} />
-          </a>
         </div>
 
         <div className="lg:hidden flex items-center gap-1.5">
