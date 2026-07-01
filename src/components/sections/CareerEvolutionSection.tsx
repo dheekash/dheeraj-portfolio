@@ -65,9 +65,14 @@ export function CareerEvolutionSection() {
   return (
     <section id="journey">
       <div className="container-page section-pad">
-        <motion.h2 {...reveal()} className="max-w-[14ch] mb-[clamp(2rem,3.5vw,4rem)]">
-          Experience
-        </motion.h2>
+        <motion.div {...reveal()} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(2rem,3.5vw,4rem)]">
+          <h2>Experience</h2>
+          <div className="flex items-center gap-2 flex-shrink-0 pb-1">
+            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>6+ years</span>
+            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>3 companies</span>
+            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>15 countries</span>
+          </div>
+        </motion.div>
 
         <div className="relative max-w-5xl space-y-0">
           {timeline.map((item, i) => (

@@ -107,15 +107,19 @@ export function FabricExpertiseSection() {
   return (
     <section id="fabric-expertise">
       <div className="container-page section-pad">
-        <motion.p {...reveal()} className="eyebrow mb-4">
-          Microsoft Fabric
-        </motion.p>
-        <motion.h2 {...reveal(0.05)} className="max-w-[18ch] mb-3">
-          End-to-end Fabric expertise
-        </motion.h2>
-        <motion.p {...reveal(0.08)} className="text-muted-foreground max-w-[52ch] text-sm mb-[clamp(2rem,3.5vw,3.5rem)]">
-          Production solutions across every Fabric workload, from raw ingestion to governed semantic models.
-        </motion.p>
+        <motion.div {...reveal()} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(2rem,3.5vw,3.5rem)]">
+          <div>
+            <p className="eyebrow mb-3">Microsoft Fabric</p>
+            <h2 className="mb-2">End-to-end Fabric expertise</h2>
+            <p className="text-muted-foreground max-w-[52ch] text-sm">
+              Production solutions across every Fabric workload, from raw ingestion to governed semantic models.
+            </p>
+          </div>
+          <div className="flex items-center gap-2 flex-shrink-0 pb-1">
+            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>7 layers</span>
+            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>Bronze → Gold → Semantic</span>
+          </div>
+        </motion.div>
 
         {/* Architecture + Governance unified container */}
         <motion.div

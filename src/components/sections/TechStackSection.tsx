@@ -155,12 +155,18 @@ export function TechStackSection() {
       <div className="container-page section-pad">
 
         {/* ── Platform Decision Guide ── */}
-        <motion.h2 {...reveal()} className="mb-3">
-          Platform Decision Guide
-        </motion.h2>
-        <motion.p {...reveal(0.05)} className="text-muted-foreground text-sm leading-relaxed max-w-[52ch] mb-[clamp(1.5rem,2.5vw,2.5rem)]">
-          How I choose between Fabric, Databricks, and Snowflake based on project constraints.
-        </motion.p>
+        <motion.div {...reveal()} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(1.5rem,2.5vw,2.5rem)]">
+          <div>
+            <h2 className="mb-2">Platform Decision Guide</h2>
+            <p className="text-muted-foreground text-sm leading-relaxed max-w-[52ch]">
+              How I choose between Fabric, Databricks, and Snowflake based on project constraints.
+            </p>
+          </div>
+          <div className="flex items-center gap-2 flex-shrink-0 pb-1">
+            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>3 platforms</span>
+            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>When to use each</span>
+          </div>
+        </motion.div>
 
         <motion.div {...reveal(0.08)}>
           {/* Snap carousel on mobile → 3-col grid on sm+ */}
@@ -210,12 +216,18 @@ export function TechStackSection() {
         </motion.div>
 
         {/* ── Core Expertise ── */}
-        <motion.h2 {...reveal(0.04)} className="mb-3 mt-[clamp(3rem,5vw,5rem)]">
-          Core Expertise
-        </motion.h2>
-        <motion.p {...reveal(0.08)} className="text-muted-foreground text-sm leading-relaxed max-w-[52ch] mb-[clamp(1.5rem,2.5vw,2.5rem)]">
-          Full-stack analytics engineering. Raw data ingestion through governed semantic models to executive-facing dashboards.
-        </motion.p>
+        <motion.div {...reveal(0.04)} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(1.5rem,2.5vw,2.5rem)] mt-[clamp(3rem,5vw,5rem)]">
+          <div>
+            <h2 className="mb-2">Core Expertise</h2>
+            <p className="text-muted-foreground text-sm leading-relaxed max-w-[52ch]">
+              Full-stack analytics engineering. Raw data ingestion through governed semantic models to executive-facing dashboards.
+            </p>
+          </div>
+          <div className="flex items-center gap-2 flex-shrink-0 pb-1">
+            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>6 categories</span>
+            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>30 tools</span>
+          </div>
+        </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {categories.map((cat, i) => (

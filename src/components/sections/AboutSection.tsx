@@ -32,7 +32,7 @@ export function AboutSection() {
   return (
     <section id="about" className="relative overflow-hidden">
       <div className="container-page section-pad">
-        <div className="grid lg:grid-cols-2 gap-x-16 gap-y-10 items-start">
+        <div className="grid md:grid-cols-2 gap-x-16 gap-y-10 items-start">
 
           {/* Left — bio */}
           <div>

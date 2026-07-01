@@ -144,13 +144,20 @@ export function CertificationsSection() {
   return (
     <section id="certifications">
       <div className="container-page section-pad">
-        <motion.h2 {...reveal()} className="max-w-[14ch] mb-3">
-          Certifications
-        </motion.h2>
-        <motion.p {...reveal(0.05)} className="text-muted-foreground max-w-[52ch] text-sm mb-[clamp(1.75rem,3vw,3rem)]">
-          {totalCount} certifications across 5 years, each earned while actively shipping the
-          technology it covers. 11 Microsoft, 1 Snowflake, 1 Databricks.
-        </motion.p>
+        <motion.div {...reveal()} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(1.75rem,3vw,3rem)]">
+          <div>
+            <h2 className="mb-3">Certifications</h2>
+            <p className="text-muted-foreground text-sm max-w-[52ch]">
+              {totalCount} certifications across 5 years, each earned while actively shipping the
+              technology it covers.
+            </p>
+          </div>
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>11 Microsoft</span>
+            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>1 Snowflake</span>
+            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>1 Databricks</span>
+          </div>
+        </motion.div>
 
         <motion.div {...reveal(0.08)}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
