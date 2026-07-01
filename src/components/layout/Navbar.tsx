@@ -77,7 +77,7 @@ export function Navbar() {
         }}
       />
 
-      <div className="container-page h-[3.75rem] flex items-center justify-between gap-4">
+      <div className="container-page h-[3.75rem] flex items-center gap-8">
         <a
           href="#top"
           className="text-[15px] font-semibold tracking-tight shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
@@ -85,7 +85,7 @@ export function Navbar() {
           Dheeraj Kashyap<span className="accent-text">.</span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-1 flex-1">
           {links.map((l) => (
             <a
               key={l.href}
