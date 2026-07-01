@@ -29,14 +29,17 @@ export function Footer() {
             Let&apos;s build analytics systems{" "}
             <span className="accent-text">that scale.</span>
           </h2>
+          <p className="leading-relaxed text-muted-foreground max-w-[50ch] mb-2">
+            Open to full-time BI & Analytics Engineering roles and enterprise Fabric / Databricks consulting.
+            Remote or Bengaluru-based.
+          </p>
           <p className="leading-relaxed text-muted-foreground max-w-[50ch] mb-[clamp(2rem,3vw,2.5rem)]">
-            Open to BI & Analytics Engineering roles and enterprise Fabric / Databricks consulting.
-            Based in Bengaluru (IST, UTC+5:30). Usually replies within 24 hours.
+            Based in Bengaluru (IST, UTC+5:30). <span className="text-foreground font-medium">Usually replies within 24 hours.</span>
           </p>
 
           <div className="flex flex-wrap items-center gap-3 mb-[clamp(2rem,3vw,2.5rem)]">
             <a
-              href={`mailto:${profile.email}`}
+              href={`mailto:${profile.email}?subject=BI%20%26%20Analytics%20Engineer%20%E2%80%94%20Let%27s%20connect`}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
             >
               <Mail size={14} /> Email me

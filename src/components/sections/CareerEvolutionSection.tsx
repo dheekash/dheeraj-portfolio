@@ -140,7 +140,7 @@ export function CareerEvolutionSection() {
                   {item.stack.map((t) => (
                     <span
                       key={t}
-                      className="text-[11px] font-mono text-muted-foreground/70 px-2 py-0.5 rounded-md"
+                      className="text-[11px] font-mono text-foreground/60 px-2 py-0.5 rounded-md"
                       style={{
                         background: "color-mix(in srgb, var(--muted) 60%, transparent)",
                         border: "1px solid color-mix(in srgb, var(--border) 60%, transparent)",

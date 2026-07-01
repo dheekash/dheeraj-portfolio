@@ -96,8 +96,12 @@ export function CinematicHero() {
             {credentials.map((tag) => (
               <span
                 key={tag}
-                className="text-[11px] font-mono text-white/60 rounded-full px-3 py-1 tracking-[0.02em]"
-                style={{ border: "1px solid rgba(255,255,255,0.18)" }}
+                className="text-[11px] font-mono text-white/85 rounded-full px-3 py-1 tracking-[0.02em] font-medium"
+                style={{
+                  background: "rgba(0,0,0,0.45)",
+                  border: "1px solid rgba(255,255,255,0.22)",
+                  backdropFilter: "blur(8px)",
+                }}
               >
                 {tag}
               </span>

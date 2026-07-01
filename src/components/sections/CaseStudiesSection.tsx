@@ -175,6 +175,7 @@ type Study = {
   domain: string;
   capability: string;
   title: string;
+  how: string;
   challenge: string;
   built: string;
   outcome: string;
@@ -190,6 +191,7 @@ const studies: Study[] = [
     id: "03", num: "01", domain: "Platform engineering",
     capability: "Architecture",
     title: "Enterprise Fabric Lakehouse Migration",
+    how: "Phased Medallion migration across 6 source systems. 200+ SQLMesh models with automated quality gates. Zero downtime.",
     challenge: "A legacy data warehouse was failing 12% of pipeline runs monthly. Six source systems had no unified schema, no lineage, and no quality gates.",
     built: "Phased migration to Microsoft Fabric with Medallion architecture (Bronze/Silver/Gold), 200+ SQLMesh transformation models, automated quality checks at each layer, and Power BI semantic models on top.",
     outcome: "Pipeline failures dropped from 12% to under 1%. Maintenance effort reduced by 90%. Legacy and new platform ran in parallel throughout validation. Zero downtime.",
@@ -232,6 +234,7 @@ WHERE event_ts >= @start_ds
     id: "05", num: "02", domain: "Risk & compliance",
     capability: "Real-time Analytics",
     title: "Real-Time Fraud Monitoring Platform",
+    how: "Kafka event stream into Databricks Random Forest scoring, surfaced on a live Power BI dashboard with sub-5-min end-to-end latency.",
     challenge: "Fraud detection ran on daily batch reports. By the time patterns surfaced, losses had occurred and intervention windows had closed.",
     built: "Kafka streaming pipeline processing transaction events in real time through Databricks anomaly detection, surfaced on a live Power BI dashboard with sub-5-minute refresh for the risk team.",
     outcome: "Detection latency cut from 24 hours to under 5 minutes. $1.2M+ in suspicious transactions flagged in the first 90 days of operation.",
@@ -282,6 +285,7 @@ scored = model.transform(
     id: "07", num: "03", domain: "Business intelligence",
     capability: "Self-Serve Analytics",
     title: "Seller Analytics Self-Serve Platform, Amazon",
+    how: "Snowflake Gold layer aggregating 100M+ daily records across 10 marketplaces, backed by 100+ DAX measures for fully self-serve analysis.",
     challenge: "Seller leadership across 10+ global marketplaces depended on analysts for every data request. Reports were stale and took days to produce. Decisions waited on people, not data.",
     built: "A unified Snowflake Gold layer aggregating 100M+ daily transaction records from 10 marketplaces. A Power BI semantic dataset with 100+ DAX measures. Automated SQL pipelines replacing manual extracts. Python predictive models surfacing revenue signals directly in the dashboard.",
     outcome: "Manual reporting effort cut 70%. Sales leadership moved to self-serve weekly reviews. $500K+ in revenue opportunities identified in the first year.",
@@ -333,6 +337,7 @@ RETURN
     id: "04", num: "04", domain: "Sales intelligence",
     capability: "Real-Time Analytics",
     title: "Real-Time Sales Intelligence Platform",
+    how: "Delta Live Tables pipeline with XGBoost forecasting under Unity Catalog governance, served via Power BI composite models on the Gold layer.",
     challenge: "Eight regional markets were running on 6-hour-old sales data. Demand signals were stale by the time managers acted, leading to missed opportunities and reactive decisions.",
     built: "Databricks Delta Live Tables workflow processing 5M+ daily transactions through Bronze, Silver, and Gold layers with schema auto-evolution and DLT quality expectations. XGBoost forecasting models tracked via MLflow under Unity Catalog governance, surfaced via Power BI composite models on the Gold layer.",
     outcome: "Data latency dropped from 6 hours to under 10 minutes. Pipeline failures reduced 95%. Sales volume forecast accuracy improved 22%. Regional managers slice live figures without waiting on an analyst.",
@@ -351,6 +356,7 @@ RETURN
     id: "06", num: "05", domain: "Manufacturing analytics",
     capability: "Enterprise BI",
     title: "Global Manufacturing Analytics Suite, Rockwool",
+    how: "ADF pipelines chained with dbt SCD Type 2 transforms and Power BI incremental refresh. Full ISO audit trail from source to report.",
     challenge: "200+ factory-floor users across 15 markets worked from stale morning exports. Report refresh took 4 hours. KPI definitions conflicted between plant controllers and corporate finance. No audit trail existed for ISO compliance.",
     built: "Chained ADF pipelines, dbt transformations with SCD Type 2 history, and Power BI incremental refresh. Modeled production yield, downtime, and OEE metrics with full audit trails. SharePoint integration for file-based sources.",
     outcome: "Report refresh cut from 4 hours to 15 minutes, 94% faster. 200+ users moved from stale exports to live figures. KPI conflicts resolved. Full ISO audit trail in place.",
@@ -369,6 +375,7 @@ RETURN
     id: "02", num: "06", domain: "Customer intelligence",
     capability: "Data Science",
     title: "Customer Segmentation & Churn Platform",
+    how: "Daily ML inference via Databricks ranking 2M+ customers by churn risk. Prioritised intervention list pushed directly to the CS team's Power BI workspace.",
     challenge: "The customer success team only learned about churn after cancellations. No early-warning system, no way to prioritise outreach, no data on who to save.",
     built: "End-to-end ML pipeline using Databricks and Snowflake ranking 2M+ customers daily by churn risk, delivering a prioritised intervention list directly into the CS team's Power BI workspace.",
     outcome: "Churn dropped 18% within 6 months, retaining approximately $300K in annual revenue. CS team shifted from reactive firefighting to proactive retention.",
@@ -528,9 +535,10 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
             {study.capability}
           </span>
         </div>
-        <h3 className="text-[clamp(1rem,0.95rem+0.4vw,1.2rem)] font-semibold leading-snug mb-3 max-w-[28ch]">
+        <h3 className="text-[clamp(1rem,0.95rem+0.4vw,1.2rem)] font-semibold leading-snug mb-2 max-w-[28ch]">
           {study.title}
         </h3>
+        <p className="text-[12px] text-muted-foreground/70 leading-snug mb-3 max-w-[44ch]">{study.how}</p>
         <div className="mb-4 flex-1 flex flex-col gap-3">
           {/* Key metric */}
           <div

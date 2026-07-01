@@ -20,6 +20,7 @@ interface Cert {
   issuer: Issuer;
   date: string;
   featured?: boolean;
+  verifyUrl?: string;
 }
 
 function IssuerLogo({ issuer }: { issuer: Issuer }) {
@@ -33,43 +34,43 @@ const certGroups: { category: string; color: string; certs: Cert[] }[] = [
     category: "Power BI",
     color: "rgba(21,145,220,0.12)",
     certs: [
-      { name: "Power BI Data Analyst",    code: "PL-300", issuer: "Microsoft", date: "Sep 2021", featured: true },
-      { name: "Power Platform Fundamentals", code: "PL-900", issuer: "Microsoft", date: "Aug 2021" },
+      { name: "Power BI Data Analyst",    code: "PL-300", issuer: "Microsoft", date: "Sep 2021", featured: true, verifyUrl: "https://learn.microsoft.com/en-us/credentials/certifications/power-bi-data-analyst-associate/" },
+      { name: "Power Platform Fundamentals", code: "PL-900", issuer: "Microsoft", date: "Aug 2021", verifyUrl: "https://learn.microsoft.com/en-us/credentials/certifications/power-platform-fundamentals/" },
     ],
   },
   {
     category: "Microsoft Fabric",
     color: "rgba(124,58,237,0.1)",
     certs: [
-      { name: "Fabric Analytics Engineer", code: "DP-600", issuer: "Microsoft", date: "Dec 2024", featured: true },
-      { name: "Fabric Data Engineer",      code: "DP-700", issuer: "Microsoft", date: "Jun 2025" },
+      { name: "Fabric Analytics Engineer", code: "DP-600", issuer: "Microsoft", date: "Dec 2024", featured: true, verifyUrl: "https://learn.microsoft.com/en-us/credentials/certifications/fabric-analytics-engineer-associate/" },
+      { name: "Fabric Data Engineer",      code: "DP-700", issuer: "Microsoft", date: "Jun 2025", verifyUrl: "https://learn.microsoft.com/en-us/credentials/certifications/fabric-data-engineer-associate/" },
     ],
   },
   {
     category: "Azure",
     color: "rgba(8,145,178,0.1)",
     certs: [
-      { name: "Azure Administrator",   code: "AZ-104", issuer: "Microsoft", date: "Dec 2021", featured: true },
-      { name: "Azure Fundamentals",    code: "AZ-900", issuer: "Microsoft", date: "Dec 2021" },
-      { name: "Azure AI Fundamentals", code: "AI-900", issuer: "Microsoft", date: "Sep 2021" },
+      { name: "Azure Administrator",   code: "AZ-104", issuer: "Microsoft", date: "Dec 2021", featured: true, verifyUrl: "https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/" },
+      { name: "Azure Fundamentals",    code: "AZ-900", issuer: "Microsoft", date: "Dec 2021", verifyUrl: "https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/" },
+      { name: "Azure AI Fundamentals", code: "AI-900", issuer: "Microsoft", date: "Sep 2021", verifyUrl: "https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/" },
     ],
   },
   {
     category: "Data & AI",
     color: "rgba(217,119,6,0.1)",
     certs: [
-      { name: "Azure Data Scientist",             code: "DP-100", issuer: "Microsoft", date: "Feb 2023", featured: true },
-      { name: "Azure Data Fundamentals",          code: "DP-900", issuer: "Microsoft", date: "Feb 2022" },
-      { name: "Security, Compliance & Identity",  code: "SC-900", issuer: "Microsoft", date: "Feb 2022" },
-      { name: "Microsoft 365 Fundamentals",       code: "MS-900", issuer: "Microsoft", date: "Dec 2021" },
+      { name: "Azure Data Scientist",             code: "DP-100", issuer: "Microsoft", date: "Feb 2023", featured: true, verifyUrl: "https://learn.microsoft.com/en-us/credentials/certifications/azure-data-scientist/" },
+      { name: "Azure Data Fundamentals",          code: "DP-900", issuer: "Microsoft", date: "Feb 2022", verifyUrl: "https://learn.microsoft.com/en-us/credentials/certifications/azure-data-fundamentals/" },
+      { name: "Security, Compliance & Identity",  code: "SC-900", issuer: "Microsoft", date: "Feb 2022", verifyUrl: "https://learn.microsoft.com/en-us/credentials/certifications/security-compliance-and-identity-fundamentals/" },
+      { name: "Microsoft 365 Fundamentals",       code: "MS-900", issuer: "Microsoft", date: "Dec 2021", verifyUrl: "https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/" },
     ],
   },
   {
     category: "Platform Engineering",
     color: "rgba(5,150,105,0.1)",
     certs: [
-      { name: "SnowPro Associate: Core", code: "SnowPro", issuer: "Snowflake",  date: "Jan 2026" },
-      { name: "Data Engineer Associate", code: "DE-A",    issuer: "Databricks", date: "May 2026" },
+      { name: "SnowPro Associate: Core", code: "SnowPro", issuer: "Snowflake",  date: "Jan 2026", verifyUrl: "https://learn.snowflake.com/en/certifications/" },
+      { name: "Data Engineer Associate", code: "DE-A",    issuer: "Databricks", date: "May 2026", verifyUrl: "https://www.databricks.com/learn/certification/data-engineer-associate" },
     ],
   },
 ];
@@ -105,13 +106,27 @@ function CertCard({ cert, groupColor }: { cert: Cert; groupColor?: string }) {
       <div>
         <p className="text-[13px] font-semibold leading-snug mb-1">{cert.name}</p>
         <div className="flex items-center gap-2 flex-wrap">
-          <span
-            className="font-mono text-[11px] font-bold px-1.5 py-0.5 rounded"
-            style={{
-              background: "color-mix(in srgb, var(--primary) 14%, var(--card))",
-              color: "var(--primary)",
-            }}
-          >{cert.code}</span>
+          {cert.verifyUrl ? (
+            <a
+              href={cert.verifyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-[11px] font-bold px-1.5 py-0.5 rounded hover:opacity-80 transition-opacity"
+              style={{
+                background: "color-mix(in srgb, var(--primary) 14%, var(--card))",
+                color: "var(--primary)",
+              }}
+              title="Verify certification"
+            >{cert.code} ↗</a>
+          ) : (
+            <span
+              className="font-mono text-[11px] font-bold px-1.5 py-0.5 rounded"
+              style={{
+                background: "color-mix(in srgb, var(--primary) 14%, var(--card))",
+                color: "var(--primary)",
+              }}
+            >{cert.code}</span>
+          )}
           <span className="text-muted-foreground/40 text-[10px]">·</span>
           <span className="font-mono text-[11px] text-muted-foreground/70">{cert.issuer}</span>
           <span className="text-muted-foreground/40 text-[10px]">·</span>

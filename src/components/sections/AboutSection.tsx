@@ -110,7 +110,7 @@ export function AboutSection() {
 
         <motion.p
           {...reveal(0.14)}
-          className="font-mono text-[11px] tracking-[0.08em] text-muted-foreground/55 mt-8"
+          className="font-mono text-[11px] tracking-[0.08em] text-muted-foreground/80 mt-8"
         >
           Bengaluru, India · IST (UTC+5:30)
         </motion.p>
