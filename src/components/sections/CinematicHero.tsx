@@ -9,17 +9,15 @@ const VIDEO_SRC =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4";
 
 const credentials = [
-  "11× Microsoft Certified",
   "DP-600 Fabric Engineer",
   "Power BI Expert",
   "6+ Years",
 ];
 
 const stats = [
-  { value: "40+",  label: "dashboards" },
-  { value: "13",   label: "certifications" },
-  { value: "3",    label: "companies" },
-  { value: "15",   label: "countries" },
+  { value: "40+", label: "dashboards" },
+  { value: "3",   label: "companies" },
+  { value: "15",  label: "countries" },
 ];
 
 function fadeUp(delay = 0) {
