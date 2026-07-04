@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
 
@@ -66,7 +65,7 @@ export function Navbar() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-[transform,background-color,border-color,box-shadow,backdrop-filter] duration-300 ${
         hidden ? "-translate-y-full" : "translate-y-0"
-      } ${scrolled || open ? "glass-nav" : "liquid-glass border-b border-white/10"}`}
+      } ${scrolled || open ? "glass-nav" : "bg-transparent"}`}
     >
       {/* Scroll progress bar */}
       <div
@@ -77,10 +76,11 @@ export function Navbar() {
         }}
       />
 
-      <div className="container-page h-[3.75rem] flex items-center gap-8">
+      <div className="container-page h-[4rem] flex items-center gap-8">
         <a
           href="#top"
-          className="text-[15px] font-semibold tracking-tight shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+          className="text-[19px] shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+          style={{ fontFamily: "var(--font-display)", fontWeight: 500, letterSpacing: "-0.02em" }}
         >
           Dheeraj Kashyap<span className="accent-text">.</span>
         </a>
@@ -91,15 +91,12 @@ export function Navbar() {
               key={l.href}
               href={l.href}
               aria-current={active === l.id ? "true" : undefined}
-              className={`relative px-3.5 py-1.5 text-[13px] transition-all duration-300 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
+              className={`relative px-4 py-1.5 text-[16px] transition-all duration-300 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
                 active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
               }`}
               style={
                 active === l.id
-                  ? {
-                      background: "color-mix(in srgb, var(--primary) 10%, transparent)",
-                      boxShadow: "inset 0 0 0 1px color-mix(in srgb, var(--primary) 22%, transparent)",
-                    }
+                  ? { background: "color-mix(in srgb, var(--foreground) 6%, transparent)" }
                   : undefined
               }
             >
@@ -108,12 +105,9 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-2">
-          <ThemeToggle />
-        </div>
+        <div className="hidden lg:block" />
 
         <div className="lg:hidden flex items-center gap-1.5">
-          <ThemeToggle />
           <button
             onClick={() => setOpen(!open)}
             aria-expanded={open}

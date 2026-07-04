@@ -559,19 +559,16 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
         <div className="mb-4 flex-1 flex flex-col gap-3">
           {/* Key metric */}
           <div
-            className="rounded-xl px-4 py-3 flex items-center gap-4 transition-shadow duration-300 group-hover:shadow-[0_0_24px_rgba(0,0,0,0.06)]"
-            style={{
-              background: `linear-gradient(135deg, rgba(${study.keyMetric.color},0.12) 0%, rgba(${study.keyMetric.color},0.04) 100%)`,
-              border: `1px solid rgba(${study.keyMetric.color},0.25)`,
-            }}
+            className="rounded-2xl px-4 py-3.5 flex items-center gap-4"
+            style={{ background: "var(--fog)", border: "1px solid var(--border)" }}
           >
             <span
-              className="font-mono font-bold tabular-nums leading-none flex-shrink-0"
-              style={{ fontSize: "clamp(1.4rem,1rem+1vw,1.8rem)", color: `rgb(${study.keyMetric.color})` }}
+              className="tabular-nums leading-none flex-shrink-0"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(1.5rem,1rem+1.1vw,2rem)", color: "var(--foreground)" }}
             >
               {study.keyMetric.value}
             </span>
-            <span className="text-[11px] text-muted-foreground font-medium leading-tight">{study.keyMetric.label}</span>
+            <span className="text-[13px] text-muted-foreground leading-tight">{study.keyMetric.label}</span>
           </div>
           {/* Outcome */}
           <p className="text-sm leading-relaxed text-muted-foreground px-1">{study.outcome}</p>

@@ -88,8 +88,8 @@ export function Footer() {
 
           {/* Availability status */}
           <div className="flex items-center gap-2.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
-            <span className="text-[13px] font-medium text-foreground/70 tracking-[0.01em]">
+            <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: "var(--sienna)" }} />
+            <span className="text-[14px] text-muted-foreground tracking-[0.01em]">
               Currently available · Bengaluru, India · IST (UTC+5:30)
             </span>
           </div>

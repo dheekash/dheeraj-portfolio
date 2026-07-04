@@ -99,9 +99,9 @@ const platformGuide = [
   {
     platform: "Microsoft Fabric",
     tagline: "All-in-one Lakehouse on OneLake",
-    bg: "rgba(0,120,212,0.08)",
-    border: "rgba(0,120,212,0.2)",
-    accent: "rgba(0,120,212,0.8)",
+    bg: "var(--fog)",
+    border: "var(--border)",
+    accent: "var(--sienna)",
     reach: [
       "Client is Microsoft-first (Azure, M365, Teams)",
       "Power BI is the primary BI tool",
@@ -116,9 +116,9 @@ const platformGuide = [
   {
     platform: "Databricks",
     tagline: "Unified analytics for ML-heavy pipelines",
-    bg: "rgba(255,54,33,0.06)",
-    border: "rgba(255,54,33,0.18)",
-    accent: "rgba(255,54,33,0.8)",
+    bg: "var(--fog)",
+    border: "var(--border)",
+    accent: "var(--sienna)",
     reach: [
       "ML and feature engineering are first-class requirements",
       "PySpark workloads at significant scale",
@@ -133,9 +133,9 @@ const platformGuide = [
   {
     platform: "Snowflake",
     tagline: "Cloud-agnostic SQL analytics warehouse",
-    bg: "rgba(41,181,232,0.07)",
-    border: "rgba(41,181,232,0.2)",
-    accent: "rgba(41,181,232,0.8)",
+    bg: "var(--fog)",
+    border: "var(--border)",
+    accent: "var(--sienna)",
     reach: [
       "Multi-cloud requirement (AWS + Azure + GCP)",
       "SQL-first team with no PySpark investment",

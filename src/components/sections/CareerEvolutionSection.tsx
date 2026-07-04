@@ -93,10 +93,8 @@ export function CareerEvolutionSection() {
               {/* Vertical line + dot */}
               <div className="hidden sm:flex flex-col items-center">
                 <span
-                  className={`w-3 h-3 rounded-full border-2 border-background flex-shrink-0 mt-1 ${
-                    item.current ? "bg-primary" : "bg-muted-foreground/35"
-                  }`}
-                  style={item.current ? { boxShadow: "0 0 12px color-mix(in srgb, var(--primary) 70%, transparent), 0 0 28px color-mix(in srgb, var(--primary) 35%, transparent)" } : undefined}
+                  className="w-3 h-3 rounded-full border-2 border-background flex-shrink-0 mt-1"
+                  style={{ background: item.current ? "var(--sienna)" : "var(--ash)" }}
                 />
                 {i < timeline.length - 1 && (
                   <span

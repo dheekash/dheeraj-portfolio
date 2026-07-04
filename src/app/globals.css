@@ -47,93 +47,99 @@
 }
 
 :root {
-  /* ── LIGHT: premium SaaS palette ── */
-  --background: #F8FAFC;
-  --foreground: #0F172A;
-  --card: #FFFFFF;
-  --card-foreground: #0F172A;
+  /* ── Steep — serif analytics on warm paper (light only) ── */
+  --background: #FFFFFF;           /* Paper White — canvas */
+  --foreground: #17191C;           /* Ink Black — text */
+  --card: #F2F2F3;                 /* Mist Gray — neutral card surface */
+  --card-foreground: #17191C;
   --popover: #FFFFFF;
-  --popover-foreground: #0F172A;
-  --primary: #2563EB;
+  --popover-foreground: #17191C;
+  --primary: #17191C;              /* Ink is the action colour */
   --primary-foreground: #FFFFFF;
-  --secondary: rgba(37, 99, 235, 0.08);
-  --secondary-foreground: #2563EB;
-  --muted: rgba(15, 23, 42, 0.04);
-  --muted-foreground: #64748B;
-  --accent: #2563EB;
-  --accent-foreground: #FFFFFF;
-  --destructive: #DC2626;
-  --border: rgba(15, 23, 42, 0.10);
-  --input: rgba(15, 23, 42, 0.08);
-  --ring: #2563EB;
-  --chart-1: #2563EB;
-  --chart-2: #64748B;
-  --chart-3: #0F172A;
-  --chart-4: #10B981;
-  --chart-5: #F1F5F9;
-  --radius: 0.75rem;
+  --secondary: #F2F2F3;
+  --secondary-foreground: #17191C;
+  --muted: #F2F2F3;
+  --muted-foreground: #777B86;     /* Slate Gray — muted copy, links */
+  --accent: #FBE1D1;               /* Blush Peach — the one chromatic surface */
+  --accent-foreground: #5D2A1A;    /* Sienna Brown — ink on peach */
+  --destructive: #B3261E;
+  --border: #ECECEC;               /* hairline */
+  --input: #ECECEC;
+  --ring: #17191C;
+  --chart-1: #17191C;
+  --chart-2: #777B86;
+  --chart-3: #979799;
+  --chart-4: #5D2A1A;
+  --chart-5: #F2F2F3;
+  --radius: 1.5rem;                /* 24px cards */
   --sidebar: #FFFFFF;
-  --sidebar-foreground: #0F172A;
-  --sidebar-primary: #2563EB;
+  --sidebar-foreground: #17191C;
+  --sidebar-primary: #17191C;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: rgba(37, 99, 235, 0.08);
-  --sidebar-accent-foreground: #2563EB;
-  --sidebar-border: rgba(15, 23, 42, 0.10);
-  --sidebar-ring: #2563EB;
+  --sidebar-accent: #F2F2F3;
+  --sidebar-accent-foreground: #17191C;
+  --sidebar-border: #ECECEC;
+  --sidebar-ring: #17191C;
 
-  /* Diagram + hero canvas accents */
-  --dgrm: #2563EB;
-  --net-node: rgba(37, 99, 235, 0.45);
-  --net-edge: 37, 99, 235;
-  --net-pulse: rgba(37, 99, 235, 0.8);
-  --grain-opacity: 0.015;
-  --nebula-1: rgba(37, 99, 235, 0.10);
-  --nebula-2: rgba(100, 116, 139, 0.05);
-  --highlight: #EFF6FF;
+  /* Editorial surfaces + tokens */
+  --fog: #FAFAFB;                  /* Section Fog — alternating band */
+  --ash: #979799;                  /* tertiary labels */
+  --smoke: #A3A6AF;                /* placeholder */
+  --peach: #FBE1D1;
+  --sienna: #5D2A1A;
+
+  /* Diagram strokes — sienna ink on kraft */
+  --dgrm: #5D2A1A;
+  --net-node: rgba(93, 42, 26, 0.35);
+  --net-edge: 93, 42, 26;
+  --net-pulse: rgba(93, 42, 26, 0.7);
+  --grain-opacity: 0.02;
+  --nebula-1: rgba(251, 225, 209, 0.55);
+  --nebula-2: rgba(251, 225, 209, 0.18);
+  --highlight: #FBE1D1;
+
+  /* Floating product artifact elevation */
+  --shadow-artifact: 0 0 0 1px rgba(4,23,43,0.05), 0 20px 25px -5px rgba(0,0,0,0.10), 0 8px 10px -6px rgba(0,0,0,0.10);
 }
 
+/* Dark theme is dropped for the editorial system — .dark inherits the paper
+   palette so any lingering toggle is a no-op. */
 .dark {
-  /* ── DARK: deep navy, sky-blue accents ── */
-  color-scheme: dark;
-  --background: #070F1C;
-  --foreground: #E8F4FD;
-  --card: #0F1E35;
-  --card-foreground: #E8F4FD;
-  --popover: #0F1E35;
-  --popover-foreground: #E8F4FD;
-  --primary: #4BB8FA;
-  --primary-foreground: #050D18;
-  --secondary: rgba(75, 184, 250, 0.12);
-  --secondary-foreground: #C4E2F5;
-  --muted: rgba(255, 255, 255, 0.05);
-  --muted-foreground: #C4E2F5;
-  --accent: #4BB8FA;
-  --accent-foreground: #050D18;
-  --destructive: #F87171;
-  --border: rgba(75, 184, 250, 0.13);
-  --input: rgba(75, 184, 250, 0.09);
-  --ring: #4BB8FA;
-  --chart-1: #4BB8FA;
-  --chart-2: #C4E2F5;
-  --chart-3: #E8F4FD;
-  --chart-4: #34D399;
-  --chart-5: #1591DC;
-  --sidebar: #0F1E35;
-  --sidebar-foreground: #E8F4FD;
-  --sidebar-primary: #4BB8FA;
-  --sidebar-primary-foreground: #050D18;
-  --sidebar-accent: rgba(75, 184, 250, 0.12);
-  --sidebar-accent-foreground: #C4E2F5;
-  --sidebar-border: rgba(75, 184, 250, 0.11);
-  --sidebar-ring: #4BB8FA;
+  color-scheme: light;
+  --background: #FFFFFF;
+  --foreground: #17191C;
+  --card: #F2F2F3;
+  --card-foreground: #17191C;
+  --popover: #FFFFFF;
+  --popover-foreground: #17191C;
+  --primary: #17191C;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F2F2F3;
+  --secondary-foreground: #17191C;
+  --muted: #F2F2F3;
+  --muted-foreground: #777B86;
+  --accent: #FBE1D1;
+  --accent-foreground: #5D2A1A;
+  --destructive: #B3261E;
+  --border: #ECECEC;
+  --input: #ECECEC;
+  --ring: #17191C;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #17191C;
+  --sidebar-primary: #17191C;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F2F2F3;
+  --sidebar-accent-foreground: #17191C;
+  --sidebar-border: #ECECEC;
+  --sidebar-ring: #17191C;
 
-  --dgrm: #4BB8FA;
-  --net-node: rgba(75, 184, 250, 0.55);
-  --net-edge: 75, 184, 250;
-  --net-pulse: rgba(196, 226, 245, 0.9);
-  --grain-opacity: 0.045;
-  --nebula-1: rgba(21, 145, 220, 0.18);
-  --nebula-2: rgba(44, 94, 173, 0.10);
+  --dgrm: #5D2A1A;
+  --net-node: rgba(93, 42, 26, 0.35);
+  --net-edge: 93, 42, 26;
+  --net-pulse: rgba(93, 42, 26, 0.7);
+  --grain-opacity: 0.02;
+  --nebula-1: rgba(251, 225, 209, 0.55);
+  --nebula-2: rgba(251, 225, 209, 0.18);
 }
 
 @layer base {
@@ -149,17 +155,19 @@
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
     overflow-x: clip;
-    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.2rem);
-    line-height: 1.75;
+    font-size: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);
+    line-height: 1.5;
   }
-  ::selection { background: color-mix(in srgb, var(--primary) 25%, transparent); }
+  ::selection { background: var(--peach); color: var(--sienna); }
   h1, h2, h3 {
-    letter-spacing: -0.03em;
+    font-family: var(--font-display);
+    font-weight: 400;
     text-wrap: balance;
-    font-weight: 600;
+    letter-spacing: -0.02em;
   }
-  h2 { font-size: clamp(2rem, 1rem + 3.6vw, 4.5rem); line-height: 1.04; letter-spacing: -0.04em; }
-  h3 { font-size: clamp(1.15rem, 0.9rem + 1.2vw, 1.6rem); line-height: 1.25; }
+  h1 { letter-spacing: -0.025em; }
+  h2 { font-size: clamp(2.25rem, 1.4rem + 3vw, 4rem); line-height: 1.14; letter-spacing: -0.025em; }
+  h3 { font-size: clamp(1.2rem, 0.95rem + 1vw, 1.6rem); line-height: 1.22; letter-spacing: -0.015em; }
 
   /* Smooth theme cross-fade (no transform/opacity, so framer-motion is unaffected) */
   @media (prefers-reduced-motion: no-preference) {
@@ -199,51 +207,49 @@
   }
 
   .eyebrow {
-    @apply text-[11px] font-medium uppercase tracking-[0.24em] text-muted-foreground font-mono;
+    @apply text-[13px] font-normal uppercase tracking-[0.12em];
+    color: var(--ash);
+    font-family: var(--font-sans);
   }
 
-  .accent-text { color: var(--primary); }
+  .accent-text { color: var(--foreground); font-style: italic; font-family: var(--font-display); }
 
   .ink-fade {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(180deg, var(--foreground) 35%, color-mix(in srgb, var(--foreground) 55%, transparent) 100%);
   }
 
-  /* ── Surfaces: minimal in light, atmospheric in dark ── */
+  /* ── Neutral card — flat Mist Gray, hairline, no shadow (Steep default) ── */
   .panel {
     background: var(--card);
     border: 1px solid var(--border);
-    box-shadow: 0 1px 3px rgba(15, 15, 17, 0.06);
+    border-radius: 1.5rem;
   }
-  .dark .panel {
-    background: linear-gradient(165deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 60%);
-    border-color: rgba(255,255,255,0.095);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 1px 3px rgba(0,0,0,0.55);
+
+  /* Floating product artifact — the only elevated surface */
+  .artifact {
+    background: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: var(--shadow-artifact);
   }
 
   .panel-lift {
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-                border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.35s ease, box-shadow 0.35s ease;
   }
   .panel-lift:hover {
     transform: translateY(-0.2rem);
-    border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
-    box-shadow: 0 0.9rem 2.25rem rgba(17, 17, 17, 0.09);
-  }
-  .dark .panel-lift:hover {
-    box-shadow: 0 1.1rem 2.75rem rgba(0, 0, 0, 0.55), 0 0 0 1px color-mix(in srgb, var(--primary) 12%, transparent);
+    border-color: color-mix(in srgb, var(--foreground) 16%, var(--border));
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.10);
   }
 
-  .glow-accent { box-shadow: 0 0 0 transparent; }
-  .dark .glow-accent {
-    box-shadow: 0 0 1.5rem rgba(96, 165, 250, 0.3), 0 0 4.5rem rgba(96, 165, 250, 0.12);
-  }
+  .glow-accent { box-shadow: none; }
 
   .glass-nav {
-    background: color-mix(in srgb, var(--background) 82%, transparent);
+    background: color-mix(in srgb, var(--background) 80%, transparent);
     border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(18px) saturate(1.4);
-    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    backdrop-filter: blur(18px) saturate(1.2);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
   }
 
   .hairline {
@@ -253,12 +259,9 @@
 
   .rule-thick { border-top: 2.5px solid var(--foreground); }
 
-  /* Alternating section tint */
+  /* Alternating section band — Fog White, a whisper above paper */
   .section-alt {
-    background: color-mix(in srgb, var(--primary) 2.5%, var(--background));
-  }
-  .dark .section-alt {
-    background: color-mix(in srgb, var(--primary) 4%, var(--background));
+    background: var(--fog);
   }
 
   /* ── Liquid glass — cinematic frosted surface ── */
@@ -297,32 +300,21 @@
   .animate-fade-rise-delay    { animation: fade-rise 0.8s ease-out 0.2s both; }
   .animate-fade-rise-delay-2  { animation: fade-rise 0.8s ease-out 0.4s both; }
 
-  /* ── Gradient text ── */
+  /* ── Editorial emphasis — italic serif, ink (no gradient in this system) ── */
   .text-gradient {
-    background-image: linear-gradient(100deg, var(--foreground) 0%, var(--primary) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    font-style: italic;
+    font-family: var(--font-display);
+    color: var(--foreground);
   }
 
-  /* Animated shimmer text — hero accent words */
-  @keyframes shimmer-slide {
-    from { background-position: 200% center; }
-    to   { background-position: -200% center; }
-  }
+  /* Emphasis word — italic serif (replaces the old animated shimmer) */
   .text-shimmer {
-    background-image: linear-gradient(
-      100deg,
-      #7dd0ff 0%, #4BB8FA 25%, #cfeaff 50%, #4BB8FA 75%, #7dd0ff 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: shimmer-slide 6s linear infinite;
+    font-style: italic;
+    font-family: var(--font-display);
+    color: var(--foreground);
   }
 
-  /* ── Gradient border card — primary fade ring via mask ── */
+  /* ── Soft ring — hairline with a faint peach warmth (editorial) ── */
   .glow-border { position: relative; }
   .glow-border::before {
     content: "";
@@ -332,10 +324,9 @@
     padding: 1px;
     background: linear-gradient(
       140deg,
-      color-mix(in srgb, var(--primary) 55%, transparent) 0%,
-      color-mix(in srgb, var(--primary) 12%, transparent) 35%,
-      transparent 60%,
-      color-mix(in srgb, var(--primary) 30%, transparent) 100%
+      color-mix(in srgb, var(--peach) 80%, transparent) 0%,
+      var(--border) 40%,
+      var(--border) 100%
     );
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -426,23 +417,16 @@
   inset: 0;
   border-radius: inherit;
   background: radial-gradient(
-    340px circle at var(--mx, -200px) var(--my, -200px),
-    color-mix(in srgb, var(--primary) 13%, transparent),
-    transparent 68%
+    360px circle at var(--mx, -200px) var(--my, -200px),
+    color-mix(in srgb, var(--peach) 55%, transparent),
+    transparent 65%
   );
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.45s ease;
   pointer-events: none;
   z-index: 0;
 }
 .spotlight:hover::before { opacity: 1; }
-.dark .spotlight::before {
-  background: radial-gradient(
-    340px circle at var(--mx, -200px) var(--my, -200px),
-    color-mix(in srgb, var(--primary) 20%, transparent),
-    transparent 65%
-  );
-}
 /* Keep card content above the glow layer */
 .spotlight > * { position: relative; z-index: 1; }
 @media (pointer: coarse) {

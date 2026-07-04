@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, JetBrains_Mono, Kanit } from "next/font/google";
+import { Inter, JetBrains_Mono, Source_Serif_4 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,7 +7,8 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import "./globals.css";
 
-const geist = Geist({
+// Sohne substitute — body, UI, navigation sans
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-geist",
   display: "swap",
@@ -20,9 +21,11 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500", "600"],
 });
 
-const kanit = Kanit({
+// Signifier substitute — display / headline serif, weight 400 at every scale
+const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   variable: "--font-kanit",
   display: "swap",
 });
@@ -154,7 +157,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${geist.variable} ${jetbrainsMono.variable} ${kanit.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} ${sourceSerif.variable} font-sans antialiased`}>
         <ThemeProvider>
           <TooltipProvider>
             <SiteChrome>{children}</SiteChrome>

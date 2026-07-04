@@ -88,8 +88,8 @@ function CertCard({ cert, groupColor }: { cert: Cert; groupColor?: string }) {
   return (
     <div
       onPointerMove={onSpotlightMove}
-      className="spotlight panel panel-lift shine rounded-xl px-4 py-3.5 flex flex-col gap-2.5"
-      style={groupColor ? { borderTop: `2px solid ${groupColor.replace("0.1", "0.5").replace("0.12", "0.5")}` } : undefined}
+      className="spotlight panel panel-lift rounded-2xl px-4 py-3.5 flex flex-col gap-2.5"
+      style={{ borderTop: "2px solid var(--sienna)" }}
     >
       <div className="flex items-center justify-between">
         <IssuerLogo issuer={cert.issuer} />

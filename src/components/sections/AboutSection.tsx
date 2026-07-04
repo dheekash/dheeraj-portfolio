@@ -110,19 +110,15 @@ export function AboutSection() {
               </div>
 
               <div
-                className="shine rounded-xl px-4 py-3.5 flex items-center gap-3"
-                style={{
-                  background: "linear-gradient(135deg, color-mix(in srgb, var(--primary) 14%, var(--card)) 0%, color-mix(in srgb, var(--primary) 6%, var(--card)) 100%)",
-                  border: "1px solid color-mix(in srgb, var(--primary) 30%, transparent)",
-                  boxShadow: "0 4px 20px color-mix(in srgb, var(--primary) 15%, transparent)",
-                }}
+                className="rounded-2xl px-5 py-4 flex items-center gap-4"
+                style={{ background: "var(--accent)", color: "var(--accent-foreground)" }}
               >
-                <span className="font-mono font-bold text-[1.6rem] leading-none tabular-nums" style={{ color: "var(--primary)" }}>
+                <span className="leading-none tabular-nums" style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "2rem", color: "var(--accent-foreground)" }}>
                   11×
                 </span>
                 <div>
-                  <p className="text-[13px] font-semibold text-foreground leading-snug">Microsoft Certified</p>
-                  <p className="text-[11px] font-mono text-muted-foreground mt-0.5">DP-600 · PL-300 · AZ-104 · DP-700 · DP-100</p>
+                  <p className="text-[15px] leading-snug" style={{ color: "var(--accent-foreground)" }}>Microsoft Certified</p>
+                  <p className="text-[12px] mt-1" style={{ color: "color-mix(in srgb, var(--accent-foreground) 75%, transparent)" }}>DP-600 · PL-300 · AZ-104 · DP-700 · DP-100</p>
                 </div>
               </div>
             </div>
