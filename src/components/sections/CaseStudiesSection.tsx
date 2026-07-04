@@ -517,7 +517,7 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
 
 function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
   return (
-    <motion.article {...reveal()} onPointerMove={onSpotlightMove} className="spotlight panel panel-lift rounded-2xl overflow-hidden flex flex-col group">
+    <motion.article {...reveal()} onPointerMove={onSpotlightMove} className="spotlight gradient-frame overflow-hidden flex flex-col group">
       {/* Faux browser chrome */}
       <div
         className="flex items-center px-4 py-2.5 border-b border-border"
@@ -575,7 +575,7 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
         </div>
         <button
           onClick={onOpen}
-          className="shine self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_color-mix(in_srgb,var(--primary)_40%,transparent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+          className="gradient-btn self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
         >
           View case study <ArrowUpRight size={14} />
         </button>
