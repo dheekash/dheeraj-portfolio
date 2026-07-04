@@ -85,7 +85,7 @@ export function Navbar() {
           Dheeraj Kashyap<span className="accent-text">.</span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-1 flex-1">
+        <nav className="hidden lg:flex items-center gap-1 ml-auto">
           {links.map((l) => (
             <a
               key={l.href}
@@ -105,9 +105,7 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden lg:block" />
-
-        <div className="lg:hidden flex items-center gap-1.5">
+        <div className="lg:hidden flex items-center gap-1.5 ml-auto">
           <button
             onClick={() => setOpen(!open)}
             aria-expanded={open}
