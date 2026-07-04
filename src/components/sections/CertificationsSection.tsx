@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MicrosoftLogo, DatabricksLogo, SnowflakeLogo } from "@/components/common/TechLogos";
+import { onSpotlightMove } from "@/components/common/spotlight";
 
 function reveal(delay = 0) {
   return {
@@ -86,7 +87,8 @@ const featuredCerts: (Cert & { groupColor: string })[] = certGroups.flatMap((g) 
 function CertCard({ cert, groupColor }: { cert: Cert; groupColor?: string }) {
   return (
     <div
-      className="panel panel-lift shine rounded-xl px-4 py-3.5 flex flex-col gap-2.5"
+      onPointerMove={onSpotlightMove}
+      className="spotlight panel panel-lift shine rounded-xl px-4 py-3.5 flex flex-col gap-2.5"
       style={groupColor ? { borderTop: `2px solid ${groupColor.replace("0.1", "0.5").replace("0.12", "0.5")}` } : undefined}
     >
       <div className="flex items-center justify-between">

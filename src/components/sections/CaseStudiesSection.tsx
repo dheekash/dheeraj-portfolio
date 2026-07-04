@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
+import { onSpotlightMove } from "@/components/common/spotlight";
 
 function reveal(delay = 0) {
   return {
@@ -516,7 +517,7 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
 
 function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
   return (
-    <motion.article {...reveal()} className="panel panel-lift rounded-2xl overflow-hidden flex flex-col group">
+    <motion.article {...reveal()} onPointerMove={onSpotlightMove} className="spotlight panel panel-lift rounded-2xl overflow-hidden flex flex-col group">
       {/* Faux browser chrome */}
       <div
         className="flex items-center px-4 py-2.5 border-b border-border"

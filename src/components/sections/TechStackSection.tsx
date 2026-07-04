@@ -7,6 +7,7 @@ import {
   DatabricksLogo, FabricLogo, PowerQueryLogo,
   MicrosoftLogo, ExcelLogo,
 } from "@/components/common/TechLogos";
+import { onSpotlightMove } from "@/components/common/spotlight";
 
 function reveal(delay = 0) {
   return {
@@ -176,7 +177,8 @@ export function TechStackSection() {
                 <motion.div
                   key={p.platform}
                   {...reveal(0.36 + i * 0.06)}
-                  className="panel panel-lift rounded-2xl overflow-hidden flex flex-col snap-start flex-shrink-0 w-[min(80vw,320px)] sm:w-auto"
+                  onPointerMove={onSpotlightMove}
+                  className="spotlight panel panel-lift rounded-2xl overflow-hidden flex flex-col snap-start flex-shrink-0 w-[min(80vw,320px)] sm:w-auto"
                   style={{ borderTop: `2px solid ${p.accent}` }}
                 >
                   <div
@@ -235,7 +237,8 @@ export function TechStackSection() {
             <motion.div
               key={cat.title}
               {...reveal(0.1 + i * 0.06)}
-              className="panel rounded-2xl p-5 flex flex-col gap-3 panel-lift"
+              onPointerMove={onSpotlightMove}
+              className="spotlight panel rounded-2xl p-5 flex flex-col gap-3 panel-lift"
             >
               <div className="flex items-center gap-3">
                 <span

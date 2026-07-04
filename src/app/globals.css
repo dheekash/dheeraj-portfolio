@@ -416,6 +416,39 @@
   .flow-pulse { animation: flow-pulse 2.2s ease-in-out infinite; }
 }
 
+/* ── Cursor-following spotlight glow (Linear / Vercel style) ──
+   Kept as plain top-level CSS (not @layer utilities) so Tailwind v4's
+   utility scanner does not purge it. */
+.spotlight { position: relative; }
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    340px circle at var(--mx, -200px) var(--my, -200px),
+    color-mix(in srgb, var(--primary) 13%, transparent),
+    transparent 68%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.spotlight:hover::before { opacity: 1; }
+.dark .spotlight::before {
+  background: radial-gradient(
+    340px circle at var(--mx, -200px) var(--my, -200px),
+    color-mix(in srgb, var(--primary) 20%, transparent),
+    transparent 65%
+  );
+}
+/* Keep card content above the glow layer */
+.spotlight > * { position: relative; z-index: 1; }
+@media (pointer: coarse) {
+  .spotlight::before { display: none; }
+}
+
 /* ── Film grain (subtler on paper, fuller in the dark) ── */
 .grain {
   position: fixed;
