@@ -119,6 +119,20 @@ export function CinematicHero() {
               <em className="italic" style={{ color: "var(--foreground)" }}>enterprise decisions.</em>
             </motion.h1>
 
+            {/* Rotating deliverable — Uiverse word list, editorial palette */}
+            <motion.div {...fadeUp(0.12)} className="mb-9">
+              <span className="word-rotator">
+                <span>Currently building</span>
+                <span className="wr-words" aria-label="Lakehouses, pipelines, dashboards, semantic models">
+                  <span className="wr-word">Lakehouses</span>
+                  <span className="wr-word">pipelines</span>
+                  <span className="wr-word">dashboards</span>
+                  <span className="wr-word">semantic models</span>
+                  <span className="wr-word">Lakehouses</span>
+                </span>
+              </span>
+            </motion.div>
+
             {/* Credential tags — ghost typographic labels */}
             <motion.div {...fadeUp(0.16)} className="flex flex-wrap gap-x-5 gap-y-2 mb-10">
               {credentials.map((tag) => (

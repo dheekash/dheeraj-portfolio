@@ -459,6 +459,60 @@
 .gradient-btn:hover { transform: scale(1.03); text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); }
 .gradient-btn:active { transform: scale(1); }
 
+/* ── Rotating word list (Uiverse loader, recoloured to the editorial theme) ── */
+.word-rotator {
+  --wr-bg: var(--background);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45ch;
+  color: var(--muted-foreground);
+  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem);
+  font-weight: 500;
+}
+.wr-words {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  height: 1.5em;
+  vertical-align: top;
+}
+.wr-words::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--wr-bg) 8%,
+    transparent 32%,
+    transparent 68%,
+    var(--wr-bg) 92%
+  );
+  z-index: 20;
+  pointer-events: none;
+}
+.wr-word {
+  display: block;
+  height: 1.5em;
+  line-height: 1.5em;
+  white-space: nowrap;
+  color: var(--sienna);
+  font-family: var(--font-display);
+  font-style: italic;
+  animation: wr-spin 7s infinite;
+}
+@keyframes wr-spin {
+  10%  { transform: translateY(-102%); }
+  25%  { transform: translateY(-100%); }
+  35%  { transform: translateY(-202%); }
+  50%  { transform: translateY(-200%); }
+  60%  { transform: translateY(-302%); }
+  75%  { transform: translateY(-300%); }
+  85%  { transform: translateY(-402%); }
+  100% { transform: translateY(-400%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wr-word { animation: none; }
+}
+
 /* ── Film grain (subtler on paper, fuller in the dark) ── */
 .grain {
   position: fixed;
