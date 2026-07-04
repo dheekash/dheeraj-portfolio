@@ -513,49 +513,6 @@
   .wr-word { animation: none; }
 }
 
-/* ── Expanding "Back to Top" button (Uiverse, recoloured to editorial) ── */
-.backtop-btn {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: var(--foreground);
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--peach) 70%, transparent);
-  cursor: pointer;
-  transition-duration: 0.3s;
-  overflow: hidden;
-  position: relative;
-}
-.backtop-icon {
-  width: 12px;
-  transition-duration: 0.3s;
-}
-.backtop-icon path { fill: var(--background); }
-.backtop-btn:hover {
-  width: 140px;
-  border-radius: 50px;
-  background-color: var(--peach);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--sienna) 22%, transparent);
-}
-.backtop-btn:hover .backtop-icon { transform: translateY(-200%); }
-.backtop-btn::before {
-  position: absolute;
-  bottom: -20px;
-  content: "Back to Top";
-  color: var(--sienna);
-  font-weight: 600;
-  font-size: 0px;
-}
-.backtop-btn:hover::before {
-  font-size: 13px;
-  opacity: 1;
-  bottom: unset;
-  transition-duration: 0.3s;
-}
-
 /* ── Film grain (subtler on paper, fuller in the dark) ── */
 .grain {
   position: fixed;
