@@ -11,6 +11,8 @@ export interface Profile {
   calendlyUrl: string;
   linkedinUrl: string;
   githubUrl: string;
+  instagramUrl: string;
+  facebookUrl: string;
   stats: Stat[];
 }
 

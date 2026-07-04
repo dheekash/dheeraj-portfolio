@@ -12,6 +12,8 @@ export const profile: Profile = {
   calendlyUrl: "https://calendly.com/dheerajkashyap",
   linkedinUrl: "https://linkedin.com/in/kashyap-dheeraj",
   githubUrl: "https://github.com/dheekash",
+  instagramUrl: "https://www.instagram.com/_dheeraj.kashyap_/",
+  facebookUrl: "https://www.facebook.com/dheeraj.kashyap.dheeraj.kashya/",
   stats: [
     { value: "5",   label: "Records processed daily",     suffix: "M+" },
     { value: "188", label: "Pipelines built",              suffix: "+"  },
