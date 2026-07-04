@@ -557,6 +557,120 @@
 .social-orb.ig svg { fill: #f2f2f2; }
 .social-orb.ig:hover svg { fill: #c13584; }
 
+/* ── Animated download button (Uiverse by Na3ar-17, editorial palette) ── */
+.dl-btn {
+  background-color: transparent;
+  border: 2px solid var(--foreground);
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50px;
+  width: 172px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  padding: 5px;
+  position: relative;
+}
+.dl-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--sienna);
+  width: 8px;
+  height: 8px;
+  transition: all 0.4s ease;
+  border-radius: 100%;
+  margin: auto;
+  opacity: 0;
+  visibility: hidden;
+}
+.dl-input { display: none; }
+.dl-title {
+  font-size: 16px;
+  color: var(--foreground);
+  transition: all 0.4s ease;
+  position: absolute;
+  right: 22px;
+  bottom: 14px;
+  text-align: center;
+}
+.dl-title:last-child { opacity: 0; visibility: hidden; }
+.dl-circle {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  background-color: var(--foreground);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease;
+  position: relative;
+  box-shadow: 0 0 0 0 var(--foreground);
+  overflow: hidden;
+}
+.dl-circle .dl-icon {
+  color: var(--background);
+  width: 26px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease;
+}
+.dl-circle .dl-square {
+  aspect-ratio: 1;
+  width: 15px;
+  border-radius: 2px;
+  background-color: var(--background);
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease;
+}
+.dl-circle::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: var(--sienna);
+  width: 100%;
+  height: 0;
+  transition: all 0.4s ease;
+}
+.dl-btn:has(.dl-input:checked) {
+  width: 57px;
+  animation: dl-installed 0.4s ease 3.5s forwards;
+}
+.dl-btn:has(.dl-input:checked)::before {
+  animation: dl-rotate 3s ease-in-out 0.4s forwards;
+}
+.dl-input:checked + .dl-circle {
+  animation: dl-pulse 1s forwards, dl-circleDelete 0.2s ease 3.5s forwards;
+  rotate: 180deg;
+}
+.dl-input:checked + .dl-circle::before { animation: dl-installing 3s ease-in-out forwards; }
+.dl-input:checked + .dl-circle .dl-icon { opacity: 0; visibility: hidden; }
+.dl-input:checked ~ .dl-circle .dl-square { opacity: 1; visibility: visible; }
+.dl-input:checked ~ .dl-title { opacity: 0; visibility: hidden; }
+.dl-input:checked ~ .dl-title:last-child { animation: dl-showInstalled 0.4s ease 3.5s forwards; }
+
+@keyframes dl-pulse {
+  0%   { scale: 0.95; box-shadow: 0 0 0 0 rgba(93, 42, 26, 0.5); }
+  70%  { scale: 1;    box-shadow: 0 0 0 16px rgba(93, 42, 26, 0); }
+  100% { scale: 0.95; box-shadow: 0 0 0 0 rgba(93, 42, 26, 0); }
+}
+@keyframes dl-installing { from { height: 0; } to { height: 100%; } }
+@keyframes dl-rotate {
+  0%   { transform: rotate(-90deg) translate(27px) rotate(0); opacity: 1; visibility: visible; }
+  99%  { transform: rotate(270deg) translate(27px) rotate(270deg); opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+@keyframes dl-installed { 100% { width: 150px; border-color: var(--sienna); } }
+@keyframes dl-circleDelete { 100% { opacity: 0; visibility: hidden; } }
+@keyframes dl-showInstalled { 100% { opacity: 1; visibility: visible; right: 56px; } }
+
 /* ── Film grain (subtler on paper, fuller in the dark) ── */
 .grain {
   position: fixed;

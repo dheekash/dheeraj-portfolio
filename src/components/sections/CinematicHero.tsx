@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useTransform, useInView, animate } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { profile } from "@/data/profile";
 
 const credentials = [
@@ -144,15 +144,25 @@ export function CinematicHero() {
 
             {/* Pill button pair — filled + ghost */}
             <motion.div {...fadeUp(0.24)} className="flex flex-wrap items-center gap-3">
-              <a
-                href={profile.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[16px] transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-                style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
-              >
-                Download Resume <ArrowUpRight size={15} />
-              </a>
+              <label className="dl-btn" aria-label="Download Resume">
+                <input
+                  type="checkbox"
+                  className="dl-input"
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      window.open(profile.resumeUrl, "_blank", "noopener,noreferrer");
+                    }
+                  }}
+                />
+                <span className="dl-circle">
+                  <svg className="dl-icon" viewBox="0 0 24 24" fill="none" aria-hidden>
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 19V5m0 14-4-4m4 4 4-4" />
+                  </svg>
+                  <div className="dl-square" />
+                </span>
+                <p className="dl-title">Download</p>
+                <p className="dl-title">Open</p>
+              </label>
               <a
                 href="#case-studies"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[16px] transition-colors hover:bg-[color-mix(in_srgb,var(--foreground)_5%,transparent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
