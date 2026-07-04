@@ -46,14 +46,21 @@ export function AboutSection() {
               About me
             </motion.h2>
 
-            <motion.p
+            <motion.div
               {...reveal(0.05)}
-              className="text-[clamp(1rem,1.1vw,1.15rem)] leading-relaxed text-muted-foreground text-pretty mb-8"
+              className="space-y-5 text-[clamp(1rem,1.1vw,1.15rem)] leading-relaxed text-muted-foreground text-pretty mb-8"
             >
-              I started in customer support. The data told a different story than the reports, so I switched to analytics.
-              Seven years later, I build Lakehouse platforms, semantic models, and pipelines for enterprise clients across 15 countries.
-              My focus is simple: does the dashboard answer the question it was built to answer?
-            </motion.p>
+              <p>
+                I build BI platforms, Lakehouse architectures, and analytics solutions for enterprise teams across 15 countries. My work spans Microsoft Fabric, Power BI, Databricks, Snowflake, dbt, Azure, and PySpark. I design semantic models, build data pipelines, and deliver reporting systems for finance, operations, sales, and executive teams.
+              </p>
+              <p>
+                I value clear architecture, fast performance, and reliable data. Every solution starts with a business problem and ends with measurable results.
+              </p>
+              <p>One question drives every project.</p>
+              <p className="text-foreground" style={{ fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "clamp(1.35rem,1rem+1.2vw,1.75rem)", lineHeight: 1.3 }}>
+                Does this help people make better decisions?
+              </p>
+            </motion.div>
 
             <motion.p
               {...reveal(0.1)}
