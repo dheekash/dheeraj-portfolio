@@ -176,11 +176,12 @@ export function TechStackSection() {
                 <motion.div
                   key={p.platform}
                   {...reveal(0.36 + i * 0.06)}
-                  className="panel rounded-2xl overflow-hidden flex flex-col snap-start flex-shrink-0 w-[min(80vw,320px)] sm:w-auto"
+                  className="panel panel-lift rounded-2xl overflow-hidden flex flex-col snap-start flex-shrink-0 w-[min(80vw,320px)] sm:w-auto"
+                  style={{ borderTop: `2px solid ${p.accent}` }}
                 >
                   <div
                     className="px-5 py-4"
-                    style={{ background: p.bg, borderBottom: `1px solid ${p.border}` }}
+                    style={{ background: `linear-gradient(160deg, ${p.bg} 0%, transparent 130%)`, borderBottom: `1px solid ${p.border}` }}
                   >
                     <p className="text-[13px] font-semibold text-foreground">{p.platform}</p>
                     <p className="text-[11px] font-mono text-muted-foreground mt-0.5">{p.tagline}</p>
@@ -237,14 +238,17 @@ export function TechStackSection() {
               className="panel rounded-2xl p-5 flex flex-col gap-3 panel-lift"
             >
               <div className="flex items-center gap-3">
-                <span className="w-3 h-3 rounded-full flex-shrink-0 bg-foreground/20" />
+                <span
+                  className="w-2 h-2 rounded-full flex-shrink-0"
+                  style={{ background: "var(--primary)", boxShadow: "0 0 8px color-mix(in srgb, var(--primary) 60%, transparent)" }}
+                />
                 <p className="text-[13px] font-bold text-foreground tracking-tight">{cat.title}</p>
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {cat.tools.map((t) => (
                   <span
                     key={t.name}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11.5px] font-medium text-muted-foreground cursor-default hover:text-foreground transition-colors"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11.5px] font-medium text-muted-foreground cursor-default transition-all duration-300 hover:text-foreground hover:-translate-y-px hover:border-primary/40"
                     style={{
                       background: "color-mix(in srgb, var(--muted) 50%, transparent)",
                       border: "1px solid color-mix(in srgb, var(--border) 60%, transparent)",

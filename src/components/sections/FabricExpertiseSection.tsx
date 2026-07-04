@@ -82,10 +82,10 @@ function ArchDiagram() {
               </div>
             </div>
             {i < layers.length - 1 && (
-              <div className="flex flex-col items-center py-1.5">
-                <div className="w-[2px] h-5" style={{ background: "color-mix(in srgb, var(--primary) 40%, var(--border))" }} />
+              <div className="flex flex-col items-center py-1.5 flow-pulse" style={{ animationDelay: `${i * 0.3}s` }}>
+                <div className="w-[2px] h-5" style={{ background: "linear-gradient(to bottom, color-mix(in srgb, var(--primary) 20%, var(--border)), var(--primary))" }} />
                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
-                  <path d="M5 6L0 0h10L5 6z" fill="var(--primary)" opacity="0.55" />
+                  <path d="M5 6L0 0h10L5 6z" fill="var(--primary)" opacity="0.8" />
                 </svg>
               </div>
             )}
@@ -124,12 +124,19 @@ export function FabricExpertiseSection() {
         {/* Architecture + Governance unified container */}
         <motion.div
           {...reveal(0.1)}
-          className="mb-[clamp(2rem,3vw,3rem)] rounded-2xl overflow-hidden"
-          style={{ border: "1px solid var(--border)" }}
+          className="glow-border mb-[clamp(2rem,3vw,3rem)] rounded-2xl overflow-hidden"
+          style={{ boxShadow: "0 12px 40px color-mix(in srgb, var(--primary) 7%, transparent)" }}
         >
-          <div className="p-[clamp(1.25rem,2vw,2rem)]">
-            <p className="text-[13px] font-semibold text-foreground mb-4">Platform Architecture</p>
-            <ArchDiagram />
+          <div className="p-[clamp(1.25rem,2vw,2rem)] relative">
+            <div
+              aria-hidden
+              className="bg-dots absolute inset-0 pointer-events-none opacity-35"
+              style={{ maskImage: "radial-gradient(ellipse 80% 80% at 50% 30%, black 0%, transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse 80% 80% at 50% 30%, black 0%, transparent 80%)" }}
+            />
+            <div className="relative">
+              <p className="text-[13px] font-semibold text-foreground mb-4">Platform Architecture</p>
+              <ArchDiagram />
+            </div>
           </div>
 
           <div

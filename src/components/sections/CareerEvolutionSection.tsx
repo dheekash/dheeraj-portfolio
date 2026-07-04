@@ -96,10 +96,11 @@ export function CareerEvolutionSection() {
                   className={`w-3 h-3 rounded-full border-2 border-background flex-shrink-0 mt-1 ${
                     item.current ? "bg-primary" : "bg-muted-foreground/35"
                   }`}
+                  style={item.current ? { boxShadow: "0 0 12px color-mix(in srgb, var(--primary) 70%, transparent), 0 0 28px color-mix(in srgb, var(--primary) 35%, transparent)" } : undefined}
                 />
                 {i < timeline.length - 1 && (
                   <span
-                    className="flex-1 w-px bg-border mt-1"
+                    className={`flex-1 w-px mt-1 ${i === 0 ? "timeline-spine" : "bg-border"}`}
                     style={{ minHeight: "calc(100% + clamp(2rem,3vw,3rem))" }}
                   />
                 )}

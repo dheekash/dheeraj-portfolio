@@ -16,6 +16,16 @@ export function Footer() {
             "radial-gradient(ellipse 70% 85% at 50% 115%, var(--nebula-1) 0%, var(--nebula-2) 45%, transparent 75%)",
         }}
       />
+      <div
+        aria-hidden
+        className="aurora w-[38vw] h-[38vw] bottom-[-20%] right-[-10%]"
+        style={{ background: "radial-gradient(circle, var(--nebula-1) 0%, transparent 70%)", animationDuration: "22s" }}
+      />
+      <div
+        aria-hidden
+        className="bg-dots absolute inset-0 pointer-events-none opacity-30"
+        style={{ maskImage: "radial-gradient(ellipse 55% 65% at 20% 45%, black 0%, transparent 70%)", WebkitMaskImage: "radial-gradient(ellipse 55% 65% at 20% 45%, black 0%, transparent 70%)" }}
+      />
 
       <div className="container-page section-pad relative">
         <motion.div
@@ -27,7 +37,7 @@ export function Footer() {
           <p className="eyebrow mb-4">Get in touch</p>
           <h2 className="mb-4">
             Let&apos;s build analytics systems{" "}
-            <span className="accent-text">that scale.</span>
+            <span className="text-gradient">that scale.</span>
           </h2>
           <p className="leading-relaxed text-muted-foreground max-w-[50ch] mb-2">
             Open to full-time BI & Analytics Engineering roles and enterprise Fabric / Databricks consulting.
@@ -41,7 +51,8 @@ export function Footer() {
             {/* Primary CTA */}
             <a
               href={`mailto:${profile.email}?subject=BI%20%26%20Analytics%20Engineer%20%E2%80%94%20Let%27s%20connect`}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              className="shine inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              style={{ boxShadow: "0 4px 24px color-mix(in srgb, var(--primary) 35%, transparent)" }}
             >
               <Mail size={14} /> Email me
             </a>

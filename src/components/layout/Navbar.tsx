@@ -91,18 +91,19 @@ export function Navbar() {
               key={l.href}
               href={l.href}
               aria-current={active === l.id ? "true" : undefined}
-              className={`relative px-3 py-2 text-[13px] transition-colors rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
+              className={`relative px-3.5 py-1.5 text-[13px] transition-all duration-300 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
                 active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
               }`}
+              style={
+                active === l.id
+                  ? {
+                      background: "color-mix(in srgb, var(--primary) 10%, transparent)",
+                      boxShadow: "inset 0 0 0 1px color-mix(in srgb, var(--primary) 22%, transparent)",
+                    }
+                  : undefined
+              }
             >
               {l.label}
-              {active === l.id && (
-                <span
-                  aria-hidden
-                  className="absolute left-3 right-3 -bottom-0.5 h-[2px] rounded-full transition-all duration-300"
-                  style={{ background: "var(--primary)" }}
-                />
-              )}
             </a>
           ))}
         </nav>

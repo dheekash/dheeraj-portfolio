@@ -31,7 +31,13 @@ const industries = [
 export function AboutSection() {
   return (
     <section id="about" className="relative overflow-hidden">
-      <div className="container-page section-pad">
+      {/* Ambient dot grid, faded at edges */}
+      <div
+        aria-hidden
+        className="bg-dots absolute inset-0 pointer-events-none opacity-40"
+        style={{ maskImage: "radial-gradient(ellipse 60% 70% at 75% 40%, black 0%, transparent 70%)", WebkitMaskImage: "radial-gradient(ellipse 60% 70% at 75% 40%, black 0%, transparent 70%)" }}
+      />
+      <div className="container-page section-pad relative">
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-10 items-start">
 
           {/* Left — bio */}
@@ -60,10 +66,10 @@ export function AboutSection() {
           {/* Right — credibility panel */}
           <motion.div
             {...reveal(0.08)}
-            className="rounded-2xl p-5 grid sm:grid-cols-2 gap-x-10 gap-y-6"
+            className="glow-border rounded-2xl p-6 grid sm:grid-cols-2 gap-x-10 gap-y-6"
             style={{
-              background: "color-mix(in srgb, var(--primary) 5%, var(--card))",
-              border: "1px solid color-mix(in srgb, var(--primary) 14%, var(--border))",
+              background: "color-mix(in srgb, var(--primary) 4%, var(--card))",
+              boxShadow: "0 8px 32px color-mix(in srgb, var(--primary) 8%, transparent)",
             }}
           >
             {/* Specializations */}
@@ -104,10 +110,11 @@ export function AboutSection() {
               </div>
 
               <div
-                className="rounded-xl px-4 py-3.5 flex items-center gap-3"
+                className="shine rounded-xl px-4 py-3.5 flex items-center gap-3"
                 style={{
-                  background: "color-mix(in srgb, var(--primary) 10%, var(--card))",
-                  border: "1px solid color-mix(in srgb, var(--primary) 25%, transparent)",
+                  background: "linear-gradient(135deg, color-mix(in srgb, var(--primary) 14%, var(--card)) 0%, color-mix(in srgb, var(--primary) 6%, var(--card)) 100%)",
+                  border: "1px solid color-mix(in srgb, var(--primary) 30%, transparent)",
+                  boxShadow: "0 4px 20px color-mix(in srgb, var(--primary) 15%, transparent)",
                 }}
               >
                 <span className="font-mono font-bold text-[1.6rem] leading-none tabular-nums" style={{ color: "var(--primary)" }}>

@@ -443,9 +443,9 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
         exit={{ opacity: 0 }}
         onClick={onClose}
       >
-        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
         <motion.div
-          className="relative panel rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-y-auto"
+          className="relative panel glow-border rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-y-auto"
           initial={{ opacity: 0, scale: 0.96, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 16 }}
@@ -516,9 +516,25 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
 
 function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
   return (
-    <motion.article {...reveal()} className="panel panel-lift rounded-2xl overflow-hidden flex flex-col">
-      <div className="border-b border-border p-[clamp(1.25rem,2vw,2rem)] text-foreground bg-background">
-        <study.Diagram />
+    <motion.article {...reveal()} className="panel panel-lift rounded-2xl overflow-hidden flex flex-col group">
+      {/* Faux browser chrome */}
+      <div
+        className="flex items-center px-4 py-2.5 border-b border-border"
+        style={{ background: "color-mix(in srgb, var(--muted) 70%, var(--card))" }}
+      >
+        <div className="browser-dots">
+          <span /><span /><span />
+        </div>
+      </div>
+      <div className="border-b border-border p-[clamp(1.25rem,2vw,2rem)] text-foreground bg-background relative overflow-hidden">
+        <div
+          aria-hidden
+          className="bg-dots absolute inset-0 pointer-events-none opacity-30"
+          style={{ maskImage: "radial-gradient(ellipse at center, black 0%, transparent 75%)", WebkitMaskImage: "radial-gradient(ellipse at center, black 0%, transparent 75%)" }}
+        />
+        <div className="relative transition-transform duration-500 group-hover:scale-[1.02]">
+          <study.Diagram />
+        </div>
       </div>
       <div className="p-[clamp(1.25rem,2vw,1.75rem)] flex flex-col flex-1">
         <div className="flex items-center gap-3 mb-3">
@@ -542,10 +558,10 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
         <div className="mb-4 flex-1 flex flex-col gap-3">
           {/* Key metric */}
           <div
-            className="rounded-xl px-4 py-3 flex items-center gap-4"
+            className="rounded-xl px-4 py-3 flex items-center gap-4 transition-shadow duration-300 group-hover:shadow-[0_0_24px_rgba(0,0,0,0.06)]"
             style={{
-              background: `rgba(${study.keyMetric.color},0.08)`,
-              border: `1px solid rgba(${study.keyMetric.color},0.22)`,
+              background: `linear-gradient(135deg, rgba(${study.keyMetric.color},0.12) 0%, rgba(${study.keyMetric.color},0.04) 100%)`,
+              border: `1px solid rgba(${study.keyMetric.color},0.25)`,
             }}
           >
             <span
@@ -561,7 +577,7 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
         </div>
         <button
           onClick={onOpen}
-          className="self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+          className="shine self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_color-mix(in_srgb,var(--primary)_40%,transparent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
         >
           View case study <ArrowUpRight size={14} />
         </button>
