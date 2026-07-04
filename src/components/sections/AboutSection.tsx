@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { profile } from "@/data/profile";
 
 function reveal(delay = 0) {
   return {
@@ -70,44 +71,48 @@ export function AboutSection() {
             </motion.p>
           </div>
 
-          {/* Right — credibility panel */}
-          <motion.div
-            {...reveal(0.08)}
-            className="glow-border rounded-2xl p-6 grid sm:grid-cols-2 gap-x-10 gap-y-6"
-            style={{
-              background: "color-mix(in srgb, var(--primary) 4%, var(--card))",
-              boxShadow: "0 8px 32px color-mix(in srgb, var(--primary) 8%, transparent)",
-            }}
-          >
-            {/* Specializations */}
-            <div>
-              <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-foreground/55 font-semibold mb-3">
-                Specialized in
-              </p>
-              <ul className="flex flex-col gap-2">
+          {/* Right — credibility card (animated warm border) */}
+          <motion.div {...reveal(0.08)}>
+            <div className="uicard">
+              <div className="uicard-border" aria-hidden />
+
+              {/* Title */}
+              <div>
+                <p className="text-[15px] font-semibold text-foreground">Specialized in</p>
+                <p className="mt-1 text-[13px] text-muted-foreground max-w-[34ch]">
+                  Core tools I design and build with, day to day.
+                </p>
+              </div>
+
+              <hr className="uicard-line" />
+
+              {/* Specializations checklist */}
+              <ul className="flex flex-col gap-2.5">
                 {specializations.map((s) => (
-                  <li key={s} className="flex items-center gap-2.5 text-[13.5px] font-medium text-foreground">
-                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--primary)" }} />
-                    {s}
+                  <li key={s} className="flex items-center gap-2.5">
+                    <span className="uicard-check">
+                      <svg viewBox="0 0 16 16" fill="currentColor" className="uicard-check-svg" aria-hidden>
+                        <path fillRule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span className="text-[14px] text-foreground">{s}</span>
                   </li>
                 ))}
               </ul>
-            </div>
 
-            {/* Industries + cert badge */}
-            <div className="flex flex-col gap-5">
+              <hr className="uicard-line" />
+
+              {/* Industries */}
               <div>
-                <p className="text-[11px] font-mono uppercase tracking-[0.14em] text-foreground/55 font-semibold mb-3">
-                  Industries
-                </p>
+                <p className="eyebrow mb-2">Industries</p>
                 <div className="flex flex-wrap gap-1.5">
                   {industries.map((ind) => (
                     <span
                       key={ind}
                       className="text-[12px] font-medium text-muted-foreground px-2.5 py-1 rounded-lg"
                       style={{
-                        background: "color-mix(in srgb, var(--primary) 8%, var(--card))",
-                        border: "1px solid color-mix(in srgb, var(--border) 70%, transparent)",
+                        background: "color-mix(in srgb, var(--foreground) 4%, var(--card))",
+                        border: "1px solid var(--border)",
                       }}
                     >
                       {ind}
@@ -116,18 +121,29 @@ export function AboutSection() {
                 </div>
               </div>
 
+              {/* 11× cert badge — the one peach accent */}
               <div
-                className="rounded-2xl px-5 py-4 flex items-center gap-4"
+                className="rounded-xl px-4 py-3 flex items-center gap-3"
                 style={{ background: "var(--accent)", color: "var(--accent-foreground)" }}
               >
-                <span className="leading-none tabular-nums" style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "2rem", color: "var(--accent-foreground)" }}>
+                <span className="leading-none tabular-nums" style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "1.8rem", color: "var(--accent-foreground)" }}>
                   11×
                 </span>
                 <div>
-                  <p className="text-[15px] leading-snug" style={{ color: "var(--accent-foreground)" }}>Microsoft Certified</p>
-                  <p className="text-[12px] mt-1" style={{ color: "color-mix(in srgb, var(--accent-foreground) 75%, transparent)" }}>DP-600 · PL-300 · AZ-104 · DP-700 · DP-100</p>
+                  <p className="text-[14px] leading-snug" style={{ color: "var(--accent-foreground)" }}>Microsoft Certified</p>
+                  <p className="text-[11px] mt-0.5" style={{ color: "color-mix(in srgb, var(--accent-foreground) 75%, transparent)" }}>DP-600 · PL-300 · AZ-104 · DP-700 · DP-100</p>
                 </div>
               </div>
+
+              {/* CTA */}
+              <a
+                href={profile.calendlyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="gradient-btn w-full rounded-full py-2.5 text-center text-[13px] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              >
+                Book a call
+              </a>
             </div>
           </motion.div>
 
