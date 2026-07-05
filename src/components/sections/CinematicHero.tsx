@@ -6,15 +6,6 @@ import { ArrowRight, LayoutDashboard, Award, Building2, Globe } from "lucide-rea
 import type { LucideIcon } from "lucide-react";
 import { profile } from "@/data/profile";
 
-const credentials = [
-  "DP-600 · Fabric Analytics Engineer",
-  "PL-300 · Power BI Data Analyst",
-  "DP-700 · Fabric Data Engineer",
-  "DP-100 · Azure Data Scientist",
-  "SnowPro Core · Snowflake",
-  "DE Associate · Databricks",
-];
-
 const stats: { value: string; label: string; Icon: LucideIcon; color: string }[] = [
   { value: "40+", label: "dashboards",     Icon: LayoutDashboard, color: "var(--accent)"  },
   { value: "13",  label: "certifications", Icon: Award,           color: "var(--success)" },
@@ -159,17 +150,8 @@ export function CinematicHero() {
               </span>
             </motion.div>
 
-            {/* Credential tags — ghost typographic labels */}
-            <motion.div {...fadeUp(0.16)} className="flex flex-wrap gap-x-5 gap-y-2 mb-10">
-              {credentials.map((tag) => (
-                <span key={tag} className="text-[14px]" style={{ color: "var(--ash)" }}>
-                  {tag}
-                </span>
-              ))}
-            </motion.div>
-
             {/* Pill button pair — filled + ghost */}
-            <motion.div {...fadeUp(0.24)} className="flex flex-wrap items-center gap-3">
+            <motion.div {...fadeUp(0.2)} className="flex flex-wrap items-center gap-3 mt-2">
               <label className="dl-btn" aria-label="Download Resume">
                 <input
                   type="checkbox"
