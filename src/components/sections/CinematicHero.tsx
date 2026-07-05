@@ -102,12 +102,12 @@ export function CinematicHero() {
         }}
       />
 
-      <div className="container-page relative z-10 py-[clamp(4.5rem,3rem+6vw,9rem)]">
+      <div className="container-page relative z-10 py-[clamp(3rem,1.5rem+4vw,5.5rem)]">
         <div className="max-w-[64rem]">
             {/* Availability pill — pulsing dot, stronger weight */}
             <motion.div
               {...fadeUp(0)}
-              className="inline-flex items-center gap-2.5 mb-8 rounded-full px-3.5 py-1.5"
+              className="inline-flex items-center gap-2.5 mb-6 rounded-full px-3.5 py-1.5"
               style={{ background: "color-mix(in srgb, var(--foreground) 5%, transparent)", border: "1px solid var(--border)" }}
             >
               <span className="relative flex w-2 h-2 flex-shrink-0">
@@ -123,7 +123,7 @@ export function CinematicHero() {
             {/* Serif display headline — bigger, with an oversized italic drop */}
             <motion.h1
               {...fadeUp(0.08)}
-              className="mb-9 text-foreground"
+              className="mb-6 text-foreground"
               style={{
                 fontFamily: "var(--font-display)",
                 fontWeight: 400,
@@ -137,7 +137,7 @@ export function CinematicHero() {
             </motion.h1>
 
             {/* Rotating deliverable — Uiverse word list, editorial palette */}
-            <motion.div {...fadeUp(0.12)} className="mb-9">
+            <motion.div {...fadeUp(0.12)} className="mb-7">
               <span className="word-rotator">
                 <span>Currently building</span>
                 <span className="wr-words" aria-label="Lakehouses, pipelines, dashboards, semantic models">
@@ -182,7 +182,7 @@ export function CinematicHero() {
         </div>
 
         {/* ── Stat artifacts — row below the headline ── */}
-        <div className="mt-[clamp(3rem,5vw,4.5rem)] grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-[62rem]">
+        <div className="mt-[clamp(2rem,3vw,2.75rem)] grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-[62rem]">
           <StatArtifact value={stats[0].value} label={stats[0].label} Icon={stats[0].Icon} color={stats[0].color} delay={0.30} />
           <StatArtifact value={stats[1].value} label={stats[1].label} Icon={stats[1].Icon} color={stats[1].color} delay={0.38} />
           <StatArtifact value={stats[2].value} label={stats[2].label} Icon={stats[2].Icon} color={stats[2].color} delay={0.46} />
