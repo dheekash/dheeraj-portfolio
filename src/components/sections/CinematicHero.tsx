@@ -9,7 +9,7 @@ import { profile } from "@/data/profile";
 const stats: { value: string; label: string; Icon: LucideIcon; color: string }[] = [
   { value: "40+", label: "dashboards",     Icon: LayoutDashboard, color: "var(--accent)"  },
   { value: "13",  label: "certifications", Icon: Award,           color: "var(--success)" },
-  { value: "6+",  label: "years",          Icon: Clock,           color: "var(--sienna)"  },
+  { value: "7+",  label: "years",          Icon: Clock,           color: "var(--sienna)"  },
   { value: "5M+", label: "records / day",  Icon: Database,        color: "var(--primary)" },
 ];
 
