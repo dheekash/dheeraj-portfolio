@@ -2,15 +2,15 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useTransform, useInView, animate } from "framer-motion";
-import { ArrowRight, LayoutDashboard, Award, Building2, Globe } from "lucide-react";
+import { ArrowRight, LayoutDashboard, Award, Clock, Database } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { profile } from "@/data/profile";
 
 const stats: { value: string; label: string; Icon: LucideIcon; color: string }[] = [
   { value: "40+", label: "dashboards",     Icon: LayoutDashboard, color: "var(--accent)"  },
   { value: "13",  label: "certifications", Icon: Award,           color: "var(--success)" },
-  { value: "3",   label: "companies",      Icon: Building2,       color: "var(--sienna)"  },
-  { value: "15",  label: "countries",      Icon: Globe,           color: "var(--primary)" },
+  { value: "6+",  label: "years",          Icon: Clock,           color: "var(--sienna)"  },
+  { value: "5M+", label: "records / day",  Icon: Database,        color: "var(--primary)" },
 ];
 
 function fadeUp(delay = 0) {
