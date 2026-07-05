@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { profile } from "@/data/profile";
 
 function reveal(delay = 0) {
   return {
@@ -135,15 +134,6 @@ export function AboutSection() {
                 </div>
               </div>
 
-              {/* CTA */}
-              <a
-                href={profile.calendlyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="gradient-btn w-full rounded-full py-2.5 text-center text-[13px] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-              >
-                Book a call
-              </a>
             </div>
           </motion.div>
 
