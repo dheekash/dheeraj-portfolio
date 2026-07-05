@@ -1,9 +1,9 @@
 import { CinematicHero } from "@/components/sections/CinematicHero";
-import { TechStackSection } from "@/components/sections/TechStackSection";
 import { AboutSection } from "@/components/sections/AboutSection";
+import { CoreExpertiseSection, PlatformGuideSection } from "@/components/sections/TechStackSection";
+import { CertificationsSection } from "@/components/sections/CertificationsSection";
 import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { CareerEvolutionSection } from "@/components/sections/CareerEvolutionSection";
-import { CertificationsSection } from "@/components/sections/CertificationsSection";
 
 export default function HomePage() {
   return (
@@ -11,13 +11,16 @@ export default function HomePage() {
       <CinematicHero />
       <AboutSection />
       <div className="section-alt">
-        <TechStackSection />
+        <CoreExpertiseSection />
+      </div>
+      <CertificationsSection />
+      <div className="section-alt">
+        <PlatformGuideSection />
       </div>
       <CaseStudiesSection />
       <div className="section-alt">
         <CareerEvolutionSection />
       </div>
-      <CertificationsSection />
     </>
   );
 }

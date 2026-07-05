@@ -150,9 +150,9 @@ const platformGuide = [
 ];
 
 
-export function TechStackSection() {
+export function PlatformGuideSection() {
   return (
-    <section id="skills">
+    <section id="platforms">
       <div className="container-page section-pad">
 
         {/* ── Platform Decision Guide ── */}
@@ -232,8 +232,18 @@ export function TechStackSection() {
           </div>
         </motion.div>
 
+      </div>
+    </section>
+  );
+}
+
+export function CoreExpertiseSection() {
+  return (
+    <section id="skills">
+      <div className="container-page section-pad">
+
         {/* ── Core Expertise ── */}
-        <motion.div {...reveal(0.04)} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(1.5rem,2.5vw,2.5rem)] mt-[clamp(3rem,5vw,5rem)]">
+        <motion.div {...reveal(0.04)} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(1.5rem,2.5vw,2.5rem)]">
           <div>
             <h2 className="mb-2">Core Expertise</h2>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-[52ch]">

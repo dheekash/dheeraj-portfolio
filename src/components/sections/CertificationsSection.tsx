@@ -82,12 +82,8 @@ const certGroups: { category: string; color: string; certs: Cert[] }[] = [
   },
 ];
 
-const FEATURED_CODES = ["PL-300", "DP-600", "DP-700", "DE-A", "SnowPro"];
-
-const featuredCerts: (Cert & { groupColor: string })[] = certGroups.flatMap((g) =>
-  g.certs
-    .filter((c) => FEATURED_CODES.includes(c.code))
-    .map((c) => ({ ...c, groupColor: g.color }))
+const allCerts: (Cert & { groupColor: string })[] = certGroups.flatMap((g) =>
+  g.certs.map((c) => ({ ...c, groupColor: g.color }))
 );
 
 function CertCard({ cert, groupColor }: { cert: Cert; groupColor?: string }) {
@@ -170,8 +166,8 @@ export function CertificationsSection() {
         </motion.div>
 
         <motion.div {...reveal(0.08)}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-            {featuredCerts.map((cert) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {allCerts.map((cert) => (
               <CertCard key={cert.code} cert={cert} groupColor={cert.groupColor} />
             ))}
           </div>
