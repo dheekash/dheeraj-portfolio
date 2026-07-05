@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
+import { ThemeSwitch } from "@/components/common/ThemeSwitch";
 import { profile } from "@/data/profile";
 
 const links = [
@@ -105,7 +106,13 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="lg:hidden flex items-center gap-1.5 ml-auto">
+        {/* Desktop theme toggle — rightmost */}
+        <div className="hidden lg:flex items-center">
+          <ThemeSwitch />
+        </div>
+
+        <div className="lg:hidden flex items-center gap-3 ml-auto">
+          <ThemeSwitch />
           <button
             onClick={() => setOpen(!open)}
             aria-expanded={open}

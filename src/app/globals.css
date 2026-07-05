@@ -150,6 +150,54 @@
   --nebula-2: rgba(24, 95, 165, 0.10);
 }
 
+/* ── Light variant of Ink & Electric Blue (opt-in via .light on <html>) ── */
+.light {
+  color-scheme: light;
+  --background: #F5F5F7;           /* Light page */
+  --foreground: #0A0A12;           /* Ink text */
+  --card: #FFFFFF;
+  --card-foreground: #0A0A12;
+  --popover: #FFFFFF;
+  --popover-foreground: #0A0A12;
+  --primary: #185FA5;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EAEAEF;
+  --secondary-foreground: #0A0A12;
+  --muted: #EDEEF2;
+  --muted-foreground: #55586E;
+  --accent: #378ADD;
+  --accent-foreground: #06121F;
+  --destructive: #D32F2F;
+  --border: rgba(10, 10, 18, 0.10);
+  --input: rgba(10, 10, 18, 0.12);
+  --ring: #185FA5;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #0A0A12;
+  --sidebar-primary: #185FA5;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #EAEAEF;
+  --sidebar-accent-foreground: #0A0A12;
+  --sidebar-border: rgba(10, 10, 18, 0.10);
+  --sidebar-ring: #185FA5;
+
+  --fog: #EEF0F4;
+  --ash: #6B6F86;
+  --smoke: #9AA0B4;
+  --peach: #378ADD;
+  --sienna: #185FA5;
+  --success: #1D9E75;
+
+  --dgrm: #185FA5;
+  --net-node: rgba(24, 95, 165, 0.35);
+  --net-edge: 24, 95, 165;
+  --net-pulse: rgba(55, 138, 221, 0.7);
+  --grain-opacity: 0.015;
+  --nebula-1: rgba(55, 138, 221, 0.14);
+  --nebula-2: rgba(24, 95, 165, 0.06);
+  --highlight: #378ADD;
+  --shadow-artifact: 0 0 0 1px rgba(10, 10, 18, 0.05), 0 20px 25px -5px rgba(0, 0, 0, 0.10), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+}
+
 @layer base {
   * { @apply border-border outline-ring/50; }
   html {
@@ -791,6 +839,52 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .skill-fill { animation-duration: 0.01ms; }
+}
+
+/* ── Theme toggle switch (Uiverse by namecho) ── */
+.theme-switch {
+  --btn-w: 3.25em;
+  --btn-h: 1.85em;
+  --tog-d: 1.4em;
+  --tog-off: calc((var(--btn-h) - var(--tog-d)) / 2);
+  display: inline-flex;
+  font-size: 12px;
+  cursor: pointer;
+}
+.theme-switch input[type="checkbox"] { display: none; }
+.theme-slider {
+  display: inline-block;
+  width: var(--btn-w);
+  height: var(--btn-h);
+  background-color: color-mix(in srgb, var(--foreground) 28%, transparent);
+  border-radius: calc(var(--btn-h) / 2);
+  position: relative;
+  transition: 0.3s all ease-in-out;
+}
+.theme-slider::after {
+  content: "";
+  display: inline-block;
+  width: var(--tog-d);
+  height: var(--tog-d);
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: var(--tog-off);
+  transform: translateX(var(--tog-off));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  transition: 0.3s all ease-in-out;
+}
+.theme-switch input[type="checkbox"]:checked + .theme-slider {
+  background-color: var(--accent);
+}
+.theme-switch input[type="checkbox"]:checked + .theme-slider::after {
+  transform: translateX(calc(var(--btn-w) - var(--tog-d) - var(--tog-off)));
+}
+.theme-switch input[type="checkbox"]:active + .theme-slider::after {
+  width: calc(var(--tog-d) * 1.35);
+}
+.theme-switch input[type="checkbox"]:checked:active + .theme-slider::after {
+  transform: translateX(calc(var(--btn-w) - var(--tog-d) * 1.35 - var(--tog-off)));
 }
 
 /* ── Film grain (subtler on paper, fuller in the dark) ── */
