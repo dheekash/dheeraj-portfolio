@@ -526,8 +526,8 @@
 .word-rotator {
   --wr-bg: var(--background);
   display: inline-flex;
-  align-items: baseline;
-  gap: 0.45ch;
+  align-items: center;
+  gap: 0.5ch;
   color: var(--muted-foreground);
   font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem);
   font-weight: 500;
@@ -536,27 +536,29 @@
   position: relative;
   display: inline-block;
   overflow: hidden;
-  height: 1.5em;
-  vertical-align: top;
+  height: 1.8em;
+  vertical-align: middle;
 }
 .wr-words::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    var(--wr-bg) 8%,
-    transparent 32%,
-    transparent 68%,
-    var(--wr-bg) 92%
+    var(--wr-bg) 4%,
+    transparent 26%,
+    transparent 74%,
+    var(--wr-bg) 96%
   );
   z-index: 20;
   pointer-events: none;
 }
 .wr-word {
-  display: block;
-  height: 1.5em;
-  line-height: 1.5em;
+  display: flex;
+  align-items: center;
+  height: 1.8em;
+  line-height: 1;
   white-space: nowrap;
+  padding-right: 2px;
   color: var(--sienna);
   font-family: var(--font-display);
   font-style: italic;
