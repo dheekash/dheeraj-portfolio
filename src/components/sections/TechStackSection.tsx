@@ -246,21 +246,21 @@ export function TechStackSection() {
                 />
                 <p className="text-[13px] font-bold text-foreground tracking-tight">{cat.title}</p>
               </div>
-              <div className="flex flex-wrap gap-1.5">
-                {cat.tools.map((t) => (
-                  <span
-                    key={t.name}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11.5px] font-medium text-muted-foreground cursor-default transition-all duration-300 hover:text-foreground hover:-translate-y-px hover:border-primary/40"
-                    style={{
-                      background: "color-mix(in srgb, var(--muted) 50%, transparent)",
-                      border: "1px solid color-mix(in srgb, var(--border) 60%, transparent)",
-                    }}
-                    title={`${t.years} · ${t.level}`}
-                  >
-                    {t.Logo && <t.Logo size={11} />}
-                    {t.name}
-                  </span>
-                ))}
+              <div className="mt-1">
+                {cat.tools.map((t) => {
+                  const lvl = t.level ?? "";
+                  const pct = lvl === "Expert" ? "90%" : lvl === "Advanced" ? "75%" : "62%";
+                  return (
+                    <div key={t.name} className="skillbox">
+                      <span className="skillbox-title">{t.name}</span>
+                      <div className="skill-track">
+                        <span className="skill-fill" style={{ width: pct }}>
+                          <span className="skill-tip">{t.level ?? t.years}</span>
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </motion.div>
           ))}
