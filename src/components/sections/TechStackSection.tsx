@@ -99,9 +99,9 @@ const platformGuide = [
   {
     platform: "Microsoft Fabric",
     tagline: "All-in-one Lakehouse on OneLake",
-    bg: "var(--fog)",
-    border: "var(--border)",
-    accent: "var(--sienna)",
+    Logo: FabricLogo,
+    bestFor: "Microsoft-first orgs",
+    accent: "#2B9AE0",
     reach: [
       "Client is Microsoft-first (Azure, M365, Teams)",
       "Power BI is the primary BI tool",
@@ -116,9 +116,9 @@ const platformGuide = [
   {
     platform: "Databricks",
     tagline: "Unified analytics for ML-heavy pipelines",
-    bg: "var(--fog)",
-    border: "var(--border)",
-    accent: "var(--sienna)",
+    Logo: DatabricksLogo,
+    bestFor: "ML at scale",
+    accent: "#FF5A3C",
     reach: [
       "ML and feature engineering are first-class requirements",
       "PySpark workloads at significant scale",
@@ -133,9 +133,9 @@ const platformGuide = [
   {
     platform: "Snowflake",
     tagline: "Cloud-agnostic SQL analytics warehouse",
-    bg: "var(--fog)",
-    border: "var(--border)",
-    accent: "var(--sienna)",
+    Logo: SnowflakeLogo,
+    bestFor: "Multi-cloud SQL",
+    accent: "#29B5E8",
     reach: [
       "Multi-cloud requirement (AWS + Azure + GCP)",
       "SQL-first team with no PySpark investment",
@@ -179,17 +179,32 @@ export function TechStackSection() {
                   {...reveal(0.36 + i * 0.06)}
                   onPointerMove={onSpotlightMove}
                   className="spotlight gradient-frame overflow-hidden flex flex-col snap-start flex-shrink-0 w-[min(80vw,320px)] sm:w-auto"
+                  style={{ borderTop: `2px solid ${p.accent}` }}
                 >
                   <div
                     className="px-5 py-4"
-                    style={{ background: `linear-gradient(160deg, ${p.bg} 0%, transparent 130%)`, borderBottom: `1px solid ${p.border}` }}
+                    style={{ background: `linear-gradient(160deg, color-mix(in srgb, ${p.accent} 12%, transparent) 0%, transparent 130%)`, borderBottom: `1px solid color-mix(in srgb, ${p.accent} 25%, var(--border))` }}
                   >
-                    <p className="text-[13px] font-semibold text-foreground">{p.platform}</p>
-                    <p className="text-[11px] font-mono text-muted-foreground mt-0.5">{p.tagline}</p>
+                    <div className="flex items-center gap-2.5 mb-1.5">
+                      <span
+                        className="inline-flex h-7 w-7 items-center justify-center rounded-lg flex-shrink-0"
+                        style={{ background: `color-mix(in srgb, ${p.accent} 16%, transparent)` }}
+                      >
+                        <p.Logo size={15} />
+                      </span>
+                      <p className="text-[14px] font-semibold text-foreground">{p.platform}</p>
+                    </div>
+                    <p className="text-[11px] font-mono text-muted-foreground mb-2.5">{p.tagline}</p>
+                    <span
+                      className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-2 py-0.5 rounded-full"
+                      style={{ background: `color-mix(in srgb, ${p.accent} 15%, transparent)`, color: p.accent }}
+                    >
+                      Best for {p.bestFor}
+                    </span>
                   </div>
                   <div className="px-5 py-5 flex flex-col gap-5 flex-1">
                     <div>
-                      <p className="text-[12px] font-mono uppercase tracking-[0.12em] font-bold mb-3" style={{ color: p.accent.replace("0.8", "1") }}>Reach for it when</p>
+                      <p className="text-[12px] font-mono uppercase tracking-[0.12em] font-bold mb-3" style={{ color: p.accent }}>Reach for it when</p>
                       <ul className="space-y-3">
                         {p.reach.map((r) => (
                           <li key={r} className="flex items-start gap-2.5 text-[14px] text-foreground/90 leading-relaxed font-medium">

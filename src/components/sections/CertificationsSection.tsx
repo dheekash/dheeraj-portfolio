@@ -24,10 +24,10 @@ interface Cert {
   verifyUrl?: string;
 }
 
-function IssuerLogo({ issuer }: { issuer: Issuer }) {
-  if (issuer === "Microsoft")  return <MicrosoftLogo size={14} />;
-  if (issuer === "Databricks") return <DatabricksLogo size={14} />;
-  return <SnowflakeLogo size={14} />;
+function IssuerLogo({ issuer, size = 14 }: { issuer: Issuer; size?: number }) {
+  if (issuer === "Microsoft")  return <MicrosoftLogo size={size} />;
+  if (issuer === "Databricks") return <DatabricksLogo size={size} />;
+  return <SnowflakeLogo size={size} />;
 }
 
 const certGroups: { category: string; color: string; certs: Cert[] }[] = [
@@ -88,16 +88,21 @@ function CertCard({ cert, groupColor }: { cert: Cert; groupColor?: string }) {
   return (
     <div
       onPointerMove={onSpotlightMove}
-      className="spotlight gradient-frame px-4 py-3.5 flex flex-col gap-2.5"
+      className="spotlight gradient-frame px-4 py-4 flex flex-col gap-3.5"
     >
-      <div className="flex items-center justify-between">
-        <IssuerLogo issuer={cert.issuer} />
+      <div className="flex items-start justify-between">
+        <span
+          className="inline-flex h-10 w-10 items-center justify-center rounded-xl flex-shrink-0"
+          style={{ background: "color-mix(in srgb, var(--foreground) 6%, transparent)", border: "1px solid var(--border)" }}
+        >
+          <IssuerLogo issuer={cert.issuer} size={20} />
+        </span>
         {cert.featured && (
           <span
             className="text-[9px] font-mono font-semibold uppercase tracking-[0.12em] px-2 py-0.5 rounded-full cursor-default"
             style={{
-              background: "color-mix(in srgb, var(--primary) 12%, var(--card))",
-              color: "var(--primary)",
+              background: "color-mix(in srgb, var(--primary) 16%, transparent)",
+              color: "var(--accent)",
             }}
             title="High-signal credential — core to the BI & Analytics Engineering role"
           >
@@ -105,34 +110,31 @@ function CertCard({ cert, groupColor }: { cert: Cert; groupColor?: string }) {
           </span>
         )}
       </div>
-      <div>
-        <p className="text-[13px] font-semibold leading-snug mb-1">{cert.name}</p>
+      <div className="flex-1">
+        <p className="text-[13.5px] font-semibold leading-snug mb-2">{cert.name}</p>
         <div className="flex items-center gap-2 flex-wrap">
           {cert.verifyUrl ? (
             <a
               href={cert.verifyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[12px] font-bold px-2 py-1 rounded hover:opacity-80 transition-opacity"
+              className="font-mono text-[11.5px] font-bold px-2 py-0.5 rounded hover:opacity-80 transition-opacity"
               style={{
-                background: "color-mix(in srgb, var(--primary) 14%, var(--card))",
-                color: "var(--primary)",
+                background: "color-mix(in srgb, var(--accent) 16%, transparent)",
+                color: "var(--accent)",
               }}
-              title="View certification on Microsoft Learn"
+              title="Verify certification"
             >{cert.code} ↗</a>
           ) : (
             <span
-              className="font-mono text-[12px] font-bold px-2 py-1 rounded"
+              className="font-mono text-[11.5px] font-bold px-2 py-0.5 rounded"
               style={{
-                background: "color-mix(in srgb, var(--primary) 14%, var(--card))",
-                color: "var(--primary)",
+                background: "color-mix(in srgb, var(--accent) 16%, transparent)",
+                color: "var(--accent)",
               }}
             >{cert.code}</span>
           )}
-          <span className="text-muted-foreground/40 text-[10px]">·</span>
-          <span className="font-mono text-[11px] text-muted-foreground/70">{cert.issuer}</span>
-          <span className="text-muted-foreground/40 text-[10px]">·</span>
-          <span className="font-mono text-[11px] text-muted-foreground/70">{cert.date}</span>
+          <span className="font-mono text-[11px] text-muted-foreground">{cert.date}</span>
         </div>
       </div>
     </div>

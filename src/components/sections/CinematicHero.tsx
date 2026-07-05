@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useTransform, useInView, animate } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, LayoutDashboard, Award, Building2, Globe } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { profile } from "@/data/profile";
 
 const credentials = [
@@ -14,11 +15,11 @@ const credentials = [
   "DE Associate · Databricks",
 ];
 
-const stats = [
-  { value: "40+", label: "dashboards" },
-  { value: "13",  label: "certifications" },
-  { value: "3",   label: "companies" },
-  { value: "15",  label: "countries" },
+const stats: { value: string; label: string; Icon: LucideIcon; color: string }[] = [
+  { value: "40+", label: "dashboards",     Icon: LayoutDashboard, color: "var(--accent)"  },
+  { value: "13",  label: "certifications", Icon: Award,           color: "var(--success)" },
+  { value: "3",   label: "companies",      Icon: Building2,       color: "var(--sienna)"  },
+  { value: "15",  label: "countries",      Icon: Globe,           color: "var(--primary)" },
 ];
 
 function fadeUp(delay = 0) {
@@ -56,22 +57,30 @@ function CountUp({ value, delay = 0 }: { value: string; delay?: number }) {
   );
 }
 
-/* Floating white product artifact holding one stat */
-function StatArtifact({ value, label, delay, className = "" }: { value: string; label: string; delay: number; className?: string }) {
+/* Floating product artifact holding one stat — icon chip + big metric */
+function StatArtifact({ value, label, delay, Icon, color, className = "" }: { value: string; label: string; delay: number; Icon: LucideIcon; color: string; className?: string }) {
   return (
     <motion.div
       {...fadeUp(delay)}
-      className={`artifact px-6 py-5 ${className}`}
+      className={`artifact px-6 py-5 flex flex-col gap-3 ${className}`}
     >
       <span
-        className="block leading-none tabular-nums text-ink"
-        style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(2rem,1.4rem+1.6vw,2.9rem)", color: "var(--foreground)" }}
+        className="inline-flex h-9 w-9 items-center justify-center rounded-xl"
+        style={{ background: `color-mix(in srgb, ${color} 16%, transparent)`, color }}
       >
-        <CountUp value={value} delay={delay + 0.1} />
+        <Icon size={18} strokeWidth={1.75} />
       </span>
-      <span className="mt-2 block text-[14px] tracking-[0.01em]" style={{ color: "var(--muted-foreground)" }}>
-        {label}
-      </span>
+      <div>
+        <span
+          className="block leading-none tabular-nums"
+          style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(2.4rem, 1.6rem + 2vw, 3.4rem)", color: "var(--foreground)" }}
+        >
+          <CountUp value={value} delay={delay + 0.1} />
+        </span>
+        <span className="mt-2 block text-[13px] uppercase tracking-[0.1em]" style={{ color: "var(--muted-foreground)" }}>
+          {label}
+        </span>
+      </div>
     </motion.div>
   );
 }
@@ -79,7 +88,7 @@ function StatArtifact({ value, label, delay, className = "" }: { value: string; 
 export function CinematicHero() {
   return (
     <section id="top" className="relative overflow-hidden bg-background">
-      {/* Warm paper wash in the top-right corner — the one chromatic note */}
+      {/* Electric-blue wash in the top-right corner */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
@@ -88,35 +97,55 @@ export function CinematicHero() {
             "radial-gradient(ellipse 55% 60% at 92% 8%, var(--nebula-1) 0%, var(--nebula-2) 45%, transparent 72%)",
         }}
       />
+      {/* Soft radial glow behind the headline (Linear/Raycast depth cue) */}
+      <div
+        aria-hidden
+        className="absolute pointer-events-none z-[1]"
+        style={{
+          top: "8%",
+          left: "-6%",
+          width: "55%",
+          height: "70%",
+          background: "radial-gradient(ellipse at 40% 40%, color-mix(in srgb, var(--accent) 14%, transparent) 0%, transparent 68%)",
+          filter: "blur(24px)",
+        }}
+      />
 
       <div className="container-page relative z-10 py-[clamp(4.5rem,3rem+6vw,9rem)]">
         <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-x-16 gap-y-16 items-center">
 
           {/* ── Left: editorial headline column ── */}
           <div className="max-w-[46rem]">
-            {/* Availability tag */}
-            <motion.div {...fadeUp(0)} className="flex items-center gap-2.5 mb-8">
-              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--success)" }} />
-              <span className="text-[15px]" style={{ color: "var(--muted-foreground)" }}>
+            {/* Availability pill — pulsing dot, stronger weight */}
+            <motion.div
+              {...fadeUp(0)}
+              className="inline-flex items-center gap-2.5 mb-8 rounded-full px-3.5 py-1.5"
+              style={{ background: "color-mix(in srgb, var(--foreground) 5%, transparent)", border: "1px solid var(--border)" }}
+            >
+              <span className="relative flex w-2 h-2 flex-shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-70" style={{ background: "var(--success)" }} />
+                <span className="relative inline-flex rounded-full w-2 h-2" style={{ background: "var(--success)" }} />
+              </span>
+              <span className="text-[14px] font-medium tracking-[0.01em]" style={{ color: "var(--foreground)" }}>
                 <span className="sm:hidden">BI &amp; Analytics Engineer · Open to hire</span>
                 <span className="hidden sm:inline">BI &amp; Analytics Engineer · Available for hire</span>
               </span>
             </motion.div>
 
-            {/* Serif display headline — italic on the closing phrase */}
+            {/* Serif display headline — bigger, with an oversized italic drop */}
             <motion.h1
               {...fadeUp(0.08)}
               className="mb-9 text-foreground"
               style={{
                 fontFamily: "var(--font-display)",
                 fontWeight: 400,
-                fontSize: "clamp(2.6rem, 1.2rem + 4.4vw, 5.6rem)",
-                lineHeight: 1.08,
-                letterSpacing: "-0.025em",
+                fontSize: "clamp(3rem, 1.4rem + 5.2vw, 6rem)",
+                lineHeight: 1.04,
+                letterSpacing: "-0.03em",
               }}
             >
               Building analytics platforms that power{" "}
-              <em className="italic" style={{ color: "var(--foreground)" }}>enterprise decisions.</em>
+              <em className="italic" style={{ color: "var(--accent)", fontSize: "1.08em", lineHeight: 1 }}>enterprise decisions.</em>
             </motion.h1>
 
             {/* Rotating deliverable — Uiverse word list, editorial palette */}
@@ -175,10 +204,10 @@ export function CinematicHero() {
 
           {/* ── Right: floating stat artifacts ── */}
           <div className="relative grid grid-cols-2 gap-4 sm:gap-5">
-            <StatArtifact value={stats[0].value} label={stats[0].label} delay={0.30} className="sm:translate-y-3" />
-            <StatArtifact value={stats[1].value} label={stats[1].label} delay={0.38} className="sm:-translate-y-3" />
-            <StatArtifact value={stats[2].value} label={stats[2].label} delay={0.46} className="sm:translate-y-3" />
-            <StatArtifact value={stats[3].value} label={stats[3].label} delay={0.54} className="sm:-translate-y-3" />
+            <StatArtifact value={stats[0].value} label={stats[0].label} Icon={stats[0].Icon} color={stats[0].color} delay={0.30} className="sm:translate-y-3" />
+            <StatArtifact value={stats[1].value} label={stats[1].label} Icon={stats[1].Icon} color={stats[1].color} delay={0.38} className="sm:-translate-y-3" />
+            <StatArtifact value={stats[2].value} label={stats[2].label} Icon={stats[2].Icon} color={stats[2].color} delay={0.46} className="sm:translate-y-3" />
+            <StatArtifact value={stats[3].value} label={stats[3].label} Icon={stats[3].Icon} color={stats[3].color} delay={0.54} className="sm:-translate-y-3" />
           </div>
 
         </div>

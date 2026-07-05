@@ -83,9 +83,20 @@ export function CareerEvolutionSection() {
                 i > 0 ? "pt-[clamp(2rem,3vw,3rem)]" : ""
               }`}
             >
-              {/* Period column */}
-              <div className="sm:text-right pt-1">
-                <span className="font-mono text-[12px] text-foreground/80 tracking-[0.04em] leading-snug font-semibold whitespace-nowrap">
+              {/* Period column — date pill */}
+              <div className="sm:text-right pt-0.5">
+                <span
+                  className="inline-flex font-mono text-[11px] tracking-[0.03em] leading-snug font-semibold whitespace-nowrap px-2.5 py-1 rounded-full"
+                  style={{
+                    background: item.current
+                      ? "color-mix(in srgb, var(--success) 15%, transparent)"
+                      : "color-mix(in srgb, var(--foreground) 5%, transparent)",
+                    color: item.current ? "var(--success)" : "var(--muted-foreground)",
+                    border: item.current
+                      ? "1px solid color-mix(in srgb, var(--success) 35%, transparent)"
+                      : "1px solid var(--border)",
+                  }}
+                >
                   {item.period}
                 </span>
               </div>
@@ -93,13 +104,23 @@ export function CareerEvolutionSection() {
               {/* Vertical line + dot */}
               <div className="hidden sm:flex flex-col items-center">
                 <span
-                  className="w-3 h-3 rounded-full border-2 border-background flex-shrink-0 mt-1"
-                  style={{ background: item.current ? "var(--success)" : "var(--ash)" }}
+                  className="rounded-full border-2 border-background flex-shrink-0 mt-1.5"
+                  style={{
+                    width: item.current ? "0.85rem" : "0.7rem",
+                    height: item.current ? "0.85rem" : "0.7rem",
+                    background: item.current ? "var(--success)" : "var(--accent)",
+                    boxShadow: item.current
+                      ? "0 0 0 4px color-mix(in srgb, var(--success) 20%, transparent)"
+                      : "0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent)",
+                  }}
                 />
                 {i < timeline.length - 1 && (
                   <span
-                    className={`flex-1 w-px mt-1 ${i === 0 ? "timeline-spine" : "bg-border"}`}
-                    style={{ minHeight: "calc(100% + clamp(2rem,3vw,3rem))" }}
+                    className="flex-1 w-[2px] mt-1.5 rounded-full"
+                    style={{
+                      minHeight: "calc(100% + clamp(2rem,3vw,3rem))",
+                      background: "linear-gradient(to bottom, color-mix(in srgb, var(--accent) 45%, transparent), var(--border))",
+                    }}
                   />
                 )}
               </div>
