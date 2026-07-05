@@ -94,7 +94,7 @@ export function CareerEvolutionSection() {
               <div className="hidden sm:flex flex-col items-center">
                 <span
                   className="w-3 h-3 rounded-full border-2 border-background flex-shrink-0 mt-1"
-                  style={{ background: item.current ? "var(--sienna)" : "var(--ash)" }}
+                  style={{ background: item.current ? "var(--success)" : "var(--ash)" }}
                 />
                 {i < timeline.length - 1 && (
                   <span

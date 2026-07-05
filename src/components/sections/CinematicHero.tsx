@@ -96,7 +96,7 @@ export function CinematicHero() {
           <div className="max-w-[46rem]">
             {/* Availability tag */}
             <motion.div {...fadeUp(0)} className="flex items-center gap-2.5 mb-8">
-              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--sienna)" }} />
+              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--success)" }} />
               <span className="text-[15px]" style={{ color: "var(--muted-foreground)" }}>
                 <span className="sm:hidden">BI &amp; Analytics Engineer · Open to hire</span>
                 <span className="hidden sm:inline">BI &amp; Analytics Engineer · Available for hire</span>

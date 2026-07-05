@@ -47,99 +47,107 @@
 }
 
 :root {
-  /* ── Steep — serif analytics on warm paper (light only) ── */
-  --background: #FFFFFF;           /* Paper White — canvas */
-  --foreground: #17191C;           /* Ink Black — text */
-  --card: #F2F2F3;                 /* Mist Gray — neutral card surface */
-  --card-foreground: #17191C;
-  --popover: #FFFFFF;
-  --popover-foreground: #17191C;
-  --primary: #17191C;              /* Ink is the action colour */
+  /* ── Ink & Electric Blue — Vercel/Linear-inspired dark tech ── */
+  color-scheme: dark;
+  --background: #0A0A12;           /* Deep ink canvas */
+  --foreground: #F5F5F7;           /* Pure white type */
+  --card: #111120;                 /* Surface */
+  --card-foreground: #F5F5F7;
+  --popover: #111120;
+  --popover-foreground: #F5F5F7;
+  --primary: #185FA5;              /* Electric blue — actions */
   --primary-foreground: #FFFFFF;
-  --secondary: #F2F2F3;
-  --secondary-foreground: #17191C;
-  --muted: #F2F2F3;
-  --muted-foreground: #777B86;     /* Slate Gray — muted copy, links */
-  --accent: #FBE1D1;               /* Blush Peach — the one chromatic surface */
-  --accent-foreground: #5D2A1A;    /* Sienna Brown — ink on peach */
-  --destructive: #B3261E;
-  --border: #ECECEC;               /* hairline */
-  --input: #ECECEC;
-  --ring: #17191C;
-  --chart-1: #17191C;
-  --chart-2: #777B86;
-  --chart-3: #979799;
-  --chart-4: #5D2A1A;
-  --chart-5: #F2F2F3;
-  --radius: 1.5rem;                /* 24px cards */
-  --sidebar: #FFFFFF;
-  --sidebar-foreground: #17191C;
-  --sidebar-primary: #17191C;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #F2F2F3;
-  --sidebar-accent-foreground: #17191C;
-  --sidebar-border: #ECECEC;
-  --sidebar-ring: #17191C;
+  --secondary: #16162A;
+  --secondary-foreground: #F5F5F7;
+  --muted: #16162A;
+  --muted-foreground: #9AA0B4;     /* muted slate */
+  --accent: #378ADD;               /* bright electric blue */
+  --accent-foreground: #06121F;    /* ink on bright blue */
+  --destructive: #E5484D;
+  --border: rgba(255, 255, 255, 0.10);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: #378ADD;
+  --chart-1: #378ADD;
+  --chart-2: #85B7EB;
+  --chart-3: #F5F5F7;
+  --chart-4: #1D9E75;
+  --chart-5: #16162A;
+  --radius: 1.5rem;
+  --sidebar: #111120;
+  --sidebar-foreground: #F5F5F7;
+  --sidebar-primary: #378ADD;
+  --sidebar-primary-foreground: #06121F;
+  --sidebar-accent: #16162A;
+  --sidebar-accent-foreground: #F5F5F7;
+  --sidebar-border: rgba(255, 255, 255, 0.10);
+  --sidebar-ring: #378ADD;
 
-  /* Editorial surfaces + tokens */
-  --fog: #FAFAFB;                  /* Section Fog — alternating band */
-  --ash: #979799;                  /* tertiary labels */
-  --smoke: #A3A6AF;                /* placeholder */
-  --peach: #FBE1D1;
-  --sienna: #5D2A1A;
+  /* Surfaces + accent tokens */
+  --fog: #0E0E1A;                  /* alternating band, a step above ink */
+  --ash: #6B6F86;                  /* tertiary labels */
+  --smoke: #55586E;                /* placeholder */
+  --peach: #378ADD;                /* repurposed: accent glow (was warm) */
+  --sienna: #85B7EB;               /* repurposed: bright accent — checks, dots, emphasis */
+  --success: #1D9E75;
 
-  /* Diagram strokes — sienna ink on kraft */
-  --dgrm: #5D2A1A;
-  --net-node: rgba(93, 42, 26, 0.35);
-  --net-edge: 93, 42, 26;
-  --net-pulse: rgba(93, 42, 26, 0.7);
-  --grain-opacity: 0.02;
-  --nebula-1: rgba(251, 225, 209, 0.55);
-  --nebula-2: rgba(251, 225, 209, 0.18);
-  --highlight: #FBE1D1;
+  /* Diagram strokes — electric blue on ink */
+  --dgrm: #378ADD;
+  --net-node: rgba(55, 138, 221, 0.4);
+  --net-edge: 55, 138, 221;
+  --net-pulse: rgba(133, 183, 235, 0.85);
+  --grain-opacity: 0.03;
+  --nebula-1: rgba(55, 138, 221, 0.18);
+  --nebula-2: rgba(24, 95, 165, 0.10);
+  --highlight: #378ADD;
 
-  /* Floating product artifact elevation */
-  --shadow-artifact: 0 0 0 1px rgba(4,23,43,0.05), 0 20px 25px -5px rgba(0,0,0,0.10), 0 8px 10px -6px rgba(0,0,0,0.10);
+  /* Floating surface elevation */
+  --shadow-artifact: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 20px 40px -12px rgba(0, 0, 0, 0.6);
 }
 
-/* Dark theme is dropped for the editorial system — .dark inherits the paper
-   palette so any lingering toggle is a no-op. */
+/* Single dark theme — .dark mirrors :root so any lingering toggle is a no-op. */
 .dark {
-  color-scheme: light;
-  --background: #FFFFFF;
-  --foreground: #17191C;
-  --card: #F2F2F3;
-  --card-foreground: #17191C;
-  --popover: #FFFFFF;
-  --popover-foreground: #17191C;
-  --primary: #17191C;
+  color-scheme: dark;
+  --background: #0A0A12;
+  --foreground: #F5F5F7;
+  --card: #111120;
+  --card-foreground: #F5F5F7;
+  --popover: #111120;
+  --popover-foreground: #F5F5F7;
+  --primary: #185FA5;
   --primary-foreground: #FFFFFF;
-  --secondary: #F2F2F3;
-  --secondary-foreground: #17191C;
-  --muted: #F2F2F3;
-  --muted-foreground: #777B86;
-  --accent: #FBE1D1;
-  --accent-foreground: #5D2A1A;
-  --destructive: #B3261E;
-  --border: #ECECEC;
-  --input: #ECECEC;
-  --ring: #17191C;
-  --sidebar: #FFFFFF;
-  --sidebar-foreground: #17191C;
-  --sidebar-primary: #17191C;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #F2F2F3;
-  --sidebar-accent-foreground: #17191C;
-  --sidebar-border: #ECECEC;
-  --sidebar-ring: #17191C;
+  --secondary: #16162A;
+  --secondary-foreground: #F5F5F7;
+  --muted: #16162A;
+  --muted-foreground: #9AA0B4;
+  --accent: #378ADD;
+  --accent-foreground: #06121F;
+  --destructive: #E5484D;
+  --border: rgba(255, 255, 255, 0.10);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: #378ADD;
+  --sidebar: #111120;
+  --sidebar-foreground: #F5F5F7;
+  --sidebar-primary: #378ADD;
+  --sidebar-primary-foreground: #06121F;
+  --sidebar-accent: #16162A;
+  --sidebar-accent-foreground: #F5F5F7;
+  --sidebar-border: rgba(255, 255, 255, 0.10);
+  --sidebar-ring: #378ADD;
 
-  --dgrm: #5D2A1A;
-  --net-node: rgba(93, 42, 26, 0.35);
-  --net-edge: 93, 42, 26;
-  --net-pulse: rgba(93, 42, 26, 0.7);
-  --grain-opacity: 0.02;
-  --nebula-1: rgba(251, 225, 209, 0.55);
-  --nebula-2: rgba(251, 225, 209, 0.18);
+  --fog: #0E0E1A;
+  --ash: #6B6F86;
+  --smoke: #55586E;
+  --peach: #378ADD;
+  --sienna: #85B7EB;
+  --success: #1D9E75;
+
+  --dgrm: #378ADD;
+  --net-node: rgba(55, 138, 221, 0.4);
+  --net-edge: 55, 138, 221;
+  --net-pulse: rgba(133, 183, 235, 0.85);
+  --grain-opacity: 0.03;
+  --nebula-1: rgba(55, 138, 221, 0.18);
+  --nebula-2: rgba(24, 95, 165, 0.10);
 }
 
 @layer base {
@@ -224,11 +232,13 @@
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   }
 
-  /* Floating product artifact — the only elevated surface */
+  /* Floating product artifact — elevated surface */
   .artifact {
-    background: #FFFFFF;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 20px;
     box-shadow: var(--shadow-artifact);
   }
@@ -441,22 +451,22 @@
   border-radius: 26px;
   background:
     linear-gradient(var(--card), var(--card)) padding-box,
-    linear-gradient(to top right, #fbe1d1, #7a3a22 42%, #c98a5e 66%, #5d2a1a 100%) border-box;
+    linear-gradient(to top right, #85B7EB, #185FA5 42%, #378ADD 66%, #185FA5 100%) border-box;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
 }
 .gradient-frame:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 36px -12px rgba(93, 42, 26, 0.28);
+  box-shadow: 0 16px 40px -12px rgba(55, 138, 221, 0.35);
 }
 
 /* Glossy gradient button (the card-btn, warmed to peach/sienna) */
 .gradient-btn {
-  background: linear-gradient(4deg, #fbe1d1, #b9764a 40%, #d9a679 65%, #7a3a22 100%);
+  background: linear-gradient(4deg, #185FA5, #378ADD 45%, #85B7EB 100%);
   color: #ffffff;
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.55);
-  transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+  box-shadow: inset 0 -2px 12px -2px rgba(255, 255, 255, 0.35), 0 4px 16px -4px rgba(55, 138, 221, 0.5);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
-.gradient-btn:hover { transform: scale(1.03); text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); }
+.gradient-btn:hover { transform: scale(1.03); box-shadow: inset 0 -2px 12px -2px rgba(255, 255, 255, 0.45), 0 6px 22px -4px rgba(55, 138, 221, 0.65); }
 .gradient-btn:active { transform: scale(1); }
 
 /* ── Rotating word list (Uiverse loader, recoloured to the editorial theme) ── */

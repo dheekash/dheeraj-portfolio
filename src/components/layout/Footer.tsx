@@ -162,7 +162,7 @@ export function Footer() {
             </a>
 
             <div className="mt-6 flex items-center gap-2.5">
-              <span className="h-2 w-2 flex-shrink-0 rounded-full" style={{ background: "var(--sienna)" }} />
+              <span className="h-2 w-2 flex-shrink-0 rounded-full" style={{ background: "var(--success)" }} />
               <span className="text-[14px] text-muted-foreground">Currently available</span>
             </div>
           </div>
