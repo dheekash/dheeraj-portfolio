@@ -557,18 +557,21 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
         </h3>
         <p className="text-[12px] text-muted-foreground/70 leading-snug mb-3 max-w-[44ch]">{study.how}</p>
         <div className="mb-4 flex-1 flex flex-col gap-3">
-          {/* Key metric */}
+          {/* Key metric — the card hero */}
           <div
-            className="rounded-2xl px-4 py-3.5 flex items-center gap-4"
-            style={{ background: "var(--fog)", border: "1px solid var(--border)" }}
+            className="rounded-2xl px-5 py-4"
+            style={{
+              background: "linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, var(--card)) 0%, var(--card) 120%)",
+              border: "1px solid color-mix(in srgb, var(--accent) 25%, var(--border))",
+            }}
           >
             <span
-              className="tabular-nums leading-none flex-shrink-0"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(1.5rem,1rem+1.1vw,2rem)", color: "var(--foreground)" }}
+              className="block tabular-nums leading-none"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(2.2rem, 1.4rem + 2vw, 3.4rem)", color: "var(--accent)" }}
             >
               {study.keyMetric.value}
             </span>
-            <span className="text-[13px] text-muted-foreground leading-tight">{study.keyMetric.label}</span>
+            <span className="mt-2 block text-[12px] uppercase tracking-[0.1em] text-muted-foreground">{study.keyMetric.label}</span>
           </div>
           {/* Outcome */}
           <p className="text-sm leading-relaxed text-muted-foreground px-1">{study.outcome}</p>

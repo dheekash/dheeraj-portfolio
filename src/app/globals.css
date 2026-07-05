@@ -317,9 +317,14 @@
 
   .rule-thick { border-top: 2.5px solid var(--foreground); }
 
-  /* Alternating section band — Fog White, a whisper above paper */
+  /* Alternating section band */
   .section-alt {
     background: var(--fog);
+  }
+  /* In light mode, alt sections go pure white for clearer rhythm against
+     the off-white page base */
+  .light .section-alt {
+    background: #FFFFFF;
   }
 
   /* ── Liquid glass — cinematic frosted surface ── */

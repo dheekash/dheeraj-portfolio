@@ -112,10 +112,7 @@ export function CinematicHero() {
       />
 
       <div className="container-page relative z-10 py-[clamp(4.5rem,3rem+6vw,9rem)]">
-        <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-x-16 gap-y-16 items-center">
-
-          {/* ── Left: editorial headline column ── */}
-          <div className="max-w-[46rem]">
+        <div className="max-w-[64rem]">
             {/* Availability pill — pulsing dot, stronger weight */}
             <motion.div
               {...fadeUp(0)}
@@ -139,8 +136,8 @@ export function CinematicHero() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontWeight: 400,
-                fontSize: "clamp(3rem, 1.4rem + 5.2vw, 6rem)",
-                lineHeight: 1.04,
+                fontSize: "clamp(2.5rem, 1rem + 4.4vw, 4.6rem)",
+                lineHeight: 1.06,
                 letterSpacing: "-0.03em",
               }}
             >
@@ -200,16 +197,14 @@ export function CinematicHero() {
                 View Projects <ArrowRight size={15} />
               </a>
             </motion.div>
-          </div>
+        </div>
 
-          {/* ── Right: floating stat artifacts ── */}
-          <div className="relative grid grid-cols-2 gap-4 sm:gap-5">
-            <StatArtifact value={stats[0].value} label={stats[0].label} Icon={stats[0].Icon} color={stats[0].color} delay={0.30} className="sm:translate-y-3" />
-            <StatArtifact value={stats[1].value} label={stats[1].label} Icon={stats[1].Icon} color={stats[1].color} delay={0.38} className="sm:-translate-y-3" />
-            <StatArtifact value={stats[2].value} label={stats[2].label} Icon={stats[2].Icon} color={stats[2].color} delay={0.46} className="sm:translate-y-3" />
-            <StatArtifact value={stats[3].value} label={stats[3].label} Icon={stats[3].Icon} color={stats[3].color} delay={0.54} className="sm:-translate-y-3" />
-          </div>
-
+        {/* ── Stat artifacts — row below the headline ── */}
+        <div className="mt-[clamp(3rem,5vw,4.5rem)] grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-[62rem]">
+          <StatArtifact value={stats[0].value} label={stats[0].label} Icon={stats[0].Icon} color={stats[0].color} delay={0.30} />
+          <StatArtifact value={stats[1].value} label={stats[1].label} Icon={stats[1].Icon} color={stats[1].color} delay={0.38} />
+          <StatArtifact value={stats[2].value} label={stats[2].label} Icon={stats[2].Icon} color={stats[2].color} delay={0.46} />
+          <StatArtifact value={stats[3].value} label={stats[3].label} Icon={stats[3].Icon} color={stats[3].color} delay={0.54} />
         </div>
       </div>
     </section>

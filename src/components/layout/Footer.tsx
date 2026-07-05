@@ -1,10 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { motion } from "framer-motion";
-import { ArrowUp, ArrowUpRight, Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { ArrowUp, ArrowUpRight, ArrowRight } from "lucide-react";
 import { profile } from "@/data/profile";
 
 const quickLinks = [
@@ -16,14 +13,7 @@ const quickLinks = [
 ];
 
 export function Footer() {
-  const [email, setEmail] = React.useState("");
-
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const subject = encodeURIComponent("BI & Analytics Engineer — Let's connect");
-    const body = email ? encodeURIComponent(`Hi Dheeraj,\n\n(Reply to: ${email})\n\n`) : "";
-    window.location.href = `mailto:${profile.email}?subject=${subject}${body ? `&body=${body}` : ""}`;
-  };
+  const contactHref = `mailto:${profile.email}?subject=${encodeURIComponent("BI & Analytics Engineer — Let's connect")}`;
 
   return (
     <footer id="contact" className="relative overflow-hidden border-t border-border bg-background text-foreground">
@@ -50,35 +40,32 @@ export function Footer() {
           <div className="lg:col-span-1">
             <p className="eyebrow mb-4">Get in touch</p>
             <h2
-              className="mb-5"
-              style={{ fontSize: "clamp(1.9rem,1.3rem+1.6vw,2.6rem)", lineHeight: 1.12 }}
+              className="mb-6"
+              style={{ fontSize: "clamp(2.1rem,1.4rem+1.9vw,3rem)", lineHeight: 1.1 }}
             >
               Let&apos;s build analytics systems{" "}
               <span className="text-gradient">that scale.</span>
             </h2>
-            <p className="mb-6 text-[15px] leading-relaxed text-muted-foreground max-w-[36ch]">
+
+            {/* Primary CTA */}
+            <a
+              href={contactHref}
+              className="gradient-btn inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-[15px] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+            >
+              Send me a message <ArrowRight size={16} />
+            </a>
+
+            <p className="mt-6 text-[15px] leading-relaxed text-muted-foreground max-w-[36ch]">
               Open to full-time BI &amp; Analytics Engineering roles and enterprise Fabric / Databricks consulting. Remote or Bengaluru-based.
             </p>
 
-            <form className="relative max-w-sm" onSubmit={onSubmit}>
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@company.com"
-                aria-label="Your email"
-                className="h-12 rounded-full border-border bg-card pl-5 pr-14 text-[15px] placeholder:text-[color:var(--smoke)] focus-visible:ring-foreground/20"
-              />
-              <Button
-                type="submit"
-                size="icon"
-                aria-label="Email me"
-                className="absolute right-1.5 top-1.5 h-9 w-9 rounded-full bg-primary text-primary-foreground transition-transform hover:scale-105"
-              >
-                <Send className="h-4 w-4" />
-                <span className="sr-only">Email me</span>
-              </Button>
-            </form>
+            <div className="mt-5 inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5" style={{ background: "color-mix(in srgb, var(--success) 12%, transparent)", border: "1px solid color-mix(in srgb, var(--success) 30%, transparent)" }}>
+              <span className="relative flex w-2 h-2 flex-shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-70" style={{ background: "var(--success)" }} />
+                <span className="relative inline-flex rounded-full w-2 h-2" style={{ background: "var(--success)" }} />
+              </span>
+              <span className="text-[13px] font-medium" style={{ color: "var(--success)" }}>Currently available</span>
+            </div>
           </div>
 
           {/* ── Explore ── */}
@@ -160,11 +147,6 @@ export function Footer() {
             >
               Download resume <ArrowUpRight size={14} />
             </a>
-
-            <div className="mt-6 flex items-center gap-2.5">
-              <span className="h-2 w-2 flex-shrink-0 rounded-full" style={{ background: "var(--success)" }} />
-              <span className="text-[14px] text-muted-foreground">Currently available</span>
-            </div>
           </div>
         </div>
 

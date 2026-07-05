@@ -30,6 +30,12 @@ function IssuerLogo({ issuer, size = 14 }: { issuer: Issuer; size?: number }) {
   return <SnowflakeLogo size={size} />;
 }
 
+const ISSUER_COLOR: Record<Issuer, string> = {
+  Microsoft:  "#2B9AE0",
+  Snowflake:  "#29B5E8",
+  Databricks: "#FF5A3C",
+};
+
 const certGroups: { category: string; color: string; certs: Cert[] }[] = [
   {
     category: "Power BI",
@@ -89,11 +95,12 @@ function CertCard({ cert, groupColor }: { cert: Cert; groupColor?: string }) {
     <div
       onPointerMove={onSpotlightMove}
       className="spotlight gradient-frame px-4 py-4 flex flex-col gap-3.5"
+      style={{ borderTop: `2px solid ${ISSUER_COLOR[cert.issuer]}` }}
     >
       <div className="flex items-start justify-between">
         <span
           className="inline-flex h-10 w-10 items-center justify-center rounded-xl flex-shrink-0"
-          style={{ background: "color-mix(in srgb, var(--foreground) 6%, transparent)", border: "1px solid var(--border)" }}
+          style={{ background: `color-mix(in srgb, ${ISSUER_COLOR[cert.issuer]} 16%, transparent)`, border: `1px solid color-mix(in srgb, ${ISSUER_COLOR[cert.issuer]} 30%, var(--border))` }}
         >
           <IssuerLogo issuer={cert.issuer} size={20} />
         </span>
