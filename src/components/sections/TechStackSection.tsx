@@ -250,9 +250,20 @@ export function CoreExpertiseSection() {
               Full-stack analytics engineering. Raw data ingestion through governed semantic models to executive-facing dashboards.
             </p>
           </div>
-          <div className="flex items-center gap-2 flex-shrink-0 pb-1">
-            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>6 categories</span>
-            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>30 tools</span>
+          {/* Legend — proficiency by visual weight, not arbitrary percentages */}
+          <div className="flex items-center gap-3 flex-shrink-0 pb-1 text-[11px] text-muted-foreground">
+            <span className="inline-flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-[3px]" style={{ background: "color-mix(in srgb, var(--accent) 22%, transparent)", border: "1px solid color-mix(in srgb, var(--accent) 45%, transparent)" }} />
+              Expert
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-[3px]" style={{ background: "color-mix(in srgb, var(--foreground) 6%, transparent)", border: "1px solid var(--border)" }} />
+              Advanced
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-[3px]" style={{ border: "1px solid var(--border)" }} />
+              Proficient
+            </span>
           </div>
         </motion.div>
 
@@ -262,7 +273,7 @@ export function CoreExpertiseSection() {
               key={cat.title}
               {...reveal(0.1 + i * 0.06)}
               onPointerMove={onSpotlightMove}
-              className="spotlight gradient-frame p-5 flex flex-col gap-3"
+              className="spotlight gradient-frame p-5 flex flex-col gap-3.5"
             >
               <div className="flex items-center gap-3">
                 <span
@@ -271,19 +282,25 @@ export function CoreExpertiseSection() {
                 />
                 <p className="text-[13px] font-bold text-foreground tracking-tight">{cat.title}</p>
               </div>
-              <div className="mt-1">
+              <div className="flex flex-wrap gap-1.5">
                 {cat.tools.map((t) => {
                   const lvl = t.level ?? "";
-                  const pct = lvl === "Expert" ? "90%" : lvl === "Advanced" ? "75%" : "62%";
+                  const style =
+                    lvl === "Expert"
+                      ? { background: "color-mix(in srgb, var(--accent) 16%, transparent)", border: "1px solid color-mix(in srgb, var(--accent) 40%, transparent)", color: "var(--foreground)" }
+                      : lvl === "Advanced"
+                      ? { background: "color-mix(in srgb, var(--foreground) 6%, transparent)", border: "1px solid var(--border)", color: "var(--foreground)" }
+                      : { background: "transparent", border: "1px solid var(--border)", color: "var(--muted-foreground)" };
                   return (
-                    <div key={t.name} className="skillbox">
-                      <span className="skillbox-title">{t.name}</span>
-                      <div className="skill-track">
-                        <span className="skill-fill" style={{ width: pct }}>
-                          <span className="skill-tip">{t.level ?? t.years}</span>
-                        </span>
-                      </div>
-                    </div>
+                    <span
+                      key={t.name}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[12px] font-medium cursor-default transition-transform duration-200 hover:-translate-y-px"
+                      style={style}
+                      title={`${t.years ?? ""}${t.years ? " · " : ""}${lvl}`}
+                    >
+                      {t.Logo && <t.Logo size={12} />}
+                      {t.name}
+                    </span>
                   );
                 })}
               </div>

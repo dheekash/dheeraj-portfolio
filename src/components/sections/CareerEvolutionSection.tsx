@@ -11,6 +11,10 @@ const timeline = [
     location: "Bengaluru, India",
     type: "Full-time",
     stack: ["Microsoft Fabric", "SQLMesh", "Power BI", "DAX", "Azure", "Delta Lake", "ADF"],
+    metrics: [
+      { value: "40%", label: "faster delivery" },
+      { value: "15+ hrs", label: "saved / week" },
+    ],
     summary:
       "Building Fabric Lakehouse platforms and analytics products for enterprise clients across 15 countries. Cut 15+ hours of weekly manual work, reduced compute costs 15%, and shortened dashboard delivery by 40%.",
     highlights: [
@@ -29,6 +33,10 @@ const timeline = [
     location: "Bengaluru, India",
     type: "Full-time",
     stack: ["Power BI", "Python", "SQL", "Snowflake", "Databricks", "Scikit-learn"],
+    metrics: [
+      { value: "−30%", label: "fraud incidence" },
+      { value: "65→30 min", label: "case resolution" },
+    ],
     summary:
       "Moved from fraud investigation into building self-serve analytics platforms for seller leadership across 10+ global marketplaces. Shipped fraud models to production, led a 15-person team, and cut case resolution time by 35 minutes.",
     highlights: [
@@ -45,6 +53,10 @@ const timeline = [
     location: "Bengaluru, India",
     type: "Full-time",
     stack: ["Excel", "SQL", "Power Query"],
+    metrics: [
+      { value: "−31%", label: "handling time" },
+      { value: "94%", label: "contact resolution" },
+    ],
     summary:
       "Amazon-operated BPO. Built Excel dashboards for 20+ associates, cut average handling time 31%, pushed contact resolution to 94% vs 82% site benchmark.",
     highlights: [],
@@ -148,11 +160,32 @@ export function CareerEvolutionSection() {
                 </div>
 
                 {/* Company + meta */}
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mb-3">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mb-4">
                   <p className="text-sm font-medium text-muted-foreground">{item.company}</p>
                   <span className="text-border hidden sm:inline text-xs">·</span>
                   <p className="text-[12px] text-muted-foreground/70 font-mono">{item.location}</p>
                 </div>
+
+                {/* Headline achievement callouts */}
+                {"metrics" in item && item.metrics && (
+                  <div className="flex flex-wrap gap-2.5 mb-4">
+                    {item.metrics.map((m) => (
+                      <div
+                        key={m.label}
+                        className="rounded-xl px-3.5 py-2"
+                        style={{ background: "color-mix(in srgb, var(--accent) 10%, transparent)", border: "1px solid color-mix(in srgb, var(--accent) 22%, var(--border))" }}
+                      >
+                        <span
+                          className="block tabular-nums leading-none"
+                          style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(1.25rem, 1rem + 0.7vw, 1.6rem)", color: "var(--accent)" }}
+                        >
+                          {m.value}
+                        </span>
+                        <span className="mt-1 block text-[11px] uppercase tracking-[0.08em] text-muted-foreground">{m.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
 
                 {/* Summary */}
                 <p className="text-sm text-muted-foreground leading-relaxed mb-3 max-w-[58ch]">

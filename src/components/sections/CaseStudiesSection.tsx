@@ -517,72 +517,68 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
 
 function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
   return (
-    <motion.article {...reveal()} onPointerMove={onSpotlightMove} className="spotlight gradient-frame overflow-hidden flex flex-col group">
-      {/* Faux browser chrome */}
-      <div
-        className="flex items-center px-4 py-2.5 border-b border-border"
-        style={{ background: "color-mix(in srgb, var(--muted) 70%, var(--card))" }}
-      >
-        <div className="browser-dots">
-          <span /><span /><span />
-        </div>
-      </div>
-      <div className="border-b border-border p-[clamp(1.25rem,2vw,2rem)] text-foreground bg-background relative overflow-hidden">
-        <div
-          aria-hidden
-          className="bg-dots absolute inset-0 pointer-events-none opacity-30"
-          style={{ maskImage: "radial-gradient(ellipse at center, black 0%, transparent 75%)", WebkitMaskImage: "radial-gradient(ellipse at center, black 0%, transparent 75%)" }}
-        />
-        <div className="relative transition-transform duration-500 group-hover:scale-[1.02]">
-          <study.Diagram />
-        </div>
-      </div>
-      <div className="p-[clamp(1.25rem,2vw,1.75rem)] flex flex-col flex-1">
-        <div className="flex items-center gap-3 mb-3">
-          <span className="font-mono text-[10px] accent-text">CASE {study.num}</span>
-          <span className="eyebrow">{study.domain}</span>
-          <span
-            className="ml-auto text-[10px] font-mono px-2 py-0.5 rounded-full"
-            style={{
-              background: "color-mix(in srgb, var(--primary) 10%, var(--card))",
-              color: "var(--primary)",
-              border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)",
-            }}
-          >
-            {study.capability}
-          </span>
-        </div>
-        <h3 className="text-[clamp(1rem,0.95rem+0.4vw,1.2rem)] font-semibold leading-snug mb-2 max-w-[28ch]">
-          {study.title}
-        </h3>
-        <p className="text-[12px] text-muted-foreground/70 leading-snug mb-3 max-w-[44ch]">{study.how}</p>
-        <div className="mb-4 flex-1 flex flex-col gap-3">
-          {/* Key metric — the card hero */}
-          <div
-            className="rounded-2xl px-5 py-4"
-            style={{
-              background: "linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, var(--card)) 0%, var(--card) 120%)",
-              border: "1px solid color-mix(in srgb, var(--accent) 25%, var(--border))",
-            }}
-          >
-            <span
-              className="block tabular-nums leading-none"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(2.2rem, 1.4rem + 2vw, 3.4rem)", color: "var(--accent)" }}
-            >
-              {study.keyMetric.value}
-            </span>
-            <span className="mt-2 block text-[12px] uppercase tracking-[0.1em] text-muted-foreground">{study.keyMetric.label}</span>
-          </div>
-          {/* Outcome */}
-          <p className="text-sm leading-relaxed text-muted-foreground px-1">{study.outcome}</p>
-        </div>
-        <button
-          onClick={onOpen}
-          className="gradient-btn self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+    <motion.article {...reveal()} onPointerMove={onSpotlightMove} className="spotlight gradient-frame overflow-hidden flex flex-col group p-[clamp(1.35rem,2vw,1.85rem)]">
+      {/* Label row */}
+      <div className="flex items-center gap-3 mb-4">
+        <span className="font-mono text-[10px] accent-text">CASE {study.num}</span>
+        <span className="eyebrow">{study.domain}</span>
+        <span
+          className="ml-auto text-[10px] font-mono px-2 py-0.5 rounded-full"
+          style={{
+            background: "color-mix(in srgb, var(--accent) 12%, var(--card))",
+            color: "var(--accent)",
+            border: "1px solid color-mix(in srgb, var(--accent) 22%, transparent)",
+          }}
         >
-          View case study <ArrowUpRight size={14} />
-        </button>
+          {study.capability}
+        </span>
       </div>
+
+      {/* Impact metric — the card hero */}
+      <div
+        className="rounded-2xl px-5 py-5 mb-4"
+        style={{
+          background: "linear-gradient(135deg, color-mix(in srgb, var(--accent) 14%, var(--card)) 0%, var(--card) 125%)",
+          border: "1px solid color-mix(in srgb, var(--accent) 28%, var(--border))",
+        }}
+      >
+        <span
+          className="block tabular-nums leading-none"
+          style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(2.6rem, 1.6rem + 2.6vw, 4rem)", color: "var(--accent)" }}
+        >
+          {study.keyMetric.value}
+        </span>
+        <span className="mt-2.5 block text-[12px] uppercase tracking-[0.1em] text-muted-foreground">{study.keyMetric.label}</span>
+      </div>
+
+      {/* Project name */}
+      <h3 className="text-[clamp(1.05rem,0.95rem+0.4vw,1.25rem)] font-semibold leading-snug mb-2">
+        {study.title}
+      </h3>
+
+      {/* One-line description */}
+      <p className="text-[13px] text-muted-foreground leading-relaxed mb-4 flex-1">{study.how}</p>
+
+      {/* Tech stack tags */}
+      <div className="flex flex-wrap gap-1.5 mb-5">
+        {study.stack.slice(0, 5).map((t) => (
+          <span
+            key={t}
+            className="text-[11px] font-mono text-foreground/70 px-2 py-0.5 rounded-md"
+            style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid color-mix(in srgb, var(--border) 60%, transparent)" }}
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+
+      {/* CTA */}
+      <button
+        onClick={onOpen}
+        className="gradient-btn self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+      >
+        View case study <ArrowUpRight size={14} />
+      </button>
     </motion.article>
   );
 }
