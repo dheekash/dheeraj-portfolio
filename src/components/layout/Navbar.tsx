@@ -7,10 +7,10 @@ import { ThemeSwitch } from "@/components/common/ThemeSwitch";
 import { profile } from "@/data/profile";
 
 const links = [
-  { href: "#about",        id: "about",        label: "About"      },
-  { href: "#skills",       id: "skills",       label: "Skills"     },
   { href: "#case-studies", id: "case-studies", label: "Projects"   },
   { href: "#journey",      id: "journey",      label: "Experience" },
+  { href: "#skills",       id: "skills",       label: "Skills"     },
+  { href: "#about",        id: "about",        label: "About"      },
   { href: "#contact",      id: "contact",      label: "Contact"    },
 ];
 
