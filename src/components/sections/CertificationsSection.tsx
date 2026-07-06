@@ -86,6 +86,9 @@ const allCerts: (Cert & { groupColor: string })[] = certGroups.flatMap((g) =>
   g.certs.map((c) => ({ ...c, groupColor: g.color }))
 );
 
+const featuredCerts = allCerts.filter((c) => c.featured);
+const otherCerts = allCerts.filter((c) => !c.featured);
+
 function CertCard({ cert, groupColor }: { cert: Cert; groupColor?: string }) {
   return (
     <div
@@ -165,11 +168,39 @@ export function CertificationsSection() {
           </div>
         </motion.div>
 
+        {/* Featured certs as cards */}
         <motion.div {...reveal(0.08)}>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {allCerts.map((cert) => (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            {featuredCerts.map((cert) => (
               <CertCard key={cert.code} cert={cert} groupColor={cert.groupColor} />
             ))}
+          </div>
+        </motion.div>
+
+        {/* The rest as a compact strip */}
+        <motion.div {...reveal(0.12)} className="mt-5">
+          <p className="text-[11px] font-mono uppercase tracking-[0.12em] text-muted-foreground/60 mb-3">
+            Also certified
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {otherCerts.map((cert) => {
+              const content = (
+                <>
+                  <span className="flex-shrink-0"><IssuerLogo issuer={cert.issuer} size={14} /></span>
+                  <span className="font-mono font-semibold" style={{ color: ISSUER_COLOR[cert.issuer] }}>{cert.code}</span>
+                  <span className="text-muted-foreground">{cert.name}</span>
+                </>
+              );
+              const cls = "inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[12px] transition-colors";
+              const style = { background: "color-mix(in srgb, var(--foreground) 4%, transparent)", border: "1px solid var(--border)" };
+              return cert.verifyUrl ? (
+                <a key={cert.code} href={cert.verifyUrl} target="_blank" rel="noopener noreferrer" className={`${cls} hover:border-[color:var(--accent)]`} style={style}>
+                  {content}
+                </a>
+              ) : (
+                <span key={cert.code} className={cls} style={style}>{content}</span>
+              );
+            })}
           </div>
         </motion.div>
       </div>

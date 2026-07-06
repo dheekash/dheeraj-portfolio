@@ -179,25 +179,25 @@ export function PlatformGuideSection() {
                   {...reveal(0.36 + i * 0.06)}
                   onPointerMove={onSpotlightMove}
                   className="spotlight gradient-frame overflow-hidden flex flex-col snap-start flex-shrink-0 w-[min(80vw,320px)] sm:w-auto"
-                  style={{ borderTop: `2px solid ${p.accent}` }}
+                  style={{ borderTop: `3px solid ${p.accent}` }}
                 >
                   <div
-                    className="px-5 py-4"
-                    style={{ background: `linear-gradient(160deg, color-mix(in srgb, ${p.accent} 12%, transparent) 0%, transparent 130%)`, borderBottom: `1px solid color-mix(in srgb, ${p.accent} 25%, var(--border))` }}
+                    className="px-5 py-5"
+                    style={{ background: `linear-gradient(160deg, color-mix(in srgb, ${p.accent} 22%, transparent) 0%, color-mix(in srgb, ${p.accent} 6%, transparent) 130%)`, borderBottom: `1px solid color-mix(in srgb, ${p.accent} 40%, var(--border))` }}
                   >
-                    <div className="flex items-center gap-2.5 mb-1.5">
+                    <div className="flex items-center gap-2.5 mb-2">
                       <span
-                        className="inline-flex h-7 w-7 items-center justify-center rounded-lg flex-shrink-0"
-                        style={{ background: `color-mix(in srgb, ${p.accent} 16%, transparent)` }}
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-xl flex-shrink-0"
+                        style={{ background: `color-mix(in srgb, ${p.accent} 24%, var(--card))`, border: `1px solid color-mix(in srgb, ${p.accent} 40%, transparent)` }}
                       >
-                        <p.Logo size={15} />
+                        <p.Logo size={18} />
                       </span>
-                      <p className="text-[14px] font-semibold text-foreground">{p.platform}</p>
+                      <p className="text-[16px] font-bold text-foreground tracking-tight">{p.platform}</p>
                     </div>
-                    <p className="text-[11px] font-mono text-muted-foreground mb-2.5">{p.tagline}</p>
+                    <p className="text-[12px] font-mono text-muted-foreground mb-3">{p.tagline}</p>
                     <span
-                      className="inline-flex items-center gap-1.5 text-[11px] font-semibold px-2 py-0.5 rounded-full"
-                      style={{ background: `color-mix(in srgb, ${p.accent} 15%, transparent)`, color: p.accent }}
+                      className="inline-flex items-center gap-1.5 text-[11.5px] font-bold px-2.5 py-1 rounded-full"
+                      style={{ background: p.accent, color: "#0A0A12" }}
                     >
                       Best for {p.bestFor}
                     </span>

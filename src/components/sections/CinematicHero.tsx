@@ -173,10 +173,10 @@ export function CinematicHero() {
               </label>
               <a
                 href="#case-studies"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[16px] transition-colors hover:bg-[color-mix(in_srgb,var(--foreground)_5%,transparent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-                style={{ border: "1px solid var(--foreground)", color: "var(--foreground)" }}
+                className="group inline-flex items-center gap-1.5 px-3 py-3 text-[15px] text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
               >
-                View Projects <ArrowRight size={15} />
+                View projects
+                <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
               </a>
             </motion.div>
         </div>
