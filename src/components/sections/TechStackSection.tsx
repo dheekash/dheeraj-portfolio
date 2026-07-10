@@ -297,7 +297,7 @@ export function CoreExpertiseSection() {
                   return (
                     <span
                       key={t.name}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[12px] font-medium cursor-default transition-transform duration-200 hover:-translate-y-px"
+                      className="morph-chip inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[12px] font-medium cursor-default"
                       style={style}
                       title={`${t.years ?? ""}${t.years ? " · " : ""}${lvl}`}
                     >

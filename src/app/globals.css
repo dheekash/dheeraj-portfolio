@@ -606,6 +606,18 @@ body {
 .dash-btn:hover { border-color: var(--cyan); color: var(--cyan); animation: dash-rotate 1.2s linear infinite; }
 @keyframes dash-rotate { to { border-style: dashed; } }
 
+/* Morphing chip — dark tier chip shifts to cyan→purple gradient on hover */
+.morph-chip {
+  transition: background 0.25s ease-out, color 0.25s ease-out,
+              border-color 0.25s ease-out, transform 0.2s ease-out;
+}
+.morph-chip:hover {
+  background: linear-gradient(95deg, #00E5FF 0%, #A855F7 100%) !important;
+  border-color: transparent !important;
+  color: #0B0E14 !important;
+  transform: translateY(-1px);
+}
+
 /* Custom cursor — gradient dot + trailing ring (fine pointers only) */
 @media (pointer: fine) {
   html.has-custom-cursor, html.has-custom-cursor a, html.has-custom-cursor button,
