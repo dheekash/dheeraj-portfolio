@@ -161,6 +161,7 @@ export function PlatformGuideSection() {
         {/* ── Platform Decision Guide ── */}
         <motion.div {...reveal()} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(1.5rem,2.5vw,2.5rem)]">
           <div>
+            <p className="eyebrow mb-3">Platforms</p>
             <h2 className="mb-2">Platform Decision Guide</h2>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-[52ch]">
               How I choose between Fabric, Databricks, and Snowflake based on project constraints.
@@ -248,6 +249,7 @@ export function CoreExpertiseSection() {
         {/* ── Core Expertise ── */}
         <motion.div {...reveal(0.04)} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(1.5rem,2.5vw,2.5rem)]">
           <div>
+            <p className="eyebrow mb-3">Skills</p>
             <h2 className="mb-2">Core Expertise</h2>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-[52ch]">
               Full-stack analytics engineering. Raw data ingestion through governed semantic models to executive-facing dashboards.

@@ -42,7 +42,10 @@ export function AboutSection() {
 
           {/* Left — bio */}
           <div>
-            <motion.h2 {...reveal()} className="mb-6">
+            <motion.p {...reveal()} className="eyebrow mb-3">
+              Narrative
+            </motion.p>
+            <motion.h2 {...reveal(0.02)} className="mb-6">
               About me
             </motion.h2>
 

@@ -50,8 +50,16 @@ function CountUp({ value, delay = 0 }: { value: string; delay?: number }) {
   );
 }
 
-/* Flat bento stat block — colored left-border accent, mono label (spec) */
-function StatArtifact({ value, label, delay, Icon, color, className = "" }: { value: string; label: string; delay: number; Icon: LucideIcon; color: string; className?: string }) {
+/* Decorative sparkline shapes — one silhouette per stat card */
+const SPARKS = [
+  "0,22 12,16 24,19 36,10 48,13 60,6 72,9 84,2",
+  "0,18 12,20 24,12 36,15 48,8 60,11 72,5 84,7",
+  "0,20 12,14 24,17 36,9 48,12 60,10 72,4 84,6",
+  "0,16 12,19 24,11 36,14 48,6 60,9 72,7 84,3",
+];
+
+/* Glass stat block — breathing icon, count-up metric, mini sparkline */
+function StatArtifact({ value, label, delay, Icon, color, spark, className = "" }: { value: string; label: string; delay: number; Icon: LucideIcon; color: string; spark: string; className?: string }) {
   return (
     <motion.div
       {...fadeUp(delay)}
@@ -71,6 +79,18 @@ function StatArtifact({ value, label, delay, Icon, color, className = "" }: { va
           {label}
         </span>
       </div>
+      {/* Mini sparkline — decorative trend gesture */}
+      <svg viewBox="0 0 84 24" className="w-full h-6" aria-hidden preserveAspectRatio="none">
+        <polyline
+          points={spark}
+          fill="none"
+          stroke={color}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          opacity="0.75"
+        />
+      </svg>
     </motion.div>
   );
 }
@@ -78,6 +98,62 @@ function StatArtifact({ value, label, delay, Icon, color, className = "" }: { va
 export function CinematicHero() {
   return (
     <section id="top" className="relative overflow-hidden">
+      {/* Floating dashboard cluster — abstract data-viz identity (xl+) */}
+      <div aria-hidden className="hidden xl:block absolute right-[4%] top-[10%] z-[1] w-[24rem] pointer-events-none">
+        <motion.div
+          className="panel p-4 mb-4 ml-10"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: [0, -8, 0] }}
+          transition={{ opacity: { duration: 1, delay: 0.5 }, y: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 } }}
+        >
+          <svg viewBox="0 0 200 64" className="w-full h-auto">
+            {[14, 30, 22, 44, 36, 54, 46, 60].map((h, i) => (
+              <rect key={i} x={i * 25 + 4} y={64 - h} width="14" height={h} rx="2"
+                fill={i % 2 ? "rgba(168,85,247,0.55)" : "rgba(0,229,255,0.55)"} />
+            ))}
+          </svg>
+        </motion.div>
+        <motion.div
+          className="panel p-4 mb-4 mr-6"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: [0, 9, 0] }}
+          transition={{ opacity: { duration: 1, delay: 0.7 }, y: { duration: 8.5, repeat: Infinity, ease: "easeInOut", delay: 0.7 } }}
+        >
+          <svg viewBox="0 0 200 48" className="w-full h-auto">
+            <defs>
+              <linearGradient id="heroSpark" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#00E5FF" />
+                <stop offset="100%" stopColor="#A855F7" />
+              </linearGradient>
+            </defs>
+            <polyline points="0,40 28,32 56,36 84,20 112,26 140,12 168,16 200,4"
+              fill="none" stroke="url(#heroSpark)" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="200" cy="4" r="3.5" fill="#00E5FF">
+              <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" />
+            </circle>
+          </svg>
+        </motion.div>
+        <motion.div
+          className="panel p-4 ml-16 w-56"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: [0, -7, 0] }}
+          transition={{ opacity: { duration: 1, delay: 0.9 }, y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.9 } }}
+        >
+          <svg viewBox="0 0 160 72" className="w-full h-auto">
+            <g stroke="rgba(0,229,255,0.35)" strokeWidth="1">
+              <line x1="80" y1="36" x2="20" y2="12" /><line x1="80" y1="36" x2="140" y2="14" />
+              <line x1="80" y1="36" x2="24" y2="60" /><line x1="80" y1="36" x2="138" y2="58" />
+            </g>
+            {[[20, 12], [140, 14], [24, 60], [138, 58]].map(([x, y], i) => (
+              <circle key={i} cx={x} cy={y} r="4" fill={i % 2 ? "#A855F7" : "#00E5FF"}>
+                <animate attributeName="opacity" values="1;0.4;1" dur={`${2 + i * 0.5}s`} repeatCount="indefinite" />
+              </circle>
+            ))}
+            <circle cx="80" cy="36" r="6" fill="url(#heroSpark)" />
+          </svg>
+        </motion.div>
+      </div>
+
       <div className="container-page relative z-10 py-[clamp(3rem,1.5rem+4vw,5.5rem)]">
         <div
           className="max-w-[64rem]"
@@ -166,10 +242,9 @@ export function CinematicHero() {
 
         {/* ── Stat artifacts — row below the headline ── */}
         <div className="mt-[clamp(2rem,3vw,2.75rem)] grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-[62rem]">
-          <StatArtifact value={stats[0].value} label={stats[0].label} Icon={stats[0].Icon} color={stats[0].color} delay={0.30} />
-          <StatArtifact value={stats[1].value} label={stats[1].label} Icon={stats[1].Icon} color={stats[1].color} delay={0.38} />
-          <StatArtifact value={stats[2].value} label={stats[2].label} Icon={stats[2].Icon} color={stats[2].color} delay={0.46} />
-          <StatArtifact value={stats[3].value} label={stats[3].label} Icon={stats[3].Icon} color={stats[3].color} delay={0.54} />
+          {stats.map((s, i) => (
+            <StatArtifact key={s.label} value={s.value} label={s.label} Icon={s.Icon} color={s.color} spark={SPARKS[i % SPARKS.length]} delay={0.3 + i * 0.08} />
+          ))}
         </div>
       </div>
     </section>

@@ -78,7 +78,10 @@ export function CareerEvolutionSection() {
     <section id="journey">
       <div className="container-page section-pad">
         <motion.div {...reveal()} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(2rem,3.5vw,4rem)]">
-          <h2>Experience</h2>
+          <div>
+            <p className="eyebrow mb-3">Career</p>
+            <h2>Experience</h2>
+          </div>
           <div className="flex items-center gap-2 flex-shrink-0 pb-1">
             <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>6+ years</span>
             <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>3 companies</span>

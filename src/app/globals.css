@@ -114,11 +114,78 @@
 
   /* Glass elevation */
   --shadow-artifact: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 24px 48px -16px rgba(0, 0, 0, 0.6);
+  --body-text: #B0B8C5;
 }
 
-/* Single cosmic theme — .dark mirrors :root so any stored toggle preference
-   is a harmless no-op. */
+/* .dark mirrors :root (cosmic dark is the default). */
 .dark { color-scheme: dark; }
+
+/* ── Light theme — designed independently (Apple/Notion/Stripe Docs), not an
+   inversion. Opt-in via .light on <html>. Repoints the accent vars so every
+   component that reads tokens adapts automatically. ── */
+.light {
+  color-scheme: light;
+  --background: #F5F7FA;
+  --foreground: #111827;
+  --card: #FFFFFF;
+  --card-foreground: #111827;
+  --popover: #FFFFFF;
+  --popover-foreground: #111827;
+  --primary: #0EA5E9;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EEF2F7;
+  --secondary-foreground: #111827;
+  --muted: #EEF2F7;
+  --muted-foreground: #475569;
+  --accent: #0284C7;
+  --accent-foreground: #FFFFFF;
+  --destructive: #DC2626;
+  --border: rgba(15, 23, 42, 0.10);
+  --input: rgba(15, 23, 42, 0.12);
+  --ring: #0EA5E9;
+  --chart-1: #0EA5E9;
+  --chart-2: #7C3AED;
+  --chart-3: #0D9488;
+  --chart-4: #F59E0B;
+  --chart-5: #475569;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #111827;
+  --sidebar-primary: #0EA5E9;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #EEF2F7;
+  --sidebar-accent-foreground: #111827;
+  --sidebar-border: rgba(15, 23, 42, 0.10);
+  --sidebar-ring: #0EA5E9;
+
+  --grid: #0F172A;
+  --hairline: rgba(15, 23, 42, 0.08);
+  --cyan: #0284C7;                 /* accessible sky on light surfaces */
+  --purple: #7C3AED;
+  --pink: #DB2777;
+  --amber: #D97706;
+  --forest: #0284C7;
+  --mint: #7C3AED;
+  --coral: #DB2777;
+  --gold: #D97706;
+
+  --fog: #EEF2F7;
+  --ash: #64748B;
+  --smoke: #94A3B8;
+  --peach: #7C3AED;
+  --sienna: #0284C7;
+  --success: #059669;
+
+  --dgrm: #0284C7;
+  --net-node: rgba(2, 132, 199, 0.4);
+  --net-edge: 2, 132, 199;
+  --net-pulse: rgba(124, 58, 237, 0.7);
+  --grain-opacity: 0.012;
+  --nebula-1: rgba(14, 165, 233, 0.10);
+  --nebula-2: rgba(124, 58, 237, 0.06);
+  --highlight: #0EA5E9;
+  --shadow-artifact: 0 0 0 1px rgba(15, 23, 42, 0.05), 0 10px 35px rgba(15, 23, 42, 0.08);
+  --body-text: #334155;
+}
 
 /* Runtime font aliases. Defined on body (not :root) because next/font puts
    --font-kanit / --font-jetbrains-mono on the body element — a var() that
@@ -151,9 +218,9 @@ body {
     overflow-x: clip;
     font-size: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);
     line-height: 1.6;
-    color: #B0B8C5; /* soft silver body text; headings stay pure white */
+    color: var(--body-text); /* soft silver on dark, slate on light */
   }
-  ::selection { background: var(--cyan); color: #04191D; }
+  ::selection { background: var(--cyan); color: var(--primary-foreground); }
   h1, h2, h3 {
     font-family: var(--font-display);
     font-weight: 700;
@@ -192,8 +259,8 @@ body {
     .container-page { max-width: min(88vw, 150rem); }
   }
 
-  /* Standardised 80px section rhythm */
-  .section-pad { padding-block: clamp(4rem, 2rem + 3vw, 5rem); }
+  /* Generous section rhythm — breathes up to ~140px on large displays */
+  .section-pad { padding-block: clamp(4.5rem, 2.5rem + 4.5vw, 8.75rem); }
 
   .hero-title {
     font-size: clamp(2rem, 1rem + 3vw, 4.5rem);
@@ -605,6 +672,107 @@ body {
 }
 .dash-btn:hover { border-color: var(--cyan); color: var(--cyan); animation: dash-rotate 1.2s linear infinite; }
 @keyframes dash-rotate { to { border-style: dashed; } }
+
+/* ── Light-theme surface overrides — glass is designed per theme, not
+   inverted. White-alpha glass is invisible on light, so these re-ground
+   every frosted surface on warm white with soft natural shadows. ── */
+.light .panel,
+.light .gradient-frame,
+.light .uicard {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 35px rgba(15, 23, 42, 0.08);
+}
+.light .gradient-frame:hover {
+  border-color: rgba(14, 165, 233, 0.45);
+  box-shadow: 0 14px 40px rgba(14, 165, 233, 0.16);
+}
+.light .artifact {
+  background: rgba(255, 255, 255, 0.78);
+}
+.light .artifact::before {
+  background: conic-gradient(from var(--spin-angle, 0deg),
+    rgba(14, 165, 233, 0.45), rgba(124, 58, 237, 0.35) 30%,
+    rgba(15, 23, 42, 0.06) 55%, rgba(14, 165, 233, 0.45) 100%);
+}
+.light .glass-nav {
+  background: rgba(245, 247, 250, 0.78);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+.light .text-glow { text-shadow: none; }
+.light .text-gradient,
+.light .text-shimmer {
+  background-image: linear-gradient(95deg, #0284C7 0%, #7C3AED 100%);
+}
+.light .gradient-btn {
+  background: linear-gradient(95deg, #0EA5E9 0%, #38BDF8 100%);
+  color: #FFFFFF;
+  box-shadow: 0 8px 24px -8px rgba(14, 165, 233, 0.45);
+}
+.light .gradient-btn:hover {
+  background: linear-gradient(95deg, #0EA5E9 0%, #7C3AED 100%);
+  box-shadow: 0 10px 28px -8px rgba(124, 58, 237, 0.4);
+}
+.light .dl-btn {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(14, 165, 233, 0.55);
+}
+.light .dl-circle { background: linear-gradient(135deg, #0EA5E9, #7C3AED); }
+.light .dash-btn { border-color: rgba(15, 23, 42, 0.3); color: var(--foreground); }
+.light .dash-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+.light .toggle-pill.on { background: linear-gradient(95deg, #0EA5E9, #7C3AED); }
+.light .toggle-pill.off { background: rgba(15, 23, 42, 0.14); }
+.light .toggle-pill::after { background: #F5F7FA; }
+.light .morph-chip:hover {
+  background: linear-gradient(95deg, #0EA5E9 0%, #7C3AED 100%) !important;
+  color: #FFFFFF !important;
+}
+.light .timeline-spine {
+  background: linear-gradient(to bottom, rgba(14, 165, 233, 0.85), rgba(124, 58, 237, 0.5) 60%, rgba(15, 23, 42, 0.08));
+  box-shadow: none;
+}
+.light .pulse-ring::before { border-color: rgba(14, 165, 233, 0.55); }
+.light .tw-caret { background: var(--cyan); }
+.light .cosmos-mesh { opacity: 0.7; }
+.light .cosmos-dots {
+  background-image: radial-gradient(rgba(15, 23, 42, 0.14) 1px, transparent 1px);
+}
+.light .aurora { opacity: 0.22; }
+.light .cursor-ring { border-color: rgba(2, 132, 199, 0.55); }
+.light .spotlight::before {
+  background: radial-gradient(
+    360px circle at var(--mx, -200px) var(--my, -200px),
+    rgba(14, 165, 233, 0.10),
+    transparent 65%
+  );
+}
+
+/* ── Sun/Moon theme toggle — icons cross-morph with rotation ── */
+.sunmoon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  border: 1px solid var(--hairline);
+  background: var(--card);
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.sunmoon:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 16px -4px color-mix(in srgb, var(--cyan) 60%, transparent);
+}
+.sunmoon .sm-icon {
+  position: absolute;
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.3s ease;
+}
+.sunmoon .sm-sun  { color: #F59E0B; transform: rotate(180deg) scale(0.4); opacity: 0; }
+.sunmoon .sm-moon { color: var(--cyan); transform: rotate(0) scale(1); opacity: 1; }
+.light .sunmoon .sm-sun  { transform: rotate(0) scale(1); opacity: 1; }
+.light .sunmoon .sm-moon { transform: rotate(-180deg) scale(0.4); opacity: 0; }
 
 /* Morphing chip — dark tier chip shifts to cyan→purple gradient on hover */
 .morph-chip {

@@ -156,6 +156,7 @@ export function CertificationsSection() {
       <div className="container-page section-pad">
         <motion.div {...reveal()} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(1.75rem,3vw,3rem)]">
           <div>
+            <p className="eyebrow mb-3">Credentials</p>
             <h2 className="mb-3">Certifications</h2>
             <p className="text-muted-foreground text-sm max-w-[52ch]">
               {totalCount} certifications across 5 years, each earned while actively shipping the
