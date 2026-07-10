@@ -404,6 +404,24 @@ body {
   .flow-pulse { animation: flow-pulse 2.2s ease-in-out infinite; }
 }
 
+/* ── Skeleton loading — flat hairline blocks with a quiet pulse ── */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--grid) 8%, var(--background));
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  animation: skeleton-pulse 1.6s ease-in-out infinite;
+}
+.skeleton--bar { border: none; background: color-mix(in srgb, var(--grid) 12%, var(--background)); }
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton { animation: none; }
+}
+
 /* ── Spotlight — disabled in the flat system (handlers remain harmless) ── */
 .spotlight { position: relative; }
 .spotlight::before { content: none; }
