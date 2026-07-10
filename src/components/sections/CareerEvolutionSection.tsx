@@ -90,7 +90,10 @@ export function CareerEvolutionSection() {
           {timeline.map((item, i) => (
             <motion.div
               key={`${item.period}-${item.role}`}
-              {...reveal(0.05 + i * 0.07)}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -44 : 44 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "0px" }}
+              transition={{ duration: 0.65, delay: 0.05 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
               className={`relative grid sm:grid-cols-[clamp(5rem,12vw,9rem)_1px_1fr] gap-x-6 items-start ${
                 i > 0 ? "pt-[clamp(2rem,3vw,3rem)]" : ""
               }`}
@@ -128,17 +131,14 @@ export function CareerEvolutionSection() {
                 />
                 {i < timeline.length - 1 && (
                   <span
-                    className="flex-1 w-[2px] mt-1.5 rounded-full"
-                    style={{
-                      minHeight: "calc(100% + clamp(2rem,3vw,3rem))",
-                      background: "linear-gradient(to bottom, color-mix(in srgb, var(--accent) 45%, transparent), var(--border))",
-                    }}
+                    className="timeline-spine flex-1 w-[2px] mt-1.5 rounded-full"
+                    style={{ minHeight: "calc(100% + clamp(2rem,3vw,3rem))" }}
                   />
                 )}
               </div>
 
-              {/* Content */}
-              <div className="pb-2">
+              {/* Content — glass node card */}
+              <div className="gradient-frame p-[clamp(1.1rem,1.8vw,1.6rem)]">
                 {/* Role + current badge */}
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1">
                   <h3 className="text-[clamp(1rem,0.95rem+0.3vw,1.1rem)] font-semibold leading-snug">
@@ -159,9 +159,20 @@ export function CareerEvolutionSection() {
                   )}
                 </div>
 
-                {/* Company + meta */}
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mb-4">
-                  <p className="text-sm font-medium text-muted-foreground">{item.company}</p>
+                {/* Company + meta — initials avatar that spins on hover */}
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-4">
+                  <span
+                    className="inline-flex h-8 w-8 items-center justify-center rounded-full font-mono text-[12px] font-bold transition-transform duration-700 hover:rotate-[360deg]"
+                    style={{
+                      color: "var(--cyan)",
+                      border: "1px solid rgba(0, 229, 255, 0.4)",
+                      background: "rgba(0, 229, 255, 0.06)",
+                    }}
+                    aria-hidden
+                  >
+                    {item.company.charAt(0)}
+                  </span>
+                  <p className="text-sm font-medium text-foreground">{item.company}</p>
                   <span className="text-border hidden sm:inline text-xs">·</span>
                   <p className="text-[12px] text-muted-foreground/70 font-mono">{item.location}</p>
                 </div>
@@ -172,8 +183,12 @@ export function CareerEvolutionSection() {
                     {item.metrics.map((m) => (
                       <div
                         key={m.label}
-                        className="rounded-xl px-3.5 py-2"
-                        style={{ background: "color-mix(in srgb, var(--accent) 10%, transparent)", border: "1px solid color-mix(in srgb, var(--accent) 22%, var(--border))" }}
+                        className="rounded-2xl px-3.5 py-2"
+                        style={{
+                          background: "color-mix(in srgb, var(--accent) 10%, transparent)",
+                          border: "1px solid color-mix(in srgb, var(--accent) 30%, var(--border))",
+                          boxShadow: "0 0 20px -6px rgba(0, 229, 255, 0.35)",
+                        }}
                       >
                         <span
                           className="block tabular-nums leading-none"

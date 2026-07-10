@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
-import { ThemeSwitch } from "@/components/common/ThemeSwitch";
 import { profile } from "@/data/profile";
 
 const links = [
@@ -74,7 +73,7 @@ export function Navbar() {
         className="absolute top-0 left-0 h-[2px] z-10 transition-[width] duration-100"
         style={{
           width: `${progress}%`,
-          background: "var(--forest)",
+          background: "linear-gradient(90deg, #00E5FF, #A855F7)",
         }}
       />
 
@@ -83,16 +82,16 @@ export function Navbar() {
           href="#top"
           className="flex items-center gap-3 shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
         >
-          {/* Square logo box */}
+          {/* Square logo box — cyan→purple gradient */}
           <span
-            className="flex h-8 w-8 items-center justify-center font-mono text-[13px] font-semibold"
-            style={{ background: "var(--forest)", color: "var(--background)", borderRadius: "2px" }}
+            className="flex h-8 w-8 items-center justify-center rounded-lg font-mono text-[13px] font-bold"
+            style={{ background: "linear-gradient(135deg, #00E5FF, #A855F7)", color: "#0B0E14", boxShadow: "0 0 16px rgba(0,229,255,0.35)" }}
           >
             DK
           </span>
           <span
             className="text-[17px]"
-            style={{ fontFamily: "var(--font-display)", fontWeight: 600, letterSpacing: "-0.02em", color: "var(--forest)" }}
+            style={{ fontFamily: "var(--font-display)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--foreground)" }}
           >
             Dheeraj Kashyap
           </span>
@@ -107,24 +106,18 @@ export function Navbar() {
               className={`relative py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
                 active === l.id ? "" : "text-muted-foreground hover:text-foreground"
               }`}
-              style={active === l.id ? { color: "var(--forest)" } : undefined}
+              style={active === l.id ? { color: "var(--cyan)" } : undefined}
             >
               <span className="opacity-50 mr-1">{String(i + 1).padStart(2, "0")}.</span>
               {l.label}
               {active === l.id && (
-                <span aria-hidden className="absolute -bottom-0.5 left-0 right-0 h-[2px]" style={{ background: "var(--forest)" }} />
+                <span aria-hidden className="absolute -bottom-0.5 left-0 right-0 h-[2px]" style={{ background: "linear-gradient(90deg, #00E5FF, #A855F7)" }} />
               )}
             </a>
           ))}
         </nav>
 
-        {/* Desktop theme toggle — rightmost */}
-        <div className="hidden lg:flex items-center">
-          <ThemeSwitch />
-        </div>
-
         <div className="lg:hidden flex items-center gap-3 ml-auto">
-          <ThemeSwitch />
           <button
             onClick={() => setOpen(!open)}
             aria-expanded={open}

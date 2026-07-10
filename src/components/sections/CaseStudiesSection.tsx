@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import { onSpotlightMove } from "@/components/common/spotlight";
+import { onTiltMove, onTiltLeave } from "@/components/common/tilt";
 
 function reveal(delay = 0) {
   return {
@@ -515,70 +516,104 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
 
 /* â"€â"€ Card â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 
+/* Brand colors for tech chips — recognizable vendor tints on glass */
+const CHIP_COLORS: Record<string, string> = {
+  "Microsoft Fabric": "#A855F7",
+  "Power BI": "#F59E0B",
+  Snowflake: "#00E5FF",
+  Databricks: "#FF5A3C",
+  PySpark: "#FF5A3C",
+  "Delta Lake": "#FF5A3C",
+  OneLake: "#A855F7",
+  SQLMesh: "#34D399",
+  "Apache Kafka": "#EC4899",
+  Python: "#F59E0B",
+  DAX: "#F59E0B",
+  Azure: "#00A4EF",
+  "Azure Event Hubs": "#00A4EF",
+  SQL: "#B0B8C5",
+  "Scikit-learn": "#F59E0B",
+};
+
 function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
   return (
-    <motion.article {...reveal()} onPointerMove={onSpotlightMove} className="spotlight gradient-frame overflow-hidden flex flex-col group p-[clamp(1.35rem,2vw,1.85rem)]">
-      {/* Label row */}
-      <div className="flex items-center gap-3 mb-4">
-        <span className="font-mono text-[10px] accent-text">CASE {study.num}</span>
-        <span className="eyebrow">{study.domain}</span>
+    <motion.article
+      {...reveal()}
+      onPointerMove={(e) => { onSpotlightMove(e); onTiltMove(e); }}
+      onPointerLeave={onTiltLeave}
+      className="spotlight gradient-frame overflow-hidden group grid lg:grid-cols-[0.9fr_1.1fr]"
+      style={{ willChange: "transform" }}
+    >
+      {/* Left — animated data-flow visual (the project's own diagram) */}
+      <div className="relative p-[clamp(1.25rem,2vw,2rem)] flex items-center border-b lg:border-b-0 lg:border-r" style={{ borderColor: "rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)" }}>
+        {/* Role pill — top-left, neon border */}
         <span
-          className="ml-auto text-[10px] font-mono px-2 py-0.5 rounded-full"
+          className="absolute top-4 left-4 z-10 text-[10px] font-mono uppercase tracking-[0.1em] px-2.5 py-1 rounded-full"
           style={{
-            background: "color-mix(in srgb, var(--accent) 12%, var(--card))",
-            color: "var(--accent)",
-            border: "1px solid color-mix(in srgb, var(--accent) 22%, transparent)",
+            color: "var(--cyan)",
+            border: "1px solid rgba(0, 229, 255, 0.5)",
+            background: "rgba(0, 229, 255, 0.08)",
+            boxShadow: "0 0 12px rgba(0, 229, 255, 0.25)",
           }}
         >
           {study.capability}
         </span>
+        <div className="w-full pt-8 text-foreground opacity-90 transition-opacity duration-300 group-hover:opacity-100">
+          <study.Diagram />
+        </div>
       </div>
 
-      {/* Impact metric — the card hero */}
-      <div
-        className="rounded-2xl px-5 py-5 mb-4"
-        style={{
-          background: "linear-gradient(135deg, color-mix(in srgb, var(--accent) 14%, var(--card)) 0%, var(--card) 125%)",
-          border: "1px solid color-mix(in srgb, var(--accent) 28%, var(--border))",
-        }}
-      >
-        <span
-          className="block tabular-nums leading-none"
-          style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(2.6rem, 1.6rem + 2.6vw, 4rem)", color: "var(--accent)" }}
-        >
-          {study.keyMetric.value}
-        </span>
-        <span className="mt-2.5 block text-[12px] uppercase tracking-[0.1em] text-muted-foreground">{study.keyMetric.label}</span>
-      </div>
+      {/* Right — case narrative */}
+      <div className="p-[clamp(1.35rem,2vw,2rem)] flex flex-col">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="font-mono text-[10px]" style={{ color: "var(--cyan)" }}>CASE {study.num}</span>
+          <span className="eyebrow">{study.domain}</span>
+        </div>
 
-      {/* Project name */}
-      <h3 className="text-[clamp(1.05rem,0.95rem+0.4vw,1.25rem)] font-semibold leading-snug mb-2">
-        {study.title}
-      </h3>
-
-      {/* One-line description */}
-      <p className="text-[13px] text-muted-foreground leading-relaxed mb-4 flex-1">{study.how}</p>
-
-      {/* Tech stack tags */}
-      <div className="flex flex-wrap gap-1.5 mb-5">
-        {study.stack.slice(0, 5).map((t) => (
+        {/* Impact metric — the card hero */}
+        <div className="mb-4">
           <span
-            key={t}
-            className="text-[11px] font-mono text-foreground/70 px-2 py-0.5 rounded-md"
-            style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid color-mix(in srgb, var(--border) 60%, transparent)" }}
+            className="block tabular-nums leading-none text-gradient"
+            style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(2.6rem, 1.6rem + 2.6vw, 4rem)" }}
           >
-            {t}
+            {study.keyMetric.value}
           </span>
-        ))}
-      </div>
+          <span className="mt-2.5 block font-mono text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{study.keyMetric.label}</span>
+        </div>
 
-      {/* CTA */}
-      <button
-        onClick={onOpen}
-        className="gradient-btn self-start inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-      >
-        View case study <ArrowUpRight size={14} />
-      </button>
+        {/* Project name */}
+        <h3 className="text-[clamp(1.05rem,0.95rem+0.4vw,1.3rem)] font-semibold leading-snug mb-2">
+          {study.title}
+        </h3>
+
+        {/* One-line description */}
+        <p className="text-[14px] text-muted-foreground leading-relaxed mb-4 flex-1">{study.how}</p>
+
+        {/* Tech stack — brand-tinted chip pills */}
+        <div className="flex flex-wrap gap-1.5 mb-5">
+          {study.stack.slice(0, 5).map((t) => {
+            const c = CHIP_COLORS[t] ?? "#B0B8C5";
+            return (
+              <span
+                key={t}
+                className="text-[11px] font-mono px-2.5 py-1 rounded-full"
+                style={{ color: c, background: `color-mix(in srgb, ${c} 12%, transparent)`, border: `1px solid color-mix(in srgb, ${c} 30%, transparent)` }}
+              >
+                {t}
+              </span>
+            );
+          })}
+        </div>
+
+        {/* CTA — glowing arrow button */}
+        <button
+          onClick={onOpen}
+          className="gradient-btn group/btn self-start inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+        >
+          View case study
+          <ArrowUpRight size={14} className="transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+        </button>
+      </div>
     </motion.article>
   );
 }
@@ -596,7 +631,7 @@ export function CaseStudiesSection() {
           Featured projects
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="flex flex-col gap-8">
           {studies.slice(0, 3).map((study) => (
             <StudyCard key={study.id} study={study} onOpen={() => setOpenStudy(study)} />
           ))}

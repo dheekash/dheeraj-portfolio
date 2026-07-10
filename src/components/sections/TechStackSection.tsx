@@ -102,7 +102,7 @@ const platformGuide = [
     Logo: FabricLogo,
     bestFor: "Microsoft-first orgs",
     accent: "var(--forest)",
-    chipText: "var(--background)",
+    chipText: "#0B0E14",
     reach: [
       "Client is Microsoft-first (Azure, M365, Teams)",
       "Power BI is the primary BI tool",
@@ -120,7 +120,7 @@ const platformGuide = [
     Logo: DatabricksLogo,
     bestFor: "ML at scale",
     accent: "var(--coral)",
-    chipText: "#3A1508",
+    chipText: "#0B0E14",
     reach: [
       "ML and feature engineering are first-class requirements",
       "PySpark workloads at significant scale",
@@ -138,7 +138,7 @@ const platformGuide = [
     Logo: SnowflakeLogo,
     bestFor: "Multi-cloud SQL",
     accent: "var(--gold)",
-    chipText: "#3A2E08",
+    chipText: "#0B0E14",
     reach: [
       "Multi-cloud requirement (AWS + Azure + GCP)",
       "SQL-first team with no PySpark investment",
@@ -181,17 +181,17 @@ export function PlatformGuideSection() {
                   key={p.platform}
                   {...reveal(0.36 + i * 0.06)}
                   onPointerMove={onSpotlightMove}
-                  className="spotlight gradient-frame overflow-hidden flex flex-col snap-start flex-shrink-0 w-[min(80vw,320px)] sm:w-auto"
+                  className="spotlight gradient-frame overflow-hidden flex flex-col snap-start flex-shrink-0 w-[min(80vw,320px)] sm:w-auto group"
                   style={{ borderTop: `3px solid ${p.accent}` }}
                 >
                   <div
                     className="px-5 py-5"
-                    style={{ background: `linear-gradient(160deg, color-mix(in srgb, ${p.accent} 22%, transparent) 0%, color-mix(in srgb, ${p.accent} 6%, transparent) 130%)`, borderBottom: `1px solid color-mix(in srgb, ${p.accent} 40%, var(--border))` }}
+                    style={{ background: `linear-gradient(160deg, color-mix(in srgb, ${p.accent} 18%, transparent) 0%, color-mix(in srgb, ${p.accent} 4%, transparent) 130%)`, borderBottom: `1px solid color-mix(in srgb, ${p.accent} 35%, var(--border))` }}
                   >
                     <div className="flex items-center gap-2.5 mb-2">
                       <span
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-xl flex-shrink-0"
-                        style={{ background: `color-mix(in srgb, ${p.accent} 24%, var(--card))`, border: `1px solid color-mix(in srgb, ${p.accent} 40%, transparent)` }}
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-xl flex-shrink-0 grayscale transition-[filter] duration-300 group-hover:grayscale-0"
+                        style={{ background: `color-mix(in srgb, ${p.accent} 20%, var(--card))`, border: `1px solid color-mix(in srgb, ${p.accent} 35%, transparent)` }}
                       >
                         <p.Logo size={18} />
                       </span>
@@ -211,7 +211,7 @@ export function PlatformGuideSection() {
                       <ul className="space-y-3">
                         {p.reach.map((r) => (
                           <li key={r} className="flex items-start gap-2.5 text-[14px] text-foreground/90 leading-relaxed font-medium">
-                            <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[0.4rem]" style={{ background: p.accent }} />
+                            <span className="toggle-pill on" aria-hidden />
                             {r}
                           </li>
                         ))}
@@ -222,7 +222,7 @@ export function PlatformGuideSection() {
                       <ul className="space-y-3">
                         {p.skip.map((s) => (
                           <li key={s} className="flex items-start gap-2.5 text-[14px] text-muted-foreground leading-relaxed">
-                            <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[0.4rem] bg-muted-foreground/40" />
+                            <span className="toggle-pill off" aria-hidden />
                             {s}
                           </li>
                         ))}

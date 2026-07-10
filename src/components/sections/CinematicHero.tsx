@@ -5,6 +5,8 @@ import { motion, useMotionValue, useTransform, useInView, animate } from "framer
 import { ArrowRight, Globe, Award, Clock, Database } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { profile } from "@/data/profile";
+import { TypeWriter } from "@/components/common/TypeWriter";
+import { onTiltMove, onTiltLeave } from "@/components/common/tilt";
 
 const stats: { value: string; label: string; Icon: LucideIcon; color: string }[] = [
   { value: "7+",  label: "years in analytics",       Icon: Clock,    color: "var(--forest)" },
@@ -54,15 +56,14 @@ function StatArtifact({ value, label, delay, Icon, color, className = "" }: { va
     <motion.div
       {...fadeUp(delay)}
       className={`artifact px-6 py-5 flex flex-col gap-3 ${className}`}
-      style={{ borderLeft: `2px solid ${color}` }}
     >
-      <span className="inline-flex" style={{ color: "var(--forest)" }}>
-        <Icon size={18} strokeWidth={1.75} />
+      <span className="breathe inline-flex" style={{ color }}>
+        <Icon size={20} strokeWidth={1.75} />
       </span>
       <div>
         <span
           className="block leading-none tabular-nums"
-          style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "clamp(2.4rem, 1.6rem + 2vw, 3.4rem)", color: "var(--forest)", letterSpacing: "-0.02em" }}
+          style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(2.4rem, 1.6rem + 2vw, 3.4rem)", color: "var(--foreground)", letterSpacing: "-0.02em" }}
         >
           <CountUp value={value} delay={delay + 0.1} />
         </span>
@@ -78,37 +79,40 @@ export function CinematicHero() {
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="container-page relative z-10 py-[clamp(3rem,1.5rem+4vw,5.5rem)]">
-        <div className="max-w-[64rem]">
-            {/* Status badge — square dot, mono, hairline (spec component) */}
+        <div
+          className="max-w-[64rem]"
+          onPointerMove={onTiltMove}
+          onPointerLeave={onTiltLeave}
+          style={{ transformStyle: "preserve-3d" }}
+        >
+            {/* Availability — pulse-ring badge */}
             <motion.div
               {...fadeUp(0)}
-              className="inline-flex items-center gap-2.5 mb-6 px-3 py-1"
-              style={{ border: "1px solid color-mix(in srgb, var(--forest) 20%, transparent)", borderRadius: "2px" }}
+              className="pulse-ring inline-flex items-center gap-2.5 mb-6 px-4 py-1.5 rounded-full"
+              style={{ border: "1px solid rgba(0, 229, 255, 0.4)", background: "rgba(0, 229, 255, 0.05)" }}
             >
-              <span className="h-2 w-2 flex-shrink-0" style={{ background: "var(--forest)" }} />
-              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--forest)" }}>
+              <span className="h-2 w-2 flex-shrink-0 rounded-full" style={{ background: "var(--cyan)", boxShadow: "0 0 8px rgba(0,229,255,0.8)" }} />
+              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--cyan)" }}>
                 <span className="sm:hidden">BI &amp; Analytics Engineer · Open to hire</span>
                 <span className="hidden sm:inline">BI &amp; Analytics Engineer · Available for hire</span>
               </span>
             </motion.div>
 
-            {/* Structural display headline — Space Grotesk, tight, forest */}
+            {/* Display headline — white with glow, gradient emphasis */}
             <motion.h1
               {...fadeUp(0.08)}
-              className="mb-7"
+              className="mb-7 text-glow"
               style={{
                 fontFamily: "var(--font-display)",
-                fontWeight: 600,
+                fontWeight: 700,
                 fontSize: "clamp(2.5rem, 1rem + 4.4vw, 4.8rem)",
-                lineHeight: 0.95,
-                letterSpacing: "-0.035em",
-                color: "var(--forest)",
+                lineHeight: 1,
+                letterSpacing: "-0.02em",
+                color: "var(--foreground)",
               }}
             >
               Building analytics platforms that power{" "}
-              <span style={{ background: "var(--mint)", color: "#10241A", padding: "0 0.12em", boxDecorationBreak: "clone", WebkitBoxDecorationBreak: "clone" }}>
-                enterprise decisions.
-              </span>
+              <span className="text-gradient">enterprise decisions.</span>
             </motion.h1>
 
             {/* Trust signals — one scannable mono line under the headline */}
@@ -120,18 +124,13 @@ export function CinematicHero() {
               Microsoft Fabric Engineer&ensp;·&ensp;Power BI Expert&ensp;·&ensp;Snowflake Certified&ensp;·&ensp;Azure Data Platform
             </motion.p>
 
-            {/* Rotating deliverable — mono, with a structural left rule */}
-            <motion.div {...fadeUp(0.12)} className="mb-7 pl-3" style={{ borderLeft: "1px solid var(--forest)" }}>
-              <span className="word-rotator">
-                <span className="font-mono text-[13px] uppercase tracking-[0.1em]">Currently building</span>
-                <span className="wr-words" aria-label="Lakehouses, pipelines, dashboards, semantic models">
-                  <span className="wr-word">Lakehouses</span>
-                  <span className="wr-word">pipelines</span>
-                  <span className="wr-word">dashboards</span>
-                  <span className="wr-word">semantic models</span>
-                  <span className="wr-word">Lakehouses</span>
-                </span>
-              </span>
+            {/* Currently building — typewriter with blinking caret */}
+            <motion.div {...fadeUp(0.12)} className="mb-7 pl-3 flex items-baseline gap-2" style={{ borderLeft: "1px solid var(--cyan)" }}>
+              <span className="font-mono text-[13px] uppercase tracking-[0.1em]" style={{ color: "var(--muted-foreground)" }}>Currently building</span>
+              <TypeWriter
+                words={["Lakehouses", "pipelines", "dashboards", "semantic models"]}
+                className="font-mono text-[13px] uppercase tracking-[0.1em] min-w-[16ch] text-[color:var(--cyan)]"
+              />
             </motion.div>
 
             {/* CTA pair — primary: case studies; secondary: animated download */}

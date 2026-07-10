@@ -57,9 +57,22 @@ export function AboutSection() {
                 I value clear architecture, fast performance, and reliable data. Every solution starts with a business problem and ends with measurable results.
               </p>
               <p>One question drives every project.</p>
-              <p className="text-foreground" style={{ fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "clamp(1.35rem,1rem+1.2vw,1.75rem)", lineHeight: 1.3 }}>
-                Does this help people make better decisions?
-              </p>
+              {/* The drive — massive stylized blockquote */}
+              <blockquote className="relative pl-8 pt-2">
+                <span
+                  aria-hidden
+                  className="absolute -left-1 -top-5 select-none text-gradient"
+                  style={{ fontFamily: "var(--font-display)", fontSize: "5rem", fontWeight: 700, lineHeight: 1, opacity: 0.9 }}
+                >
+                  &ldquo;
+                </span>
+                <p
+                  className="text-foreground text-glow"
+                  style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(1.5rem, 1.1rem + 1.6vw, 2.2rem)", lineHeight: 1.2, letterSpacing: "-0.02em" }}
+                >
+                  Does this help people make better decisions?
+                </p>
+              </blockquote>
             </motion.div>
 
             <motion.p
@@ -70,8 +83,46 @@ export function AboutSection() {
             </motion.p>
           </div>
 
-          {/* Right — credibility card (animated warm border) */}
-          <motion.div {...reveal(0.08)}>
+          {/* Right — industries constellation + credibility card */}
+          <motion.div {...reveal(0.08)} className="flex flex-col gap-6">
+            {/* Constellation — industries orbiting a central node */}
+            <svg viewBox="0 0 360 200" className="w-full h-auto" role="img" aria-label={`Industries: ${industries.join(", ")}`}>
+              <defs>
+                <linearGradient id="constel" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#00E5FF" />
+                  <stop offset="100%" stopColor="#A855F7" />
+                </linearGradient>
+              </defs>
+              {industries.map((ind, i) => {
+                const angle = (i / industries.length) * Math.PI * 2 - Math.PI / 2;
+                const x = 180 + Math.cos(angle) * 120;
+                const y = 100 + Math.sin(angle) * 66;
+                return (
+                  <g key={ind}>
+                    <line x1="180" y1="100" x2={x} y2={y} stroke="url(#constel)" strokeOpacity="0.25" strokeWidth="1" />
+                    <circle cx={x} cy={y} r="3.5" fill="url(#constel)">
+                      <animate attributeName="opacity" values="1;0.4;1" dur={`${2.4 + i * 0.4}s`} repeatCount="indefinite" />
+                    </circle>
+                    <text
+                      x={x}
+                      y={y + (y > 100 ? 16 : -10)}
+                      textAnchor="middle"
+                      fontFamily="var(--font-mono)"
+                      fontSize="9"
+                      fill="#B0B8C5"
+                    >
+                      {ind}
+                    </text>
+                  </g>
+                );
+              })}
+              <circle cx="180" cy="100" r="7" fill="url(#constel)" />
+              <circle cx="180" cy="100" r="12" fill="none" stroke="url(#constel)" strokeOpacity="0.4" strokeWidth="1">
+                <animate attributeName="r" values="12;18;12" dur="3s" repeatCount="indefinite" />
+                <animate attributeName="stroke-opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite" />
+              </circle>
+            </svg>
+
             <div className="uicard">
               <div className="uicard-border" aria-hidden />
 

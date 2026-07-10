@@ -13,10 +13,30 @@ const quickLinks = [
 ];
 
 export function Footer() {
-  const contactHref = `mailto:${profile.email}?subject=${encodeURIComponent("BI & Analytics Engineer — Let's connect")}`;
+  const hireHref = `mailto:${profile.email}?subject=${encodeURIComponent("Full-time opportunity — BI & Analytics Engineer")}`;
+  const consultHref = `mailto:${profile.email}?subject=${encodeURIComponent("Consulting engagement — Fabric / Databricks")}`;
 
   return (
-    <footer id="contact" className="relative overflow-hidden border-t border-border bg-background text-foreground">
+    <footer id="contact" className="relative overflow-hidden text-foreground">
+      {/* Sine-wave divider */}
+      <svg aria-hidden viewBox="0 0 1440 64" preserveAspectRatio="none" className="block w-full h-12">
+        <path
+          d="M0 40 C 180 8, 360 8, 540 34 S 900 62, 1080 38 S 1350 10, 1440 26 L 1440 64 L 0 64 Z"
+          fill="rgba(255,255,255,0.03)"
+        />
+        <path
+          d="M0 40 C 180 8, 360 8, 540 34 S 900 62, 1080 38 S 1350 10, 1440 26"
+          fill="none"
+          stroke="url(#footwave)"
+          strokeWidth="1.5"
+        />
+        <defs>
+          <linearGradient id="footwave" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#00E5FF" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#A855F7" stopOpacity="0.6" />
+          </linearGradient>
+        </defs>
+      </svg>
       {/* Single warm peach note in the corner */}
       <div
         aria-hidden
@@ -47,13 +67,21 @@ export function Footer() {
               <span className="text-gradient">that scale.</span>
             </h2>
 
-            {/* Primary CTA */}
-            <a
-              href={contactHref}
-              className="gradient-btn inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-[15px] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-            >
-              Send me a message <ArrowRight size={16} />
-            </a>
+            {/* CTA split — full-time (shimmering) / consulting (dashed) */}
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={hireHref}
+                className="gradient-btn shine inline-flex items-center gap-2 rounded-full px-6 py-3 text-[14px] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              >
+                Hire for full-time <ArrowRight size={15} />
+              </a>
+              <a
+                href={consultHref}
+                className="dash-btn inline-flex items-center gap-2 px-6 py-3 text-[14px] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              >
+                Engage for consulting
+              </a>
+            </div>
 
             <p className="mt-6 text-[15px] leading-relaxed text-muted-foreground max-w-[36ch]">
               Open to full-time BI &amp; Analytics Engineering roles and enterprise Fabric / Databricks consulting. Remote or Bengaluru-based.
