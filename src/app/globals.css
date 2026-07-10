@@ -92,7 +92,7 @@
 
   /* Legacy accent tokens, repointed so older components follow the system */
   --fog: #F0F0ED;                  /* alternating band, a half-step off paper */
-  --ash: #8A8A85;                  /* tertiary labels */
+  --ash: #6E6E69;                  /* tertiary labels — AA at small mono sizes */
   --smoke: #ABABA6;                /* placeholder */
   --peach: #FF8C69;                /* → coral */
   --sienna: #1A3C2B;               /* → forest: checks, dots, emphasis */

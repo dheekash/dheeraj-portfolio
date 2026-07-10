@@ -7,10 +7,10 @@ import type { LucideIcon } from "lucide-react";
 import { profile } from "@/data/profile";
 
 const stats: { value: string; label: string; Icon: LucideIcon; color: string }[] = [
-  { value: "7+",  label: "years",          Icon: Clock,    color: "var(--forest)" },
-  { value: "15+", label: "countries",      Icon: Globe,    color: "var(--coral)"  },
-  { value: "13",  label: "certifications", Icon: Award,    color: "var(--mint)"   },
-  { value: "5M+", label: "records / day",  Icon: Database, color: "var(--gold)"   },
+  { value: "7+",  label: "years in analytics",       Icon: Clock,    color: "var(--forest)" },
+  { value: "15+", label: "countries served",         Icon: Globe,    color: "var(--coral)"  },
+  { value: "13",  label: "industry certifications",  Icon: Award,    color: "var(--mint)"   },
+  { value: "5M+", label: "records processed daily",  Icon: Database, color: "var(--gold)"   },
 ];
 
 function fadeUp(delay = 0) {
@@ -111,6 +111,15 @@ export function CinematicHero() {
               </span>
             </motion.h1>
 
+            {/* Trust signals — one scannable mono line under the headline */}
+            <motion.p
+              {...fadeUp(0.1)}
+              className="mb-7 font-mono text-[12px] uppercase tracking-[0.08em]"
+              style={{ color: "var(--muted-foreground)" }}
+            >
+              Microsoft Fabric Engineer&ensp;·&ensp;Power BI Expert&ensp;·&ensp;Snowflake Certified&ensp;·&ensp;Azure Data Platform
+            </motion.p>
+
             {/* Rotating deliverable — mono, with a structural left rule */}
             <motion.div {...fadeUp(0.12)} className="mb-7 pl-3" style={{ borderLeft: "1px solid var(--forest)" }}>
               <span className="word-rotator">
@@ -125,8 +134,15 @@ export function CinematicHero() {
               </span>
             </motion.div>
 
-            {/* Pill button pair — filled + ghost */}
+            {/* CTA pair — primary: case studies; secondary: animated download */}
             <motion.div {...fadeUp(0.2)} className="flex flex-wrap items-center gap-3 mt-2">
+              <a
+                href="#case-studies"
+                className="gradient-btn group inline-flex items-center gap-2 px-6 py-[15px] font-mono text-[13px] font-semibold uppercase tracking-[0.08em] focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+              >
+                Explore case studies
+                <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+              </a>
               <label className="dl-btn" aria-label="Download Resume">
                 <input
                   type="checkbox"
@@ -143,16 +159,9 @@ export function CinematicHero() {
                   </svg>
                   <div className="dl-square" />
                 </span>
-                <p className="dl-title">Download</p>
+                <p className="dl-title">Resume</p>
                 <p className="dl-title">Open</p>
               </label>
-              <a
-                href="#case-studies"
-                className="group inline-flex items-center gap-1.5 px-3 py-3 font-mono text-[12px] uppercase tracking-[0.1em] text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-              >
-                View projects
-                <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
-              </a>
             </motion.div>
         </div>
 
