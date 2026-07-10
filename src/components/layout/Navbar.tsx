@@ -64,44 +64,56 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-[transform,background-color,border-color,box-shadow,backdrop-filter] duration-300 ${
+      className={`fixed top-0 inset-x-0 z-50 border-b transition-[transform,background-color,border-color,backdrop-filter] duration-300 ${
         hidden ? "-translate-y-full" : "translate-y-0"
-      } ${scrolled || open ? "glass-nav" : "bg-transparent"}`}
+      } ${scrolled || open ? "glass-nav" : "bg-transparent border-transparent"}`}
+      style={scrolled || open ? undefined : { borderColor: "transparent" }}
     >
       {/* Scroll progress bar */}
       <div
         className="absolute top-0 left-0 h-[2px] z-10 transition-[width] duration-100"
         style={{
           width: `${progress}%`,
-          background: "var(--primary)",
+          background: "var(--forest)",
         }}
       />
 
       <div className="container-page h-[4rem] flex items-center gap-8">
         <a
           href="#top"
-          className="text-[19px] shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-          style={{ fontFamily: "var(--font-display)", fontWeight: 500, letterSpacing: "-0.02em" }}
+          className="flex items-center gap-3 shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
         >
-          Dheeraj Kashyap<span className="accent-text">.</span>
+          {/* Square logo box */}
+          <span
+            className="flex h-8 w-8 items-center justify-center font-mono text-[13px] font-semibold"
+            style={{ background: "var(--forest)", color: "var(--background)", borderRadius: "2px" }}
+          >
+            DK
+          </span>
+          <span
+            className="text-[17px]"
+            style={{ fontFamily: "var(--font-display)", fontWeight: 600, letterSpacing: "-0.02em", color: "var(--forest)" }}
+          >
+            Dheeraj Kashyap
+          </span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-1 ml-auto">
-          {links.map((l) => (
+        <nav className="hidden lg:flex items-center gap-6 ml-auto">
+          {links.map((l, i) => (
             <a
               key={l.href}
               href={l.href}
               aria-current={active === l.id ? "true" : undefined}
-              className={`relative px-4 py-1.5 text-[16px] transition-all duration-300 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
-                active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+              className={`relative py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
+                active === l.id ? "" : "text-muted-foreground hover:text-foreground"
               }`}
-              style={
-                active === l.id
-                  ? { background: "color-mix(in srgb, var(--foreground) 6%, transparent)" }
-                  : undefined
-              }
+              style={active === l.id ? { color: "var(--forest)" } : undefined}
             >
+              <span className="opacity-50 mr-1">{String(i + 1).padStart(2, "0")}.</span>
               {l.label}
+              {active === l.id && (
+                <span aria-hidden className="absolute -bottom-0.5 left-0 right-0 h-[2px]" style={{ background: "var(--forest)" }} />
+              )}
             </a>
           ))}
         </nav>

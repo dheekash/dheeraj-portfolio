@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Source_Serif_4 } from "next/font/google";
+import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,13 +7,14 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import "./globals.css";
 
-// Sohne substitute — body, UI, navigation sans
+// General Sans substitute — body text
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-geist",
   display: "swap",
 });
 
+// Functional mono — labels, tags, technical metadata
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
@@ -21,11 +22,10 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500", "600"],
 });
 
-// Signifier substitute — display / headline serif, weight 400 at every scale
-const sourceSerif = Source_Serif_4({
+// Display — bold, tight-tracked structural headers
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-kanit",
   display: "swap",
 });
@@ -149,7 +149,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{if(localStorage.getItem('theme')==='light'){document.documentElement.classList.add('light')}}catch(e){}})()",
+              "(function(){try{if(localStorage.getItem('theme')==='dark'){document.documentElement.classList.add('dark')}}catch(e){}})()",
           }}
         />
         <script
@@ -157,7 +157,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} ${sourceSerif.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
         <ThemeProvider>
           <TooltipProvider>
             <SiteChrome>{children}</SiteChrome>

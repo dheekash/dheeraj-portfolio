@@ -10,26 +10,27 @@ const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({
 });
 
 /**
- * Dark (Ink & Electric Blue) is the default. Light is opt-in via a `.light`
- * class on <html>. A small inline script in layout.tsx applies the stored
- * class before paint; this provider syncs React state to it and enables the
- * cross-fade transition class only after hydration so the first paint is instant.
+ * Light (Paper blueprint) is the default. Dark is the charcoal twin, opt-in
+ * via a `.dark` class on <html>. A small inline script in layout.tsx applies
+ * the stored class before paint; this provider syncs React state to it and
+ * enables the cross-fade transition class only after hydration so the first
+ * paint is instant.
  */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
     const root = document.documentElement;
-    setTheme(root.classList.contains("light") ? "light" : "dark");
+    setTheme(root.classList.contains("dark") ? "dark" : "light");
     // Defer enabling transitions until after first paint
     const id = requestAnimationFrame(() => root.classList.add("theme-ready"));
     return () => cancelAnimationFrame(id);
   }, []);
 
   const toggle = () => {
-    const next: Theme = theme === "light" ? "dark" : "light";
+    const next: Theme = theme === "dark" ? "light" : "dark";
     setTheme(next);
-    document.documentElement.classList.toggle("light", next === "light");
+    document.documentElement.classList.toggle("dark", next === "dark");
     try {
       localStorage.setItem("theme", next);
     } catch {}

@@ -7,10 +7,10 @@ import type { LucideIcon } from "lucide-react";
 import { profile } from "@/data/profile";
 
 const stats: { value: string; label: string; Icon: LucideIcon; color: string }[] = [
-  { value: "7+",  label: "years",          Icon: Clock,    color: "var(--accent)"  },
-  { value: "15+", label: "countries",      Icon: Globe,    color: "var(--success)" },
-  { value: "13",  label: "certifications", Icon: Award,    color: "var(--sienna)"  },
-  { value: "5M+", label: "records / day",  Icon: Database, color: "var(--primary)" },
+  { value: "7+",  label: "years",          Icon: Clock,    color: "var(--forest)" },
+  { value: "15+", label: "countries",      Icon: Globe,    color: "var(--coral)"  },
+  { value: "13",  label: "certifications", Icon: Award,    color: "var(--mint)"   },
+  { value: "5M+", label: "records / day",  Icon: Database, color: "var(--gold)"   },
 ];
 
 function fadeUp(delay = 0) {
@@ -48,27 +48,25 @@ function CountUp({ value, delay = 0 }: { value: string; delay?: number }) {
   );
 }
 
-/* Floating product artifact holding one stat — icon chip + big metric */
+/* Flat bento stat block — colored left-border accent, mono label (spec) */
 function StatArtifact({ value, label, delay, Icon, color, className = "" }: { value: string; label: string; delay: number; Icon: LucideIcon; color: string; className?: string }) {
   return (
     <motion.div
       {...fadeUp(delay)}
       className={`artifact px-6 py-5 flex flex-col gap-3 ${className}`}
+      style={{ borderLeft: `2px solid ${color}` }}
     >
-      <span
-        className="inline-flex h-9 w-9 items-center justify-center rounded-xl"
-        style={{ background: `color-mix(in srgb, ${color} 16%, transparent)`, color }}
-      >
+      <span className="inline-flex" style={{ color: "var(--forest)" }}>
         <Icon size={18} strokeWidth={1.75} />
       </span>
       <div>
         <span
           className="block leading-none tabular-nums"
-          style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(2.4rem, 1.6rem + 2vw, 3.4rem)", color: "var(--foreground)" }}
+          style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "clamp(2.4rem, 1.6rem + 2vw, 3.4rem)", color: "var(--forest)", letterSpacing: "-0.02em" }}
         >
           <CountUp value={value} delay={delay + 0.1} />
         </span>
-        <span className="mt-2 block text-[13px] uppercase tracking-[0.1em]" style={{ color: "var(--muted-foreground)" }}>
+        <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.1em]" style={{ color: "var(--muted-foreground)" }}>
           {label}
         </span>
       </div>
@@ -78,68 +76,45 @@ function StatArtifact({ value, label, delay, Icon, color, className = "" }: { va
 
 export function CinematicHero() {
   return (
-    <section id="top" className="relative overflow-hidden bg-background">
-      {/* Electric-blue wash in the top-right corner */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 55% 60% at 92% 8%, var(--nebula-1) 0%, var(--nebula-2) 45%, transparent 72%)",
-        }}
-      />
-      {/* Soft radial glow behind the headline (Linear/Raycast depth cue) */}
-      <div
-        aria-hidden
-        className="absolute pointer-events-none z-[1]"
-        style={{
-          top: "8%",
-          left: "-6%",
-          width: "55%",
-          height: "70%",
-          background: "radial-gradient(ellipse at 40% 40%, color-mix(in srgb, var(--accent) 14%, transparent) 0%, transparent 68%)",
-          filter: "blur(24px)",
-        }}
-      />
-
+    <section id="top" className="relative overflow-hidden">
       <div className="container-page relative z-10 py-[clamp(3rem,1.5rem+4vw,5.5rem)]">
         <div className="max-w-[64rem]">
-            {/* Availability pill — pulsing dot, stronger weight */}
+            {/* Status badge — square dot, mono, hairline (spec component) */}
             <motion.div
               {...fadeUp(0)}
-              className="inline-flex items-center gap-2.5 mb-6 rounded-full px-3.5 py-1.5"
-              style={{ background: "color-mix(in srgb, var(--foreground) 5%, transparent)", border: "1px solid var(--border)" }}
+              className="inline-flex items-center gap-2.5 mb-6 px-3 py-1"
+              style={{ border: "1px solid color-mix(in srgb, var(--forest) 20%, transparent)", borderRadius: "2px" }}
             >
-              <span className="relative flex w-2 h-2 flex-shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-70" style={{ background: "var(--success)" }} />
-                <span className="relative inline-flex rounded-full w-2 h-2" style={{ background: "var(--success)" }} />
-              </span>
-              <span className="text-[14px] font-medium tracking-[0.01em]" style={{ color: "var(--foreground)" }}>
+              <span className="h-2 w-2 flex-shrink-0" style={{ background: "var(--forest)" }} />
+              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--forest)" }}>
                 <span className="sm:hidden">BI &amp; Analytics Engineer · Open to hire</span>
                 <span className="hidden sm:inline">BI &amp; Analytics Engineer · Available for hire</span>
               </span>
             </motion.div>
 
-            {/* Serif display headline — bigger, with an oversized italic drop */}
+            {/* Structural display headline — Space Grotesk, tight, forest */}
             <motion.h1
               {...fadeUp(0.08)}
-              className="mb-6 text-foreground"
+              className="mb-7"
               style={{
                 fontFamily: "var(--font-display)",
-                fontWeight: 400,
-                fontSize: "clamp(2.5rem, 1rem + 4.4vw, 4.6rem)",
-                lineHeight: 1.06,
-                letterSpacing: "-0.03em",
+                fontWeight: 600,
+                fontSize: "clamp(2.5rem, 1rem + 4.4vw, 4.8rem)",
+                lineHeight: 0.95,
+                letterSpacing: "-0.035em",
+                color: "var(--forest)",
               }}
             >
               Building analytics platforms that power{" "}
-              <em className="italic" style={{ color: "var(--accent)", fontSize: "1.08em", lineHeight: 1 }}>enterprise decisions.</em>
+              <span style={{ background: "var(--mint)", color: "#10241A", padding: "0 0.12em", boxDecorationBreak: "clone", WebkitBoxDecorationBreak: "clone" }}>
+                enterprise decisions.
+              </span>
             </motion.h1>
 
-            {/* Rotating deliverable — Uiverse word list, editorial palette */}
-            <motion.div {...fadeUp(0.12)} className="mb-7">
+            {/* Rotating deliverable — mono, with a structural left rule */}
+            <motion.div {...fadeUp(0.12)} className="mb-7 pl-3" style={{ borderLeft: "1px solid var(--forest)" }}>
               <span className="word-rotator">
-                <span>Currently building</span>
+                <span className="font-mono text-[13px] uppercase tracking-[0.1em]">Currently building</span>
                 <span className="wr-words" aria-label="Lakehouses, pipelines, dashboards, semantic models">
                   <span className="wr-word">Lakehouses</span>
                   <span className="wr-word">pipelines</span>
@@ -173,10 +148,10 @@ export function CinematicHero() {
               </label>
               <a
                 href="#case-studies"
-                className="group inline-flex items-center gap-1.5 px-3 py-3 text-[15px] text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+                className="group inline-flex items-center gap-1.5 px-3 py-3 font-mono text-[12px] uppercase tracking-[0.1em] text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
               >
                 View projects
-                <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
               </a>
             </motion.div>
         </div>

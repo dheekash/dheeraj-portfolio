@@ -101,7 +101,8 @@ const platformGuide = [
     tagline: "All-in-one Lakehouse on OneLake",
     Logo: FabricLogo,
     bestFor: "Microsoft-first orgs",
-    accent: "#2B9AE0",
+    accent: "var(--forest)",
+    chipText: "var(--background)",
     reach: [
       "Client is Microsoft-first (Azure, M365, Teams)",
       "Power BI is the primary BI tool",
@@ -118,7 +119,8 @@ const platformGuide = [
     tagline: "Unified analytics for ML-heavy pipelines",
     Logo: DatabricksLogo,
     bestFor: "ML at scale",
-    accent: "#FF5A3C",
+    accent: "var(--coral)",
+    chipText: "#3A1508",
     reach: [
       "ML and feature engineering are first-class requirements",
       "PySpark workloads at significant scale",
@@ -135,7 +137,8 @@ const platformGuide = [
     tagline: "Cloud-agnostic SQL analytics warehouse",
     Logo: SnowflakeLogo,
     bestFor: "Multi-cloud SQL",
-    accent: "#29B5E8",
+    accent: "var(--gold)",
+    chipText: "#3A2E08",
     reach: [
       "Multi-cloud requirement (AWS + Azure + GCP)",
       "SQL-first team with no PySpark investment",
@@ -196,15 +199,15 @@ export function PlatformGuideSection() {
                     </div>
                     <p className="text-[12px] font-mono text-muted-foreground mb-3">{p.tagline}</p>
                     <span
-                      className="inline-flex items-center gap-1.5 text-[11.5px] font-bold px-2.5 py-1 rounded-full"
-                      style={{ background: p.accent, color: "#0A0A12" }}
+                      className="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] px-2.5 py-1"
+                      style={{ background: p.accent, color: p.chipText, borderRadius: "2px" }}
                     >
                       Best for {p.bestFor}
                     </span>
                   </div>
                   <div className="px-5 py-5 flex flex-col gap-5 flex-1">
                     <div>
-                      <p className="text-[12px] font-mono uppercase tracking-[0.12em] font-bold mb-3" style={{ color: p.accent }}>Reach for it when</p>
+                      <p className="text-[12px] font-mono uppercase tracking-[0.12em] font-bold mb-3" style={{ color: "var(--forest)" }}>Reach for it when</p>
                       <ul className="space-y-3">
                         {p.reach.map((r) => (
                           <li key={r} className="flex items-start gap-2.5 text-[14px] text-foreground/90 leading-relaxed font-medium">
