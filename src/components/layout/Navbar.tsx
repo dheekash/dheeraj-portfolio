@@ -74,7 +74,7 @@ export function Navbar() {
         className="absolute top-0 left-0 h-[2px] z-10 transition-[width] duration-100"
         style={{
           width: `${progress}%`,
-          background: "linear-gradient(90deg, #00E5FF, #A855F7)",
+          background: "linear-gradient(90deg, #60A5FA, #A78BFA)",
         }}
       />
 
@@ -86,7 +86,7 @@ export function Navbar() {
           {/* Square logo box — cyan→purple gradient */}
           <span
             className="flex h-8 w-8 items-center justify-center rounded-lg font-mono text-[13px] font-bold"
-            style={{ background: "linear-gradient(135deg, #00E5FF, #A855F7)", color: "#0B0E14", boxShadow: "0 0 16px rgba(0,229,255,0.35)" }}
+            style={{ background: "linear-gradient(135deg, #60A5FA, #A78BFA)", color: "#0B0E14", boxShadow: "0 0 16px rgba(96, 165, 250,0.35)" }}
           >
             DK
           </span>
@@ -112,7 +112,7 @@ export function Navbar() {
               <span className="opacity-50 mr-1">{String(i + 1).padStart(2, "0")}.</span>
               {l.label}
               {active === l.id && (
-                <span aria-hidden className="absolute -bottom-0.5 left-0 right-0 h-[2px]" style={{ background: "linear-gradient(90deg, #00E5FF, #A855F7)" }} />
+                <span aria-hidden className="absolute -bottom-0.5 left-0 right-0 h-[2px]" style={{ background: "linear-gradient(90deg, #60A5FA, #A78BFA)" }} />
               )}
             </a>
           ))}

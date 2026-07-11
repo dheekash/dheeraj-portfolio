@@ -92,8 +92,8 @@ export function AboutSection() {
             <svg viewBox="0 0 360 200" className="w-full h-auto" role="img" aria-label={`Industries: ${industries.join(", ")}`}>
               <defs>
                 <linearGradient id="constel" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#00E5FF" />
-                  <stop offset="100%" stopColor="#A855F7" />
+                  <stop offset="0%" stopColor="#60A5FA" />
+                  <stop offset="100%" stopColor="#A78BFA" />
                 </linearGradient>
               </defs>
               {industries.map((ind, i) => {

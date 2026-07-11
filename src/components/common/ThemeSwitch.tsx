@@ -5,11 +5,13 @@ import { useTheme } from "@/components/providers/ThemeProvider";
 
 /**
  * Neumorphic sliding theme toggle. A glowing blue thumb springs between a sun
- * (light) and a moon (dark) over a soft embossed track. Dark is the default;
+ * (light) and a moon (dark) over a soft embossed track, spinning and
+ * cross-fading between the two icons as it travels. Dark is the default;
  * light is opt-in via the shared ThemeProvider, which manages the `.light`
  * class on <html>, persists the choice, and respects the system preference
- * until overridden. The thumb slide is driven by CSS (position keyed off the
- * `.light` class); only the thumb's icon is swapped in React.
+ * until overridden. Both icons stay mounted at all times — the slide,
+ * rotation, and cross-fade are driven entirely by CSS keyed off the `.light`
+ * class, so nothing has to be conditionally swapped in React.
  */
 export function ThemeSwitch() {
   const { theme, toggle } = useTheme();
@@ -29,13 +31,10 @@ export function ThemeSwitch() {
       <Sun size={12} className="tt-side tt-side-l" aria-hidden />
       <Moon size={12} className="tt-side tt-side-r" aria-hidden />
 
-      {/* Glowing thumb — CSS slides it right in dark mode */}
+      {/* Glowing thumb — CSS slides + spins it, icons cross-fade underneath */}
       <span className="tt-thumb">
-        {isDark ? (
-          <Moon size={12} className="tt-thumb-icon" fill="currentColor" aria-hidden />
-        ) : (
-          <Sun size={12} className="tt-thumb-icon" aria-hidden />
-        )}
+        <Sun size={12} className="tt-thumb-icon tt-sun" aria-hidden />
+        <Moon size={12} className="tt-thumb-icon tt-moon" fill="currentColor" aria-hidden />
       </span>
     </button>
   );

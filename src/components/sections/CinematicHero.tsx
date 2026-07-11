@@ -109,7 +109,7 @@ export function CinematicHero() {
           <svg viewBox="0 0 200 64" className="w-full h-auto">
             {[14, 30, 22, 44, 36, 54, 46, 60].map((h, i) => (
               <rect key={i} x={i * 25 + 4} y={64 - h} width="14" height={h} rx="2"
-                fill={i % 2 ? "rgba(168,85,247,0.55)" : "rgba(0,229,255,0.55)"} />
+                fill={i % 2 ? "rgba(167, 139, 250,0.55)" : "rgba(96, 165, 250,0.55)"} />
             ))}
           </svg>
         </motion.div>
@@ -122,13 +122,13 @@ export function CinematicHero() {
           <svg viewBox="0 0 200 48" className="w-full h-auto">
             <defs>
               <linearGradient id="heroSpark" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#00E5FF" />
-                <stop offset="100%" stopColor="#A855F7" />
+                <stop offset="0%" stopColor="#60A5FA" />
+                <stop offset="100%" stopColor="#A78BFA" />
               </linearGradient>
             </defs>
             <polyline points="0,40 28,32 56,36 84,20 112,26 140,12 168,16 200,4"
               fill="none" stroke="url(#heroSpark)" strokeWidth="2" strokeLinecap="round" />
-            <circle cx="200" cy="4" r="3.5" fill="#00E5FF">
+            <circle cx="200" cy="4" r="3.5" fill="#60A5FA">
               <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" />
             </circle>
           </svg>
@@ -140,12 +140,12 @@ export function CinematicHero() {
           transition={{ opacity: { duration: 1, delay: 0.9 }, y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.9 } }}
         >
           <svg viewBox="0 0 160 72" className="w-full h-auto">
-            <g stroke="rgba(0,229,255,0.35)" strokeWidth="1">
+            <g stroke="rgba(96, 165, 250,0.35)" strokeWidth="1">
               <line x1="80" y1="36" x2="20" y2="12" /><line x1="80" y1="36" x2="140" y2="14" />
               <line x1="80" y1="36" x2="24" y2="60" /><line x1="80" y1="36" x2="138" y2="58" />
             </g>
             {[[20, 12], [140, 14], [24, 60], [138, 58]].map(([x, y], i) => (
-              <circle key={i} cx={x} cy={y} r="4" fill={i % 2 ? "#A855F7" : "#00E5FF"}>
+              <circle key={i} cx={x} cy={y} r="4" fill={i % 2 ? "#A78BFA" : "#60A5FA"}>
                 <animate attributeName="opacity" values="1;0.4;1" dur={`${2 + i * 0.5}s`} repeatCount="indefinite" />
               </circle>
             ))}
@@ -165,9 +165,9 @@ export function CinematicHero() {
             <motion.div
               {...fadeUp(0)}
               className="pulse-ring inline-flex items-center gap-2.5 mb-6 px-4 py-1.5 rounded-full"
-              style={{ border: "1px solid rgba(0, 229, 255, 0.4)", background: "rgba(0, 229, 255, 0.05)" }}
+              style={{ border: "1px solid rgba(96, 165, 250, 0.4)", background: "rgba(96, 165, 250, 0.05)" }}
             >
-              <span className="h-2 w-2 flex-shrink-0 rounded-full" style={{ background: "var(--cyan)", boxShadow: "0 0 8px rgba(0,229,255,0.8)" }} />
+              <span className="h-2 w-2 flex-shrink-0 rounded-full" style={{ background: "var(--cyan)", boxShadow: "0 0 8px rgba(96, 165, 250,0.8)" }} />
               <span className="font-mono text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--cyan)" }}>
                 <span className="sm:hidden">BI &amp; Analytics Engineer · Open to hire</span>
                 <span className="hidden sm:inline">BI &amp; Analytics Engineer · Available for hire</span>

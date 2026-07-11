@@ -518,13 +518,13 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
 
 /* Brand colors for tech chips — recognizable vendor tints on glass */
 const CHIP_COLORS: Record<string, string> = {
-  "Microsoft Fabric": "#A855F7",
+  "Microsoft Fabric": "#A78BFA",
   "Power BI": "#F59E0B",
-  Snowflake: "#00E5FF",
+  Snowflake: "#60A5FA",
   Databricks: "#FF5A3C",
   PySpark: "#FF5A3C",
   "Delta Lake": "#FF5A3C",
-  OneLake: "#A855F7",
+  OneLake: "#A78BFA",
   SQLMesh: "#34D399",
   "Apache Kafka": "#EC4899",
   Python: "#F59E0B",
@@ -551,9 +551,9 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
           className="absolute top-4 left-4 z-10 text-[10px] font-mono uppercase tracking-[0.1em] px-2.5 py-1 rounded-full"
           style={{
             color: "var(--cyan)",
-            border: "1px solid rgba(0, 229, 255, 0.5)",
-            background: "rgba(0, 229, 255, 0.08)",
-            boxShadow: "0 0 12px rgba(0, 229, 255, 0.25)",
+            border: "1px solid rgba(96, 165, 250, 0.5)",
+            background: "rgba(96, 165, 250, 0.08)",
+            boxShadow: "0 0 12px rgba(96, 165, 250, 0.25)",
           }}
         >
           {study.capability}

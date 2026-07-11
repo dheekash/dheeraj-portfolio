@@ -110,7 +110,7 @@ function CertCard({ cert }: { cert: Cert; groupColor?: string }) {
             {cert.featured && (
               <span
                 className="text-[9px] font-mono font-semibold uppercase tracking-[0.12em] px-2 py-0.5 rounded-full cursor-default"
-                style={{ background: "rgba(0, 229, 255, 0.12)", color: "var(--cyan)" }}
+                style={{ background: "rgba(96, 165, 250, 0.12)", color: "var(--cyan)" }}
                 title="High-signal credential — core to the BI & Analytics Engineering role"
               >
                 Core cert
@@ -136,7 +136,7 @@ function CertCard({ cert }: { cert: Cert; groupColor?: string }) {
               target="_blank"
               rel="noopener noreferrer"
               className="self-start font-mono text-[11.5px] font-bold px-2.5 py-1 rounded-full hover:opacity-80 transition-opacity"
-              style={{ background: "rgba(0, 229, 255, 0.14)", color: "var(--cyan)" }}
+              style={{ background: "rgba(96, 165, 250, 0.14)", color: "var(--cyan)" }}
               title="Verify certification"
             >
               Verify ↗

@@ -50,8 +50,8 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <div className="cosmos-mesh" aria-hidden />
       <div className="cosmos-dots" aria-hidden />
       <div aria-hidden className="fixed inset-0 -z-[1] pointer-events-none overflow-hidden">
-        <span className="aurora w-[42vw] h-[42vw] -top-[12%] -left-[8%]" style={{ background: "radial-gradient(circle, rgba(0,229,255,0.22) 0%, transparent 70%)" }} />
-        <span className="aurora w-[36vw] h-[36vw] top-[30%] -right-[10%]" style={{ background: "radial-gradient(circle, rgba(168,85,247,0.22) 0%, transparent 70%)", animationDelay: "-8s", animationDuration: "28s" }} />
+        <span className="aurora w-[42vw] h-[42vw] -top-[12%] -left-[8%]" style={{ background: "radial-gradient(circle, rgba(96, 165, 250,0.22) 0%, transparent 70%)" }} />
+        <span className="aurora w-[36vw] h-[36vw] top-[30%] -right-[10%]" style={{ background: "radial-gradient(circle, rgba(167, 139, 250,0.22) 0%, transparent 70%)", animationDelay: "-8s", animationDuration: "28s" }} />
         <span className="aurora w-[30vw] h-[30vw] bottom-[-10%] left-[28%]" style={{ background: "radial-gradient(circle, rgba(236,72,153,0.16) 0%, transparent 70%)", animationDelay: "-15s", animationDuration: "34s" }} />
       </div>
       <div className="grain" aria-hidden />

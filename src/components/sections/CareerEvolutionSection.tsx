@@ -168,8 +168,8 @@ export function CareerEvolutionSection() {
                     className="inline-flex h-8 w-8 items-center justify-center rounded-full font-mono text-[12px] font-bold transition-transform duration-700 hover:rotate-[360deg]"
                     style={{
                       color: "var(--cyan)",
-                      border: "1px solid rgba(0, 229, 255, 0.4)",
-                      background: "rgba(0, 229, 255, 0.06)",
+                      border: "1px solid rgba(96, 165, 250, 0.4)",
+                      background: "rgba(96, 165, 250, 0.06)",
                     }}
                     aria-hidden
                   >
@@ -190,7 +190,7 @@ export function CareerEvolutionSection() {
                         style={{
                           background: "color-mix(in srgb, var(--accent) 10%, transparent)",
                           border: "1px solid color-mix(in srgb, var(--accent) 30%, var(--border))",
-                          boxShadow: "0 0 20px -6px rgba(0, 229, 255, 0.35)",
+                          boxShadow: "0 0 20px -6px rgba(96, 165, 250, 0.35)",
                         }}
                       >
                         <span
