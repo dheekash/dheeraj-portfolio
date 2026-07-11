@@ -145,11 +145,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Apply persisted theme before paint — light is the default */}
+        {/* Apply persisted theme before paint — light is the default unless
+            the user chose dark, or nothing is stored and the OS prefers dark */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var t=localStorage.getItem('theme');if(t==='light'||(!t&&window.matchMedia('(prefers-color-scheme: light)').matches)){document.documentElement.classList.add('light')}}catch(e){}})()",
+              "(function(){try{var t=localStorage.getItem('theme');var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var wantDark=t==='dark'||(!t&&prefersDark);if(!wantDark){document.documentElement.classList.add('light')}}catch(e){document.documentElement.classList.add('light')}})()",
           }}
         />
         <script

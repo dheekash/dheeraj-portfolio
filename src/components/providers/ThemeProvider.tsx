@@ -10,14 +10,16 @@ const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({
 });
 
 /**
- * Dark (cosmic) is the default; light is opt-in via a `.light` class on
- * <html>. A small inline script in layout.tsx applies the stored choice (or
- * the system preference when nothing is stored) before paint; this provider
- * syncs React state to it and enables the cross-fade transition class only
- * after hydration so the first paint is instant.
+ * Light is the default; dark (cosmic) is opt-in via the absence of a
+ * `.light` class on <html> being flipped — i.e. dark shows only when the
+ * user picks it or the OS reports a dark preference. A small inline script
+ * in layout.tsx applies the stored choice (or the system preference when
+ * nothing is stored) before paint; this provider syncs React state to it and
+ * enables the cross-fade transition class only after hydration so the first
+ * paint is instant.
  */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
     const root = document.documentElement;
