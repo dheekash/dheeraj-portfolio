@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowUp, ArrowUpRight, ArrowRight } from "lucide-react";
 import { profile } from "@/data/profile";
+import { ContactForm } from "@/components/sections/ContactForm";
 
 const quickLinks = [
   { href: "#about",        label: "About"      },
@@ -93,6 +94,10 @@ export function Footer() {
                 <span className="relative inline-flex rounded-full w-2 h-2" style={{ background: "var(--success)" }} />
               </span>
               <span className="text-[13px] font-medium" style={{ color: "var(--success)" }}>Currently available</span>
+            </div>
+
+            <div className="mt-8 max-w-[26rem]">
+              <ContactForm />
             </div>
           </div>
 
