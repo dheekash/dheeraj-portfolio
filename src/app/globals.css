@@ -121,72 +121,74 @@
 /* .dark mirrors :root (cosmic dark is the default). */
 .dark { color-scheme: dark; }
 
-/* ── Light theme — designed independently (Apple/Notion/Stripe Docs), not an
-   inversion. Opt-in via .light on <html>. Repoints the accent vars so every
-   component that reads tokens adapts automatically. ── */
+/* ── Light theme — Azure/Cobalt/Slate Blue system, designed independently
+   (Linear/Stripe/Vercel/Framer/Raycast register), not an inversion. Opt-in
+   via .light on <html>. Repoints the accent vars so every component that
+   reads tokens adapts automatically. ── */
 .light {
   color-scheme: light;
-  --background: #F8FAFC;           /* Page background — layered, not pure white */
-  --foreground: #111827;
+  --background: #F5F7FA;           /* Light Gray — layered page bg, not pure white */
+  --foreground: #1E293B;           /* Heading */
   --card: #FFFFFF;                 /* Primary surface */
-  --card-foreground: #111827;
+  --card-foreground: #1E293B;
   --popover: #FFFFFF;
-  --popover-foreground: #111827;
-  --primary: #2563EB;
+  --popover-foreground: #1E293B;
+  --primary: #007FFF;              /* Azure */
   --primary-foreground: #FFFFFF;
-  --secondary: #F3F6FA;            /* Secondary surface */
-  --secondary-foreground: #111827;
-  --muted: #F3F6FA;
-  --muted-foreground: #4B5563;     /* Secondary text */
-  --accent: #2563EB;
+  --secondary: #EEF4FA;            /* Surface */
+  --secondary-foreground: #1E293B;
+  --muted: #EEF4FA;
+  --muted-foreground: #475569;     /* Body text */
+  --accent: #007FFF;
   --accent-foreground: #FFFFFF;
-  --destructive: #DC2626;
-  --border: #E5E7EB;
-  --input: #E5E7EB;
-  --ring: #2563EB;
-  --chart-1: #2563EB;
-  --chart-2: #7C3AED;
-  --chart-3: #16A34A;
+  --destructive: #EF4444;
+  --border: #CBD5E1;
+  --input: #CBD5E1;
+  --ring: #007FFF;
+  --chart-1: #007FFF;
+  --chart-2: #0047AB;
+  --chart-3: #22C55E;
   --chart-4: #F59E0B;
-  --chart-5: #4B5563;
+  --chart-5: #64748B;
   --sidebar: #FFFFFF;
-  --sidebar-foreground: #111827;
-  --sidebar-primary: #2563EB;
+  --sidebar-foreground: #1E293B;
+  --sidebar-primary: #007FFF;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #F3F6FA;
-  --sidebar-accent-foreground: #111827;
-  --sidebar-border: #E5E7EB;
-  --sidebar-ring: #2563EB;
+  --sidebar-accent: #EEF4FA;
+  --sidebar-accent-foreground: #1E293B;
+  --sidebar-border: #CBD5E1;
+  --sidebar-ring: #007FFF;
 
   --grid: #0F172A;
-  --hairline: #E5E7EB;
-  --cyan: #2563EB;                 /* accessible blue on light surfaces */
-  --purple: #7C3AED;
-  --pink: #DB2777;
-  --amber: #D97706;
-  --forest: #2563EB;
-  --mint: #7C3AED;
-  --coral: #DB2777;
-  --gold: #D97706;
+  --hairline: #E2E8F0;             /* Divider */
+  --cyan: #007FFF;                 /* Azure — primary brand blue */
+  --purple: #0047AB;               /* Cobalt — secondary brand blue (kept mono-hue on purpose) */
+  --pink: #38BDF8;                 /* Sky Blue — tertiary accent */
+  --amber: #F59E0B;
+  --forest: #007FFF;
+  --mint: #0047AB;
+  --coral: #38BDF8;
+  --gold: #F59E0B;
 
-  --fog: #F3F6FA;
-  --ash: #6B7280;                  /* Muted text */
-  --smoke: #94A3B8;
-  --peach: #7C3AED;
-  --sienna: #2563EB;
-  --success: #16A34A;
+  --fog: #EEF4FA;
+  --ash: #64748B;                  /* Secondary text */
+  --smoke: #94A3B8;                /* Muted text */
+  --peach: #0047AB;
+  --sienna: #007FFF;
+  --success: #22C55E;
 
-  --dgrm: #2563EB;
-  --net-node: rgba(37, 99, 235, 0.4);
-  --net-edge: 37, 99, 235;
-  --net-pulse: rgba(124, 58, 237, 0.7);
+  --dgrm: #007FFF;
+  --net-node: rgba(0, 127, 255, 0.4);
+  --net-edge: 0, 127, 255;
+  --net-pulse: rgba(0, 71, 171, 0.7);
   --grain-opacity: 0.012;
-  --nebula-1: rgba(37, 99, 235, 0.08);
-  --nebula-2: rgba(124, 58, 237, 0.05);
-  --highlight: #2563EB;
-  --shadow-artifact: 0 0 0 1px #E5E7EB, 0 10px 30px rgba(15, 23, 42, 0.08);
-  --body-text: #4B5563;
-  --card-hover: #EEF4FF;           /* Card hover surface */
+  --nebula-1: rgba(0, 127, 255, 0.08);
+  --nebula-2: rgba(0, 71, 171, 0.06);
+  --highlight: #007FFF;
+  --shadow-artifact: 0 0 0 1px #E2E8F0, 0 10px 30px rgba(15, 23, 42, 0.08);
+  --body-text: #475569;
+  --card-hover: #EAF4FF;           /* Hover Background */
+  --slate-blue: #557C99;           /* Accent Blue — used sparingly for muted UI chrome */
 }
 
 /* Runtime font aliases. Defined on body (not :root) because next/font puts
@@ -532,20 +534,20 @@ body {
   transform: translateY(-4px) scale(1.01);
 }
 
-/* Blue→indigo gradient action button */
+/* Azure→Cobalt gradient action button (light) */
 .gradient-btn {
   position: relative;
-  background: linear-gradient(95deg, #2563EB 0%, #4F46E5 100%);
+  background: linear-gradient(95deg, #007FFF 0%, #0047AB 100%);
   color: #FFFFFF;
   border: none;
   border-radius: 9999px;
   transition: background 0.3s ease-out, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease-out;
-  box-shadow: 0 4px 24px -6px rgba(37, 99, 235, 0.5);
+  box-shadow: 0 4px 24px -6px rgba(0, 127, 255, 0.5);
 }
 .gradient-btn:hover {
-  background: linear-gradient(95deg, #3B82F6 0%, #6366F1 100%);
+  background: linear-gradient(95deg, #38BDF8 0%, #007FFF 50%, #0047AB 100%);
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 28px -6px rgba(79, 70, 229, 0.5);
+  box-shadow: 0 8px 28px -6px rgba(0, 71, 171, 0.5);
 }
 .gradient-btn:active { transform: scale(0.98); }
 .dark .gradient-btn,
@@ -702,23 +704,23 @@ body {
 .light .gradient-frame,
 .light .uicard {
   background: #FFFFFF;
-  border-color: #E5E7EB;
+  border-color: #CBD5E1;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
 }
 .light .gradient-frame:hover,
 .light .panel:hover {
-  background: #EEF4FF;
-  border-color: rgba(37, 99, 235, 0.35);
-  box-shadow: 0 16px 36px rgba(37, 99, 235, 0.14);
+  background: #EAF4FF;
+  border-color: rgba(0, 127, 255, 0.35);
+  box-shadow: 0 16px 36px rgba(0, 127, 255, 0.14);
 }
 .light .artifact {
   background: #FFFFFF;
 }
-.light .artifact:hover { box-shadow: 0 16px 36px rgba(37, 99, 235, 0.14); }
+.light .artifact:hover { box-shadow: 0 16px 36px rgba(0, 127, 255, 0.14); }
 .light .artifact::before {
   background: conic-gradient(from var(--spin-angle, 0deg),
-    rgba(37, 99, 235, 0.45), rgba(124, 58, 237, 0.35) 30%,
-    rgba(15, 23, 42, 0.06) 55%, rgba(37, 99, 235, 0.45) 100%);
+    rgba(0, 127, 255, 0.45), rgba(0, 71, 171, 0.35) 30%,
+    rgba(15, 23, 42, 0.06) 55%, rgba(0, 127, 255, 0.45) 100%);
 }
 .light .glass-nav {
   background: rgba(255, 255, 255, 0.75);
@@ -729,47 +731,47 @@ body {
 .light .text-glow { text-shadow: none; }
 .light .text-gradient,
 .light .text-shimmer {
-  background-image: linear-gradient(95deg, #2563EB 0%, #7C3AED 100%);
+  background-image: linear-gradient(95deg, #007FFF 0%, #3F51B5 100%);
 }
 .light .gradient-btn {
-  background: linear-gradient(95deg, #2563EB 0%, #4F46E5 100%);
+  background: linear-gradient(95deg, #007FFF 0%, #0047AB 100%);
   color: #FFFFFF;
-  box-shadow: 0 8px 24px -8px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 8px 24px -8px rgba(0, 127, 255, 0.45);
 }
 .light .gradient-btn:hover {
-  background: linear-gradient(95deg, #3B82F6 0%, #6366F1 100%);
-  box-shadow: 0 10px 28px -8px rgba(79, 70, 229, 0.4);
+  background: linear-gradient(95deg, #38BDF8 0%, #007FFF 50%, #0047AB 100%);
+  box-shadow: 0 10px 28px -8px rgba(0, 71, 171, 0.4);
 }
 .light .dl-btn {
   background: rgba(255, 255, 255, 0.7);
-  border-color: rgba(37, 99, 235, 0.55);
+  border-color: rgba(0, 127, 255, 0.55);
 }
-.light .dl-circle { background: linear-gradient(135deg, #2563EB, #7C3AED); }
+.light .dl-circle { background: linear-gradient(135deg, #007FFF, #0047AB); }
 .light .dash-btn { border-color: rgba(15, 23, 42, 0.3); color: var(--foreground); }
 .light .dash-btn:hover { border-color: var(--cyan); color: var(--cyan); }
-.light .toggle-pill.on { background: linear-gradient(95deg, #2563EB, #7C3AED); }
+.light .toggle-pill.on { background: linear-gradient(95deg, #007FFF, #0047AB); }
 .light .toggle-pill.off { background: rgba(15, 23, 42, 0.14); }
 .light .toggle-pill::after { background: #F5F7FA; }
 .light .morph-chip:hover {
-  background: linear-gradient(95deg, #2563EB 0%, #7C3AED 100%) !important;
+  background: linear-gradient(95deg, #007FFF 0%, #0047AB 100%) !important;
   color: #FFFFFF !important;
 }
 .light .timeline-spine {
-  background: linear-gradient(to bottom, rgba(37, 99, 235, 0.85), rgba(124, 58, 237, 0.5) 60%, rgba(15, 23, 42, 0.08));
+  background: linear-gradient(to bottom, rgba(0, 127, 255, 0.85), rgba(0, 71, 171, 0.5) 60%, rgba(15, 23, 42, 0.08));
   box-shadow: none;
 }
-.light .pulse-ring::before { border-color: rgba(37, 99, 235, 0.55); }
+.light .pulse-ring::before { border-color: rgba(0, 127, 255, 0.55); }
 .light .tw-caret { background: var(--cyan); }
 .light .cosmos-mesh { opacity: 0.7; }
 .light .cosmos-dots {
   background-image: radial-gradient(rgba(15, 23, 42, 0.14) 1px, transparent 1px);
 }
 .light .aurora { opacity: 0.22; }
-.light .cursor-ring { border-color: rgba(37, 99, 235, 0.55); }
+.light .cursor-ring { border-color: rgba(0, 127, 255, 0.55); }
 .light .spotlight::before {
   background: radial-gradient(
     360px circle at var(--mx, -200px) var(--my, -200px),
-    rgba(37, 99, 235, 0.10),
+    rgba(0, 127, 255, 0.10),
     transparent 65%
   );
 }
