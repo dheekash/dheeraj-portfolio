@@ -747,32 +747,63 @@ body {
   );
 }
 
-/* ── Sun/Moon theme toggle — icons cross-morph with rotation ── */
-.sunmoon {
+/* ── Neumorphic sliding theme toggle — glowing blue thumb ── */
+.theme-toggle {
   position: relative;
+  flex-shrink: 0;
+  width: 56px;
+  height: 30px;
+  padding: 4px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  /* Default = dark theme: recessed, inset track */
+  background: #2B3447;
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.45), inset 0 -1px 1px rgba(255, 255, 255, 0.04), 0 1px 2px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.45s ease, box-shadow 0.45s ease;
+}
+.light .theme-toggle {
+  /* Light theme: raised, puffy neumorphic track */
+  background: #F8FBFF;
+  box-shadow: 0 6px 15px rgba(116, 142, 255, 0.28), inset 0 2px 4px rgba(255, 255, 255, 0.9), inset 0 -2px 4px rgba(116, 142, 255, 0.12);
+}
+.theme-toggle:hover { filter: brightness(1.04); }
+
+.tt-thumb {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 9999px;
-  border: 1px solid var(--hairline);
-  background: var(--card);
-  cursor: pointer;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  color: #ffffff;
+  z-index: 2;
+  background: linear-gradient(180deg, #2757ff 0%, #53c9ff 100%);
+  box-shadow: 0 0 15px rgba(54, 112, 255, 0.75), 0 2px 5px rgba(20, 50, 160, 0.5), inset 0 -3px 6px rgba(255, 255, 255, 0.2), inset 0 3px 6px rgba(255, 255, 255, 0.25);
+  transform: translateX(0);
+  transition: transform 0.45s cubic-bezier(0.68, -0.4, 0.27, 1.4);
 }
-.sunmoon:hover {
-  border-color: var(--cyan);
-  box-shadow: 0 0 16px -4px color-mix(in srgb, var(--cyan) 60%, transparent);
-}
-.sunmoon .sm-icon {
+/* Dark (default) → thumb slides to the right */
+:root:not(.light) .theme-toggle .tt-thumb { transform: translateX(26px); }
+.tt-thumb-icon { position: relative; }
+
+.tt-side {
   position: absolute;
-  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.3s ease;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  color: #5A6478;
 }
-.sunmoon .sm-sun  { color: #F59E0B; transform: rotate(180deg) scale(0.4); opacity: 0; }
-.sunmoon .sm-moon { color: var(--cyan); transform: rotate(0) scale(1); opacity: 1; }
-.light .sunmoon .sm-sun  { transform: rotate(0) scale(1); opacity: 1; }
-.light .sunmoon .sm-moon { transform: rotate(-180deg) scale(0.4); opacity: 0; }
+.light .tt-side { color: #9BA6C4; }
+.tt-side-l { left: 7px; }
+.tt-side-r { right: 7px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle .tt-thumb { transition: none; }
+}
 
 /* Morphing chip — dark tier chip shifts to cyan→purple gradient on hover */
 .morph-chip {
