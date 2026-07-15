@@ -1214,3 +1214,27 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Portrait Stories feature cards — gradient-border-shell technique,
+   site tokens (not the source doc's green), minimal 150ms color-only hover ── */
+.ps-shell {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--foreground) 16%, transparent),
+    color-mix(in srgb, var(--foreground) 3%, transparent)
+  );
+  transition: background 150ms ease;
+}
+.ps-shell:hover {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--primary) 45%, transparent),
+    color-mix(in srgb, var(--foreground) 3%, transparent)
+  );
+}
+.ps-card {
+  background: var(--card);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: color 150ms ease;
+}

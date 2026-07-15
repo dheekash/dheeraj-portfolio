@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Inter, JetBrains_Mono, Space_Grotesk, Playfair_Display, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -27,6 +27,22 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-kanit",
+  display: "swap",
+});
+
+// Scoped to the Portrait Stories feature section only — editorial serif display
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["600"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+// Scoped to the Portrait Stories feature section only — supporting body/label copy
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "500"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -158,7 +174,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} ${playfairDisplay.variable} ${poppins.variable} font-sans antialiased`}>
         <ThemeProvider>
           <TooltipProvider>
             <SiteChrome>{children}</SiteChrome>

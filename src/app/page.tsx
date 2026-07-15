@@ -1,4 +1,5 @@
 import { CinematicHero } from "@/components/sections/CinematicHero";
+import { PortraitStoriesSection } from "@/components/sections/PortraitStoriesSection";
 import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { CoreExpertiseSection, PlatformGuideSection } from "@/components/sections/TechStackSection";
 import { CareerEvolutionSection } from "@/components/sections/CareerEvolutionSection";
@@ -9,6 +10,7 @@ export default function HomePage() {
   return (
     <>
       <CinematicHero />
+      <PortraitStoriesSection />
       <div className="section-alt">
         <CaseStudiesSection />
       </div>
