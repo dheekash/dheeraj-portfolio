@@ -8,6 +8,7 @@ import {
   MicrosoftLogo, ExcelLogo,
 } from "@/components/common/TechLogos";
 import { onSpotlightMove } from "@/components/common/spotlight";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 function reveal(delay = 0) {
   return {
@@ -154,6 +155,7 @@ const platformGuide = [
 
 
 export function PlatformGuideSection() {
+  const { theme } = useTheme();
   return (
     <section id="platforms">
       <div className="container-page section-pad">
@@ -201,7 +203,13 @@ export function PlatformGuideSection() {
                     <p className="text-[12px] font-mono text-muted-foreground mb-3">{p.tagline}</p>
                     <span
                       className="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] px-2.5 py-1"
-                      style={{ background: p.accent, color: p.chipText, borderRadius: "2px" }}
+                      style={{
+                        background: p.accent,
+                        // Fabric's light-theme accent was darkened for text-on-white contrast
+                        // elsewhere, which flips this chip's own best readable text to white.
+                        color: p.accent === "var(--forest)" && theme === "light" ? "#FFFFFF" : p.chipText,
+                        borderRadius: "2px",
+                      }}
                     >
                       Best for {p.bestFor}
                     </span>

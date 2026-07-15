@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { MicrosoftLogo, DatabricksLogo, SnowflakeLogo } from "@/components/common/TechLogos";
 import { onSpotlightMove } from "@/components/common/spotlight";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 function reveal(delay = 0) {
   return {
@@ -30,10 +31,18 @@ function IssuerLogo({ issuer, size = 14 }: { issuer: Issuer; size?: number }) {
   return <SnowflakeLogo size={size} />;
 }
 
-const ISSUER_COLOR: Record<Issuer, string> = {
+/* Dark-theme values read fine against near-black; light theme needs
+   darker shades of the same brand hue to clear WCAG AA (4.5:1) on white. */
+const ISSUER_COLOR_DARK: Record<Issuer, string> = {
   Microsoft:  "#2B9AE0",
   Snowflake:  "#29B5E8",
   Databricks: "#FF5A3C",
+};
+
+const ISSUER_COLOR_LIGHT: Record<Issuer, string> = {
+  Microsoft:  "#0057B8",
+  Snowflake:  "#0E7490",
+  Databricks: "#C2410C",
 };
 
 const certGroups: { category: string; color: string; certs: Cert[] }[] = [
@@ -91,7 +100,8 @@ const otherCerts = allCerts.filter((c) => !c.featured);
 
 /* 3D flip card — front: logo + name; back: code, issuer, date, verify */
 function CertCard({ cert }: { cert: Cert; groupColor?: string }) {
-  const c = ISSUER_COLOR[cert.issuer];
+  const { theme } = useTheme();
+  const c = (theme === "light" ? ISSUER_COLOR_LIGHT : ISSUER_COLOR_DARK)[cert.issuer];
   return (
     <div className="flip-card h-40" tabIndex={0}>
       <div className="flip-inner">
@@ -150,6 +160,8 @@ function CertCard({ cert }: { cert: Cert; groupColor?: string }) {
 
 export function CertificationsSection() {
   const totalCount = certGroups.reduce((s, g) => s + g.certs.length, 0);
+  const { theme } = useTheme();
+  const issuerColor = theme === "light" ? ISSUER_COLOR_LIGHT : ISSUER_COLOR_DARK;
 
   return (
     <section id="certifications">
@@ -189,7 +201,7 @@ export function CertificationsSection() {
               const content = (
                 <>
                   <span className="flex-shrink-0"><IssuerLogo issuer={cert.issuer} size={14} /></span>
-                  <span className="font-mono font-semibold" style={{ color: ISSUER_COLOR[cert.issuer] }}>{cert.code}</span>
+                  <span className="font-mono font-semibold" style={{ color: issuerColor[cert.issuer] }}>{cert.code}</span>
                   <span className="text-muted-foreground">{cert.name}</span>
                 </>
               );

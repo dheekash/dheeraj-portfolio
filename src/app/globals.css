@@ -133,58 +133,58 @@
   --card-foreground: #1E293B;
   --popover: #FFFFFF;
   --popover-foreground: #1E293B;
-  --primary: #007FFF;              /* Azure */
+  --primary: #0066CC;              /* Azure Dark — darkened from pure #007FFF so text/icons hit WCAG AA (4.5:1) on white */
   --primary-foreground: #FFFFFF;
   --secondary: #EEF4FA;            /* Surface */
   --secondary-foreground: #1E293B;
   --muted: #EEF4FA;
   --muted-foreground: #475569;     /* Body text */
-  --accent: #007FFF;
+  --accent: #0066CC;
   --accent-foreground: #FFFFFF;
   --destructive: #EF4444;
   --border: #CBD5E1;
   --input: #CBD5E1;
-  --ring: #007FFF;
-  --chart-1: #007FFF;
+  --ring: #0066CC;
+  --chart-1: #0066CC;
   --chart-2: #0047AB;
   --chart-3: #22C55E;
   --chart-4: #F59E0B;
   --chart-5: #64748B;
   --sidebar: #FFFFFF;
   --sidebar-foreground: #1E293B;
-  --sidebar-primary: #007FFF;
+  --sidebar-primary: #0066CC;
   --sidebar-primary-foreground: #FFFFFF;
   --sidebar-accent: #EEF4FA;
   --sidebar-accent-foreground: #1E293B;
   --sidebar-border: #CBD5E1;
-  --sidebar-ring: #007FFF;
+  --sidebar-ring: #0066CC;
 
   --grid: #0F172A;
   --hairline: #E2E8F0;             /* Divider */
-  --cyan: #007FFF;                 /* Azure — primary brand blue */
+  --cyan: #0066CC;                 /* Azure — primary brand blue */
   --purple: #0047AB;               /* Cobalt — secondary brand blue (kept mono-hue on purpose) */
   --pink: #38BDF8;                 /* Sky Blue — tertiary accent */
   --amber: #F59E0B;
-  --forest: #007FFF;
+  --forest: #0066CC;
   --mint: #0047AB;
   --coral: #38BDF8;
   --gold: #F59E0B;
 
   --fog: #EEF4FA;
-  --ash: #64748B;                  /* Secondary text */
+  --ash: #5B6B80;                  /* Secondary text — darkened slightly to clear AA on the lightest surfaces */
   --smoke: #94A3B8;                /* Muted text */
   --peach: #0047AB;
-  --sienna: #007FFF;
-  --success: #22C55E;
+  --sienna: #0066CC;
+  --success: #15803D;              /* Darkened from #22C55E so "current role"/status text clears AA on light surfaces */
 
-  --dgrm: #007FFF;
-  --net-node: rgba(0, 127, 255, 0.4);
-  --net-edge: 0, 127, 255;
+  --dgrm: #0066CC;
+  --net-node: rgba(0, 102, 204, 0.4);
+  --net-edge: 0, 102, 204;
   --net-pulse: rgba(0, 71, 171, 0.7);
   --grain-opacity: 0.012;
-  --nebula-1: rgba(0, 127, 255, 0.08);
+  --nebula-1: rgba(0, 102, 204, 0.08);
   --nebula-2: rgba(0, 71, 171, 0.06);
-  --highlight: #007FFF;
+  --highlight: #0066CC;
   --shadow-artifact: 0 0 0 1px #E2E8F0, 0 10px 30px rgba(15, 23, 42, 0.08);
   --body-text: #475569;
   --card-hover: #EAF4FF;           /* Hover Background */
@@ -537,15 +537,15 @@ body {
 /* Azure→Cobalt gradient action button (light) */
 .gradient-btn {
   position: relative;
-  background: linear-gradient(95deg, #007FFF 0%, #0047AB 100%);
+  background: linear-gradient(95deg, #0066CC 0%, #0047AB 100%);
   color: #FFFFFF;
   border: none;
   border-radius: 9999px;
   transition: background 0.3s ease-out, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease-out;
-  box-shadow: 0 4px 24px -6px rgba(0, 127, 255, 0.5);
+  box-shadow: 0 4px 24px -6px rgba(0, 102, 204, 0.5);
 }
 .gradient-btn:hover {
-  background: linear-gradient(95deg, #38BDF8 0%, #007FFF 50%, #0047AB 100%);
+  background: linear-gradient(95deg, #38BDF8 0%, #0066CC 50%, #0047AB 100%);
   transform: translateY(-2px) scale(1.03);
   box-shadow: 0 8px 28px -6px rgba(0, 71, 171, 0.5);
 }
@@ -710,17 +710,17 @@ body {
 .light .gradient-frame:hover,
 .light .panel:hover {
   background: #EAF4FF;
-  border-color: rgba(0, 127, 255, 0.35);
-  box-shadow: 0 16px 36px rgba(0, 127, 255, 0.14);
+  border-color: rgba(0, 102, 204, 0.35);
+  box-shadow: 0 16px 36px rgba(0, 102, 204, 0.14);
 }
 .light .artifact {
   background: #FFFFFF;
 }
-.light .artifact:hover { box-shadow: 0 16px 36px rgba(0, 127, 255, 0.14); }
+.light .artifact:hover { box-shadow: 0 16px 36px rgba(0, 102, 204, 0.14); }
 .light .artifact::before {
   background: conic-gradient(from var(--spin-angle, 0deg),
-    rgba(0, 127, 255, 0.45), rgba(0, 71, 171, 0.35) 30%,
-    rgba(15, 23, 42, 0.06) 55%, rgba(0, 127, 255, 0.45) 100%);
+    rgba(0, 102, 204, 0.45), rgba(0, 71, 171, 0.35) 30%,
+    rgba(15, 23, 42, 0.06) 55%, rgba(0, 102, 204, 0.45) 100%);
 }
 .light .glass-nav {
   background: rgba(255, 255, 255, 0.75);
@@ -731,47 +731,47 @@ body {
 .light .text-glow { text-shadow: none; }
 .light .text-gradient,
 .light .text-shimmer {
-  background-image: linear-gradient(95deg, #007FFF 0%, #3F51B5 100%);
+  background-image: linear-gradient(95deg, #0066CC 0%, #3F51B5 100%);
 }
 .light .gradient-btn {
-  background: linear-gradient(95deg, #007FFF 0%, #0047AB 100%);
+  background: linear-gradient(95deg, #0066CC 0%, #0047AB 100%);
   color: #FFFFFF;
-  box-shadow: 0 8px 24px -8px rgba(0, 127, 255, 0.45);
+  box-shadow: 0 8px 24px -8px rgba(0, 102, 204, 0.45);
 }
 .light .gradient-btn:hover {
-  background: linear-gradient(95deg, #38BDF8 0%, #007FFF 50%, #0047AB 100%);
+  background: linear-gradient(95deg, #38BDF8 0%, #0066CC 50%, #0047AB 100%);
   box-shadow: 0 10px 28px -8px rgba(0, 71, 171, 0.4);
 }
 .light .dl-btn {
   background: rgba(255, 255, 255, 0.7);
-  border-color: rgba(0, 127, 255, 0.55);
+  border-color: rgba(0, 102, 204, 0.55);
 }
-.light .dl-circle { background: linear-gradient(135deg, #007FFF, #0047AB); }
+.light .dl-circle { background: linear-gradient(135deg, #0066CC, #0047AB); }
 .light .dash-btn { border-color: rgba(15, 23, 42, 0.3); color: var(--foreground); }
 .light .dash-btn:hover { border-color: var(--cyan); color: var(--cyan); }
-.light .toggle-pill.on { background: linear-gradient(95deg, #007FFF, #0047AB); }
+.light .toggle-pill.on { background: linear-gradient(95deg, #0066CC, #0047AB); }
 .light .toggle-pill.off { background: rgba(15, 23, 42, 0.14); }
 .light .toggle-pill::after { background: #F5F7FA; }
 .light .morph-chip:hover {
-  background: linear-gradient(95deg, #007FFF 0%, #0047AB 100%) !important;
+  background: linear-gradient(95deg, #0066CC 0%, #0047AB 100%) !important;
   color: #FFFFFF !important;
 }
 .light .timeline-spine {
-  background: linear-gradient(to bottom, rgba(0, 127, 255, 0.85), rgba(0, 71, 171, 0.5) 60%, rgba(15, 23, 42, 0.08));
+  background: linear-gradient(to bottom, rgba(0, 102, 204, 0.85), rgba(0, 71, 171, 0.5) 60%, rgba(15, 23, 42, 0.08));
   box-shadow: none;
 }
-.light .pulse-ring::before { border-color: rgba(0, 127, 255, 0.55); }
+.light .pulse-ring::before { border-color: rgba(0, 102, 204, 0.55); }
 .light .tw-caret { background: var(--cyan); }
 .light .cosmos-mesh { opacity: 0.7; }
 .light .cosmos-dots {
   background-image: radial-gradient(rgba(15, 23, 42, 0.14) 1px, transparent 1px);
 }
 .light .aurora { opacity: 0.22; }
-.light .cursor-ring { border-color: rgba(0, 127, 255, 0.55); }
+.light .cursor-ring { border-color: rgba(0, 102, 204, 0.55); }
 .light .spotlight::before {
   background: radial-gradient(
     360px circle at var(--mx, -200px) var(--my, -200px),
-    rgba(0, 127, 255, 0.10),
+    rgba(0, 102, 204, 0.10),
     transparent 65%
   );
 }

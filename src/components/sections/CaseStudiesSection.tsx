@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import { onSpotlightMove } from "@/components/common/spotlight";
 import { onTiltMove, onTiltLeave } from "@/components/common/tilt";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 function reveal(delay = 0) {
   return {
@@ -516,8 +517,11 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
 
 /* ── Card ─────────────────────────────────────────────────────────────────── */
 
-/* Brand colors for tech chips — recognizable vendor tints on glass */
-const CHIP_COLORS: Record<string, string> = {
+/* Brand colors for tech chips — recognizable vendor tints on glass.
+   Dark-theme values read fine against near-black; light theme needs
+   noticeably darker shades of the same hue to clear WCAG AA (4.5:1) on
+   white, so each chip gets a separate value per theme. */
+const CHIP_COLORS_DARK: Record<string, string> = {
   "Microsoft Fabric": "#A78BFA",
   "Power BI": "#F59E0B",
   Snowflake: "#60A5FA",
@@ -535,7 +539,27 @@ const CHIP_COLORS: Record<string, string> = {
   "Scikit-learn": "#F59E0B",
 };
 
+const CHIP_COLORS_LIGHT: Record<string, string> = {
+  "Microsoft Fabric": "#7C3AED",
+  "Power BI": "#B45309",
+  Snowflake: "#1D4ED8",
+  Databricks: "#C2410C",
+  PySpark: "#C2410C",
+  "Delta Lake": "#C2410C",
+  OneLake: "#7C3AED",
+  SQLMesh: "#15803D",
+  "Apache Kafka": "#BE185D",
+  Python: "#B45309",
+  DAX: "#B45309",
+  Azure: "#0369A1",
+  "Azure Event Hubs": "#0369A1",
+  SQL: "#475569",
+  "Scikit-learn": "#B45309",
+};
+
 function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
+  const { theme } = useTheme();
+  const chipColors = theme === "light" ? CHIP_COLORS_LIGHT : CHIP_COLORS_DARK;
   return (
     <motion.article
       {...reveal()}
@@ -545,7 +569,7 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
       style={{ willChange: "transform" }}
     >
       {/* Left — animated data-flow visual (the project's own diagram) */}
-      <div className="relative p-[clamp(1.25rem,2vw,2rem)] flex items-center border-b lg:border-b-0 lg:border-r" style={{ borderColor: "rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)" }}>
+      <div className="relative p-[clamp(1.25rem,2vw,2rem)] flex items-center border-b lg:border-b-0 lg:border-r" style={{ borderColor: "var(--border)", background: "color-mix(in srgb, var(--foreground) 3%, transparent)" }}>
         {/* Role pill — top-left, neon border */}
         <span
           className="absolute top-4 left-4 z-10 text-[10px] font-mono uppercase tracking-[0.1em] px-2.5 py-1 rounded-full"
@@ -592,7 +616,7 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
         {/* Tech stack — brand-tinted chip pills */}
         <div className="flex flex-wrap gap-1.5 mb-5">
           {study.stack.slice(0, 5).map((t) => {
-            const c = CHIP_COLORS[t] ?? "#B0B8C5";
+            const c = chipColors[t] ?? (theme === "light" ? "#475569" : "#B0B8C5");
             return (
               <span
                 key={t}
