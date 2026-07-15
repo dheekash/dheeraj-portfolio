@@ -1,10 +1,17 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 import { Layers, Gauge, Workflow, LineChart, type LucideIcon } from "lucide-react";
 import { WebGLDotField } from "@/components/common/WebGLDotField";
+
+function reveal(delay = 0) {
+  return {
+    initial: { opacity: 0, y: 28 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: "0px" },
+    transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
+  };
+}
 
 const features: { Icon: LucideIcon; title: string; body: string }[] = [
   {
@@ -34,52 +41,31 @@ const features: { Icon: LucideIcon; title: string; body: string }[] = [
  * heading, Poppins body copy, glass gradient-border-shell cards on an 8px
  * spacing rhythm, over a WebGL dot-matrix field. Colors stay on the site's
  * own tokens; only the typography/spacing/card technique come from the
- * Portrait Stories design system. Reveal is GSAP ScrollTrigger per that
- * system's motion spec (elsewhere on the site uses Framer Motion — scoped
- * here on purpose).
+ * Portrait Stories design system. Reveal uses the same Framer Motion
+ * whileInView pattern as every other section on this site — an earlier GSAP
+ * ScrollTrigger version left cards permanently invisible when its trigger
+ * position went stale (didn't refresh after the WebGL canvas/web fonts
+ * settled layout), so it was replaced with the already-proven mechanism.
  */
 export function PortraitStoriesSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || !sectionRef.current) return;
-
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      gsap.from(".ps-reveal", {
-        opacity: 0,
-        y: 28,
-        duration: 0.7,
-        ease: "power2.out",
-        stagger: 0.12,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          once: true,
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section ref={sectionRef} className="relative overflow-hidden">
+    <section className="relative overflow-hidden">
       <div aria-hidden className="absolute inset-0">
         <WebGLDotField />
       </div>
 
       <div className="container-page section-pad relative">
         <div className="max-w-[46rem] mb-[clamp(2rem,3vw,3rem)]">
-          <p
-            className="ps-reveal mb-3 text-[14px] font-medium uppercase tracking-[0.1em]"
+          <motion.p
+            {...reveal()}
+            className="mb-3 text-[14px] font-medium uppercase tracking-[0.1em]"
             style={{ fontFamily: "var(--font-poppins), sans-serif", color: "var(--primary)" }}
           >
             How I work
-          </p>
-          <h2
-            className="ps-reveal mb-4"
+          </motion.p>
+          <motion.h2
+            {...reveal(0.05)}
+            className="mb-4"
             style={{
               fontFamily: "var(--font-playfair), serif",
               fontWeight: 600,
@@ -90,18 +76,19 @@ export function PortraitStoriesSection() {
             }}
           >
             Every dataset has a story worth telling.
-          </h2>
-          <p
-            className="ps-reveal text-[15px] leading-relaxed text-muted-foreground max-w-[42ch]"
+          </motion.h2>
+          <motion.p
+            {...reveal(0.1)}
+            className="text-[15px] leading-relaxed text-muted-foreground max-w-[42ch]"
             style={{ fontFamily: "var(--font-poppins), sans-serif", fontWeight: 300 }}
           >
             From messy source systems to boardroom-ready dashboards — four disciplines I lean on for every engagement.
-          </p>
+          </motion.p>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map(({ Icon, title, body }) => (
-            <div key={title} className="ps-reveal ps-shell rounded-[2rem] p-[1px]">
+          {features.map(({ Icon, title, body }, i) => (
+            <motion.div key={title} {...reveal(0.15 + i * 0.08)} className="ps-shell rounded-[2rem] p-[1px]">
               <div className="ps-card h-full rounded-[calc(2rem-1px)] p-6 flex flex-col gap-4">
                 <span
                   className="inline-flex h-10 w-10 items-center justify-center rounded-xl flex-shrink-0"
@@ -121,7 +108,7 @@ export function PortraitStoriesSection() {
                   {body}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
