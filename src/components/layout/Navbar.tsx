@@ -73,10 +73,12 @@ export function Navbar() {
       } ${scrolled || open ? "glass-nav" : "bg-transparent border-transparent"}`}
       style={scrolled || open ? undefined : { borderColor: "transparent" }}
     >
-      <div className="container-page h-[4rem] flex items-center gap-8">
+      {/* gap-8 pushed the brand + controls past 360px viewports. min-w-0
+          lets the flex row actually shrink instead of forcing overflow. */}
+      <div className="container-page h-[4rem] flex items-center gap-3 lg:gap-8 min-w-0">
         <a
           href="#top"
-          className="flex items-center gap-3 shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+          className="flex items-center gap-3 shrink-0 min-h-11 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
         >
           {/* Square logo box — solid accent, no glow */}
           <span
@@ -99,7 +101,9 @@ export function Navbar() {
               key={l.href}
               href={l.href}
               aria-current={active === l.id ? "true" : undefined}
-              className={`relative py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
+              /* min-h-6 = 24px, WCAG 2.2 AA 2.5.8 Target Size (Minimum).
+                 py-1.5 alone left these 17px tall. */
+              className={`relative inline-flex items-center min-h-6 px-1 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
                 active === l.id ? "" : "text-muted-foreground hover:text-foreground"
               }`}
               style={active === l.id ? { color: "var(--cyan)" } : undefined}

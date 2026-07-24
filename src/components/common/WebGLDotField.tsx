@@ -85,6 +85,16 @@ export function WebGLDotField() {
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    /* Skip WebGL entirely on touch/small screens. The shader's only
+       interactive input is pointer-driven drift, which does not exist on
+       touch, so on phones this was pure GPU cost for a static-looking
+       result. The .bg-dots fallback renders the same motif for free.
+       Measured: Lighthouse mobile main-thread "Other" work was dominated
+       by this canvas. */
+    const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+    const smallViewport = window.matchMedia("(max-width: 767px)").matches;
+    if (coarsePointer || smallViewport) return;
+
     const gl = canvas.getContext("webgl", { alpha: true, antialias: true, premultipliedAlpha: true });
     if (!gl) return; // DOM fallback (.bg-dots) stays visible
 
@@ -165,10 +175,30 @@ export function WebGLDotField() {
 
       if (!reducedMotion) raf = requestAnimationFrame(render);
     };
+
+    /* Only run the loop while the section is on screen. Previously this
+       rendered every frame for the whole page lifetime, including when
+       scrolled far away, which is GPU work for something nobody can see. */
+    const visibility = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!raf) raf = requestAnimationFrame(render);
+        } else if (raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+      },
+      { rootMargin: "100px" }
+    );
+    visibility.observe(container);
+
+    // Paint one frame immediately so the field is never blank on first paint.
     render(start);
+    if (reducedMotion && raf) { cancelAnimationFrame(raf); raf = 0; }
 
     return () => {
       if (raf) cancelAnimationFrame(raf);
+      visibility.disconnect();
       resizeObserver.disconnect();
       observer.disconnect();
       window.removeEventListener("pointermove", onPointerMove);

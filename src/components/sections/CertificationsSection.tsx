@@ -167,7 +167,9 @@ export function CertificationsSection() {
               technology it covers.
             </p>
           </div>
-          <div className="flex items-center gap-3 flex-shrink-0">
+          {/* flex-wrap, not flex-shrink-0: three non-shrinking pills in a
+              nowrap row overflowed 360px viewports. */}
+          <div className="flex flex-wrap items-center gap-3">
             <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>11 Microsoft</span>
             <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>1 Snowflake</span>
             <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>1 Databricks</span>

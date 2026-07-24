@@ -1,21 +1,44 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
+
+const REDUCED_QUERY = "(prefers-reduced-motion: reduce)";
+
+function subscribe(cb: () => void) {
+  const mq = window.matchMedia(REDUCED_QUERY);
+  mq.addEventListener("change", cb);
+  return () => mq.removeEventListener("change", cb);
+}
+
+/**
+ * Reads the reduced-motion preference without a setState-in-effect cascade,
+ * and stays correct if the user changes the setting mid-session. The server
+ * snapshot is `false` so SSR and first client paint agree.
+ */
+function usePrefersReducedMotion() {
+  return useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(REDUCED_QUERY).matches,
+    () => false
+  );
+}
 
 /**
  * Typewriter cycle: types each word, holds, deletes, moves to the next.
- * Renders a blinking cyan caret (.tw-caret). Respects reduced motion by
- * showing the first word statically.
+ * Under reduced motion the first word is shown statically.
+ *
+ * Accessibility: the animated text is decorative presentation of a fixed
+ * list, so the visible span is aria-hidden and the full list is exposed once
+ * to assistive tech via visually-hidden text. (An aria-label on the wrapper
+ * span was invalid — aria-label is prohibited on a span with no role, and
+ * axe flags it.) No live region: the value is not new information arriving,
+ * it is the same four words looping.
  */
 export function TypeWriter({ words, className = "" }: { words: string[]; className?: string }) {
   const [text, setText] = useState("");
   const [wordIdx, setWordIdx] = useState(0);
   const [deleting, setDeleting] = useState(false);
-  const [reduced, setReduced] = useState(false);
-
-  useEffect(() => {
-    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
+  const reduced = usePrefersReducedMotion();
 
   useEffect(() => {
     if (reduced) return;
@@ -46,9 +69,12 @@ export function TypeWriter({ words, className = "" }: { words: string[]; classNa
   const shown = reduced ? words[0] : text;
 
   return (
-    <span className={className} aria-label={words.join(", ")}>
-      <span aria-hidden>{shown}</span>
-      {!reduced && <span className="tw-caret" aria-hidden />}
-    </span>
+    <>
+      <span className="sr-only">{words.join(", ")}</span>
+      <span className={className} aria-hidden>
+        {shown}
+        {!reduced && <span className="tw-caret" />}
+      </span>
+    </>
   );
 }

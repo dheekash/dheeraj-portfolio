@@ -193,7 +193,7 @@ export function Footer() {
           <a
             href="#top"
             aria-label="Back to top"
-            className="flex items-center gap-1.5 text-[14px] text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex items-center gap-1.5 min-h-6 text-[14px] text-muted-foreground transition-colors hover:text-foreground"
           >
             <ArrowUp size={13} /> Back to top
           </a>

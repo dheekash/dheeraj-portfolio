@@ -170,7 +170,10 @@ export function PlatformGuideSection() {
 
         <motion.div {...reveal(0.08)}>
           {/* Snap carousel on mobile → 3-col grid on sm+ */}
-          <div className="overflow-x-auto -mx-[clamp(1.25rem,0.75rem+3vw,4.5rem)] px-[clamp(1.25rem,0.75rem+3vw,4.5rem)] pb-3 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0">
+          {/* Edge-to-edge scroller. The negative margin must match
+              .container-page's padding exactly, or the row pushes past the
+              viewport and the whole document scrolls sideways. */}
+          <div className="overflow-x-auto -mx-[clamp(1.25rem,0.5rem+2vw,3rem)] px-[clamp(1.25rem,0.5rem+2vw,3rem)] pb-3 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0">
             <div className="flex gap-4 snap-x snap-mandatory sm:grid sm:grid-cols-3 sm:snap-none">
               {platformGuide.map((p, i) => (
                 <motion.div

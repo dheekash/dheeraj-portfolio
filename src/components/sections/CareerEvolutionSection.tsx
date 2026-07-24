@@ -75,7 +75,7 @@ export function CareerEvolutionSection() {
             <p className="eyebrow mb-3">Career</p>
             <h2>Experience</h2>
           </div>
-          <div className="flex items-center gap-2 flex-shrink-0 pb-1">
+          <div className="flex flex-wrap items-center gap-2 pb-1">
             <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>6+ years</span>
             <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>3 companies</span>
             <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>15 countries</span>
@@ -245,7 +245,7 @@ export function CareerEvolutionSection() {
                 {"caseStudyLink" in item && item.caseStudyLink && (
                   <a
                     href={item.caseStudyLink}
-                    className="inline-flex items-center gap-1.5 text-[12px] font-mono font-semibold mb-4"
+                    className="inline-flex items-center gap-1.5 min-h-6 text-[12px] font-mono font-semibold mb-4"
                     style={{ color: "var(--primary)" }}
                   >
                     See featured project <ArrowUpRight size={12} />
