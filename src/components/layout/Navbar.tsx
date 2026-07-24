@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useScroll, useMotionValueEvent, useSpring } from "framer-motion";
+import { useScroll, useMotionValueEvent } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { ThemeSwitch } from "@/components/common/ThemeSwitch";
@@ -21,10 +21,9 @@ export function Navbar() {
   const [open, setOpen]           = useState(false);
   const [active, setActive]       = useState("");
 
-  /* Scroll progress drives a motion value, so the bar repaints on the
-     compositor instead of re-rendering the header on every frame. */
-  const { scrollY, scrollYProgress } = useScroll();
-  const progress = useSpring(scrollYProgress, { stiffness: 180, damping: 30, restDelta: 0.001 });
+  /* Only discrete state changes (scrolled / hidden) come off scroll here.
+     Continuous progress lives in ScrollExperience as a single indicator. */
+  const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (y) => {
     const last = scrollY.getPrevious() ?? 0;
@@ -74,13 +73,6 @@ export function Navbar() {
       } ${scrolled || open ? "glass-nav" : "bg-transparent border-transparent"}`}
       style={scrolled || open ? undefined : { borderColor: "transparent" }}
     >
-      {/* Scroll progress bar */}
-      <motion.div
-        aria-hidden
-        className="absolute top-0 left-0 right-0 h-[2px] z-10 origin-left"
-        style={{ scaleX: progress, background: "var(--primary)" }}
-      />
-
       <div className="container-page h-[4rem] flex items-center gap-8">
         <a
           href="#top"

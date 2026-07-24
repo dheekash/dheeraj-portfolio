@@ -6,15 +6,8 @@ import { X, ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import { onSpotlightMove } from "@/components/common/spotlight";
 import { onTiltMove, onTiltLeave } from "@/components/common/tilt";
 import { useTheme } from "@/components/providers/ThemeProvider";
+import { reveal } from "@/lib/motion";
 
-function reveal(delay = 0) {
-  return {
-    initial: { opacity: 0, y: 26 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "0px" },
-    transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
-  };
-}
 
 /* ── SVG diagrams ─────────────────────────────────────────────────────────── */
 

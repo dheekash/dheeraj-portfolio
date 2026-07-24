@@ -9,15 +9,8 @@ import {
 } from "@/components/common/TechLogos";
 import { onSpotlightMove } from "@/components/common/spotlight";
 import { useTheme } from "@/components/providers/ThemeProvider";
+import { reveal, stagger } from "@/lib/motion";
 
-function reveal(delay = 0) {
-  return {
-    initial: { opacity: 0, y: 16 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "0px" },
-    transition: { duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] as const },
-  };
-}
 
 type Tool = {
   name: string;
@@ -182,7 +175,7 @@ export function PlatformGuideSection() {
               {platformGuide.map((p, i) => (
                 <motion.div
                   key={p.platform}
-                  {...reveal(0.36 + i * 0.06)}
+                  {...reveal(stagger(i, 0.36))}
                   onPointerMove={onSpotlightMove}
                   className="spotlight gradient-frame overflow-hidden flex flex-col snap-start flex-shrink-0 w-[min(80vw,320px)] sm:w-auto group"
                   style={{ borderTop: `3px solid ${p.accent}` }}
@@ -284,7 +277,7 @@ export function CoreExpertiseSection() {
           {categories.map((cat, i) => (
             <motion.div
               key={cat.title}
-              {...reveal(0.1 + i * 0.06)}
+              {...reveal(stagger(i, 0.1))}
               onPointerMove={onSpotlightMove}
               className="spotlight gradient-frame p-5 flex flex-col gap-3.5"
             >

@@ -3,15 +3,8 @@
 import { motion } from "framer-motion";
 import { Layers, Gauge, Workflow, LineChart, type LucideIcon } from "lucide-react";
 import { WebGLDotField } from "@/components/common/WebGLDotField";
+import { reveal, stagger } from "@/lib/motion";
 
-function reveal(delay = 0) {
-  return {
-    initial: { opacity: 0, y: 28 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "0px" },
-    transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
-  };
-}
 
 const features: { Icon: LucideIcon; title: string; body: string }[] = [
   {
@@ -37,15 +30,14 @@ const features: { Icon: LucideIcon; title: string; body: string }[] = [
 ];
 
 /**
- * "Portrait Stories" feature-highlight section — editorial Playfair Display
- * heading, Poppins body copy, glass gradient-border-shell cards on an 8px
- * spacing rhythm, over a WebGL dot-matrix field. Colors stay on the site's
- * own tokens; only the typography/spacing/card technique come from the
- * Portrait Stories design system. Reveal uses the same Framer Motion
- * whileInView pattern as every other section on this site — an earlier GSAP
- * ScrollTrigger version left cards permanently invisible when its trigger
- * position went stale (didn't refresh after the WebGL canvas/web fonts
- * settled layout), so it was replaced with the already-proven mechanism.
+ * Feature-highlight section: gradient-border-shell cards on an 8px spacing
+ * rhythm, over a WebGL dot-matrix field. Typography and colour come from the
+ * site's own tokens.
+ *
+ * Reveal uses the shared whileInView pattern like every other section. An
+ * earlier GSAP ScrollTrigger version left cards permanently invisible when
+ * its trigger position went stale (it didn't refresh after the WebGL canvas
+ * and web fonts settled layout), so it was replaced with this mechanism.
  */
 export function PortraitStoriesSection() {
   return (
@@ -86,7 +78,7 @@ export function PortraitStoriesSection() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {features.map(({ Icon, title, body }, i) => (
-            <motion.div key={title} {...reveal(0.15 + i * 0.08)} className="ps-shell rounded-[var(--radius)] p-px">
+            <motion.div key={title} {...reveal(stagger(i, 0.15))} className="ps-shell rounded-[var(--radius)] p-px">
               <div className="ps-card h-full rounded-[calc(var(--radius)-1px)] p-6 flex flex-col gap-4">
                 <span
                   className="inline-flex h-10 w-10 items-center justify-center rounded-[calc(var(--radius)*0.6)] flex-shrink-0"

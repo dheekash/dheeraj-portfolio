@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { reveal, stagger, DURATION, EASE } from "@/lib/motion";
 
 const timeline = [
   {
@@ -64,14 +65,6 @@ const timeline = [
   },
 ];
 
-function reveal(delay = 0) {
-  return {
-    initial: { opacity: 0, y: 22 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "0px" },
-    transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
-  };
-}
 
 export function CareerEvolutionSection() {
   return (
@@ -93,10 +86,14 @@ export function CareerEvolutionSection() {
           {timeline.map((item, i) => (
             <motion.div
               key={`${item.period}-${item.role}`}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -44 : 44 }}
+              /* Directional origin reinforces the alternating layout, so the
+                 x-offset is motivated. Travel is short (44px previously read
+                 as a slide-in effect rather than an arrival) and duration and
+                 easing come from the shared system. */
+              initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "0px" }}
-              transition={{ duration: 0.65, delay: 0.05 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: DURATION.reveal, delay: stagger(i, 0.05), ease: EASE }}
               className={`relative grid sm:grid-cols-[clamp(5rem,12vw,9rem)_1px_1fr] gap-x-6 items-start ${
                 i > 0 ? "pt-[clamp(2rem,3vw,3rem)]" : ""
               }`}
@@ -156,7 +153,7 @@ export function CareerEvolutionSection() {
                         border: "1px solid color-mix(in srgb, var(--primary) 40%, transparent)",
                       }}
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse flex-shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
                       Current role
                     </span>
                   )}

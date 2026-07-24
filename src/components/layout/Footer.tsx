@@ -72,7 +72,7 @@ export function Footer() {
             <div className="flex flex-wrap items-center gap-3">
               <a
                 href={hireHref}
-                className="gradient-btn shine inline-flex items-center gap-2 rounded-full px-6 py-3 text-[14px] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+                className="gradient-btn inline-flex items-center gap-2 rounded-full px-6 py-3 text-[14px] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
               >
                 Hire for full-time <ArrowRight size={15} />
               </a>
@@ -89,10 +89,9 @@ export function Footer() {
             </p>
 
             <div className="mt-5 inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5" style={{ background: "color-mix(in srgb, var(--success) 12%, transparent)", border: "1px solid color-mix(in srgb, var(--success) 30%, transparent)" }}>
-              <span className="relative flex w-2 h-2 flex-shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-70" style={{ background: "var(--success)" }} />
-                <span className="relative inline-flex rounded-full w-2 h-2" style={{ background: "var(--success)" }} />
-              </span>
+              {/* Static dot: the adjacent label already says "Currently
+                  available", so a perpetual ping adds motion, not meaning. */}
+              <span className="inline-flex rounded-full w-2 h-2 flex-shrink-0" style={{ background: "var(--success)" }} />
               <span className="text-[13px] font-medium" style={{ color: "var(--success)" }}>Currently available</span>
             </div>
 

@@ -1,15 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { reveal } from "@/lib/motion";
 
-function reveal(delay = 0) {
-  return {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "0px" },
-    transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
-  };
-}
 
 const specializations = [
   "Microsoft Fabric",

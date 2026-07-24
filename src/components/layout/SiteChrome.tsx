@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { motion, useScroll, useSpring, useMotionValueEvent } from "framer-motion";
+import { MotionConfig, motion, useScroll, useSpring, useMotionValueEvent } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
@@ -58,14 +58,17 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <>
+    /* reducedMotion="user" strips transform animations app-wide when the OS
+       asks for it, keeping opacity so content still reads as arriving.
+       Every motion component inherits this — no per-component branches. */
+    <MotionConfig reducedMotion="user">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[10000] focus:px-4 focus:py-2.5 focus:rounded-lg focus:bg-primary focus:text-primary-foreground focus:text-sm focus:font-semibold"
       >
         Skip to content
       </a>
-      {/* Ambient atmosphere — quiet dot grid, single restrained glow */}
+      {/* Ambient atmosphere — static dot grid, single restrained glow */}
       <div className="cosmos-dots" aria-hidden />
       <div aria-hidden className="fixed inset-0 -z-[1] pointer-events-none overflow-hidden">
         <span className="aurora w-[38vw] h-[38vw] -top-[10%] -right-[6%]" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.14) 0%, transparent 70%)" }} />
@@ -76,6 +79,6 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <main id="main-content">{children}</main>
       <Footer />
       <BackToTop />
-    </>
+    </MotionConfig>
   );
 }

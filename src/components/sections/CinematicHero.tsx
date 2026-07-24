@@ -6,6 +6,7 @@ import { ArrowRight, ArrowDown, Globe, Award, Clock, Database } from "lucide-rea
 import type { LucideIcon } from "lucide-react";
 import { profile } from "@/data/profile";
 import { TypeWriter } from "@/components/common/TypeWriter";
+import { enter, stagger, DURATION, EASE } from "@/lib/motion";
 
 /* One accent across every stat — hue is not the differentiator here, the number is. */
 const stats: { value: string; label: string; Icon: LucideIcon }[] = [
@@ -15,33 +16,35 @@ const stats: { value: string; label: string; Icon: LucideIcon }[] = [
   { value: "5M+", label: "records processed daily", Icon: Database },
 ];
 
-function fadeUp(delay = 0) {
-  return {
-    initial: { opacity: 0, y: 24 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] as const },
-  };
-}
+const fadeUp = enter;
 
-/* Animated counter — parses "40+" into 40 + suffix, counts up on view */
+/* Animated counter — parses "40+" into 40 + suffix, counts up on view.
+   Under reduced motion the final value is rendered immediately: a ticking
+   number is motion, and the number is the content, so it must not be
+   withheld from anyone who opted out. */
 function CountUp({ value, delay = 0 }: { value: string; delay?: number }) {
   const match = value.match(/^(\d+)(.*)$/);
   const target = match ? parseInt(match[1], 10) : 0;
   const suffix = match ? match[2] : "";
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
-  const count = useMotionValue(0);
+  const reduce = useReducedMotion();
+  const count = useMotionValue(reduce ? target : 0);
   const rounded = useTransform(count, (v) => `${Math.round(v)}${suffix}`);
 
   useEffect(() => {
     if (!inView) return;
+    if (reduce) {
+      count.set(target);
+      return;
+    }
     const controls = animate(count, target, {
-      duration: 1.6,
+      duration: DURATION.counter,
       delay,
-      ease: [0.22, 1, 0.36, 1],
+      ease: EASE,
     });
     return () => controls.stop();
-  }, [inView, target, count, delay]);
+  }, [inView, target, count, delay, reduce]);
 
   return (
     <motion.span ref={ref} className="inline-block">
@@ -84,7 +87,7 @@ export function CinematicHero() {
   const panel = (delay: number) => ({
     initial: reduce ? false : { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: DURATION.reveal, delay, ease: EASE },
   });
 
   return (
@@ -200,7 +203,7 @@ export function CinematicHero() {
               value={s.value}
               label={s.label}
               Icon={s.Icon}
-              delay={0.3 + i * 0.06}
+              delay={stagger(i, 0.3)}
               /* Hairlines between cells only, so the group reads as one object */
               className={`border-[var(--border)] ${i % 2 === 0 ? "border-r" : ""} ${i < 2 ? "border-b" : ""} lg:border-b-0 lg:border-r ${i === stats.length - 1 ? "lg:border-r-0" : ""}`}
             />
