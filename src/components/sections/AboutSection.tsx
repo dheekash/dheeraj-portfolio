@@ -93,7 +93,7 @@ export function AboutSection() {
               <defs>
                 <linearGradient id="constel" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0%" stopColor="#60A5FA" />
-                  <stop offset="100%" stopColor="#A78BFA" />
+                  <stop offset="100%" stopColor="#60A5FA" />
                 </linearGradient>
               </defs>
               {industries.map((ind, i) => {

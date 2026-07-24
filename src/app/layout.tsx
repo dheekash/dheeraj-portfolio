@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Space_Grotesk, Playfair_Display, Poppins } from "next/font/google";
+import { Plus_Jakarta_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,8 +7,8 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import "./globals.css";
 
-// General Sans substitute — body text
-const inter = Inter({
+// Body text
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-geist",
   display: "swap",
@@ -30,33 +30,17 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
-// Scoped to the Portrait Stories feature section only — editorial serif display
-const playfairDisplay = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600"],
-  variable: "--font-playfair",
-  display: "swap",
-});
-
-// Scoped to the Portrait Stories feature section only — supporting body/label copy
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "500"],
-  variable: "--font-poppins",
-  display: "swap",
-});
-
 const siteUrl = "https://dheerajkashyap.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default:
-      "Dheeraj Kashyap | Microsoft Certified BI & Analytics Engineer — Fabric, Power BI, Snowflake, Databricks",
+      "Dheeraj Kashyap | Microsoft Certified BI & Analytics Engineer: Fabric, Power BI, Snowflake, Databricks",
     template: "%s | Dheeraj Kashyap",
   },
   description:
-    "Dheeraj Kashyap — Microsoft Certified BI & Analytics Engineer at Amplify Analytix. 13× certified, 7+ years designing enterprise Lakehouse platforms, Power BI semantic models, and analytics pipelines on Microsoft Fabric, Databricks, and Snowflake across 15 countries.",
+    "Dheeraj Kashyap, Microsoft Certified BI & Analytics Engineer at Amplify Analytix. 13x certified, 7+ years designing enterprise Lakehouse platforms, Power BI semantic models, and analytics pipelines on Microsoft Fabric, Databricks, and Snowflake across 15 countries.",
   keywords: [
     "Microsoft Certified BI Engineer",
     "BI & Analytics Engineer",
@@ -96,7 +80,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Dheeraj Kashyap | BI & Analytics Engineer",
     description:
-      "BI & Analytics Engineer at Amplify Analytix — Microsoft Fabric, Databricks, Snowflake, Power BI.",
+      "BI & Analytics Engineer at Amplify Analytix. Microsoft Fabric, Databricks, Snowflake, Power BI.",
   },
   robots: {
     index: true,
@@ -119,7 +103,7 @@ const jsonLd = {
   jobTitle: "BI & Analytics Engineer",
   worksFor: { "@type": "Organization", name: "Amplify Analytix" },
   description:
-    "Business Intelligence & Analytics Engineer at Amplify Analytix — designing Lakehouse platforms, CI/CD data environments, and executive reporting with Microsoft Fabric, Databricks, Snowflake, and Power BI.",
+    "Business Intelligence & Analytics Engineer at Amplify Analytix, designing Lakehouse platforms, CI/CD data environments, and executive reporting with Microsoft Fabric, Databricks, Snowflake, and Power BI.",
   url: siteUrl,
   email: "kash.dheeraj.yap@gmail.com",
   address: {
@@ -161,12 +145,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Apply persisted theme before paint — light is the default unless
-            the user chose dark, or nothing is stored and the OS prefers dark */}
+        {/* Apply persisted theme before paint. Light is the default: dark
+            shows only when the user has explicitly chosen it. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var t=localStorage.getItem('theme');var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var wantDark=t==='dark'||(!t&&prefersDark);if(!wantDark){document.documentElement.classList.add('light')}}catch(e){document.documentElement.classList.add('light')}})()",
+              "(function(){try{if(localStorage.getItem('theme')!=='dark'){document.documentElement.classList.add('light')}}catch(e){document.documentElement.classList.add('light')}})()",
           }}
         />
         <script
@@ -174,7 +158,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} ${playfairDisplay.variable} ${poppins.variable} font-sans antialiased`}>
+      <body className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
         <ThemeProvider>
           <TooltipProvider>
             <SiteChrome>{children}</SiteChrome>

@@ -34,7 +34,7 @@ export function Footer() {
         <defs>
           <linearGradient id="footwave" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#A78BFA" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#60A5FA" stopOpacity="0.25" />
           </linearGradient>
         </defs>
       </svg>

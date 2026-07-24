@@ -89,7 +89,7 @@ export const projects: Project[] = [
     challenges: [
       "Migrating 5+ years of historical data with full lineage preservation and zero data loss",
       "Re-engineering 200+ legacy SQL transformations into SQLMesh models with automated testing",
-      "Maintaining business continuity — parallel-running legacy and new systems during validation",
+      "Maintaining business continuity by parallel-running legacy and new systems during validation",
       "Stakeholder change management and retraining on Fabric tooling",
     ],
     results: [

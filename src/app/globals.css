@@ -39,11 +39,14 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
+  /* Radius scale — capped so the top of the ramp stays engineered (16px),
+     not consumer-soft. Every rounded-* utility resolves through here. */
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-xl: calc(var(--radius) * 1.17);
+  --radius-2xl: calc(var(--radius) * 1.33);
+  --radius-3xl: calc(var(--radius) * 1.33);
 }
 
 :root {
@@ -68,11 +71,11 @@
   --input: rgba(255, 255, 255, 0.10);
   --ring: #60A5FA;
   --chart-1: #60A5FA;
-  --chart-2: #A78BFA;
+  --chart-2: #3B82F6;
   --chart-3: #22D3EE;
   --chart-4: #FB923C;
   --chart-5: #CBD5E1;
-  --radius: 1.25rem;                /* Premium soft corners, 18–24px family */
+  --radius: 0.75rem;               /* Engineered corners, 12px family (Linear/Stripe/Vercel register) */
   --sidebar: #111827;
   --sidebar-foreground: #F8FAFC;
   --sidebar-primary: #60A5FA;
@@ -86,19 +89,19 @@
   --grid: #F8FAFC;
   --hairline: rgba(255, 255, 255, 0.08);
   --cyan: #60A5FA;                  /* accent blue role */
-  --purple: #A78BFA;
+  --purple: #3B82F6;
   --pink: #22D3EE;                  /* cyan accent role */
   --amber: #FB923C;                 /* orange accent role */
   /* Legacy role tokens, repointed so every component follows the system */
   --forest: #60A5FA;               /* brand role → accent blue */
-  --mint: #A78BFA;                 /* highlight role → purple */
+  --mint: #3B82F6;                 /* highlight role → purple */
   --coral: #22D3EE;
   --gold: #FB923C;
 
   --fog: rgba(255, 255, 255, 0.02); /* alternating band, a whisper of glass */
   --ash: #94A3B8;                  /* muted metadata text */
   --smoke: #64748B;                /* placeholder */
-  --peach: #A78BFA;
+  --peach: #3B82F6;
   --sienna: #60A5FA;
   --success: #34D399;
 
@@ -106,14 +109,14 @@
   --dgrm: #60A5FA;
   --net-node: rgba(96, 165, 250, 0.4);
   --net-edge: 96, 165, 250;
-  --net-pulse: rgba(167, 139, 250, 0.8);
+  --net-pulse: rgba(59, 130, 246, 0.8);
   --grain-opacity: 0.028;          /* permanent ultra-subtle noise */
   --nebula-1: rgba(96, 165, 250, 0.14);
-  --nebula-2: rgba(167, 139, 250, 0.10);
+  --nebula-2: rgba(59, 130, 246, 0.10);
   --highlight: #60A5FA;
 
-  /* Premium elevation — soft glow shadow keyed to the accent, not pure black */
-  --shadow-artifact: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 40px rgba(96, 165, 250, 0.08), 0 24px 48px -16px rgba(0, 0, 0, 0.55);
+  /* Elevation — neutral, layered, no accent glow */
+  --shadow-artifact: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 1px 2px rgba(0, 0, 0, 0.30), 0 8px 24px -12px rgba(0, 0, 0, 0.50);
   --body-text: #CBD5E1;
   --card-hover: rgba(96, 165, 250, 0.08);  /* Card hover surface */
 }
@@ -291,7 +294,7 @@ body {
   .panel {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 1.25rem;
+    border-radius: var(--radius);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: var(--shadow-artifact);
@@ -303,24 +306,21 @@ body {
     position: relative;
     background: var(--card);
     border: 1px solid transparent;
-    border-radius: 1.25rem;
+    border-radius: var(--radius);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     background-clip: padding-box;
     box-shadow: var(--shadow-artifact);
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease-out;
   }
-  .artifact:hover { transform: translateY(-4px) scale(1.01); }
+  .artifact:hover { transform: translateY(-2px); }
   .artifact::before {
     content: "";
     position: absolute;
     inset: -1px;
     z-index: -1;
     border-radius: inherit;
-    background: conic-gradient(from var(--spin-angle, 0deg),
-      rgba(96, 165, 250, 0.5), rgba(167, 139, 250, 0.4) 30%,
-      rgba(255, 255, 255, 0.06) 55%, rgba(96, 165, 250, 0.5) 100%);
-    animation: border-spin 6s linear infinite;
+    background: linear-gradient(160deg, rgba(96, 165, 250, 0.35), rgba(255, 255, 255, 0.04) 60%);
   }
 
   .panel-lift {
@@ -328,11 +328,11 @@ body {
   }
   .panel-lift:hover {
     border-color: rgba(96, 165, 250, 0.4);
-    box-shadow: 0 0 32px -8px rgba(96, 165, 250, 0.25);
-    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.18), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
+    transform: translateY(-2px);
   }
 
-  .glow-accent { box-shadow: 0 0 32px -8px rgba(96, 165, 250, 0.3); }
+  .glow-accent { box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.18), 0 12px 32px -14px rgba(0, 0, 0, 0.6); }
 
   .glass-nav {
     background: rgba(17, 24, 39, 0.6);
@@ -395,7 +395,7 @@ body {
   /* ── Emphasis — cyan→purple gradient text ── */
   .text-gradient {
     font-style: normal;
-    background-image: linear-gradient(95deg, #60A5FA 0%, #A78BFA 100%);
+    background-image: linear-gradient(95deg, #60A5FA 0%, #3B82F6 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -403,7 +403,7 @@ body {
 
   .text-shimmer {
     font-style: normal;
-    background-image: linear-gradient(95deg, #60A5FA 0%, #A78BFA 100%);
+    background-image: linear-gradient(95deg, #60A5FA 0%, #3B82F6 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -464,7 +464,7 @@ body {
 
   /* ── Timeline spine — glowing cyan gradient line ── */
   .timeline-spine {
-    background: linear-gradient(to bottom, rgba(96, 165, 250, 0.9), rgba(167, 139, 250, 0.55) 60%, rgba(255, 255, 255, 0.08));
+    background: linear-gradient(to bottom, rgba(96, 165, 250, 0.9), rgba(59, 130, 246, 0.55) 60%, rgba(255, 255, 255, 0.08));
     box-shadow: 0 0 12px rgba(96, 165, 250, 0.35);
   }
 
@@ -520,7 +520,7 @@ body {
    Kept top-level so Tailwind v4's utility scanner does not purge it. */
 .gradient-frame {
   border: 1px solid var(--border);
-  border-radius: 1.25rem;
+  border-radius: var(--radius);
   background: var(--card);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -530,8 +530,8 @@ body {
 .gradient-frame:hover {
   border-color: rgba(96, 165, 250, 0.35);
   background: var(--card-hover, var(--card));
-  box-shadow: 0 0 36px -10px rgba(96, 165, 250, 0.3);
-  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.18), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
 }
 
 /* Azure→Cobalt gradient action button (light) */
@@ -558,8 +558,8 @@ body {
 }
 .dark .gradient-btn:hover,
 :root:not(.light) .gradient-btn:hover {
-  background: linear-gradient(95deg, #60A5FA 0%, #A78BFA 100%);
-  box-shadow: 0 8px 28px -6px rgba(167, 139, 250, 0.5);
+  background: linear-gradient(95deg, #60A5FA 0%, #3B82F6 100%);
+  box-shadow: 0 8px 28px -6px rgba(59, 130, 246, 0.5);
 }
 
 /* ── Cosmic atmosphere — fixed background layers ── */
@@ -570,7 +570,7 @@ body {
   pointer-events: none;
   background:
     radial-gradient(ellipse 70% 55% at 18% 12%, rgba(96, 165, 250, 0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 85% 30%, rgba(167, 139, 250, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 30%, rgba(59, 130, 246, 0.12) 0%, transparent 60%),
     radial-gradient(ellipse 55% 60% at 50% 95%, rgba(236, 72, 153, 0.07) 0%, transparent 65%);
   animation: mesh-drift 26s ease-in-out infinite alternate;
 }
@@ -681,7 +681,7 @@ body {
   border-radius: 9999px;
   background: #0B0E14;
 }
-.toggle-pill.on { background: linear-gradient(95deg, #60A5FA, #A78BFA); }
+.toggle-pill.on { background: linear-gradient(95deg, #60A5FA, #3B82F6); }
 .toggle-pill.on::after { right: 2px; }
 .toggle-pill.off { background: rgba(255, 255, 255, 0.14); }
 .toggle-pill.off::after { left: 2px; }
@@ -718,9 +718,7 @@ body {
 }
 .light .artifact:hover { box-shadow: 0 16px 36px rgba(0, 102, 204, 0.14); }
 .light .artifact::before {
-  background: conic-gradient(from var(--spin-angle, 0deg),
-    rgba(0, 102, 204, 0.45), rgba(0, 71, 171, 0.35) 30%,
-    rgba(15, 23, 42, 0.06) 55%, rgba(0, 102, 204, 0.45) 100%);
+  background: linear-gradient(160deg, rgba(0, 102, 204, 0.30), rgba(15, 23, 42, 0.04) 60%);
 }
 .light .glass-nav {
   background: rgba(255, 255, 255, 0.75);
@@ -851,7 +849,7 @@ body {
               border-color 0.25s ease-out, transform 0.2s ease-out;
 }
 .morph-chip:hover {
-  background: linear-gradient(95deg, #60A5FA 0%, #A78BFA 100%) !important;
+  background: linear-gradient(95deg, #60A5FA 0%, #3B82F6 100%) !important;
   border-color: transparent !important;
   color: #0B0E14 !important;
   transform: translateY(-1px);
@@ -870,7 +868,7 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #60A5FA, #A78BFA);
+  background: linear-gradient(135deg, #60A5FA, #3B82F6);
   pointer-events: none;
 }
 .cursor-ring {
@@ -890,7 +888,7 @@ body {
   height: 24px;
   top: -12px;
   left: -12px;
-  border-color: rgba(167, 139, 250, 0.8);
+  border-color: rgba(59, 130, 246, 0.8);
 }
 
 /* ── Rotating word list (Uiverse loader, recoloured to the editorial theme) ── */
@@ -1041,7 +1039,7 @@ body {
   height: 45px;
   width: 45px;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #60A5FA, #A78BFA);
+  background: linear-gradient(135deg, #60A5FA, #3B82F6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1123,15 +1121,15 @@ body {
   padding: 1.5rem;
   background-color: var(--card);
   border: 1px solid var(--border);
-  border-radius: 1.25rem;
+  border-radius: var(--radius);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--shadow-artifact);
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease-out, background-color 0.3s ease-out;
 }
 .uicard:hover {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 0 36px -10px rgba(96, 165, 250, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.18), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
 }
 .uicard::before, .uicard::after { content: none; }
 .uicard-border { display: none; }
@@ -1143,7 +1141,7 @@ body {
   width: 1.1rem;
   height: 1.1rem;
   flex-shrink: 0;
-  background: linear-gradient(135deg, #60A5FA, #A78BFA);
+  background: linear-gradient(135deg, #60A5FA, #3B82F6);
   border-radius: 9999px;
 }
 .uicard-check-svg { width: 0.75rem; height: 0.75rem; fill: #0B0E14; }

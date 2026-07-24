@@ -17,7 +17,7 @@ const features: { Icon: LucideIcon; title: string; body: string }[] = [
   {
     Icon: Layers,
     title: "Lakehouse Architecture",
-    body: "Medallion-layered Lakehouses on Microsoft Fabric and Databricks — one governed source of truth instead of a dozen disconnected reports.",
+    body: "Medallion-layered Lakehouses on Microsoft Fabric and Databricks: one governed source of truth instead of a dozen disconnected reports.",
   },
   {
     Icon: Gauge,
@@ -32,7 +32,7 @@ const features: { Icon: LucideIcon; title: string; body: string }[] = [
   {
     Icon: LineChart,
     title: "Executive-Ready Insights",
-    body: "Reporting systems built for the people making the call — finance, operations, and leadership teams who need answers, not raw tables.",
+    body: "Reporting systems built for the people making the call: finance, operations, and leadership teams who need answers, not raw tables.",
   },
 ];
 
@@ -58,8 +58,7 @@ export function PortraitStoriesSection() {
         <div className="max-w-[46rem] mb-[clamp(2rem,3vw,3rem)]">
           <motion.p
             {...reveal()}
-            className="mb-3 text-[14px] font-medium uppercase tracking-[0.1em]"
-            style={{ fontFamily: "var(--font-poppins), sans-serif", color: "var(--primary)" }}
+            className="eyebrow mb-3"
           >
             How I work
           </motion.p>
@@ -67,11 +66,11 @@ export function PortraitStoriesSection() {
             {...reveal(0.05)}
             className="mb-4"
             style={{
-              fontFamily: "var(--font-playfair), serif",
-              fontWeight: 600,
-              fontSize: "clamp(2.1rem, 1.2rem + 3.4vw, 4.5rem)",
-              lineHeight: 1,
-              letterSpacing: "-0.025em",
+              fontFamily: "var(--font-display)",
+              fontWeight: 700,
+              fontSize: "clamp(2rem, 1.2rem + 2.8vw, 3.4rem)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.03em",
               color: "var(--foreground)",
             }}
           >
@@ -79,32 +78,26 @@ export function PortraitStoriesSection() {
           </motion.h2>
           <motion.p
             {...reveal(0.1)}
-            className="text-[15px] leading-relaxed text-muted-foreground max-w-[42ch]"
-            style={{ fontFamily: "var(--font-poppins), sans-serif", fontWeight: 300 }}
+            className="text-[15px] leading-relaxed text-muted-foreground max-w-[52ch]"
           >
-            From messy source systems to boardroom-ready dashboards — four disciplines I lean on for every engagement.
+            From messy source systems to boardroom-ready dashboards, four disciplines I lean on for every engagement.
           </motion.p>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {features.map(({ Icon, title, body }, i) => (
-            <motion.div key={title} {...reveal(0.15 + i * 0.08)} className="ps-shell rounded-[2rem] p-[1px]">
-              <div className="ps-card h-full rounded-[calc(2rem-1px)] p-6 flex flex-col gap-4">
+            <motion.div key={title} {...reveal(0.15 + i * 0.08)} className="ps-shell rounded-[var(--radius)] p-px">
+              <div className="ps-card h-full rounded-[calc(var(--radius)-1px)] p-6 flex flex-col gap-4">
                 <span
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-xl flex-shrink-0"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-[calc(var(--radius)*0.6)] flex-shrink-0"
                   style={{ background: "color-mix(in srgb, var(--primary) 14%, transparent)", color: "var(--primary)" }}
                 >
                   <Icon size={18} strokeWidth={1.75} />
                 </span>
-                <p
-                  style={{ fontFamily: "var(--font-poppins), sans-serif", fontWeight: 500, fontSize: "14px", lineHeight: "20px", color: "var(--foreground)" }}
-                >
+                <p className="text-[14px] font-semibold leading-5" style={{ color: "var(--foreground)" }}>
                   {title}
                 </p>
-                <p
-                  className="text-muted-foreground"
-                  style={{ fontFamily: "var(--font-poppins), sans-serif", fontWeight: 300, fontSize: "14px", lineHeight: "24px" }}
-                >
+                <p className="text-[14px] leading-6 text-muted-foreground">
                   {body}
                 </p>
               </div>

@@ -1,60 +1,47 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { motion, useScroll, useSpring, useMotionValueEvent } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { ScrollExperience } from "@/components/common/ScrollExperience";
-import { CustomCursor } from "@/components/common/CustomCursor";
 
 /* Scroll progress ring — fills with the brand gradient as the page scrolls,
    doubles as a back-to-top control once enough of the page has been read. */
 const RING_R = 17;
-const RING_C = 2 * Math.PI * RING_R;
 
 function BackToTop() {
   const [visible, setVisible] = useState(false);
-  const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
-      setVisible(window.scrollY > 700);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  /* Progress rides a motion value straight onto the SVG, so scrolling never
+     re-renders this subtree. */
+  const { scrollY, scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 180, damping: 30, restDelta: 0.001 });
+
+  useMotionValueEvent(scrollY, "change", (y) => setVisible(y > 700));
 
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
-      className={`fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full panel flex items-center justify-center text-muted-foreground hover:text-foreground transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
+      className={`fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full panel flex items-center justify-center text-muted-foreground hover:text-foreground transition-[opacity,transform,color] duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
         visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-3 pointer-events-none"
       }`}
     >
       <svg viewBox="0 0 40 40" className="absolute inset-0 w-full h-full -rotate-90" aria-hidden>
-        <defs>
-          <linearGradient id="scroll-ring-gradient" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" style={{ stopColor: "var(--cyan)" }} />
-            <stop offset="100%" style={{ stopColor: "var(--purple)" }} />
-          </linearGradient>
-        </defs>
         <circle cx="20" cy="20" r={RING_R} fill="none" stroke="var(--hairline)" strokeWidth="2" />
-        <circle
+        <motion.circle
           cx="20"
           cy="20"
           r={RING_R}
           fill="none"
-          stroke="url(#scroll-ring-gradient)"
+          stroke="var(--primary)"
           strokeWidth="2"
           strokeLinecap="round"
-          strokeDasharray={RING_C}
-          strokeDashoffset={RING_C * (1 - progress)}
-          style={{ transition: "stroke-dashoffset 0.15s linear" }}
+          pathLength={1}
+          style={{ pathLength: progress }}
         />
       </svg>
       <ArrowUp size={15} className="relative" />
@@ -78,16 +65,12 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       >
         Skip to content
       </a>
-      {/* Cosmic atmosphere — animated mesh, drifting dot grid, floating orbs */}
-      <div className="cosmos-mesh" aria-hidden />
+      {/* Ambient atmosphere — quiet dot grid, single restrained glow */}
       <div className="cosmos-dots" aria-hidden />
       <div aria-hidden className="fixed inset-0 -z-[1] pointer-events-none overflow-hidden">
-        <span className="aurora w-[42vw] h-[42vw] -top-[12%] -left-[8%]" style={{ background: "radial-gradient(circle, rgba(96, 165, 250,0.22) 0%, transparent 70%)" }} />
-        <span className="aurora w-[36vw] h-[36vw] top-[30%] -right-[10%]" style={{ background: "radial-gradient(circle, rgba(167, 139, 250,0.22) 0%, transparent 70%)", animationDelay: "-8s", animationDuration: "28s" }} />
-        <span className="aurora w-[30vw] h-[30vw] bottom-[-10%] left-[28%]" style={{ background: "radial-gradient(circle, rgba(236,72,153,0.16) 0%, transparent 70%)", animationDelay: "-15s", animationDuration: "34s" }} />
+        <span className="aurora w-[38vw] h-[38vw] -top-[10%] -right-[6%]" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.14) 0%, transparent 70%)" }} />
       </div>
       <div className="grain" aria-hidden />
-      <CustomCursor />
       <ScrollExperience />
       <Navbar />
       <main id="main-content">{children}</main>
