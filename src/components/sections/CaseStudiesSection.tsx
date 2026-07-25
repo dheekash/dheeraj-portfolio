@@ -6,7 +6,7 @@ import { X, ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import { onSpotlightMove } from "@/components/common/spotlight";
 import { onTiltMove, onTiltLeave } from "@/components/common/tilt";
 import { useTheme } from "@/components/providers/ThemeProvider";
-import { reveal } from "@/lib/motion";
+import { reveal, staggerParent, staggerGroup, staggerItem } from "@/lib/motion";
 
 
 /* ── SVG diagrams ─────────────────────────────────────────────────────────── */
@@ -555,14 +555,17 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
   const chipColors = theme === "light" ? CHIP_COLORS_LIGHT : CHIP_COLORS_DARK;
   return (
     <motion.article
-      {...reveal()}
+      /* Sequenced rather than arriving as one block: the card reads
+         outcome -> name -> method -> stack -> go deeper, so the order of
+         arrival matches the order it should be read in. */
+      {...staggerParent}
       onPointerMove={(e) => { onSpotlightMove(e); onTiltMove(e); }}
       onPointerLeave={onTiltLeave}
       className="spotlight gradient-frame overflow-hidden group grid lg:grid-cols-[0.9fr_1.1fr]"
       style={{ willChange: "transform" }}
     >
       {/* Left — animated data-flow visual (the project's own diagram) */}
-      <div className="relative p-[clamp(1.25rem,2vw,2rem)] flex items-center border-b lg:border-b-0 lg:border-r" style={{ borderColor: "var(--border)", background: "color-mix(in srgb, var(--foreground) 3%, transparent)" }}>
+      <motion.div {...staggerItem} className="relative p-[clamp(1.25rem,2vw,2rem)] flex items-center border-b lg:border-b-0 lg:border-r" style={{ borderColor: "var(--border)", background: "color-mix(in srgb, var(--foreground) 3%, transparent)" }}>
         {/* Role pill — top-left, neon border */}
         <span
           className="absolute top-4 left-4 z-10 text-[10px] font-mono uppercase tracking-[0.1em] px-2.5 py-1 rounded-full"
@@ -578,17 +581,17 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
         <div className="w-full pt-8 text-foreground opacity-90 transition-opacity duration-300 group-hover:opacity-100">
           <study.Diagram />
         </div>
-      </div>
+      </motion.div>
 
       {/* Right — case narrative */}
-      <div className="p-[clamp(1.35rem,2vw,2rem)] flex flex-col">
-        <div className="flex items-center gap-3 mb-4">
+      <motion.div {...staggerGroup()} className="p-[clamp(1.35rem,2vw,2rem)] flex flex-col">
+        <motion.div {...staggerItem} className="flex items-center gap-3 mb-4">
           <span className="font-mono text-[10px]" style={{ color: "var(--cyan)" }}>CASE {study.num}</span>
           <span className="eyebrow">{study.domain}</span>
-        </div>
+        </motion.div>
 
         {/* Impact metric — the card hero */}
-        <div className="mb-4">
+        <motion.div {...staggerItem} className="mb-4">
           <span
             className="block tabular-nums leading-none text-gradient"
             style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(2.6rem, 1.6rem + 2.6vw, 4rem)" }}
@@ -596,18 +599,18 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
             {study.keyMetric.value}
           </span>
           <span className="mt-2.5 block font-mono text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{study.keyMetric.label}</span>
-        </div>
+        </motion.div>
 
         {/* Project name */}
-        <h3 className="text-[clamp(1.05rem,0.95rem+0.4vw,1.3rem)] font-semibold leading-snug mb-2">
+        <motion.h3 {...staggerItem} className="text-[clamp(1.05rem,0.95rem+0.4vw,1.3rem)] font-semibold leading-snug mb-2">
           {study.title}
-        </h3>
+        </motion.h3>
 
         {/* One-line description */}
-        <p className="text-[14px] text-muted-foreground leading-relaxed mb-4 flex-1">{study.how}</p>
+        <motion.p {...staggerItem} className="text-[14px] text-muted-foreground leading-relaxed mb-4 flex-1">{study.how}</motion.p>
 
         {/* Tech stack — brand-tinted chip pills */}
-        <div className="flex flex-wrap gap-1.5 mb-5">
+        <motion.div {...staggerItem} className="flex flex-wrap gap-1.5 mb-5">
           {study.stack.slice(0, 5).map((t) => {
             const c = chipColors[t] ?? (theme === "light" ? "#475569" : "#B0B8C5");
             return (
@@ -620,17 +623,18 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
               </span>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* CTA — glowing arrow button */}
-        <button
+        <motion.button
+          {...staggerItem}
           onClick={onOpen}
           className="gradient-btn group/btn self-start inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
         >
           View case study
           <ArrowUpRight size={14} className="transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-        </button>
-      </div>
+        </motion.button>
+      </motion.div>
     </motion.article>
   );
 }

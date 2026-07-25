@@ -72,6 +72,12 @@ export function Footer() {
             >
               Let&apos;s build analytics systems{" "}
               <span className="text-gradient">that scale.</span>
+              {/* Terminal cursor — the page's one closing gesture. Sits on
+                  the final line so the footer reads as a prompt waiting for
+                  input rather than a dead end. Decorative, so aria-hidden;
+                  it reuses the typewriter caret rather than introducing a
+                  second blink rhythm. */}
+              <span className="tw-caret ml-1 align-baseline" aria-hidden />
             </h2>
 
             {/* CTA split — full-time (shimmering) / consulting (dashed) */}
@@ -113,7 +119,7 @@ export function Footer() {
           {/* ── Links ── the three short groups share one column instead of
               three near-empty ones, which also gives the social pill (264px)
               room it did not have in a 164px column. */}
-          <div className="md:col-span-2 lg:col-span-4 grid grid-cols-2 gap-x-8 gap-y-6 content-start">
+          <div className="md:col-span-2 lg:col-span-4 grid grid-cols-[0.8fr_1.2fr] gap-x-6 gap-y-6 content-start">
 
           {/* ── Explore ── */}
           <div>
@@ -139,7 +145,7 @@ export function Footer() {
               <p>IST (UTC+5:30)</p>
               <a
                 href={`mailto:${profile.email}`}
-                className="block break-all transition-colors hover:text-foreground"
+                className="block break-words transition-colors hover:text-foreground"
               >
                 {profile.email}
               </a>

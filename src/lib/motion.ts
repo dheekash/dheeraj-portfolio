@@ -67,3 +67,32 @@ export function enter(delay = 0) {
 
 /** Stagger delay for the nth item in a group. */
 export const stagger = (i: number, base = 0) => base + i * STAGGER;
+
+/**
+ * Sequenced group reveal.
+ *
+ * Use when the order of arrival carries meaning — a case study reading
+ * outcome, then name, then method, then stack — rather than as decoration.
+ * A block that has no narrative order should use reveal() and arrive at once.
+ *
+ * Spread `staggerParent` on the container and `staggerItem` on each child.
+ * Nest `staggerGroup()` on a child that is itself a container to continue
+ * the sequence one level down.
+ */
+export const staggerParent = {
+  initial: "hidden",
+  whileInView: "show",
+  viewport: { once: true, amount: 0.2 },
+  variants: { hidden: {}, show: { transition: { staggerChildren: STAGGER } } },
+} as const;
+
+export const staggerGroup = (delay = STAGGER) => ({
+  variants: { hidden: {}, show: { transition: { staggerChildren: delay } } },
+});
+
+export const staggerItem = {
+  variants: {
+    hidden: { opacity: 0, y: REVEAL_Y },
+    show: { opacity: 1, y: 0, transition: { duration: DURATION.reveal, ease: EASE } },
+  },
+} as const;
