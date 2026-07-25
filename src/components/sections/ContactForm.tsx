@@ -115,7 +115,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="uicard gap-4">
+    <form onSubmit={onSubmit} noValidate className="uicard gap-3">
       <Field id="contact-name" label="Your name" value={name} onChange={setName} error={errors.name} />
       <Field id="contact-email" label="Email address" type="email" value={email} onChange={setEmail} error={errors.email} />
       <Field id="contact-message" label="Message" value={message} onChange={setMessage} error={errors.message} textarea />

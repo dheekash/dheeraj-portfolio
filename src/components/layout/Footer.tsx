@@ -53,7 +53,10 @@ export function Footer() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "0px" }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="container-page section-pad relative"
+        /* Tighter than the global section-pad (which ran 105px top and
+           bottom here). The footer is the page's last frame, so it should
+           land in one viewport rather than inherit the mid-page rhythm. */
+        className="container-page relative py-[clamp(2.5rem,1.75rem+2vw,3.5rem)]"
       >
         {/* 12-col at lg so the CTA headline gets real width. As four equal
             columns it sat in a quarter of the container, and a 48px headline
@@ -61,11 +64,11 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12">
 
           {/* ── Connect / contact CTA ── */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-4">
             <p className="eyebrow mb-4">Get in touch</p>
             <h2
               className="mb-6"
-              style={{ fontSize: "clamp(2.1rem, 1.4rem + 1.9vw, 3rem)", lineHeight: 1.1 }}
+              style={{ fontSize: "clamp(1.9rem, 1.3rem + 1.6vw, 2.5rem)", lineHeight: 1.1 }}
             >
               Let&apos;s build analytics systems{" "}
               <span className="text-gradient">that scale.</span>
@@ -98,13 +101,22 @@ export function Footer() {
               <span className="text-[13px] font-medium" style={{ color: "var(--success)" }}>Currently available</span>
             </div>
 
-            <div className="mt-8 max-w-[26rem]">
-              <ContactForm />
-            </div>
           </div>
 
+          {/* ── Form ── sits beside the pitch, not stacked under it. Stacked,
+              this one column ran 771px while the link columns held ~150px
+              each, so the section could not fit a viewport. */}
+          <div className="lg:col-span-4">
+            <ContactForm />
+          </div>
+
+          {/* ── Links ── the three short groups share one column instead of
+              three near-empty ones, which also gives the social pill (264px)
+              room it did not have in a 164px column. */}
+          <div className="md:col-span-2 lg:col-span-4 grid grid-cols-2 gap-x-8 gap-y-6 content-start">
+
           {/* ── Explore ── */}
-          <div className="lg:col-span-2">
+          <div>
             <p className="eyebrow mb-4">Explore</p>
             <nav className="space-y-2.5 text-[15px]">
               {quickLinks.map((l) => (
@@ -120,7 +132,7 @@ export function Footer() {
           </div>
 
           {/* ── Contact ── */}
-          <div className="lg:col-span-3">
+          <div>
             <p className="eyebrow mb-4">Contact</p>
             <address className="space-y-2.5 text-[15px] not-italic text-muted-foreground">
               <p>Bengaluru, India</p>
@@ -136,7 +148,7 @@ export function Footer() {
           </div>
 
           {/* ── Follow ── */}
-          <div className="lg:col-span-2">
+          <div className="col-span-2">
             <p className="eyebrow mb-4">Follow</p>
             <div className="social-pill mb-6">
               <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-orb li">
@@ -183,10 +195,11 @@ export function Footer() {
               Download resume <ArrowUpRight size={14} />
             </a>
           </div>
+          </div>
         </div>
 
         {/* ── Bottom bar ── */}
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-center md:flex-row md:text-left">
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border pt-5 text-center md:flex-row md:text-left">
           <p className="text-[14px] text-muted-foreground">
             © {new Date().getFullYear()} Dheeraj Kashyap · Bengaluru, India
           </p>
