@@ -120,7 +120,7 @@ export function LiveMetricsSection() {
             >
               <p
                 className="font-mono tabular-nums font-bold leading-none tracking-tight"
-                style={{ fontSize: "clamp(1.6rem,1rem+1.8vw,2.4rem)", color: m.accent }}
+                style={{ fontSize: "clamp(1.6rem, 1rem + 1.8vw, 2.4rem)", color: m.accent }}
               >
                 <AnimatedCount
                   end={m.value}

@@ -31,10 +31,14 @@ export function AboutSection() {
         style={{ maskImage: "radial-gradient(ellipse 60% 70% at 75% 40%, black 0%, transparent 70%)", WebkitMaskImage: "radial-gradient(ellipse 60% 70% at 75% 40%, black 0%, transparent 70%)" }}
       />
       <div className="container-page section-pad relative">
-        <div className="grid md:grid-cols-2 gap-x-16 gap-y-10 items-start">
+        {/* items-stretch, not items-start: the bio column is shorter than the
+            constellation + card column, and pinning both to the top left a
+            dead block of whitespace under the bio. Stretching lets the
+            locale line anchor to the bottom so the gap is distributed. */}
+        <div className="grid md:grid-cols-2 gap-x-16 gap-y-10 items-stretch">
 
           {/* Left — bio */}
-          <div>
+          <div className="flex flex-col">
             <motion.p {...reveal()} className="eyebrow mb-3">
               Narrative
             </motion.p>
@@ -73,7 +77,7 @@ export function AboutSection() {
 
             <motion.p
               {...reveal(0.1)}
-              className="font-mono text-[11px] tracking-[0.08em] text-muted-foreground/80"
+              className="mt-auto pt-6 font-mono text-[11px] tracking-[0.08em] text-muted-foreground/80"
             >
               Bengaluru, India · IST (UTC+5:30)
             </motion.p>

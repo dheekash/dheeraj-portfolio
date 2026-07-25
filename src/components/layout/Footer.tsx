@@ -55,14 +55,17 @@ export function Footer() {
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className="container-page section-pad relative"
       >
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        {/* 12-col at lg so the CTA headline gets real width. As four equal
+            columns it sat in a quarter of the container, and a 48px headline
+            in a ~350px column broke one word per line. */}
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12">
 
           {/* ── Connect / contact CTA ── */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-5">
             <p className="eyebrow mb-4">Get in touch</p>
             <h2
               className="mb-6"
-              style={{ fontSize: "clamp(2.1rem,1.4rem+1.9vw,3rem)", lineHeight: 1.1 }}
+              style={{ fontSize: "clamp(2.1rem, 1.4rem + 1.9vw, 3rem)", lineHeight: 1.1 }}
             >
               Let&apos;s build analytics systems{" "}
               <span className="text-gradient">that scale.</span>
@@ -101,7 +104,7 @@ export function Footer() {
           </div>
 
           {/* ── Explore ── */}
-          <div>
+          <div className="lg:col-span-2">
             <p className="eyebrow mb-4">Explore</p>
             <nav className="space-y-2.5 text-[15px]">
               {quickLinks.map((l) => (
@@ -117,7 +120,7 @@ export function Footer() {
           </div>
 
           {/* ── Contact ── */}
-          <div>
+          <div className="lg:col-span-3">
             <p className="eyebrow mb-4">Contact</p>
             <address className="space-y-2.5 text-[15px] not-italic text-muted-foreground">
               <p>Bengaluru, India</p>
@@ -133,7 +136,7 @@ export function Footer() {
           </div>
 
           {/* ── Follow ── */}
-          <div>
+          <div className="lg:col-span-2">
             <p className="eyebrow mb-4">Follow</p>
             <div className="social-pill mb-6">
               <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-orb li">
