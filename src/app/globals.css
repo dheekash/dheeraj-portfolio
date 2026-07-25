@@ -104,6 +104,13 @@
   --gold: #FB923C;
 
   --fog: rgba(255, 255, 255, 0.02); /* alternating band, a whisper of glass */
+  /* Surface tiers. The old single band sat at 2% white, a 4/255 per-channel
+     step over the page base — effectively invisible, which left dark mode
+     relying entirely on hairlines to separate sections. These are pitched
+     to be legible as distinct surfaces while staying far below anything
+     that reads as a coloured block. */
+  --surface-1: rgba(255, 255, 255, 0.028);
+  --surface-2: rgba(255, 255, 255, 0.058);
   --ash: #94A3B8;                  /* muted metadata text */
   --smoke: #64748B;                /* placeholder */
   --peach: #3B82F6;
@@ -179,6 +186,12 @@
   --gold: #F59E0B;
 
   --fog: #EEF4FA;
+  /* Light tiers step down from the #F5F7FA page base. Pitched so each step
+     lands near 1.06 surface-to-surface, matching the dark scale — an
+     earlier pass sat at 1.038 base-to-tier-1, too close to read as a
+     separate surface. Body text (#475569) stays above 6:1 on both. */
+  --surface-1: #ECF0F7;
+  --surface-2: #E2E9F3;
   --ash: #5B6B80;                  /* Secondary text — darkened slightly to clear AA on the lightest surfaces */
   --smoke: #94A3B8;                /* Muted text */
   --peach: #0047AB;
@@ -356,11 +369,60 @@ body {
   .rule-thick { border-top: 2px solid var(--cyan); }
 
   /* Alternating section band — a whisper of glass, hairline-ruled */
-  .section-alt {
-    background: var(--fog);
-    border-top: 1px solid var(--hairline);
-    border-bottom: 1px solid var(--hairline);
+  /* ── Surface system ────────────────────────────────────────────────────
+     Three tiers instead of a two-state alternation. Binary alternation
+     makes every other section identical, which reads as a template; with
+     three tiers adjacent sections always differ AND non-adjacent ones do
+     too, so the page has rhythm rather than a repeating stripe.
+
+     Dividers are a single hairline that fades out at both ends rather than
+     a hard border-top + border-bottom pair, so sections flow into each
+     other instead of sitting in boxes. */
+  .surface-1,
+  .surface-2 {
+    position: relative;
   }
+  .surface-1 { background: var(--surface-1); }
+  .surface-2 { background: var(--surface-2); }
+
+  .surface-1::before,
+  .surface-2::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--hairline) 18%,
+      var(--hairline) 82%,
+      transparent
+    );
+  }
+
+  /* Destination emphasis. A single low-opacity wash bled from the top edge
+     marks the two sections the page is steering toward (work, contact).
+     Used sparingly on purpose: if every section glows, none of them do. */
+  .surface-lift::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: min(420px, 60%);
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--primary) 6%, transparent),
+      transparent
+    );
+  }
+  .surface-lift > * { position: relative; z-index: 1; }
+
+  /* Legacy alias — kept so any stray usage still renders a valid surface. */
+  .section-alt { background: var(--surface-1); }
 
   /* ── Liquid glass — cinematic frosted surface ── */
 

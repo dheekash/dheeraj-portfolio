@@ -25,25 +25,35 @@ import { CertificationsSection } from "@/components/sections/CertificationsSecti
  * and the hard-credibility block (Experience -> Certifications) stays
  * contiguous rather than being split by reflective content.
  *
- * `section-alt` alternates to keep a visible band rhythm down the page.
+ * Backgrounds run a three-tier surface scale (base / surface-1 / surface-2)
+ * rather than a two-state alternation. Binary alternation makes every other
+ * section identical, which reads as a template. With three tiers, adjacent
+ * sections always differ and so do the alternating ones.
+ *
+ * `surface-2` is reserved for the two sections carrying the most weight
+ * (the work itself, and the platform judgement piece); `surface-lift` adds
+ * a single faint top wash to the section the page is steering toward.
+ * Sections that paint their own background (How I Work runs a WebGL dot
+ * field, About a dot grid) stay on the base tier so the treatments do not
+ * stack.
  */
 export default function HomePage() {
   return (
     <>
       <CinematicHero />
-      <div className="section-alt">
+      <div className="surface-2 surface-lift">
         <CaseStudiesSection />
       </div>
       <CareerEvolutionSection />
-      <div className="section-alt">
+      <div className="surface-1">
         <CertificationsSection />
       </div>
       <CoreExpertiseSection />
-      <div className="section-alt">
+      <div className="surface-2">
         <PlatformGuideSection />
       </div>
       <PortraitStoriesSection />
-      <div className="section-alt">
+      <div className="surface-1">
         <AboutSection />
       </div>
     </>
