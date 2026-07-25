@@ -7,12 +7,17 @@ import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
 import { ThemeSwitch } from "@/components/common/ThemeSwitch";
 import { profile } from "@/data/profile";
 
+/* Mirrors the page's narrative order. #certifications and #platforms were
+   previously rendered as full sections but omitted here, leaving them
+   reachable only by scrolling past them. */
 const links = [
-  { href: "#case-studies", id: "case-studies", label: "Projects"   },
-  { href: "#skills",       id: "skills",       label: "Skills"     },
-  { href: "#journey",      id: "journey",      label: "Experience" },
-  { href: "#about",        id: "about",        label: "About"      },
-  { href: "#contact",      id: "contact",      label: "Contact"    },
+  { href: "#case-studies",   id: "case-studies",   label: "Projects"   },
+  { href: "#journey",        id: "journey",        label: "Experience" },
+  { href: "#certifications", id: "certifications", label: "Certs"      },
+  { href: "#skills",         id: "skills",         label: "Skills"     },
+  { href: "#platforms",      id: "platforms",      label: "Platforms"  },
+  { href: "#about",          id: "about",          label: "About"      },
+  { href: "#contact",        id: "contact",        label: "Contact"    },
 ];
 
 export function Navbar() {
