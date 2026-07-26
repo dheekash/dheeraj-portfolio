@@ -69,9 +69,12 @@ function DiagramReliabilityScroll() {
   const silver = useTransform(p, [0.46, 0.60], [0.22, 1]);
   const gold = useTransform(p, [0.62, 0.76], [0.22, 1]);
   // Raw sources -> lake -> dashboard.
-  const src = useTransform(p, [0.10, 0.24], [0.25, 0.85]);
-  const lake = useTransform(p, [0.42, 0.56], [0.25, 0.85]);
-  const bi = useTransform(p, [0.74, 0.88], [0.25, 1]);
+  // Resting opacity starts at 0.45, not 0.25: the un-revealed state must not
+  // be fainter than the static diagram it replaces (which sat at 0.5), and
+  // all three finish at full so the resolved flow reads stronger than before.
+  const src = useTransform(p, [0.10, 0.24], [0.45, 1]);
+  const lake = useTransform(p, [0.42, 0.56], [0.45, 1]);
+  const bi = useTransform(p, [0.74, 0.88], [0.45, 1]);
 
   const on = (mv: typeof bronze, final = 1) => (reduce ? final : mv);
 
@@ -110,9 +113,9 @@ function DiagramReliabilityScroll() {
             </motion.g>
           ))}
 
-          <motion.text x="0" y="158" style={{ opacity: on(src, 0.5) }}>6 SOURCE SYSTEMS</motion.text>
-          <motion.text x="104" y="158" style={{ opacity: on(lake, 0.5) }}>→ ONELAKE</motion.text>
-          <motion.text x="170" y="158" fill="var(--dgrm)" style={{ opacity: on(bi, 0.5) }}>→ POWER BI</motion.text>
+          <motion.text x="0" y="158" style={{ opacity: on(src, 1) }}>6 SOURCE SYSTEMS</motion.text>
+          <motion.text x="104" y="158" style={{ opacity: on(lake, 1) }}>→ ONELAKE</motion.text>
+          <motion.text x="170" y="158" fill="var(--dgrm)" style={{ opacity: on(bi, 1) }}>→ POWER BI</motion.text>
         </g>
       </svg>
     </div>

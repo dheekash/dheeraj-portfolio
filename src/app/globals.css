@@ -428,6 +428,119 @@ body {
   /* Legacy alias — kept so any stray usage still renders a valid surface. */
   .section-alt { background: var(--surface-1); }
 
+  /* ── Inverted band ─────────────────────────────────────────────────────
+     A deliberately dark chapter. Rather than restyling every child, this
+     re-scopes the theme tokens for its subtree, so any component that reads
+     tokens adapts on its own — the same mechanism `.light` uses at :root.
+
+     In light mode this is the dramatic break the page needs. In dark mode
+     it deepens instead of inverting, because flipping to a light band on a
+     dark page is the "different website" problem, not a chapter break.
+
+     Used twice on the whole page (one mid-page, one terminal). A third
+     would turn a device into a pattern. */
+  .surface-invert {
+    position: relative;
+    color-scheme: dark;
+    --background: #0A0F1C;
+    --foreground: #F8FAFC;
+    --card: rgba(255, 255, 255, 0.045);
+    --card-foreground: #F8FAFC;
+    --popover: #111827;
+    --popover-foreground: #F8FAFC;
+    --secondary: #1F2937;
+    --secondary-foreground: #F8FAFC;
+    --muted: rgba(255, 255, 255, 0.07);
+    --muted-foreground: #CBD5E1;
+    --border: rgba(255, 255, 255, 0.12);
+    --input: rgba(255, 255, 255, 0.14);
+    --hairline: rgba(255, 255, 255, 0.12);
+    --fog: rgba(255, 255, 255, 0.03);
+    --surface-1: rgba(255, 255, 255, 0.03);
+    --surface-2: rgba(255, 255, 255, 0.06);
+    --body-text: #CBD5E1;
+    --ash: #94A3B8;
+    --smoke: #64748B;
+    --card-hover: rgba(96, 165, 250, 0.09);
+    /* Accent lifts to the brighter blue: #0066CC is tuned for white and
+       goes muddy on near-black. */
+    --primary: #7DB8FF;
+    --primary-foreground: #0A0F1C;
+    --accent: #7DB8FF;
+    --ring: #7DB8FF;
+    --cyan: #7DB8FF;
+    --forest: #7DB8FF;
+    --highlight: #7DB8FF;
+    --dgrm: #7DB8FF;
+    --success: #4ADE80;
+    --shadow-artifact:
+      0 0 0 1px rgba(255, 255, 255, 0.06),
+      0 1px 2px rgba(0, 0, 0, 0.4),
+      0 10px 28px -12px rgba(0, 0, 0, 0.6);
+    background: var(--background);
+    color: var(--body-text);
+  }
+
+  /* Blueprint grid — a distinct identity for a section without inverting
+     it. Used where token inversion is unsafe: the expertise section styles
+     its chips from hardcoded vendor-brand hex, which goes dark-on-dark in
+     an inverted band (measured: 24 of 27 text nodes below WCAG AA). A grid
+     reads as engineering drawing and costs nothing in contrast. */
+  .surface-grid {
+    position: relative;
+    /* Grid strength is a color-mix off --foreground rather than --hairline:
+       hairline is tuned for 1px dividers between elements and was too faint
+       to register as a section-wide texture. Also crossed with a wider minor
+       grid so the drawing reads as a plan, not graph paper. */
+    --grid-line: color-mix(in srgb, var(--foreground) 9%, transparent);
+    background:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px) 0 0 / 112px 112px,
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px) 0 0 / 112px 112px,
+      linear-gradient(to right, color-mix(in srgb, var(--foreground) 4%, transparent) 1px, transparent 1px) 0 0 / 28px 28px,
+      linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 4%, transparent) 1px, transparent 1px) 0 0 / 28px 28px,
+      var(--surface-1);
+  }
+  .surface-grid::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    /* Softens the grid toward the edges so it reads as texture rather than a
+       hard-edged table pinned to the section box. */
+    background: radial-gradient(ellipse 92% 86% at 50% 50%, transparent 55%, var(--background) 100%);
+  }
+  .surface-grid > * { position: relative; }
+
+  /* Utilities that hardcode light-theme values need a dark counterpart. */
+  .surface-invert .dash-btn {
+    border-color: rgba(255, 255, 255, 0.35);
+    color: var(--foreground);
+  }
+  .surface-invert .dash-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .surface-invert .gradient-btn {
+    background: linear-gradient(95deg, #7DB8FF 0%, #4F93E8 100%);
+    color: #0A0F1C;
+    box-shadow: 0 4px 20px -8px rgba(125, 184, 255, 0.5);
+  }
+  .surface-invert .gradient-btn:hover {
+    background: linear-gradient(95deg, #96C7FF 0%, #6BA6F2 100%);
+  }
+  .surface-invert .text-gradient,
+  .surface-invert .text-shimmer {
+    background-image: linear-gradient(95deg, #7DB8FF 0%, #A9D2FF 100%);
+  }
+  .surface-invert .panel,
+  .surface-invert .gradient-frame,
+  .surface-invert .uicard,
+  .surface-invert .artifact {
+    background: var(--card);
+    border-color: var(--border);
+    box-shadow: var(--shadow-artifact);
+  }
+
   /* ── Liquid glass — cinematic frosted surface ── */
 
   /* ── Fade-rise entry animation ── */
@@ -673,6 +786,26 @@ body {
   border-color: rgba(0, 102, 204, 0.35);
   box-shadow: 0 16px 36px rgba(0, 102, 204, 0.14);
 }
+
+/* Inside an inverted band a surface follows the band, not the page theme.
+   The rules above hardcode white and are unlayered, so they beat the
+   token-based `.surface-invert` block in @layer utilities. These are
+   unlayered too and one class more specific, so they win. Without them the
+   footer's contact card stayed white while its labels inherited the
+   inverted (light) text tokens: measured 1.48:1, unreadable. */
+.light .surface-invert .panel,
+.light .surface-invert .gradient-frame,
+.light .surface-invert .uicard {
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: var(--shadow-artifact);
+}
+.light .surface-invert .gradient-frame:hover,
+.light .surface-invert .panel:hover {
+  background: var(--card-hover);
+  border-color: color-mix(in srgb, var(--primary) 40%, transparent);
+  box-shadow: var(--shadow-artifact);
+}
 .light .artifact {
   background: #FFFFFF;
 }
@@ -702,6 +835,34 @@ body {
 }
 .light .dash-btn { border-color: rgba(15, 23, 42, 0.3); color: var(--foreground); }
 .light .dash-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+/* Same specificity fix as the surfaces above: these light-theme rules are
+   unlayered, so they outrank the token-driven `.surface-invert` block. Inside
+   an inverted band the dark border was rendering at rgba(15,23,42,0.3) on
+   near-black, i.e. the outline vanished entirely. */
+.light .surface-invert .dash-btn {
+  border-color: rgba(255, 255, 255, 0.38);
+  color: var(--foreground);
+}
+.light .surface-invert .dash-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.light .surface-invert .gradient-btn {
+  background: linear-gradient(95deg, #7DB8FF 0%, #4F93E8 100%);
+  color: #0A0F1C;
+  box-shadow: 0 4px 20px -8px rgba(125, 184, 255, 0.5);
+}
+.light .surface-invert .gradient-btn:hover {
+  background: linear-gradient(95deg, #96C7FF 0%, #6BA6F2 100%);
+}
+.light .surface-invert .text-gradient,
+.light .surface-invert .text-shimmer {
+  background-image: linear-gradient(95deg, #7DB8FF 0%, #A9D2FF 100%);
+}
+.light .surface-invert .timeline-spine {
+  background: linear-gradient(to bottom, rgba(125, 184, 255, 0.9), rgba(125, 184, 255, 0.5) 60%, rgba(255, 255, 255, 0.1));
+}
 .light .toggle-pill.on { background: linear-gradient(95deg, #0066CC, #0047AB); }
 .light .toggle-pill.off { background: rgba(15, 23, 42, 0.14); }
 .light .toggle-pill::after { background: #F5F7FA; }

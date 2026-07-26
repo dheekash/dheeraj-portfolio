@@ -36,6 +36,16 @@ import { CertificationsSection } from "@/components/sections/CertificationsSecti
  * Sections that paint their own background (How I Work runs a WebGL dot
  * field, About a dot grid) stay on the base tier so the treatments do not
  * stack.
+ *
+ * The expertise section gets a blueprint grid rather than a dark inversion:
+ * its chips are coloured from hardcoded vendor-brand hex, which measured 24
+ * of 27 text nodes below WCAG AA when the tokens were inverted underneath
+ * them. The grid gives it a distinct identity at no contrast cost.
+ *
+ * `surface-invert` is the one dramatic break, reserved for the terminal
+ * footer. The resulting rhythm is:
+ *
+ *   base -> s2 -> base -> s1 -> GRID -> s2 -> base -> s1 -> INVERT
  */
 export default function HomePage() {
   return (
@@ -48,7 +58,9 @@ export default function HomePage() {
       <div className="surface-1">
         <CertificationsSection />
       </div>
-      <CoreExpertiseSection />
+      <div className="surface-grid">
+        <CoreExpertiseSection />
+      </div>
       <div className="surface-2">
         <PlatformGuideSection />
       </div>

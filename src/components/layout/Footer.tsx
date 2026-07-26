@@ -18,7 +18,7 @@ export function Footer() {
   const consultHref = `mailto:${profile.email}?subject=${encodeURIComponent("Consulting engagement — Fabric / Databricks")}`;
 
   return (
-    <footer id="contact" className="surface-2 surface-lift relative overflow-hidden text-foreground">
+    <footer id="contact" className="surface-invert surface-lift relative overflow-hidden">
       {/* Sine-wave divider */}
       <svg aria-hidden viewBox="0 0 1440 64" preserveAspectRatio="none" className="block w-full h-12">
         <path
