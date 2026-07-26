@@ -254,7 +254,11 @@ body {
     color: var(--foreground);
   }
   h1 { letter-spacing: -0.025em; line-height: 0.95; }
-  h2 { font-size: clamp(2.25rem, 1.4rem + 3vw, 4rem); line-height: 1; letter-spacing: -0.02em; }
+  /* Section headings top out at 44px, not 64px. At 64 they tied the hero
+     (67px) and the card metrics (63px): three different roles shouting at
+     the same volume, so nothing led. The scale now steps
+     67 / 44 / 34 / 21 / 15 / 11 with real ratios between tiers. */
+  h2 { font-size: clamp(1.9rem, 1.2rem + 2.2vw, 2.75rem); line-height: 1.05; letter-spacing: -0.025em; }
   h3 { font-size: clamp(1.2rem, 0.95rem + 1vw, 1.6rem); line-height: 1.15; letter-spacing: -0.015em; }
 
   /* Smooth theme cross-fade (no transform/opacity, so framer-motion is unaffected) */

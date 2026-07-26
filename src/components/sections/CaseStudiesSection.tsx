@@ -594,7 +594,9 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
         <motion.div {...staggerItem} className="mb-4">
           <span
             className="block tabular-nums leading-none text-gradient"
-            style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(2.6rem, 1.6rem + 2.6vw, 4rem)" }}
+            /* Sits below the section heading, not level with it: this is a
+               card's hero, not the page's. */
+            style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(1.9rem, 1.3rem + 1.5vw, 2.15rem)" }}
           >
             {study.keyMetric.value}
           </span>
