@@ -1,12 +1,12 @@
 ﻿"use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import { X, ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import { onSpotlightMove } from "@/components/common/spotlight";
 import { onTiltMove, onTiltLeave } from "@/components/common/tilt";
 import { useTheme } from "@/components/providers/ThemeProvider";
-import { reveal, staggerParent, staggerGroup, staggerItem } from "@/lib/motion";
+import { reveal, staggerParent, staggerGroup, staggerItem, useMediaQuery } from "@/lib/motion";
 
 
 /* ── SVG diagrams ─────────────────────────────────────────────────────────── */
@@ -30,6 +30,92 @@ function DiagramReliability() {
         <text x="0" y="158" opacity="0.5">6 SOURCE SYSTEMS → ONELAKE → POWER BI</text>
       </g>
     </svg>
+  );
+}
+
+/**
+ * Scroll-driven version of the reliability diagram — the page's signature
+ * moment. As the card travels through the viewport the pipeline builds
+ * itself: the failure-rate line draws left to right, each Medallion layer
+ * lights up as the line reaches it, and the flow resolves from six raw
+ * source systems to the executive dashboard.
+ *
+ * The motion is scrubbed to scroll rather than played once, so the reader
+ * controls the build and the story stays legible at any scroll position.
+ * Every value drawn is already in the case study; nothing here is invented.
+ *
+ * Card-only. The expanded modal has no scroll context of its own, so it
+ * keeps the static DiagramReliability — a scrubbed diagram would sit at
+ * progress 0 (blank) inside a dialog.
+ */
+function DiagramReliabilityScroll() {
+  const ref = useRef<HTMLDivElement>(null);
+  /* Fall back to the finished diagram under reduced motion, and on small
+     screens where the scrub is least visible and the CPU budget tightest.
+     Same reasoning as the WebGL dot field. */
+  const prefersReduced = useReducedMotion();
+  const isSmallScreen = useMediaQuery("(max-width: 767px)");
+  const reduce = prefersReduced || isSmallScreen;
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.92", "center 0.42"],
+  });
+  const p = useSpring(scrollYProgress, { stiffness: 120, damping: 28, restDelta: 0.001 });
+
+  // Line draw, then each layer activating as the line passes its marker.
+  const draw = useTransform(p, [0.05, 0.85], [0, 1]);
+  const bronze = useTransform(p, [0.30, 0.44], [0.22, 1]);
+  const silver = useTransform(p, [0.46, 0.60], [0.22, 1]);
+  const gold = useTransform(p, [0.62, 0.76], [0.22, 1]);
+  // Raw sources -> lake -> dashboard.
+  const src = useTransform(p, [0.10, 0.24], [0.25, 0.85]);
+  const lake = useTransform(p, [0.42, 0.56], [0.25, 0.85]);
+  const bi = useTransform(p, [0.74, 0.88], [0.25, 1]);
+
+  const on = (mv: typeof bronze, final = 1) => (reduce ? final : mv);
+
+  return (
+    <div ref={ref}>
+      <svg
+        viewBox="0 0 360 160"
+        className="w-full h-auto"
+        role="img"
+        aria-label="Pipeline failure rate falling from 12% to under 1% across Bronze, Silver and Gold layers, from six source systems through OneLake to Power BI"
+      >
+        <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
+          <text x="0" y="12" opacity="0.5">MONTHLY PIPELINE FAILURE RATE</text>
+          <path d="M 30 26 V 126 H 340" stroke="currentColor" strokeWidth="1" opacity="0.3" fill="none" />
+          <text x="0" y="34" opacity="0.6">12%</text>
+          <text x="10" y="124" opacity="0.6">1%</text>
+
+          <motion.path
+            d="M 35 32 L 60 38 L 85 30 L 110 40 L 135 34 L 165 54 L 200 82 L 240 108 L 290 118 L 338 120"
+            stroke="var(--dgrm)"
+            strokeWidth="1.6"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ pathLength: reduce ? 1 : draw }}
+          />
+
+          {([
+            { x: 150, l: "BRONZE", mv: bronze },
+            { x: 215, l: "SILVER", mv: silver },
+            { x: 280, l: "GOLD", mv: gold },
+          ] as const).map((s) => (
+            <motion.g key={s.l} style={{ opacity: on(s.mv) }}>
+              <line x1={s.x} y1="26" x2={s.x} y2="126" stroke="currentColor" strokeWidth="1" strokeDasharray="2 4" opacity="0.45" />
+              <text x={s.x} y="140" textAnchor="middle">{s.l}</text>
+            </motion.g>
+          ))}
+
+          <motion.text x="0" y="158" style={{ opacity: on(src, 0.5) }}>6 SOURCE SYSTEMS</motion.text>
+          <motion.text x="104" y="158" style={{ opacity: on(lake, 0.5) }}>→ ONELAKE</motion.text>
+          <motion.text x="170" y="158" fill="var(--dgrm)" style={{ opacity: on(bi, 0.5) }}>→ POWER BI</motion.text>
+        </g>
+      </svg>
+    </div>
   );
 }
 
@@ -178,6 +264,8 @@ type Study = {
   keyMetric: { value: string; label: string; color: string };
   stack: string[];
   Diagram: () => React.ReactElement;
+  /** Scroll-driven variant used on the card only; modal keeps Diagram. */
+  DiagramCard?: () => React.ReactElement;
   detailPoints: string[];
   codeSnippet?: { lang: string; label: string; code: string };
 };
@@ -194,6 +282,7 @@ const studies: Study[] = [
     keyMetric: { value: "12% → <1%", label: "pipeline failure rate", color: "16,185,129" },
     stack: ["Microsoft Fabric", "SQLMesh", "Delta Lake", "OneLake", "Power BI", "DAX"],
     Diagram: DiagramReliability,
+    DiagramCard: DiagramReliabilityScroll,
     codeSnippet: {
       lang: "sql",
       label: "SQLMesh — Silver quality gate",
@@ -579,7 +668,9 @@ function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
           {study.capability}
         </span>
         <div className="w-full pt-8 text-foreground opacity-90 transition-opacity duration-300 group-hover:opacity-100">
-          <study.Diagram />
+          {/* Scroll-driven variant where one exists; the modal keeps the
+              static Diagram since a dialog has no scroll context. */}
+          {study.DiagramCard ? <study.DiagramCard /> : <study.Diagram />}
         </div>
       </motion.div>
 

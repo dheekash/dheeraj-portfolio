@@ -1,3 +1,5 @@
+import { useSyncExternalStore } from "react";
+
 /**
  * Motion system — one language for the whole site.
  *
@@ -67,6 +69,22 @@ export function enter(delay = 0) {
 
 /** Stagger delay for the nth item in a group. */
 export const stagger = (i: number, base = 0) => base + i * STAGGER;
+
+/**
+ * SSR-safe media query subscription. Server snapshot is `false`, so the
+ * first client paint matches the server and nothing flashes.
+ */
+export function useMediaQuery(query: string) {
+  return useSyncExternalStore(
+    (cb) => {
+      const mq = window.matchMedia(query);
+      mq.addEventListener("change", cb);
+      return () => mq.removeEventListener("change", cb);
+    },
+    () => window.matchMedia(query).matches,
+    () => false
+  );
+}
 
 /**
  * Sequenced group reveal.
