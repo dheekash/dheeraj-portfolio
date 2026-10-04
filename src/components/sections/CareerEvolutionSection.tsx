@@ -6,7 +6,28 @@ import { reveal, stagger, DURATION, EASE } from "@/lib/motion";
 
 const timeline = [
   {
-    period: "Jan 2025 - Present",
+    period: "Aug 2026 - Present",
+    role: "Senior Business Intelligence Developer",
+    company: "DataStream IT Solutions Pvt Ltd",
+    location: "Remote",
+    type: "Full-time",
+    stack: ["Power BI", "Microsoft Fabric", "DAX", "Row-Level Security", "Delta Lake", "Azure DevOps"],
+    metrics: [
+      { value: "7", label: "client engagements" },
+      { value: "12", label: "semantic models" },
+    ],
+    summary:
+      "Delivering enterprise Power BI and Microsoft Fabric solutions across 7 active client engagements spanning North America, Europe, and APAC, plus 3 completed handovers. 12 governed semantic models and 8 medallion lakehouse pipelines built to date.",
+    highlights: [
+      "Built 12 governed semantic models (6 in production, 6 in UAT/staging) and deployed 8 medallion lakehouse pipelines across Fabric workspaces.",
+      "Engaged 42 stakeholders across 7 clients, facilitating 18 formal requirements workshops.",
+      "Shipped 7 production Power BI dashboards spanning compliance, vendor, and incident-tracking use cases, including a Denied Access incremental report using incremental refresh.",
+    ],
+    caseStudyLink: undefined,
+    current: true,
+  },
+  {
+    period: "Jan 2025 - Aug 2026",
     role: "BI & Analytics Engineer",
     company: "Amplify Analytix",
     location: "Bengaluru, India",
@@ -17,14 +38,14 @@ const timeline = [
       { value: "15+ hrs", label: "saved / week" },
     ],
     summary:
-      "Building Fabric Lakehouse platforms and analytics products for enterprise clients across 15 countries. Cut 15+ hours of weekly manual work, reduced compute costs 15%, and shortened dashboard delivery by 40%.",
+      "Built Fabric Lakehouse platforms and analytics products for enterprise clients across 15 countries. Cut 15+ hours of weekly manual work, reduced compute costs 15%, and shortened dashboard delivery by 40%.",
     highlights: [
       "Architected Microsoft Fabric Lakehouse with Medallion architecture across 6 source systems. Cut 15+ hrs/week of manual work.",
       "Migrated legacy SQL warehouse to SQLMesh. Pipeline failures dropped from 12% to under 1%.",
       "Shortened dashboard delivery by 40%, from stakeholder brief to published report.",
     ],
     caseStudyLink: "#case-studies",
-    current: true,
+    current: false,
   },
   {
     period: "Mar 2020 - Jun 2024",
@@ -76,8 +97,8 @@ export function CareerEvolutionSection() {
             <h2>Experience</h2>
           </div>
           <div className="flex flex-wrap items-center gap-2 pb-1">
-            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>6+ years</span>
-            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>3 companies</span>
+            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>7+ years</span>
+            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>4 companies</span>
             <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>15 countries</span>
           </div>
         </motion.div>

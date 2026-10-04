@@ -147,7 +147,7 @@ export default function OpengraphImage() {
                 display: "flex",
               }}
             >
-              Dheeraj Kashyap · Business Analyst @ Amplify Analytix
+              Dheeraj Kashyap · Senior BI Developer @ DataStream
             </div>
           </div>
 
