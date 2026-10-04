@@ -243,6 +243,27 @@ body {
   a, button, label, summary, [role="button"], input, select, textarea {
     touch-action: manipulation;
   }
+  /* Touch targets. 24px clears WCAG 2.2 AA, but a finger wants ~44px, so on
+     coarse pointers interactive elements grow to that. Scoped to
+     (pointer: coarse) so the denser desktop layout is untouched.
+
+     min-height is inert on inline boxes, which is what we want: links inside
+     prose keep flowing, while the block/flex controls (footer nav, cert
+     cards, verify links) grow. The theme toggle is excluded and handled
+     separately — it has a fixed 30px track that min-height would break, so
+     its hit area is expanded without changing its size. */
+  @media (pointer: coarse) {
+    a, button, [role="button"], summary, label[for] {
+      min-height: 44px;
+    }
+    .theme-toggle, .social-orb, .tt-thumb { min-height: 0; }
+    .theme-toggle { position: relative; }
+    .theme-toggle::after {
+      content: "";
+      position: absolute;
+      inset: -7px -4px;
+    }
+  }
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;

@@ -266,7 +266,7 @@ export function CareerEvolutionSection() {
                 {"caseStudyLink" in item && item.caseStudyLink && (
                   <a
                     href={item.caseStudyLink}
-                    className="inline-flex items-center gap-1.5 min-h-6 text-[12px] font-mono font-semibold mb-4"
+                    className="inline-flex items-center gap-1.5 min-h-11 md:min-h-6 text-[12px] font-mono font-semibold mb-4"
                     style={{ color: "var(--primary)" }}
                   >
                     See featured project <ArrowUpRight size={12} />
