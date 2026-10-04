@@ -237,6 +237,12 @@ body {
   /* Proportional scale-up on very large displays */
   @media (min-width: 1920px) { html { font-size: 17px; } }
   @media (min-width: 2560px) { html { font-size: 19px; } }
+  /* Removes the 300ms double-tap-zoom wait on touch, and replaces the
+     default grey iOS tap flash with a tint from our own palette. */
+  html { -webkit-tap-highlight-color: color-mix(in srgb, var(--primary) 18%, transparent); }
+  a, button, label, summary, [role="button"], input, select, textarea {
+    touch-action: manipulation;
+  }
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;

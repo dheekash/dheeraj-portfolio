@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import { X, ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import { onSpotlightMove } from "@/components/common/spotlight";
@@ -522,6 +522,55 @@ function CodeBlock({ snippet }: { snippet: Snippet }) {
 /* ── Modal ────────────────────────────────────────────────────────────────── */
 
 function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const titleId = `study-${study.id}-title`;
+
+  /* Dialog focus contract per the ARIA APG: remember what opened it, move
+     focus in, keep Tab inside, close on Escape, and hand focus back on exit.
+     Also locks body scroll so the page behind cannot be scrolled away. */
+  useEffect(() => {
+    const opener = document.activeElement as HTMLElement | null;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const node = panelRef.current;
+    const focusables = () =>
+      Array.from(
+        node?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        ) ?? []
+      ).filter((el) => el.offsetParent !== null);
+
+    focusables()[0]?.focus();
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const items = focusables();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKey, true);
+    return () => {
+      document.removeEventListener("keydown", onKey, true);
+      document.body.style.overflow = prevOverflow;
+      opener?.focus?.();
+    };
+  }, [onClose]);
+
   return (
     <AnimatePresence>
       <motion.div
@@ -533,6 +582,13 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
       >
         <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
         <motion.div
+          ref={panelRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
+          /* Keeps a scroll gesture that reaches the panel's end from chaining
+             to the page behind it. */
+          style={{ overscrollBehavior: "contain" }}
           className="relative panel glow-border rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-y-auto"
           initial={{ opacity: 0, scale: 0.96, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -548,7 +604,7 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
                   <span className="text-[10px] font-mono text-muted-foreground/50">·</span>
                   <p className="text-[10px] font-mono uppercase tracking-[0.15em] accent-text">{study.capability}</p>
                 </div>
-                <h3 className="text-xl font-semibold leading-tight">{study.title}</h3>
+                <h3 id={titleId} className="text-xl font-semibold leading-tight">{study.title}</h3>
               </div>
               <button onClick={onClose} aria-label="Close"
                 className="flex-shrink-0 w-9 h-9 rounded-full panel flex items-center justify-center hover:border-primary/30 transition-colors">

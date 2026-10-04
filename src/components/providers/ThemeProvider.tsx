@@ -4,6 +4,21 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 
+/* Keeps <meta name="theme-color"> on the actual page background so browser
+   chrome (iOS Safari bar, Android status bar) does not sit at a different
+   colour from the page. Values mirror --background in globals.css. */
+const THEME_COLOR: Record<Theme, string> = { light: "#F5F7FA", dark: "#0B1120" };
+
+function syncThemeColor(theme: Theme) {
+  let tag = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+  if (!tag) {
+    tag = document.createElement("meta");
+    tag.name = "theme-color";
+    document.head.appendChild(tag);
+  }
+  tag.content = THEME_COLOR[theme];
+}
+
 const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({
   theme: "light",
   toggle: () => {},
@@ -23,7 +38,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    setTheme(root.classList.contains("light") ? "light" : "dark");
+    const current = root.classList.contains("light") ? "light" : "dark";
+    setTheme(current);
+    syncThemeColor(current);
     // Defer enabling transitions until after first paint
     const id = requestAnimationFrame(() => root.classList.add("theme-ready"));
     return () => cancelAnimationFrame(id);
@@ -33,6 +50,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const next: Theme = theme === "light" ? "dark" : "light";
     setTheme(next);
     document.documentElement.classList.toggle("light", next === "light");
+    syncThemeColor(next);
     try {
       localStorage.setItem("theme", next);
     } catch {}

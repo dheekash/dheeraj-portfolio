@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -31,6 +31,14 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 const siteUrl = "https://dheerajkashyap.com";
+
+/* Matches the page background so browser chrome blends with the page.
+   A prefers-color-scheme pair would be wrong here: this site defaults to
+   light regardless of OS preference, so the value is seeded light and then
+   kept in sync with the actual chosen theme by ThemeProvider. */
+export const viewport: Viewport = {
+  themeColor: "#F5F7FA",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
