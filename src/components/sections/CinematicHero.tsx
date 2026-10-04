@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion, useMotionValue, useTransform, useInView, animate, useReducedMotion } from "framer-motion";
+import { motion, useMotionValue, useTransform, useSpring, useInView, animate, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowDown, Globe, Award, Clock, Database } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { profile } from "@/data/profile";
@@ -90,35 +90,95 @@ export function CinematicHero() {
     transition: { duration: DURATION.reveal, delay, ease: EASE },
   });
 
+  /* Pointer parallax. Motion values only — a useState-driven pointer handler
+     re-renders the whole hero on every mousemove. Each plate moves a
+     different few pixels, which is what reads as depth; anything larger
+     reads as the page sliding around. Spring-damped so it settles rather
+     than tracking the cursor rigidly. */
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const sx = useSpring(px, { stiffness: 110, damping: 20, restDelta: 0.001 });
+  const sy = useSpring(py, { stiffness: 110, damping: 20, restDelta: 0.001 });
+  /* Declared one by one rather than via a helper: a helper that calls
+     useTransform is a rules-of-hooks violation even when the call count is
+     stable. Depth order is far 3px / mid 6px / near 10px. */
+  const farX = useTransform(sx, [-1, 1], [-3, 3]);
+  const farY = useTransform(sy, [-1, 1], [-1.8, 1.8]);
+  const midX = useTransform(sx, [-1, 1], [-6, 6]);
+  const midY = useTransform(sy, [-1, 1], [-3.6, 3.6]);
+  const nearX = useTransform(sx, [-1, 1], [-10, 10]);
+  const nearY = useTransform(sy, [-1, 1], [-6, 6]);
+
+  const onPointer = (e: React.PointerEvent<HTMLElement>) => {
+    if (reduce) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    px.set(((e.clientX - r.left) / r.width) * 2 - 1);
+    py.set(((e.clientY - r.top) / r.height) * 2 - 1);
+  };
+  const onLeave = () => { px.set(0); py.set(0); };
+
   return (
-    <section id="top" className="relative overflow-hidden">
-      {/* Abstract data-viz identity (xl+) — one accent, no perpetual motion */}
-      <div aria-hidden className="hidden xl:block absolute right-[4%] top-[12%] z-[1] w-[22rem] pointer-events-none">
-        <motion.div className="panel p-4 mb-4 ml-10" {...panel(0.5)}>
-          <svg viewBox="0 0 200 64" className="w-full h-auto">
-            {[14, 30, 22, 44, 36, 54, 46, 60].map((h, i) => (
-              <rect key={i} x={i * 25 + 4} y={64 - h} width="14" height={h} rx="2"
-                fill="var(--primary)" opacity={0.25 + (i / 8) * 0.45} />
+    <section
+      id="top"
+      className="relative overflow-hidden"
+      onPointerMove={onPointer}
+      onPointerLeave={onLeave}
+    >
+      {/* Data-viz identity plates (xl+). Overlapped and rotated into a single
+          composed cluster rather than three stacked boxes, and sized to carry
+          the right half of the hero instead of floating in its top corner. */}
+      <div aria-hidden className="hidden xl:block absolute right-[3%] top-[14%] z-[1] w-[34rem] pointer-events-none">
+        {/* Back plate — widest, furthest, least parallax */}
+        <motion.div
+          className="hero-plate absolute right-0 top-0 w-[30rem] p-6"
+          style={{ x: farX,  y: farY,  rotate: -2.2 }}
+          {...panel(0.45)}
+        >
+          <p className="hero-plate-label">Monthly pipeline volume</p>
+          <svg viewBox="0 0 320 96" className="w-full h-auto">
+            {[22, 44, 33, 64, 52, 78, 67, 88, 74, 96].map((h, i) => (
+              <rect key={i} x={i * 32 + 5} y={96 - h} width="20" height={h} rx="3"
+                fill="var(--primary)" opacity={0.2 + (i / 10) * 0.55} />
             ))}
           </svg>
         </motion.div>
-        <motion.div className="panel p-4 mb-4 mr-6" {...panel(0.62)}>
-          <svg viewBox="0 0 200 48" className="w-full h-auto">
-            <polyline points="0,40 28,32 56,36 84,20 112,26 140,12 168,16 200,4"
-              fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <circle cx="200" cy="4" r="3.5" fill="var(--primary)" />
+
+        {/* Mid plate — overlaps the back plate's lower edge */}
+        <motion.div
+          className="hero-plate absolute right-[7.5rem] top-[11.5rem] w-[26rem] p-6"
+          style={{ x: midX,  y: midY,  rotate: 1.6 }}
+          {...panel(0.58)}
+        >
+          <p className="hero-plate-label">Failure rate · 12 months</p>
+          <svg viewBox="0 0 280 76" className="w-full h-auto">
+            {/* Descends: this plate is labelled failure rate, and a rising
+                line here would illustrate the opposite of the result the
+                case studies report. */}
+            <polyline
+              points="0,8 31,18 62,13 93,30 124,25 155,44 186,38 217,56 248,52 280,68"
+              fill="none" stroke="var(--primary)" strokeWidth="2.5"
+              strokeLinecap="round" strokeLinejoin="round"
+            />
+            <circle cx="280" cy="68" r="4.5" fill="var(--primary)" />
           </svg>
         </motion.div>
-        <motion.div className="panel p-4 ml-16 w-56" {...panel(0.74)}>
-          <svg viewBox="0 0 160 72" className="w-full h-auto">
-            <g stroke="var(--primary)" strokeOpacity="0.3" strokeWidth="1">
-              <line x1="80" y1="36" x2="20" y2="12" /><line x1="80" y1="36" x2="140" y2="14" />
-              <line x1="80" y1="36" x2="24" y2="60" /><line x1="80" y1="36" x2="138" y2="58" />
+
+        {/* Front plate — smallest, nearest, most parallax */}
+        <motion.div
+          className="hero-plate absolute right-[1rem] top-[21.5rem] w-[17rem] p-6"
+          style={{ x: nearX, y: nearY, rotate: -1.2 }}
+          {...panel(0.7)}
+        >
+          <p className="hero-plate-label">Source lineage</p>
+          <svg viewBox="0 0 180 84" className="w-full h-auto">
+            <g stroke="var(--primary)" strokeOpacity="0.32" strokeWidth="1.2">
+              <line x1="90" y1="42" x2="22" y2="14" /><line x1="90" y1="42" x2="158" y2="16" />
+              <line x1="90" y1="42" x2="26" y2="70" /><line x1="90" y1="42" x2="156" y2="68" />
             </g>
-            {[[20, 12], [140, 14], [24, 60], [138, 58]].map(([x, y], i) => (
-              <circle key={i} cx={x} cy={y} r="4" fill="var(--primary)" opacity={0.55} />
+            {[[22, 14], [158, 16], [26, 70], [156, 68]].map(([x, y], i) => (
+              <circle key={i} cx={x} cy={y} r="4.5" fill="var(--primary)" opacity={0.55} />
             ))}
-            <circle cx="80" cy="36" r="6" fill="var(--primary)" />
+            <circle cx="90" cy="42" r="7" fill="var(--primary)" />
           </svg>
         </motion.div>
       </div>

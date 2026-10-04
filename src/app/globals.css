@@ -652,6 +652,58 @@ body {
   transform: translateY(-2px);
 }
 
+/* ── Hero plates ───────────────────────────────────────────────────────────
+   Frosted glass with real edge refraction: a bright 1px inner top edge and a
+   dark inner bottom edge, so the plate reads as a physical sheet catching
+   light rather than a flat translucent box. The outer shadow is wide and
+   very soft (diffusion) rather than tight and dark, which is what keeps
+   overlapping plates from looking like stacked cards.
+
+   Radius follows the page scale (--radius * 1.33) rather than a bespoke
+   value, so these sit inside the same shape system as everything else.
+   Unlayered deliberately: layered equivalents have been silently dropped by
+   the build here before. */
+.hero-plate {
+  background: rgba(255, 255, 255, 0.70);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: calc(var(--radius) * 1.33);
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(15, 23, 42, 0.05),
+    0 2px 4px rgba(15, 23, 42, 0.03),
+    0 28px 56px -28px rgba(15, 23, 42, 0.22);
+  will-change: transform;
+}
+:root:not(.light) .hero-plate {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+    0 2px 4px rgba(0, 0, 0, 0.25),
+    0 28px 56px -28px rgba(0, 0, 0, 0.6);
+}
+.hero-plate-label {
+  margin-bottom: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+/* Blur is the whole effect; without it the translucent fill alone would be
+   muddy, so the fallback goes opaque instead. */
+@media (prefers-reduced-transparency: reduce) {
+  .hero-plate {
+    background: var(--card);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  :root:not(.light) .hero-plate { background: #141B2B; }
+}
+
 /* Azure→Cobalt gradient action button (light) */
 .gradient-btn {
   position: relative;
