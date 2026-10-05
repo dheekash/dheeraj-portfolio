@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { caseStudies, type CaseStudy } from "@/data/work";
+import { caseStudies, impactTone, type CaseStudy } from "@/data/work";
 import { ArchitectureDiagram, NodeChain, WorkImage } from "@/components/work/ArchitectureFlow";
 
 function Impact({ study, limit }: { study: CaseStudy; limit?: number }) {
   return (
     <dl className="impact" aria-label="Impact">
       {study.impact.slice(0, limit).map((m) => (
-        <div key={m.label}>
+        <div key={m.label} className={`tone-${impactTone(m.value)}`}>
           <dt className="sr-only">{m.label}</dt>
           <dd>
             <div className="impact-value">{m.value}</div>

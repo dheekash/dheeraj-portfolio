@@ -393,3 +393,14 @@ scored = model.transform(
 ];
 
 export const getStudy = (slug: string) => caseStudies.find((s) => s.slug === slug);
+
+/**
+ * Colour role of an impact figure. Improvements read as "positive"; money
+ * and plain counts (scale, not change) read as "money" / "count" so the
+ * page does not paint every number green.
+ */
+export function impactTone(value: string): "positive" | "money" | "count" {
+  if (/^≈?\$/.test(value)) return "money";
+  if (/^\d[\d.,]*[MK]?\+?$/.test(value)) return "count";
+  return "positive";
+}

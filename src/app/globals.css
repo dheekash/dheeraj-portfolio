@@ -38,53 +38,91 @@
 /* ─────────────────────────────────────────────────────────────────────────
    Tokens
 
-   Editorial analytics. Ink on paper, one surface (white sheet), one dark
-   band for the close. Colour carries meaning only:
-     positive  = the improved, "after" value
-     baseline  = the starting, "before" value
-   Neither is used for decoration. Every before/after pair is also told
-   apart by shape (outlined vs solid) and by an arrow, never colour alone.
+   Warm neutrals, charcoal, and a muted sage used sparingly. From a
+   distance the page reads almost monochrome; colour carries meaning only:
+     positive / sage  = the improved, "after" value, active and selected states
+     baseline (amber) = the starting, "before" value
+   Every before/after pair is also told apart by shape (outlined vs solid)
+   and by an arrow, never colour alone.
    ───────────────────────────────────────────────────────────────────────── */
 :root {
   color-scheme: light;
-  --paper: #F6F5F1;
+  /* canvas */
+  --paper: #F5F4EF;
+  --paper-alt: #ECEEE9;
+  --paper-subtle: #E7EAE4;
+  /* surfaces */
   --sheet: #FFFFFF;
-  --ink: #15171A;
-  --ink-hover: #2B2E33;
-  --muted-ink: #5B6068;
-  --line: #E3E1DA;
-  --line-strong: #CBC8BE;
-  --positive: #0F6B4F;
-  --positive-soft: rgba(15, 107, 79, 0.08);
-  --baseline: #B4583A;
-  --baseline-text: #9E4A2E;
-  --band: #101311;
-  --band-sheet: #181C1A;
-  --band-ink: #ECEDE8;
-  --band-muted: #A6ACA7;
+  --sheet-raised: #FAFAF7;
+  /* text */
+  --ink: #171A18;
+  --muted-ink: #555B56;
+  --soft-ink: #6A706A;
+  --faint-ink: #A0A49F;
+  /* borders */
+  --line: #D7D9D3;
+  --line-subtle: #E3E4DE;
+  --line-strong: #AEB3AB;
+  /* accent */
+  --sage: #536B58;
+  --sage-dark: #3F5544;
+  --sage-light: #DCE5DC;
+  --sage-pale: #EDF2EC;
+  --ink-hover: var(--sage);
+  /* data */
+  --positive: #3F7654;
+  --positive-soft: #EDF2EC;
+  --baseline: #A36D3F;
+  --baseline-text: #8A5A32;
+  --highlight: #7B6A45;
+  --info: #66756A;
+  /* tags */
+  --tag-bg: #F3F3EE;
+  /* dark band */
+  --band: #101412;
+  --band-sheet: #161B18;
+  --band-ink: #F3F3ED;
+  --band-muted: #AEB5AD;
   --band-line: #2A302C;
-  --shadow-hover: 0 1px 2px rgba(21, 23, 26, 0.04), 0 10px 24px -16px rgba(21, 23, 26, 0.22);
+  --band-input-line: #3A423C;
+  --band-accent: #9FB6A0;
+  --shadow-hover: 0 1px 2px rgba(23, 26, 24, 0.04), 0 10px 24px -18px rgba(23, 26, 24, 0.18);
 }
 
 /* Light is the default. Dark applies only when chosen (.dark on <html>). */
 .dark {
   color-scheme: dark;
-  --paper: #121513;
-  --sheet: #181C1A;
-  --ink: #ECEDE8;
-  --ink-hover: #FFFFFF;
-  --muted-ink: #A6ACA7;
-  --line: #2A302C;
-  --line-strong: #3E4540;
-  --positive: #63C29A;
-  --positive-soft: rgba(99, 194, 154, 0.10);
-  --baseline: #D98A69;
-  --baseline-text: #E49C7E;
-  --band: #0B0D0C;
-  --band-sheet: #141816;
-  --band-ink: #ECEDE8;
-  --band-muted: #A6ACA7;
-  --band-line: #262B28;
+  --paper: #121613;
+  --paper-alt: #161B18;
+  --paper-subtle: #191E1B;
+  --sheet: #1B201D;
+  --sheet-raised: #1F2521;
+  --ink: #EDEEE8;
+  --muted-ink: #AEB5AD;
+  --soft-ink: #99A098;
+  --faint-ink: #6F756F;
+  --line: #2E352F;
+  --line-subtle: #262C28;
+  --line-strong: #46504A;
+  --sage: #9FB6A0;
+  --sage-dark: #B8CBB9;
+  --sage-light: #2C3A2F;
+  --sage-pale: #212B24;
+  --ink-hover: #C9D8CA;
+  --positive: #8DBE9A;
+  --positive-soft: #212B24;
+  --baseline: #C8925F;
+  --baseline-text: #D6A273;
+  --highlight: #BFAE85;
+  --info: #A3B0A5;
+  --tag-bg: #202622;
+  --band: #0C0F0D;
+  --band-sheet: #141916;
+  --band-ink: #F3F3ED;
+  --band-muted: #AEB5AD;
+  --band-line: #262C28;
+  --band-input-line: #3A423C;
+  --band-accent: #9FB6A0;
   --shadow-hover: 0 10px 24px -16px rgba(0, 0, 0, 0.7);
 }
 
@@ -786,18 +824,23 @@
 .band {
   --ink: var(--band-ink);
   --muted-ink: var(--band-muted);
+  --soft-ink: var(--band-muted);
   --line: var(--band-line);
-  --line-strong: #3C433E;
+  --line-strong: var(--band-input-line);
   --sheet: var(--band-sheet);
   --paper: var(--band);
-  --ink-hover: #FFFFFF;
-  --positive: #63C29A;
+  --ink-hover: var(--band-accent);
+  --positive: var(--band-accent);
+  --sage: var(--band-accent);
+  --tag-bg: var(--band-sheet);
   background: var(--band);
   color: var(--band-ink);
   color-scheme: dark;
 }
 .band .btn-primary { background: var(--band-ink); color: var(--band); }
-.band .btn-primary:hover { background: #FFFFFF; }
+.band .btn-primary:hover { background: var(--band-accent); color: var(--band); }
+.band .field input, .band .field textarea { background: var(--band-sheet); border-color: var(--band-input-line); }
+.band .field input:focus, .band .field textarea:focus { border-color: var(--band-ink); box-shadow: 0 0 0 1px var(--band-ink); }
 .contact-grid { display: grid; gap: var(--s-7); }
 @media (min-width: 1000px) { .contact-grid { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); column-gap: var(--s-8); } }
 .contact-email {
@@ -1318,7 +1361,7 @@ a.sl-inner:hover { background: color-mix(in srgb, var(--paper) 70%, var(--sheet)
   background: color-mix(in srgb, var(--sheet) 94%, transparent);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 8px 24px -12px rgba(21, 23, 26, 0.25);
+  box-shadow: 0 8px 24px -14px rgba(23, 26, 24, 0.22);
   transform: translateY(calc(100% + 24px));
   visibility: hidden;
   transition: transform 250ms var(--ease), visibility 0s linear 250ms;
@@ -1331,3 +1374,145 @@ a.sl-inner:hover { background: color-mix(in srgb, var(--paper) 70%, var(--sheet)
 .flagship .work-story { align-content: start; }
 .work-small .impact-value { font-size: 1.0625rem; white-space: nowrap; }
 .more-work .mw-metric .small { font-family: var(--font-sans); }
+
+/* ═══ Colour system: warm neutrals, charcoal, muted sage ════════════════
+   Colour-only rules. Nothing below changes size, spacing or layout. */
+
+/* Section rhythm: alternate canvas tones; dividers soften */
+.section + .section { border-top-color: var(--line-subtle); }
+#experience, #platforms, #certifications { --paper: var(--paper-alt); background: var(--paper); }
+
+/* Small section labels and active states carry the accent */
+.section-head .label, .hero-working .label, .about-copy > .label, .band .label { color: var(--sage); }
+.nav-link[aria-current="true"]::after { background: var(--sage); }
+
+/* Links: charcoal to sage */
+.link-arrow { transition: color var(--dur) var(--ease), text-decoration-color var(--dur) var(--ease); }
+.link-arrow:hover { color: var(--sage); }
+.applied a:hover, .inline-link:hover { color: var(--sage); text-decoration-color: var(--sage); }
+.footer-bar a:hover { color: var(--sage); }
+.more-work li a:hover .mw-title { color: var(--sage-dark); }
+
+/* Buttons */
+.btn-secondary:hover { border-color: var(--sage); color: var(--sage-dark); }
+.band .btn-secondary:hover { color: var(--band-accent); }
+.copy-btn:hover { border-color: var(--sage); }
+
+/* Cards: quiet hover, border and a touch of raised surface */
+.card-interactive { transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background-color var(--dur) var(--ease); }
+@media (hover: hover) {
+  .card-interactive:hover { background: var(--sheet-raised); border-color: var(--line-strong); }
+}
+.work-visual { background: var(--sheet-raised); }
+
+/* Tags: light neutral; core items in light sage */
+.hero-working-item,
+.capability li,
+.chain li {
+  background: var(--tag-bg);
+  border-color: var(--line-subtle);
+  color: var(--ink);
+}
+.capability li.is-core {
+  background: var(--sage-light);
+  border-color: var(--sage-light);
+  color: var(--sage-dark);
+}
+.chain li.is-output {
+  background: var(--sage-pale);
+  border-color: var(--sage-light);
+  color: var(--sage-dark);
+}
+.capability ul { border-top-color: var(--line-subtle); }
+
+/* Proof strip: monochrome figures, small sage tick */
+.proof-item { position: relative; }
+.proof-item .proof-label { color: var(--soft-ink); }
+.proof-item::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: var(--sage);
+}
+.proof-item + .proof-item::before { left: var(--s-5); }
+@media (max-width: 767.98px) {
+  .proof-item:nth-child(odd)::before { left: 0; }
+  .proof-item:nth-child(even)::before { left: var(--s-4); }
+}
+.proof-item:nth-child(n + 3) { border-top-color: var(--line-subtle); }
+
+/* Before / after */
+.result-before { color: var(--baseline-text); }
+.result-after { color: var(--positive); }
+.key-swatch.is-before { border-color: var(--baseline); }
+.key-swatch.is-after { background: var(--positive); }
+
+/* Hero stack panel */
+.sl-dot { border-color: var(--sage); }
+.sl-row.is-output .sl-dot { background: var(--sage); border-color: var(--sage); }
+.sl-row::before { background: var(--line); }
+.stack-note { border-top-color: var(--line-subtle); }
+.results-head { border-bottom-color: var(--line-subtle); }
+
+/* Impact figures: improvements in green, money and scale in charcoal */
+.impact-value { color: var(--positive); }
+.tone-money .impact-value, .tone-count .impact-value { color: var(--ink); }
+.tone-money .impact-label { color: var(--highlight); }
+.impact { border-top-color: var(--line-subtle); }
+.mw-metric { color: var(--positive); }
+
+/* Architecture diagrams */
+.arch-node { border-color: var(--line); }
+.arch-node.is-output { background: var(--sage-pale); border-color: var(--sage); }
+.arch-node.is-output .arch-name { color: var(--sage-dark); }
+.flow-step::after { border-color: var(--sage); }
+.flow-step.is-output::after { background: var(--sage); border-color: var(--sage); }
+.role-scope { border-top-color: var(--line-subtle); }
+
+/* Experience */
+.progression::before { background: var(--line); }
+.progression li::before { border-color: var(--sage); }
+.progression li.is-current::before { background: var(--sage); border-color: var(--sage); }
+.rail-item { border-top-color: var(--line-subtle); }
+.rail-item:first-child { border-top-color: var(--ink); }
+.rail-current { color: var(--sage); }
+.ri-value { color: var(--sage-dark); }
+.rail-impact { border-color: var(--line-subtle); }
+
+/* How I build */
+.step-n { color: var(--sage); }
+.step-title { transition: color var(--dur) var(--ease); }
+.step:hover .step-title { color: var(--sage-dark); }
+.step-evidence { border-top-color: var(--line); }
+.step + .step { border-left-color: var(--line-subtle); }
+
+/* Platform guide: near-monochrome column tints */
+.compare thead th:nth-child(2) { border-bottom-color: var(--sage); }
+.compare thead th:nth-child(3) { border-bottom-color: var(--highlight); }
+.compare thead th:nth-child(4) { border-bottom-color: var(--soft-ink); }
+.compare tbody tr + tr th, .compare tbody tr + tr td { border-top-color: var(--line-subtle); }
+.decision-toggle[aria-pressed="true"] { background: var(--sage-pale); border-color: var(--sage); }
+.decision-toggle[aria-pressed="true"] .dt-box { background: var(--sage); border-color: var(--sage); }
+.decision-toggle:hover { border-color: var(--sage); }
+.dt-box { border-color: var(--line-strong); }
+.decision-out { background: var(--sheet-raised); border-color: var(--line-subtle); }
+.decision-why li.is-for::before { color: var(--positive); }
+.decision-why li.is-against::before { color: var(--baseline-text); }
+.verdict { border-left-color: var(--sage); }
+
+/* Certifications */
+.cert-card .label { color: var(--muted-ink); }
+.cert-card .cert-meta .small { color: var(--sage); }
+.cert-code { color: var(--sage-dark); }
+
+/* About */
+.facts { border-top-color: var(--ink); }
+.facts > div { border-bottom-color: var(--line-subtle); }
+.facts dt { color: var(--sage); }
+.about-quote { border-left-color: var(--sage); }
+
+/* Selection */
+::selection { background: var(--sage-light); color: var(--ink); }

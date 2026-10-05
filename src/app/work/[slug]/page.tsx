@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { caseStudies, getStudy, type CaseStudy } from "@/data/work";
+import { caseStudies, getStudy, impactTone, type CaseStudy } from "@/data/work";
 import { ArchitectureDiagram, WorkImage } from "@/components/work/ArchitectureFlow";
 
 export const dynamicParams = false;
@@ -116,7 +116,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <p className="lead">{s.problem}</p>
           <dl className="impact">
             {s.impact.map((m) => (
-              <div key={m.label}>
+              <div key={m.label} className={`tone-${impactTone(m.value)}`}>
                 <dt className="sr-only">{m.label}</dt>
                 <dd>
                   <div className="impact-value" style={{ fontSize: "1.75rem" }}>{m.value}</div>
