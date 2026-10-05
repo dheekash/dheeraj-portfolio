@@ -7,7 +7,7 @@ type Theme = "light" | "dark";
 /* Keeps <meta name="theme-color"> on the actual page background so browser
    chrome (iOS Safari bar, Android status bar) does not sit at a different
    colour from the page. Values mirror --background in globals.css. */
-const THEME_COLOR: Record<Theme, string> = { light: "#F5F7FA", dark: "#0B1120" };
+const THEME_COLOR: Record<Theme, string> = { light: "#F3F4F1", dark: "#141816" };
 
 function syncThemeColor(theme: Theme) {
   let tag = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');

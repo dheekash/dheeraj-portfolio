@@ -42,29 +42,24 @@ export const STAGGER = 0.06;
 /** Entrance travel distance. Short: the fade carries the reveal, not the slide. */
 export const REVEAL_Y = 16;
 
-/**
- * Standard scroll-triggered entrance. Fires once, when 20% of the element
- * has entered the viewport.
+/*
+ * Section entrances are switched off by design. One orchestrated moment
+ * (the hero results chart, pure CSS) lands harder than a fade-and-rise on
+ * every section, which reads as a template. It is also more robust: content
+ * no longer depends on JS hydrating before it becomes visible, which is how
+ * the hero once rendered blank when a chunk failed to load.
+ *
+ * The helpers keep their signatures so call sites need no edits; they now
+ * return no animation props. Motion that answers a user action (dialogs,
+ * the contact form's states) and the scroll-scrubbed pipeline diagram are
+ * unaffected — those show something changing.
  */
-export function reveal(delay = 0) {
-  return {
-    initial: { opacity: 0, y: REVEAL_Y },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.2 },
-    transition: { duration: DURATION.reveal, delay, ease: EASE },
-  } as const;
+export function reveal(_delay = 0) {
+  return {} as const;
 }
 
-/**
- * Above-the-fold entrance. Same shape as reveal() but plays on mount
- * instead of waiting for an intersection, so the hero never flashes empty.
- */
-export function enter(delay = 0) {
-  return {
-    initial: { opacity: 0, y: REVEAL_Y },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: DURATION.reveal, delay, ease: EASE },
-  } as const;
+export function enter(_delay = 0) {
+  return {} as const;
 }
 
 /** Stagger delay for the nth item in a group. */
@@ -97,20 +92,8 @@ export function useMediaQuery(query: string) {
  * Nest `staggerGroup()` on a child that is itself a container to continue
  * the sequence one level down.
  */
-export const staggerParent = {
-  initial: "hidden",
-  whileInView: "show",
-  viewport: { once: true, amount: 0.2 },
-  variants: { hidden: {}, show: { transition: { staggerChildren: STAGGER } } },
-} as const;
+export const staggerParent = {} as const;
 
-export const staggerGroup = (delay = STAGGER) => ({
-  variants: { hidden: {}, show: { transition: { staggerChildren: delay } } },
-});
+export const staggerGroup = (_delay = STAGGER) => ({} as const);
 
-export const staggerItem = {
-  variants: {
-    hidden: { opacity: 0, y: REVEAL_Y },
-    show: { opacity: 1, y: 0, transition: { duration: DURATION.reveal, ease: EASE } },
-  },
-} as const;
+export const staggerItem = {} as const;

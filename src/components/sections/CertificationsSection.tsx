@@ -1,11 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { MicrosoftLogo, DatabricksLogo, SnowflakeLogo } from "@/components/common/TechLogos";
-import { useTheme } from "@/components/providers/ThemeProvider";
-import { reveal } from "@/lib/motion";
-
-
 type Issuer = "Microsoft" | "Snowflake" | "Databricks";
 
 interface Cert {
@@ -16,26 +8,6 @@ interface Cert {
   featured?: boolean;
   verifyUrl?: string;
 }
-
-function IssuerLogo({ issuer, size = 14 }: { issuer: Issuer; size?: number }) {
-  if (issuer === "Microsoft")  return <MicrosoftLogo size={size} />;
-  if (issuer === "Databricks") return <DatabricksLogo size={size} />;
-  return <SnowflakeLogo size={size} />;
-}
-
-/* Dark-theme values read fine against near-black; light theme needs
-   darker shades of the same brand hue to clear WCAG AA (4.5:1) on white. */
-const ISSUER_COLOR_DARK: Record<Issuer, string> = {
-  Microsoft:  "#2B9AE0",
-  Snowflake:  "#29B5E8",
-  Databricks: "#FF5A3C",
-};
-
-const ISSUER_COLOR_LIGHT: Record<Issuer, string> = {
-  Microsoft:  "#0057B8",
-  Snowflake:  "#0E7490",
-  Databricks: "#C2410C",
-};
 
 const certGroups: { category: string; color: string; certs: Cert[] }[] = [
   {
@@ -83,134 +55,70 @@ const certGroups: { category: string; color: string; certs: Cert[] }[] = [
   },
 ];
 
-const allCerts: (Cert & { groupColor: string })[] = certGroups.flatMap((g) =>
-  g.certs.map((c) => ({ ...c, groupColor: g.color }))
-);
-
-const featuredCerts = allCerts.filter((c) => c.featured);
-const otherCerts = allCerts.filter((c) => !c.featured);
-
-/* 3D flip card — front: logo + name; back: code, issuer, date, verify */
-function CertCard({ cert }: { cert: Cert; groupColor?: string }) {
-  const { theme } = useTheme();
-  const c = (theme === "light" ? ISSUER_COLOR_LIGHT : ISSUER_COLOR_DARK)[cert.issuer];
-  return (
-    <div className="flip-card h-40" tabIndex={0}>
-      <div className="flip-inner">
-        {/* Front */}
-        <div
-          className="flip-face gradient-frame px-4 py-4 flex flex-col gap-3"
-          style={{ borderLeft: `3px solid ${c}` }}
-        >
-          <div className="flex items-start justify-between">
-            <span
-              className="inline-flex h-10 w-10 items-center justify-center rounded-xl flex-shrink-0"
-              style={{ background: `color-mix(in srgb, ${c} 16%, transparent)`, border: `1px solid color-mix(in srgb, ${c} 30%, var(--border))` }}
-            >
-              <IssuerLogo issuer={cert.issuer} size={20} />
-            </span>
-            {cert.featured && (
-              <span
-                className="text-[9px] font-mono font-semibold uppercase tracking-[0.12em] px-2 py-0.5 rounded-full cursor-default"
-                style={{ background: "rgba(96, 165, 250, 0.12)", color: "var(--cyan)" }}
-                title="High-signal credential — core to the BI & Analytics Engineering role"
-              >
-                Core cert
-              </span>
-            )}
-          </div>
-          <p className="text-[13.5px] font-semibold leading-snug" style={{ color: "var(--foreground)" }}>{cert.name}</p>
-        </div>
-
-        {/* Back */}
-        <div
-          className="flip-back flip-face gradient-frame px-4 py-4 flex flex-col justify-between"
-          style={{ borderLeft: `3px solid ${c}` }}
-        >
-          <div>
-            <p className="font-mono text-[16px] font-bold mb-1" style={{ color: c }}>{cert.code}</p>
-            <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">{cert.issuer}</p>
-            <p className="font-mono text-[11px] text-muted-foreground mt-1">{cert.date}</p>
-          </div>
-          {cert.verifyUrl && (
-            <a
-              href={cert.verifyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="self-start font-mono text-[11.5px] font-bold px-2.5 py-1 rounded-full hover:opacity-80 transition-opacity"
-              style={{ background: "rgba(96, 165, 250, 0.14)", color: "var(--cyan)" }}
-              title="Verify certification"
-            >
-              Verify ↗
-            </a>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
+/**
+ * Certifications as a register.
+ *
+ * Previously four of these were flip cards whose code, date and verify link
+ * only appeared on hover, so touch users could not reach them at all. Every
+ * field is now visible in one table, grouped by area. Role-critical
+ * credentials are set in a heavier weight rather than tagged, and issuer is
+ * plain text: brand-coloured logos were the only colour in the section and
+ * they meant nothing about the credential.
+ */
 export function CertificationsSection() {
-  const totalCount = certGroups.reduce((s, g) => s + g.certs.length, 0);
-  const { theme } = useTheme();
-  const issuerColor = theme === "light" ? ISSUER_COLOR_LIGHT : ISSUER_COLOR_DARK;
+  const all = certGroups.flatMap((g) => g.certs);
+  const count = (i: Issuer) => all.filter((c) => c.issuer === i).length;
 
   return (
     <section id="certifications">
       <div className="container-page section-pad">
-        <motion.div {...reveal()} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(1.75rem,3vw,3rem)]">
-          <div>
-            <p className="eyebrow mb-3">Credentials</p>
-            <h2 className="mb-3">Certifications</h2>
-            <p className="text-muted-foreground text-sm max-w-[52ch]">
-              {totalCount} certifications across 5 years, each earned while actively shipping the
-              technology it covers.
-            </p>
-          </div>
-          {/* flex-wrap, not flex-shrink-0: three non-shrinking pills in a
-              nowrap row overflowed 360px viewports. */}
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>11 Microsoft</span>
-            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>1 Snowflake</span>
-            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>1 Databricks</span>
-          </div>
-        </motion.div>
-
-        {/* Featured certs as cards */}
-        <motion.div {...reveal(0.08)}>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            {featuredCerts.map((cert) => (
-              <CertCard key={cert.code} cert={cert} groupColor={cert.groupColor} />
-            ))}
-          </div>
-        </motion.div>
-
-        {/* The rest as a compact strip */}
-        <motion.div {...reveal(0.12)} className="mt-5">
-          <p className="text-[11px] font-mono uppercase tracking-[0.12em] text-muted-foreground/60 mb-3">
-            Also certified
+        <div className="max-w-[60ch] mb-[clamp(1.75rem,3vw,2.75rem)]">
+          <h2 className="mb-3">Certifications</h2>
+          <p className="text-muted-foreground text-[1.0625rem] leading-relaxed">
+            {all.length} certifications across 5 years, each earned while actively shipping the
+            technology it covers: {count("Microsoft")} from Microsoft, {count("Snowflake")} from
+            Snowflake and {count("Databricks")} from Databricks.
           </p>
-          <div className="flex flex-wrap gap-2">
-            {otherCerts.map((cert) => {
-              const content = (
-                <>
-                  <span className="flex-shrink-0"><IssuerLogo issuer={cert.issuer} size={14} /></span>
-                  <span className="font-mono font-semibold" style={{ color: issuerColor[cert.issuer] }}>{cert.code}</span>
-                  <span className="text-muted-foreground">{cert.name}</span>
-                </>
-              );
-              const cls = "inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[12px] transition-colors";
-              const style = { background: "color-mix(in srgb, var(--foreground) 4%, transparent)", border: "1px solid var(--border)" };
-              return cert.verifyUrl ? (
-                <a key={cert.code} href={cert.verifyUrl} target="_blank" rel="noopener noreferrer" className={`${cls} hover:border-[color:var(--accent)]`} style={style}>
-                  {content}
-                </a>
-              ) : (
-                <span key={cert.code} className={cls} style={style}>{content}</span>
-              );
-            })}
-          </div>
-        </motion.div>
+        </div>
+
+        <table className="cert-table">
+          <thead>
+            <tr>
+              <th scope="col">Code</th>
+              <th scope="col">Certification</th>
+              <th scope="col" className="cert-col-issuer">Issuer</th>
+              <th scope="col">Earned</th>
+              <th scope="col"><span className="sr-only">Verification</span></th>
+            </tr>
+          </thead>
+          {certGroups.map((g) => (
+            <tbody key={g.category}>
+              <tr className="cert-group">
+                <th scope="rowgroup" colSpan={5}>{g.category}</th>
+              </tr>
+              {g.certs.map((c) => (
+                <tr key={c.code} className={c.featured ? "is-core" : undefined}>
+                  <td className="cert-code" translate="no">{c.code}</td>
+                  <th scope="row" className="cert-name">{c.name}</th>
+                  <td className="cert-col-issuer cert-issuer" translate="no">{c.issuer}</td>
+                  <td className="cert-date">{c.date}</td>
+                  <td className="cert-verify">
+                    {c.verifyUrl && (
+                      <a
+                        href={c.verifyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Verify ${c.code} ${c.name} (opens in a new tab)`}
+                      >
+                        Verify
+                      </a>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          ))}
+        </table>
       </div>
     </section>
   );

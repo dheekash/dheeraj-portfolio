@@ -68,15 +68,8 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       >
         Skip to content
       </a>
-      {/* Ambient atmosphere — static dot grid, single restrained glow.
-          The 90px-blur aurora and the full-screen noise overlay are both
-          expensive to raster; they are desktop-only decoration and buy
-          nothing on a phone, so they are gated behind md. */}
-      <div className="cosmos-dots" aria-hidden />
-      <div aria-hidden className="hidden md:block fixed inset-0 -z-[1] pointer-events-none overflow-hidden">
-        <span className="aurora w-[38vw] h-[38vw] -top-[10%] -right-[6%]" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.14) 0%, transparent 70%)" }} />
-      </div>
-      <div className="grain hidden md:block" aria-hidden />
+      {/* No ambient layers: no dot grid, glow or grain. The page's texture comes
+          from type and the results chart, not from decoration behind them. */}
       <ScrollExperience />
       <Navbar />
       <main id="main-content">{children}</main>

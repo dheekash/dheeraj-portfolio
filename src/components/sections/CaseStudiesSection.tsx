@@ -2,11 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
-import { X, ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
-import { onSpotlightMove } from "@/components/common/spotlight";
-import { onTiltMove, onTiltLeave } from "@/components/common/tilt";
-import { useTheme } from "@/components/providers/ThemeProvider";
-import { reveal, staggerParent, staggerGroup, staggerItem, useMediaQuery } from "@/lib/motion";
+import { X, ChevronDown, ChevronUp } from "lucide-react";
+import { useMediaQuery } from "@/lib/motion";
 
 
 /* ── SVG diagrams ─────────────────────────────────────────────────────────── */
@@ -15,19 +12,19 @@ function DiagramReliability() {
   return (
     <svg viewBox="0 0 360 160" className="w-full h-auto" role="img" aria-label="Pipeline failure rate falling from 12% to under 1%">
       <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
-        <text x="0" y="12" opacity="0.5">MONTHLY PIPELINE FAILURE RATE</text>
+        <text x="0" y="12" opacity="0.5">Monthly pipeline failure rate</text>
         <path d="M 30 26 V 126 H 340" stroke="currentColor" strokeWidth="1" opacity="0.3" fill="none" />
         <text x="0" y="34" opacity="0.6">12%</text>
         <text x="10" y="124" opacity="0.6">1%</text>
         <path d="M 35 32 L 60 38 L 85 30 L 110 40 L 135 34 L 165 54 L 200 82 L 240 108 L 290 118 L 338 120"
           stroke="var(--dgrm)" strokeWidth="1.6" fill="none" />
-        {[{ x: 150, l: "BRONZE" }, { x: 215, l: "SILVER" }, { x: 280, l: "GOLD" }].map((p) => (
+        {[{ x: 150, l: "Bronze" }, { x: 215, l: "Silver" }, { x: 280, l: "Gold" }].map((p) => (
           <g key={p.l}>
             <line x1={p.x} y1="26" x2={p.x} y2="126" stroke="currentColor" strokeWidth="1" strokeDasharray="2 4" opacity="0.3" />
             <text x={p.x} y="140" textAnchor="middle" opacity="0.6">{p.l}</text>
           </g>
         ))}
-        <text x="0" y="158" opacity="0.5">6 SOURCE SYSTEMS → ONELAKE → POWER BI</text>
+        <text x="0" y="158" opacity="0.5">6 source systems → OneLake → Power BI</text>
       </g>
     </svg>
   );
@@ -87,7 +84,7 @@ function DiagramReliabilityScroll() {
         aria-label="Pipeline failure rate falling from 12% to under 1% across Bronze, Silver and Gold layers, from six source systems through OneLake to Power BI"
       >
         <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
-          <text x="0" y="12" opacity="0.5">MONTHLY PIPELINE FAILURE RATE</text>
+          <text x="0" y="12" opacity="0.5">Monthly pipeline failure rate</text>
           <path d="M 30 26 V 126 H 340" stroke="currentColor" strokeWidth="1" opacity="0.3" fill="none" />
           <text x="0" y="34" opacity="0.6">12%</text>
           <text x="10" y="124" opacity="0.6">1%</text>
@@ -103,9 +100,9 @@ function DiagramReliabilityScroll() {
           />
 
           {([
-            { x: 150, l: "BRONZE", mv: bronze },
-            { x: 215, l: "SILVER", mv: silver },
-            { x: 280, l: "GOLD", mv: gold },
+            { x: 150, l: "Bronze", mv: bronze },
+            { x: 215, l: "Silver", mv: silver },
+            { x: 280, l: "Gold", mv: gold },
           ] as const).map((s) => (
             <motion.g key={s.l} style={{ opacity: on(s.mv) }}>
               <line x1={s.x} y1="26" x2={s.x} y2="126" stroke="currentColor" strokeWidth="1" strokeDasharray="2 4" opacity="0.45" />
@@ -113,9 +110,11 @@ function DiagramReliabilityScroll() {
             </motion.g>
           ))}
 
-          <motion.text x="0" y="158" style={{ opacity: on(src, 1) }}>6 SOURCE SYSTEMS</motion.text>
-          <motion.text x="104" y="158" style={{ opacity: on(lake, 1) }}>→ ONELAKE</motion.text>
-          <motion.text x="170" y="158" fill="var(--dgrm)" style={{ opacity: on(bi, 1) }}>→ POWER BI</motion.text>
+          <text x="0" y="158">
+            <motion.tspan style={{ opacity: on(src, 1) }}>6 source systems</motion.tspan>
+            <motion.tspan style={{ opacity: on(lake, 1) }}> → OneLake</motion.tspan>
+            <motion.tspan fill="var(--dgrm)" style={{ opacity: on(bi, 1) }}> → Power BI</motion.tspan>
+          </text>
         </g>
       </svg>
     </div>
@@ -126,7 +125,7 @@ function DiagramFraud() {
   return (
     <svg viewBox="0 0 360 160" className="w-full h-auto" role="img" aria-label="Fraud detection latency cut from 24 hours to under 5 minutes">
       <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
-        <text x="0" y="12" opacity="0.5">FRAUD DETECTION LATENCY</text>
+        <text x="0" y="12" opacity="0.5">Fraud detection latency</text>
         <text x="0" y="54" opacity="0.65">before</text>
         <rect x="56" y="42" width="285" height="16" fill="currentColor" opacity="0.12" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1" />
         <text x="347" y="53" textAnchor="end" opacity="0.65">24 hrs</text>
@@ -134,7 +133,7 @@ function DiagramFraud() {
         <rect x="56" y="80" width="6" height="16" fill="var(--dgrm)" />
         <text x="68" y="91" fill="var(--dgrm)">&lt;5 min</text>
         <path d="M 0 112 H 348" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" strokeDasharray="2 5" />
-        <text x="0" y="130" opacity="0.5">KAFKA → DATABRICKS ML → REAL-TIME ALERT</text>
+        <text x="0" y="130" opacity="0.5">Kafka → Databricks ML → real-time alert</text>
         <text x="0" y="150" fill="var(--dgrm)">$1.2M+ flagged · first 90 days</text>
       </g>
     </svg>
@@ -145,7 +144,7 @@ function DiagramSales() {
   return (
     <svg viewBox="0 0 360 160" className="w-full h-auto" role="img" aria-label="Data latency reduced from 6 hours to under 10 minutes">
       <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
-        <text x="0" y="12" opacity="0.5">DATA LATENCY · 8 REGIONAL MARKETS</text>
+        <text x="0" y="12" opacity="0.5">Data latency, 8 regional markets</text>
         <text x="0" y="54" opacity="0.65">before</text>
         <rect x="56" y="42" width="285" height="16" fill="currentColor" opacity="0.12" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1" />
         <text x="347" y="53" textAnchor="end" opacity="0.65">6 hrs</text>
@@ -153,7 +152,7 @@ function DiagramSales() {
         <rect x="56" y="80" width="8" height="16" fill="var(--dgrm)" />
         <text x="70" y="91" fill="var(--dgrm)">&lt;10 min</text>
         <path d="M 0 112 H 348" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" strokeDasharray="2 5" />
-        <text x="0" y="130" opacity="0.5">BRONZE → SILVER → GOLD · DELTA LIVE TABLES</text>
+        <text x="0" y="130" opacity="0.5">Bronze → Silver → Gold, Delta Live Tables</text>
         <text x="0" y="150" fill="var(--dgrm)">5M+ daily transactions · 95% fewer pipeline failures</text>
       </g>
     </svg>
@@ -166,7 +165,7 @@ function DiagramManufacturing() {
   return (
     <svg viewBox="0 0 360 160" className="w-full h-auto" role="img" aria-label="OEE improvement across 15 markets">
       <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
-        <text x="0" y="12" opacity="0.5">OEE TREND · 200+ FACTORY-FLOOR USERS</text>
+        <text x="0" y="12" opacity="0.5">OEE trend, 200+ factory-floor users</text>
         {bars.map((v, i) => {
           const h = (v / 100) * maxH;
           const x = 10 + i * 28;
@@ -181,7 +180,7 @@ function DiagramManufacturing() {
         })}
         <text x="238" y="22" fill="var(--dgrm)" fontSize="8">ADF+dbt deployed</text>
         <path d="M 230 26 L 238 22" stroke="var(--dgrm)" strokeWidth="1" />
-        <text x="0" y="115" opacity="0.5">REPORT REFRESH: 4 HRS → 15 MIN · 94% FASTER</text>
+        <text x="0" y="115" opacity="0.5">Report refresh: 4 hrs → 15 min, 94% faster</text>
         <text x="0" y="140" opacity="0.65">dbt SCD Type 2 · ISO compliance · 15 markets</text>
       </g>
     </svg>
@@ -193,7 +192,7 @@ function DiagramSelfServe() {
     <svg viewBox="0 0 360 170" className="w-full h-auto" role="img" aria-label="Self-serve BI platform layers">
       <g fontFamily="var(--font-mono)" fontSize="8.5" fill="currentColor">
         {/* Sources row ─ y=0..28 */}
-        <text x="0" y="10" opacity="0.45" fontSize="7.5">SOURCES</text>
+        <text x="0" y="10" opacity="0.45" fontSize="7.5">Sources</text>
         <rect x="0"   y="14" width="90" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
         <rect x="96"  y="14" width="90" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
         <rect x="192" y="14" width="90" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
@@ -205,7 +204,7 @@ function DiagramSelfServe() {
         <line x1="45" y1="32" x2="45" y2="44" stroke="var(--dgrm)" strokeWidth="1" strokeDasharray="3 2" />
 
         {/* Warehouse row ─ y=44..68 */}
-        <text x="0" y="54" opacity="0.45" fontSize="7.5">WAREHOUSE</text>
+        <text x="0" y="54" opacity="0.45" fontSize="7.5">Warehouse</text>
         <rect x="0" y="58" width="175" height="18" fill="none" stroke="var(--dgrm)" strokeOpacity="0.4" strokeWidth="1" rx="3" />
         <text x="6" y="71">Snowflake Gold</text>
 
@@ -213,7 +212,7 @@ function DiagramSelfServe() {
         <line x1="45" y1="76" x2="45" y2="88" stroke="var(--dgrm)" strokeWidth="1" strokeDasharray="3 2" />
 
         {/* Semantic row ─ y=88..112 */}
-        <text x="0" y="98" opacity="0.45" fontSize="7.5">SEMANTIC MODEL</text>
+        <text x="0" y="98" opacity="0.45" fontSize="7.5">Semantic model</text>
         <rect x="0" y="102" width="230" height="18" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" rx="3" />
         <text x="6" y="115">Power BI Dataset · 100+ measures</text>
 
@@ -231,7 +230,7 @@ function DiagramChurn() {
   return (
     <svg viewBox="0 0 360 170" className="w-full h-auto" role="img" aria-label="2M customers ranked by churn risk">
       <g fontFamily="var(--font-mono)" fontSize="9" fill="currentColor">
-        <text x="0" y="12" opacity="0.5">2M CUSTOMERS, RANKED BY CHURN RISK</text>
+        <text x="0" y="12" opacity="0.5">2M customers, ranked by churn risk</text>
         {cells.map((_, i) => {
           const x = (i % 20) * 17.5;
           const y = 28 + Math.floor(i / 20) * 26;
@@ -494,7 +493,7 @@ function CodeBlock({ snippet }: { snippet: Snippet }) {
       >
         <div className="flex items-center gap-2.5">
           <span
-            className="text-[9px] font-mono uppercase tracking-[0.15em] px-1.5 py-0.5 rounded"
+            className="text-[9px] font-mono px-1.5 py-0.5 rounded"
             style={{
               background: "color-mix(in srgb, var(--primary) 12%, transparent)",
               color: "var(--primary)",
@@ -602,7 +601,7 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
                 <div className="flex items-center gap-2 mb-2">
                   <p className="eyebrow">{study.domain}</p>
                   <span className="text-[10px] font-mono text-muted-foreground/50">·</span>
-                  <p className="text-[10px] font-mono uppercase tracking-[0.15em] accent-text">{study.capability}</p>
+                  <p className="text-[10px] font-mono accent-text">{study.capability}</p>
                 </div>
                 <h3 id={titleId} className="text-xl font-semibold leading-tight">{study.title}</h3>
               </div>
@@ -658,136 +657,49 @@ function StudyModal({ study, onClose }: { study: Study; onClose: () => void }) {
 
 /* ── Card ─────────────────────────────────────────────────────────────────── */
 
-/* Brand colors for tech chips — recognizable vendor tints on glass.
-   Dark-theme values read fine against near-black; light theme needs
-   noticeably darker shades of the same hue to clear WCAG AA (4.5:1) on
-   white, so each chip gets a separate value per theme. */
-const CHIP_COLORS_DARK: Record<string, string> = {
-  "Microsoft Fabric": "#A78BFA",
-  "Power BI": "#F59E0B",
-  Snowflake: "#60A5FA",
-  Databricks: "#FF5A3C",
-  PySpark: "#FF5A3C",
-  "Delta Lake": "#FF5A3C",
-  OneLake: "#A78BFA",
-  SQLMesh: "#34D399",
-  "Apache Kafka": "#EC4899",
-  Python: "#F59E0B",
-  DAX: "#F59E0B",
-  Azure: "#00A4EF",
-  "Azure Event Hubs": "#00A4EF",
-  SQL: "#B0B8C5",
-  "Scikit-learn": "#F59E0B",
-};
-
-const CHIP_COLORS_LIGHT: Record<string, string> = {
-  "Microsoft Fabric": "#7C3AED",
-  "Power BI": "#B45309",
-  Snowflake: "#1D4ED8",
-  Databricks: "#C2410C",
-  PySpark: "#C2410C",
-  "Delta Lake": "#C2410C",
-  OneLake: "#7C3AED",
-  SQLMesh: "#15803D",
-  "Apache Kafka": "#BE185D",
-  Python: "#B45309",
-  DAX: "#B45309",
-  Azure: "#0369A1",
-  "Azure Event Hubs": "#0369A1",
-  SQL: "#475569",
-  "Scikit-learn": "#B45309",
-};
-
 function StudyCard({ study, onOpen }: { study: Study; onOpen: () => void }) {
-  const { theme } = useTheme();
-  const chipColors = theme === "light" ? CHIP_COLORS_LIGHT : CHIP_COLORS_DARK;
   return (
-    <motion.article
-      /* Sequenced rather than arriving as one block: the card reads
-         outcome -> name -> method -> stack -> go deeper, so the order of
-         arrival matches the order it should be read in. */
-      {...staggerParent}
-      onPointerMove={(e) => { onSpotlightMove(e); onTiltMove(e); }}
-      onPointerLeave={onTiltLeave}
-      className="spotlight gradient-frame overflow-hidden group grid lg:grid-cols-[0.9fr_1.1fr]"
-      style={{ willChange: "transform" }}
-    >
-      {/* Left — animated data-flow visual (the project's own diagram) */}
-      <motion.div {...staggerItem} className="relative p-[clamp(1.25rem,2vw,2rem)] flex items-center border-b lg:border-b-0 lg:border-r" style={{ borderColor: "var(--border)", background: "color-mix(in srgb, var(--foreground) 3%, transparent)" }}>
-        {/* Role pill — top-left, neon border */}
-        <span
-          className="absolute top-4 left-4 z-10 text-[10px] font-mono uppercase tracking-[0.1em] px-2.5 py-1 rounded-full"
-          style={{
-            color: "var(--cyan)",
-            border: "1px solid rgba(96, 165, 250, 0.5)",
-            background: "rgba(96, 165, 250, 0.08)",
-            boxShadow: "0 0 12px rgba(96, 165, 250, 0.25)",
-          }}
-        >
-          {study.capability}
-        </span>
-        <div className="w-full pt-8 text-foreground opacity-90 transition-opacity duration-300 group-hover:opacity-100">
+    <article className="gradient-frame overflow-hidden grid lg:grid-cols-[0.9fr_1.1fr]">
+      {/* Left: the project's own diagram, drawn in ink. */}
+      <div
+        className="relative p-[clamp(1.25rem,2vw,2rem)] flex items-center border-b lg:border-b-0 lg:border-r"
+        style={{ borderColor: "var(--rule)", background: "var(--surface-1)" }}
+      >
+        <div className="w-full text-foreground">
           {/* Scroll-driven variant where one exists; the modal keeps the
               static Diagram since a dialog has no scroll context. */}
           {study.DiagramCard ? <study.DiagramCard /> : <study.Diagram />}
         </div>
-      </motion.div>
+      </div>
 
-      {/* Right — case narrative */}
-      <motion.div {...staggerGroup()} className="p-[clamp(1.35rem,2vw,2rem)] flex flex-col">
-        <motion.div {...staggerItem} className="flex items-center gap-3 mb-4">
-          <span className="font-mono text-[10px]" style={{ color: "var(--cyan)" }}>CASE {study.num}</span>
-          <span className="eyebrow">{study.domain}</span>
-        </motion.div>
+      {/* Right: result first, then what it was and how. */}
+      <div className="p-[clamp(1.35rem,2.2vw,2.25rem)] flex flex-col">
+        <p className="text-[14px] text-muted-foreground mb-3">{study.domain}</p>
 
-        {/* Impact metric — the card hero */}
-        <motion.div {...staggerItem} className="mb-4">
-          <span
-            className="block tabular-nums leading-none text-gradient"
-            /* Sits below the section heading, not level with it: this is a
-               card's hero, not the page's. */
-            style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "clamp(1.9rem, 1.3rem + 1.5vw, 2.15rem)" }}
-          >
-            {study.keyMetric.value}
-          </span>
-          <span className="mt-2.5 block font-mono text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{study.keyMetric.label}</span>
-        </motion.div>
+        <p className="mb-5">
+          <span className="case-metric text-gradient">{study.keyMetric.value}</span>
+          <span className="mt-1.5 block text-[14px] text-muted-foreground">{study.keyMetric.label}</span>
+        </p>
 
-        {/* Project name */}
-        <motion.h3 {...staggerItem} className="text-[clamp(1.05rem,0.95rem+0.4vw,1.3rem)] font-semibold leading-snug mb-2">
-          {study.title}
-        </motion.h3>
+        <h3 className="mb-2">{study.title}</h3>
+        <p className="text-[15px] text-muted-foreground leading-relaxed mb-5 flex-1 max-w-[58ch]">{study.how}</p>
 
-        {/* One-line description */}
-        <motion.p {...staggerItem} className="text-[14px] text-muted-foreground leading-relaxed mb-4 flex-1">{study.how}</motion.p>
+        <ul className="case-stack mb-6" aria-label="Stack">
+          {study.stack.slice(0, 5).map((t) => (
+            <li key={t} translate="no">{t}</li>
+          ))}
+        </ul>
 
-        {/* Tech stack — brand-tinted chip pills */}
-        <motion.div {...staggerItem} className="flex flex-wrap gap-1.5 mb-5">
-          {study.stack.slice(0, 5).map((t) => {
-            const c = chipColors[t] ?? (theme === "light" ? "#475569" : "#B0B8C5");
-            return (
-              <span
-                key={t}
-                className="text-[11px] font-mono px-2.5 py-1 rounded-full"
-                style={{ color: c, background: `color-mix(in srgb, ${c} 12%, transparent)`, border: `1px solid color-mix(in srgb, ${c} 30%, transparent)` }}
-              >
-                {t}
-              </span>
-            );
-          })}
-        </motion.div>
-
-        {/* CTA — glowing arrow button */}
-        <motion.button
-          {...staggerItem}
+        <button
+          type="button"
           onClick={onOpen}
-          className="gradient-btn group/btn self-start inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+          aria-haspopup="dialog"
+          className="dash-btn self-start h-11 px-5 text-[14px]"
         >
           View case study
-          <ArrowUpRight size={14} className="transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-        </motion.button>
-      </motion.div>
-    </motion.article>
+        </button>
+      </div>
+    </article>
   );
 }
 
@@ -799,10 +711,7 @@ export function CaseStudiesSection() {
   return (
     <section id="case-studies">
       <div className="container-page section-pad">
-        <motion.p {...reveal()} className="eyebrow mb-4">Flagship work</motion.p>
-        <motion.h2 {...reveal(0.05)} className="max-w-[18ch] mb-[clamp(2rem,3.5vw,3.5rem)]">
-          Featured projects
-        </motion.h2>
+        <h2 className="max-w-[18ch] mb-[clamp(2rem,3.5vw,3.5rem)]">Featured projects</h2>
 
         <div className="flex flex-col gap-8">
           {studies.slice(0, 3).map((study) => (

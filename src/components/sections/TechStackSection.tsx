@@ -1,15 +1,9 @@
-﻿"use client";
-
-import { motion } from "framer-motion";
 import {
   PythonLogo, SQLLogo, DbtLogo, SparkLogo,
   SnowflakeLogo, PowerBILogo, AzureLogo,
   DatabricksLogo, FabricLogo, PowerQueryLogo,
   MicrosoftLogo, ExcelLogo,
 } from "@/components/common/TechLogos";
-import { onSpotlightMove } from "@/components/common/spotlight";
-import { useTheme } from "@/components/providers/ThemeProvider";
-import { reveal, stagger } from "@/lib/motion";
 
 
 type Tool = {
@@ -147,178 +141,106 @@ const platformGuide = [
 ];
 
 
+/**
+ * Platform decision guide as a comparison: three ruled columns, one per
+ * platform, reading the same three questions down each. The earlier cards
+ * gave every platform its own accent hue and a gradient header — three
+ * colours and a gradient in a system that uses one colour to mean "better".
+ * A decision guide is a comparison, so it is now laid out as one.
+ */
 export function PlatformGuideSection() {
-  const { theme } = useTheme();
   return (
     <section id="platforms">
       <div className="container-page section-pad">
+        <div className="max-w-[60ch] mb-[clamp(2rem,3vw,3rem)]">
+          <h2 className="mb-3">Platform decision guide</h2>
+          <p className="text-muted-foreground text-[1.0625rem] leading-relaxed">
+            How I choose between Fabric, Databricks, and Snowflake based on project constraints.
+          </p>
+        </div>
 
-        {/* ── Platform Decision Guide ── */}
-        <motion.div {...reveal()} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(1.5rem,2.5vw,2.5rem)]">
-          <div>
-            <p className="eyebrow mb-3">Platforms</p>
-            <h2 className="mb-2">Platform Decision Guide</h2>
-            <p className="text-muted-foreground text-sm leading-relaxed max-w-[52ch]">
-              How I choose between Fabric, Databricks, and Snowflake based on project constraints.
-            </p>
-          </div>
-          <div className="flex items-center gap-2 flex-shrink-0 pb-1">
-            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>3 platforms</span>
-            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>When to use each</span>
-          </div>
-        </motion.div>
+        <div className="platform-grid">
+          {platformGuide.map((p) => (
+            <section key={p.platform} className="platform-col" aria-labelledby={`pf-${p.platform}`}>
+              <h3 id={`pf-${p.platform}`} className="platform-name" translate="no">{p.platform}</h3>
+              <p className="platform-tagline">{p.tagline}</p>
+              <p className="platform-best"><span>Best for</span> {p.bestFor}</p>
 
-        <motion.div {...reveal(0.08)}>
-          {/* Snap carousel on mobile → 3-col grid on sm+ */}
-          {/* Edge-to-edge scroller. The negative margin must match
-              .container-page's padding exactly, or the row pushes past the
-              viewport and the whole document scrolls sideways. */}
-          <div className="overflow-x-auto -mx-[clamp(1.25rem,0.5rem+2vw,3rem)] px-[clamp(1.25rem,0.5rem+2vw,3rem)] pb-3 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0">
-            <div className="flex gap-4 snap-x snap-mandatory sm:grid sm:grid-cols-3 sm:snap-none">
-              {platformGuide.map((p, i) => (
-                <motion.div
-                  key={p.platform}
-                  {...reveal(stagger(i, 0.36))}
-                  onPointerMove={onSpotlightMove}
-                  className="spotlight gradient-frame overflow-hidden flex flex-col snap-start flex-shrink-0 w-[min(80vw,320px)] sm:w-auto group"
-                  style={{ borderTop: `3px solid ${p.accent}` }}
-                >
-                  <div
-                    className="px-5 py-5"
-                    style={{ background: `linear-gradient(160deg, color-mix(in srgb, ${p.accent} 18%, transparent) 0%, color-mix(in srgb, ${p.accent} 4%, transparent) 130%)`, borderBottom: `1px solid color-mix(in srgb, ${p.accent} 35%, var(--border))` }}
-                  >
-                    <div className="flex items-center gap-2.5 mb-2">
-                      <span
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-xl flex-shrink-0 grayscale transition-[filter] duration-300 group-hover:grayscale-0"
-                        style={{ background: `color-mix(in srgb, ${p.accent} 20%, var(--card))`, border: `1px solid color-mix(in srgb, ${p.accent} 35%, transparent)` }}
-                      >
-                        <p.Logo size={18} />
-                      </span>
-                      <p className="text-[16px] font-bold text-foreground tracking-tight">{p.platform}</p>
-                    </div>
-                    <p className="text-[12px] font-mono text-muted-foreground mb-3">{p.tagline}</p>
-                    <span
-                      className="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] px-2.5 py-1"
-                      style={{
-                        background: p.accent,
-                        // Fabric's light-theme accent was darkened for text-on-white contrast
-                        // elsewhere, which flips this chip's own best readable text to white.
-                        color: p.accent === "var(--forest)" && theme === "light" ? "#FFFFFF" : p.chipText,
-                        borderRadius: "2px",
-                      }}
-                    >
-                      Best for {p.bestFor}
-                    </span>
-                  </div>
-                  <div className="px-5 py-5 flex flex-col gap-5 flex-1">
-                    <div>
-                      <p className="text-[12px] font-mono uppercase tracking-[0.12em] font-bold mb-3" style={{ color: "var(--forest)" }}>Reach for it when</p>
-                      <ul className="space-y-3">
-                        {p.reach.map((r) => (
-                          <li key={r} className="flex items-start gap-2.5 text-[14px] text-foreground/90 leading-relaxed font-medium">
-                            <span className="toggle-pill on" aria-hidden />
-                            {r}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="pt-4" style={{ borderTop: "1px solid var(--border)" }}>
-                      <p className="text-[12px] font-mono uppercase tracking-[0.12em] text-muted-foreground font-bold mb-3">Skip it when</p>
-                      <ul className="space-y-3">
-                        {p.skip.map((s) => (
-                          <li key={s} className="flex items-start gap-2.5 text-[14px] text-muted-foreground leading-relaxed">
-                            <span className="toggle-pill off" aria-hidden />
-                            {s}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+              <h4 className="platform-q">Reach for it when</h4>
+              <ul className="platform-list is-reach">
+                {p.reach.map((r) => <li key={r}>{r}</li>)}
+              </ul>
 
+              <h4 className="platform-q">Skip it when</h4>
+              <ul className="platform-list is-skip">
+                {p.skip.map((x) => <li key={x}>{x}</li>)}
+              </ul>
+            </section>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
+/* Longest tenure in the data; every years bar is drawn against it. */
+const MAX_YEARS = 7;
+const yearsOf = (y?: string) => (y ? parseFloat(y) || 0 : 0);
+
+/**
+ * Skills as a matrix rather than chip cards. The data already carried years
+ * and proficiency for every tool, but only inside a hover tooltip, so touch
+ * users and almost every visitor never saw it. Each group is now a real
+ * table: tool, years drawn to a shared scale, level in words. Uncoloured on
+ * purpose — proficiency is not an improvement, so it does not get the gain
+ * hue; weight carries the distinction instead.
+ */
 export function CoreExpertiseSection() {
   return (
     <section id="skills">
       <div className="container-page section-pad">
-
-        {/* ── Core Expertise ── */}
-        <motion.div {...reveal(0.04)} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(1.5rem,2.5vw,2.5rem)]">
-          <div>
-            <p className="eyebrow mb-3">Skills</p>
-            <h2 className="mb-2">Core Expertise</h2>
-            <p className="text-muted-foreground text-sm leading-relaxed max-w-[52ch]">
-              Full-stack analytics engineering. Raw data ingestion through governed semantic models to executive-facing dashboards.
-            </p>
-          </div>
-          {/* Legend — proficiency by visual weight, not arbitrary percentages */}
-          <div className="flex items-center gap-3 flex-shrink-0 pb-1 text-[11px] text-muted-foreground">
-            <span className="inline-flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-[3px]" style={{ background: "color-mix(in srgb, var(--accent) 22%, transparent)", border: "1px solid color-mix(in srgb, var(--accent) 45%, transparent)" }} />
-              Expert
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-[3px]" style={{ background: "color-mix(in srgb, var(--foreground) 6%, transparent)", border: "1px solid var(--border)" }} />
-              Advanced
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-[3px]" style={{ border: "1px solid var(--border)" }} />
-              Proficient
-            </span>
-          </div>
-        </motion.div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {categories.map((cat, i) => (
-            <motion.div
-              key={cat.title}
-              {...reveal(stagger(i, 0.1))}
-              onPointerMove={onSpotlightMove}
-              className="spotlight gradient-frame p-5 flex flex-col gap-3.5"
-            >
-              <div className="flex items-center gap-3">
-                <span
-                  className="w-2 h-2 rounded-full flex-shrink-0"
-                  style={{ background: "var(--primary)", boxShadow: "0 0 8px color-mix(in srgb, var(--primary) 60%, transparent)" }}
-                />
-                <p className="text-[13px] font-bold text-foreground tracking-tight">{cat.title}</p>
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {cat.tools.map((t) => {
-                  const lvl = t.level ?? "";
-                  const style =
-                    lvl === "Expert"
-                      ? { background: "color-mix(in srgb, var(--accent) 16%, transparent)", border: "1px solid color-mix(in srgb, var(--accent) 40%, transparent)", color: "var(--foreground)" }
-                      : lvl === "Advanced"
-                      ? { background: "color-mix(in srgb, var(--foreground) 6%, transparent)", border: "1px solid var(--border)", color: "var(--foreground)" }
-                      : { background: "transparent", border: "1px solid var(--border)", color: "var(--muted-foreground)" };
-                  return (
-                    <span
-                      key={t.name}
-                      className="morph-chip inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[12px] font-medium cursor-default"
-                      style={style}
-                      title={`${t.years ?? ""}${t.years ? " · " : ""}${lvl}`}
-                    >
-                      {t.Logo && <t.Logo size={12} />}
-                      {t.name}
-                    </span>
-                  );
-                })}
-              </div>
-            </motion.div>
-          ))}
+        <div className="max-w-[60ch] mb-[clamp(2rem,3vw,3rem)]">
+          <h2 className="mb-3">Core expertise</h2>
+          <p className="text-muted-foreground text-[1.0625rem] leading-relaxed">
+            Full-stack analytics engineering. Raw data ingestion through governed semantic models to executive-facing dashboards.
+          </p>
         </div>
 
+        <div className="grid gap-x-14 gap-y-12 lg:grid-cols-2">
+          {categories.map((cat) => (
+            <table key={cat.title} className="skill-table">
+              <caption className="skill-caption">{cat.title}</caption>
+              <thead className="sr-only">
+                <tr>
+                  <th scope="col">Tool</th>
+                  <th scope="col">Experience</th>
+                  <th scope="col">Level</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cat.tools.map((t) => {
+                  const yrs = yearsOf(t.years);
+                  const expert = t.level === "Expert";
+                  return (
+                    <tr key={t.name}>
+                      <th scope="row" className={`skill-name ${expert ? "is-expert" : ""}`}>
+                        <span translate="no">{t.name}</span>
+                      </th>
+                      <td className="skill-years">
+                        <span className="skill-track" aria-hidden>
+                          <span className="skill-fill" style={{ width: `${(yrs / MAX_YEARS) * 100}%` }} />
+                        </span>
+                        <span className="skill-years-text">{t.years}</span>
+                      </td>
+                      <td className={`skill-level ${expert ? "is-expert" : ""}`}>{t.level}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
-

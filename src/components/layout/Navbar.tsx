@@ -13,7 +13,7 @@ import { profile } from "@/data/profile";
 const links = [
   { href: "#case-studies",   id: "case-studies",   label: "Projects"   },
   { href: "#journey",        id: "journey",        label: "Experience" },
-  { href: "#certifications", id: "certifications", label: "Certs"      },
+  { href: "#certifications", id: "certifications", label: "Certifications" },
   { href: "#skills",         id: "skills",         label: "Skills"     },
   { href: "#platforms",      id: "platforms",      label: "Platforms"  },
   { href: "#about",          id: "about",          label: "About"      },
@@ -87,7 +87,7 @@ export function Navbar() {
         >
           {/* Square logo box — solid accent, no glow */}
           <span
-            className="flex h-8 w-8 items-center justify-center rounded-md font-mono text-[13px] font-bold"
+            className="flex h-8 w-8 items-center justify-center rounded-md text-[13px] font-bold"
             style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
           >
             DK
@@ -108,7 +108,7 @@ export function Navbar() {
               aria-current={active === l.id ? "true" : undefined}
               /* min-h-6 = 24px, WCAG 2.2 AA 2.5.8 Target Size (Minimum).
                  py-1.5 alone left these 17px tall. */
-              className={`relative inline-flex items-center min-h-6 px-1 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
+              className={`relative inline-flex items-center min-h-6 px-1 text-[14.5px] font-medium transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
                 active === l.id ? "" : "text-muted-foreground hover:text-foreground"
               }`}
               style={active === l.id ? { color: "var(--cyan)" } : undefined}

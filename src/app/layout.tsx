@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,27 +7,23 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import "./globals.css";
 
-// Body text
-const plusJakartaSans = Plus_Jakarta_Sans({
+/* One family for the whole interface. Archivo is a grotesque drawn for
+   data-dense layouts, and its width axis lets headlines and figures run
+   semi-condensed while body copy stays at normal width — one voice with
+   range, rather than a display face bolted onto a text face. */
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-geist",
+  axes: ["wdth"],
+  variable: "--font-archivo",
   display: "swap",
 });
 
-// Functional mono — labels, tags, technical metadata
+/* Kept only for the case-study code sample. */
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
   display: "swap",
-  weight: ["400", "500", "600"],
-});
-
-// Display — bold, tight-tracked structural headers
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-kanit",
-  display: "swap",
+  weight: ["400", "500"],
 });
 
 const siteUrl = "https://dheerajkashyap.com";
@@ -37,7 +33,7 @@ const siteUrl = "https://dheerajkashyap.com";
    light regardless of OS preference, so the value is seeded light and then
    kept in sync with the actual chosen theme by ThemeProvider. */
 export const viewport: Viewport = {
-  themeColor: "#F5F7FA",
+  themeColor: "#F3F4F1",
 };
 
 export const metadata: Metadata = {
@@ -166,7 +162,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+      <body className={`${archivo.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider>
           <TooltipProvider>
             <SiteChrome>{children}</SiteChrome>

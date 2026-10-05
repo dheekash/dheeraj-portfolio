@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowUp, ArrowUpRight, ArrowRight } from "lucide-react";
 import { profile } from "@/data/profile";
 import { ContactForm } from "@/components/sections/ContactForm";
 
@@ -19,40 +17,7 @@ export function Footer() {
 
   return (
     <footer id="contact" className="surface-invert surface-lift relative overflow-hidden">
-      {/* Sine-wave divider */}
-      <svg aria-hidden viewBox="0 0 1440 64" preserveAspectRatio="none" className="block w-full h-12">
-        <path
-          d="M0 40 C 180 8, 360 8, 540 34 S 900 62, 1080 38 S 1350 10, 1440 26 L 1440 64 L 0 64 Z"
-          fill="rgba(255,255,255,0.03)"
-        />
-        <path
-          d="M0 40 C 180 8, 360 8, 540 34 S 900 62, 1080 38 S 1350 10, 1440 26"
-          fill="none"
-          stroke="url(#footwave)"
-          strokeWidth="1.5"
-        />
-        <defs>
-          <linearGradient id="footwave" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#60A5FA" stopOpacity="0.25" />
-          </linearGradient>
-        </defs>
-      </svg>
-      {/* Single warm peach note in the corner */}
       <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 80% at 88% 115%, var(--nebula-1) 0%, var(--nebula-2) 45%, transparent 72%)",
-        }}
-      />
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "0px" }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         /* Tighter than the global section-pad (which ran 105px top and
            bottom here). The footer is the page's last frame, so it should
            land in one viewport rather than inherit the mid-page rhythm. */
@@ -65,19 +30,11 @@ export function Footer() {
 
           {/* ── Connect / contact CTA ── */}
           <div className="lg:col-span-4">
-            <p className="eyebrow mb-4">Get in touch</p>
-            <h2
+                        <h2
               className="mb-6"
               style={{ fontSize: "clamp(1.9rem, 1.3rem + 1.6vw, 2.5rem)", lineHeight: 1.1 }}
             >
-              Let&apos;s build analytics systems{" "}
-              <span className="text-gradient">that scale.</span>
-              {/* Terminal cursor — the page's one closing gesture. Sits on
-                  the final line so the footer reads as a prompt waiting for
-                  input rather than a dead end. Decorative, so aria-hidden;
-                  it reuses the typewriter caret rather than introducing a
-                  second blink rhythm. */}
-              <span className="tw-caret ml-1 align-baseline" aria-hidden />
+              Let’s build analytics systems{" "} that scale.
             </h2>
 
             {/* CTA split — full-time (shimmering) / consulting (dashed) */}
@@ -86,7 +43,7 @@ export function Footer() {
                 href={hireHref}
                 className="gradient-btn inline-flex items-center gap-2 rounded-full px-6 py-3 text-[14px] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
               >
-                Hire for full-time <ArrowRight size={15} />
+                Hire for full-time
               </a>
               <a
                 href={consultHref}
@@ -198,7 +155,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-[15px] text-foreground transition-opacity hover:opacity-70"
             >
-              Download resume <ArrowUpRight size={14} />
+              Download résumé
             </a>
           </div>
           </div>
@@ -207,9 +164,9 @@ export function Footer() {
         {/* ── Bottom bar ── */}
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border pt-5 text-center md:flex-row md:text-left">
           <p className="text-[14px] text-muted-foreground">
-            © {new Date().getFullYear()} Dheeraj Kashyap · Bengaluru, India
+            © {new Date().getFullYear()} Dheeraj Kashyap, Bengaluru, India
           </p>
-          <p className="text-[13px] uppercase tracking-[0.12em]" style={{ color: "var(--ash)" }}>
+          <p className="text-[13px]" style={{ color: "var(--ash)" }}>
             From raw data to executive decisions
           </p>
           <a
@@ -217,10 +174,10 @@ export function Footer() {
             aria-label="Back to top"
             className="inline-flex items-center gap-1.5 min-h-11 md:min-h-6 text-[14px] text-muted-foreground transition-colors hover:text-foreground"
           >
-            <ArrowUp size={13} /> Back to top
+            Back to top
           </a>
         </div>
-      </motion.div>
+      </div>
     </footer>
   );
 }

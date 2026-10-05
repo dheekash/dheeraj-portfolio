@@ -1,8 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { reveal, stagger, DURATION, EASE } from "@/lib/motion";
 
 const timeline = [
   {
@@ -87,195 +82,73 @@ const timeline = [
 ];
 
 
+/* Ranges take an en dash (The Elements of Typographic Style, 5.2.2). */
+const range = (p: string) => p.replace(" - ", " – ");
+
+/**
+ * Experience as an open timeline rather than a stack of cards. The case
+ * studies above are cards; repeating the device here would make the page
+ * read as one template. A ruled spine carries the chronology, the current
+ * role is set in ink, and each role leads with its figures.
+ */
 export function CareerEvolutionSection() {
   return (
     <section id="journey">
       <div className="container-page section-pad">
-        <motion.div {...reveal()} className="flex items-end justify-between gap-6 flex-wrap mb-[clamp(2rem,3.5vw,4rem)]">
-          <div>
-            <p className="eyebrow mb-3">Career</p>
-            <h2>Experience</h2>
-          </div>
-          <div className="flex flex-wrap items-center gap-2 pb-1">
-            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>7+ years</span>
-            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>4 companies</span>
-            <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-muted-foreground/70 px-3 py-1.5 rounded-full" style={{ background: "color-mix(in srgb, var(--muted) 60%, transparent)", border: "1px solid var(--border)" }}>15 countries</span>
-          </div>
-        </motion.div>
+        <div className="max-w-[60rem] flex flex-wrap items-end justify-between gap-x-10 gap-y-4 mb-[clamp(2rem,3.5vw,3.5rem)]">
+          <h2>Experience</h2>
+          <dl className="career-facts">
+            <div><dt className="sr-only">Experience</dt><dd><strong>7+</strong> years</dd></div>
+            <div><dt className="sr-only">Employers</dt><dd><strong>4</strong> companies</dd></div>
+            <div><dt className="sr-only">Markets</dt><dd><strong>15</strong> countries</dd></div>
+          </dl>
+        </div>
 
-        <div className="relative max-w-5xl space-y-0">
-          {timeline.map((item, i) => (
-            <motion.div
-              key={`${item.period}-${item.role}`}
-              /* Directional origin reinforces the alternating layout, so the
-                 x-offset is motivated. Travel is short (44px previously read
-                 as a slide-in effect rather than an arrival) and duration and
-                 easing come from the shared system. */
-              initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: DURATION.reveal, delay: stagger(i, 0.05), ease: EASE }}
-              className={`relative grid sm:grid-cols-[clamp(5rem,12vw,9rem)_1px_1fr] gap-x-6 items-start ${
-                i > 0 ? "pt-[clamp(2rem,3vw,3rem)]" : ""
-              }`}
-            >
-              {/* Period column — date pill */}
-              <div className="sm:text-right pt-0.5">
-                <span
-                  className="inline-flex font-mono text-[11px] tracking-[0.03em] leading-snug font-semibold whitespace-nowrap px-2.5 py-1 rounded-full"
-                  style={{
-                    background: item.current
-                      ? "color-mix(in srgb, var(--success) 15%, transparent)"
-                      : "color-mix(in srgb, var(--foreground) 5%, transparent)",
-                    color: item.current ? "var(--success)" : "var(--muted-foreground)",
-                    border: item.current
-                      ? "1px solid color-mix(in srgb, var(--success) 35%, transparent)"
-                      : "1px solid var(--border)",
-                  }}
-                >
-                  {item.period}
-                </span>
-              </div>
+        <ol className="career">
+          {timeline.map((item) => (
+            <li key={`${item.period}-${item.role}`} className={`career-role ${item.current ? "is-current" : ""}`}>
+              <p className="career-period">
+                {range(item.period)}
+                {item.current && <span className="sr-only"> (current role)</span>}
+              </p>
 
-              {/* Vertical line + dot */}
-              <div className="hidden sm:flex flex-col items-center">
-                <span
-                  className="rounded-full border-2 border-background flex-shrink-0 mt-1.5"
-                  style={{
-                    width: item.current ? "0.85rem" : "0.7rem",
-                    height: item.current ? "0.85rem" : "0.7rem",
-                    background: item.current ? "var(--success)" : "var(--accent)",
-                    boxShadow: item.current
-                      ? "0 0 0 4px color-mix(in srgb, var(--success) 20%, transparent)"
-                      : "0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent)",
-                  }}
-                />
-                {i < timeline.length - 1 && (
-                  <span
-                    className="timeline-spine flex-1 w-[2px] mt-1.5 rounded-full"
-                    style={{ minHeight: "calc(100% + clamp(2rem,3vw,3rem))" }}
-                  />
-                )}
-              </div>
-
-              {/* Content — glass node card */}
-              <div className="gradient-frame p-[clamp(1.1rem,1.8vw,1.6rem)]">
-                {/* Role + current badge */}
-                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1">
-                  <h3 className="text-[clamp(1rem,0.95rem+0.3vw,1.1rem)] font-semibold leading-snug">
-                    {item.role}
-                  </h3>
-                  {item.current && (
-                    <span
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold"
-                      style={{
-                        background: "color-mix(in srgb, var(--primary) 18%, transparent)",
-                        color: "var(--primary)",
-                        border: "1px solid color-mix(in srgb, var(--primary) 40%, transparent)",
-                      }}
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                      Current role
-                    </span>
-                  )}
-                </div>
-
-                {/* Company + meta — initials avatar that spins on hover */}
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-4">
-                  <span
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-full font-mono text-[12px] font-bold transition-transform duration-700 hover:rotate-[360deg]"
-                    style={{
-                      color: "var(--cyan)",
-                      border: "1px solid rgba(96, 165, 250, 0.4)",
-                      background: "rgba(96, 165, 250, 0.06)",
-                    }}
-                    aria-hidden
-                  >
-                    {item.company.charAt(0)}
-                  </span>
-                  <p className="text-sm font-medium text-foreground">{item.company}</p>
-                  <span className="text-border hidden sm:inline text-xs">·</span>
-                  <p className="text-[12px] text-muted-foreground/70 font-mono">{item.location}</p>
-                </div>
-
-                {/* Headline achievement callouts */}
-                {"metrics" in item && item.metrics && (
-                  <div className="flex flex-wrap gap-2.5 mb-4">
-                    {item.metrics.map((m) => (
-                      <div
-                        key={m.label}
-                        className="rounded-2xl px-3.5 py-2"
-                        style={{
-                          background: "color-mix(in srgb, var(--accent) 10%, transparent)",
-                          border: "1px solid color-mix(in srgb, var(--accent) 30%, var(--border))",
-                          boxShadow: "0 0 20px -6px rgba(96, 165, 250, 0.35)",
-                        }}
-                      >
-                        <span
-                          className="block tabular-nums leading-none"
-                          style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(1.25rem, 1rem + 0.7vw, 1.6rem)", color: "var(--accent)" }}
-                        >
-                          {m.value}
-                        </span>
-                        <span className="mt-1 block text-[11px] uppercase tracking-[0.08em] text-muted-foreground">{m.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Summary */}
-                <p className="text-sm text-muted-foreground leading-relaxed mb-3 max-w-[58ch]">
-                  {item.summary}
+              <div className="career-body">
+                <h3 className="career-title">{item.role}</h3>
+                <p className="career-org">
+                  <span translate="no">{item.company}</span>
+                  <span className="career-loc">{item.location}</span>
                 </p>
 
-                {/* Tech stack chips */}
-                <div className="flex flex-wrap gap-1.5 mb-3.5">
-                  {item.stack.map((t) => (
-                    <span
-                      key={t}
-                      className="text-[11px] font-mono text-foreground/70 px-2 py-0.5 rounded-md"
-                      style={{
-                        background: "color-mix(in srgb, var(--muted) 60%, transparent)",
-                        border: "1px solid color-mix(in srgb, var(--border) 60%, transparent)",
-                      }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Highlights */}
-                {item.highlights.length > 0 && (
-                  <ul className="space-y-2 mb-4">
-                    {item.highlights.map((h) => (
-                      <li
-                        key={h}
-                        className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed"
-                      >
-                        <span
-                          className="w-1 h-1 rounded-full flex-shrink-0 mt-[0.45rem]"
-                          style={{ background: "var(--primary)" }}
-                        />
-                        {h}
-                      </li>
+                {"metrics" in item && item.metrics && (
+                  <dl className="career-metrics">
+                    {item.metrics.map((m) => (
+                      <div key={m.label}>
+                        <dt className="sr-only">{m.label}</dt>
+                        <dd><span className="career-metric-value">{m.value}</span> {m.label}</dd>
+                      </div>
                     ))}
+                  </dl>
+                )}
+
+                <p className="career-summary">{item.summary}</p>
+
+                {item.highlights.length > 0 && (
+                  <ul className="career-highlights">
+                    {item.highlights.map((h) => <li key={h}>{h}</li>)}
                   </ul>
                 )}
 
-                {/* Case study link */}
+                <ul className="case-stack" aria-label="Stack">
+                  {item.stack.map((t) => <li key={t} translate="no">{t}</li>)}
+                </ul>
+
                 {"caseStudyLink" in item && item.caseStudyLink && (
-                  <a
-                    href={item.caseStudyLink}
-                    className="inline-flex items-center gap-1.5 min-h-11 md:min-h-6 text-[12px] font-mono font-semibold mb-4"
-                    style={{ color: "var(--primary)" }}
-                  >
-                    See featured project <ArrowUpRight size={12} />
-                  </a>
+                  <a href={item.caseStudyLink} className="hero-link mt-4 -ml-1">See featured project</a>
                 )}
               </div>
-            </motion.div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );
