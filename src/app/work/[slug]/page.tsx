@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { caseStudies, getStudy, type CaseStudy } from "@/data/work";
-import { ArchitectureFlow } from "@/components/work/ArchitectureFlow";
+import { ArchitectureDiagram, WorkImage } from "@/components/work/ArchitectureFlow";
 
 export const dynamicParams = false;
 
@@ -30,13 +30,23 @@ function blocks(s: CaseStudy): Block[] {
   const all: (Block | null)[] = [
     { id: "context", title: "Context", body: <p>{s.summary}</p> },
     { id: "challenge", title: "Business challenge", body: <p>{s.challenge}</p> },
-    s.role ? { id: "role", title: "My role", body: <p>{s.role}</p> } : null,
+    {
+      id: "role",
+      title: "My role",
+      body: (
+        <>
+          <p>{s.contribution.join(", ")}.{s.role ? ` ${s.role}` : ""}</p>
+          <p className="small" style={{ marginTop: 12 }}>Scope: {s.scope.join(" · ")}</p>
+        </>
+      ),
+    },
     {
       id: "architecture",
       title: "Architecture",
       body: (
         <div className="card">
-          <ArchitectureFlow study={s} large id={`arch-${s.slug}`} />
+          <ArchitectureDiagram study={s} />
+          {s.image && <div style={{ marginTop: 24 }}><WorkImage study={s} /></div>}
         </div>
       ),
     },

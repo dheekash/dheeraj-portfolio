@@ -11,7 +11,10 @@ const mail = (subject: string) => `mailto:${profile.email}?subject=${encodeURICo
  * primary route and can be copied in one tap; the form is the fallback.
  */
 export function Footer() {
-  const year = new Date().getFullYear();
+  const now = new Date();
+  const year = now.getFullYear();
+  /* Build date: the site is static, so this is when it was last published. */
+  const updated = now.toLocaleDateString("en-GB", { month: "long", year: "numeric" });
 
   return (
     <footer id="contact" className="band" aria-labelledby="contact-title">
@@ -23,52 +26,44 @@ export function Footer() {
               Have a data problem worth solving?
             </h2>
             <p className="lead" style={{ marginTop: 16 }}>
-              I usually reply within 24 hours.
+              Let&rsquo;s talk about the architecture, the dashboard, or everything in between.
+              Open to full-time roles and consulting. I usually reply within 24 hours.
             </p>
+
+            <div className="contact-ctas">
+              <a href={mail("Hello from your portfolio")} className="btn btn-primary">
+                Email me <ArrowRight size={16} aria-hidden />
+              </a>
+              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                LinkedIn <ArrowUpRight size={16} aria-hidden />
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
+              <a href="/api/resume" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                Download résumé <ArrowUpRight size={16} aria-hidden />
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
+            </div>
 
             <div className="contact-email">
               <a href={`mailto:${profile.email}`}>{profile.email}</a>
               <CopyEmail email={profile.email} />
             </div>
 
-            <div className="paths">
-              <div className="card path">
-                <h3 className="title-3" style={{ fontSize: "1.125rem" }}>Full-time roles</h3>
-                <p className="small">Senior BI, analytics engineering and Power BI / Fabric roles.</p>
-                <a href={mail("Full-time opportunity")} className="btn btn-primary btn-sm">
-                  Get in touch <ArrowRight size={16} aria-hidden />
-                </a>
-              </div>
-              <div className="card path">
-                <h3 className="title-3" style={{ fontSize: "1.125rem" }}>Consulting &amp; projects</h3>
-                <p className="small">Fabric, Power BI and Databricks engagements, remote or Bengaluru.</p>
-                <a href={mail("Consulting enquiry")} className="btn btn-secondary btn-sm">
-                  Book a conversation <ArrowRight size={16} aria-hidden />
-                </a>
-              </div>
-            </div>
-
-            <div className="contact-links">
-              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="link-arrow">
-                LinkedIn <ArrowUpRight size={16} className="arrow-out" aria-hidden />
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-              <a href="/api/resume" target="_blank" rel="noopener noreferrer" className="link-arrow">
-                Download résumé <ArrowUpRight size={16} className="arrow-out" aria-hidden />
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-              <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="link-arrow">
-                GitHub <ArrowUpRight size={16} className="arrow-out" aria-hidden />
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-            </div>
+            <p className="small" style={{ marginTop: 16 }}>
+              Consulting enquiry?{" "}
+              <a href={mail("Consulting enquiry")} className="inline-link">Email with the project details</a>
+              {" "}and I&rsquo;ll suggest a time to talk. Also on{" "}
+              <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-link">GitHub</a>.
+            </p>
           </div>
 
           <ContactForm />
         </div>
 
         <div className="footer-bar">
-          <span>© {year} Dheeraj Kashyap · Bengaluru, India</span>
+          <span>
+            © {year} Dheeraj Kashyap · Bengaluru, India · Portfolio updated {updated}
+          </span>
           <nav aria-label="Footer">
             <Link href="/#work">Work</Link>
             <Link href="/#experience">Experience</Link>

@@ -2,25 +2,50 @@ import Image from "next/image";
 import type { CaseStudy } from "@/data/work";
 
 /**
- * The project's data path, source to decision, as an ordered list. Each
- * stage is taken from the build description, so the diagram is a faithful
- * summary of the architecture rather than an illustration of one.
+ * A project's data path, source to decision, drawn as connected boxes.
+ * Every node and caption comes from the build description in
+ * src/data/work.ts, so the diagram summarises the real architecture.
  *
- * When an anonymised screenshot exists for the project it is shown instead
- * on the card (the flow still appears on the case-study page).
+ * Lays out horizontally when its container is wide and vertically when it
+ * is narrow (container query), so the same markup serves the featured
+ * card, the case-study page and phones.
  */
-export function ArchitectureFlow({
-  study,
-  large = false,
-  id,
-}: {
-  study: CaseStudy;
-  large?: boolean;
-  id?: string;
-}) {
+export function ArchitectureDiagram({ study, caption = true }: { study: CaseStudy; caption?: boolean }) {
   return (
-    <figure className="m-0" aria-labelledby={id}>
-      <ol className={`flow${large ? " is-large" : ""}`}>
+    <figure className="arch m-0">
+      <ol className="arch-flow" aria-label={`${study.title} architecture, from source to decision`}>
+        {study.flow.map((step) => (
+          <li key={step.stage} className={`arch-node${step.output ? " is-output" : ""}`}>
+            {/* Skip the stage label or detail when it would only repeat the node name. */}
+            {step.stage.toLowerCase() !== step.node.toLowerCase() && <span className="arch-stage">{step.stage}</span>}
+            <span className="arch-name">{step.node}</span>
+            {step.detail.toLowerCase() !== step.node.toLowerCase() && <span className="arch-detail">{step.detail}</span>}
+          </li>
+        ))}
+      </ol>
+      {caption && <figcaption className="flow-caption small">Architecture, from source to decision</figcaption>}
+    </figure>
+  );
+}
+
+/** Compact one-line version for smaller project cards. */
+export function NodeChain({ study }: { study: CaseStudy }) {
+  return (
+    <ol className="chain" aria-label={`Architecture: ${study.flow.map((f) => f.node).join(", then ")}`}>
+      {study.flow.map((step) => (
+        <li key={step.stage} className={step.output ? "is-output" : undefined} aria-hidden>
+          {step.node}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+/** Vertical list version, used on the case-study page beside the prose. */
+export function ArchitectureFlow({ study }: { study: CaseStudy }) {
+  return (
+    <figure className="m-0">
+      <ol className="flow is-large">
         {study.flow.map((step) => (
           <li key={step.stage} className={`flow-step${step.output ? " is-output" : ""}`}>
             <span className="flow-stage">{step.stage}</span>
@@ -28,28 +53,23 @@ export function ArchitectureFlow({
           </li>
         ))}
       </ol>
-      <figcaption id={id} className="flow-caption small">
-        Architecture, from source to decision
-      </figcaption>
     </figure>
   );
 }
 
-export function WorkVisual({ study }: { study: CaseStudy }) {
-  if (study.image) {
-    return (
-      <figure className="m-0">
-        <Image
-          src={study.image.src}
-          alt={study.image.alt}
-          width={study.image.width}
-          height={study.image.height}
-          sizes="(min-width: 960px) 460px, 100vw"
-          className="w-full h-auto rounded-lg border border-border"
-        />
-        <figcaption className="flow-caption small">Anonymised view</figcaption>
-      </figure>
-    );
-  }
-  return <ArchitectureFlow study={study} id={`flow-${study.slug}`} />;
+export function WorkImage({ study }: { study: CaseStudy }) {
+  if (!study.image) return null;
+  return (
+    <figure className="m-0">
+      <Image
+        src={study.image.src}
+        alt={study.image.alt}
+        width={study.image.width}
+        height={study.image.height}
+        sizes="(min-width: 960px) 640px, 100vw"
+        className="w-full h-auto rounded-lg border border-border"
+      />
+      <figcaption className="flow-caption small">Anonymised view</figcaption>
+    </figure>
+  );
 }

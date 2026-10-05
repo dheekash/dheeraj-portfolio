@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Navbar } from "./Navbar";
 
@@ -35,6 +35,48 @@ function useRevealOnce(pathname: string) {
   }, [pathname]);
 }
 
+/**
+ * Small contact bar for phones and tablets (desktop keeps "Let's talk" in
+ * the sticky nav). Appears once the hero is passed and steps aside when the
+ * contact section itself is on screen.
+ */
+function MobileContactBar() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const contact = document.getElementById("contact");
+    let contactVisible = false;
+    const io = contact
+      ? new IntersectionObserver(([e]) => {
+          contactVisible = e.isIntersecting;
+          update();
+        })
+      : null;
+    function update() {
+      setShow(window.scrollY > window.innerHeight * 0.9 && !contactVisible);
+    }
+    if (contact && io) io.observe(contact);
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+    return () => {
+      window.removeEventListener("scroll", update);
+      io?.disconnect();
+    };
+  }, []);
+
+  return (
+    <div className={`contact-bar${show ? " is-shown" : ""}`} aria-hidden={!show}>
+      <span className="contact-bar-text">
+        <strong>Dheeraj Kashyap</strong>
+        <span>BI &amp; Analytics Engineer</span>
+      </span>
+      <a href="#contact" className="btn btn-primary btn-sm" tabIndex={show ? 0 : -1}>
+        Let&rsquo;s talk
+      </a>
+    </div>
+  );
+}
+
 export function SiteChrome({ children, footer }: { children: React.ReactNode; footer: React.ReactNode }) {
   const pathname = usePathname();
   useRevealOnce(pathname);
@@ -51,6 +93,7 @@ export function SiteChrome({ children, footer }: { children: React.ReactNode; fo
         {children}
       </main>
       {footer}
+      <MobileContactBar />
     </>
   );
 }

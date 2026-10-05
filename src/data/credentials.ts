@@ -18,28 +18,28 @@ export const credentialGroups: { category: string; items: Credential[] }[] = [
   {
     category: "Microsoft Fabric",
     items: [
-      { name: "Fabric Analytics Engineer Associate", code: "DP-600", issuer: "Microsoft", earned: "Dec 2024", flagship: 1, url: "https://learn.microsoft.com/en-us/credentials/certifications/fabric-analytics-engineer-associate/" },
-      { name: "Fabric Data Engineer Associate", code: "DP-700", issuer: "Microsoft", earned: "Jun 2025", flagship: 2, url: "https://learn.microsoft.com/en-us/credentials/certifications/fabric-data-engineer-associate/" },
+      { name: "Fabric Analytics Engineer Associate", code: "DP-600", issuer: "Microsoft", earned: "Dec 2024", flagship: 2, url: "https://learn.microsoft.com/en-us/credentials/certifications/fabric-analytics-engineer-associate/" },
+      { name: "Fabric Data Engineer Associate", code: "DP-700", issuer: "Microsoft", earned: "Jun 2025", flagship: 3, url: "https://learn.microsoft.com/en-us/credentials/certifications/fabric-data-engineer-associate/" },
     ],
   },
   {
     category: "Power BI",
     items: [
-      { name: "Power BI Data Analyst Associate", code: "PL-300", issuer: "Microsoft", earned: "Sep 2021", flagship: 3, url: "https://learn.microsoft.com/en-us/credentials/certifications/power-bi-data-analyst-associate/" },
+      { name: "Power BI Data Analyst Associate", code: "PL-300", issuer: "Microsoft", earned: "Sep 2021", flagship: 1, url: "https://learn.microsoft.com/en-us/credentials/certifications/power-bi-data-analyst-associate/" },
       { name: "Power Platform Fundamentals", code: "PL-900", issuer: "Microsoft", earned: "Aug 2021", url: "https://learn.microsoft.com/en-us/credentials/certifications/power-platform-fundamentals/" },
     ],
   },
   {
     category: "Data platforms",
     items: [
-      { name: "Data Engineer Associate", code: "DE-A", issuer: "Databricks", earned: "May 2026", flagship: 4, url: "https://www.databricks.com/learn/certification/data-engineer-associate" },
-      { name: "SnowPro Associate: Core", code: "SnowPro", issuer: "Snowflake", earned: "Jan 2026", flagship: 5, url: "https://learn.snowflake.com/en/certifications/" },
+      { name: "Data Engineer Associate", code: "DE-A", issuer: "Databricks", earned: "May 2026", flagship: 5, url: "https://www.databricks.com/learn/certification/data-engineer-associate" },
+      { name: "SnowPro Associate: Core", code: "SnowPro", issuer: "Snowflake", earned: "Jan 2026", flagship: 6, url: "https://learn.snowflake.com/en/certifications/" },
     ],
   },
   {
     category: "Azure",
     items: [
-      { name: "Azure Administrator Associate", code: "AZ-104", issuer: "Microsoft", earned: "Dec 2021", flagship: 6, url: "https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/" },
+      { name: "Azure Administrator Associate", code: "AZ-104", issuer: "Microsoft", earned: "Dec 2021", flagship: 4, url: "https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/" },
       { name: "Azure Fundamentals", code: "AZ-900", issuer: "Microsoft", earned: "Dec 2021", url: "https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/" },
       { name: "Azure AI Fundamentals", code: "AI-900", issuer: "Microsoft", earned: "Sep 2021", url: "https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/" },
     ],

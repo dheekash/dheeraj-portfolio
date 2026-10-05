@@ -1,3 +1,5 @@
+import { PlatformDecision } from "./PlatformDecision";
+
 /* Columns are platforms, rows are the questions asked of each. "Typical
    pairing" is drawn from how each platform is combined in the case studies. */
 const platforms = ["Microsoft Fabric", "Databricks", "Snowflake"] as const;
@@ -76,12 +78,24 @@ export function PlatformJudgment() {
           <p className="label">Architecture judgment</p>
           <h2 id="platforms-title" className="section-title">How I choose an analytics platform</h2>
           <p className="lead">
-            Fabric, Databricks and Snowflake each win under different constraints. This is how I
-            decide between them.
+            Fabric, Databricks and Snowflake each win under different constraints. Answer a few
+            questions to see how I would decide.
           </p>
         </header>
 
         <div className="reveal">
+          <PlatformDecision />
+
+          <div className="verdict">
+            <span className="label">My default</span>
+            <p>
+              Choose the simplest architecture that satisfies scale, governance, cost and business
+              requirements.
+            </p>
+          </div>
+
+          <details className="compare-details">
+            <summary>See the full comparison</summary>
           <table className="compare">
             <caption className="sr-only">Platform comparison: Microsoft Fabric, Databricks and Snowflake</caption>
             <thead>
@@ -115,14 +129,7 @@ export function PlatformJudgment() {
               ))}
             </tbody>
           </table>
-
-          <div className="verdict">
-            <span className="label">My default</span>
-            <p>
-              Choose the simplest architecture that satisfies scale, governance, cost and business
-              requirements.
-            </p>
-          </div>
+          </details>
         </div>
       </div>
     </section>

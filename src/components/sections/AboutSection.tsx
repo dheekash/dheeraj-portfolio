@@ -17,9 +17,10 @@ export function AboutSection() {
 
         <div className="about-grid">
           <div className="about-copy reveal">
+            <span className="label">Professional</span>
             <p className="about-first">
-              I&rsquo;m a BI &amp; Analytics Engineer focused on building practical analytics
-              systems, not just dashboards.
+              BI &amp; Analytics Engineer focused on enterprise reporting, semantic modelling and
+              modern data platforms.
             </p>
             <p>
               My work sits between business requirements, data engineering and decision-making. I
@@ -33,8 +34,11 @@ export function AboutSection() {
                 decisions?&rdquo;</strong>
               </p>
             </blockquote>
-            <p className="small">
-              Outside work: lifting, football, anime, movies and too much caffeine.
+
+            <span className="label about-outside">Outside work</span>
+            <p>
+              Outside the data world, you&rsquo;ll usually find me lifting, watching football,
+              exploring anime and movies, or looking for good food.
             </p>
           </div>
 

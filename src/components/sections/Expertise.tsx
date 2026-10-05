@@ -1,71 +1,69 @@
-/* Capability groups. Every item is from the existing skills list; the
-   self-rated years and levels are dropped because a bar next to a tool
-   name says little a recruiter can check. Core tools are outlined in ink. */
-const groups: { title: string; summary: string; items: { name: string; core?: boolean }[] }[] = [
+import Link from "next/link";
+import { getStudy } from "@/data/work";
+
+/* Four capability areas. Each lists what I do (not just tool names) and
+   links to the case studies where it was applied, so depth is shown by
+   evidence. Every item is from the existing skills list or case studies. */
+const groups: { title: string; summary: string; items: { name: string; core?: boolean }[]; applied: string[] }[] = [
   {
-    title: "Power BI & semantic modelling",
-    summary: "Governed models and reports that hold up under real enterprise use.",
+    title: "BI & semantic modelling",
+    summary: "Governed Power BI models that stay fast and trusted under enterprise use.",
     items: [
       { name: "Power BI", core: true },
       { name: "DAX", core: true },
-      { name: "Semantic modelling", core: true },
+      { name: "Semantic models", core: true },
       { name: "Star schema" },
-      { name: "Power Query" },
       { name: "Row-level security" },
       { name: "Direct Lake" },
       { name: "Incremental refresh" },
+      { name: "Composite models" },
+      { name: "Power Query" },
     ],
-  },
-  {
-    title: "Microsoft Fabric & lakehouse",
-    summary: "One governed platform from ingestion to the semantic layer.",
-    items: [
-      { name: "Microsoft Fabric", core: true },
-      { name: "Medallion architecture", core: true },
-      { name: "OneLake" },
-      { name: "Delta Lake" },
-      { name: "SQLMesh" },
-      { name: "Lakehouse pipelines" },
-    ],
+    applied: ["seller-analytics-platform", "manufacturing-analytics-suite"],
   },
   {
     title: "Data engineering",
-    summary: "Pipelines and models with quality checks built in.",
+    summary: "Lakehouse pipelines with quality checks built into every layer.",
     items: [
+      { name: "Microsoft Fabric", core: true },
+      { name: "Medallion architecture", core: true },
       { name: "SQL", core: true },
-      { name: "Python" },
-      { name: "PySpark" },
+      { name: "OneLake & Delta Lake" },
+      { name: "SQLMesh" },
       { name: "dbt" },
       { name: "Azure Data Factory" },
-      { name: "Data modelling" },
-      { name: "Pipeline monitoring" },
+      { name: "PySpark" },
+      { name: "Python" },
     ],
+    applied: ["fabric-lakehouse-migration", "sales-intelligence-platform"],
   },
   {
-    title: "Cloud & platforms",
-    summary: "Chosen per project, not by habit.",
+    title: "Cloud & data platforms",
+    summary: "Chosen per project, using the decision guide above.",
     items: [
       { name: "Azure", core: true },
       { name: "Snowflake" },
       { name: "Databricks" },
       { name: "ADLS Gen2" },
-      { name: "Azure DevOps" },
-      { name: "CI/CD" },
+      { name: "Kafka & Event Hubs" },
+      { name: "Azure DevOps & CI/CD" },
       { name: "Git" },
     ],
+    applied: ["real-time-fraud-monitoring", "customer-churn-platform"],
   },
   {
-    title: "Business analytics & delivery",
-    summary: "Turning requirements into analytics products people use.",
+    title: "Analytics & delivery",
+    summary: "From requirements workshop to a report leadership uses every week.",
     items: [
-      { name: "Stakeholder management", core: true },
+      { name: "KPI definition", core: true },
+      { name: "Executive reporting", core: true },
       { name: "Requirements workshops" },
-      { name: "Executive reporting" },
-      { name: "Client presentations" },
+      { name: "Stakeholder management" },
+      { name: "Forecasting (XGBoost)" },
+      { name: "Churn & anomaly models" },
       { name: "Team leadership" },
-      { name: "Agile / Scrum" },
-      { name: "Power Automate" },
     ],
+    applied: ["manufacturing-analytics-suite", "seller-analytics-platform"],
   },
 ];
 
@@ -92,6 +90,19 @@ export function Expertise() {
                   </li>
                 ))}
               </ul>
+              <p className="applied small">
+                <span className="label">Applied in</span>{" "}
+                {g.applied.map((slug, k) => {
+                  const s = getStudy(slug);
+                  if (!s) return null;
+                  return (
+                    <span key={slug}>
+                      {k > 0 && ", "}
+                      <Link href={`/work/${slug}`}>{s.title.replace(/, (Amazon|Rockwool)$/, "")}</Link>
+                    </span>
+                  );
+                })}
+              </p>
             </section>
           ))}
         </div>

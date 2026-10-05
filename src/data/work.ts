@@ -9,7 +9,13 @@
  * invented copy.
  */
 
-export type FlowStep = { stage: string; detail: string; output?: boolean };
+export type FlowStep = {
+  stage: string;
+  /** Short label for the diagram node. */
+  node: string;
+  detail: string;
+  output?: boolean;
+};
 export type Metric = { value: string; label: string };
 
 export type CaseStudy = {
@@ -33,6 +39,10 @@ export type CaseStudy = {
   points: string[];
   /** Where the work was done, when the portfolio states it. */
   role?: string;
+  /** What I did, as disciplines, taken from the build description. */
+  contribution: string[];
+  /** Size of the build, from the case study's own figures. */
+  scope: string[];
   learnings?: string[];
   /** Anonymised screenshot, when one is available. Lives in /public/work. */
   image?: { src: string; alt: string; width: number; height: number };
@@ -62,14 +72,16 @@ export const caseStudies: CaseStudy[] = [
       { value: "−90%", label: "Maintenance effort" },
       { value: "−15%", label: "Compute cost" },
     ],
+    contribution: ["Lakehouse architecture", "Data modelling", "Migration delivery"],
+    scope: ["6 source systems", "200+ SQLMesh models", "5+ years of history"],
     stack: ["Microsoft Fabric", "SQLMesh", "Delta Lake", "OneLake", "Power BI", "DAX"],
     flow: [
-      { stage: "Sources", detail: "6 source systems" },
-      { stage: "Bronze", detail: "Raw ingestion to OneLake, Delta Lake" },
-      { stage: "Silver", detail: "200+ SQLMesh models, automated quality gates" },
-      { stage: "Gold", detail: "Curated Fabric lakehouse tables" },
-      { stage: "Semantic model", detail: "Power BI semantic models, DAX" },
-      { stage: "Reporting", detail: "Power BI", output: true },
+      { stage: "Sources", node: "6 source systems", detail: "No unified schema, lineage or quality gates" },
+      { stage: "Bronze", node: "Bronze", detail: "Raw ingestion to OneLake, Delta Lake" },
+      { stage: "Silver", node: "Silver", detail: "200+ SQLMesh models, automated quality gates" },
+      { stage: "Gold", node: "Gold", detail: "Curated Fabric lakehouse tables" },
+      { stage: "Semantic model", node: "Semantic model", detail: "Power BI semantic models, DAX" },
+      { stage: "Reporting", node: "Power BI", detail: "Power BI", output: true },
     ],
     points: [
       "5+ years of historical data migrated with zero data loss.",
@@ -127,14 +139,16 @@ WHERE event_ts >= @start_ds
       { value: "$500K+", label: "Revenue opportunities, first year" },
       { value: "100M+", label: "Records a day" },
     ],
+    contribution: ["Semantic modelling", "Pipeline automation", "Predictive models"],
+    scope: ["10 marketplaces", "100M+ records a day", "100+ DAX measures"],
     stack: ["Power BI", "Snowflake", "Python", "SQL", "DAX", "Scikit-learn", "Azure"],
     flow: [
-      { stage: "Sources", detail: "Transaction data from 10 marketplaces" },
-      { stage: "Ingestion", detail: "Automated SQL pipelines replacing manual extracts" },
-      { stage: "Warehouse", detail: "Snowflake Gold layer, 100M+ records a day" },
-      { stage: "Semantic model", detail: "Power BI dataset, 100+ DAX measures" },
-      { stage: "Analytics", detail: "Python predictive models for revenue signals" },
-      { stage: "Decision", detail: "Seller leadership weekly business reviews", output: true },
+      { stage: "Sources", node: "10 marketplaces", detail: "Transaction data from 10 marketplaces" },
+      { stage: "Ingestion", node: "SQL pipelines", detail: "Automated SQL pipelines replacing manual extracts" },
+      { stage: "Warehouse", node: "Snowflake", detail: "Snowflake Gold layer, 100M+ records a day" },
+      { stage: "Semantic model", node: "Semantic model", detail: "Power BI dataset, 100+ DAX measures" },
+      { stage: "Analytics", node: "Python models", detail: "Python predictive models for revenue signals" },
+      { stage: "Decision", node: "Weekly reviews", detail: "Seller leadership weekly business reviews", output: true },
     ],
     points: [
       "100M+ daily records aggregated across 10 global marketplaces into one Snowflake Gold layer.",
@@ -201,14 +215,16 @@ RETURN
       { value: "200+", label: "Users on live data" },
       { value: "15", label: "Markets" },
     ],
+    contribution: ["Pipeline engineering", "Data modelling", "Power BI delivery"],
+    scope: ["15 markets", "200+ users", "ISO audit trail"],
     stack: ["Power BI", "Snowflake", "dbt", "Azure Data Factory", "SharePoint", "DAX"],
     flow: [
-      { stage: "Sources", detail: "Production data and SharePoint file sources" },
-      { stage: "Ingestion", detail: "Chained Azure Data Factory pipelines" },
-      { stage: "Transformation", detail: "dbt models, SCD Type 2 history, audit trail" },
-      { stage: "Warehouse", detail: "Snowflake" },
-      { stage: "Semantic model", detail: "Power BI, incremental refresh; yield, downtime, OEE" },
-      { stage: "Decision", detail: "200+ factory-floor users in 15 markets", output: true },
+      { stage: "Sources", node: "Production data", detail: "Production data and SharePoint file sources" },
+      { stage: "Ingestion", node: "ADF", detail: "Chained Azure Data Factory pipelines" },
+      { stage: "Transformation", node: "dbt", detail: "dbt models, SCD Type 2 history, audit trail" },
+      { stage: "Warehouse", node: "Snowflake", detail: "Snowflake" },
+      { stage: "Semantic model", node: "Power BI", detail: "Power BI, incremental refresh; yield, downtime, OEE" },
+      { stage: "Decision", node: "200+ users", detail: "200+ factory-floor users in 15 markets", output: true },
     ],
     points: [
       "Report refresh: 4 hours to 15 minutes. 94% faster.",
@@ -241,14 +257,16 @@ RETURN
       { value: "$1.2M+", label: "Flagged in the first 90 days" },
       { value: "94%", label: "Detection precision" },
     ],
+    contribution: ["Streaming pipeline", "Anomaly detection", "Real-time reporting"],
+    scope: ["100K+ events an hour", "Sub-5-minute refresh"],
     stack: ["Apache Kafka", "Databricks", "PySpark", "Azure Event Hubs", "Power BI", "Python"],
     flow: [
-      { stage: "Sources", detail: "Transaction events, 100K+ an hour" },
-      { stage: "Streaming", detail: "Apache Kafka, Azure Event Hubs" },
-      { stage: "Scoring", detail: "Databricks Random Forest anomaly detection, PySpark" },
-      { stage: "Storage", detail: "Delta table of fraud alerts" },
-      { stage: "Reporting", detail: "Live Power BI dashboard, sub-5-minute refresh" },
-      { stage: "Decision", detail: "Risk team intervention", output: true },
+      { stage: "Sources", node: "Events", detail: "Transaction events, 100K+ an hour" },
+      { stage: "Streaming", node: "Kafka", detail: "Apache Kafka, Azure Event Hubs" },
+      { stage: "Scoring", node: "Databricks ML", detail: "Databricks Random Forest anomaly detection, PySpark" },
+      { stage: "Storage", node: "Delta", detail: "Delta table of fraud alerts" },
+      { stage: "Reporting", node: "Power BI", detail: "Live Power BI dashboard, sub-5-minute refresh" },
+      { stage: "Decision", node: "Risk team", detail: "Risk team intervention", output: true },
     ],
     points: [
       "100K+ transaction events per hour through the Kafka streaming pipeline.",
@@ -312,14 +330,16 @@ scored = model.transform(
       { value: "−95%", label: "Pipeline failures" },
       { value: "+22%", label: "Forecast accuracy" },
     ],
+    contribution: ["Lakehouse pipelines", "Forecasting", "Composite models"],
+    scope: ["8 regional markets", "5M+ transactions a day"],
     stack: ["Databricks", "Delta Live Tables", "MLflow", "Azure Data Factory", "PySpark", "Power BI", "ADLS Gen2"],
     flow: [
-      { stage: "Sources", detail: "5M+ transactions a day" },
-      { stage: "Ingestion", detail: "Azure Data Factory, ADLS Gen2" },
-      { stage: "Transformation", detail: "Delta Live Tables, Bronze → Silver → Gold" },
-      { stage: "Forecasting", detail: "XGBoost on MLflow, Unity Catalog governance" },
-      { stage: "Semantic model", detail: "Power BI composite models on Gold" },
-      { stage: "Decision", detail: "Regional managers in 8 markets", output: true },
+      { stage: "Sources", node: "Transactions", detail: "5M+ transactions a day" },
+      { stage: "Ingestion", node: "ADF", detail: "Azure Data Factory, ADLS Gen2" },
+      { stage: "Transformation", node: "Delta Live Tables", detail: "Delta Live Tables, Bronze → Silver → Gold" },
+      { stage: "Forecasting", node: "XGBoost", detail: "XGBoost on MLflow, Unity Catalog governance" },
+      { stage: "Semantic model", node: "Power BI", detail: "Power BI composite models on Gold" },
+      { stage: "Decision", node: "8 markets", detail: "Regional managers in 8 markets", output: true },
     ],
     points: [
       "5M+ daily transactions processed through Bronze, Silver, and Gold Medallion layers.",
@@ -351,13 +371,15 @@ scored = model.transform(
       { value: "≈$300K", label: "Annual revenue retained" },
       { value: "89%", label: "Recall on at-risk customers" },
     ],
+    contribution: ["ML pipeline", "Feature store", "Power BI delivery"],
+    scope: ["2M+ customers scored daily"],
     stack: ["Databricks", "Snowflake", "dbt", "MLflow", "Power BI", "Python"],
     flow: [
-      { stage: "Sources", detail: "CRM, billing and usage data" },
-      { stage: "Features", detail: "Feature store in Snowflake" },
-      { stage: "Models", detail: "Databricks ML, MLflow; daily inference on 2M+ customers" },
-      { stage: "Delivery", detail: "Prioritised list in the CS team's Power BI workspace" },
-      { stage: "Decision", detail: "Customer success outreach", output: true },
+      { stage: "Sources", node: "CRM & billing", detail: "CRM, billing and usage data" },
+      { stage: "Features", node: "Snowflake", detail: "Feature store in Snowflake" },
+      { stage: "Models", node: "Databricks ML", detail: "Databricks ML, MLflow; daily inference on 2M+ customers" },
+      { stage: "Delivery", node: "Power BI", detail: "Prioritised list in the CS team's Power BI workspace" },
+      { stage: "Decision", node: "CS team", detail: "Customer success outreach", output: true },
     ],
     points: [
       "Feature store built in Snowflake from CRM, billing, and usage data.",

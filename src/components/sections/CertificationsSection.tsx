@@ -43,7 +43,7 @@ export function CertificationsSection() {
 
         <div className="after-grid reveal">
           <Link href="/certifications" className="link-arrow">
-            View all {allCredentials.length} certifications <ArrowRight size={16} className="arrow" aria-hidden />
+            View all {allCredentials.length} credentials <ArrowRight size={16} className="arrow" aria-hidden />
           </Link>
         </div>
       </div>
