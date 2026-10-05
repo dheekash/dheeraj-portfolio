@@ -4,10 +4,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 
-/* Keeps <meta name="theme-color"> on the actual page background so browser
-   chrome (iOS Safari bar, Android status bar) does not sit at a different
-   colour from the page. Values mirror --background in globals.css. */
-const THEME_COLOR: Record<Theme, string> = { light: "#F3F4F1", dark: "#141816" };
+/* Keeps <meta name="theme-color"> on the page background so browser chrome
+   matches the page. Values mirror --paper in globals.css. */
+const THEME_COLOR: Record<Theme, string> = { light: "#F6F5F1", dark: "#121513" };
 
 function syncThemeColor(theme: Theme) {
   let tag = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
@@ -25,42 +24,31 @@ const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({
 });
 
 /**
- * Light is the default; dark (cosmic) is opt-in via the absence of a
- * `.light` class on <html> being flipped — i.e. dark shows only when the
- * user picks it or the OS reports a dark preference. A small inline script
- * in layout.tsx applies the stored choice (or the system preference when
- * nothing is stored) before paint; this provider syncs React state to it and
- * enables the cross-fade transition class only after hydration so the first
- * paint is instant.
+ * Light is the default and needs no class. Dark is opt-in: an inline script
+ * in layout.tsx adds `.dark` to <html> before paint when the visitor chose it
+ * on an earlier visit. This provider mirrors that into React state.
  */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    const root = document.documentElement;
-    const current = root.classList.contains("light") ? "light" : "dark";
+    const current: Theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncs state to the pre-paint class
     setTheme(current);
     syncThemeColor(current);
-    // Defer enabling transitions until after first paint
-    const id = requestAnimationFrame(() => root.classList.add("theme-ready"));
-    return () => cancelAnimationFrame(id);
   }, []);
 
   const toggle = () => {
     const next: Theme = theme === "light" ? "dark" : "light";
     setTheme(next);
-    document.documentElement.classList.toggle("light", next === "light");
+    document.documentElement.classList.toggle("dark", next === "dark");
     syncThemeColor(next);
     try {
       localStorage.setItem("theme", next);
     } catch {}
   };
 
-  return (
-    <ThemeContext.Provider value={{ theme, toggle }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ theme, toggle }}>{children}</ThemeContext.Provider>;
 }
 
 export const useTheme = () => useContext(ThemeContext);

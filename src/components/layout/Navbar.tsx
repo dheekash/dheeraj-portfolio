@@ -1,183 +1,151 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useScroll, useMotionValueEvent } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { LinkedinIcon, GithubIcon } from "@/components/common/SocialIcons";
-import { ThemeSwitch } from "@/components/common/ThemeSwitch";
-import { profile } from "@/data/profile";
+import { usePathname } from "next/navigation";
+import { Menu, Moon, Sun, X } from "lucide-react";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
-/* Mirrors the page's narrative order. #certifications and #platforms were
-   previously rendered as full sections but omitted here, leaving them
-   reachable only by scrolling past them. */
+/* Four destinations. Platform judgment and certifications sit inside
+   Expertise's reach on the page; Contact is the primary button. */
 const links = [
-  { href: "#case-studies",   id: "case-studies",   label: "Projects"   },
-  { href: "#journey",        id: "journey",        label: "Experience" },
-  { href: "#certifications", id: "certifications", label: "Certifications" },
-  { href: "#skills",         id: "skills",         label: "Skills"     },
-  { href: "#platforms",      id: "platforms",      label: "Platforms"  },
-  { href: "#about",          id: "about",          label: "About"      },
-  { href: "#contact",        id: "contact",        label: "Contact"    },
+  { id: "work", label: "Work", sections: ["work"] },
+  { id: "experience", label: "Experience", sections: ["experience"] },
+  { id: "expertise", label: "Expertise", sections: ["platforms", "expertise", "certifications"] },
+  { id: "about", label: "About", sections: ["about"] },
 ];
 
+function ThemeButton() {
+  const { theme, toggle } = useTheme();
+  const dark = theme === "dark";
+  return (
+    <button
+      type="button"
+      onClick={toggle}
+      className="nav-icon-btn"
+      aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+    >
+      {dark ? <Sun size={18} aria-hidden /> : <Moon size={18} aria-hidden />}
+    </button>
+  );
+}
+
 export function Navbar() {
-  const [scrolled, setScrolled]   = useState(false);
-  const [hidden, setHidden]       = useState(false);
-  const [open, setOpen]           = useState(false);
-  const [active, setActive]       = useState("");
+  const pathname = usePathname();
+  const onHome = pathname === "/";
+  const href = (id: string) => (onHome ? `#${id}` : `/#${id}`);
 
-  /* Only discrete state changes (scrolled / hidden) come off scroll here.
-     Continuous progress lives in ScrollExperience as a single indicator. */
-  const { scrollY } = useScroll();
-
-  useMotionValueEvent(scrollY, "change", (y) => {
-    const last = scrollY.getPrevious() ?? 0;
-    setScrolled(y > 16);
-    if (open) setHidden(false);
-    else if (y > last && y > 320) setHidden(true);
-    else if (y < last) setHidden(false);
-  });
-
-  /* Escape closes the mobile menu */
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    const onChange = () => mq.matches && setOpen(false);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* Active section: whichever tracked section crosses the middle band. */
   useEffect(() => {
-    const sections = links
-      .map((l) => document.getElementById(l.id))
-      .filter((el): el is HTMLElement => el !== null);
-    if (sections.length === 0) return;
+    if (!onHome) return;
+    const map = new Map<string, string>();
+    links.forEach((l) => l.sections.forEach((s) => map.set(s, l.id)));
+    const els = [...map.keys()].map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
     const io = new IntersectionObserver(
       (entries) => {
-        const vis = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (vis) setActive(vis.target.id);
+        const hit = entries.find((e) => e.isIntersecting);
+        if (hit) setActive(map.get(hit.target.id) ?? "");
       },
-      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5] }
+      { rootMargin: "-45% 0px -50% 0px" }
     );
-    sections.forEach((s) => io.observe(s));
+    els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, [onHome]);
+
+  /* Sheet: Escape closes, body does not scroll behind it, desktop width closes it. */
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const onMq = () => mq.matches && setOpen(false);
+    document.addEventListener("keydown", onKey);
+    mq.addEventListener("change", onMq);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      mq.removeEventListener("change", onMq);
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
 
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-50 border-b transition-[transform,background-color,border-color,backdrop-filter] duration-300 ${
-        hidden ? "-translate-y-full" : "translate-y-0"
-      } ${scrolled || open ? "glass-nav" : "bg-transparent border-transparent"}`}
-      style={scrolled || open ? undefined : { borderColor: "transparent" }}
-    >
-      {/* gap-8 pushed the brand + controls past 360px viewports. min-w-0
-          lets the flex row actually shrink instead of forcing overflow. */}
-      <div className="container-page h-[4rem] flex items-center gap-3 lg:gap-8 min-w-0">
-        <a
-          href="#top"
-          className="flex items-center gap-3 shrink-0 min-h-11 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
-        >
-          {/* Square logo box — solid accent, no glow */}
-          <span
-            className="flex h-8 w-8 items-center justify-center rounded-md text-[13px] font-bold"
-            style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
-          >
-            DK
-          </span>
-          <span
-            className="text-[17px]"
-            style={{ fontFamily: "var(--font-display)", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--foreground)" }}
-          >
-            Dheeraj Kashyap
-          </span>
+    <header className={`nav${scrolled || open ? " is-scrolled" : ""}`}>
+      <div className="container nav-inner">
+        <a href={onHome ? "#top" : "/"} className="nav-brand">
+          Dheeraj Kashyap
         </a>
 
-        <nav className="hidden lg:flex items-center gap-6 ml-auto">
+        <nav className="nav-links" aria-label="Primary">
           {links.map((l) => (
             <a
-              key={l.href}
-              href={l.href}
+              key={l.id}
+              href={href(l.id)}
+              className="nav-link"
               aria-current={active === l.id ? "true" : undefined}
-              /* min-h-6 = 24px, WCAG 2.2 AA 2.5.8 Target Size (Minimum).
-                 py-1.5 alone left these 17px tall. */
-              className={`relative inline-flex items-center min-h-6 px-1 text-[14.5px] font-medium transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
-                active === l.id ? "" : "text-muted-foreground hover:text-foreground"
-              }`}
-              style={active === l.id ? { color: "var(--cyan)" } : undefined}
             >
               {l.label}
-              {active === l.id && (
-                <span aria-hidden className="absolute -bottom-0.5 left-0 right-0 h-px" style={{ background: "var(--primary)" }} />
-              )}
             </a>
           ))}
         </nav>
 
-        {/* Theme toggle — top-right */}
-        <div className="hidden lg:flex items-center">
-          <ThemeSwitch />
+        <div className="nav-actions">
+          <ThemeButton />
+          <a href="/api/resume" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm">
+            Résumé<span className="sr-only"> (opens in a new tab)</span>
+          </a>
+          <a href={href("contact")} className="btn btn-primary btn-sm">
+            Let&rsquo;s talk
+          </a>
         </div>
 
-        <div className="lg:hidden flex items-center gap-3 ml-auto">
-          <ThemeSwitch />
+        <div className="nav-mobile">
+          <ThemeButton />
           <button
-            onClick={() => setOpen(!open)}
+            type="button"
+            className="nav-icon-btn"
             aria-expanded={open}
+            aria-controls="nav-sheet"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="flex items-center justify-center w-11 h-11 -mr-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+            onClick={() => setOpen((o) => !o)}
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            {open ? <X size={20} aria-hidden /> : <Menu size={20} aria-hidden />}
           </button>
         </div>
       </div>
 
       {open && (
-        <nav className="lg:hidden glass-nav border-t border-border" aria-label="Mobile">
-          <ul className="container-page py-3">
-            {links.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className={`flex items-center min-h-12 text-[15px] font-medium transition-colors ${
-                    active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {l.label}
-                  {active === l.id && (
-                    <span className="ml-2 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                  )}
-                </a>
-              </li>
-            ))}
-            <li className="flex flex-wrap items-center gap-4 pt-2 border-t border-border mt-1">
-              <a
-                href={profile.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 min-h-12 text-[15px] text-muted-foreground"
-              >
-                <LinkedinIcon size={15} /> LinkedIn
+        <div id="nav-sheet" className="nav-sheet">
+          <nav className="container" aria-label="Mobile">
+            <ul>
+              {links.map((l) => (
+                <li key={l.id}>
+                  <a href={href(l.id)} className="sheet-link" onClick={() => setOpen(false)}>
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="sheet-actions">
+              <a href={href("contact")} className="btn btn-primary" onClick={() => setOpen(false)}>
+                Let&rsquo;s talk
               </a>
-              <a
-                href={profile.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 min-h-12 text-[15px] text-muted-foreground"
-              >
-                <GithubIcon size={15} /> GitHub
+              <a href="/api/resume" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                Download résumé<span className="sr-only"> (opens in a new tab)</span>
               </a>
-            </li>
-          </ul>
-        </nav>
+            </div>
+          </nav>
+        </div>
       )}
     </header>
   );

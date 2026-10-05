@@ -1,80 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { MotionConfig, motion, useScroll, useSpring, useMotionValueEvent } from "framer-motion";
-import { ArrowUp } from "lucide-react";
 import { Navbar } from "./Navbar";
-import { Footer } from "./Footer";
-import { ScrollExperience } from "@/components/common/ScrollExperience";
 
-/* Scroll progress ring — fills with the brand gradient as the page scrolls,
-   doubles as a back-to-top control once enough of the page has been read. */
-const RING_R = 17;
-
-function BackToTop() {
-  const [visible, setVisible] = useState(false);
-
-  /* Progress rides a motion value straight onto the SVG, so scrolling never
-     re-renders this subtree. */
-  const { scrollY, scrollYProgress } = useScroll();
-  const progress = useSpring(scrollYProgress, { stiffness: 180, damping: 30, restDelta: 0.001 });
-
-  useMotionValueEvent(scrollY, "change", (y) => setVisible(y > 700));
-
-  return (
-    <button
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      aria-label="Back to top"
-      className={`fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full panel flex items-center justify-center text-muted-foreground hover:text-foreground transition-[opacity,transform,color] duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring ${
-        visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-3 pointer-events-none"
-      }`}
-    >
-      <svg viewBox="0 0 40 40" className="absolute inset-0 w-full h-full -rotate-90" aria-hidden>
-        <circle cx="20" cy="20" r={RING_R} fill="none" stroke="var(--hairline)" strokeWidth="2" />
-        <motion.circle
-          cx="20"
-          cy="20"
-          r={RING_R}
-          fill="none"
-          stroke="var(--primary)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          pathLength={1}
-          style={{ pathLength: progress }}
-        />
-      </svg>
-      <ArrowUp size={15} className="relative" />
-    </button>
-  );
+/**
+ * Fades each `.reveal` block up once as it enters the viewport. Content is
+ * only hidden after this runs (`reveal-ready` on <html>), so it is always
+ * visible without JS, and the CSS skips it under reduced motion.
+ */
+function useRevealOnce(pathname: string) {
+  useEffect(() => {
+    if (!("IntersectionObserver" in window)) return;
+    const root = document.documentElement;
+    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal:not(.is-in)"));
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px" }
+    );
+    // Anything already on screen is shown at once rather than animated.
+    els.forEach((el) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("is-in");
+      else io.observe(el);
+    });
+    root.classList.add("reveal-ready");
+    return () => io.disconnect();
+  }, [pathname]);
 }
 
-export function SiteChrome({ children }: { children: React.ReactNode }) {
+export function SiteChrome({ children, footer }: { children: React.ReactNode; footer: React.ReactNode }) {
   const pathname = usePathname();
-  const isIsolated = pathname.startsWith("/deck");
+  useRevealOnce(pathname);
 
-  if (isIsolated) {
-    return <>{children}</>;
-  }
+  if (pathname.startsWith("/deck")) return <>{children}</>;
 
   return (
-    /* reducedMotion="user" strips transform animations app-wide when the OS
-       asks for it, keeping opacity so content still reads as arriving.
-       Every motion component inherits this — no per-component branches. */
-    <MotionConfig reducedMotion="user">
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[10000] focus:px-4 focus:py-2.5 focus:rounded-lg focus:bg-primary focus:text-primary-foreground focus:text-sm focus:font-semibold"
-      >
+    <>
+      <a href="#main-content" className="skip-link">
         Skip to content
       </a>
-      {/* No ambient layers: no dot grid, glow or grain. The page's texture comes
-          from type and the results chart, not from decoration behind them. */}
-      <ScrollExperience />
       <Navbar />
-      <main id="main-content">{children}</main>
-      <Footer />
-      <BackToTop />
-    </MotionConfig>
+      <main id="main-content" tabIndex={-1}>
+        {children}
+      </main>
+      {footer}
+    </>
   );
 }
