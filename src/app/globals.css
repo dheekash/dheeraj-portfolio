@@ -1516,3 +1516,81 @@ a.sl-inner:hover { background: color-mix(in srgb, var(--paper) 70%, var(--sheet)
 
 /* Selection */
 ::selection { background: var(--sage-light); color: var(--ink); }
+
+/* ═══ Logo system ═══════════════════════════════════════════════════════
+   One colour for every mark: charcoal at rest, sage on hover. Masked
+   files (official logos you add under public/logos) follow the same rule. */
+.mark {
+  display: inline-block;
+  flex: none;
+  color: var(--ink);
+  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+span.mark {
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+/* Hero: working across. Marks and names, no boxes. */
+.hero-working { gap: 10px 22px; }
+.hero-working .label { flex-basis: 100%; margin: 0; }
+.hero-working-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted-ink);
+  transition: color var(--dur) var(--ease);
+}
+.hero-working-item:hover { color: var(--ink); }
+.hero-working-item:hover .mark { color: var(--sage); }
+
+/* Project cards: stack with marks */
+.stack-marks {
+  list-style: none;
+  margin: var(--s-4) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 0.875rem;
+  color: var(--muted-ink);
+}
+.stack-marks li { display: inline-flex; align-items: center; gap: 7px; }
+.flagship-body .stack-marks { margin: 0 0 var(--s-5); }
+@media (hover: hover) {
+  .card-interactive:hover .stack-marks .mark { color: var(--sage); }
+}
+
+/* Certifications: product mark top right */
+.cert-top { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s-3); }
+.cert-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--sheet-raised);
+  border: 1px solid var(--line-subtle);
+}
+.cert-card:hover .cert-mark .mark { color: var(--sage); }
+@media (max-width: 639.98px) {
+  .cert-card .cert-top { flex-basis: 100%; }
+  .cert-mark { width: 32px; height: 32px; }
+}
+
+/* Contact: icon buttons */
+.contact-ctas .btn svg.mark, .contact-ctas .btn .mark { color: inherit; }
+.icon-btn:hover .mark { color: var(--band-accent); }
+
+/* Experience: company logo, only when a file is provided */
+.rail-logo { width: 96px; height: 28px; margin-top: var(--s-3); color: var(--muted-ink); -webkit-mask-position: left center; mask-position: left center; }
+.rail-item:hover .rail-logo { color: var(--sage); }

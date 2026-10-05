@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, FileText, Mail } from "lucide-react";
+import { LinkedinIcon } from "@/components/common/SocialIcons";
+import { Mark } from "@/components/common/Mark";
 import { profile } from "@/data/profile";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { CopyEmail } from "@/components/layout/CopyEmail";
@@ -32,14 +34,18 @@ export function Footer() {
 
             <div className="contact-ctas">
               <a href={mail("Hello from your portfolio")} className="btn btn-primary">
-                Email me <ArrowRight size={16} aria-hidden />
+                <Mail size={16} aria-hidden /> Email me
               </a>
-              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                LinkedIn <ArrowUpRight size={16} aria-hidden />
+              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
+                <LinkedinIcon size={16} className="mark" /> LinkedIn <ArrowUpRight size={14} aria-hidden />
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
-              <a href="/api/resume" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                Download résumé <ArrowUpRight size={16} aria-hidden />
+              <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
+                <Mark name="GitHub" size={16} /> GitHub <ArrowUpRight size={14} aria-hidden />
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
+              <a href="/api/resume" target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
+                <FileText size={16} aria-hidden className="mark" /> Résumé <ArrowUpRight size={14} aria-hidden />
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
             </div>
@@ -52,8 +58,7 @@ export function Footer() {
             <p className="small" style={{ marginTop: 16 }}>
               Consulting enquiry?{" "}
               <a href={mail("Consulting enquiry")} className="inline-link">Email with the project details</a>
-              {" "}and I&rsquo;ll suggest a time to talk. Also on{" "}
-              <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-link">GitHub</a>.
+              {" "}and I&rsquo;ll suggest a time to talk.
             </p>
           </div>
 

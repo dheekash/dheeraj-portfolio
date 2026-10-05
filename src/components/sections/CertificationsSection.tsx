@@ -1,6 +1,17 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { allCredentials, flagshipCredentials } from "@/data/credentials";
+import { Mark } from "@/components/common/Mark";
+
+/* The product each credential certifies, for its mark. */
+const productOf: Record<string, string> = {
+  "PL-300": "Power BI",
+  "DP-600": "Microsoft Fabric",
+  "DP-700": "Microsoft Fabric",
+  "AZ-104": "Azure",
+  "DE-A": "Databricks",
+  SnowPro: "Snowflake",
+};
 
 /**
  * Six flagship credentials as cards; the full register lives on
@@ -24,7 +35,14 @@ export function CertificationsSection() {
         <ul className="cert-grid list-none m-0 p-0">
           {flagshipCredentials.map((c) => (
             <li key={c.code} className="card cert-card reveal">
-              <span className="label">{c.issuer}</span>
+              <span className="cert-top">
+                <span className="label">{c.issuer}</span>
+                {productOf[c.code] && (
+                  <span className="cert-mark" title={productOf[c.code]}>
+                    <Mark name={productOf[c.code]} size={22} />
+                  </span>
+                )}
+              </span>
               <span className="cert-name">{c.name}</span>
               <div className="cert-meta">
                 <span className="small">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { companyLogo } from "@/components/common/Mark";
 
 type Role = {
   start: string;
@@ -142,6 +143,17 @@ export function Experience() {
                   {r.start} – {r.end}
                 </span>
                 {r.current && <span className="rail-current">Current role</span>}
+                {companyLogo(r.company) && (
+                  <span
+                    className="rail-logo mark"
+                    role="img"
+                    aria-label={`${r.company} logo`}
+                    style={{
+                      WebkitMaskImage: `url(${companyLogo(r.company)})`,
+                      maskImage: `url(${companyLogo(r.company)})`,
+                    }}
+                  />
+                )}
               </div>
 
               <div className="rail-main">

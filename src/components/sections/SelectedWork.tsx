@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { caseStudies, impactTone, type CaseStudy } from "@/data/work";
 import { ArchitectureDiagram, NodeChain, WorkImage } from "@/components/work/ArchitectureFlow";
+import { Mark } from "@/components/common/Mark";
 
 function Impact({ study, limit }: { study: CaseStudy; limit?: number }) {
   return (
@@ -16,6 +17,20 @@ function Impact({ study, limit }: { study: CaseStudy; limit?: number }) {
         </div>
       ))}
     </dl>
+  );
+}
+
+/** Up to five stack items, each with its mark. */
+function StackMarks({ study, limit = 6 }: { study: CaseStudy; limit?: number }) {
+  return (
+    <ul className="stack-marks" aria-label="Stack">
+      {study.stack.slice(0, limit).map((t) => (
+        <li key={t} translate="no">
+          <Mark name={t} size={16} />
+          {t}
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -77,6 +92,7 @@ export function SelectedWork() {
               <p><strong>Approach.</strong> {flagship.action}</p>
             </div>
             <div>
+              <StackMarks study={flagship} />
               <Impact study={flagship} />
               <RoleScope study={flagship} />
               <div className="work-cta">

@@ -1,5 +1,6 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { profile } from "@/data/profile";
+import { Mark } from "@/components/common/Mark";
 
 /* Proof strip. All four figures are from the experience section: years
    since Mar 2019, and the current DataStream role's models, pipelines and
@@ -81,7 +82,10 @@ export function Hero() {
           <p className="hero-working hero-anim" style={{ "--d": 4 } as React.CSSProperties}>
             <span className="label">Working across</span>
             {working.map((w) => (
-              <span key={w} className="hero-working-item" translate="no">{w}</span>
+              <span key={w} className="hero-working-item" translate="no">
+                <Mark name={w} size={18} />
+                {w}
+              </span>
             ))}
           </p>
         </div>
