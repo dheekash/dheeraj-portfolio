@@ -123,6 +123,9 @@ export function Experience() {
                     <li key={b}><Rich text={b} /></li>
                   ))}
                 </ul>
+              </div>
+
+              <div className="rail-side">
                 <p className="stack-line">
                   <strong className="sr-only">Stack: </strong>
                   {r.stack.map((t) => <span key={t} translate="no">{t}</span>)}
@@ -133,7 +136,6 @@ export function Experience() {
                   </Link>
                 )}
               </div>
-
             </li>
           ))}
         </ol>
