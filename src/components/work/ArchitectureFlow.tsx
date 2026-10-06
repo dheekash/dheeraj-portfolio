@@ -15,7 +15,7 @@ export function ArchitectureDiagram({ study, caption = true }: { study: CaseStud
     <figure className="arch m-0">
       <ol className="arch-flow" aria-label={`${study.title} architecture, from source to decision`}>
         {study.flow.map((step) => (
-          <li key={step.stage} className={`arch-node${step.output ? " is-output" : ""}`}>
+          <li key={step.stage} data-stage={step.stage.toLowerCase().replace(/ /g, "-")} className={`arch-node${step.output ? " is-output" : ""}`}>
             {/* Skip the stage label or detail when it would only repeat the node name. */}
             {step.stage.toLowerCase() !== step.node.toLowerCase() && <span className="arch-stage">{step.stage}</span>}
             <span className="arch-name">{step.node}</span>

@@ -15,17 +15,14 @@ import {
 import { Blend, ChartColumnBig, Cloud, Database, Sigma, Workflow, type LucideIcon } from "lucide-react";
 
 /**
- * One logo language for the whole site: every mark is drawn in a single
- * colour (currentColor), sized to the text beside it, and turns sage on
- * hover via CSS. Brand colours are never used.
+ * Logos across the site, always shown next to the product name.
  *
  * Resolution order for a name:
- *   1. A file you add at public/logos/<slug>.svg (or .png). It is applied
- *      as a mask, so any official logo file is recoloured to match.
- *   2. The brand mark from simple-icons, where the brand allows it.
- *   3. A neutral icon for products whose marks are not freely available
- *      (Microsoft removed theirs from simple-icons). These are generic
- *      symbols, not imitations of the product logos.
+ *   1. An official file at public/logos/<slug>.svg (or .png), shown as-is.
+ *      Power BI, Fabric, Azure and Data Factory come from Microsoft's
+ *      official icon sets (Fabric icons, Azure architecture icons).
+ *   2. The brand mark from simple-icons, in its brand colour.
+ *   3. A neutral icon in the site accent, for items with no official mark.
  *   4. Nothing: the label stands alone.
  *
  * Server-only (reads the filesystem at build time).
@@ -78,29 +75,33 @@ export function Mark({ name, size = 16, className = "" }: { name: string; size?:
   const cls = `mark ${className}`.trim();
 
   if (file) {
+    /* Official files are shown unaltered, in their original colours, as
+       Microsoft's icon terms require; every call site labels them. */
     return (
-      <span
-        aria-hidden
-        className={cls}
-        style={{
-          width: size,
-          height: size,
-          WebkitMaskImage: `url(${file})`,
-          maskImage: `url(${file})`,
-        }}
-      />
+      // eslint-disable-next-line @next/next/no-img-element -- tiny static SVG
+      <img src={file} alt="" aria-hidden width={size} height={size} className={`${cls} mark-file`} />
     );
   }
   const si = brand[slug];
   if (si) {
+    /* Brand colour, except near-black marks (GitHub, Kafka), which follow
+       the text colour so they stay visible on dark backgrounds. */
+    const sum = [0, 2, 4].reduce((t, i) => t + parseInt(si.hex.slice(i, i + 2), 16), 0);
     return (
-      <svg aria-hidden viewBox="0 0 24 24" width={size} height={size} className={cls} fill="currentColor">
+      <svg
+        aria-hidden
+        viewBox="0 0 24 24"
+        width={size}
+        height={size}
+        className={`${cls} mark-brand`}
+        fill={sum < 160 ? "currentColor" : `#${si.hex}`}
+      >
         <path d={si.path} />
       </svg>
     );
   }
   const Icon = neutral[slug];
-  if (Icon) return <Icon aria-hidden size={size} strokeWidth={1.75} className={cls} />;
+  if (Icon) return <Icon aria-hidden size={size} strokeWidth={1.9} className={`${cls} mark-neutral`} />;
   return null;
 }
 

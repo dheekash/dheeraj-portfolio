@@ -80,7 +80,7 @@ export function Expertise() {
 
         <div className="capabilities">
           {groups.map((g, gi) => (
-            <section key={g.title} className="card capability reveal" aria-labelledby={`cap-${gi}`}>
+            <section key={g.title} className="card capability reveal" data-tone={gi} aria-labelledby={`cap-${gi}`}>
               <h3 id={`cap-${gi}`} className="title-3" style={{ fontSize: "1.1875rem" }}>{g.title}</h3>
               <p className="small">{g.summary}</p>
               <ul>

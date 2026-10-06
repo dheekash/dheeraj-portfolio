@@ -1594,3 +1594,200 @@ span.mark {
 /* Experience: company logo, only when a file is provided */
 .rail-logo { width: 96px; height: 28px; margin-top: var(--s-3); color: var(--muted-ink); -webkit-mask-position: left center; mask-position: left center; }
 .rail-item:hover .rail-logo { color: var(--sage); }
+
+/* ═══ Colour layer ══════════════════════════════════════════════════════
+   Four hues on a warm base, each with one job:
+     emerald  primary accent, improvements, actions
+     gold     Power BI, money, highlights
+     teal     platforms, data engineering
+     clay     baselines ("before"), delivery
+   Text colours are the darker "-text" steps so every label passes AA. */
+:root {
+  --paper: #F6F4EE;
+  --sage: #1D6B4C;
+  --sage-dark: #134A35;
+  --sage-light: #D3E8DB;
+  --sage-pale: #EAF4EE;
+  --positive: #1A7A4E;
+  --positive-soft: #EAF4EE;
+  --ink-hover: #1D6B4C;
+  --baseline: #C0622F;
+  --baseline-text: #A04F24;
+  --highlight: #8C6209;
+  --gold: #D9A21B;
+  --gold-text: #8C6209;
+  --gold-pale: #FBF1D9;
+  --teal: #1F6E7A;
+  --teal-pale: #E1EFF0;
+  --clay: #C0622F;
+  --clay-text: #A04F24;
+  --clay-pale: #F8E8DE;
+  --tint-mint: #EAF3EE;
+  --tint-sand: #F7F0E1;
+  --tint-mist: #E6F0F1;
+  --band: #0F1D17;
+  --band-sheet: #15261E;
+  --band-line: #22362C;
+  --band-input-line: #34503F;
+  --band-accent: #8FD3AE;
+}
+.dark {
+  --paper: #111613;
+  --sage: #7FCCA2;
+  --sage-dark: #A6DDBF;
+  --sage-light: #1E3A2B;
+  --sage-pale: #17271F;
+  --positive: #7FCCA2;
+  --positive-soft: #17271F;
+  --ink-hover: #A6DDBF;
+  --baseline: #E08A5C;
+  --baseline-text: #EBA27A;
+  --highlight: #E8C062;
+  --gold: #E8B93B;
+  --gold-text: #E8C062;
+  --gold-pale: #2A2412;
+  --teal: #6EC1CC;
+  --teal-pale: #142629;
+  --clay: #E08A5C;
+  --clay-text: #EBA27A;
+  --clay-pale: #2B1D16;
+  --tint-mint: #131D17;
+  --tint-sand: #1B1A14;
+  --tint-mist: #121C1E;
+  --band: #0A120E;
+  --band-sheet: #112019;
+  --band-line: #1F3328;
+  --band-input-line: #2E4A3A;
+  --band-accent: #8FD3AE;
+}
+
+/* Primary actions in emerald */
+.btn-primary { background: var(--sage); color: #FFFFFF; }
+.btn-primary:hover { background: var(--sage-dark); }
+.dark .btn-primary { color: #0F1D17; }
+.band .btn-primary { background: var(--band-accent); color: var(--band); }
+.band .btn-primary:hover { background: #B5E6CB; }
+.nav .btn-primary { background: var(--ink); color: var(--paper); }
+.nav .btn-primary:hover { background: var(--sage); color: #FFFFFF; }
+
+/* Hero: soft colour wash, product names in the accent */
+.hero {
+  background:
+    radial-gradient(60rem 30rem at 85% 10%, color-mix(in srgb, var(--sage) 9%, transparent), transparent 70%),
+    radial-gradient(40rem 24rem at 100% 85%, color-mix(in srgb, var(--gold) 10%, transparent), transparent 70%);
+}
+.hero .hl { color: var(--sage); }
+.hero-name { color: var(--sage); }
+
+/* Proof strip: one hue per figure */
+.proof-item:nth-child(1) .proof-value { color: var(--sage); }
+.proof-item:nth-child(2) .proof-value { color: var(--gold-text); }
+.proof-item:nth-child(3) .proof-value { color: var(--teal); }
+.proof-item:nth-child(4) .proof-value { color: var(--clay-text); }
+.proof-item:nth-child(1)::before { background: var(--sage); }
+.proof-item:nth-child(2)::before { background: var(--gold); }
+.proof-item:nth-child(3)::before { background: var(--teal); }
+.proof-item:nth-child(4)::before { background: var(--clay); }
+.proof-item::before { height: 3px; top: -2px; width: 32px; }
+
+/* Hero stack: each layer marked in its own hue */
+.sl-row:nth-child(1) .sl-dot { border-color: var(--muted-ink); }
+.sl-row:nth-child(2) .sl-dot { border-color: var(--teal); background: var(--teal-pale); }
+.sl-row:nth-child(3) .sl-dot { border-color: var(--gold); background: var(--gold-pale); }
+.sl-row:nth-child(4) .sl-dot { border-color: var(--clay); background: var(--clay-pale); }
+.sl-row:nth-child(5) .sl-dot { border-color: var(--gold); background: var(--gold); }
+.stack-panel .results-head { background: var(--sage-pale); }
+.stack-panel .results-head .label { color: var(--sage-dark) !important; }
+
+/* Section canvases */
+#experience { --paper: var(--tint-mint); }
+#platforms { --paper: var(--tint-sand); }
+#certifications { --paper: var(--tint-mist); }
+.section-head .label { color: var(--sage); }
+#platforms .section-head .label { color: var(--gold-text); }
+
+/* Featured case study */
+.flag { background: var(--sage); color: #FFFFFF; }
+.dark .flag { color: #0F1D17; }
+.flagship { box-shadow: inset 0 4px 0 var(--sage); }
+
+/* Architecture: Medallion layers in bronze, silver and gold */
+.arch-node[data-stage="bronze"] { background: #F6E7DA; border-color: #B8743E; }
+.arch-node[data-stage="silver"] { background: #EEF0F2; border-color: #8E99A3; }
+.arch-node[data-stage="gold"] { background: var(--gold-pale); border-color: var(--gold); }
+.arch-node[data-stage="semantic-model"] { background: var(--teal-pale); border-color: var(--teal); }
+.dark .arch-node[data-stage="bronze"] { background: #2A1E14; border-color: #B8743E; }
+.dark .arch-node[data-stage="silver"] { background: #1D2125; border-color: #8E99A3; }
+.arch-node[data-stage="bronze"] .arch-stage, .arch-node[data-stage="bronze"] .arch-name { color: #8A4F22; }
+.dark .arch-node[data-stage="bronze"] .arch-stage, .dark .arch-node[data-stage="bronze"] .arch-name { color: #E0A877; }
+.arch-node[data-stage="gold"] .arch-name { color: var(--gold-text); }
+.arch-node[data-stage="semantic-model"] .arch-name { color: var(--teal); }
+.chain li:first-child { background: var(--teal-pale); border-color: color-mix(in srgb, var(--teal) 30%, transparent); }
+
+/* Impact figures */
+.tone-money .impact-value { color: var(--gold-text); }
+.tone-money .impact-label { color: var(--muted-ink); }
+.tone-count .impact-value { color: var(--teal); }
+
+/* Experience */
+.progression li:nth-child(1)::before { border-color: var(--clay); }
+.progression li:nth-child(2)::before { border-color: var(--gold); }
+.progression li:nth-child(3)::before { border-color: var(--teal); }
+.progression li.is-current::before { background: var(--sage); border-color: var(--sage); box-shadow: 0 0 0 4px var(--sage-light); }
+.rail-year { color: var(--sage-dark); }
+.ri-value { color: var(--sage); }
+
+/* How I build: each step its own hue */
+.step-n {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+  min-width: 2.25rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: var(--sage);
+}
+.dark .step-n { color: #0F1D17; }
+.step:nth-child(2) .step-n { background: var(--teal); }
+.step:nth-child(3) .step-n { background: var(--gold-text); }
+.step:nth-child(4) .step-n { background: var(--clay-text); }
+.step:nth-child(5) .step-n { background: var(--sage-dark); }
+.dark .step:nth-child(3) .step-n { background: var(--gold); }
+.dark .step:nth-child(4) .step-n { background: var(--clay); }
+.steps { border-top-color: var(--sage); border-top-width: 2px; }
+
+/* Platform guide */
+.decision { box-shadow: inset 0 4px 0 var(--gold); }
+.decision-pick { color: var(--sage-dark); }
+.verdict { border-left-color: var(--gold); background: var(--sheet); }
+
+/* Expertise: one hue per capability area */
+.capability { box-shadow: inset 0 4px 0 var(--tone, var(--sage)); }
+.capability[data-tone="0"] { --tone: var(--gold); --tone-pale: var(--gold-pale); --tone-text: var(--gold-text); }
+.capability[data-tone="1"] { --tone: var(--teal); --tone-pale: var(--teal-pale); --tone-text: var(--teal); }
+.capability[data-tone="2"] { --tone: var(--sage); --tone-pale: var(--sage-pale); --tone-text: var(--sage-dark); }
+.capability[data-tone="3"] { --tone: var(--clay); --tone-pale: var(--clay-pale); --tone-text: var(--clay-text); }
+.capability li.is-core { background: var(--tone-pale); border-color: color-mix(in srgb, var(--tone) 35%, transparent); color: var(--tone-text); }
+
+/* Certifications: stripe in the product's colour */
+.cert-card { box-shadow: inset 0 4px 0 var(--cert, var(--sage)); }
+.cert-card[data-product="power-bi"] { --cert: #E6AD10; }
+.cert-card[data-product="microsoft-fabric"] { --cert: #1B8A7A; }
+.cert-card[data-product="azure"] { --cert: #0A7BD6; }
+.cert-card[data-product="databricks"] { --cert: #FF3621; }
+.cert-card[data-product="snowflake"] { --cert: #29B5E8; }
+.cert-mark { background: var(--sheet); }
+.cert-card .cert-meta .small { color: var(--sage); }
+
+/* About */
+.facts { border-top-color: var(--sage); }
+.about-quote { border-left-color: var(--gold); }
+
+/* Logos: official colours; hover adds a lift rather than a recolour */
+.mark-file, .mark-brand { transition: transform var(--dur) var(--ease); }
+.hero-working-item { color: var(--ink); }
+.hero-working-item:hover .mark-file, .hero-working-item:hover .mark-brand { transform: translateY(-1px); }
+.mark-neutral { color: var(--sage); }

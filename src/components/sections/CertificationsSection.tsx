@@ -34,7 +34,7 @@ export function CertificationsSection() {
 
         <ul className="cert-grid list-none m-0 p-0">
           {flagshipCredentials.map((c) => (
-            <li key={c.code} className="card cert-card reveal">
+            <li key={c.code} className="card cert-card reveal" data-product={productOf[c.code]?.toLowerCase().replace(/ /g, "-")}>
               <span className="cert-top">
                 <span className="label">{c.issuer}</span>
                 {productOf[c.code] && (

@@ -61,7 +61,8 @@ export function Hero() {
         <div className="hero-intro">
           <p className="hero-name">Dheeraj Kashyap</p>
           <h1 id="hero-title" className="display-1 hero-anim" style={{ "--d": 1 } as React.CSSProperties}>
-            BI &amp; Analytics Engineer building enterprise data systems with Power BI &amp; Microsoft Fabric.
+            BI &amp; Analytics Engineer building enterprise data systems with{" "}
+            <span className="hl">Power BI</span> &amp; <span className="hl">Microsoft Fabric</span>.
           </h1>
           <p className="lead hero-anim" style={{ "--d": 2 } as React.CSSProperties}>
             7+ years turning complex enterprise data into governed semantic models, analytics
