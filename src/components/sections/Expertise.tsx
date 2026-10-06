@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { ChartColumnBig, Cloud, Presentation, Workflow } from "lucide-react";
+
+const groupIcons = [ChartColumnBig, Workflow, Cloud, Presentation];
 import { getStudy } from "@/data/work";
 
 /* Four capability areas. Each lists what I do (not just tool names) and
@@ -81,7 +84,12 @@ export function Expertise() {
         <div className="capabilities">
           {groups.map((g, gi) => (
             <section key={g.title} className="card capability reveal" data-tone={gi} aria-labelledby={`cap-${gi}`}>
-              <h3 id={`cap-${gi}`} className="title-3" style={{ fontSize: "1.1875rem" }}>{g.title}</h3>
+              <h3 id={`cap-${gi}`} className="title-3 cap-title" style={{ fontSize: "1.1875rem" }}>
+                <span className="cap-icon" aria-hidden>
+                  {(() => { const I = groupIcons[gi]; return <I size={18} strokeWidth={1.9} />; })()}
+                </span>
+                {g.title}
+              </h3>
               <p className="small">{g.summary}</p>
               <ul>
                 {g.items.map((i) => (

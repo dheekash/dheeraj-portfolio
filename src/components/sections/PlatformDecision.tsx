@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Compass } from "lucide-react";
 
 type Platform = "Microsoft Fabric" | "Databricks" | "Snowflake";
 const PLATFORMS: Platform[] = ["Microsoft Fabric", "Databricks", "Snowflake"];
@@ -105,7 +106,7 @@ export function PlatformDecision() {
       </fieldset>
 
       <div className="decision-out" aria-live="polite">
-        <span className="label">Where I would start</span>
+        <span className="label decision-label"><Compass size={14} strokeWidth={2} aria-hidden /> Where I would start</span>
         {leaders.length === 0 ? (
           <p className="decision-empty">
             {yes.size === 0

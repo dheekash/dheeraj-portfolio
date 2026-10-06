@@ -1,10 +1,17 @@
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import {
+  ArrowRight, ArrowUpRight, CalendarClock, ChartColumnBig, Database, Layers, Network,
+  Target, Users, Workflow,
+} from "lucide-react";
 import { profile } from "@/data/profile";
 import { Mark } from "@/components/common/Mark";
 
 /* Proof strip. All four figures are from the experience section: years
    since Mar 2019, and the current DataStream role's models, pipelines and
    stakeholders. Stated exactly, without "+", because they are counts. */
+/* Lucide icons, one per figure and per layer. */
+const proofIcons = [CalendarClock, Network, Workflow, Users];
+const layerIcons = [Database, Workflow, Layers, Network, ChartColumnBig, Target];
+
 const proof = [
   { value: "7+", label: "Years in BI & analytics" },
   { value: "12", label: "Semantic models built" },
@@ -94,7 +101,10 @@ export function Hero() {
         <dl className="hero-proof proof">
           {proof.map((p, i) => (
             <div key={p.label} className="proof-item hero-anim" style={{ "--d": 5 + i } as React.CSSProperties}>
-              <dt className="proof-label label">{p.label}</dt>
+              <dt className="proof-label label">
+                {(() => { const I = proofIcons[i]; return <I size={14} strokeWidth={2} aria-hidden className="proof-icon" />; })()}
+                {p.label}
+              </dt>
               <dd className="proof-value">{p.value}</dd>
             </div>
           ))}
@@ -112,7 +122,9 @@ export function Hero() {
             {layers.map((l, i) => {
               const body = (
                 <>
-                  <span className="sl-dot" aria-hidden />
+                  <span className="sl-dot" aria-hidden>
+                    {(() => { const I = layerIcons[i]; return <I size={14} strokeWidth={2} />; })()}
+                  </span>
                   <span className="sl-text">
                     <span className="sl-layer">{l.layer}</span>
                     <span className="sl-what">{l.what}</span>

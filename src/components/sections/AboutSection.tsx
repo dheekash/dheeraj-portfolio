@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import Image from "next/image";
+import { Building2, MapPin, Target, Wrench } from "lucide-react";
 
 /* The photo renders once a file exists at public/images/avatar.jpg, so the
    layout never shows a broken image or a placeholder face. */
@@ -55,22 +56,22 @@ export function AboutSection() {
             )}
             <dl className="facts">
               <div>
-                <dt className="label">Based in</dt>
+                <dt className="label"><MapPin size={14} strokeWidth={2} aria-hidden className="fact-icon" />Based in</dt>
                 <dd>
                   Bengaluru, India
                   <span className="small">IST (UTC+5:30), working with teams worldwide</span>
                 </dd>
               </div>
               <div>
-                <dt className="label">Focus</dt>
+                <dt className="label"><Target size={14} strokeWidth={2} aria-hidden className="fact-icon" />Focus</dt>
                 <dd>Semantic models, lakehouse architecture, reliable pipelines and executive reporting</dd>
               </div>
               <div>
-                <dt className="label">Core tools</dt>
+                <dt className="label"><Wrench size={14} strokeWidth={2} aria-hidden className="fact-icon" />Core tools</dt>
                 <dd translate="no">Power BI, Microsoft Fabric, SQL, Azure, Python, Databricks, Snowflake</dd>
               </div>
               <div>
-                <dt className="label">Industries</dt>
+                <dt className="label"><Building2 size={14} strokeWidth={2} aria-hidden className="fact-icon" />Industries</dt>
                 <dd>Manufacturing, sales intelligence, risk &amp; fraud, retail &amp; e-commerce, customer analytics</dd>
               </div>
             </dl>

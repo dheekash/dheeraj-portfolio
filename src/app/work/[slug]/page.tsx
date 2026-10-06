@@ -1,7 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import {
+  ArrowLeft, ArrowRight, ClipboardList, Code, Cpu, FileText, Lightbulb, Network, TrendingUp,
+  TriangleAlert, UserRound, type LucideIcon,
+} from "lucide-react";
+
+const sectionIcons: Record<string, LucideIcon> = {
+  context: FileText,
+  challenge: TriangleAlert,
+  role: UserRound,
+  architecture: Network,
+  implementation: Code,
+  technology: Cpu,
+  outcome: TrendingUp,
+  learnings: Lightbulb,
+};
+const iconFor = (id: string) => sectionIcons[id] ?? ClipboardList;
 import { caseStudies, getStudy, impactTone, type CaseStudy } from "@/data/work";
 import { ArchitectureDiagram, WorkImage } from "@/components/work/ArchitectureFlow";
 
@@ -146,7 +161,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           {sections.map((b, n) => (
             <section key={b.id} id={b.id} className="cs-section" aria-labelledby={`h-${b.id}`}>
               <h2 id={`h-${b.id}`}>
-                <span className="n">{pad(n + 1)}</span> {b.title}
+                <span className="n">{pad(n + 1)}</span>
+                {(() => { const I = iconFor(b.id); return <I size={20} strokeWidth={1.75} aria-hidden className="cs-h-icon" />; })()}
+                {b.title}
               </h2>
               {b.body}
             </section>

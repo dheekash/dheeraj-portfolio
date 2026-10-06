@@ -1956,3 +1956,72 @@ span.mark {
   .glass::before, .glass::after { display: none; }
   .nav.is-on-dark .glass { background: #12142B; }
 }
+
+/* ═══ Lucide icons ══════════════════════════════════════════════════════
+   One style everywhere: 2px stroke at 14px, 1.75–1.9 at 18–20px, drawn in
+   the accent of the element they label. Always beside text, never alone. */
+.proof-label { display: inline-flex; align-items: center; gap: 8px; }
+.proof-icon { flex: none; }
+.proof-item:nth-child(1) .proof-icon { color: var(--sage); }
+.proof-item:nth-child(2) .proof-icon { color: var(--gold-text); }
+.proof-item:nth-child(3) .proof-icon { color: var(--teal); }
+.proof-item:nth-child(4) .proof-icon { color: var(--clay-text); }
+
+/* Hero stack: layer markers become small icon tiles on the line */
+.sl-inner { grid-template-columns: 26px minmax(0, 1fr) auto; }
+@media (max-width: 479.98px) { .sl-inner { grid-template-columns: 26px minmax(0, 1fr); } }
+.sl-row::before { left: calc(var(--s-5) + 12px); }
+.sl-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  border-width: 1px;
+  color: var(--ink);
+  background: var(--sheet);
+}
+.sl-row:nth-child(1) .sl-dot { color: var(--muted-ink); }
+.sl-row:nth-child(2) .sl-dot { color: var(--teal); }
+.sl-row:nth-child(3) .sl-dot { color: var(--gold-text); }
+.sl-row:nth-child(4) .sl-dot { color: var(--clay-text); }
+.sl-row:nth-child(5) .sl-dot { color: var(--gold-text); background: var(--gold-pale); }
+.sl-row.is-output .sl-dot { color: #FFFFFF; border-radius: 7px; }
+.dark .sl-row.is-output .sl-dot { color: #12142B; }
+
+/* How I build */
+.step-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.step-icon { color: var(--muted-ink); transition: color var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.step:nth-child(1) .step-icon { color: var(--sage); }
+.step:nth-child(2) .step-icon { color: var(--teal); }
+.step:nth-child(3) .step-icon { color: var(--gold-text); }
+.step:nth-child(4) .step-icon { color: var(--clay-text); }
+.step:nth-child(5) .step-icon { color: var(--sage-dark); }
+@media (prefers-reduced-motion: no-preference) {
+  .step:hover .step-icon { transform: translateY(-2px); }
+}
+
+/* Expertise */
+.cap-title { display: flex; align-items: center; gap: 10px; }
+.cap-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--tone-text, var(--sage));
+  background: var(--tone-pale, var(--sage-pale));
+}
+
+/* About facts */
+.facts dt { display: inline-flex; align-items: flex-start; gap: 6px; }
+.fact-icon { flex: none; margin-top: 1px; color: var(--sage); }
+
+/* Platform decision */
+.decision-label { display: inline-flex; align-items: center; gap: 6px; color: var(--gold-text); }
+
+/* Case-study section headings */
+.cs-h-icon { flex: none; align-self: center; color: var(--sage); }

@@ -1,3 +1,7 @@
+import { ChartLine, Gauge, Hammer, MessagesSquare, Network } from "lucide-react";
+
+const stepIcons = [MessagesSquare, Network, Hammer, Gauge, ChartLine];
+
 /* The method, as a sequence. Each step names where it shows up in the
    case studies, so the process is backed by work rather than asserted. */
 const steps = [
@@ -40,7 +44,10 @@ export function HowIBuild() {
         <ol className="steps reveal">
           {steps.map((s, i) => (
             <li key={s.title} className="step">
-              <span className="step-n">{String(i + 1).padStart(2, "0")}</span>
+              <span className="step-head">
+                <span className="step-n">{String(i + 1).padStart(2, "0")}</span>
+                {(() => { const I = stepIcons[i]; return <I size={20} strokeWidth={1.75} aria-hidden className="step-icon" />; })()}
+              </span>
               <h3 className="step-title">{s.title}</h3>
               <p className="step-what">{s.what}</p>
               <p className="step-evidence small">{s.evidence}</p>
