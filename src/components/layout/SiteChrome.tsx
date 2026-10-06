@@ -65,7 +65,7 @@ function MobileContactBar() {
   }, []);
 
   return (
-    <div className={`contact-bar${show ? " is-shown" : ""}`} aria-hidden={!show}>
+    <div className={`contact-bar glass${show ? " is-shown" : ""}`} aria-hidden={!show}>
       <span className="contact-bar-text">
         <strong>Dheeraj Kashyap</strong>
         <span>BI &amp; Analytics Engineer</span>

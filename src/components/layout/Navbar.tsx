@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "@/components/providers/ThemeProvider";
@@ -35,15 +35,39 @@ export function Navbar() {
   const href = (id: string) => (onHome ? `#${id}` : `/#${id}`);
 
   const [scrolled, setScrolled] = useState(false);
+  const [onDark, setOnDark] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
+  const barRef = useRef<HTMLDivElement>(null);
 
+  /* Scroll state, plus adaptivity: when the floating bar sits over the dark
+     contact band, the glass flips to its dark variant so text stays legible. */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      const band = document.getElementById("contact");
+      const bar = barRef.current;
+      if (band && bar) {
+        const mid = bar.getBoundingClientRect().top + bar.offsetHeight / 2;
+        const r = band.getBoundingClientRect();
+        setOnDark(mid >= r.top && mid <= r.bottom);
+      }
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [pathname]);
+
+  /* Touch-point illumination: a soft light follows the pointer across the glass. */
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--gx", `${e.clientX - r.left}px`);
+    e.currentTarget.style.setProperty("--gy", `${e.clientY - r.top}px`);
+  };
 
   /* Active section: whichever tracked section crosses the middle band. */
   useEffect(() => {
@@ -80,8 +104,9 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header className={`nav${scrolled || open ? " is-scrolled" : ""}`}>
-      <div className="container nav-inner">
+    <header className={`nav${scrolled || open ? " is-scrolled" : ""}${onDark ? " is-on-dark" : ""}`}>
+      <div className="container">
+      <div ref={barRef} className="nav-inner glass" onPointerMove={onPointerMove}>
         <a href={onHome ? "#top" : "/"} className="nav-brand">
           Dheeraj Kashyap
         </a>
@@ -123,10 +148,11 @@ export function Navbar() {
           </button>
         </div>
       </div>
+      </div>
 
       {open && (
         <div id="nav-sheet" className="nav-sheet">
-          <nav className="container" aria-label="Mobile">
+          <nav className="nav-sheet-panel glass" aria-label="Mobile">
             <ul>
               {links.map((l) => (
                 <li key={l.id}>

@@ -129,7 +129,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       </header>
 
       <div className="container cs-layout">
-        <nav className="cs-toc" aria-label="On this page">
+        <nav className="cs-toc glass" aria-label="On this page">
           <span className="label">On this page</span>
           <ol>
             {sections.map((b, n) => (
