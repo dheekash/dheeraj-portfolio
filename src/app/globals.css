@@ -1597,20 +1597,20 @@ span.mark {
 
 /* ═══ Colour layer ══════════════════════════════════════════════════════
    Four hues on a warm base, each with one job:
-     emerald  primary accent, improvements, actions
+     indigo   primary accent, improvements, actions
      gold     Power BI, money, highlights
      teal     platforms, data engineering
      clay     baselines ("before"), delivery
    Text colours are the darker "-text" steps so every label passes AA. */
 :root {
   --paper: #F6F4EE;
-  --sage: #1D6B4C;
-  --sage-dark: #134A35;
-  --sage-light: #D3E8DB;
-  --sage-pale: #EAF4EE;
-  --positive: #1A7A4E;
-  --positive-soft: #EAF4EE;
-  --ink-hover: #1D6B4C;
+  --sage: #3B3F9E;
+  --sage-dark: #2A2D78;
+  --sage-light: #DADCF3;
+  --sage-pale: #ECEDF8;
+  --positive: #3B3F9E;
+  --positive-soft: #ECEDF8;
+  --ink-hover: #3B3F9E;
   --baseline: #C0622F;
   --baseline-text: #A04F24;
   --highlight: #8C6209;
@@ -1622,24 +1622,24 @@ span.mark {
   --clay: #C0622F;
   --clay-text: #A04F24;
   --clay-pale: #F8E8DE;
-  --tint-mint: #EAF3EE;
+  --tint-mint: #EEEFF8;
   --tint-sand: #F7F0E1;
   --tint-mist: #E6F0F1;
-  --band: #0F1D17;
-  --band-sheet: #15261E;
-  --band-line: #22362C;
-  --band-input-line: #34503F;
-  --band-accent: #8FD3AE;
+  --band: #12142B;
+  --band-sheet: #1A1D3A;
+  --band-line: #282B4D;
+  --band-input-line: #3A3E6B;
+  --band-accent: #AEB3F2;
 }
 .dark {
   --paper: #111613;
-  --sage: #7FCCA2;
-  --sage-dark: #A6DDBF;
-  --sage-light: #1E3A2B;
-  --sage-pale: #17271F;
-  --positive: #7FCCA2;
-  --positive-soft: #17271F;
-  --ink-hover: #A6DDBF;
+  --sage: #A9AEF5;
+  --sage-dark: #C8CBFA;
+  --sage-light: #272B5C;
+  --sage-pale: #1A1D3D;
+  --positive: #A9AEF5;
+  --positive-soft: #1A1D3D;
+  --ink-hover: #C8CBFA;
   --baseline: #E08A5C;
   --baseline-text: #EBA27A;
   --highlight: #E8C062;
@@ -1651,22 +1651,22 @@ span.mark {
   --clay: #E08A5C;
   --clay-text: #EBA27A;
   --clay-pale: #2B1D16;
-  --tint-mint: #131D17;
+  --tint-mint: #15172A;
   --tint-sand: #1B1A14;
   --tint-mist: #121C1E;
-  --band: #0A120E;
-  --band-sheet: #112019;
-  --band-line: #1F3328;
-  --band-input-line: #2E4A3A;
-  --band-accent: #8FD3AE;
+  --band: #0B0C1C;
+  --band-sheet: #13152B;
+  --band-line: #23264A;
+  --band-input-line: #34376A;
+  --band-accent: #AEB3F2;
 }
 
 /* Primary actions in emerald */
 .btn-primary { background: var(--sage); color: #FFFFFF; }
 .btn-primary:hover { background: var(--sage-dark); }
-.dark .btn-primary { color: #0F1D17; }
+.dark .btn-primary { color: #12142B; }
 .band .btn-primary { background: var(--band-accent); color: var(--band); }
-.band .btn-primary:hover { background: #B5E6CB; }
+.band .btn-primary:hover { background: #CDD0F8; }
 .nav .btn-primary { background: var(--ink); color: var(--paper); }
 .nav .btn-primary:hover { background: var(--sage); color: #FFFFFF; }
 
@@ -1708,7 +1708,7 @@ span.mark {
 
 /* Featured case study */
 .flag { background: var(--sage); color: #FFFFFF; }
-.dark .flag { color: #0F1D17; }
+.dark .flag { color: #12142B; }
 .flagship { box-shadow: inset 0 4px 0 var(--sage); }
 
 /* Architecture: Medallion layers in bronze, silver and gold */
@@ -1750,7 +1750,7 @@ span.mark {
   color: #FFFFFF;
   background: var(--sage);
 }
-.dark .step-n { color: #0F1D17; }
+.dark .step-n { color: #12142B; }
 .step:nth-child(2) .step-n { background: var(--teal); }
 .step:nth-child(3) .step-n { background: var(--gold-text); }
 .step:nth-child(4) .step-n { background: var(--clay-text); }
