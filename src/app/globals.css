@@ -2036,3 +2036,33 @@ span.mark {
 .nav.is-on-dark .logo, .dark .logo, .band .logo { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2); }
 .footer-id { display: inline-flex; align-items: center; gap: 12px; }
 .contact-bar-id { display: inline-flex; align-items: center; gap: 10px; }
+
+/* ═══ Alignment fixes ═══════════════════════════════════════════════════ */
+/* Certification cards: issuer label centred on the logo tile */
+.cert-top { align-items: center; }
+/* Experience: year shares the job title's first line */
+.rail-when { margin-top: -4px; }
+/* Expertise: "Applied in" pinned to the card bottom so rows line up */
+.capability .applied { margin: auto 0 0; padding-top: var(--s-4); }
+/* About facts: label and value share a baseline */
+.facts > div { align-items: baseline; }
+.facts dt { padding-top: 0; }
+/* Hero: results panel top on the name label's first line */
+@media (min-width: 1100px) { .hero-results { margin-top: 2px; } }
+
+.rail-bullets li::marker, .cs-section ul.points li::marker { color: var(--sage); }
+
+/* Bullets: the base reset removes list markers, so draw them. The dot sits
+   in a 16px hanging indent, so bullet text aligns on its own edge. */
+.rail-bullets, .cs-section ul.points { list-style: none; padding-left: 0; }
+.rail-bullets li, .cs-section ul.points li { position: relative; padding-left: 16px; }
+.rail-bullets li::before, .cs-section ul.points li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.68em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--sage);
+}
