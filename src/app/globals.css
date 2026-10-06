@@ -2025,3 +2025,14 @@ span.mark {
 
 /* Case-study section headings */
 .cs-h-icon { flex: none; align-self: center; color: var(--sage); }
+
+/* ═══ Logo ══════════════════════════════════════════════════════════════ */
+.logo { display: block; flex: none; border-radius: 25%; }
+.nav-brand { padding: 4px; margin-left: -4px; border-radius: 12px; }
+.nav-brand .logo { transition: transform 220ms var(--ease), box-shadow 220ms var(--ease); box-shadow: 0 4px 12px -6px rgba(59, 63, 158, 0.6); }
+@media (prefers-reduced-motion: no-preference) {
+  .nav-brand:hover .logo { transform: rotate(-4deg) scale(1.04); }
+}
+.nav.is-on-dark .logo, .dark .logo, .band .logo { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2); }
+.footer-id { display: inline-flex; align-items: center; gap: 12px; }
+.contact-bar-id { display: inline-flex; align-items: center; gap: 10px; }

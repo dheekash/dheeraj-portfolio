@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Navbar } from "./Navbar";
+import { Logo } from "@/components/common/Logo";
 
 /**
  * Fades each `.reveal` block up once as it enters the viewport. Content is
@@ -66,9 +67,12 @@ function MobileContactBar() {
 
   return (
     <div className={`contact-bar glass${show ? " is-shown" : ""}`} aria-hidden={!show}>
-      <span className="contact-bar-text">
-        <strong>Dheeraj Kashyap</strong>
-        <span>BI &amp; Analytics Engineer</span>
+      <span className="contact-bar-id">
+        <Logo size={32} />
+        <span className="contact-bar-text">
+          <strong>Dheeraj Kashyap</strong>
+          <span>BI &amp; Analytics Engineer</span>
+        </span>
       </span>
       <a href="#contact" className="btn btn-primary btn-sm" tabIndex={show ? 0 : -1}>
         Let&rsquo;s talk

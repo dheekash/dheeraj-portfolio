@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "@/components/providers/ThemeProvider";
+import { Logo } from "@/components/common/Logo";
 
 /* Four destinations. Platform judgment and certifications sit inside
    Expertise's reach on the page; Contact is the primary button. */
@@ -107,8 +108,8 @@ export function Navbar() {
     <header className={`nav${scrolled || open ? " is-scrolled" : ""}${onDark ? " is-on-dark" : ""}`}>
       <div className="container">
       <div ref={barRef} className="nav-inner glass" onPointerMove={onPointerMove}>
-        <a href={onHome ? "#top" : "/"} className="nav-brand">
-          Dheeraj Kashyap
+        <a href={onHome ? "#top" : "/"} className="nav-brand" aria-label="Dheeraj Kashyap, home">
+          <Logo size={36} />
         </a>
 
         <nav className="nav-links" aria-label="Primary">

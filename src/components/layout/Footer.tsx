@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight, FileText, Mail } from "lucide-react";
 import { LinkedinIcon } from "@/components/common/SocialIcons";
 import { Mark } from "@/components/common/Mark";
+import { Logo } from "@/components/common/Logo";
 import { profile } from "@/data/profile";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { CopyEmail } from "@/components/layout/CopyEmail";
@@ -66,8 +67,9 @@ export function Footer() {
         </div>
 
         <div className="footer-bar">
-          <span>
-            © {year} Dheeraj Kashyap · Bengaluru, India · Portfolio updated {updated}
+          <span className="footer-id">
+            <Logo size={28} />
+            <span>© {year} Dheeraj Kashyap · Bengaluru, India · Portfolio updated {updated}</span>
           </span>
           <nav aria-label="Footer">
             <Link href="/#work">Work</Link>
