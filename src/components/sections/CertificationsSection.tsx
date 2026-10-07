@@ -22,11 +22,14 @@ export function CertificationsSection() {
   const issuers = new Set(allCredentials.map((c) => c.issuer)).size;
 
   return (
-    <section id="certifications" className="section" aria-labelledby="certs-title">
+    <section id="certifications" className="section sx" aria-labelledby="certs-title">
       <div className="container">
-        <header className="section-head reveal">
-          <h2 id="certs-title" className="section-title">Certifications</h2>
-          <p className="lead">
+        <header className="sx-head reveal">
+          <p className="sx-eyebrow">Credentials</p>
+          <h2 id="certs-title" className="sx-title">
+            Certifications<span className="sx-dot">.</span>
+          </h2>
+          <p className="sx-intro">
             {allCredentials.length} certifications from {issuers} vendors. These six matter most for
             Power BI and Fabric work.
           </p>

@@ -9,10 +9,11 @@ import { Logo } from "@/components/common/Logo";
 /* Four destinations. Platform judgment and certifications sit inside
    Expertise's reach on the page; Contact is the primary button. */
 const links = [
-  { id: "work", label: "Work", sections: ["work"] },
-  { id: "experience", label: "Experience", sections: ["experience"] },
-  { id: "expertise", label: "Expertise", sections: ["platforms", "expertise", "certifications"] },
   { id: "about", label: "About", sections: ["about"] },
+  { id: "experience", label: "Experience", sections: ["experience"] },
+  { id: "work", label: "Projects", sections: ["skills", "work"] },
+  { id: "certifications", label: "Certifications", sections: ["certifications"] },
+  { id: "contact", label: "Contact", sections: ["contact"] },
 ];
 
 function ThemeButton() {
@@ -127,12 +128,6 @@ export function Navbar() {
 
         <div className="nav-actions">
           <ThemeButton />
-          <a href="/api/resume" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm">
-            Résumé<span className="sr-only"> (opens in a new tab)</span>
-          </a>
-          <a href={href("contact")} className="btn btn-primary btn-sm">
-            Let&rsquo;s talk
-          </a>
         </div>
 
         <div className="nav-mobile">

@@ -1,82 +1,65 @@
-import fs from "node:fs";
-import path from "node:path";
-import Image from "next/image";
-import { Building2, MapPin, Target, Wrench } from "lucide-react";
+import { Building2, CalendarClock, MapPin, Network, Target, Users, Workflow, Wrench } from "lucide-react";
 
-/* The photo renders once a file exists at public/images/avatar.jpg, so the
-   layout never shows a broken image or a placeholder face. */
-const PHOTO = "/images/avatar.jpg";
-const hasPhoto = fs.existsSync(path.join(process.cwd(), "public", PHOTO));
+/* Figures from the experience section: years since Mar 2019, and the
+   current role's models, pipelines and stakeholders. */
+const stats = [
+  { Icon: CalendarClock, value: "7+", label: "Years in BI & analytics" },
+  { Icon: Network, value: "12", label: "Semantic models built" },
+  { Icon: Workflow, value: "8", label: "Fabric pipelines deployed" },
+  { Icon: Users, value: "42", label: "Stakeholders engaged" },
+];
 
 export function AboutSection() {
   return (
-    <section id="about" className="section" aria-labelledby="about-title">
+    <section id="about" className="section sx" aria-labelledby="about-title">
       <div className="container">
-        <header className="section-head reveal">
-          <h2 id="about-title" className="section-title">About</h2>
+        <header className="sx-head reveal">
+          <p className="sx-eyebrow">Introduction</p>
+          <h2 id="about-title" className="sx-title">
+            About Me<span className="sx-dot">.</span>
+          </h2>
         </header>
 
-        <div className="about-grid">
-          <div className="about-copy reveal">
-            <span className="label">Professional</span>
-            <p className="about-first">
-              BI &amp; Analytics Engineer focused on enterprise reporting, semantic modelling and
-              modern data platforms.
+        <div className="sx-about reveal">
+          <div className="sx-about-copy">
+            <p>
+              I&rsquo;m a BI &amp; Analytics Engineer focused on enterprise reporting, semantic
+              modelling and modern data platforms. My work sits between business requirements, data
+              engineering and decision-making: I design semantic models, build data pipelines and
+              deliver reporting systems for finance, operations, sales and executive teams.
             </p>
             <p>
-              My work sits between business requirements, data engineering and decision-making. I
-              design semantic models, build data pipelines and deliver reporting systems for
-              finance, operations, sales and executive teams, and I value clear architecture, fast
-              performance and reliable data.
+              Over 7+ years I&rsquo;ve moved from support-floor reporting, to risk and fraud analytics
+              at Amazon, to Fabric lakehouse platforms for clients across 15 countries.
+              One question drives every project: <strong>&ldquo;Does this help people make better
+              decisions?&rdquo;</strong>
             </p>
-            <blockquote className="about-quote">
-              <p>
-                One question drives every project: <strong>&ldquo;Does this help people make better
-                decisions?&rdquo;</strong>
-              </p>
-            </blockquote>
-
-            <span className="label about-outside">Outside work</span>
-            <p>
+            <p className="small">
               Outside the data world, you&rsquo;ll usually find me lifting, watching football,
               exploring anime and movies, or looking for good food.
             </p>
           </div>
 
-          <div className="reveal">
-            {hasPhoto && (
-              <Image
-                src={PHOTO}
-                alt="Dheeraj Kashyap"
-                width={640}
-                height={800}
-                sizes="320px"
-                className="about-photo"
-              />
-            )}
-            <dl className="facts">
-              <div>
-                <dt className="label"><MapPin size={14} strokeWidth={2} aria-hidden className="fact-icon" />Based in</dt>
+          <dl className="sx-stats">
+            {stats.map(({ Icon, value, label }) => (
+              <div key={label} className="sx-stat">
+                <dt className="sr-only">{label}</dt>
                 <dd>
-                  Bengaluru, India
-                  <span className="small">IST (UTC+5:30), working with teams worldwide</span>
+                  <Icon size={18} strokeWidth={1.9} aria-hidden className="sx-stat-icon" />
+                  <span className="sx-stat-value">{value}</span>
+                  <span className="sx-stat-label" aria-hidden>{label}</span>
                 </dd>
               </div>
-              <div>
-                <dt className="label"><Target size={14} strokeWidth={2} aria-hidden className="fact-icon" />Focus</dt>
-                <dd>Semantic models, lakehouse architecture, reliable pipelines and executive reporting</dd>
-              </div>
-              <div>
-                <dt className="label"><Wrench size={14} strokeWidth={2} aria-hidden className="fact-icon" />Core tools</dt>
-                <dd translate="no">Power BI, Microsoft Fabric, SQL, Azure, Python, Databricks, Snowflake</dd>
-              </div>
-              <div>
-                <dt className="label"><Building2 size={14} strokeWidth={2} aria-hidden className="fact-icon" />Industries</dt>
-                <dd>Manufacturing, sales intelligence, risk &amp; fraud, retail &amp; e-commerce, customer analytics</dd>
-              </div>
-            </dl>
-          </div>
+            ))}
+          </dl>
         </div>
+
+        <dl className="sx-facts reveal">
+          <div><dt><MapPin size={14} aria-hidden /> Based in</dt><dd>Bengaluru, India · IST (UTC+5:30)</dd></div>
+          <div><dt><Target size={14} aria-hidden /> Focus</dt><dd>Semantic models, lakehouses, pipelines, executive reporting</dd></div>
+          <div><dt><Wrench size={14} aria-hidden /> Core tools</dt><dd translate="no">Power BI, Fabric, SQL, Azure, Python, Databricks, Snowflake</dd></div>
+          <div><dt><Building2 size={14} aria-hidden /> Industries</dt><dd>Manufacturing, sales, risk &amp; fraud, retail, customer analytics</dd></div>
+        </dl>
       </div>
     </section>
   );

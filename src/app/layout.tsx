@@ -38,7 +38,7 @@ const siteUrl = "https://dheerajkashyap.com";
    light regardless of OS preference, so the value is seeded light and then
    kept in sync with the actual chosen theme by ThemeProvider. */
 export const viewport: Viewport = {
-  themeColor: "#F6F5F1",
+  themeColor: "#0B0B1A",
 };
 
 export const metadata: Metadata = {
@@ -154,15 +154,15 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${newsreader.variable} ${geist.variable} ${geistMono.variable}`}
+      className={`dark ${newsreader.variable} ${geist.variable} ${geistMono.variable}`}
     >
       <head>
-        {/* Light is the default and needs nothing. Dark is applied before
+        {/* Dark is the default (set on <html>). Light is applied before
             paint only when the visitor chose it on an earlier visit. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{if(localStorage.getItem('theme')==='dark'){document.documentElement.classList.add('dark')}}catch(e){}})()",
+              "(function(){try{if(localStorage.getItem('theme')==='light'){document.documentElement.classList.remove('dark')}}catch(e){}})()",
           }}
         />
         <script

@@ -100,7 +100,7 @@ export function ContactForm() {
       aria-labelledby="form-title"
     >
       <h3 id="form-title" className="title-3" style={{ fontSize: "1.125rem" }}>
-        Or send a message
+        Send a message
       </h3>
       <Field id={IDS.name} label="Name" error={errors.name}>
         <input id={IDS.name} name="name" autoComplete="name" value={values.name} onChange={set("name")} {...invalid("name")} />

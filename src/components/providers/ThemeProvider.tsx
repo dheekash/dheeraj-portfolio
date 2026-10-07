@@ -6,7 +6,7 @@ type Theme = "light" | "dark";
 
 /* Keeps <meta name="theme-color"> on the page background so browser chrome
    matches the page. Values mirror --paper in globals.css. */
-const THEME_COLOR: Record<Theme, string> = { light: "#F6F5F1", dark: "#121513" };
+const THEME_COLOR: Record<Theme, string> = { light: "#F6F4EE", dark: "#0B0B1A" };
 
 function syncThemeColor(theme: Theme) {
   let tag = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
@@ -29,7 +29,7 @@ const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({
  * on an earlier visit. This provider mirrors that into React state.
  */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
     const current: Theme = document.documentElement.classList.contains("dark") ? "dark" : "light";

@@ -105,91 +105,81 @@ const roles: Role[] = [
   },
 ];
 
-const year = (d: string) => d.slice(-4);
+/* Company badge for the timeline node: a logo file when one exists in
+   public/logos/companies, otherwise the company's initials. */
+function initials(company: string) {
+  const words = company.replace(/[^A-Za-z ]/g, "").split(/\s+/).filter(Boolean);
+  // A camel-cased brand ("DataStream") gives its own two capitals.
+  const camel = words[0].match(/[A-Z]/g);
+  if (camel && camel.length > 1) return camel.slice(0, 2).join("");
+  return (words.length > 1 ? words[0][0] + words[1][0] : words[0].slice(0, 2)).toUpperCase();
+}
 
 /**
- * Experience: a progression strip first (the career story in one line),
- * then each role as a rail entry led by three figures.
+ * Work experience as a centred timeline: a single line down the middle,
+ * a company badge on it for each role, cards alternating left and right
+ * with the dates opposite. On narrow screens the line moves to the left
+ * and every card follows it.
  */
 export function Experience() {
-  const progression = [...roles].reverse();
-
   return (
-    <section id="experience" className="section" aria-labelledby="experience-title">
+    <section id="experience" className="section sx" aria-labelledby="experience-title">
       <div className="container">
-        <header className="section-head reveal">
-          <h2 id="experience-title" className="section-title">Experience</h2>
-          <p className="lead">
-            From support-floor reporting to enterprise BI architecture, in four roles over 7+ years.
-          </p>
+        <header className="sx-head is-center reveal">
+          <p className="sx-eyebrow">What I have done so far</p>
+          <h2 id="experience-title" className="sx-title">
+            Work Experience<span className="sx-dot">.</span>
+          </h2>
         </header>
 
-        <ol className="progression reveal" aria-label="Career progression">
-          {progression.map((r) => (
-            <li key={r.company} className={r.current ? "is-current" : undefined}>
-              <span className="pg-year">{year(r.start)}</span>
-              <span className="pg-title">{r.short}</span>
-              <span className="pg-org">{r.company}</span>
-            </li>
-          ))}
-        </ol>
+        <ol className="tl">
+          {roles.map((r, i) => {
+            const logo = companyLogo(r.company);
+            return (
+              <li key={r.company} className={`tl-item ${i % 2 ? "is-right" : "is-left"} reveal`}>
+                <article className="tl-card card" aria-labelledby={`role-${i}`}>
+                  <h3 id={`role-${i}`} className="tl-role">{r.title}</h3>
+                  <p className="tl-org">
+                    <span translate="no">{r.company}</span>
+                    <span className="tl-loc">{r.location}</span>
+                  </p>
+                  <dl className="tl-impact">
+                    {r.impact.map((m) => (
+                      <div key={m.label}>
+                        <dt className="sr-only">{m.label}</dt>
+                        <dd>
+                          <span className="tl-impact-value">{m.value}</span>
+                          <span className="tl-impact-label" aria-hidden>{m.label}</span>
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <ul className="rail-bullets tl-bullets">
+                    {r.bullets.map((b) => <li key={b}>{b}</li>)}
+                  </ul>
+                  {r.caseStudy && (
+                    <Link href={r.caseStudy.href} className="link-arrow tl-link">
+                      Case study: {r.caseStudy.label} <ArrowRight size={16} className="arrow" aria-hidden />
+                    </Link>
+                  )}
+                </article>
 
-        <ol className="rail">
-          {roles.map((r) => (
-            <li key={r.company} className="rail-item reveal">
-              <div className="rail-when">
-                <span className="rail-year">{year(r.start)}</span>
-                <span className="rail-range">
-                  {r.start} – {r.end}
+                <span className={`tl-node${r.current ? " is-current" : ""}`} aria-hidden>
+                  {logo ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- small static logo
+                    <img src={logo} alt="" width={28} height={28} />
+                  ) : (
+                    initials(r.company)
+                  )}
                 </span>
-                {r.current && <span className="rail-current">Current role</span>}
-                {companyLogo(r.company) && (
-                  <span
-                    className="rail-logo mark"
-                    role="img"
-                    aria-label={`${r.company} logo`}
-                    style={{
-                      WebkitMaskImage: `url(${companyLogo(r.company)})`,
-                      maskImage: `url(${companyLogo(r.company)})`,
-                    }}
-                  />
-                )}
-              </div>
 
-              <div className="rail-main">
-                <h3 className="title-3">{r.title}</h3>
-                <p className="rail-org m-0">
-                  <span translate="no">{r.company}</span>
-                  <span className="muted">{r.location}</span>
+                <p className="tl-date">
+                  {r.start} – {r.end}
+                  {r.current && <span className="tl-current">Current role</span>}
                 </p>
-                <p className="rail-summary">{r.summary}</p>
-                <ul className="rail-bullets">
-                  {r.bullets.map((b) => <li key={b}>{b}</li>)}
-                </ul>
-                <p className="stack-line">
-                  <strong className="sr-only">Stack: </strong>
-                  {r.stack.map((t) => <span key={t} translate="no">{t}</span>)}
-                </p>
-                {r.caseStudy && (
-                  <Link href={r.caseStudy.href} className="link-arrow">
-                    Case study: {r.caseStudy.label} <ArrowRight size={16} className="arrow" aria-hidden />
-                  </Link>
-                )}
-              </div>
-
-              <dl className="rail-impact" aria-label={`${r.company} impact`}>
-                {r.impact.map((m) => (
-                  <div key={m.label}>
-                    <dt className="sr-only">{m.label}</dt>
-                    <dd className="m-0">
-                      <span className="ri-value">{m.value}</span>
-                      <span className="ri-label" aria-hidden>{m.label}</span>
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ol>
       </div>
     </section>

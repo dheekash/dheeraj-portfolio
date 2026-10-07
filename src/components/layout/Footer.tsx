@@ -10,8 +10,8 @@ import { CopyEmail } from "@/components/layout/CopyEmail";
 const mail = (subject: string) => `mailto:${profile.email}?subject=${encodeURIComponent(subject)}`;
 
 /**
- * The close: one dark band holding contact and the footer. Email is the
- * primary route and can be copied in one tap; the form is the fallback.
+ * Contact, centred: heading, direct routes (email, LinkedIn, GitHub, CV),
+ * then a short form. A small footer line closes the page.
  */
 export function Footer() {
   const now = new Date();
@@ -20,63 +20,56 @@ export function Footer() {
   const updated = now.toLocaleDateString("en-GB", { month: "long", year: "numeric" });
 
   return (
-    <footer id="contact" className="band" aria-labelledby="contact-title">
-      <div className="container" style={{ paddingTop: "var(--section-y)" }}>
-        <div className="contact-grid">
-          <div>
-            <p className="label">Contact</p>
-            <h2 id="contact-title" className="display-2" style={{ marginTop: 12 }}>
-              Have a data problem worth solving?
-            </h2>
-            <p className="lead" style={{ marginTop: 16 }}>
-              Let&rsquo;s talk about the architecture, the dashboard, or everything in between.
-              Open to full-time roles and consulting. I usually reply within 24 hours.
-            </p>
+    <footer id="contact" className="band sx-contact" aria-labelledby="contact-title">
+      <div className="container sx-contact-inner">
+        <header className="sx-head is-center">
+          <p className="sx-eyebrow">Get in touch</p>
+          <h2 id="contact-title" className="sx-title">
+            Contact Me<span className="sx-dot">.</span>
+          </h2>
+          <p className="sx-intro">
+            Open to full-time BI roles and consulting. Let&rsquo;s talk about the architecture, the
+            dashboard, or everything in between. I usually reply within 24 hours.
+          </p>
+        </header>
 
-            <div className="contact-ctas">
-              <a href={mail("Hello from your portfolio")} className="btn btn-primary">
-                <Mail size={16} aria-hidden /> Email me
-              </a>
-              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
-                <LinkedinIcon size={16} className="mark" /> LinkedIn <ArrowUpRight size={14} aria-hidden />
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-              <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
-                <Mark name="GitHub" size={16} /> GitHub <ArrowUpRight size={14} aria-hidden />
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-              <a href="/api/resume" target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
-                <FileText size={16} aria-hidden className="mark" /> Résumé <ArrowUpRight size={14} aria-hidden />
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-            </div>
+        <div className="contact-ctas sx-contact-ctas">
+          <a href={mail("Hello from your portfolio")} className="btn btn-primary">
+            <Mail size={16} aria-hidden /> Email me
+          </a>
+          <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
+            <LinkedinIcon size={16} className="mark" /> LinkedIn <ArrowUpRight size={14} aria-hidden />
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
+          <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
+            <Mark name="GitHub" size={16} /> GitHub <ArrowUpRight size={14} aria-hidden />
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
+          <a href="/api/resume" target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
+            <FileText size={16} aria-hidden className="mark" /> CV <ArrowUpRight size={14} aria-hidden />
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
+        </div>
 
-            <div className="contact-email">
-              <a href={`mailto:${profile.email}`}>{profile.email}</a>
-              <CopyEmail email={profile.email} />
-            </div>
+        <div className="contact-email sx-contact-email">
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
+          <CopyEmail email={profile.email} />
+        </div>
 
-            <p className="small" style={{ marginTop: 16 }}>
-              Consulting enquiry?{" "}
-              <a href={mail("Consulting enquiry")} className="inline-link">Email with the project details</a>
-              {" "}and I&rsquo;ll suggest a time to talk.
-            </p>
-          </div>
-
+        <div className="sx-contact-form">
           <ContactForm />
         </div>
 
-        <div className="footer-bar">
+        <div className="footer-bar sx-footer-bar">
           <span className="footer-id">
             <Logo size={28} />
-            <span>© {year} Dheeraj Kashyap · Bengaluru, India · Portfolio updated {updated}</span>
+            <span>© {year} Dheeraj Kashyap · Bengaluru, India · Updated {updated}</span>
           </span>
           <nav aria-label="Footer">
-            <Link href="/#work">Work</Link>
-            <Link href="/#experience">Experience</Link>
-            <Link href="/#expertise">Expertise</Link>
-            <Link href="/certifications">Certifications</Link>
             <Link href="/#about">About</Link>
+            <Link href="/#experience">Experience</Link>
+            <Link href="/#work">Projects</Link>
+            <Link href="/certifications">Certifications</Link>
           </nav>
         </div>
       </div>
