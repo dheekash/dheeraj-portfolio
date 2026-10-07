@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { companyLogo } from "@/components/common/Mark";
+import { Scribble } from "@/components/common/Scribble";
 
 type Role = {
   start: string;
@@ -128,7 +129,7 @@ export function Experience() {
         <header className="sx-head is-center reveal">
           <p className="sx-eyebrow">What I have done so far</p>
           <h2 id="experience-title" className="sx-title">
-            Work Experience<span className="sx-dot">.</span>
+            Work <Scribble>Experience</Scribble><span className="sx-dot">.</span>
           </h2>
         </header>
 

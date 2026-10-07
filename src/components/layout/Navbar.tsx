@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { Logo } from "@/components/common/Logo";
 
@@ -118,10 +118,11 @@ export function Navbar() {
             <a
               key={l.id}
               href={href(l.id)}
-              className="nav-link"
+              className={`nav-link${l.id === "contact" ? " nav-link-cta" : ""}`}
               aria-current={active === l.id ? "true" : undefined}
             >
               {l.label}
+              {l.id === "contact" && <ArrowUpRight size={14} aria-hidden />}
             </a>
           ))}
         </nav>

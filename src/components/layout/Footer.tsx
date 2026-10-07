@@ -3,6 +3,7 @@ import { ArrowUpRight, FileText, Mail } from "lucide-react";
 import { LinkedinIcon } from "@/components/common/SocialIcons";
 import { Mark } from "@/components/common/Mark";
 import { Logo } from "@/components/common/Logo";
+import { Scribble } from "@/components/common/Scribble";
 import { profile } from "@/data/profile";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { CopyEmail } from "@/components/layout/CopyEmail";
@@ -22,10 +23,11 @@ export function Footer() {
   return (
     <footer id="contact" className="band sx-contact" aria-labelledby="contact-title">
       <div className="container sx-contact-inner">
-        <header className="sx-head is-center">
+        <header className="sx-head is-center reveal">
           <p className="sx-eyebrow">Get in touch</p>
-          <h2 id="contact-title" className="sx-title">
-            Contact Me<span className="sx-dot">.</span>
+          <h2 id="contact-title" className="sx-title fx-together">
+            Let&rsquo;s work <Scribble>together</Scribble>
+            <span className="sx-dot">.</span>
           </h2>
           <p className="sx-intro">
             Open to full-time BI roles and consulting. Let&rsquo;s talk about the architecture, the
@@ -73,6 +75,7 @@ export function Footer() {
           </nav>
         </div>
       </div>
+      <p className="fx-wordmark" aria-hidden>Kashyap</p>
     </footer>
   );
 }
