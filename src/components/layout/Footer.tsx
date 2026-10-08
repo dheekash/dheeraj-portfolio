@@ -5,6 +5,7 @@ import { Mark } from "@/components/common/Mark";
 import { Logo } from "@/components/common/Logo";
 import { Scribble } from "@/components/common/Scribble";
 import { profile } from "@/data/profile";
+import { caseStudies } from "@/data/work";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { CopyEmail } from "@/components/layout/CopyEmail";
 
@@ -62,19 +63,72 @@ export function Footer() {
           <ContactForm />
         </div>
 
-        <div className="footer-bar sx-footer-bar">
-          <span className="footer-id">
-            <Logo size={28} />
-            <span>© {year} Dheeraj Kashyap · Bengaluru, India · Updated {updated}</span>
-          </span>
-          <nav aria-label="Footer">
-            <Link href="/#about">About</Link>
-            <Link href="/#experience">Experience</Link>
-            <Link href="/#work">Projects</Link>
-            <Link href="/certifications">Certifications</Link>
+      </div>
+
+      {/* Four-column footer: brand, then three labelled link groups, then a
+          copyright and social bar. Two columns below 768px. */}
+      <div className="fcol">
+        <div className="fcol-cols">
+          <div className="fcol-brand">
+            <p className="fcol-logo">
+              <Logo size={28} />
+              Dheeraj Kashyap
+            </p>
+            <p className="fcol-blurb">
+              BI &amp; Analytics Engineer in Bengaluru, building Power BI and Microsoft Fabric
+              systems that cut reporting from hours to minutes.
+            </p>
+          </div>
+
+          <nav aria-labelledby="fcol-site">
+            <h2 id="fcol-site">Site</h2>
+            <ul>
+              <li><Link href="/#about">About</Link></li>
+              <li><Link href="/#experience">Experience</Link></li>
+              <li><Link href="/#skills">Technologies</Link></li>
+              <li><Link href="/#work">Projects</Link></li>
+              <li><Link href="/certifications">Certifications</Link></li>
+            </ul>
+          </nav>
+
+          <nav aria-labelledby="fcol-work">
+            <h2 id="fcol-work">Case studies</h2>
+            <ul>
+              {caseStudies.filter((s) => s.featured).map((s) => (
+                <li key={s.slug}>
+                  <Link href={`/work/${s.slug}`}>{s.title.replace(/, (Amazon|Rockwool)$/, "").replace(/ Platform$/, "")}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav aria-labelledby="fcol-connect">
+            <h2 id="fcol-connect">Connect</h2>
+            <ul>
+              <li><a href={`mailto:${profile.email}`}>Email</a></li>
+              <li><a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer">LinkedIn<span className="sr-only"> (opens in a new tab)</span></a></li>
+              <li><a href={profile.githubUrl} target="_blank" rel="noopener noreferrer">GitHub<span className="sr-only"> (opens in a new tab)</span></a></li>
+              <li><a href="/api/resume" target="_blank" rel="noopener noreferrer">Download CV<span className="sr-only"> (opens in a new tab)</span></a></li>
+            </ul>
           </nav>
         </div>
+
+        <div className="fcol-base">
+          <p>© {year} Dheeraj Kashyap · Updated {updated}</p>
+          <div className="fcol-soc">
+            <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)">
+              <LinkedinIcon size={15} />
+            </a>
+            <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)">
+              <Mark name="GitHub" size={15} />
+            </a>
+            <a href={`mailto:${profile.email}`} aria-label="Email">
+              <Mail size={15} aria-hidden />
+            </a>
+          </div>
+        </div>
       </div>
+
       <p className="fx-wordmark" aria-hidden>Kashyap</p>
     </footer>
   );
