@@ -1470,24 +1470,6 @@ span.mark {
 .nav-link:hover { background: color-mix(in srgb, var(--ink) 7%, transparent); }
 .nav-link-cta { gap: 6px; margin-left: 6px; border: 1px solid var(--line-strong); color: var(--ink); }
 .nav-link-cta:hover { border-color: var(--sage); color: var(--sage); }
-.fx-wordmark {
-  margin: 0;
-  padding: 0 0 clamp(8px, 1.5vw, 20px);
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  font-family: var(--font-sans);
-  font-weight: 800;
-  font-size: min(21vw, 400px);
-  line-height: 0.78;
-  letter-spacing: -0.06em;
-  text-transform: uppercase;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--sage) 55%, transparent) 0%, transparent 92%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  user-select: none;
-}
 
 /* ═══ Palette: Midnight Navy #021861 · Cobalt Blue #255DCE · Bright Red #DE1110
    Navy is the ground, cobalt the working accent (links, figures, glow),
