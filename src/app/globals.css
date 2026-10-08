@@ -3241,3 +3241,67 @@ span.mark {
 .srail-page .srail-sep { display: block; width: 1px; height: 10px; background: var(--line-strong); }
 .srail ul { justify-items: center; }
 .srail-bar { justify-content: center; width: 36px; }
+
+/* ═══ Experience: compact, one screen ══════════════════════════════════ */
+#experience { padding-block: clamp(40px, 5vw, 56px); }
+#experience .sx-head { margin-bottom: 20px; }
+#experience .sx-title { font-size: clamp(2rem, 1.5rem + 1.8vw, 2.75rem); }
+.xt-item { padding-bottom: 12px; }
+.xt-card { padding: 16px 20px 14px; }
+.xt-card .tl-role { font-size: 1.0625rem; }
+.xt-card .tl-org { font-size: 0.875rem; }
+.xt-date { margin-bottom: 4px; font-size: 0.8125rem; }
+.xt-card .tl-impact { margin-top: 10px; padding: 8px 0; gap: 8px; }
+.xt-card .tl-impact-value { font-size: 1rem; }
+.xt-node { top: 14px; width: 40px; height: 40px; }
+.xt-item.is-left .xt-node { right: -52px; }
+.xt-item.is-right .xt-node { left: -52px; }
+
+.xt-more { margin-top: 8px; }
+.xt-more summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--sage);
+}
+@media (pointer: coarse) { .xt-more summary { min-height: 44px; } }
+.xt-more summary::-webkit-details-marker { display: none; }
+.xt-more summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-top: -3px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform var(--dur) var(--ease);
+}
+.xt-more[open] summary::after { transform: rotate(-135deg); margin-top: 3px; }
+.xt-more summary:hover { color: var(--ink); }
+.xt-more .tl-bullets { margin-top: 6px; }
+@media (prefers-reduced-motion: no-preference) {
+  .xt-more[open] > :not(summary) { animation: xt-open 220ms var(--ease); }
+}
+@keyframes xt-open { from { opacity: 0; transform: translateY(-4px); } }
+
+/* Short laptop screens: trim the Experience section further so it still
+   fits in one view (wide screens only; phones stack anyway). */
+@media (min-width: 900px) and (max-height: 899px) {
+  #experience { padding-block: 24px 20px; }
+  #experience .sx-eyebrow { display: none; }
+  #experience .sx-head { margin-bottom: 14px; }
+  #experience .sx-title { font-size: 2.25rem; }
+  .xt-item { padding-bottom: 8px; }
+  .xt-card { padding: 12px 18px 10px; }
+  .xt-date { margin-bottom: 2px; }
+  .xt-card .tl-org { margin-top: 2px; }
+  .xt-card .tl-impact { margin-top: 8px; padding: 6px 0; }
+  .xt-card .tl-impact-label { font-size: 0.75rem; }
+  .xt-more { margin-top: 4px; }
+  .xt-more summary { min-height: 28px; }
+}

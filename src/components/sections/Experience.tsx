@@ -172,14 +172,18 @@ export function Experience() {
                       </div>
                     ))}
                   </dl>
-                  <ul className="rail-bullets tl-bullets">
-                    {r.bullets.map((b) => <li key={b}>{b}</li>)}
-                  </ul>
-                  {r.caseStudy && (
-                    <Link href={r.caseStudy.href} className="link-arrow tl-link">
-                      Case study: {r.caseStudy.label} <ArrowRight size={16} className="arrow" aria-hidden />
-                    </Link>
-                  )}
+                  {/* Highlights fold away so the whole timeline fits one screen. */}
+                  <details className="xt-more">
+                    <summary>Highlights</summary>
+                    <ul className="rail-bullets tl-bullets">
+                      {r.bullets.map((b) => <li key={b}>{b}</li>)}
+                    </ul>
+                    {r.caseStudy && (
+                      <Link href={r.caseStudy.href} className="link-arrow tl-link">
+                        Case study: {r.caseStudy.label} <ArrowRight size={16} className="arrow" aria-hidden />
+                      </Link>
+                    )}
+                  </details>
                 </article>
               </li>
             );
