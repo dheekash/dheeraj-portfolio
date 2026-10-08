@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { caseStudies } from "@/data/work";
-
-const siteUrl = "https://dheerajkashyap.com";
+import { SITE_URL as siteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

@@ -1,10 +1,20 @@
 import { ImageResponse } from "next/og";
+import { SITE_URL } from "@/lib/site";
 
-export const alt = "Dheeraj Kashyap — Business Analyst & BI Engineer";
+export const alt = "Dheeraj Kashyap, BI & Analytics Engineer: Power BI and Microsoft Fabric";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+/* Link-preview card in the site's palette: navy ground, cobalt glow and
+   figures, one red point. Figures match the home-page results. */
+const results = [
+  { value: "<1%", label: "Pipeline failures", from: "from 12%" },
+  { value: "<5 min", label: "Fraud detection", from: "from 24 hrs" },
+  { value: "15 min", label: "Report refresh", from: "from 4 hrs" },
+];
+
 export default function OpengraphImage() {
+  const host = SITE_URL.replace(/^https?:\/\//, "");
   return new ImageResponse(
     (
       <div
@@ -13,179 +23,108 @@ export default function OpengraphImage() {
           height: "630px",
           display: "flex",
           flexDirection: "column",
-          background: "#0B0E14",
+          justifyContent: "space-between",
+          padding: "64px 72px",
+          background: "linear-gradient(160deg, #021861 0%, #020B2B 70%)",
           fontFamily: "system-ui, sans-serif",
-          color: "#ECEFF5",
+          color: "#F3F6FF",
           position: "relative",
-          overflow: "hidden",
         }}
       >
-        {/* Blue nebula glow — top-right */}
         <div
           style={{
             position: "absolute",
+            left: "-160px",
+            bottom: "-220px",
+            width: "720px",
+            height: "620px",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(37,93,206,0.55) 0%, rgba(37,93,206,0) 70%)",
+            display: "flex",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            right: "-120px",
             top: "-160px",
-            right: "-100px",
-            width: "600px",
-            height: "600px",
+            width: "520px",
+            height: "520px",
             borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(37,99,235,0.4) 0%, rgba(37,99,235,0.1) 50%, transparent 72%)",
-            display: "flex",
-          }}
-        />
-        {/* Secondary glow — bottom-left */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-80px",
-            left: "120px",
-            width: "380px",
-            height: "280px",
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(222,17,16,0.18) 0%, rgba(222,17,16,0) 70%)",
             display: "flex",
           }}
         />
 
-        {/* Subtle dot-grid texture */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)",
-            backgroundSize: "36px 36px",
-            display: "flex",
-          }}
-        />
-
-        {/* Left accent bar */}
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            bottom: 0,
-            width: "4px",
-            background:
-              "linear-gradient(to bottom, transparent, #2563EB 25%, #60A5FA 75%, transparent)",
-            display: "flex",
-          }}
-        />
-
-        {/* Content layer */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            padding: "60px 80px 60px 84px",
-            flex: 1,
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
-          {/* Top: eyebrow */}
-          <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
             <div
               style={{
-                width: "8px",
-                height: "8px",
-                borderRadius: "50%",
-                background: "#2563EB",
+                width: "56px",
+                height: "56px",
+                borderRadius: "14px",
+                background: "#255DCE",
                 display: "flex",
-              }}
-            />
-            <span
-              style={{
-                fontSize: "14px",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "#60A5FA",
-                fontWeight: 600,
-                display: "flex",
-              }}
-            >
-              dheerajkashyap.com
-            </span>
-            <div
-              style={{
-                flex: 1,
-                height: "1px",
-                background: "rgba(96,165,250,0.2)",
-                display: "flex",
-              }}
-            />
-            <span style={{ fontSize: "14px", color: "#5A6478", display: "flex" }}>
-              13× Certified
-            </span>
-          </div>
-
-          {/* Center: headline */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            <div
-              style={{
-                fontSize: "76px",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "28px",
                 fontWeight: 800,
-                lineHeight: 1.0,
-                letterSpacing: "-0.03em",
-                display: "flex",
-                flexWrap: "wrap",
-                maxWidth: "960px",
+                position: "relative",
               }}
             >
-              <span style={{ display: "flex" }}>Turning complex data into&nbsp;</span>
-              <span style={{ display: "flex", color: "#60A5FA" }}>business growth.</span>
+              DK
+              <div style={{ position: "absolute", top: "9px", right: "9px", width: "9px", height: "9px", borderRadius: "50%", background: "#DE1110", display: "flex" }} />
             </div>
-            <div
-              style={{
-                fontSize: "26px",
-                color: "#8B98B0",
-                fontWeight: 400,
-                display: "flex",
-              }}
-            >
-              Dheeraj Kashyap · Senior BI Developer @ DataStream
-            </div>
+            <div style={{ display: "flex", fontSize: "22px", color: "#A9B6DA" }}>{host}</div>
           </div>
-
-          {/* Bottom: tech stack */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "space-between",
+              gap: "10px",
+              padding: "8px 16px",
+              borderRadius: "999px",
+              border: "1px solid rgba(169,182,218,0.35)",
+              fontSize: "20px",
             }}
           >
-            <div style={{ display: "flex", gap: "10px" }}>
-              {["Power BI", "Microsoft Fabric", "Databricks", "Snowflake", "dbt"].map(
-                (tag) => (
-                  <div
-                    key={tag}
-                    style={{
-                      padding: "6px 16px",
-                      border: "1px solid rgba(96,165,250,0.22)",
-                      borderRadius: "100px",
-                      color: "#8B98B0",
-                      fontSize: "14px",
-                      fontWeight: 500,
-                      display: "flex",
-                    }}
-                  >
-                    {tag}
-                  </div>
-                )
-              )}
-            </div>
-            <span style={{ fontSize: "18px", color: "#3D4A5F", display: "flex" }}>
-              Bengaluru · India
-            </span>
+            <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#22C55E", display: "flex" }} />
+            Open to opportunities
           </div>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+          <div style={{ display: "flex", fontSize: "84px", fontWeight: 800, letterSpacing: "-3px", lineHeight: 1 }}>
+            Dheeraj Kashyap<span style={{ color: "#DE1110" }}>.</span>
+          </div>
+          <div style={{ display: "flex", fontSize: "34px", color: "#DCE4FA", maxWidth: "980px", lineHeight: 1.3 }}>
+            BI &amp; Analytics Engineer building Power BI and Microsoft Fabric systems that cut reporting from hours to minutes.
+          </div>
+        </div>
+
+        <div style={{ display: "flex", gap: "18px" }}>
+          {results.map((r) => (
+            <div
+              key={r.label}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "4px",
+                padding: "18px 22px",
+                borderRadius: "16px",
+                border: "1px solid rgba(143,176,245,0.28)",
+                background: "rgba(7,22,69,0.7)",
+                width: "300px",
+              }}
+            >
+              <div style={{ display: "flex", fontSize: "40px", fontWeight: 800, color: "#8FB0F5", letterSpacing: "-1px" }}>{r.value}</div>
+              <div style={{ display: "flex", fontSize: "20px", color: "#F3F6FF" }}>{r.label}</div>
+              <div style={{ display: "flex", fontSize: "17px", color: "#A9B6DA" }}>{r.from}</div>
+            </div>
+          ))}
         </div>
       </div>
     ),
-    { ...size }
+    size
   );
 }
