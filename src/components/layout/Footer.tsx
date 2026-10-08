@@ -107,8 +107,6 @@ export function Footer() {
           <a href="#top" className="cf-top-link">Back to top ↑</a>
         </div>
       </div>
-
-      <p className="fx-wordmark" aria-hidden>Kashyap</p>
     </footer>
   );
 }
