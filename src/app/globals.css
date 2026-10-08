@@ -2098,3 +2098,16 @@ span.mark {
 .nf-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 0; }
 .nf-links { list-style: none; margin: 28px 0 0; padding: 18px 0 0; border-top: 1px solid var(--line); display: grid; gap: 10px; }
 .nf-links a { font-size: 0.9375rem; }
+
+/* One section per screen on desktop: a section lands below the nav
+   (scroll-padding), so it fills the rest of the viewport and the next
+   section's heading never peeks in underneath. */
+@media (min-width: 1024px) and (min-height: 600px) {
+  /* the hero is pulled up 12px under the nav, so it adds that back */
+  #top { min-height: calc(100svh + 12px); display: flex; flex-direction: column; justify-content: center; }
+  :is(#about, #experience, #skills, #work, #certifications) {
+    min-height: calc(100svh - var(--nav-h) - 16px);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  :is(#top, #about, #experience, #skills, #work, #certifications) > .container { width: 100%; }
+}
