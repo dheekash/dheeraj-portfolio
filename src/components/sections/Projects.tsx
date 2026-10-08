@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { caseStudies } from "@/data/work";
 import { Mark } from "@/components/common/Mark";
 import { Scribble } from "@/components/common/Scribble";
@@ -44,7 +44,7 @@ export function Projects() {
           {shown.map((s, i) => {
             const m = s.impact[0];
             return (
-              <article key={s.slug} className={`pg-card reveal${i === 0 || i === 3 ? " is-wide" : ""}`} data-cover={i % 3}>
+              <article key={s.slug} className={`pg-card reveal${i === 0 || i === 3 ? " is-wide" : ""}`}>
                 <Link href={`/work/${s.slug}`} className="pg-link" aria-labelledby={`pg-${s.slug}`}>
                   <div className="pg-cover" aria-hidden>
                     <span className="pg-num">{String(i + 1).padStart(2, "0")}</span>
@@ -65,7 +65,7 @@ export function Projects() {
                     </h3>
                     <p className="pg-text">{s.summary}</p>
                     <p className="sx-tags">
-                      {s.stack.slice(0, 4).map((t) => (
+                      {s.stack.slice(0, 3).map((t) => (
                         <span key={t} translate="no">#{t.toLowerCase().replace(/[^a-z0-9]+/g, "")}</span>
                       ))}
                     </p>
@@ -77,15 +77,14 @@ export function Projects() {
         </div>
 
         {others.length > 0 && (
-          <p className="sx-more reveal">
-            More case studies:{" "}
-            {others.map((s, i) => (
-              <span key={s.slug}>
-                {i > 0 && " · "}
-                <Link href={`/work/${s.slug}`} className="inline-link">{s.title.replace(/, (Amazon|Rockwool)$/, "")}</Link>
-              </span>
+          <div className="sx-more reveal">
+            <p>More case studies</p>
+            {others.map((s) => (
+              <Link key={s.slug} href={`/work/${s.slug}`} className="btn btn-secondary btn-sm">
+                {s.title.replace(/, (Amazon|Rockwool)$/, "")} <ArrowRight size={14} aria-hidden />
+              </Link>
             ))}
-          </p>
+          </div>
         )}
       </div>
     </section>

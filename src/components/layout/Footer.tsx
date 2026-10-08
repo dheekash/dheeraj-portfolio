@@ -38,10 +38,15 @@ export function Footer() {
               dashboard, or everything in between. I usually reply within 24 hours.
             </p>
 
-            <div className="contact-ctas cf-ctas">
-              <a href={mail("Hello from your portfolio")} className="btn btn-primary">
-                <Mail size={16} aria-hidden /> Email me
+            {/* Email first, with its copy action beside it; profiles below. */}
+            <div className="contact-email cf-email">
+              <a href={mail("Hello from your portfolio")}>
+                <Mail size={18} aria-hidden /> {profile.email}
               </a>
+              <CopyEmail email={profile.email} />
+            </div>
+
+            <div className="contact-ctas cf-ctas">
               <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
                 <LinkedinIcon size={16} className="mark" /> LinkedIn <ArrowUpRight size={14} aria-hidden />
                 <span className="sr-only">(opens in a new tab)</span>
@@ -54,11 +59,6 @@ export function Footer() {
                 <FileText size={16} aria-hidden className="mark" /> CV <ArrowUpRight size={14} aria-hidden />
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
-            </div>
-
-            <div className="contact-email cf-email">
-              <a href={`mailto:${profile.email}`}>{profile.email}</a>
-              <CopyEmail email={profile.email} />
             </div>
           </div>
 

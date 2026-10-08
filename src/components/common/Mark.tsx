@@ -12,7 +12,20 @@ import {
   siSnowflake,
   type SimpleIcon,
 } from "simple-icons";
-import { Blend, ChartColumnBig, Cloud, Database, Sigma, Workflow, type LucideIcon } from "lucide-react";
+import {
+  Blend,
+  Blocks,
+  ChartColumnBig,
+  Cloud,
+  Database,
+  Funnel,
+  Layers,
+  Network,
+  Sheet,
+  Sigma,
+  Workflow,
+  type LucideIcon,
+} from "lucide-react";
 
 /**
  * Logos across the site, always shown next to the product name.
@@ -51,6 +64,11 @@ const neutral: Record<string, LucideIcon> = {
   dax: Sigma,
   "azure-data-factory": Workflow,
   adf: Workflow,
+  "power-query": Funnel,
+  excel: Sheet,
+  "delta-lake": Layers,
+  dbt: Blocks,
+  sqlmesh: Network,
 };
 
 export const slugOf = (name: string) =>
@@ -102,14 +120,5 @@ export function Mark({ name, size = 16, className = "" }: { name: string; size?:
   }
   const Icon = neutral[slug];
   if (Icon) return <Icon aria-hidden size={size} strokeWidth={1.9} className={`${cls} mark-neutral`} />;
-  return null;
-}
-
-/** Company logo for the experience timeline, only when a file was added. */
-export function companyLogo(company: string): string | null {
-  for (const ext of ["svg", "png"]) {
-    const rel = `/logos/companies/${slugOf(company)}.${ext}`;
-    if (fs.existsSync(path.join(process.cwd(), "public", rel))) return rel;
-  }
   return null;
 }

@@ -1,3 +1,4 @@
+import { MousePointer2 } from "lucide-react";
 import { Mark } from "@/components/common/Mark";
 import { DataParticles } from "@/components/common/DataParticles";
 
@@ -24,9 +25,11 @@ export function Technologies() {
 
         <div className="bento reveal">
           <div className="tech-visual bento-visual">
-            <p className="tech-tag" aria-hidden>Tools / Platforms</p>
+            <p className="tech-tag" aria-hidden>Tools and platforms</p>
             <DataParticles word="DATA" />
-            <p className="tech-caption" aria-hidden>Move your pointer through the word</p>
+            <p className="tech-caption" aria-hidden>
+              <MousePointer2 size={14} /> Move your pointer through the word
+            </p>
           </div>
           <div className="bento-groups">
             {groups.map((g) => (
