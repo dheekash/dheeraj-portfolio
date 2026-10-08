@@ -2111,3 +2111,10 @@ span.mark {
   }
   :is(#top, #about, #experience, #skills, #work, #certifications) > .container { width: 100%; }
 }
+
+/* {DK} wordmark: no tile, so no radius or ring; braces follow the theme */
+.logo, .nav-brand .logo, .nav.is-on-dark .logo, .dark .logo, .band .logo { border-radius: 0; box-shadow: none; }
+.logo .logo-brace { stroke: #4B5563; }
+.dark .logo .logo-brace, .nav.is-on-dark .logo .logo-brace { stroke: #D5D9DF; }
+@media (prefers-reduced-motion: no-preference) {
+  .nav-brand:hover .logo { transform: scale(1.04); }}
