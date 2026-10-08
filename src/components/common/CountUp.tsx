@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
  * Counts the first number in `value` up from zero once, on load. The final
  * value is server-rendered, so the figure is correct without JS, there is no
  * layout shift (tabular figures, same characters), and nothing animates
- * under reduced motion.
+ * under reduced motion or on phone and tablet widths.
  */
 export function CountUp({ value, duration = 1100, delay = 0 }: { value: string; duration?: number; delay?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -15,6 +15,9 @@ export function CountUp({ value, duration = 1100, delay = 0 }: { value: string; 
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Phones: show the final figure at once. Counting delays the hero's
+    // largest paint by seconds on a mid-range CPU.
+    if (window.matchMedia("(max-width: 1023.98px)").matches) return;
     const m = value.match(/(\d+(?:\.\d+)?)/);
     if (!m || m.index === undefined) return;
     const target = parseFloat(m[1]);

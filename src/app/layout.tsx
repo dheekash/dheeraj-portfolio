@@ -2,10 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { Footer } from "@/components/layout/Footer";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 /* Three roles, three faces:
@@ -31,12 +31,11 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const siteUrl = "https://dheerajkashyap.com";
+const siteUrl = SITE_URL;
 
 /* Matches the page background so browser chrome blends with the page.
-   A prefers-color-scheme pair would be wrong here: this site defaults to
-   light regardless of OS preference, so the value is seeded light and then
-   kept in sync with the actual chosen theme by ThemeProvider. */
+   Dark is the default theme; ThemeProvider keeps this in sync when the
+   visitor switches. */
 export const viewport: Viewport = {
   themeColor: "#020B2B",
 };
@@ -108,7 +107,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Dheeraj Kashyap",
-  jobTitle: "BI & Analytics Engineer",
+  jobTitle: "Senior Business Intelligence Developer",
   worksFor: { "@type": "Organization", name: "DataStream IT Solutions Pvt Ltd" },
   description:
     "Business Intelligence & Analytics Engineer at DataStream IT Solutions, designing Lakehouse platforms, CI/CD data environments, and executive reporting with Microsoft Fabric, Databricks, Snowflake, and Power BI.",
@@ -172,9 +171,7 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider>
-          <TooltipProvider>
-            <SiteChrome footer={<Footer />}>{children}</SiteChrome>
-          </TooltipProvider>
+          <SiteChrome footer={<Footer />}>{children}</SiteChrome>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

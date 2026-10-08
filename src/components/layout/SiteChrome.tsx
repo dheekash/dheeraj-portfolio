@@ -87,7 +87,6 @@ export function SiteChrome({ children, footer }: { children: React.ReactNode; fo
   const pathname = usePathname();
   useRevealOnce(pathname);
 
-  if (pathname.startsWith("/deck")) return <>{children}</>;
 
   return (
     <>

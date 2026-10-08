@@ -38,6 +38,8 @@ export function ContactForm() {
   const [values, setValues] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
+  const [serverError, setServerError] = useState("");
+  const [company, setCompany] = useState(""); // honeypot, hidden from people
 
   const set = (k: keyof typeof values) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setValues((v) => ({ ...v, [k]: e.target.value }));
@@ -62,9 +64,13 @@ export function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...t, subject: "Portfolio contact form" }),
+        body: JSON.stringify({ ...t, subject: "Portfolio contact form", company }),
       });
-      if (!res.ok) throw new Error("Request failed");
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setServerError(typeof data.error === "string" ? data.error : "");
+        throw new Error("Request failed");
+      }
       setStatus("success");
       setValues({ name: "", email: "", message: "" });
     } catch {
@@ -103,7 +109,7 @@ export function ContactForm() {
         Send a message
       </h3>
       <Field id={IDS.name} label="Name" error={errors.name}>
-        <input id={IDS.name} name="name" autoComplete="name" value={values.name} onChange={set("name")} {...invalid("name")} />
+        <input id={IDS.name} name="name" autoComplete="name" maxLength={100} value={values.name} onChange={set("name")} {...invalid("name")} />
       </Field>
       <Field id={IDS.email} label="Email" error={errors.email}>
         <input
@@ -113,6 +119,7 @@ export function ContactForm() {
           inputMode="email"
           autoComplete="email"
           spellCheck={false}
+          maxLength={200}
           value={values.email}
           onChange={set("email")}
           {...invalid("email")}
@@ -123,6 +130,7 @@ export function ContactForm() {
           id={IDS.message}
           name="message"
           rows={4}
+          maxLength={5000}
           value={values.message}
           onChange={set("message")}
           onKeyDown={(e) => {
@@ -135,8 +143,14 @@ export function ContactForm() {
         />
       </Field>
 
+      {/* Honeypot: off-screen and skipped by keyboard and screen readers. */}
+      <div className="hp" aria-hidden="true">
+        <label htmlFor="contact-company">Company</label>
+        <input id="contact-company" name="company" tabIndex={-1} autoComplete="off" value={company} onChange={(e) => setCompany(e.target.value)} />
+      </div>
+
       <p aria-live="polite" className="form-status m-0" style={{ color: "#F0A190" }}>
-        {status === "error" ? "The message didn’t send. Try again, or email me directly." : ""}
+        {status === "error" ? (serverError ? `${serverError}` : "The message didn’t send. Try again, or email me directly.") : ""}
       </p>
 
       <button type="submit" className="btn btn-primary" disabled={status === "submitting"} style={{ justifySelf: "start" }}>
