@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Loader2 } from "lucide-react";
+import { Loader2, Send } from "lucide-react";
 
 type Status = "idle" | "submitting" | "success" | "error";
 type Errors = { name?: string; email?: string; message?: string };
@@ -154,8 +154,8 @@ export function ContactForm() {
       </p>
 
       <button type="submit" className="btn btn-primary" disabled={status === "submitting"} style={{ justifySelf: "start" }}>
+        {status === "submitting" ? <Loader2 size={16} className="animate-spin" aria-hidden /> : <Send size={16} aria-hidden />}
         Send message
-        {status === "submitting" && <Loader2 size={16} className="animate-spin" aria-hidden />}
       </button>
     </form>
   );

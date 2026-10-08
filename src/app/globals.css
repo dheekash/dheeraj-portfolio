@@ -1786,8 +1786,6 @@ span.mark {
   color: #FFFFFF;
   background: #0A2272 linear-gradient(135deg, #021861 0%, #255DCE 100%);
 }
-.pg-card[data-cover="1"] .pg-cover { background: #1C4AAE linear-gradient(135deg, #1A47A8 0%, #255DCE 50%, #5C8BEA 100%); }
-.pg-card[data-cover="2"] .pg-cover { background: #4A0F3A linear-gradient(135deg, #021861 0%, #6A0E3A 55%, #DE1110 100%); }
 .pg-card.is-wide .pg-cover { min-height: 220px; }
 .pg-num { position: absolute; top: 18px; left: 24px; font-family: var(--font-mono); font-size: var(--fs-xs); color: rgba(255, 255, 255, 0.85); }
 .pg-mark { top: 14px; right: 16px; width: 44px; height: 44px; }
@@ -2155,3 +2153,33 @@ span.mark {
 .cert-card { position: relative; transition: border-color var(--dur) var(--ease); }
 .cert-card .link-arrow::after { content: ""; position: absolute; inset: 0; border-radius: var(--r-lg); }
 .cert-card:has(.link-arrow:hover) { border-color: var(--sage); }
+
+/* ═══ Usability pass 2 ══════════════════════════════════════════════════ */
+/* Timeline: plain markers on the line, aligned with each card's title */
+.xt-node { top: 20px; width: 16px; height: 16px; border-width: 3px; background: var(--paper); }
+.xt-item.is-left .xt-node { right: -40px; }
+.xt-item.is-right .xt-node { left: -40px; }
+.xt-node.is-current { box-shadow: 0 0 0 5px rgba(222, 17, 16, 0.2); }
+@media (max-width: 899.98px) {
+  .xt-item.is-left .xt-node, .xt-item.is-right .xt-node { left: -42px; right: auto; }}
+
+/* Technologies: the toolset gets two thirds, the DATA panel one third */
+@media (min-width: 1000px) {
+  .bento { grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr); }
+  .bento-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+.tech-tag { text-transform: none; letter-spacing: 0.02em; }
+.tech-caption { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid var(--line-strong); border-radius: 999px; background: color-mix(in srgb, var(--paper) 70%, transparent); font-family: inherit; font-size: var(--fs-xs); letter-spacing: 0; color: var(--ink); }
+
+/* Projects: one cover colour; titles and categories hold two lines so a
+   row's descriptions start on the same line */
+@media (min-width: 900px) {
+  .pg-sub, .pg-title { min-height: 2lh; align-content: start; }}
+.pg-body .sx-tags { gap: 6px 14px; }
+.sx-more { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.sx-more p { margin: 0 4px 0 0; font-size: var(--fs-sm); color: var(--muted-ink); }
+
+/* Contact: the address leads, sized to sit with its copy button */
+.cf-email { margin-top: 24px; }
+.cf-email + .cf-ctas { margin-top: 16px; }
+.contact-email a { gap: 10px; font-family: inherit; font-size: var(--fs-md); font-weight: 600; text-underline-offset: 5px; }
+.copy-btn { height: 40px; }

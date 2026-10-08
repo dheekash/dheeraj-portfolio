@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { companyLogo } from "@/components/common/Mark";
 import { Scribble } from "@/components/common/Scribble";
 
 type Role = {
@@ -106,16 +105,6 @@ const roles: Role[] = [
   },
 ];
 
-/* Company badge for the timeline node: a logo file when one exists in
-   public/logos/companies, otherwise the company's initials. */
-function initials(company: string) {
-  const words = company.replace(/[^A-Za-z ]/g, "").split(/\s+/).filter(Boolean);
-  // A camel-cased brand ("DataStream") gives its own two capitals.
-  const camel = words[0].match(/[A-Z]/g);
-  if (camel && camel.length > 1) return camel.slice(0, 2).join("");
-  return (words.length > 1 ? words[0][0] + words[1][0] : words[0].slice(0, 2)).toUpperCase();
-}
-
 /**
  * Work experience as a compact two-sided timeline. One continuous line runs
  * down the centre; cards alternate left and right and overlap by half a
@@ -136,21 +125,14 @@ export function Experience() {
 
         <ol className="xt">
           {roles.map((r, i) => {
-            const logo = companyLogo(r.company);
             return (
               <li
                 key={r.company}
                 className={`xt-item ${i % 2 ? "is-right" : "is-left"} reveal`}
                 style={{ "--row": i + 1 } as React.CSSProperties}
               >
-                <span className={`xt-node${r.current ? " is-current" : ""}`} aria-hidden>
-                  {logo ? (
-                    // eslint-disable-next-line @next/next/no-img-element -- small static logo
-                    <img src={logo} alt="" width={24} height={24} />
-                  ) : (
-                    initials(r.company)
-                  )}
-                </span>
+                {/* A plain marker on the line; the card names the company. */}
+                <span className={`xt-node${r.current ? " is-current" : ""}`} aria-hidden />
                 <article className="xt-card card" aria-labelledby={`role-${i}`}>
                   <p className="xt-date">
                     {r.start} – {r.end}
