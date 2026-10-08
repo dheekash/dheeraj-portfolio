@@ -106,17 +106,16 @@ const roles: Role[] = [
 ];
 
 /**
- * Work experience as a compact two-sided timeline. One continuous line runs
- * down the centre; cards alternate left and right and overlap by half a
- * card, so the section is about half the height of a one-card-per-row
- * layout. Document order stays chronological for screen readers. On narrow
- * screens the line moves to the left and cards stack.
+ * Work experience as a single-column timeline: one line on the left, newest
+ * role first. On wide screens each card is one row (role on the left,
+ * results on the right), so all four roles fit one screen and read
+ * straight down. On narrow screens the card contents stack.
  */
 export function Experience() {
   return (
     <section id="experience" className="section sx" aria-labelledby="experience-title">
       <div className="container">
-        <header className="sx-head is-center reveal">
+        <header className="sx-head reveal">
           <p className="sx-eyebrow">Career</p>
           <h2 id="experience-title" className="sx-title">
             Work <Scribble>Experience</Scribble><span className="sx-dot">.</span>
@@ -128,8 +127,7 @@ export function Experience() {
             return (
               <li
                 key={r.company}
-                className={`xt-item ${i % 2 ? "is-right" : "is-left"} reveal`}
-                style={{ "--row": i + 1 } as React.CSSProperties}
+                className="xt-item reveal"
               >
                 {/* A plain marker on the line; the card names the company. */}
                 <span className={`xt-node${r.current ? " is-current" : ""}`} aria-hidden />
