@@ -2112,8 +2112,10 @@ span.mark {
 
 /* {DK} wordmark: no tile, so no radius or ring; braces follow the theme */
 .logo, .nav-brand .logo, .nav.is-on-dark .logo, .dark .logo, .band .logo { border-radius: 0; box-shadow: none; }
-.logo .logo-brace { stroke: #4B5563; }
-.dark .logo .logo-brace, .nav.is-on-dark .logo .logo-brace { stroke: #D5D9DF; }
+.logo .logo-brace { stroke: #255DCE; }
+.logo .logo-k { fill: #021861; }
+.dark .logo .logo-brace, .nav.is-on-dark .logo .logo-brace { stroke: #8FB0F5; }
+.dark .logo .logo-k, .nav.is-on-dark .logo .logo-k { fill: #F3F6FF; }
 @media (prefers-reduced-motion: no-preference) {
   .nav-brand:hover .logo { transform: scale(1.04); }}
 
