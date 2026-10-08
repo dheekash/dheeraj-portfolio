@@ -1,41 +1,47 @@
 import { Mark } from "@/components/common/Mark";
 import { DataParticles } from "@/components/common/DataParticles";
 
-/* The working toolset as chips, each with its mark where one exists.
-   Every item is from the skills list and case studies. Core tools first. */
-const tech = [
-  "Power BI", "Microsoft Fabric", "SQL", "DAX", "Power Query", "Azure", "Azure Data Factory",
-  "Snowflake", "Databricks", "Python", "PySpark", "dbt", "SQLMesh", "Delta Lake",
-  "Apache Kafka", "MLflow", "scikit-learn", "Git", "Excel",
+/* The toolset, grouped by what it does. Every item is from the skills list
+   and case studies. */
+const groups = [
+  { title: "BI & semantic models", items: ["Power BI", "DAX", "Power Query", "Excel"] },
+  { title: "Data platforms", items: ["Microsoft Fabric", "Azure", "Snowflake", "Databricks", "Delta Lake"] },
+  { title: "Engineering & pipelines", items: ["SQL", "Azure Data Factory", "dbt", "SQLMesh", "Apache Kafka"] },
+  { title: "Languages, ML & tooling", items: ["Python", "PySpark", "MLflow", "scikit-learn", "Git"] },
 ];
 
+/** Bento: the DATA graphic and the grouped toolset share one panel. */
 export function Technologies() {
   return (
     <section id="skills" className="section sx" aria-labelledby="skills-title">
       <div className="container">
-        <div className="tech-panel reveal">
-          <div className="tech-visual">
+        <header className="sx-head reveal">
+          <p className="sx-eyebrow">My skills</p>
+          <h2 id="skills-title" className="sx-title">
+            Technologies<span className="sx-dot">.</span>
+          </h2>
+        </header>
+
+        <div className="bento reveal">
+          <div className="tech-visual bento-visual">
             <p className="tech-tag" aria-hidden>Tools / Platforms</p>
             <DataParticles word="DATA" />
             <p className="tech-caption" aria-hidden>Move your pointer through the word</p>
           </div>
-          <div className="tech-body">
-            <p className="sx-eyebrow">My skills</p>
-            <h2 id="skills-title" className="sx-title">
-              Technologies<span className="sx-dot">.</span>
-            </h2>
-            <p className="sx-intro">
-              The toolset behind every build, from ingestion and lakehouse engineering to semantic
-              models and the reports executives read.
-            </p>
-            <ul className="sx-chips tech-chips" aria-label="Technologies">
-              {tech.map((t) => (
-                <li key={t} className="sx-chip" translate="no">
-                  <Mark name={t} size={16} />
-                  {t}
-                </li>
-              ))}
-            </ul>
+          <div className="bento-groups">
+            {groups.map((g) => (
+              <section key={g.title} className="bento-group" aria-labelledby={`tg-${g.title}`}>
+                <h3 id={`tg-${g.title}`} className="bento-title">{g.title}</h3>
+                <ul className="bento-list">
+                  {g.items.map((t) => (
+                    <li key={t} className="sx-chip" translate="no">
+                      <Mark name={t} size={16} />
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
           </div>
         </div>
       </div>

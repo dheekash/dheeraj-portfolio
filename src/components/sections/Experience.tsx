@@ -117,10 +117,11 @@ function initials(company: string) {
 }
 
 /**
- * Work experience as a centred timeline: a single line down the middle,
- * a company badge on it for each role, cards alternating left and right
- * with the dates opposite. On narrow screens the line moves to the left
- * and every card follows it.
+ * Work experience as a compact two-sided timeline. One continuous line runs
+ * down the centre; cards alternate left and right and overlap by half a
+ * card, so the section is about half the height of a one-card-per-row
+ * layout. Document order stays chronological for screen readers. On narrow
+ * screens the line moves to the left and cards stack.
  */
 export function Experience() {
   return (
@@ -133,12 +134,28 @@ export function Experience() {
           </h2>
         </header>
 
-        <ol className="tl">
+        <ol className="xt">
           {roles.map((r, i) => {
             const logo = companyLogo(r.company);
             return (
-              <li key={r.company} className={`tl-item ${i % 2 ? "is-right" : "is-left"} reveal`}>
-                <article className="tl-card card" aria-labelledby={`role-${i}`}>
+              <li
+                key={r.company}
+                className={`xt-item ${i % 2 ? "is-right" : "is-left"} reveal`}
+                style={{ "--row": i + 1 } as React.CSSProperties}
+              >
+                <span className={`xt-node${r.current ? " is-current" : ""}`} aria-hidden>
+                  {logo ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- small static logo
+                    <img src={logo} alt="" width={24} height={24} />
+                  ) : (
+                    initials(r.company)
+                  )}
+                </span>
+                <article className="xt-card card" aria-labelledby={`role-${i}`}>
+                  <p className="xt-date">
+                    {r.start} – {r.end}
+                    {r.current && <span className="xt-current">Current role</span>}
+                  </p>
                   <h3 id={`role-${i}`} className="tl-role">{r.title}</h3>
                   <p className="tl-org">
                     <span translate="no">{r.company}</span>
@@ -164,20 +181,6 @@ export function Experience() {
                     </Link>
                   )}
                 </article>
-
-                <span className={`tl-node${r.current ? " is-current" : ""}`} aria-hidden>
-                  {logo ? (
-                    // eslint-disable-next-line @next/next/no-img-element -- small static logo
-                    <img src={logo} alt="" width={28} height={28} />
-                  ) : (
-                    initials(r.company)
-                  )}
-                </span>
-
-                <p className="tl-date">
-                  {r.start} – {r.end}
-                  {r.current && <span className="tl-current">Current role</span>}
-                </p>
               </li>
             );
           })}
