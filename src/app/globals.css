@@ -1713,18 +1713,16 @@ span.mark {
 @media (max-width: 1023.98px) { .hx-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }}
 
 /* Experience: interleaved two-sided timeline */
-.xt { list-style: none; margin: 0; padding: 0; position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr); row-gap: 0; }
+.xt { list-style: none; margin: 0; padding: 0 0 0 56px; position: relative; display: grid; gap: 12px; }
 .xt::before {
   content: "";
   position: absolute;
-  top: 8px; bottom: 8px; left: 50%;
+  top: 8px; bottom: 8px; left: 22px;
   width: 2px;
   transform: translateX(-50%);
   background: linear-gradient(180deg, var(--red), var(--line-strong) 25%, var(--line-strong) 85%, transparent);
 }
-.xt-item { position: relative; grid-row: var(--row) / span 2; padding-bottom: 20px; }
-.xt-item.is-left { grid-column: 1; }
-.xt-item.is-right { grid-column: 3; }
+.xt-item { position: relative; }
 .xt-card { padding: 22px 24px; box-shadow: inset 0 -3px 0 var(--cobalt); }
 .xt-node {
   position: absolute;
@@ -1738,17 +1736,9 @@ span.mark {
   font-size: var(--fs-xs); font-weight: 700;
   color: var(--ink);
 }
-.xt-item.is-left .xt-node { right: -54px; }
-.xt-item.is-right .xt-node { left: -54px; }
 .xt-node.is-current { background: var(--red); border-color: var(--red); color: #FFFFFF; box-shadow: 0 0 0 6px rgba(222, 17, 16, 0.16); }
-.xt-node img { width: 24px; height: 24px; object-fit: contain; }
 .xt-date { margin: 0 0 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: var(--fs-sm); color: var(--muted-ink); font-variant-numeric: tabular-nums; }
 .xt-current { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 700; color: #FFFFFF; background: var(--red); }
-@media (max-width: 899.98px) {
-  .xt { grid-template-columns: minmax(0, 1fr); padding-left: 56px; }
-  .xt::before { left: 22px; transform: none; }
-  .xt-item, .xt-item.is-left, .xt-item.is-right { grid-column: 1; grid-row: auto; }
-  .xt-item.is-left .xt-node, .xt-item.is-right .xt-node { left: -56px; right: auto; }}
 
 /* Technologies bento */
 .bento { display: grid; gap: 16px; }
@@ -1989,8 +1979,6 @@ span.mark {
 /* ═══ Experience: compact, one screen ══════════════════════════════════ */
 #experience { padding-block: clamp(40px, 5vw, 56px); }
 #experience .sx-head { margin-bottom: 20px; }
-#experience .sx-title { font-size: var(--fs-2xl); }
-.xt-item { padding-bottom: 12px; }
 .xt-card { padding: 16px 20px 14px; }
 .xt-card .tl-role { font-size: var(--fs-base); }
 .xt-card .tl-org { font-size: var(--fs-sm); }
@@ -1998,8 +1986,6 @@ span.mark {
 .xt-card .tl-impact { margin-top: 10px; padding: 8px 0; gap: 8px; }
 .xt-card .tl-impact-value { font-size: var(--fs-base); }
 .xt-node { top: 14px; width: 40px; height: 40px; }
-.xt-item.is-left .xt-node { right: -52px; }
-.xt-item.is-right .xt-node { left: -52px; }
 
 .xt-more { margin-top: 8px; }
 .xt-more summary {
@@ -2036,10 +2022,7 @@ span.mark {
    fits in one view (wide screens only; phones stack anyway). */
 @media (min-width: 900px) and (max-height: 899px) {
   #experience { padding-block: 24px 20px; }
-  #experience .sx-eyebrow { display: none; }
   #experience .sx-head { margin-bottom: 14px; }
-  #experience .sx-title { font-size: var(--fs-xl); }
-  .xt-item { padding-bottom: 8px; }
   .xt-card { padding: 12px 18px 10px; }
   .xt-date { margin-bottom: 2px; }
   .xt-card .tl-org { margin-top: 2px; }
@@ -2159,11 +2142,17 @@ span.mark {
 /* ═══ Usability pass 2 ══════════════════════════════════════════════════ */
 /* Timeline: plain markers on the line, aligned with each card's title */
 .xt-node { top: 20px; width: 16px; height: 16px; border-width: 3px; background: var(--paper); }
-.xt-item.is-left .xt-node { right: -40px; }
-.xt-item.is-right .xt-node { left: -40px; }
 .xt-node.is-current { box-shadow: 0 0 0 5px rgba(222, 17, 16, 0.2); }
-@media (max-width: 899.98px) {
-  .xt-item.is-left .xt-node, .xt-item.is-right .xt-node { left: -42px; right: auto; }}
+.xt-node { left: -42px; }
+
+/* Wide screens: each role is one row, who/where on the left and the three
+   results on the right, so the timeline reads straight down */
+@media (min-width: 900px) {
+  .xt-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); column-gap: 32px; align-items: center; }
+  .xt-card > :not(.tl-impact, .xt-more) { grid-column: 1; }
+  .xt-card > .tl-impact { grid-column: 2; grid-row: 1 / span 3; margin: 0; padding: 0 0 0 24px; border-block: 0; border-left: 1px solid var(--line-subtle); }
+  .xt-card > .xt-more { grid-column: 1 / -1; }
+}
 
 /* Technologies: the toolset gets two thirds, the DATA panel one third */
 @media (min-width: 1000px) {
@@ -2185,3 +2174,15 @@ span.mark {
 .cf-email + .cf-ctas { margin-top: 16px; }
 .contact-email a { gap: 10px; font-family: inherit; font-size: var(--fs-md); font-weight: 600; text-underline-offset: 5px; }
 .copy-btn { height: 40px; }
+
+/* ═══ Usability pass 3 ══════════════════════════════════════════════════ */
+/* Side rail: a visible glass pill, off the screen edge, with readable bars */
+.srail { right: 10px; padding: 14px 3px; border: 1px solid var(--glass-edge, var(--line)); border-radius: 999px; background: var(--glass-bg, var(--sheet)); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 12px 32px -18px rgba(2, 24, 97, 0.6); }
+.srail-bar { width: 34px; height: 24px; }
+/* Shown only where the page margin can hold it clear of the content */
+@media (max-width: 1399.98px) { .srail { display: none; }}
+.srail-bar::after { width: 16px; height: 4px; background: var(--muted-ink); opacity: 0.55; }
+.srail-bar:hover::after { width: 22px; opacity: 1; }
+.srail-bar.is-active::after { width: 26px; opacity: 1; }
+.srail-page { color: var(--ink); }
+
