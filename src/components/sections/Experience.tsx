@@ -128,7 +128,7 @@ export function Experience() {
     <section id="experience" className="section sx" aria-labelledby="experience-title">
       <div className="container">
         <header className="sx-head is-center reveal">
-          <p className="sx-eyebrow">What I have done so far</p>
+          <p className="sx-eyebrow">Career</p>
           <h2 id="experience-title" className="sx-title">
             Work <Scribble>Experience</Scribble><span className="sx-dot">.</span>
           </h2>
