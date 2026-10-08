@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     template: "%s | Dheeraj Kashyap",
   },
   description:
-    "Dheeraj Kashyap is a BI & Analytics Engineer with 7+ years in enterprise analytics: Power BI semantic models, Microsoft Fabric lakehouses, SQL and analytics engineering for teams across 15 countries. 13 certifications across Microsoft, Snowflake and Databricks.",
+    "Dheeraj Kashyap, BI & Analytics Engineer in Bengaluru with 7+ years building Power BI semantic models and Microsoft Fabric lakehouses that cut reporting from hours to minutes. Open to opportunities; 13 certifications across Microsoft, Snowflake and Databricks.",
   keywords: [
     "Microsoft Certified BI Engineer",
     "BI & Analytics Engineer",

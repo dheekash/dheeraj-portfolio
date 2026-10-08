@@ -2802,3 +2802,102 @@ span.mark {
 
 /* Selection */
 ::selection { background: var(--cobalt); color: #FFFFFF; }
+
+/* ═══ Hero refinements: results first, one primary action ═══════════════ */
+.fx-hero { min-height: auto; padding-bottom: clamp(40px, 5vw, 64px); }
+
+/* Availability */
+.fx-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding: 6px 14px 6px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--sheet) 70%, transparent);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.fx-status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #22C55E;
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .fx-status-dot { animation: fx-pulse 2.4s ease-in-out infinite; }
+}
+@keyframes fx-pulse { 50% { box-shadow: 0 0 0 7px rgba(34, 197, 94, 0.06); } }
+.fx-avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; margin-left: -4px; }
+
+/* Greeting and name */
+.fx-hello { font-weight: 700; color: var(--ink); opacity: 0.9; }
+.fx-name { max-width: none; display: grid; justify-items: center; }
+.fx-name-line { display: block; }
+/* DHEERAJ is the narrower word; open its tracking so both lines share a width. */
+.fx-name-line:first-child { letter-spacing: -0.051em; }
+
+/* Tagline and credibility line */
+.fx-lede { max-width: 34ch; font-size: clamp(1.125rem, 1rem + 0.6vw, 1.4375rem); font-weight: 500; }
+.fx-cred { margin: 12px 0 0; font-size: 0.9375rem; color: var(--muted-ink); }
+
+/* One primary action; CV is secondary */
+.fx-actions { align-items: center; }
+.fx-actions .btn-secondary { background: color-mix(in srgb, var(--sheet) 50%, transparent); }
+
+/* Results row */
+.fx-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  width: min(100%, 880px);
+  margin: clamp(32px, 4vw, 48px) 0 0;
+}
+@media (max-width: 719.98px) { .fx-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.fx-metric dd {
+  margin: 0;
+  display: grid;
+  gap: 2px;
+  justify-items: center;
+  height: 100%;
+  padding: 18px 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--sheet) 78%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.fx-metric-value {
+  font-family: var(--font-sans);
+  font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--sage);
+}
+.fx-metric-label { font-size: 0.9375rem; font-weight: 600; color: var(--ink); }
+.fx-metric-from { font-size: 0.8125rem; color: var(--muted-ink); }
+
+/* Next step: a clear, gently moving chevron */
+.fx-next {
+  display: inline-grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  margin-top: clamp(28px, 4vw, 44px);
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--ink);
+  transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.fx-next:hover { border-color: var(--red); color: var(--red); }
+@media (prefers-reduced-motion: no-preference) {
+  .fx-next svg { animation: fx-nudge 1.8s ease-in-out infinite; }
+}
+@keyframes fx-nudge { 50% { transform: translateY(4px); } }
+
+/* Floating tool chips: only where there is room beside the text */
+.fx-tile-body { border-radius: 14px; }
+.fx-logo { font-weight: 600; }
+@media (max-width: 1199.98px) { .fx-field { display: none; } }
