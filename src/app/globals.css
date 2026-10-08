@@ -2640,3 +2640,165 @@ span.mark {
 
 .fx-tile-body { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(28, 28, 60, 0.9); }
 :root:not(.dark) .fx-tile-body { background: rgba(255, 255, 255, 0.92); }
+
+/* ═══ Palette: Midnight Navy #021861 · Cobalt Blue #255DCE · Bright Red #DE1110
+   Navy is the ground, cobalt the working accent (links, figures, glow),
+   red the call to action and small markers only. Lighter tints of cobalt
+   and red are used for text on navy so every label passes WCAG AA. */
+:root {
+  --navy: #021861;
+  --cobalt: #255DCE;
+  --red: #DE1110;
+
+  --paper: #F5F7FC;
+  --paper-alt: #F5F7FC;
+  --paper-subtle: #EEF2FB;
+  --sheet: #FFFFFF;
+  --sheet-raised: #F8FAFE;
+  --ink: #021861;
+  --muted-ink: #4A5680;
+  --soft-ink: #5A668F;
+  --faint-ink: #97A2C4;
+  --line: #D9DFEE;
+  --line-subtle: #E6EAF5;
+  --line-strong: #B4BFDA;
+  --sage: #255DCE;
+  --sage-dark: #021861;
+  --sage-light: #D6E2FA;
+  --sage-pale: #EEF3FD;
+  --positive: #255DCE;
+  --positive-soft: #EEF3FD;
+  --ink-hover: #255DCE;
+  --baseline: #8A95BA;
+  --baseline-text: #5F6B92;
+  --gold: #DE1110;
+  --gold-text: #C20F0E;
+  --gold-pale: #FDECEC;
+  --teal: #255DCE;
+  --teal-pale: #E8EFFC;
+  --clay: #021861;
+  --clay-text: #021861;
+  --clay-pale: #E6EAF5;
+  --tint-mint: #F5F7FC;
+  --tint-sand: #F5F7FC;
+  --tint-mist: #F5F7FC;
+  --band: #021861;
+  --band-sheet: #0A2272;
+  --band-line: #1D3483;
+  --band-input-line: #3450A3;
+  --band-accent: #8FB0F5;
+  --glass-glow: rgba(37, 93, 206, 0.18);
+}
+.dark {
+  --paper: #020B2B;
+  --paper-alt: #020B2B;
+  --paper-subtle: #031038;
+  --sheet: #071645;
+  --sheet-raised: #0B1D57;
+  --ink: #F3F6FF;
+  --muted-ink: #A9B6DA;
+  --soft-ink: #97A6D0;
+  --faint-ink: #5F6E9C;
+  --line: #1B2B66;
+  --line-subtle: #142257;
+  --line-strong: #2C3F80;
+  --sage: #6F9BF3;
+  --sage-dark: #A9C3FA;
+  --sage-light: #16306F;
+  --sage-pale: #0E2260;
+  --positive: #6F9BF3;
+  --positive-soft: #0E2260;
+  --ink-hover: #A9C3FA;
+  --baseline: #5F6E9C;
+  --baseline-text: #A9B6DA;
+  --gold: #FF4544;
+  --gold-text: #FF6B6A;
+  --gold-pale: rgba(222, 17, 16, 0.14);
+  --teal: #8FB0F5;
+  --teal-pale: rgba(37, 93, 206, 0.2);
+  --clay: #C9D5F5;
+  --clay-text: #C9D5F5;
+  --clay-pale: rgba(169, 188, 232, 0.12);
+  --tint-mint: #020B2B;
+  --tint-sand: #020B2B;
+  --tint-mist: #020B2B;
+  --band: #010824;
+  --band-sheet: #071645;
+  --band-line: #16255E;
+  --band-input-line: #2C3F80;
+  --band-accent: #8FB0F5;
+  --glass-bg: rgba(4, 20, 74, 0.6);
+  --glass-edge: rgba(255, 255, 255, 0.12);
+  --glass-glow: rgba(111, 155, 243, 0.25);
+}
+
+/* Calls to action in red */
+.btn-primary,
+.dark .btn-primary,
+.band .btn-primary { background: var(--red); color: #FFFFFF; }
+.btn-primary:hover,
+.dark .btn-primary:hover,
+.band .btn-primary:hover { background: #B90E0D; color: #FFFFFF; }
+.nav .btn-primary, .dark .nav .btn-primary { background: var(--red); color: #FFFFFF; }
+
+/* Small red markers */
+.sx-dot { color: var(--red); }
+.dark .sx-dot { color: #FF3B3A; }
+.scribble-line path { stroke: var(--red); }
+.sx-hero-rail::before, .tl-node.is-current { background: var(--red); border-color: var(--red); color: #FFFFFF; }
+.dark .tl-node.is-current { color: #FFFFFF; box-shadow: 0 0 0 6px rgba(222, 17, 16, 0.2); }
+.tl-node.is-current { box-shadow: 0 0 0 6px rgba(222, 17, 16, 0.14); }
+.tl-current, .rail-current { color: var(--red); }
+.dark .tl-current { color: #FF6B6A; }
+.tl-card { box-shadow: inset 0 -3px 0 var(--cobalt); }
+.dark .tl::before { background: linear-gradient(180deg, var(--red), var(--line-strong) 30%, var(--line-strong) 85%, transparent); }
+.tl::before { background: linear-gradient(180deg, var(--red), var(--line-strong) 30%, var(--line-strong) 85%, transparent); }
+
+/* Nav: cobalt active pill, red Contact pill */
+.nav-link[aria-current="true"] { background: color-mix(in srgb, var(--cobalt) 20%, transparent); }
+.nav-link-cta, .nav-link-cta[aria-current="true"] { background: var(--red); border-color: var(--red); color: #FFFFFF; }
+.nav-link-cta:hover { background: #B90E0D; border-color: #B90E0D; color: #FFFFFF; }
+.nav.is-on-dark { --paper: #021861; --sage: #8FB0F5; }
+
+/* Hero: navy ground, cobalt glow, a faint red ember */
+.fx-hero {
+  background:
+    radial-gradient(46rem 28rem at 12% 64%, rgba(37, 93, 206, 0.5), transparent 65%),
+    radial-gradient(34rem 22rem at 86% 88%, rgba(222, 17, 16, 0.16), transparent 65%),
+    radial-gradient(50rem 30rem at 88% -5%, rgba(37, 93, 206, 0.35), transparent 62%),
+    linear-gradient(180deg, #021861 0%, #020B2B 92%);
+}
+:root:not(.dark) .fx-hero {
+  background:
+    radial-gradient(46rem 28rem at 12% 64%, rgba(37, 93, 206, 0.14), transparent 65%),
+    radial-gradient(34rem 22rem at 86% 88%, rgba(222, 17, 16, 0.07), transparent 65%),
+    radial-gradient(50rem 30rem at 88% -5%, rgba(37, 93, 206, 0.12), transparent 62%),
+    var(--paper);
+}
+.fx-name { background-image: linear-gradient(180deg, #FFFFFF 0%, #BFD2FF 100%); }
+:root:not(.dark) .fx-name { background-image: linear-gradient(180deg, #021861 0%, #255DCE 100%); }
+.fx-tile-body { background: rgba(7, 22, 69, 0.92); border-color: rgba(143, 176, 245, 0.18); }
+:root:not(.dark) .fx-tile-body { background: rgba(255, 255, 255, 0.94); border-color: #E1E7F5; }
+.fx-scroll-line { background: linear-gradient(var(--red), transparent); }
+
+/* Project covers in the palette */
+.pt-cover { background: #0A2272 linear-gradient(135deg, #021861 0%, #255DCE 100%); }
+.pt-card[data-cover="1"] .pt-cover { background: #1C4AAE linear-gradient(135deg, #1A47A8 0%, #255DCE 50%, #5C8BEA 100%); }
+.pt-card[data-cover="2"] .pt-cover { background: #4A0F3A linear-gradient(135deg, #021861 0%, #6A0E3A 55%, #DE1110 100%); }
+
+/* Particle panel */
+.tech-visual {
+  background:
+    radial-gradient(70% 60% at 30% 30%, rgba(37, 93, 206, 0.35), transparent 70%),
+    radial-gradient(40% 40% at 85% 85%, rgba(222, 17, 16, 0.14), transparent 70%),
+    #021142;
+}
+
+/* Medallion layers keep their metals regardless of palette */
+.arch-node[data-stage="gold"] { background: #FBF1D9; border-color: #C9A227; }
+.arch-node[data-stage="gold"] .arch-name { color: #8C6209; }
+.dark .arch-node[data-stage="gold"] { background: #2A2412; }
+.dark .arch-node[data-stage="gold"] .arch-name { color: #E8C062; }
+
+/* Selection */
+::selection { background: var(--cobalt); color: #FFFFFF; }

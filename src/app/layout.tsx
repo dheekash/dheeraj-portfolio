@@ -38,7 +38,7 @@ const siteUrl = "https://dheerajkashyap.com";
    light regardless of OS preference, so the value is seeded light and then
    kept in sync with the actual chosen theme by ThemeProvider. */
 export const viewport: Viewport = {
-  themeColor: "#0B0B1A",
+  themeColor: "#020B2B",
 };
 
 export const metadata: Metadata = {

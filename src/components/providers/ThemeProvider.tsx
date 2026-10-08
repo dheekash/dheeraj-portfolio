@@ -6,7 +6,7 @@ type Theme = "light" | "dark";
 
 /* Keeps <meta name="theme-color"> on the page background so browser chrome
    matches the page. Values mirror --paper in globals.css. */
-const THEME_COLOR: Record<Theme, string> = { light: "#F6F4EE", dark: "#0B0B1A" };
+const THEME_COLOR: Record<Theme, string> = { light: "#F5F7FC", dark: "#020B2B" };
 
 function syncThemeColor(theme: Theme) {
   let tag = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');

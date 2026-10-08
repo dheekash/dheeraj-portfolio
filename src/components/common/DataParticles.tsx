@@ -16,7 +16,7 @@ export function DataParticles({ word = "DATA" }: { word?: string }) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const palette = ["#A99BFF", "#8B7DF7", "#C084FC", "#E6AD10", "#6EC1CC"];
+    const palette = ["#6F9BF3", "#255DCE", "#FFFFFF", "#DE1110", "#A9C3FA"];
 
     type P = { hx: number; hy: number; x: number; y: number; vx: number; vy: number; c: string; r: number };
     let pts: P[] = [];
