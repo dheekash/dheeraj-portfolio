@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Navbar } from "./Navbar";
+import { PageTransition } from "@/components/common/PageTransition";
+import { SectionRail } from "@/components/common/SectionRail";
 import { Logo } from "@/components/common/Logo";
 
 /**
@@ -98,6 +100,8 @@ export function SiteChrome({ children, footer }: { children: React.ReactNode; fo
       </main>
       {footer}
       <MobileContactBar />
+      {pathname === "/" && <SectionRail />}
+      <PageTransition />
     </>
   );
 }

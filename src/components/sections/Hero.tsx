@@ -25,7 +25,7 @@ const results = [
  */
 export function Hero() {
   return (
-    <section className="fx-hero hx" aria-labelledby="hero-title">
+    <section id="top" className="fx-hero hx" aria-labelledby="hero-title">
       <div className="container hx-grid">
         <div className="hx-copy">
           <p className="fx-status hero-anim" style={{ "--d": 0 } as React.CSSProperties}>
