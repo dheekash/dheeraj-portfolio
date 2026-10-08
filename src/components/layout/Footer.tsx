@@ -12,8 +12,10 @@ import { CopyEmail } from "@/components/layout/CopyEmail";
 const mail = (subject: string) => `mailto:${profile.email}?subject=${encodeURIComponent(subject)}`;
 
 /**
- * Contact, centred: heading, direct routes (email, LinkedIn, GitHub, CV),
- * then a short form. A small footer line closes the page.
+ * One closing block: get in touch and the footer together. The pitch and
+ * direct routes sit beside the form; the brand and site links share the
+ * same panel below a hairline; a copyright bar ends the page. Each route
+ * (email, LinkedIn, GitHub, CV) appears once.
  */
 export function Footer() {
   const now = new Date();
@@ -22,53 +24,50 @@ export function Footer() {
   const updated = now.toLocaleDateString("en-GB", { month: "long", year: "numeric" });
 
   return (
-    <footer id="contact" className="band sx-contact" aria-labelledby="contact-title">
-      <div className="container sx-contact-inner">
-        <header className="sx-head is-center reveal">
-          <p className="sx-eyebrow">Get in touch</p>
-          <h2 id="contact-title" className="sx-title fx-together">
-            Let&rsquo;s work <Scribble>together</Scribble>
-            <span className="sx-dot">.</span>
-          </h2>
-          <p className="sx-intro">
-            Open to full-time BI roles and consulting. Let&rsquo;s talk about the architecture, the
-            dashboard, or everything in between. I usually reply within 24 hours.
-          </p>
-        </header>
+    <footer id="contact" className="band sx-contact cf" aria-labelledby="contact-title">
+      <div className="container cf-inner">
+        <div className="cf-top">
+          <div className="cf-pitch reveal">
+            <p className="sx-eyebrow">Get in touch</p>
+            <h2 id="contact-title" className="sx-title cf-title">
+              Let&rsquo;s work <Scribble>together</Scribble>
+              <span className="sx-dot">.</span>
+            </h2>
+            <p className="cf-intro">
+              Open to full-time BI roles and consulting. Let&rsquo;s talk about the architecture, the
+              dashboard, or everything in between. I usually reply within 24 hours.
+            </p>
 
-        <div className="contact-ctas sx-contact-ctas">
-          <a href={mail("Hello from your portfolio")} className="btn btn-primary">
-            <Mail size={16} aria-hidden /> Email me
-          </a>
-          <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
-            <LinkedinIcon size={16} className="mark" /> LinkedIn <ArrowUpRight size={14} aria-hidden />
-            <span className="sr-only">(opens in a new tab)</span>
-          </a>
-          <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
-            <Mark name="GitHub" size={16} /> GitHub <ArrowUpRight size={14} aria-hidden />
-            <span className="sr-only">(opens in a new tab)</span>
-          </a>
-          <a href="/api/resume" target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
-            <FileText size={16} aria-hidden className="mark" /> CV <ArrowUpRight size={14} aria-hidden />
-            <span className="sr-only">(opens in a new tab)</span>
-          </a>
+            <div className="contact-ctas cf-ctas">
+              <a href={mail("Hello from your portfolio")} className="btn btn-primary">
+                <Mail size={16} aria-hidden /> Email me
+              </a>
+              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
+                <LinkedinIcon size={16} className="mark" /> LinkedIn <ArrowUpRight size={14} aria-hidden />
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
+              <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
+                <Mark name="GitHub" size={16} /> GitHub <ArrowUpRight size={14} aria-hidden />
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
+              <a href="/api/resume" target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
+                <FileText size={16} aria-hidden className="mark" /> CV <ArrowUpRight size={14} aria-hidden />
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
+            </div>
+
+            <div className="contact-email cf-email">
+              <a href={`mailto:${profile.email}`}>{profile.email}</a>
+              <CopyEmail email={profile.email} />
+            </div>
+          </div>
+
+          <div className="cf-form reveal">
+            <ContactForm />
+          </div>
         </div>
 
-        <div className="contact-email sx-contact-email">
-          <a href={`mailto:${profile.email}`}>{profile.email}</a>
-          <CopyEmail email={profile.email} />
-        </div>
-
-        <div className="sx-contact-form">
-          <ContactForm />
-        </div>
-
-      </div>
-
-      {/* Four-column footer: brand, then three labelled link groups, then a
-          copyright and social bar. Two columns below 768px. */}
-      <div className="fcol">
-        <div className="fcol-cols">
+        <div className="cf-links">
           <div className="fcol-brand">
             <p className="fcol-logo">
               <Logo size={28} />
@@ -101,31 +100,11 @@ export function Footer() {
               ))}
             </ul>
           </nav>
-
-          <nav aria-labelledby="fcol-connect">
-            <h2 id="fcol-connect">Connect</h2>
-            <ul>
-              <li><a href={`mailto:${profile.email}`}>Email</a></li>
-              <li><a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer">LinkedIn<span className="sr-only"> (opens in a new tab)</span></a></li>
-              <li><a href={profile.githubUrl} target="_blank" rel="noopener noreferrer">GitHub<span className="sr-only"> (opens in a new tab)</span></a></li>
-              <li><a href="/api/resume" target="_blank" rel="noopener noreferrer">Download CV<span className="sr-only"> (opens in a new tab)</span></a></li>
-            </ul>
-          </nav>
         </div>
 
-        <div className="fcol-base">
-          <p>© {year} Dheeraj Kashyap · Updated {updated}</p>
-          <div className="fcol-soc">
-            <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)">
-              <LinkedinIcon size={15} />
-            </a>
-            <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)">
-              <Mark name="GitHub" size={15} />
-            </a>
-            <a href={`mailto:${profile.email}`} aria-label="Email">
-              <Mail size={15} aria-hidden />
-            </a>
-          </div>
+        <div className="fcol-base cf-base">
+          <p>© {year} Dheeraj Kashyap · Bengaluru, India · Updated {updated}</p>
+          <a href="#top" className="cf-top-link">Back to top ↑</a>
         </div>
       </div>
 
