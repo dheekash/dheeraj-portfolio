@@ -35,7 +35,7 @@ export function Technologies() {
                 <ul className="bento-list">
                   {g.items.map((t) => (
                     <li key={t} className="sx-chip" translate="no">
-                      <Mark name={t} size={16} />
+                      <Mark name={t} size={20} />
                       {t}
                     </li>
                   ))}
