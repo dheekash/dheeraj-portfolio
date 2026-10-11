@@ -128,6 +128,7 @@ export function Experience() {
               <li
                 key={r.company}
                 className="xt-item reveal"
+                style={{ "--n": i } as React.CSSProperties}
               >
                 {/* A plain marker on the line; the card names the company. */}
                 <span className={`xt-node${r.current ? " is-current" : ""}`} aria-hidden />
