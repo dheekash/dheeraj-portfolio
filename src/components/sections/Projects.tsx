@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { caseStudies } from "@/data/work";
-import { Mark } from "@/components/common/Mark";
+import { Mark, hasMark } from "@/components/common/Mark";
+import { ProjectShowcase } from "@/components/sections/ProjectShowcase";
 import { Scribble } from "@/components/common/Scribble";
 
 /* Lead technology for each cover. No screenshots exist yet, so each cover
@@ -32,12 +33,78 @@ function ratioOf(value: string): number | null {
 }
 
 /**
- * Selected projects as an editorial grid: wide / narrow, then narrow / wide.
+ * Selected projects as one product-style showcase card: the coloured panel
+ * shows the chosen project's result and lead technology, the thumbnails
+ * switch project, and the right side carries the details and the link.
  * The remaining case studies are linked underneath.
  */
 export function Projects() {
   const shown = caseStudies.filter((s) => s.featured).slice(0, 4);
   const others = caseStudies.filter((s) => !shown.includes(s));
+
+  const covers = shown.map((s, i) => {
+    const m = s.impact[0];
+    const ratio = ratioOf(m.value);
+    return (
+      <>
+        <span className="pc-num">{String(i + 1).padStart(2, "0")} / {String(shown.length).padStart(2, "0")}</span>
+        <span className="pc-logo"><Mark name={leadOf[s.slug]} size={44} /></span>
+        <span className="pc-value">{m.value}</span>
+        <span className="pc-label">{m.label}</span>
+        {ratio !== null && (
+          <span className="pg-bars pc-bars" style={{ "--r": Math.max(ratio, 0.02) } as React.CSSProperties}>
+            <span className="pg-bar"><span>Before</span></span>
+            <span className="pg-bar is-after"><span>After</span></span>
+          </span>
+        )}
+      </>
+    );
+  });
+
+  const thumbs = shown.map((s, i) => (
+    <>
+      <span className="pc-thumb-logo"><Mark name={leadOf[s.slug]} size={22} /></span>
+      <span className="pc-thumb-num" aria-hidden>{String(i + 1).padStart(2, "0")}</span>
+    </>
+  ));
+
+  const infos = shown.map((s) => {
+    const [headline, ...rest] = s.impact;
+    return (
+      <>
+        <div className="pc-title">
+          <h3>{s.title}</h3>
+          <p>{s.domain} · {s.type}</p>
+        </div>
+        <p className="pc-price">
+          <span>{headline.value}</span> {headline.label}
+        </p>
+        <p className="pc-summary">{s.summary}</p>
+        <div className="pc-block">
+          <h4>Stack</h4>
+          <ul className="pc-stack">
+            {s.stack.slice(0, 6).map((t) => (
+              <li key={t} translate="no">
+                {hasMark(t) && <span className="pc-stack-ico"><Mark name={t} size={18} /></span>}
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="pc-block">
+          <h4>Results</h4>
+          <ul className="pc-results">
+            {rest.map((r) => (
+              <li key={r.label}><strong>{r.value}</strong> {r.label}</li>
+            ))}
+          </ul>
+        </div>
+        <Link href={`/work/${s.slug}`} className="btn btn-primary pc-btn">
+          Read case study <ArrowRight size={16} aria-hidden />
+        </Link>
+      </>
+    );
+  });
 
   return (
     <section id="work" className="section sx" aria-labelledby="work-title">
@@ -56,48 +123,8 @@ export function Projects() {
           </p>
         </header>
 
-        <div className="pg">
-          {shown.map((s, i) => {
-            const m = s.impact[0];
-            const ratio = ratioOf(m.value);
-            return (
-              <article key={s.slug} className={`pg-card reveal${i === 0 || i === 3 ? " is-wide" : ""}`}>
-                <Link href={`/work/${s.slug}`} className="pg-link" aria-labelledby={`pg-${s.slug}`}>
-                  <div className="pg-cover" aria-hidden>
-                    <span className="pg-num">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="sx-cover-mark pg-mark">
-                      <Mark name={leadOf[s.slug]} size={26} />
-                    </span>
-                    {ratio !== null && (
-                      /* Before at full length; after shrinks to its share when the card arrives. */
-                      <span className="pg-bars" style={{ "--r": Math.max(ratio, 0.02) } as React.CSSProperties}>
-                        <span className="pg-bar"><span>Before</span></span>
-                        <span className="pg-bar is-after"><span>After</span></span>
-                      </span>
-                    )}
-                    <span className="pg-value">{m.value}</span>
-                    <span className="pg-label">{m.label}</span>
-                  </div>
-                  <div className="pg-body">
-                    <p className="pg-sub">
-                      <span>{s.domain}</span>
-                      <span>{s.type}</span>
-                    </p>
-                    <h3 id={`pg-${s.slug}`} className="pg-title">
-                      {s.title}
-                      <ArrowUpRight size={20} aria-hidden className="pg-arrow" />
-                    </h3>
-                    <p className="pg-text">{s.summary}</p>
-                    <p className="sx-tags">
-                      {s.stack.slice(0, 3).map((t) => (
-                        <span key={t} translate="no">#{t.toLowerCase().replace(/[^a-z0-9]+/g, "")}</span>
-                      ))}
-                    </p>
-                  </div>
-                </Link>
-              </article>
-            );
-          })}
+        <div className="reveal">
+          <ProjectShowcase covers={covers} thumbs={thumbs} infos={infos} labels={shown.map((s) => s.title)} />
         </div>
 
         {others.length > 0 && (
