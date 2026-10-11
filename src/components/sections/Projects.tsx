@@ -15,6 +15,22 @@ const leadOf: Record<string, string> = {
   "customer-churn-platform": "Snowflake",
 };
 
+/* Turns a headline result into an after/before ratio for the cover chart,
+   straight from its own figures: "12% → <1%" is 1/12, "4 hrs → 15 min" is
+   15/240, "−70%" is 30/100. Anything else gets no chart. */
+const toMinutes = (n: number, unit = "") => (/^hr/.test(unit) ? n * 60 : n);
+function ratioOf(value: string): number | null {
+  const v = value.replace(/−/g, "-").trim();
+  const ft = v.match(/^([\d.]+)\s*(%|hrs?|min)?\s*→\s*<?\s*([\d.]+)\s*(%|hrs?|min)?$/);
+  if (ft) {
+    const from = toMinutes(parseFloat(ft[1]), ft[2]);
+    const to = toMinutes(parseFloat(ft[3]), ft[4] ?? ft[2]);
+    return from > 0 ? to / from : null;
+  }
+  const cut = v.match(/^-([\d.]+)%$/);
+  return cut ? 1 - parseFloat(cut[1]) / 100 : null;
+}
+
 /**
  * Selected projects as an editorial grid: wide / narrow, then narrow / wide.
  * The remaining case studies are linked underneath.
@@ -43,6 +59,7 @@ export function Projects() {
         <div className="pg">
           {shown.map((s, i) => {
             const m = s.impact[0];
+            const ratio = ratioOf(m.value);
             return (
               <article key={s.slug} className={`pg-card reveal${i === 0 || i === 3 ? " is-wide" : ""}`}>
                 <Link href={`/work/${s.slug}`} className="pg-link" aria-labelledby={`pg-${s.slug}`}>
@@ -51,6 +68,13 @@ export function Projects() {
                     <span className="sx-cover-mark pg-mark">
                       <Mark name={leadOf[s.slug]} size={26} />
                     </span>
+                    {ratio !== null && (
+                      /* Before at full length; after shrinks to its share when the card arrives. */
+                      <span className="pg-bars" style={{ "--r": Math.max(ratio, 0.02) } as React.CSSProperties}>
+                        <span className="pg-bar"><span>Before</span></span>
+                        <span className="pg-bar is-after"><span>After</span></span>
+                      </span>
+                    )}
                     <span className="pg-value">{m.value}</span>
                     <span className="pg-label">{m.label}</span>
                   </div>

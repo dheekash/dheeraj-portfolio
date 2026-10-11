@@ -6,6 +6,7 @@ import { profile } from "@/data/profile";
 import { Mark } from "@/components/common/Mark";
 import { LinkedinIcon } from "@/components/common/SocialIcons";
 import { CountUp } from "@/components/common/CountUp";
+import { HeroFlow } from "@/components/sections/HeroFlow";
 
 /* Headshot sits beside the availability line once public/images/avatar.jpg exists. */
 const PHOTO = "/images/avatar.jpg";
@@ -77,6 +78,7 @@ export function Hero() {
           ))}
         </dl>
       </div>
+      <HeroFlow />
     </section>
   );
 }
