@@ -2269,3 +2269,77 @@ span.mark {
   html.reveal-ready .stk:not(.is-in) .stk-arrow { opacity: 0; }
   .stk.is-in .stk-layer { transition: opacity 420ms var(--ease), transform 420ms var(--ease); transition-delay: calc(var(--n, 0) * 130ms); }
   .stk.is-in .stk-arrow { transition: opacity 300ms ease; transition-delay: calc(var(--n, 0) * 130ms + 380ms); }}
+
+/* ═══ Theme switch: day sky with clouds, night sky with stars ═══════════
+   Based on the theme switch by Galahhad on Uiverse.io (MIT). Sized in em
+   from --ts so the whole switch scales with one number. */
+.theme-switch {
+  --ts: 10.5px;
+  --w: 5.625em; --h: 2.5em; --circle: 1.875em;
+  --pad: calc((var(--h) - var(--circle)) / 2);
+  --day: #3D7EAE; --night: #1D1F2C;
+  --sun: #ECCA2F; --moon: #C4C9D1; --spot: #959DB1;
+  --cloud: #F3FDFF; --cloud-back: #AACADF;
+  --ease-sw: cubic-bezier(0, -0.02, 0.4, 1.25);
+  position: relative; display: inline-flex; align-items: center; flex: none;
+  font-size: var(--ts); cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.theme-switch__checkbox { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.theme-switch__container,
+.theme-switch__container span { display: block; }
+.theme-switch__container {
+  position: relative; width: var(--w); height: var(--h); overflow: hidden;
+  border-radius: 6.25em; background-color: var(--day);
+  box-shadow: inset 0 -0.062em 0.062em rgba(0, 0, 0, 0.25), inset 0 0.062em 0.125em rgba(0, 0, 0, 0.35);
+  transition: background-color 0.5s var(--ease-sw);
+}
+.theme-switch__checkbox:focus-visible + .theme-switch__container { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.theme-switch__circle-container {
+  position: absolute; top: var(--pad); left: var(--pad); z-index: 1;
+  width: var(--circle); height: var(--circle); border-radius: 50%;
+  box-shadow: 0 0 0 0.45em rgba(255, 255, 255, 0.1), 0 0 0 0.9em rgba(255, 255, 255, 0.1), 0 0 0 1.35em rgba(255, 255, 255, 0.1);
+  transition: left 0.3s var(--ease-sw);
+}
+.theme-switch__sun-moon-container {
+  position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 50%;
+  background-color: var(--sun);
+  box-shadow: inset 0.062em 0.062em 0.062em rgba(254, 255, 239, 0.6), inset 0 -0.062em 0.062em #A1872A;
+  filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25)) drop-shadow(0 0.062em 0.125em rgba(0, 0, 0, 0.25));
+}
+.theme-switch__moon {
+  position: absolute; inset: 0; border-radius: 50%; background-color: var(--moon);
+  box-shadow: inset 0.062em 0.062em 0.062em rgba(254, 255, 239, 0.6), inset 0 -0.062em 0.062em #969696;
+  transform: translateX(100%);
+  transition: transform 0.5s var(--ease-sw);
+}
+.theme-switch__spot { position: absolute; top: 0.75em; left: 0.312em; width: 0.75em; height: 0.75em; border-radius: 50%; background-color: var(--spot); box-shadow: inset 0 0.031em 0.062em rgba(0, 0, 0, 0.25); }
+.theme-switch__spot:nth-of-type(2) { top: 0.937em; left: 1.375em; width: 0.375em; height: 0.375em; }
+.theme-switch__spot:nth-of-type(3) { top: 0.312em; left: 0.812em; width: 0.25em; height: 0.25em; }
+
+.theme-switch__clouds {
+  position: absolute; bottom: -0.625em; left: 0.312em;
+  width: 1.25em; height: 1.25em; border-radius: 50%; background-color: var(--cloud);
+  box-shadow:
+    0.937em 0.312em var(--cloud), -0.312em -0.312em var(--cloud-back),
+    1.437em 0.375em var(--cloud), 0.5em -0.125em var(--cloud-back),
+    2.187em 0 var(--cloud), 1.25em -0.062em var(--cloud-back),
+    2.937em 0.312em var(--cloud), 2em -0.312em var(--cloud-back),
+    3.625em -0.062em var(--cloud), 2.625em 0 var(--cloud-back),
+    4.5em -0.312em var(--cloud), 3.375em -0.437em var(--cloud-back),
+    4.625em -1.75em 0 0.437em var(--cloud), 4em -0.625em var(--cloud-back),
+    4.125em -2.125em 0 0.437em var(--cloud-back);
+  transition: bottom 0.5s var(--ease-sw);
+}
+.theme-switch__stars-container { position: absolute; top: -100%; left: 0.312em; width: 2.75em; color: #FFFFFF; transition: top 0.5s var(--ease-sw); }
+.theme-switch__stars-container svg { display: block; width: 100%; height: auto; }
+
+/* Hover nudges the sun / moon toward the other side */
+.theme-switch:hover .theme-switch__circle-container { left: calc(var(--pad) + 0.187em); }
+.theme-switch__checkbox:checked + .theme-switch__container { background-color: var(--night); }
+.theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container { left: calc(100% - var(--circle) - var(--pad)); }
+.theme-switch:hover .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container { left: calc(100% - var(--circle) - var(--pad) - 0.187em); }
+.theme-switch__checkbox:checked + .theme-switch__container .theme-switch__moon { transform: translateX(0); }
+.theme-switch__checkbox:checked + .theme-switch__container .theme-switch__clouds { bottom: -4.062em; }
+.theme-switch__checkbox:checked + .theme-switch__container .theme-switch__stars-container { top: 50%; transform: translateY(-50%); }
+.nav-actions .theme-switch, .nav-mobile .theme-switch { margin-inline: 4px; }
