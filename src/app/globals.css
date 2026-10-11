@@ -1713,31 +1713,6 @@ span.mark {
 @media (max-width: 1023.98px) { .hx-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }}
 
 /* Experience: interleaved two-sided timeline */
-.xt { list-style: none; margin: 0; padding: 0 0 0 56px; position: relative; display: grid; gap: 12px; }
-.xt::before {
-  content: "";
-  position: absolute;
-  top: 8px; bottom: 8px; left: 22px;
-  width: 2px;
-  transform: translateX(-50%);
-  background: linear-gradient(180deg, var(--red), var(--line-strong) 25%, var(--line-strong) 85%, transparent);
-}
-.xt-item { position: relative; }
-.xt-card { padding: 22px 24px; box-shadow: inset 0 -3px 0 var(--cobalt); }
-.xt-node {
-  position: absolute;
-  top: 18px;
-  z-index: 1;
-  display: grid; place-items: center;
-  width: 44px; height: 44px;
-  border-radius: 50%;
-  border: 2px solid var(--line-strong);
-  background: var(--sheet);
-  font-size: var(--fs-xs); font-weight: 700;
-  color: var(--ink);
-}
-.xt-node.is-current { background: var(--red); border-color: var(--red); color: #FFFFFF; box-shadow: 0 0 0 6px rgba(222, 17, 16, 0.16); }
-.xt-date { margin: 0 0 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: var(--fs-sm); color: var(--muted-ink); font-variant-numeric: tabular-nums; }
 .xt-current { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 700; color: #FFFFFF; background: var(--red); }
 
 /* Technologies bento */
@@ -1979,13 +1954,6 @@ span.mark {
 /* ═══ Experience: compact, one screen ══════════════════════════════════ */
 #experience { padding-block: clamp(40px, 5vw, 56px); }
 #experience .sx-head { margin-bottom: 20px; }
-.xt-card { padding: 16px 20px 14px; }
-.xt-card .tl-role { font-size: var(--fs-base); }
-.xt-card .tl-org { font-size: var(--fs-sm); }
-.xt-date { margin-bottom: 4px; font-size: var(--fs-xs); }
-.xt-card .tl-impact { margin-top: 10px; padding: 8px 0; gap: 8px; }
-.xt-card .tl-impact-value { font-size: var(--fs-base); }
-.xt-node { top: 14px; width: 40px; height: 40px; }
 
 .xt-more { margin-top: 8px; }
 .xt-more summary {
@@ -2023,11 +1991,6 @@ span.mark {
 @media (min-width: 900px) and (max-height: 899px) {
   #experience { padding-block: 24px 20px; }
   #experience .sx-head { margin-bottom: 14px; }
-  .xt-card { padding: 12px 18px 10px; }
-  .xt-date { margin-bottom: 2px; }
-  .xt-card .tl-org { margin-top: 2px; }
-  .xt-card .tl-impact { margin-top: 8px; padding: 6px 0; }
-  .xt-card .tl-impact-label { font-size: var(--fs-xs); }
   .xt-more { margin-top: 4px; }
   .xt-more summary { min-height: 28px; }}
 
@@ -2140,19 +2103,7 @@ span.mark {
 .cert-card:has(.link-arrow:hover) { border-color: var(--sage); }
 
 /* ═══ Usability pass 2 ══════════════════════════════════════════════════ */
-/* Timeline: plain markers on the line, aligned with each card's title */
-.xt-node { top: 20px; width: 16px; height: 16px; border-width: 3px; background: var(--paper); }
-.xt-node.is-current { box-shadow: 0 0 0 5px rgba(222, 17, 16, 0.2); }
-.xt-node { left: -42px; }
 
-/* Wide screens: each role is one row, who/where on the left and the three
-   results on the right, so the timeline reads straight down */
-@media (min-width: 900px) {
-  .xt-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); column-gap: 32px; align-items: center; }
-  .xt-card > :not(.tl-impact, .xt-more) { grid-column: 1; }
-  .xt-card > .tl-impact { grid-column: 2; grid-row: 1 / span 3; margin: 0; padding: 0 0 0 24px; border-block: 0; border-left: 1px solid var(--line-subtle); }
-  .xt-card > .xt-more { grid-column: 1 / -1; }
-}
 
 /* Technologies: the toolset gets two thirds, the DATA panel one third */
 @media (min-width: 1000px) {
@@ -2230,12 +2181,75 @@ span.mark {
 @keyframes logo-drop { from { opacity: 0; transform: translateY(-9px); } to { opacity: 1; transform: none; } }
 @keyframes logo-pulse { 0%, 100% { transform: none; filter: none; } 40% { transform: scale(1.18); filter: drop-shadow(0 0 3px rgba(255, 69, 68, 0.9)); } }
 
-/* 4. Timeline: the line draws down, then each dot lights in order */
-@media (prefers-reduced-motion: no-preference) {
-  .xt::before { transform-origin: top center; }
-  html.reveal-ready .xt:not(:has(.xt-item.is-in))::before { transform: translateX(-50%) scaleY(0); }
-  .xt:has(.xt-item.is-in)::before { transition: transform 1200ms cubic-bezier(0.5, 0, 0.2, 1); }
-  html.reveal-ready .xt-item:not(.is-in) .xt-node { transform: scale(0); }
-  .xt-item.is-in .xt-node { transition: transform 360ms cubic-bezier(0.3, 1.5, 0.5, 1); transition-delay: calc(var(--n, 0) * 280ms + 200ms); }}
 /* Bars sit below the number / logo row of the cover */
 .pg-card .pg-cover:has(.pg-bars) { padding-top: 64px; }
+
+/* ═══ Experience: horizontal chevron timeline ═══════════════════════════
+   Earliest role left. Each column is a subgrid of three rows: above the
+   line, the line, below the line. Details and icon swap sides each role. */
+.ht { list-style: none; margin: 8px 0 0; padding: 0; --tip: 20px; }
+.ht-item { --c: #2C4A9A; --ct: #2C4A9A; position: relative; }
+.ht-item:nth-child(2) { --c: #255DCE; --ct: #255DCE; }
+.ht-item:nth-child(3) { --c: #4F86F0; --ct: #1F5FD6; }
+.ht-item.is-current { --c: #DE1110; --ct: #C20F0E; }
+.dark .ht-item { --ct: #A9C3FA; }
+.dark .ht-item:nth-child(2) { --ct: #8FB0F5; }
+.dark .ht-item:nth-child(3) { --ct: #6F9BF3; }
+.dark .ht-item.is-current { --ct: #FF6B6A; }
+
+.ht-company { margin: 0; font-size: var(--fs-base); font-weight: 700; color: var(--ct); }
+.ht-role { margin: 2px 0 0; font-size: var(--fs-base); font-weight: 700; line-height: 1.3; color: var(--ink); }
+.ht-meta { margin: 4px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: var(--fs-xs); color: var(--muted-ink); font-variant-numeric: tabular-nums; }
+.ht-impact { margin: 10px 0 0; display: grid; gap: 3px; font-size: var(--fs-sm); line-height: 1.35; color: var(--muted-ink); }
+.ht-impact dd { margin: 0; }
+.ht-impact-value { font-family: var(--font-mono); font-weight: 600; color: var(--ct); }
+.ht-card .xt-more { margin-top: 6px; }
+
+/* The chevron: a pointed bar with a notch, so neighbours interlock */
+.ht-bar {
+  display: flex; align-items: center; justify-content: center;
+  height: 48px; padding-inline: calc(var(--tip) + 6px);
+  background: var(--c); color: #FFFFFF;
+  font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 700; letter-spacing: 0.02em; white-space: nowrap;
+  clip-path: polygon(0 0, calc(100% - var(--tip)) 0, 100% 50%, calc(100% - var(--tip)) 100%, 0 100%, var(--tip) 50%);
+}
+.ht-item:first-child .ht-bar { clip-path: polygon(0 0, calc(100% - var(--tip)) 0, 100% 50%, calc(100% - var(--tip)) 100%, 0 100%); }
+
+/* The icon on a stem that meets the line */
+.ht-icon { position: relative; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--c); color: #FFFFFF; box-shadow: 0 0 0 6px color-mix(in srgb, var(--c) 18%, transparent); }
+.ht-icon::before { content: ""; position: absolute; left: 50%; width: 2px; height: 28px; margin-left: -1px; background: var(--c); }
+
+@media (min-width: 900px) {
+  .ht { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: auto auto auto; column-gap: 0; }
+  .ht-item { grid-row: 1 / -1; display: grid; grid-template-rows: subgrid; justify-items: center; text-align: center; padding-inline: 10px; }
+  .ht-card { max-width: 30ch; }
+  .ht-meta { justify-content: center; }
+  .ht-card .xt-more summary { margin-inline: auto; }
+  .ht-card .tl-bullets { text-align: left; }
+  .ht-bar { grid-row: 2; justify-self: stretch; margin-inline: -10px; }
+  .ht-item:not(:first-child) .ht-bar { margin-left: calc(-10px - var(--tip) + 4px); }
+  .ht-item.is-up .ht-card { grid-row: 1; align-self: end; padding-bottom: 18px; }
+  .ht-item.is-up .ht-icon { grid-row: 3; align-self: start; margin-top: 28px; }
+  .ht-item.is-up .ht-icon::before { bottom: 100%; }
+  .ht-item.is-down .ht-icon { grid-row: 1; align-self: end; margin-bottom: 28px; }
+  .ht-item.is-down .ht-icon::before { top: 100%; }
+  .ht-item.is-down .ht-card { grid-row: 3; align-self: start; padding-top: 18px; }
+}
+
+/* Narrow screens: a vertical list, icon beside each chevron and its details */
+@media (max-width: 899.98px) {
+  .ht { display: grid; gap: 24px; }
+  .ht-item { display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 14px; row-gap: 10px; align-items: center; }
+  .ht-icon { grid-column: 1; grid-row: 1; }
+  .ht-icon::before { display: none; }
+  .ht-bar { grid-column: 2; grid-row: 1; justify-content: flex-start; padding-left: 18px; }
+  .ht-bar, .ht-item:first-child .ht-bar { clip-path: polygon(0 0, calc(100% - var(--tip)) 0, 100% 50%, calc(100% - var(--tip)) 100%, 0 100%); }
+  .ht-card { grid-column: 2; grid-row: 2; }
+}
+
+/* Motion: chevrons slide in left to right, then each icon pops */
+@media (prefers-reduced-motion: no-preference) {
+  html.reveal-ready .ht-item:not(.is-in) .ht-bar { opacity: 0; transform: translateX(-24px); }
+  html.reveal-ready .ht-item:not(.is-in) .ht-icon { transform: scale(0); }
+  .ht-item.is-in .ht-bar { transition: opacity 400ms var(--ease), transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1); transition-delay: calc(var(--n, 0) * 160ms); }
+  .ht-item.is-in .ht-icon { transition: transform 380ms cubic-bezier(0.3, 1.5, 0.5, 1); transition-delay: calc(var(--n, 0) * 160ms + 300ms); }}

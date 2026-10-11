@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Briefcase, ChartColumnBig, Database, Headset, ShieldCheck, type LucideIcon } from "lucide-react";
 import { Scribble } from "@/components/common/Scribble";
 
 type Role = {
@@ -105,13 +105,23 @@ const roles: Role[] = [
   },
 ];
 
+/* Shown in the chevron: years only; the full months sit in the details. */
+const yearOf = (d: string) => (d === "Present" ? "Now" : d.slice(-4));
+const iconOf: Record<string, LucideIcon> = {
+  "Frontizo Business Services": Headset,
+  Amazon: ShieldCheck,
+  "Amplify Analytix": Database,
+  "DataStream IT Solutions": ChartColumnBig,
+};
+
 /**
- * Work experience as a single-column timeline: one line on the left, newest
- * role first. On wide screens each card is one row (role on the left,
- * results on the right), so all four roles fit one screen and read
- * straight down. On narrow screens the card contents stack.
+ * Work experience as a horizontal timeline, earliest role on the left: one
+ * chevron per role carries its years, an icon on a stem marks it, and the
+ * details sit on the opposite side of the line, alternating above and
+ * below. On narrow screens it becomes a vertical list with the same parts.
  */
 export function Experience() {
+  const chronological = [...roles].reverse();
   return (
     <section id="experience" className="section sx" aria-labelledby="experience-title">
       <div className="container">
@@ -122,33 +132,29 @@ export function Experience() {
           </h2>
         </header>
 
-        <ol className="xt">
-          {roles.map((r, i) => {
+        <ol className="ht" aria-label="Roles, earliest first">
+          {chronological.map((r, i) => {
+            const Icon = iconOf[r.company] ?? Briefcase;
             return (
               <li
                 key={r.company}
-                className="xt-item reveal"
+                className={`ht-item ${i % 2 ? "is-down" : "is-up"}${r.current ? " is-current" : ""} reveal`}
                 style={{ "--n": i } as React.CSSProperties}
               >
-                {/* A plain marker on the line; the card names the company. */}
-                <span className={`xt-node${r.current ? " is-current" : ""}`} aria-hidden />
-                <article className="xt-card card" aria-labelledby={`role-${i}`}>
-                  <p className="xt-date">
-                    {r.start} – {r.end}
+                <article className="ht-card" aria-labelledby={`role-${i}`}>
+                  <p className="ht-company" translate="no">{r.company}</p>
+                  <h3 id={`role-${i}`} className="ht-role">{r.title}</h3>
+                  <p className="ht-meta">
+                    {r.start} – {r.end} · {r.location}
                     {r.current && <span className="xt-current">Current role</span>}
                   </p>
-                  <h3 id={`role-${i}`} className="tl-role">{r.title}</h3>
-                  <p className="tl-org">
-                    <span translate="no">{r.company}</span>
-                    <span className="tl-loc">{r.location}</span>
-                  </p>
-                  <dl className="tl-impact">
+                  <dl className="ht-impact">
                     {r.impact.map((m) => (
                       <div key={m.label}>
                         <dt className="sr-only">{m.label}</dt>
                         <dd>
-                          <span className="tl-impact-value">{m.value}</span>
-                          <span className="tl-impact-label" aria-hidden>{m.label}</span>
+                          <span className="ht-impact-value">{m.value}</span>{" "}
+                          <span aria-hidden>{m.label}</span>
                         </dd>
                       </div>
                     ))}
@@ -166,6 +172,12 @@ export function Experience() {
                     )}
                   </details>
                 </article>
+                <span className="ht-bar" aria-hidden>
+                  {yearOf(r.start)} – {yearOf(r.end)}
+                </span>
+                <span className="ht-icon" aria-hidden>
+                  <Icon size={24} strokeWidth={1.9} />
+                </span>
               </li>
             );
           })}
