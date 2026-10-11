@@ -2122,51 +2122,6 @@ span.mark {
   .ct::before { transform-origin: top center; }
   html.reveal-ready .ct:not(.is-in)::before { transform: scaleY(0); }}
 
-/* ═══ Technologies: the data stack ══════════════════════════════════════
-   Five layers in the order data flows, each a column with its tools; an
-   arrow sits on each gap. ML and tooling run alongside, beneath. */
-.stk { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 16px; }
-.stk-layer { --c: #2C4A9A; position: relative; padding: 18px 18px 16px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--sheet); box-shadow: inset 0 3px 0 var(--c); }
-.stk-layer:nth-child(2) { --c: #255DCE; }
-.stk-layer:nth-child(3) { --c: #3D74E6; }
-.stk-layer:nth-child(4) { --c: #6F9BF3; }
-.stk-layer:nth-child(5) { --c: #DE1110; }
-.stk-title { display: flex; align-items: baseline; gap: 8px; margin: 0; font-size: var(--fs-md); font-weight: 800; letter-spacing: -0.01em; color: var(--ink); }
-.stk-num { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 700; color: var(--c); }
-.dark .stk-layer:nth-child(1) .stk-num { color: #8FB0F5; }
-.dark .stk-layer:nth-child(5) .stk-num { color: #FF6B6A; }
-.stk-note { margin: 2px 0 14px; font-size: var(--fs-xs); color: var(--muted-ink); }
-.stk-tools { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.stk-tools li { display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm); font-weight: 600; color: var(--ink); }
-.stk-ico { display: grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: var(--r-md); background: #FFFFFF; color: #021861; box-shadow: 0 0 0 1px var(--line); }
-.stk-ico .mark-neutral { color: #255DCE; }
-.stk-ico .mark-brand { color: #021861; }
-.stk-arrow { position: absolute; z-index: 1; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--c); color: #FFFFFF; box-shadow: 0 0 0 4px var(--paper); }
-
-.stk-side { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 16px; padding: 14px 18px; border: 1px dashed var(--line-strong); border-radius: var(--r-lg); }
-.stk-side-title { margin: 0; font-size: var(--fs-sm); font-weight: 700; color: var(--muted-ink); }
-.stk-tools.is-row { display: flex; flex-wrap: wrap; gap: 10px 20px; }
-
-@media (min-width: 1000px) {
-  .stk { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 22px; }
-  .stk-arrow { top: 50%; right: -24px; margin-top: -13px; }
-}
-@media (min-width: 600px) and (max-width: 999.98px) {
-  .stk { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .stk-arrow { display: none; }
-}
-@media (max-width: 599.98px) {
-  .stk { gap: 22px; }
-  .stk-arrow { left: 50%; bottom: -24px; margin-left: -13px; transform: rotate(90deg); }
-  .stk-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-/* Motion: layers arrive left to right, then the arrows between them */
-@media (prefers-reduced-motion: no-preference) {
-  html.reveal-ready .stk:not(.is-in) .stk-layer { opacity: 0; transform: translateY(12px); }
-  html.reveal-ready .stk:not(.is-in) .stk-arrow { opacity: 0; }
-  .stk.is-in .stk-layer { transition: opacity 420ms var(--ease), transform 420ms var(--ease); transition-delay: calc(var(--n, 0) * 130ms); }
-  .stk.is-in .stk-arrow { transition: opacity 300ms ease; transition-delay: calc(var(--n, 0) * 130ms + 380ms); }}
 
 /* ═══ Theme switch: day sky with clouds, night sky with stars ═══════════
    Based on the theme switch by Galahhad on Uiverse.io (MIT). Sized in em
@@ -2315,3 +2270,56 @@ span.mark {
 /* Thumbnail: logo bottom-left, number top-right, so they never overlap */
 .pc-thumb { place-items: end start; padding: 0 0 8px 9px; }
 @media (max-width: 899.98px) { .pc-thumb { place-items: center; padding: 0; } .pc-thumb-num { display: none; } }
+
+/* ═══ Technologies: link cards, one per layer ═══════════════════════════
+   Picture panel of the layer's logos, a coloured tag, a one-line heading,
+   and an arrow that straightens and fills on hover. Each card opens a case
+   study that used those tools. */
+.sk { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+@media (min-width: 1000px) { .sk { grid-template-columns: repeat(3, minmax(0, 1fr)); }}
+.sk > li { --c: #021861; --ct: #021861; --tint: rgba(2, 24, 97, 0.1); display: flex; }
+.sk > li:nth-child(2) { --c: #2C4A9A; --ct: #2C4A9A; --tint: rgba(44, 74, 154, 0.12); }
+.sk > li:nth-child(3) { --c: #255DCE; --ct: #1F4FB5; --tint: rgba(37, 93, 206, 0.12); }
+.sk > li:nth-child(4) { --c: #4F86F0; --ct: #1F5FD6; --tint: rgba(79, 134, 240, 0.14); }
+.sk > li:nth-child(5) { --c: #DE1110; --ct: #B80E0D; --tint: rgba(222, 17, 16, 0.1); }
+.sk > li:nth-child(6) { --c: #5F6E9C; --ct: #46547F; --tint: rgba(95, 110, 156, 0.14); }
+.dark .sk > li { --c: #0E2A86; --ct: #C9D5F5; --tint: rgba(201, 213, 245, 0.12); }
+.dark .sk > li:nth-child(2) { --c: #2C4A9A; --ct: #A9C3FA; --tint: rgba(169, 195, 250, 0.12); }
+.dark .sk > li:nth-child(3) { --c: #255DCE; --ct: #8FB0F5; --tint: rgba(143, 176, 245, 0.13); }
+.dark .sk > li:nth-child(4) { --c: #4F86F0; --ct: #6F9BF3; --tint: rgba(111, 155, 243, 0.14); }
+.dark .sk > li:nth-child(5) { --c: #DE1110; --ct: #FF8A89; --tint: rgba(255, 107, 106, 0.13); }
+.dark .sk > li:nth-child(6) { --c: #5F6E9C; --ct: #C9D5F5; --tint: rgba(201, 213, 245, 0.1); }
+
+.sk-card { display: flex; flex-direction: column; gap: 10px; width: 100%; padding: 16px 16px 18px; border: 2px solid var(--line); border-radius: var(--r-lg); background: var(--sheet); color: inherit; text-decoration: none; box-shadow: 0 10px 24px -18px rgba(2, 24, 97, 0.45); transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease); }
+.sk-card:hover { border-color: var(--c); transform: translateY(-3px); box-shadow: 0 22px 40px -24px rgba(2, 24, 97, 0.55); }
+.sk-card:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.sk-visual { display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 10px; min-height: 112px; margin-bottom: 4px; padding: 18px; border-radius: var(--r-md); background: var(--c) radial-gradient(120% 120% at 20% 0%, rgba(255, 255, 255, 0.28), transparent 60%); }
+.sk-logo { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--r-md); background: #FFFFFF; color: #021861; box-shadow: 0 6px 14px -8px rgba(2, 10, 40, 0.6); transition: transform var(--dur) var(--ease); }
+.sk-logo .mark-neutral { color: #255DCE; }
+.sk-logo .mark-brand { color: #021861; }
+.sk-card:hover .sk-logo { transform: translateY(-2px); }
+.sk-card:hover .sk-logo:nth-child(even) { transform: translateY(2px); }
+
+.sk-tag { align-self: flex-start; padding: 4px 14px; border-radius: 999px; background: var(--tint); font-size: var(--fs-xs); font-weight: 700; color: var(--ct); }
+.sk-title { margin: 0; font-size: var(--fs-base); font-weight: 700; line-height: 1.35; color: var(--ink); }
+.sk-tools { margin: 0; font-size: var(--fs-xs); line-height: 1.5; color: var(--muted-ink); }
+.sk-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 6px; }
+.sk-see { font-size: var(--fs-xs); font-weight: 600; color: var(--muted-ink); }
+.sk-see span { color: var(--ink); }
+.sk-arrow { display: grid; place-items: center; flex: none; width: 36px; height: 36px; border: 1px solid var(--line-strong); border-radius: 50%; color: var(--ink); transform: rotate(-35deg); transition: transform 0.4s var(--ease), background-color 0.4s var(--ease), border-color 0.4s var(--ease), color 0.4s var(--ease); }
+.sk-card:hover .sk-arrow, .sk-card:focus-visible .sk-arrow { transform: none; background: var(--c); border-color: var(--c); color: #FFFFFF; }
+
+/* Motion: cards arrive in turn when the section comes into view */
+@media (prefers-reduced-motion: no-preference) {
+  html.reveal-ready .sk:not(.is-in) > li { opacity: 0; transform: translateY(14px); }
+  .sk.is-in > li { transition: opacity 420ms var(--ease), transform 420ms var(--ease); transition-delay: calc(var(--n, 0) * 90ms); }}
+/* Compact on wide screens so both rows of cards fit one view */
+@media (min-width: 1000px) {
+  .sk { gap: 16px; }
+  .sk-card { gap: 8px; padding: 12px 12px 14px; }
+  .sk-visual { min-height: 78px; padding: 12px; margin-bottom: 2px; }
+  .sk-logo { width: 40px; height: 40px; }
+  .sk-arrow { width: 32px; height: 32px; }
+  .sk-foot { padding-top: 2px; }
+}
