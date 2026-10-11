@@ -1,17 +1,18 @@
-import { MousePointer2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Mark } from "@/components/common/Mark";
-import { DataParticles } from "@/components/common/DataParticles";
 
-/* The toolset, grouped by what it does. Every item is from the skills list
-   and case studies. */
-const groups = [
-  { title: "BI & semantic models", items: ["Power BI", "DAX", "Power Query", "Excel"] },
-  { title: "Data platforms", items: ["Microsoft Fabric", "Azure", "Snowflake", "Databricks", "Delta Lake"] },
-  { title: "Engineering & pipelines", items: ["SQL", "Azure Data Factory", "dbt", "SQLMesh", "Apache Kafka"] },
-  { title: "Languages, ML & tooling", items: ["Python", "PySpark", "MLflow", "scikit-learn", "Git"] },
+/* The toolset as the layers of a data platform, in the order data moves
+   through them. Every item is from the skills list and case studies. */
+const layers = [
+  { title: "Ingest", note: "Move data in", items: ["Azure Data Factory", "Apache Kafka"] },
+  { title: "Store", note: "Land and keep it", items: ["Microsoft Fabric", "Snowflake", "Databricks", "Delta Lake", "Azure"] },
+  { title: "Transform", note: "Clean and shape it", items: ["SQL", "dbt", "SQLMesh", "PySpark", "Python"] },
+  { title: "Model", note: "Define the measures", items: ["DAX", "Power Query"] },
+  { title: "Visualise", note: "Show the answer", items: ["Power BI", "Excel"] },
 ];
+const alongside = ["MLflow", "scikit-learn", "Git"];
 
-/** Bento: the DATA graphic and the grouped toolset share one panel. */
+/** Technologies as a data stack: five layers left to right, ML and tooling beneath. */
 export function Technologies() {
   return (
     <section id="skills" className="section sx" aria-labelledby="skills-title">
@@ -23,29 +24,39 @@ export function Technologies() {
           </h2>
         </header>
 
-        <div className="bento reveal">
-          <div className="tech-visual bento-visual">
-            <p className="tech-tag" aria-hidden>Tools and platforms</p>
-            <DataParticles word="DATA" />
-            <p className="tech-caption" aria-hidden>
-              <MousePointer2 size={14} /> Move your pointer through the word
-            </p>
-          </div>
-          <div className="bento-groups">
-            {groups.map((g) => (
-              <section key={g.title} className="bento-group" aria-labelledby={`tg-${g.title}`}>
-                <h3 id={`tg-${g.title}`} className="bento-title">{g.title}</h3>
-                <ul className="bento-list">
-                  {g.items.map((t) => (
-                    <li key={t} className="sx-chip" translate="no">
-                      <Mark name={t} size={20} />
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-              </section>
+        <ol className="stk reveal" aria-label="Tools by layer, in the order data flows">
+          {layers.map((l, i) => (
+            <li key={l.title} className="stk-layer" style={{ "--n": i } as React.CSSProperties}>
+              <h3 className="stk-title">
+                <span className="stk-num" aria-hidden>{String(i + 1).padStart(2, "0")}</span>
+                {l.title}
+              </h3>
+              <p className="stk-note">{l.note}</p>
+              <ul className="stk-tools">
+                {l.items.map((t) => (
+                  <li key={t} translate="no">
+                    <span className="stk-ico"><Mark name={t} size={20} /></span>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              {i < layers.length - 1 && (
+                <span className="stk-arrow" aria-hidden><ArrowRight size={14} strokeWidth={2.4} /></span>
+              )}
+            </li>
+          ))}
+        </ol>
+
+        <div className="stk-side reveal">
+          <h3 className="stk-side-title">ML &amp; tooling</h3>
+          <ul className="stk-tools is-row">
+            {alongside.map((t) => (
+              <li key={t} translate="no">
+                <span className="stk-ico"><Mark name={t} size={20} /></span>
+                {t}
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </section>
