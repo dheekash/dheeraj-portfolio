@@ -2253,3 +2253,7 @@ span.mark {
   html.reveal-ready .ht-item:not(.is-in) .ht-icon { transform: scale(0); }
   .ht-item.is-in .ht-bar { transition: opacity 400ms var(--ease), transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1); transition-delay: calc(var(--n, 0) * 160ms); }
   .ht-item.is-in .ht-icon { transition: transform 380ms cubic-bezier(0.3, 1.5, 0.5, 1); transition-delay: calc(var(--n, 0) * 160ms + 300ms); }}
+/* Hero flow: each stage's mark sits in its own tile */
+.hflow-node { gap: 10px; padding: 6px 16px 6px 6px; }
+.hflow-ico { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 0 0 1px var(--line), 0 4px 10px -6px rgba(2, 24, 97, 0.5); }
+.dark .hflow-ico { background: #F3F6FF; }
