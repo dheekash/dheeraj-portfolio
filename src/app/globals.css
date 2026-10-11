@@ -486,18 +486,6 @@
 .rail-bullets .figure { font-variant-numeric: tabular-nums; font-weight: 650; color: var(--ink); }
 
 /* ── Certifications ───────────────────────────────────────────────────── */
-.cert-grid { display: grid; gap: var(--s-4); grid-template-columns: 1fr; }
-@media (min-width: 640px) { .cert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }}
-@media (min-width: 1100px) { .cert-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }}
-.cert-card { display: flex; flex-direction: column; gap: var(--s-2); }
-.cert-card .cert-name { font-size: var(--fs-base); font-weight: 600; line-height: 1.35; color: var(--ink); }
-.cert-card .cert-meta { margin-top: auto; padding-top: var(--s-3); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-2) var(--s-4); }
-.cert-code { font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 500; color: var(--muted-ink); }
-.cert-card .link-arrow { min-height: 44px; font-size: var(--fs-sm); }
-@media (max-width: 639.98px) {
-  .cert-card { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 4px var(--s-3); padding: var(--s-4); }
-  .cert-card .label { flex-basis: 100%; }
-  .cert-card .cert-meta { flex-basis: 100%; padding-top: 0; }}
 .after-grid { margin-top: var(--s-5); }
 
 .register { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
@@ -867,9 +855,6 @@
 .step + .step { border-left-color: var(--line-subtle); }
 
 /* Certifications */
-.cert-card .label { color: var(--muted-ink); }
-.cert-card .cert-meta .small { color: var(--sage); }
-.cert-code { color: var(--sage-dark); }
 
 /* Selection */
 ::selection { background: var(--sage-light); color: var(--ink); }
@@ -894,21 +879,6 @@ span.mark {
 }
 
 /* Certifications: product mark top right */
-.cert-top { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s-3); }
-.cert-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--r-md);
-  background: var(--sheet-raised);
-  border: 1px solid var(--line-subtle);
-}
-.cert-card:hover .cert-mark .mark { color: var(--sage); }
-@media (max-width: 639.98px) {
-  .cert-card .cert-top { flex-basis: 100%; }
-  .cert-mark { width: 32px; height: 32px; }}
 
 /* Contact: icon buttons */
 .contact-ctas .btn svg.mark, .contact-ctas .btn .mark { color: inherit; }
@@ -1034,14 +1004,6 @@ span.mark {
 .decision { box-shadow: inset 0 4px 0 var(--gold); }
 
 /* Certifications: stripe in the product's colour */
-.cert-card { box-shadow: inset 0 4px 0 var(--cert, var(--sage)); }
-.cert-card[data-product="power-bi"] { --cert: #E6AD10; }
-.cert-card[data-product="microsoft-fabric"] { --cert: #1B8A7A; }
-.cert-card[data-product="azure"] { --cert: #0A7BD6; }
-.cert-card[data-product="databricks"] { --cert: #FF3621; }
-.cert-card[data-product="snowflake"] { --cert: #29B5E8; }
-.cert-mark { background: var(--sheet); }
-.cert-card .cert-meta .small { color: var(--sage); }
 
 /* Logos: official colours; hover adds a lift rather than a recolour */
 .mark-file, .mark-brand { transition: transform var(--dur) var(--ease); }
@@ -1221,7 +1183,6 @@ span.mark {
 
 /* ═══ Alignment fixes ═══════════════════════════════════════════════════ */
 /* Certification cards: issuer label centred on the logo tile */
-.cert-top { align-items: center; }
 
 .rail-bullets li::marker, .cs-section ul.points li::marker { color: var(--sage); }
 
@@ -1764,9 +1725,6 @@ span.mark {
 .pg-text { margin: 0; font-size: var(--fs-sm); line-height: 1.6; color: var(--muted-ink); }
 
 /* Certifications: equal 3×2 grid, tighter */
-.cert-grid { gap: 14px; }
-@media (min-width: 640px) and (max-width: 1099.98px) { .cert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }}
-.cert-card { height: 100%; }
 
 /* Project covers share one height so a row's titles line up */
 .pg-cover, .pg-card.is-wide .pg-cover { min-height: 200px; }
@@ -2098,9 +2056,6 @@ span.mark {
 .pg-sub { text-transform: none; letter-spacing: 0; font-family: inherit; font-size: var(--fs-sm); }
 
 /* Certification cards: the whole card opens the exam page */
-.cert-card { position: relative; transition: border-color var(--dur) var(--ease); }
-.cert-card .link-arrow::after { content: ""; position: absolute; inset: 0; border-radius: var(--r-lg); }
-.cert-card:has(.link-arrow:hover) { border-color: var(--sage); }
 
 /* ═══ Usability pass 2 ══════════════════════════════════════════════════ */
 
@@ -2257,3 +2212,64 @@ span.mark {
 .hflow-node { gap: 10px; padding: 6px 16px 6px 6px; }
 .hflow-ico { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 0 0 1px var(--line), 0 4px 10px -6px rgba(2, 24, 97, 0.5); }
 .dark .hflow-ico { background: #F3F6FF; }
+
+/* ═══ Certifications: learning timeline ═════════════════════════════════
+   Evenly spaced stops, earliest first, each with its own date. A break on
+   the line marks a gap of more than a year. */
+.ct { list-style: none; margin: 8px 0 0; padding: 0; position: relative; }
+.ct::before { content: ""; position: absolute; background: linear-gradient(90deg, var(--line-strong), var(--sage) 70%, var(--red)); }
+.ct-item { position: relative; --cert: var(--sage); }
+.ct-date { margin: 0; font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.04em; color: var(--muted-ink); }
+.ct-dot { display: block; width: 16px; height: 16px; border-radius: 50%; background: var(--cert); box-shadow: 0 0 0 4px var(--paper), 0 0 0 6px color-mix(in srgb, var(--cert) 45%, transparent); }
+.ct-mark { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 0 0 1px var(--line), 0 6px 16px -8px rgba(2, 24, 97, 0.5); }
+.ct-code { margin: 0; font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 700; color: var(--ink); }
+.ct-name { margin: 0; font-size: var(--fs-sm); font-weight: 600; line-height: 1.35; color: var(--ink); }
+.ct-issuer { margin: 0; font-size: var(--fs-xs); color: var(--muted-ink); }
+.ct-link { display: inline-flex; align-items: center; gap: 4px; min-height: 32px; font-size: var(--fs-xs); font-weight: 600; color: var(--sage); }
+/* The whole stop opens the exam page */
+.ct-link::after { content: ""; position: absolute; inset: -8px -4px; border-radius: var(--r-lg); }
+.ct-item:has(.ct-link:hover) .ct-mark { box-shadow: 0 0 0 2px var(--cert), 0 8px 18px -8px rgba(2, 24, 97, 0.6); }
+.ct-item:has(.ct-link:hover) .ct-link { color: var(--ink); }
+.ct-link:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+/* Time skipped: two slanted bars across the line */
+.ct-break { position: absolute; width: 14px; height: 22px; background: linear-gradient(110deg, transparent 0 30%, var(--paper) 30% 70%, transparent 70%); }
+.ct-break::before, .ct-break::after { content: ""; position: absolute; top: 0; width: 2px; height: 100%; background: var(--muted-ink); transform: skewX(-20deg); }
+.ct-break::before { left: 3px; }
+.ct-break::after { right: 3px; }
+
+@media (min-width: 900px) {
+  .ct { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); padding-right: 18px; }
+  .ct::before { top: 39px; left: 0; right: 0; height: 2px; }
+  .ct::after { content: ""; position: absolute; top: 34px; right: 0; border-left: 12px solid var(--red); border-block: 6px solid transparent; }
+  .ct-item { display: flex; flex-direction: column; align-items: center; gap: 6px; padding-inline: 8px; text-align: center; }
+  .ct-date { height: 20px; line-height: 20px; margin-bottom: 6px; }
+  .ct-dot { margin-bottom: 14px; }
+  .ct-mark { margin-bottom: 6px; }
+  .ct-break { left: -7px; top: 29px; }
+  .ct-link { margin-top: auto; }
+}
+@media (max-width: 899.98px) {
+  .ct { display: grid; gap: 22px; padding-left: 40px; }
+  .ct::before { top: 8px; bottom: 8px; left: 13px; width: 2px; background: linear-gradient(180deg, var(--line-strong), var(--sage) 70%, var(--red)); }
+  .ct-item { display: grid; grid-template-columns: 52px minmax(0, 1fr); column-gap: 14px; align-items: center; }
+  .ct-dot { position: absolute; left: -35px; top: 2px; }
+  .ct-date { grid-column: 1 / -1; margin-bottom: 6px; }
+  .ct-mark { grid-row: 2 / span 4; align-self: start; }
+  .ct-code, .ct-name, .ct-issuer, .ct-link { grid-column: 2; }
+  .ct-break { left: -34px; top: -18px; transform: rotate(90deg); }
+}
+
+/* Motion: the line draws left to right, then each stop arrives in turn */
+@media (prefers-reduced-motion: no-preference) {
+  .ct::before { transform-origin: left center; }
+  html.reveal-ready .ct:not(.is-in)::before { transform: scaleX(0); }
+  html.reveal-ready .ct:not(.is-in) .ct-item { opacity: 0; transform: translateY(10px); }
+  html.reveal-ready .ct:not(.is-in) .ct-dot { transform: scale(0); }
+  .ct.is-in::before { transition: transform 1100ms cubic-bezier(0.5, 0, 0.2, 1); }
+  html.reveal-ready .ct:not(.is-in)::after { opacity: 0; }
+  .ct.is-in::after { transition: opacity 200ms ease 1000ms; }
+  .ct.is-in .ct-item { transition: opacity 400ms var(--ease), transform 400ms var(--ease); transition-delay: calc(var(--n, 0) * 140ms + 150ms); }
+  .ct.is-in .ct-dot { transition: transform 320ms cubic-bezier(0.3, 1.5, 0.5, 1); transition-delay: calc(var(--n, 0) * 140ms + 250ms); }}
+@media (prefers-reduced-motion: no-preference) and (max-width: 899.98px) {
+  .ct::before { transform-origin: top center; }
+  html.reveal-ready .ct:not(.is-in)::before { transform: scaleY(0); }}
