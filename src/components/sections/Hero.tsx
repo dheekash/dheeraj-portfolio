@@ -11,6 +11,8 @@ import { HeroFlow } from "@/components/sections/HeroFlow";
 /* Headshot sits beside the availability line once public/images/avatar.jpg exists. */
 const PHOTO = "/images/avatar.jpg";
 const hasPhoto = fs.existsSync(path.join(process.cwd(), "public", PHOTO));
+/* Portrait shown beside the name. */
+const PORTRAIT = "/images/portrait.webp";
 
 /* Results from the case studies, written so each reads on its own. */
 const results = [
@@ -63,6 +65,18 @@ export function Hero() {
           </div>
         </div>
 
+        {/* Portrait with the four results floating around it as chips. */}
+        <div className="hx-visual">
+          <div className="hx-photo hero-anim" style={{ "--d": 2 } as React.CSSProperties}>
+            <Image
+              src={PORTRAIT}
+              alt="Dheeraj Kashyap"
+              width={1000}
+              height={1340}
+              priority
+              sizes="(min-width: 1024px) 340px, 68vw"
+            />
+          </div>
         <dl className="fx-metrics hx-metrics hero-anim" style={{ "--d": 3 } as React.CSSProperties} aria-label="Key results">
           {results.map((r, i) => (
             <div key={r.label} className="fx-metric">
@@ -77,6 +91,7 @@ export function Hero() {
             </div>
           ))}
         </dl>
+        </div>
       </div>
       <HeroFlow />
     </section>
