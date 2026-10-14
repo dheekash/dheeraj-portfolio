@@ -3,7 +3,6 @@ import { ArrowRight } from "lucide-react";
 import { caseStudies } from "@/data/work";
 import { Mark, hasMark } from "@/components/common/Mark";
 import { ProjectShowcase } from "@/components/sections/ProjectShowcase";
-import { Scribble } from "@/components/common/Scribble";
 
 /* Lead technology for each cover. No screenshots exist yet, so each cover
    shows the project's real headline result rather than a mock image. */
@@ -69,21 +68,21 @@ export function Projects() {
   ));
 
   const infos = shown.map((s) => {
-    const [headline, ...rest] = s.impact;
+    const rest = s.impact.slice(1);
     return (
       <>
         <div className="pc-title">
           <h3>{s.title}</h3>
           <p>{s.domain} · {s.type}</p>
         </div>
-        <p className="pc-price">
-          <span>{headline.value}</span> {headline.label}
-        </p>
-        <p className="pc-summary">{s.summary}</p>
+        <dl className="pc-story">
+          <div><dt>Problem</dt><dd>{s.problem}</dd></div>
+          <div><dt>Solution</dt><dd>{s.action}</dd></div>
+        </dl>
         <div className="pc-block">
           <h4>Stack</h4>
           <ul className="pc-stack">
-            {s.stack.slice(0, 6).map((t) => (
+            {s.stack.slice(0, 4).map((t) => (
               <li key={t} translate="no">
                 {hasMark(t) && <span className="pc-stack-ico"><Mark name={t} size={18} /></span>}
                 {t}
@@ -92,7 +91,7 @@ export function Projects() {
           </ul>
         </div>
         <div className="pc-block">
-          <h4>Results</h4>
+          <h4>Impact</h4>
           <ul className="pc-results">
             {rest.map((r) => (
               <li key={r.label}><strong>{r.value}</strong> {r.label}</li>
@@ -113,7 +112,7 @@ export function Projects() {
           <div>
             <p className="sx-eyebrow">Featured work</p>
             <h2 id="work-title" className="sx-title">
-              Selected <Scribble>projects</Scribble>
+              Selected projects
               <span className="sx-dot">.</span>
             </h2>
           </div>

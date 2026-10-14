@@ -1,9 +1,8 @@
-import { Building2, CalendarClock, MapPin, Network, Target, Users, Workflow, Wrench } from "lucide-react";
+import { Building2, MapPin, Network, Target, Users, Workflow, Wrench } from "lucide-react";
 
-/* Figures from the experience section: years since Mar 2019, and the
-   current role's models, pipelines and stakeholders. */
+/* Figures from the current role in the experience section. Years of
+   experience are shown once, in the hero. */
 const stats = [
-  { Icon: CalendarClock, value: "7+", label: "Years in BI & analytics" },
   { Icon: Network, value: "12", label: "Semantic models built" },
   { Icon: Workflow, value: "8", label: "Fabric pipelines deployed" },
   { Icon: Users, value: "42", label: "Stakeholders engaged" },
