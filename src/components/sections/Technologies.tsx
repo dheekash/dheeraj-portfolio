@@ -52,7 +52,9 @@ export function Technologies() {
                 </span>
                 <span className="sk-tag">{c.tag}</span>
                 <h3 className="sk-title">{c.line}</h3>
-                <p className="sk-tools" translate="no">{c.items.join(" · ")}</p>
+                <ul className="sk-tags" aria-label="Tools">
+                  {c.items.map((t) => <li key={t} translate="no">{t}</li>)}
+                </ul>
                 <span className="sk-foot">
                   <span className="sk-see">
                     See it in <span translate="no">{c.study.title.replace(/, (Amazon|Rockwool)$/, "")}</span>

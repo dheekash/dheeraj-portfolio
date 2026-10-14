@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight, Briefcase, ChartColumnBig, Database, Headset, ShieldCheck, type LucideIcon } from "lucide-react";
-import { Scribble } from "@/components/common/Scribble";
 
 type Role = {
   start: string;
@@ -128,7 +127,7 @@ export function Experience() {
         <header className="sx-head reveal">
           <p className="sx-eyebrow">Career</p>
           <h2 id="experience-title" className="sx-title">
-            Work <Scribble>Experience</Scribble><span className="sx-dot">.</span>
+            Work Experience<span className="sx-dot">.</span>
           </h2>
         </header>
 

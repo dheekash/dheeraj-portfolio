@@ -3,7 +3,6 @@ import { ArrowUpRight, FileText, Mail } from "lucide-react";
 import { LinkedinIcon } from "@/components/common/SocialIcons";
 import { Mark } from "@/components/common/Mark";
 import { Logo } from "@/components/common/Logo";
-import { Scribble } from "@/components/common/Scribble";
 import { profile } from "@/data/profile";
 import { caseStudies } from "@/data/work";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -30,7 +29,7 @@ export function Footer() {
           <div className="cf-pitch reveal">
             <p className="sx-eyebrow">Get in touch</p>
             <h2 id="contact-title" className="sx-title cf-title">
-              Let&rsquo;s work <Scribble>together</Scribble>
+              Let&rsquo;s work together
               <span className="sx-dot">.</span>
             </h2>
             <p className="cf-intro">
