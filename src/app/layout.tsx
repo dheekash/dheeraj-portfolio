@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Newsreader } from "next/font/google";
+import { IBM_Plex_Mono, Inter, Manrope } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
@@ -9,25 +9,26 @@ import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 /* Three roles, three faces:
-   Newsreader  display headings only (H1, H2, pull lines)
-   Geist       interface and body text
-   Geist Mono  figures, metrics and small technical labels */
-const newsreader = Newsreader({
+   Manrope        your name and headings
+   Inter          body text, navigation and buttons
+   IBM Plex Mono  small technical labels and figures */
+const manrope = Manrope({
   subsets: ["latin"],
-  axes: ["opsz"],
-  variable: "--font-newsreader",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-manrope",
   display: "swap",
 });
 
-const geist = Geist({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-geist",
+  variable: "--font-inter",
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
+const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  variable: "--font-geist-mono",
+  weight: ["400", "500", "600"],
+  variable: "--font-plex-mono",
   display: "swap",
 });
 
@@ -37,7 +38,7 @@ const siteUrl = SITE_URL;
    Dark is the default theme; ThemeProvider keeps this in sync when the
    visitor switches. */
 export const viewport: Viewport = {
-  themeColor: "#020B2B",
+  themeColor: "#111310",
 };
 
 export const metadata: Metadata = {
@@ -153,7 +154,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`dark ${newsreader.variable} ${geist.variable} ${geistMono.variable}`}
+      className={`dark ${manrope.variable} ${inter.variable} ${plexMono.variable}`}
     >
       <head>
         {/* Dark is the default (set on <html>). Light is applied before
