@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { Logo } from "@/components/common/Logo";
+import { PaletteSwitcher } from "@/components/layout/PaletteSwitcher";
 
 /* Four destinations. Platform judgment and certifications sit inside
    Expertise's reach on the page; Contact is the primary button. */
@@ -131,10 +132,12 @@ export function Navbar() {
         </nav>
 
         <div className="nav-actions">
+          <PaletteSwitcher />
           <ThemeButton />
         </div>
 
         <div className="nav-mobile">
+          <PaletteSwitcher />
           <ThemeButton />
           <button
             type="button"

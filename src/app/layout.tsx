@@ -162,7 +162,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{if(localStorage.getItem('theme')==='light'){document.documentElement.classList.remove('dark')}}catch(e){}})()",
+              "(function(){try{var d=document.documentElement;if(localStorage.getItem('theme')==='light'){d.classList.remove('dark')}var p=localStorage.getItem('palette');if(p&&p!=='editorial'&&/^[a-z]+$/.test(p)){d.setAttribute('data-palette',p)}}catch(e){}})()",
           }}
         />
         <script

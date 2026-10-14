@@ -19,9 +19,9 @@ function Db({ cx, top, bottom, body, cap, className }: { cx: number; top: number
   const r = cx + rx;
   const step = (bottom - top) / 3;
   return (
-    <g className={className} stroke="#20231F" strokeWidth="1">
-      <path d={`M${l} ${top}V${bottom}A${rx} ${ry} 0 0 0 ${r} ${bottom}V${top}Z`} fill={body} />
-      <ellipse cx={cx} cy={top} rx={rx} ry={ry} fill={cap} />
+    <g className={className} style={{ stroke: "var(--p-ink)" }} strokeWidth="1">
+      <path d={`M${l} ${top}V${bottom}A${rx} ${ry} 0 0 0 ${r} ${bottom}V${top}Z`} style={{ fill: body }} />
+      <ellipse cx={cx} cy={top} rx={rx} ry={ry} style={{ fill: cap }} />
       <path d={`M${l} ${top + step}A${rx} ${ry} 0 0 0 ${r} ${top + step}M${l} ${top + 2 * step}A${rx} ${ry} 0 0 0 ${r} ${top + 2 * step}`} fill="none" strokeWidth="1.3" />
     </g>
   );
@@ -41,10 +41,10 @@ export function Logo({ size = 36, className = "" }: { size?: number; className?:
         <path d="M11 5C7 5 6.5 7 6.5 10.5V15.5C6.5 18 5.5 20 2.5 20C5.5 20 6.5 22 6.5 24.5V29.5C6.5 33 7 35 11 35" />
         <path d="M107 5C111 5 111.5 7 111.5 10.5V15.5C111.5 18 112.5 20 115.5 20C112.5 20 111.5 22 111.5 24.5V29.5C111.5 33 111 35 107 35" />
       </g>
-      <path d="M16 4H31A16 16 0 0 1 31 36H16ZM24.5 11V29H30.5A7 9 0 0 0 30.5 11Z" fill="#237A57" fillRule="evenodd" />
-      <Db cx={31} top={12} bottom={28} body="#F4F2EC" cap="#FFFFFF" className="logo-db" />
+      <path d="M16 4H31A16 16 0 0 1 31 36H16ZM24.5 11V29H30.5A7 9 0 0 0 30.5 11Z" style={{ fill: "var(--p-acc)" }} fillRule="evenodd" />
+      <Db cx={31} top={12} bottom={28} body="var(--d-ink)" cap="#FFFFFF" className="logo-db" />
       <path className="logo-k" d="M52 4H61V17L73 4H85L70 19.5L86.5 36H74.5L64 25.3L61 28.4V36H52Z" />
-      <Db cx={94} top={16} bottom={31} body="#237A57" cap="#7CC8A3" className="logo-db is-red" />
+      <Db cx={94} top={16} bottom={31} body="var(--p-acc)" cap="var(--d-acc)" className="logo-db is-red" />
     </svg>
   );
 }
