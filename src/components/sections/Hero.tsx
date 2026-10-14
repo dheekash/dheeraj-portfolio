@@ -6,6 +6,7 @@ import { profile } from "@/data/profile";
 import { Mark } from "@/components/common/Mark";
 import { LinkedinIcon } from "@/components/common/SocialIcons";
 import { CountUp } from "@/components/common/CountUp";
+import { allCredentials } from "@/data/credentials";
 import { HeroFlow } from "@/components/sections/HeroFlow";
 
 /* Headshot sits beside the availability line once public/images/avatar.jpg exists. */
@@ -14,12 +15,10 @@ const hasPhoto = fs.existsSync(path.join(process.cwd(), "public", PHOTO));
 /* Portrait shown beside the name. */
 const PORTRAIT = "/images/portrait.webp";
 
-/* Results from the case studies, written so each reads on its own. */
-const results = [
-  { value: "<1%", label: "Pipeline failures", from: "down from 12%" },
-  { value: "<5 min", label: "Fraud detection", from: "down from 24 hrs" },
-  { value: "15 min", label: "Report refresh", from: "down from 4 hrs" },
-  { value: "−70%", label: "Manual reporting effort", from: "self-serve Power BI" },
+/* Two facts under the portrait. Project results live on the project cards. */
+const facts = [
+  { value: "7+", label: "Years experience" },
+  { value: String(allCredentials.length), label: "Certifications" },
 ];
 
 /**
@@ -65,7 +64,7 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Portrait with the four results floating around it as chips. */}
+        {/* Portrait, with two facts in aligned cards beneath it. */}
         <div className="hx-visual">
           <div className="hx-photo hero-anim" style={{ "--d": 2 } as React.CSSProperties}>
             <Image
@@ -77,17 +76,11 @@ export function Hero() {
               sizes="(min-width: 1024px) 340px, 68vw"
             />
           </div>
-        <dl className="fx-metrics hx-metrics hero-anim" style={{ "--d": 3 } as React.CSSProperties} aria-label="Key results">
-          {results.map((r, i) => (
-            <div key={r.label} className="fx-metric">
-              <dt className="sr-only">{r.label}, {r.from}</dt>
-              <dd>
-                <span className="fx-metric-value">
-                  <CountUp value={r.value} delay={400 + i * 120} />
-                </span>
-                <span className="fx-metric-label" aria-hidden>{r.label}</span>
-                <span className="fx-metric-from" aria-hidden>{r.from}</span>
-              </dd>
+        <dl className="hx-facts hero-anim" style={{ "--d": 3 } as React.CSSProperties}>
+          {facts.map((f, i) => (
+            <div key={f.label} className="hx-fact">
+              <dt>{f.label}</dt>
+              <dd><CountUp value={f.value} delay={400 + i * 120} /></dd>
             </div>
           ))}
         </dl>
