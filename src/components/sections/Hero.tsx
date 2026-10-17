@@ -33,7 +33,7 @@ export function Hero() {
           <p className="fx-status hero-anim" style={{ "--d": 0 } as React.CSSProperties}>
             {hasPhoto && <Image src={PHOTO} alt="" width={36} height={36} className="fx-avatar" />}
             <span className="fx-status-dot" aria-hidden />
-            Open to opportunities · Bengaluru · Remote
+            Open to opportunities<span className="fx-status-loc"> · Bengaluru · Remote</span>
           </p>
           <p className="fx-hello hero-anim" style={{ "--d": 1 } as React.CSSProperties}>Hi, I&rsquo;m</p>
           {/* Each line rises out of its own mask, one after the other. */}

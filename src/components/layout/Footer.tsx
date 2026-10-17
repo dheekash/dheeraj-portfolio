@@ -103,7 +103,7 @@ export function Footer() {
 
         <div className="fcol-base cf-base">
           <p>© {year} Dheeraj Kashyap · Bengaluru, India · Updated {updated}</p>
-          <a href="#top" className="cf-top-link">Back to top ↑</a>
+          <a href="#main-content" className="cf-top-link">Back to top ↑</a>
         </div>
       </div>
     </footer>
