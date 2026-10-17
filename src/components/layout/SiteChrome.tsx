@@ -85,6 +85,9 @@ function MobileContactBar() {
 export function SiteChrome({ children, footer }: { children: React.ReactNode; footer: React.ReactNode }) {
   const pathname = usePathname();
   useRevealOnce(pathname);
+  // The first page paints at once; only later route changes fade in.
+  const [firstPath] = useState(pathname);
+  const navigated = pathname !== firstPath;
 
 
   return (
@@ -94,7 +97,7 @@ export function SiteChrome({ children, footer }: { children: React.ReactNode; fo
       </a>
       <Navbar />
       {/* Keyed by route so each page fades in briefly on navigation. */}
-      <main key={pathname} id="main-content" tabIndex={-1} className="route-in">
+      <main key={pathname} id="main-content" tabIndex={-1} className={navigated ? "route-in" : undefined}>
         {children}
       </main>
       {footer}

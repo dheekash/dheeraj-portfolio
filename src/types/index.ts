@@ -2,7 +2,6 @@ export interface Profile {
   name: string;
   role: string;
   tagline: string;
-  bio: string;
   location: string;
   email: string;
   phone?: string;
@@ -13,14 +12,8 @@ export interface Profile {
   githubUrl: string;
   instagramUrl: string;
   facebookUrl: string;
-  stats: Stat[];
 }
 
-export interface Stat {
-  value: string;
-  label: string;
-  suffix?: string;
-}
 
 export interface SocialLink {
   name: string;

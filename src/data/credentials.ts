@@ -25,7 +25,7 @@ export const credentialGroups: { category: string; items: Credential[] }[] = [
   {
     category: "Power BI",
     items: [
-      { name: "Power BI Data Analyst Associate", code: "PL-300", issuer: "Microsoft", earned: "Sep 2021", flagship: 1, url: "https://learn.microsoft.com/en-us/credentials/certifications/power-bi-data-analyst-associate/" },
+      { name: "Power BI Data Analyst Associate", code: "PL-300", issuer: "Microsoft", earned: "Sep 2021", flagship: 1, url: "https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/" },
       { name: "Power Platform Fundamentals", code: "PL-900", issuer: "Microsoft", earned: "Aug 2021", url: "https://learn.microsoft.com/en-us/credentials/certifications/power-platform-fundamentals/" },
     ],
   },
