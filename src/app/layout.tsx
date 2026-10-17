@@ -38,7 +38,7 @@ const siteUrl = SITE_URL;
    Dark is the default theme; ThemeProvider keeps this in sync when the
    visitor switches. */
 export const viewport: Viewport = {
-  themeColor: "#111310",
+  themeColor: "#160B0E",
 };
 
 export const metadata: Metadata = {
@@ -162,7 +162,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var d=document.documentElement;if(localStorage.getItem('theme')==='light'){d.classList.remove('dark')}var p=localStorage.getItem('palette');if(p&&p!=='editorial'&&/^[a-z]+$/.test(p)){d.setAttribute('data-palette',p)}}catch(e){}})()",
+              "(function(){try{var d=document.documentElement;if(localStorage.getItem('theme')==='light'){d.classList.remove('dark')}var p=localStorage.getItem('palette');if(p==='midnight'||p==='sage'||p==='regal'){d.setAttribute('data-palette',p)}}catch(e){}})()",
           }}
         />
         <script

@@ -6,19 +6,17 @@ import { Check, Palette } from "lucide-react";
 /* The palettes in globals.css (":root[data-palette=…]"). Swatches are the
    page, text and accent colours, for the menu only. */
 export const PALETTES = [
-  { id: "editorial", name: "Editorial", swatch: ["#F7F6F2", "#20231F", "#237A57"] },
-  { id: "brass", name: "Executive brass", swatch: ["#FAF9F6", "#242321", "#B58A52"] },
-  { id: "saffron", name: "Midnight saffron", swatch: ["#F6F5F1", "#14213D", "#E0A526"] },
-  { id: "teal", name: "Petrol teal", swatch: ["#F3F6F6", "#16262E", "#0F6B73"] },
-  { id: "oxblood", name: "Oxblood", swatch: ["#F5F2EC", "#1F1D1B", "#7A1F2B"] },
-  { id: "lavender", name: "Modern lavender", swatch: ["#F4F2F8", "#25212D", "#9B8AFB"] },
+  { id: "luxury", name: "Timeless luxury", swatch: ["#FFF9F2", "#800020", "#D9B061"] },
+  { id: "midnight", name: "Midnight and gold", swatch: ["#0D1C42", "#22396F", "#F4AE52"] },
+  { id: "sage", name: "Editorial sage", swatch: ["#FEFAF3", "#6A795D", "#B2BD7E"] },
+  { id: "regal", name: "Regal purple and teal", swatch: ["#4C2365", "#7F5D99", "#B4E4D6"] },
 ] as const;
 type PaletteId = (typeof PALETTES)[number]["id"];
 
-/** Applies a palette to <html> and remembers it. Editorial is the default and needs no attribute. */
+/** Applies a palette to <html> and remembers it. Timeless luxury is the default and needs no attribute. */
 function applyPalette(id: PaletteId) {
   const root = document.documentElement;
-  if (id === "editorial") root.removeAttribute("data-palette");
+  if (id === "luxury") root.removeAttribute("data-palette");
   else root.setAttribute("data-palette", id);
   try {
     localStorage.setItem("palette", id);
@@ -26,13 +24,13 @@ function applyPalette(id: PaletteId) {
 }
 
 /**
- * Palette button for the nav: opens a small menu of the six palettes. Arrow
+ * Palette button for the nav: opens a small menu of the four palettes. Arrow
  * keys move between options, Escape or a click outside closes it, and focus
  * returns to the button.
  */
 export function PaletteSwitcher() {
   const [open, setOpen] = useState(false);
-  const [current, setCurrent] = useState<PaletteId>("editorial");
+  const [current, setCurrent] = useState<PaletteId>("luxury");
   const wrap = useRef<HTMLDivElement>(null);
   const button = useRef<HTMLButtonElement>(null);
   const options = useRef<(HTMLButtonElement | null)[]>([]);

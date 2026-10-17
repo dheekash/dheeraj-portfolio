@@ -41,10 +41,10 @@ export function Logo({ size = 36, className = "" }: { size?: number; className?:
         <path d="M11 5C7 5 6.5 7 6.5 10.5V15.5C6.5 18 5.5 20 2.5 20C5.5 20 6.5 22 6.5 24.5V29.5C6.5 33 7 35 11 35" />
         <path d="M107 5C111 5 111.5 7 111.5 10.5V15.5C111.5 18 112.5 20 115.5 20C112.5 20 111.5 22 111.5 24.5V29.5C111.5 33 111 35 107 35" />
       </g>
-      <path d="M16 4H31A16 16 0 0 1 31 36H16ZM24.5 11V29H30.5A7 9 0 0 0 30.5 11Z" style={{ fill: "var(--p-acc)" }} fillRule="evenodd" />
+      <path d="M16 4H31A16 16 0 0 1 31 36H16ZM24.5 11V29H30.5A7 9 0 0 0 30.5 11Z" style={{ fill: "var(--logo-d, var(--p-acc))" }} fillRule="evenodd" />
       <Db cx={31} top={12} bottom={28} body="var(--d-ink)" cap="#FFFFFF" className="logo-db" />
       <path className="logo-k" d="M52 4H61V17L73 4H85L70 19.5L86.5 36H74.5L64 25.3L61 28.4V36H52Z" />
-      <Db cx={94} top={16} bottom={31} body="var(--p-acc)" cap="var(--d-acc)" className="logo-db is-red" />
+      <Db cx={94} top={16} bottom={31} body="var(--logo-d, var(--p-acc))" cap="var(--d-acc)" className="logo-db is-red" />
     </svg>
   );
 }
