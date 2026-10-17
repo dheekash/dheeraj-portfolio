@@ -2415,6 +2415,89 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 /* Underline is the only hover cue on ordinary links */
 .nav .nav-link:not(.nav-link-cta), .nav .nav-link:not(.nav-link-cta):hover, .nav .nav-link:not(.nav-link-cta)[aria-current="true"] { background: transparent; }
 
+/* ═══ Depth ═════════════════════════════════════════════════════════════
+   Two ideas, applied everywhere with the existing palette only:
+   1. Layers by shade: recessed areas sit a shade below the page, cards a
+      shade above it, and interactive pieces on top.
+   2. Two-layer shadows: a light edge on top (light hitting the surface)
+      plus a soft dark shadow below, in three sizes. Elevated surfaces
+      get the light edge; recessed ones get the reverse (dark on top,
+      light below). Separation comes from shade and shadow, so borders
+      on raised surfaces drop back to a faint ring. */
+:root {
+  --surface-low: color-mix(in srgb, var(--paper) 94%, var(--ink));
+  --surface-high: var(--sheet);
+  --surface-top: color-mix(in srgb, var(--sheet) 70%, var(--paper));
+  --hi: rgba(255, 255, 255, 0.9);
+  --ring: color-mix(in srgb, var(--ink) 7%, transparent);
+  --sh: color-mix(in srgb, var(--p-ink) 22%, transparent);
+  --sh-soft: color-mix(in srgb, var(--p-ink) 10%, transparent);
+  --depth-1: inset 0 1px 0 var(--hi), 0 0 0 1px var(--ring), 0 1px 2px var(--sh), 0 2px 6px -2px var(--sh-soft);
+  --depth-2: inset 0 1px 0 var(--hi), 0 0 0 1px var(--ring), 0 3px 6px -2px var(--sh), 0 10px 24px -10px var(--sh-soft);
+  --depth-3: inset 0 1px 0 var(--hi), 0 0 0 1px var(--ring), 0 6px 12px -4px var(--sh), 0 24px 48px -18px var(--sh);
+  --depth-in: inset 0 2px 4px -1px var(--sh), inset 0 -1px 0 var(--hi), 0 0 0 1px var(--ring);
+}
+.dark, .band {
+  --surface-low: color-mix(in srgb, var(--paper) 70%, #000000);
+  --surface-high: var(--sheet);
+  --surface-top: var(--sheet-raised);
+  --hi: rgba(255, 255, 255, 0.07);
+  --ring: rgba(255, 255, 255, 0.05);
+  --sh: rgba(0, 0, 0, 0.5);
+  --sh-soft: rgba(0, 0, 0, 0.35);
+  --depth-in: inset 0 2px 4px -1px rgba(0, 0, 0, 0.6), inset 0 -1px 0 rgba(255, 255, 255, 0.05), 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+.band { --surface-high: var(--band-sheet); --surface-top: color-mix(in srgb, var(--band-sheet) 80%, #FFFFFF); }
+
+/* Raised surfaces: lighter shade, small two-layer shadow, faint ring */
+.card, .sk-card, .pc, .hx-facts, .sx-stat dd, .pal-menu, .hflow-node {
+  border-color: transparent;
+  background-color: var(--surface-high);
+  box-shadow: var(--depth-1);
+}
+.nav-inner.glass { box-shadow: var(--depth-2); }
+.pc, .hx-facts { box-shadow: var(--depth-2); }
+/* Hover raises a level */
+@media (hover: hover) {
+  .sk-card:hover { box-shadow: var(--depth-3); }
+  .pc:hover { box-shadow: var(--depth-3); }
+}
+
+/* Recessed surfaces: a shade below the page, shadow pressed in */
+.sk-visual { background: var(--surface-low); border-color: transparent; box-shadow: var(--depth-in); }
+.field input, .field textarea { background: var(--surface-low); border-color: transparent; box-shadow: var(--depth-in); }
+.band .field input, .band .field textarea { background: color-mix(in srgb, var(--band) 70%, #000000); border-color: transparent; box-shadow: var(--depth-in); }
+.field input:focus-visible, .field textarea:focus-visible { box-shadow: var(--depth-in); }
+/* Before/after tracks read as grooves the bar sits in */
+.pg-bar::after { box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35); }
+
+/* Interactive pieces sit on top: chips, tags, logo tiles */
+.sk-logo, .stk-ico, .pc-stack-ico, .hflow-ico, .ct-mark { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 0 0 1px var(--ring), 0 2px 4px -1px var(--sh); }
+.sk-tags li, .pc-stack li { border-color: transparent; background: var(--surface-top); box-shadow: inset 0 1px 0 var(--hi), 0 0 0 1px var(--ring), 0 1px 2px -1px var(--sh); }
+
+/* Selected states lift: the chosen project thumbnail, palette and tag */
+.pc-thumb[aria-selected="true"] { box-shadow: inset 0 1px 0 #FFFFFF, 0 4px 10px -2px rgba(0, 0, 0, 0.45); }
+.pal-opt[aria-pressed="true"] { background: var(--surface-top); box-shadow: inset 0 1px 0 var(--hi), 0 0 0 1px var(--ring), 0 2px 5px -2px var(--sh); }
+
+/* Buttons: the primary gets light from above (same colour, a touch
+   lighter at the top, a bright top edge); the secondary becomes a raised
+   surface instead of an outline */
+.btn-primary, .dark .btn-primary, .band .btn-primary, .nav-link-cta, .dark .nav-link-cta {
+  background-image: linear-gradient(to bottom, color-mix(in srgb, #FFFFFF 14%, transparent), transparent 60%);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #FFFFFF 30%, transparent), 0 1px 2px var(--sh), 0 4px 10px -4px var(--sh);
+}
+.btn-secondary, .fx-actions .btn-secondary, .sx-icon-btn, .copy-btn, .theme-btn, .pal-btn {
+  background-color: var(--surface-high);
+  border-color: transparent;
+  box-shadow: var(--depth-1);
+}
+.band .btn-secondary, .band .copy-btn { background-color: var(--surface-high); }
+@media (hover: hover) {
+  .btn-primary:hover, .nav-link-cta:hover { box-shadow: inset 0 1px 0 color-mix(in srgb, #FFFFFF 30%, transparent), 0 2px 4px var(--sh), 0 12px 22px -10px var(--sh); }
+  .btn-secondary:hover, .sx-icon-btn:hover, .copy-btn:hover { box-shadow: var(--depth-2); }
+}
+.btn:active, .btn-primary:active, .btn-secondary:active { box-shadow: var(--depth-in); }
+
 /* ═══ Palettes ══════════════════════════════════════════════════════════
    Every palette colour above reads a --p-* (light) or --d-* (dark)
    variable. Timeless Luxury is the default; the switcher in the nav sets
