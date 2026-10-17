@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { allCredentials, credentialGroups } from "@/data/credentials";
+import { allCredentials, credentialGroups, issuerList } from "@/data/credentials";
 
 export const metadata: Metadata = {
   title: "Certifications",
   description:
-    "All 13 certifications held by Dheeraj Kashyap across Microsoft Fabric, Power BI, Azure, Snowflake and Databricks.",
+    `All ${allCredentials.length} certifications held by Dheeraj Kashyap across Microsoft Fabric, Power BI, Azure, Snowflake, Databricks and Apache Airflow.`,
   alternates: { canonical: "/certifications" },
 };
 
@@ -19,7 +19,7 @@ export default function CertificationsPage() {
       <header className="section-head">
         <h1 className="display-2">All certifications</h1>
         <p className="lead">
-          {allCredentials.length} certifications from Microsoft, Snowflake and Databricks, grouped by
+          {allCredentials.length} certifications from {issuerList}, grouped by
           area, with the month each was earned.
         </p>
       </header>

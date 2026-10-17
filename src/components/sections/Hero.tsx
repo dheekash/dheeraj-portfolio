@@ -46,7 +46,7 @@ export function Hero() {
             <span className="hl">Power BI</span> and <span className="hl">Microsoft Fabric</span>.
           </p>
           <p className="fx-cred hero-anim" style={{ "--d": 5 } as React.CSSProperties}>
-            BI &amp; Analytics Engineer · 7+ years · 13 certifications incl. Microsoft DP-600 &amp; DP-700
+            BI &amp; Analytics Engineer · 7+ years · {allCredentials.length} certifications incl. Microsoft DP-600 &amp; DP-700
           </p>
           <div className="fx-actions hx-actions hero-anim" style={{ "--d": 6 } as React.CSSProperties}>
             <a href="#contact" className="btn btn-primary">
