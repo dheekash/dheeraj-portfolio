@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Navbar } from "./Navbar";
-import { PageTransition } from "@/components/common/PageTransition";
+import { ScrollProgress } from "@/components/common/ScrollProgress";
 import { Logo } from "@/components/common/Logo";
 
 /**
@@ -93,12 +93,13 @@ export function SiteChrome({ children, footer }: { children: React.ReactNode; fo
         Skip to content
       </a>
       <Navbar />
-      <main id="main-content" tabIndex={-1}>
+      {/* Keyed by route so each page fades in briefly on navigation. */}
+      <main key={pathname} id="main-content" tabIndex={-1} className="route-in">
         {children}
       </main>
       {footer}
       <MobileContactBar />
-      <PageTransition />
+      <ScrollProgress />
     </>
   );
 }

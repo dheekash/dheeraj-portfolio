@@ -36,18 +36,19 @@ export function Hero() {
             Open to opportunities · Bengaluru · Remote
           </p>
           <p className="fx-hello hero-anim" style={{ "--d": 1 } as React.CSSProperties}>Hi, I&rsquo;m</p>
-          <h1 id="hero-title" className="fx-name hx-name hero-anim" style={{ "--d": 1 } as React.CSSProperties}>
-            <span className="fx-name-line">Dheeraj</span>
-            <span className="fx-name-line">Kashyap</span>
+          {/* Each line rises out of its own mask, one after the other. */}
+          <h1 id="hero-title" className="fx-name hx-name">
+            <span className="fx-name-line"><span className="hx-rise" style={{ "--d": 2 } as React.CSSProperties}>Dheeraj</span></span>
+            <span className="fx-name-line"><span className="hx-rise" style={{ "--d": 3 } as React.CSSProperties}>Kashyap</span></span>
           </h1>
-          <p className="fx-lede hx-lede hero-anim" style={{ "--d": 2 } as React.CSSProperties}>
+          <p className="fx-lede hx-lede hero-anim" style={{ "--d": 4 } as React.CSSProperties}>
             I build BI systems that cut reporting from hours to minutes, with{" "}
             <span className="hl">Power BI</span> and <span className="hl">Microsoft Fabric</span>.
           </p>
-          <p className="fx-cred hero-anim" style={{ "--d": 2 } as React.CSSProperties}>
+          <p className="fx-cred hero-anim" style={{ "--d": 5 } as React.CSSProperties}>
             BI &amp; Analytics Engineer · 7+ years · 13 certifications incl. Microsoft DP-600 &amp; DP-700
           </p>
-          <div className="fx-actions hx-actions hero-anim" style={{ "--d": 3 } as React.CSSProperties}>
+          <div className="fx-actions hx-actions hero-anim" style={{ "--d": 6 } as React.CSSProperties}>
             <a href="#contact" className="btn btn-primary">
               Contact me <ArrowRight size={16} aria-hidden />
             </a>
@@ -66,7 +67,7 @@ export function Hero() {
 
         {/* Portrait, with two facts in aligned cards beneath it. */}
         <div className="hx-visual">
-          <div className="hx-photo hero-anim" style={{ "--d": 2 } as React.CSSProperties}>
+          <div className="hx-photo" style={{ "--d": 3 } as React.CSSProperties}>
             <Image
               src={PORTRAIT}
               alt="Dheeraj Kashyap"
@@ -76,7 +77,7 @@ export function Hero() {
               sizes="(min-width: 1024px) 340px, 68vw"
             />
           </div>
-        <dl className="hx-facts hero-anim" style={{ "--d": 3 } as React.CSSProperties}>
+        <dl className="hx-facts hero-anim" style={{ "--d": 7 } as React.CSSProperties}>
           {facts.map((f, i) => (
             <div key={f.label} className="hx-fact">
               <dt>{f.label}</dt>

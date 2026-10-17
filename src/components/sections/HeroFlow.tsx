@@ -50,7 +50,7 @@ const stages = [
  */
 export function HeroFlow() {
   return (
-    <div className="container hflow hero-anim" style={{ "--d": 4 } as React.CSSProperties} aria-hidden>
+    <div className="container hflow hero-anim" style={{ "--d": 8 } as React.CSSProperties} aria-hidden>
       {stages.map((s, i) => (
         <div key={s.label} className="hflow-step">
           {i > 0 && (

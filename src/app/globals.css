@@ -1367,7 +1367,6 @@ span.mark {
 
 /* Hand-drawn underline */
 
-
 /* Pill nav */
 .nav-link { border-radius: 999px; padding-inline: 14px; transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease); }
 .nav-link[aria-current="true"] { color: var(--ink); background: color-mix(in srgb, var(--sage) 16%, transparent); }
@@ -1674,57 +1673,6 @@ span.mark {
 
 /* ═══ Striped section transition (after "Fancy Sections Transition") ═══
    Eight vertical bars sweep down to cover, then sweep away downward. */
-.stw {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  pointer-events: none;
-  visibility: hidden;
-}
-.stw-in, .stw-out { visibility: visible; pointer-events: auto; }
-.stw-bar {
-  display: block;
-  height: 100%;
-  margin-right: -1px; /* no hairline gaps between bars */
-  background: var(--p-ink);
-  transform: scaleY(0);
-  transform-origin: top;
-}
-.stw-bar:nth-child(even) { background: #031E73; }
-.stw-bar:nth-child(8) { background: #0A2A8C; }
-.stw-in .stw-bar {
-  transform: scaleY(1);
-  transform-origin: top;
-  transition: transform 320ms cubic-bezier(0.7, 0, 0.3, 1);
-  transition-delay: calc(var(--i) * 40ms);
-}
-.stw-out .stw-bar {
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 320ms cubic-bezier(0.7, 0, 0.3, 1);
-  transition-delay: calc(var(--i) * 40ms);
-}
-.stw-label {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin: 0;
-  display: grid;
-  justify-items: center;
-  gap: 6px;
-  transform: translate(-50%, -50%);
-  color: #FFFFFF;
-  text-align: center;
-  opacity: 0;
-}
-.stw-in .stw-label { opacity: 1; transition: opacity 200ms ease 320ms; }
-.stw-out .stw-label { opacity: 0; transition: opacity 120ms ease; }
-.stw-count { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: 0.12em; color: var(--d-acc); }
-.stw-name { font-size: var(--fs-3xl); font-weight: 800; letter-spacing: -0.03em; }
-.stw-name::after { content: "."; color: var(--p-acc); }
-@media (prefers-reduced-motion: reduce) { .stw { display: none; }}
 
 /* Side pagination rail */
 
@@ -2346,290 +2294,354 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 }
 @keyframes pal-in { from { opacity: 0; transform: translateY(-4px); } }
 
+/* ═══ Motion system ═════════════════════════════════════════════════════
+   One set of durations and curves for the whole site. Colours are the
+   existing palette variables only. Everything here is skipped or reduced
+   under prefers-reduced-motion. */
+:root {
+  --m-fast: 140ms;      /* instant feedback */
+  --m-ui: 220ms;        /* small UI changes */
+  --m-card: 320ms;      /* buttons and cards */
+  --m-reveal: 650ms;    /* section entrances */
+  --m-hero: 750ms;      /* hero introduction */
+  --m-step: 110ms;      /* stagger */
+  --e-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --lift-shadow: 0 18px 36px -22px color-mix(in srgb, var(--p-ink) 45%, transparent);
+}
+
+/* Hero: one orchestrated introduction. The name rises line by line out of
+   masks; the portrait opens with a soft clip. Phones skip it so the
+   largest text paints at once. */
+.fx-name-line { overflow: hidden; padding-bottom: 0.06em; margin-bottom: -0.06em; }
+.hx-rise { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+  .hx .hero-anim { animation: hx-in var(--m-hero) var(--e-out) both; animation-delay: calc(var(--d, 0) * var(--m-step)); }
+  .hx-rise { animation: hx-rise var(--m-hero) var(--e-out) both; animation-delay: calc(var(--d, 0) * var(--m-step)); }
+  .hx-photo { animation: hx-fade 600ms var(--e-out) both; animation-delay: calc(var(--d, 0) * var(--m-step)); }
+  .hx-photo img { animation: hx-clip 900ms var(--e-out) both, hx-settle 1100ms var(--e-out) both; animation-delay: calc(var(--d, 0) * var(--m-step)); }
+}
+@keyframes hx-in { from { opacity: 0; transform: translateY(20px); } }
+@keyframes hx-rise { from { transform: translateY(105%); } }
+@keyframes hx-clip { from { clip-path: inset(10% 10% 10% 10% round 24px); } to { clip-path: inset(0 0 0 0 round 16px); } }
+@keyframes hx-fade { from { opacity: 0; } }
+@keyframes hx-settle { from { transform: scale(1.06); } }
+
+/* Hero depth on scroll: the portrait drifts up a little slower than the
+   page as the hero leaves. CSS scroll timeline only; no scroll handlers. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+    .hx-visual { animation: hx-drift linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+  }
+}
+@keyframes hx-drift { to { transform: translateY(-48px); } }
+
+/* Section entrances: one group at a time, once, a touch longer and softer */
+@media (prefers-reduced-motion: no-preference) {
+  html.reveal-ready .reveal { opacity: 0; transform: translateY(20px); }
+  html.reveal-ready .reveal.is-in { opacity: 1; transform: none; transition: opacity var(--m-reveal) var(--e-out), transform var(--m-reveal) var(--e-out); }
+  html.reveal-ready .sx-head + .reveal.is-in, html.reveal-ready .sx-head-row + .reveal.is-in { transition-delay: 90ms; }
+}
+
+/* Route change: a brief fade and rise */
+@media (prefers-reduced-motion: no-preference) {
+  .route-in { animation: route-in 320ms var(--e-out) both; }
+}
+@keyframes route-in { from { opacity: 0; transform: translateY(8px); } }
+
+/* Navigation: underline grows from the centre; inactive links sit back */
+.nav-link[aria-current="true"] { box-shadow: none; }
+.nav-link:not(.nav-link-cta)::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 4px; height: 2px; border-radius: 2px; background: var(--sage); transform: scaleX(0); transform-origin: center; opacity: 0.5; transition: transform var(--m-ui) var(--e-out), opacity var(--m-ui) ease; }
+.nav-link:not(.nav-link-cta):hover::after { transform: scaleX(1); }
+.nav-link:not(.nav-link-cta)[aria-current="true"]::after { transform: scaleX(1); opacity: 1; }
+.nav-link:not(.nav-link-cta) { color: color-mix(in srgb, var(--ink) 72%, transparent); transition: color var(--m-ui) ease; }
+.nav-link:not(.nav-link-cta):hover, .nav-link:not(.nav-link-cta)[aria-current="true"] { color: var(--ink); }
+.nav-inner { transition: background-color var(--m-card) ease, box-shadow var(--m-card) ease, border-color var(--m-card) ease; }
+/* Theme and palette icons turn in when they change; the menu sheet settles in */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-btn svg { animation: icon-turn 360ms var(--e-out); }
+  .pal-btn svg { transition: transform var(--m-card) var(--e-out); }
+  .pal-btn[aria-expanded="true"] svg { transform: rotate(-20deg); }
+  .nav-sheet-panel { animation: sheet-in 280ms var(--e-out) both; }
+}
+@keyframes icon-turn { from { opacity: 0; transform: rotate(-90deg) scale(0.6); } }
+@keyframes sheet-in { from { opacity: 0; transform: translateY(-8px) scale(0.98); } }
+
+/* Buttons: small lift, firm press, arrows lean the way they point */
+.btn { transition: transform var(--m-card) var(--e-out), box-shadow var(--m-card) var(--e-out), background-color var(--m-ui) ease, border-color var(--m-ui) ease, color var(--m-ui) ease; }
+.btn svg, .link-arrow svg, .ct-link svg { transition: transform var(--m-card) var(--e-out); }
+@media (hover: hover) {
+  .btn:hover { transform: translateY(-2px); box-shadow: var(--lift-shadow); }
+  .btn:hover .lucide-arrow-right, .link-arrow:hover .lucide-arrow-right { transform: translateX(3px); }
+  .btn:hover .lucide-arrow-up-right, .ct-link:hover .lucide-arrow-up-right, .link-arrow:hover .lucide-arrow-up-right { transform: translate(2px, -2px); }
+  .btn:hover .lucide-download { transform: translateY(2px); }
+}
+.btn:active { transform: translateY(0) scale(0.98); box-shadow: none; transition-duration: var(--m-fast); }
+.nav-icon-btn:active { transform: scale(0.94); }
+/* Text links: underline draws in from the left */
+.inline-link, .cf-links a { text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size var(--m-card) var(--e-out), color var(--m-ui) ease; }
+.inline-link:hover, .cf-links a:hover, .inline-link:focus-visible, .cf-links a:focus-visible { background-size: 100% 1px; }
+
+/* Featured project: the panel lifts on hover and its logo breathes */
+.pc { transition: box-shadow var(--m-card) var(--e-out), transform var(--m-card) var(--e-out); }
+.pc-logo { transition: transform 400ms var(--e-out); }
+@media (hover: hover) {
+  .pc:hover { transform: translateY(-3px); box-shadow: 0 34px 64px -40px color-mix(in srgb, var(--p-ink) 55%, transparent); }
+  .pc:hover .pc-main:not([hidden]) .pc-logo { transform: scale(1.04); }
+}
+/* Skill cards: same lift language */
+.sk-card { transition: transform var(--m-card) var(--e-out), box-shadow var(--m-card) var(--e-out), border-color var(--m-ui) ease; }
+@media (hover: hover) { .sk-card:hover { transform: translateY(-4px); box-shadow: var(--lift-shadow); } }
+/* Touch: a quick press instead of hover */
+@media (hover: none) {
+  .sk-card:active, .pc-thumb:active, .ct-item:active { transform: scale(0.985); transition: transform var(--m-fast) ease; }
+}
+
+/* Highlights open smoothly where the browser can animate to auto height */
+@supports (interpolate-size: allow-keywords) {
+  @media (prefers-reduced-motion: no-preference) {
+    .xt-more { interpolate-size: allow-keywords; }
+    .xt-more::details-content { height: 0; overflow: clip; transition: height var(--m-card) var(--e-out), content-visibility var(--m-card) allow-discrete; }
+    .xt-more[open]::details-content { height: auto; }
+  }
+}
+
+/* Reading progress: a 2px line along the top, in the button colour */
+.scroll-progress { position: fixed; top: 0; left: 0; right: 0; z-index: 70; height: 2px; background: var(--btn); transform: scaleX(0); transform-origin: 0 50%; pointer-events: none; }
+@supports (animation-timeline: scroll()) {
+  .scroll-progress { animation: progress-grow linear both; animation-timeline: scroll(root); }
+}
+@keyframes progress-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Underline is the only hover cue on ordinary links */
+.nav .nav-link:not(.nav-link-cta), .nav .nav-link:not(.nav-link-cta):hover, .nav .nav-link:not(.nav-link-cta)[aria-current="true"] { background: transparent; }
+
 /* ═══ Palettes ══════════════════════════════════════════════════════════
    Every palette colour above reads a --p-* (light) or --d-* (dark)
-   variable. The default block is Editorial Luxury; the switcher in the
-   nav sets data-palette on <html> to swap in another set. Generated by
-   a script from a few anchor colours per palette. */
+   variable. Timeless Luxury is the default; the switcher in the nav sets
+   data-palette on <html> for the others. Generated from a few anchor
+   colours per palette. --btn / --on-btn carry the button fill and its
+   text, so a palette can use dark text on a light button. */
+
+:root { --btn: var(--p-btn); --btn-hover: var(--p-btn-hover); --on-btn: var(--p-on); }
+.dark { --btn: var(--d-btn); --btn-hover: var(--d-btn-hover); --on-btn: var(--d-on); }
+.btn-primary, .dark .btn-primary, .band .btn-primary, .nav .btn-primary, .dark .nav .btn-primary,
+.nav-link-cta, .nav-link-cta[aria-current="true"], .dark .nav-link-cta, .nav.is-on-dark .nav-link-cta { background: var(--btn); border-color: var(--btn); color: var(--on-btn); }
+.btn-primary:hover, .dark .btn-primary:hover, .band .btn-primary:hover, .nav .btn-primary:hover, .nav.is-on-dark .btn-primary:hover,
+.nav-link-cta:hover, .dark .nav-link-cta:hover { background: var(--btn-hover); border-color: var(--btn-hover); color: var(--on-btn); }
+.xt-current { background: var(--btn); color: var(--on-btn); }
+::selection { background: var(--btn); color: var(--on-btn); }
+/* The logo's accent and the last flow dots switch to the dark-mode shade on dark grounds */
+.dark, .band, .nav.is-on-dark { --logo-d: var(--d-btn); }
+.dark .hflow-step:last-child .hflow-dot { background: var(--d-acc); }
 
 :root {
-  --p-bg: #F7F6F2;
-  --p-bg2: #F1EFE9;
-  --p-raised: #FBFAF7;
-  --p-ink: #20231F;
-  --p-mut: #5D6158;
-  --p-soft: #6B6F65;
-  --p-faint: #A3A69C;
-  --p-faint2: #9A9D93;
-  --p-line: #D9D5CB;
-  --p-line-sub: #E7E3DA;
-  --p-line-strong: #C4BFB2;
-  --p-acc: #237A57;
-  --p-acc-deep: #1B5E43;
-  --p-acc-deep2: #1B6E4D;
-  --p-acc-mid: #3A9A72;
-  --p-acc-mid2: #2F8A64;
-  --p-acc-tint2: #D3E7DC;
-  --p-acc-tint: #EAF3EE;
-  --p-band-sheet: #262A24;
-  --p-band-line: #3A3F37;
-  --p-band-input: #4A5047;
-  --p-grey1: #8A8E84;
-  --p-grey2: #6B7068;
-  --p-grey3: #4E534B;
-  --p-ink-acc: #2E3A33;
-  --d-bg: #111310;
-  --d-bg2: #161814;
-  --d-sheet: #191C18;
-  --d-raised: #22251F;
-  --d-band: #0D0F0C;
-  --d-ink: #F4F2EC;
-  --d-mut: #B7B9B0;
-  --d-line: #343831;
-  --d-line-sub: #2A2E27;
-  --d-line-strong: #3F443C;
-  --d-acc: #7CC8A3;
-  --d-acc-hi: #A6DCC0;
-  --d-acc-hi2: #D2EBDD;
-  --d-acc-tint2: #24302A;
-  --d-acc-tint: #1C2620;
-  --d-acc-tint3: #1E2B24;
-  --d-grey-hi: #DCDDD5;
-  --d-grey-hi2: #C9CBC2;
-  --d-grey-mid: #5A6056;
+  --p-bg: #FFF9F2;
+  --p-bg2: #F3E6D5;
+  --p-raised: #FFFDFA;
+  --p-ink: #2A1519;
+  --p-mut: #6A595A;
+  --p-soft: #7B6C6B;
+  --p-faint: #AA9E9B;
+  --p-faint2: #9F9290;
+  --p-line: #E8D6C0;
+  --p-line-sub: #F2E6D6;
+  --p-line-strong: #CDBBA9;
+  --p-acc: #800020;
+  --p-acc-deep: #600018;
+  --p-acc-deep2: #71001C;
+  --p-acc-mid: #932641;
+  --p-acc-mid2: #891230;
+  --p-acc-tint2: #E6CCD2;
+  --p-acc-tint: #F3E6D5;
+  --p-band-sheet: #352124;
+  --p-band-line: #463337;
+  --p-band-input: #554447;
+  --p-grey1: #998C8A;
+  --p-grey2: #7F7070;
+  --p-grey3: #5D4C4D;
+  --p-ink-acc: #40101B;
+  --p-btn: #800020;
+  --p-btn-hover: #6D001B;
+  --p-on: #FFFFFF;
+  --d-bg: #160B0E;
+  --d-bg2: #1B1012;
+  --d-sheet: #221719;
+  --d-raised: #2B2021;
+  --d-band: #10080A;
+  --d-ink: #FFF4E6;
+  --d-mut: #BEB3AA;
+  --d-line: #3E3333;
+  --d-line-sub: #322728;
+  --d-line-strong: #493E3E;
+  --d-acc: #D9B061;
+  --d-acc-hi: #E4C890;
+  --d-acc-hi2: #F0DFC0;
+  --d-acc-tint2: #33241A;
+  --d-acc-tint: #2A1C16;
+  --d-acc-tint3: #2D1F18;
+  --d-grey-hi: #E8DDD0;
+  --d-grey-hi2: #D5CABF;
+  --d-grey-mid: #615653;
+  --d-btn: #800020;
+  --d-btn-hover: #6D001B;
+  --d-on: #FFFFFF;
 }
 
-:root[data-palette="brass"] {
-  --p-bg: #FAF9F6;
-  --p-bg2: #F4F3F0;
-  --p-raised: #FDFDFB;
-  --p-ink: #242321;
-  --p-mut: #646361;
-  --p-soft: #757472;
-  --p-faint: #A4A3A1;
-  --p-faint2: #9A9996;
-  --p-line: #E6E1D8;
-  --p-line-sub: #EFECE6;
-  --p-line-strong: #CFCAC2;
-  --p-acc: #8C6A3B;
-  --p-acc-deep: #69502C;
-  --p-acc-deep2: #7B5D34;
-  --p-acc-mid: #C09C6C;
-  --p-acc-mid2: #BA925E;
-  --p-acc-tint2: #F0E8DC;
-  --p-acc-tint: #F8F3EE;
-  --p-band-sheet: #2F2E2C;
-  --p-band-line: #40403E;
-  --p-band-input: #504F4D;
-  --p-grey1: #939290;
-  --p-grey2: #7A7976;
-  --p-grey3: #575654;
-  --p-ink-acc: #3E3528;
-  --d-bg: #151412;
-  --d-bg2: #191816;
-  --d-sheet: #201F1D;
-  --d-raised: #292825;
-  --d-band: #100F0E;
-  --d-ink: #F3EFE7;
-  --d-mut: #B5B2AB;
-  --d-line: #3B3936;
-  --d-line-sub: #302E2C;
-  --d-line-strong: #464441;
-  --d-acc: #D4AE7A;
-  --d-acc-hi: #E1C6A2;
-  --d-acc-hi2: #EEDFCA;
-  --d-acc-tint2: #322B22;
-  --d-acc-tint: #28231C;
-  --d-acc-tint3: #2C261E;
-  --d-grey-hi: #DDD9D2;
-  --d-grey-hi2: #CBC8C1;
-  --d-grey-mid: #5C5A56;
+:root[data-palette="midnight"] {
+  --p-bg: #FBF7EC;
+  --p-bg2: #F4F0E7;
+  --p-raised: #FDFCF7;
+  --p-ink: #0D1C42;
+  --p-mut: #545E75;
+  --p-soft: #676F83;
+  --p-faint: #9C9FA8;
+  --p-faint2: #9094A0;
+  --p-line: #E3DCC8;
+  --p-line-sub: #EEE8D8;
+  --p-line-strong: #C5C1B5;
+  --p-acc: #8A520A;
+  --p-acc-deep: #683E08;
+  --p-acc-deep2: #794809;
+  --p-acc-mid: #F6BA6C;
+  --p-acc-mid2: #F5B45E;
+  --p-acc-tint2: #FDEFDC;
+  --p-acc-tint: #FEF7EE;
+  --p-band-sheet: #19274B;
+  --p-band-line: #2C3A5B;
+  --p-band-input: #3D4968;
+  --p-grey1: #898E9A;
+  --p-grey2: #6C7486;
+  --p-grey3: #46516B;
+  --p-ink-acc: #2C2A34;
+  --p-btn: #F4AE52;
+  --p-btn-hover: #F6BD71;
+  --p-on: #0D1C42;
+  --d-bg: #0D1C42;
+  --d-bg2: #0F1F4A;
+  --d-sheet: #16285A;
+  --d-raised: #22396F;
+  --d-band: #010736;
+  --d-ink: #FCF1D0;
+  --d-mut: #B9B5A8;
+  --d-line: #36405A;
+  --d-line-sub: #2A3653;
+  --d-line-strong: #424B61;
+  --d-acc: #F4AE52;
+  --d-acc-hi: #F7C686;
+  --d-acc-hi2: #FBDFBA;
+  --d-acc-tint2: #303244;
+  --d-acc-tint: #242B44;
+  --d-acc-tint3: #292E44;
+  --d-grey-hi: #E4DCC2;
+  --d-grey-hi2: #D1CBB6;
+  --d-grey-mid: #59606F;
+  --d-btn: #F4AE52;
+  --d-btn-hover: #F6BD71;
+  --d-on: #0D1C42;
 }
 
-:root[data-palette="saffron"] {
-  --p-bg: #F6F5F1;
-  --p-bg2: #EFEFEC;
-  --p-raised: #FBFBF9;
-  --p-ink: #14213D;
-  --p-mut: #586173;
-  --p-soft: #6A7281;
-  --p-faint: #9CA0A9;
-  --p-faint2: #9096A0;
-  --p-line: #D5D9E0;
-  --p-line-sub: #E4E6E8;
-  --p-line-strong: #BEC3CC;
-  --p-acc: #946A0C;
-  --p-acc-deep: #6F5009;
-  --p-acc-deep2: #825D0B;
-  --p-acc-mid: #E5B247;
-  --p-acc-mid2: #E2AB35;
-  --p-acc-tint2: #F9EDD4;
-  --p-acc-tint: #FCF6E9;
-  --p-band-sheet: #202C47;
-  --p-band-line: #333E56;
-  --p-band-input: #434D64;
-  --p-grey1: #8A8F9B;
-  --p-grey2: #6E7685;
-  --p-grey3: #4A5468;
-  --p-ink-acc: #343331;
-  --d-bg: #0E1626;
-  --d-bg2: #131A2A;
-  --d-sheet: #192130;
-  --d-raised: #232A38;
-  --d-band: #0A101C;
-  --d-ink: #F2F0EA;
-  --d-mut: #B2B3B3;
-  --d-line: #353B47;
-  --d-line-sub: #29303E;
-  --d-line-strong: #404651;
-  --d-acc: #F2C14E;
-  --d-acc-hi: #F6D483;
-  --d-acc-hi2: #FAE6B8;
-  --d-acc-tint2: #30302C;
-  --d-acc-tint: #25272A;
-  --d-acc-tint3: #292B2B;
-  --d-grey-hi: #DBDAD6;
-  --d-grey-hi2: #C9C9C7;
-  --d-grey-mid: #575C65;
+:root[data-palette="sage"] {
+  --p-bg: #FEFAF3;
+  --p-bg2: #F8F4ED;
+  --p-raised: #FFFDFA;
+  --p-ink: #2B3027;
+  --p-mut: #6A6D64;
+  --p-soft: #7B7D75;
+  --p-faint: #AAA9A1;
+  --p-faint2: #9F9F97;
+  --p-line: #E6E0CC;
+  --p-line-sub: #F1ECDE;
+  --p-line-strong: #CCC7B5;
+  --p-acc: #6A795D;
+  --p-acc-deep: #505B46;
+  --p-acc-deep2: #5D6A52;
+  --p-acc-mid: #9FA27A;
+  --p-acc-mid2: #96996D;
+  --p-acc-tint2: #E3E7CC;
+  --p-acc-tint: #F4F4EF;
+  --p-band-sheet: #363A32;
+  --p-band-line: #474B43;
+  --p-band-input: #555952;
+  --p-grey1: #999991;
+  --p-grey2: #7F8179;
+  --p-grey3: #5E6058;
+  --p-ink-acc: #3B4234;
+  --p-btn: #6A795D;
+  --p-btn-hover: #5A674F;
+  --p-on: #FFFFFF;
+  --d-bg: #151811;
+  --d-bg2: #191C15;
+  --d-sheet: #20231C;
+  --d-raised: #292C24;
+  --d-band: #10120D;
+  --d-ink: #F4F1E6;
+  --d-mut: #B6B4AA;
+  --d-line: #3B3D35;
+  --d-line-sub: #30322B;
+  --d-line-strong: #464840;
+  --d-acc: #B2BD7E;
+  --d-acc-hi: #C9D1A5;
+  --d-acc-hi2: #E0E5CB;
+  --d-acc-tint2: #2D3121;
+  --d-acc-tint: #25281C;
+  --d-acc-tint3: #282C1E;
+  --d-grey-hi: #DEDBD1;
+  --d-grey-hi2: #CCCAC0;
+  --d-grey-mid: #5C5D55;
+  --d-btn: #6A795D;
+  --d-btn-hover: #5A674F;
+  --d-on: #FFFFFF;
 }
 
-:root[data-palette="teal"] {
-  --p-bg: #F3F6F6;
-  --p-bg2: #ECF0F0;
-  --p-raised: #FAFBFB;
-  --p-ink: #16262E;
-  --p-mut: #58646A;
-  --p-soft: #6A757A;
-  --p-faint: #9BA3A6;
-  --p-faint2: #90989C;
-  --p-line: #D3DEDF;
-  --p-line-sub: #E1E9E9;
-  --p-line-strong: #BCC8CA;
-  --p-acc: #0F6B73;
-  --p-acc-deep: #0B5056;
-  --p-acc-deep2: #0D5E65;
-  --p-acc-mid: #338188;
-  --p-acc-mid2: #20757D;
-  --p-acc-tint2: #CFE1E3;
-  --p-acc-tint: #E7F0F1;
-  --p-band-sheet: #223138;
-  --p-band-line: #344249;
-  --p-band-input: #455158;
-  --p-grey1: #899296;
-  --p-grey2: #6E797E;
-  --p-grey3: #4B585E;
-  --p-ink-acc: #14373F;
-  --d-bg: #0C1619;
-  --d-bg2: #111A1D;
-  --d-sheet: #172124;
-  --d-raised: #202A2D;
-  --d-band: #091013;
-  --d-ink: #EEF4F4;
-  --d-mut: #AFB6B7;
-  --d-line: #323C3E;
-  --d-line-sub: #273133;
-  --d-line-strong: #3E4749;
-  --d-acc: #5CC4CC;
-  --d-acc-hi: #8DD6DB;
-  --d-acc-hi2: #BEE7EB;
-  --d-acc-tint2: #183034;
-  --d-acc-tint: #14272B;
-  --d-acc-tint3: #162B2E;
-  --d-grey-hi: #D7DEDE;
-  --d-grey-hi2: #C5CCCD;
-  --d-grey-mid: #545D5F;
-}
-
-:root[data-palette="oxblood"] {
-  --p-bg: #F5F2EC;
-  --p-bg2: #EFECE6;
-  --p-raised: #FBFAF7;
-  --p-ink: #1F1D1B;
-  --p-mut: #5F5D5A;
-  --p-soft: #706E6A;
-  --p-faint: #9F9D98;
-  --p-faint2: #95928E;
-  --p-line: #DDD5C8;
-  --p-line-sub: #E8E2D8;
-  --p-line-strong: #C6BFB3;
-  --p-acc: #7A1F2B;
-  --p-acc-deep: #5C1720;
-  --p-acc-deep2: #6B1B26;
-  --p-acc-mid: #8E414B;
-  --p-acc-mid2: #832F3A;
-  --p-acc-tint2: #E4D2D5;
-  --p-acc-tint: #F2E9EA;
-  --p-band-sheet: #2A2826;
-  --p-band-line: #3C3A39;
-  --p-band-input: #4C4A49;
-  --p-grey1: #8E8C88;
-  --p-grey2: #75726F;
-  --p-grey3: #52504D;
-  --p-ink-acc: #361E1F;
-  --d-bg: #141211;
-  --d-bg2: #181615;
-  --d-sheet: #1F1D1C;
-  --d-raised: #282624;
-  --d-band: #0F0E0D;
-  --d-ink: #F4EFE8;
-  --d-mut: #B5B1AC;
-  --d-line: #3A3836;
-  --d-line-sub: #2F2D2B;
-  --d-line-strong: #454340;
-  --d-acc: #D9858F;
-  --d-acc-hi: #E4AAB1;
-  --d-acc-hi2: #F0CED2;
-  --d-acc-tint2: #322324;
-  --d-acc-tint: #281E1E;
-  --d-acc-tint3: #2C2020;
-  --d-grey-hi: #DED9D2;
-  --d-grey-hi2: #CCC7C1;
-  --d-grey-mid: #5C5956;
-}
-
-:root[data-palette="lavender"] {
-  --p-bg: #F4F2F8;
-  --p-bg2: #EEECF2;
-  --p-raised: #FBFAFC;
-  --p-ink: #25212D;
-  --p-mut: #63606A;
-  --p-soft: #74707A;
-  --p-faint: #A19EA7;
-  --p-faint2: #97949D;
-  --p-line: #DDD7E8;
-  --p-line-sub: #E7E3EF;
-  --p-line-strong: #C7C1D2;
-  --p-acc: #5B48C9;
-  --p-acc-deep: #443697;
-  --p-acc-deep2: #503FB1;
-  --p-acc-mid: #AA9CFC;
-  --p-acc-mid2: #A292FB;
-  --p-acc-tint2: #EBE8FE;
-  --p-acc-tint: #F5F3FF;
-  --p-band-sheet: #302C38;
-  --p-band-line: #413E48;
-  --p-band-input: #514D57;
-  --p-grey1: #918E97;
-  --p-grey2: #78757E;
-  --p-grey3: #57535E;
-  --p-ink-acc: #322B54;
-  --d-bg: #131118;
-  --d-bg2: #17151C;
-  --d-sheet: #1E1C23;
-  --d-raised: #27252C;
-  --d-band: #0E0D12;
-  --d-ink: #F3F1F8;
-  --d-mut: #B4B2B9;
-  --d-line: #39373E;
-  --d-line-sub: #2E2C33;
-  --d-line-strong: #444249;
-  --d-acc: #B3A6FF;
-  --d-acc-hi: #CAC1FF;
-  --d-acc-hi2: #E1DBFF;
-  --d-acc-tint2: #2B273B;
-  --d-acc-tint: #23202F;
-  --d-acc-tint3: #262334;
-  --d-grey-hi: #DDDBE2;
-  --d-grey-hi2: #CBC9D0;
-  --d-grey-mid: #5B5960;
+:root[data-palette="regal"] {
+  --p-bg: #FFFDF4;
+  --p-bg2: #F8F6EE;
+  --p-raised: #FFFEFB;
+  --p-ink: #24132F;
+  --p-mut: #66596A;
+  --p-soft: #776C7A;
+  --p-faint: #A79FA5;
+  --p-faint2: #9C949B;
+  --p-line: #E4DCEA;
+  --p-line-sub: #F0EBEE;
+  --p-line-strong: #C9C0D0;
+  --p-acc: #4C2365;
+  --p-acc-deep: #391A4C;
+  --p-acc-deep2: #431F59;
+  --p-acc-mid: #9275A8;
+  --p-acc-mid2: #8868A0;
+  --p-acc-tint2: #E5DFEB;
+  --p-acc-tint: #FFF6A9;
+  --p-band-sheet: #2F1F39;
+  --p-band-line: #40324A;
+  --p-band-input: #504259;
+  --p-grey1: #968D95;
+  --p-grey2: #7C717E;
+  --p-grey3: #594B5E;
+  --p-ink-acc: #2E173C;
+  --p-btn: #4C2365;
+  --p-btn-hover: #411E56;
+  --p-on: #FFFFFF;
+  --d-bg: #140B1C;
+  --d-bg2: #191020;
+  --d-sheet: #1F1627;
+  --d-raised: #282030;
+  --d-band: #0F0815;
+  --d-ink: #F6F0FA;
+  --d-mut: #B7B0BC;
+  --d-line: #3A3242;
+  --d-line-sub: #2F2637;
+  --d-line-strong: #463D4D;
+  --d-acc: #B4E4D6;
+  --d-acc-hi: #D9F2EA;
+  --d-acc-hi2: #E1F4EF;
+  --d-acc-tint2: #2C2C38;
+  --d-acc-tint: #24212F;
+  --d-acc-tint3: #272532;
+  --d-grey-hi: #DFD9E4;
+  --d-grey-hi2: #CDC7D2;
+  --d-grey-mid: #5C5463;
+  --d-btn: #7F5D99;
+  --d-btn-hover: #6C4F82;
+  --d-on: #FFFFFF;
 }
