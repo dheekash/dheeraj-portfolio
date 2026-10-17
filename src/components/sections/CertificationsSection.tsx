@@ -11,6 +11,7 @@ const productOf: Record<string, { name: string; colour: string }> = {
   "AZ-104": { name: "Azure", colour: "#0A7BD6" },
   "DE-A": { name: "Databricks", colour: "#FF3621" },
   SnowPro: { name: "Snowflake", colour: "#29B5E8" },
+  "Airflow 3": { name: "Apache Airflow", colour: "#017CEE" },
 };
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -21,7 +22,7 @@ const monthIndex = (earned: string) => {
 };
 
 /**
- * The six flagship credentials as a learning timeline, earliest first.
+ * The flagship credentials as a learning timeline, earliest first.
  * Stops are evenly spaced, not to scale; each carries its own date, and a
  * break on the line marks a gap of more than a year. The full register
  * lives on /certifications. Status is not shown because it has not been
@@ -40,8 +41,8 @@ export function CertificationsSection() {
             Certifications<span className="sx-dot">.</span>
           </h2>
           <p className="sx-intro">
-            {allCredentials.length} certifications from {issuers} vendors. These six matter most for
-            Power BI and Fabric work.
+            {allCredentials.length} certifications from {issuers} vendors. These seven matter most for
+            BI and data-platform work.
           </p>
         </header>
 

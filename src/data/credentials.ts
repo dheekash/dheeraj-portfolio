@@ -1,4 +1,4 @@
-export type Issuer = "Microsoft" | "Snowflake" | "Databricks";
+export type Issuer = "Microsoft" | "Snowflake" | "Databricks" | "Astronomer";
 
 export interface Credential {
   name: string;
@@ -37,6 +37,12 @@ export const credentialGroups: { category: string; items: Credential[] }[] = [
     ],
   },
   {
+    category: "Orchestration",
+    items: [
+      { name: "DAG Authoring for Apache Airflow 3", code: "Airflow 3", issuer: "Astronomer", earned: "Oct 2026", flagship: 7 },
+    ],
+  },
+  {
     category: "Azure",
     items: [
       { name: "Azure Administrator Associate", code: "AZ-104", issuer: "Microsoft", earned: "Dec 2021", flagship: 4, url: "https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/" },
@@ -60,3 +66,9 @@ export const allCredentials = credentialGroups.flatMap((g) => g.items);
 export const flagshipCredentials = allCredentials
   .filter((c) => c.flagship)
   .sort((a, b) => (a.flagship ?? 0) - (b.flagship ?? 0));
+
+/** "Microsoft, Snowflake, Databricks and Astronomer": issuers in first-seen order. */
+export const issuerList = (() => {
+  const names = [...new Set(allCredentials.map((c) => c.issuer))];
+  return names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}` : names.join("");
+})();

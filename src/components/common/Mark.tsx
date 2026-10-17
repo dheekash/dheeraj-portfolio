@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import {
+  siApacheairflow,
   siApachekafka,
   siApachespark,
   siDatabricks,
@@ -47,6 +48,8 @@ const brand: Record<string, SimpleIcon> = {
   python: siPython,
   pyspark: siApachespark,
   "apache-spark": siApachespark,
+  "apache-airflow": siApacheairflow,
+  airflow: siApacheairflow,
   "apache-kafka": siApachekafka,
   kafka: siApachekafka,
   git: siGit,
