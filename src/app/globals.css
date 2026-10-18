@@ -2517,7 +2517,7 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 
 /* ═══ UX polish ═════════════════════════════════════════════════════════ */
 /* Result figures: "<" and ">" in Inter; Manrope's read as "‹". */
-.fig-sym { font-family: var(--font-sans); }
+.fig-sym { font-family: var(--font-inter), ui-sans-serif, sans-serif; }
 
 /* Hero facts: the real figure rises out of its own mask (desktop only,
    via .hx-rise), never counting through wrong numbers. */
@@ -2975,3 +2975,139 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 @keyframes tf-drift-b { to { transform: translate(-12px, 8px); } }
 /* The icon strip is see-through, so the constellation shows behind it */
 :root[data-palette="void"] .sk-visual { background: transparent; box-shadow: none; border-color: transparent; }
+
+:root[data-palette="dusk"] {
+  --p-bg: #FAFAF9;
+  --p-bg2: #F3F3F1;
+  --p-raised: #FFFFFF;
+  --p-ink: #161616;
+  --p-mut: #555555;
+  --p-soft: #646464;
+  --p-faint: #8A8A8A;
+  --p-faint2: #7E7E7E;
+  --p-line: #E5E5E5;
+  --p-line-sub: #EFEFEF;
+  --p-line-strong: #D0D0D0;
+  --p-acc: #A84D17;
+  --p-acc-deep: #8A3E12;
+  --p-acc-deep2: #964414;
+  --p-acc-mid: #E8A27A;
+  --p-acc-mid2: #E0915F;
+  --p-acc-tint2: #F8E1D3;
+  --p-acc-tint: #FCF1EA;
+  --p-band-sheet: #161616;
+  --p-band-line: #2A2A2A;
+  --p-band-input: #333333;
+  --p-grey1: #8C8C8C;
+  --p-grey2: #707070;
+  --p-grey3: #4A4A4A;
+  --p-ink-acc: #2A1A10;
+  --p-btn: #161616;
+  --p-btn-hover: #2C2C2C;
+  --p-on: #FFFFFF;
+  --d-bg: #0A0A0A;
+  --d-bg2: #0D0D0D;
+  --d-sheet: #161616;
+  --d-raised: #1D1D1D;
+  --d-band: #0A0A0A;
+  --d-ink: #EDEDED;
+  --d-mut: #C2C2C2;
+  --d-line: #262626;
+  --d-line-sub: #1C1C1C;
+  --d-line-strong: #383838;
+  --d-acc: #F2B48A;
+  --d-acc-hi: #F6C7A6;
+  --d-acc-hi2: #FADBC6;
+  --d-acc-tint2: #241A14;
+  --d-acc-tint: #1A1410;
+  --d-acc-tint3: #1F1712;
+  --d-grey-hi: #EDEDED;
+  --d-grey-hi2: #D6D6D6;
+  --d-grey-mid: #5A5A5A;
+  --d-btn: #FFFFFF;
+  --d-btn-hover: #E4E4E4;
+  --d-on: #161616;
+}
+
+/* ═══ Dusk theme: frosted glass at dusk ═════════════════════════════════
+   Everything below applies only with data-palette="dusk". Near-black and
+   graphite, warm greys, a sunset hero (amber → cobalt), translucent panels
+   with hairline edges and 24px corners and no shadows, DM Sans / Geist at
+   medium weights, and a white pill (dark in light mode) as the one filled
+   action. */
+:root[data-palette="dusk"] {
+  --font-sans: var(--font-dmsans), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-dmsans), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --fs-hero: clamp(3rem, 1.4rem + 5vw, 5.5rem);
+  --r-lg: 24px;
+  --r-md: 12px;
+  /* Hairline edges instead of shadows */
+  --hairline: rgba(22, 22, 22, 0.1);
+  --depth-1: 0 0 0 1px var(--hairline) inset; --depth-2: 0 0 0 1px var(--hairline) inset; --depth-3: 0 0 0 1px var(--hairline) inset;
+  --depth-in: 0 0 0 1px var(--hairline) inset;
+  --surface-low: color-mix(in srgb, var(--p-ink) 4%, var(--paper));
+  --surface-high: rgba(255, 255, 255, 0.72);
+  --surface-top: rgba(255, 255, 255, 0.9);
+  --logo-d: #C2612F;
+  --glass-bg: rgba(255, 255, 255, 0.78); --glass-edge: var(--hairline); --glass-spec: transparent; --glass-under: transparent; --glass-sheen: transparent;
+  --glass-shadow: rgba(0, 0, 0, 0.08);
+}
+:root.dark[data-palette="dusk"] {
+  --hairline: rgba(255, 255, 255, 0.1);
+  --surface-low: rgba(212, 212, 212, 0.05);
+  --surface-high: rgba(212, 212, 212, 0.07);
+  --surface-top: rgba(212, 212, 212, 0.1);
+  --logo-d: #F0A070;
+  --glass-bg: rgba(22, 22, 22, 0.82); --glass-shadow: rgba(0, 0, 0, 0.4);
+}
+:root[data-palette="dusk"] .band { --surface-high: rgba(212, 212, 212, 0.07); --surface-top: rgba(212, 212, 212, 0.1); --hairline: rgba(255, 255, 255, 0.1); }
+:root[data-palette="dusk"] .nav.is-on-dark { --glass-bg: rgba(22, 22, 22, 0.82); --glass-edge: rgba(255, 255, 255, 0.1); --glass-spec: transparent; --glass-under: transparent; --glass-sheen: transparent; --logo-d: #F0A070; }
+
+/* Sunset hero: deep enough at every stop that white text passes 4.5:1,
+   fading into the page at the bottom. Light mode is a pale daylight wash. */
+:root[data-palette="dusk"] .fx-hero {
+  background:
+    linear-gradient(180deg, transparent 62%, var(--paper) 100%),
+    linear-gradient(100deg, #FBE2D1 0%, #F8D9D6 30%, #E4DDF4 62%, #D3E1FA 100%);
+}
+:root.dark[data-palette="dusk"] .fx-hero {
+  --ink: #FFFFFF; --muted-ink: rgba(255, 255, 255, 0.86); --sage: #FFDDBF; --line: rgba(255, 255, 255, 0.22);
+  --surface-high: rgba(255, 255, 255, 0.1); --hairline: rgba(255, 255, 255, 0.18);
+  background:
+    linear-gradient(180deg, transparent 58%, var(--paper) 100%),
+    linear-gradient(100deg, #7A3A22 0%, #A04A2C 22%, #8A3F5C 46%, #3C3C9A 72%, #1D3A9C 100%);
+}
+
+/* Medium-weight type: DM Sans 500 display, Geist for section headings */
+:root[data-palette="dusk"] :is(h1, .fx-name, .display-1, .display-2) { font-weight: 500; letter-spacing: -0.035em; }
+:root[data-palette="dusk"] .fx-name { text-transform: none; line-height: 0.95; }
+:root[data-palette="dusk"] :is(.sx-title, .cs2-section h2, .cf-title, .nf-title) { font-family: var(--font-geist), var(--font-inter), sans-serif; font-weight: 500; letter-spacing: -0.035em; }
+:root[data-palette="dusk"] :is(h3, .pc-title h3, .sk-title, .ht-role, .cs2-pn-title) { font-family: var(--font-geist), var(--font-inter), sans-serif; font-weight: 500; letter-spacing: -0.01em; }
+:root[data-palette="dusk"] :is(.sx-stat-value, .ht-impact-value, .cs2-result-value, .cs2-headline-value, .pc-value, .hx-fact dd) { font-weight: 500; letter-spacing: -0.035em; }
+:root[data-palette="dusk"] .sx-dot { color: var(--sage); }
+
+/* Frosted panels: translucent fill, hairline edge, 24px corners */
+:root[data-palette="dusk"] :is(.sk-card, .pc, .cf-form .card, .cs2-facts, .cs2-result dd, .cs2-pn, .hx-fact, .sx-stat dd) {
+  background: var(--surface-high); border: 1px solid var(--hairline); box-shadow: none;
+}
+:root[data-palette="dusk"] .sk-card:hover { border-color: color-mix(in srgb, var(--ink) 30%, transparent); box-shadow: none; }
+:root[data-palette="dusk"] .sk-visual { border: 1px solid var(--hairline); box-shadow: none; }
+@media (min-width: 1024px) {
+  :root[data-palette="dusk"] .fx-hero :is(.hx-fact, .hx-facts, .fx-status, .btn-secondary, .sx-icon-btn) { -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+}
+/* The featured cover keeps one quiet sunset glow instead of a solid block */
+:root[data-palette="dusk"] .pc-photo { color: var(--ink); background: radial-gradient(70% 80% at 50% 35%, color-mix(in srgb, #E0855A 22%, transparent), transparent 70%), radial-gradient(60% 70% at 80% 90%, color-mix(in srgb, #2F52D6 18%, transparent), transparent 70%), var(--surface-low); }
+:root[data-palette="dusk"] :is(.pc-label, .pc-num, .pc-photo .pg-bar) { color: var(--muted-ink); }
+:root[data-palette="dusk"] .pc-photo .pg-bar::after { background: color-mix(in srgb, var(--ink) 22%, transparent); }
+:root[data-palette="dusk"] .pc-photo .pg-bar.is-after::after { background: var(--ink); }
+:root[data-palette="dusk"] .pc-album { background: transparent; border-top: 1px solid var(--hairline); }
+/* The lead result is the one inverted card: white on dark, ink on light */
+:root[data-palette="dusk"] .cs2-result.is-lead dd { color: var(--on-btn); background: var(--btn); border-color: var(--btn); }
+
+/* One white pill; everything else is a hairline ghost pill */
+:root[data-palette="dusk"] :is(.btn, .sx-icon-btn, .copy-btn, .nav-link-cta) { border-radius: 999px; }
+:root[data-palette="dusk"] :is(.btn-secondary, .fx-actions .btn-secondary, .sx-icon-btn, .copy-btn) {
+  background: transparent; border: 1px solid color-mix(in srgb, var(--ink) 30%, transparent); box-shadow: none;
+}
+:root[data-palette="dusk"] :is(.btn-secondary, .sx-icon-btn, .copy-btn):hover { border-color: var(--ink); background: color-mix(in srgb, var(--ink) 6%, transparent); }
+@media screen { :root[data-palette="dusk"] .cv { background: var(--surface-high); box-shadow: 0 0 0 1px var(--hairline) inset; } }

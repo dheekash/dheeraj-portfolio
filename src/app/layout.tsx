@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Inter, Manrope } from "next/font/google";
+import { DM_Sans, Geist, IBM_Plex_Mono, Inter, Manrope } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
@@ -32,6 +32,22 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+});
+
+/* The Dusk palette's faces. Not preloaded: the files download only when
+   Dusk is chosen and text actually uses them. */
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dmsans",
+  display: "swap",
+  preload: false,
+});
+
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+  display: "swap",
+  preload: false,
 });
 
 const plexMono = IBM_Plex_Mono({
@@ -161,7 +177,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`dark ${manrope.variable} ${inter.variable} ${plexMono.variable}`}
+      className={`dark ${manrope.variable} ${inter.variable} ${plexMono.variable} ${dmSans.variable} ${geist.variable}`}
     >
       <head>
         {/* Dark is the default (set on <html>). Light is applied before
@@ -169,7 +185,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var d=document.documentElement;if(localStorage.getItem('theme')==='light'){d.classList.remove('dark')}var p=localStorage.getItem('palette');if(p==='midnight'||p==='sage'||p==='regal'||p==='void'){d.setAttribute('data-palette',p)}}catch(e){}})()",
+              "(function(){try{var d=document.documentElement;if(localStorage.getItem('theme')==='light'){d.classList.remove('dark')}var p=localStorage.getItem('palette');if(p==='midnight'||p==='sage'||p==='regal'||p==='void'||p==='dusk'){d.setAttribute('data-palette',p)}}catch(e){}})()",
           }}
         />
         <script
