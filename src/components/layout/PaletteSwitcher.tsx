@@ -10,6 +10,7 @@ export const PALETTES = [
   { id: "midnight", name: "Midnight and gold", swatch: ["#0D1C42", "#22396F", "#F4AE52"] },
   { id: "sage", name: "Editorial sage", swatch: ["#FEFAF3", "#6A795D", "#B2BD7E"] },
   { id: "regal", name: "Regal purple and teal", swatch: ["#4C2365", "#7F5D99", "#B4E4D6"] },
+  { id: "void", name: "Void and iris", swatch: ["#000000", "#8052FF", "#FFB829"] },
 ] as const;
 type PaletteId = (typeof PALETTES)[number]["id"];
 
@@ -24,7 +25,7 @@ function applyPalette(id: PaletteId) {
 }
 
 /**
- * Palette button for the nav: opens a small menu of the four palettes. Arrow
+ * Palette button for the nav: opens a small menu of the palettes. Arrow
  * keys move between options, Escape or a click outside closes it, and focus
  * returns to the button.
  */

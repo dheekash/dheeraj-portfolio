@@ -8,6 +8,7 @@ import { Mark } from "@/components/common/Mark";
 import { LinkedinIcon } from "@/components/common/SocialIcons";
 import { allCredentials } from "@/data/credentials";
 import { HeroFlow } from "@/components/sections/HeroFlow";
+import { HeroConstellation } from "@/components/sections/HeroConstellation";
 
 /* Headshot sits beside the availability line once public/images/avatar.jpg exists. */
 const PHOTO = "/images/avatar.jpg";
@@ -28,6 +29,7 @@ const facts = [
 export function Hero() {
   return (
     <section id="top" className="fx-hero hx" aria-labelledby="hero-title">
+      <HeroConstellation />
       <div className="container hx-grid">
         <div className="hx-copy">
           <p className="fx-status hero-anim" style={{ "--d": 0 } as React.CSSProperties}>

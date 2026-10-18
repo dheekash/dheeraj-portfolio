@@ -169,7 +169,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var d=document.documentElement;if(localStorage.getItem('theme')==='light'){d.classList.remove('dark')}var p=localStorage.getItem('palette');if(p==='midnight'||p==='sage'||p==='regal'){d.setAttribute('data-palette',p)}}catch(e){}})()",
+              "(function(){try{var d=document.documentElement;if(localStorage.getItem('theme')==='light'){d.classList.remove('dark')}var p=localStorage.getItem('palette');if(p==='midnight'||p==='sage'||p==='regal'||p==='void'){d.setAttribute('data-palette',p)}}catch(e){}})()",
           }}
         />
         <script
