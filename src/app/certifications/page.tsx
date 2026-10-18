@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { allCredentials, credentialGroups, issuerList } from "@/data/credentials";
+import { pageMeta } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Certifications",
-  description:
-    `All ${allCredentials.length} certifications held by Dheeraj Kashyap across Microsoft Fabric, Power BI, Azure, Snowflake, Databricks and Apache Airflow.`,
-  alternates: { canonical: "/certifications" },
-};
+  description: `All ${allCredentials.length} certifications held by Dheeraj Kashyap across Microsoft Fabric, Power BI, Azure, Snowflake, Databricks and Apache Airflow.`,
+  path: "/certifications",
+});
 
 export default function CertificationsPage() {
   return (

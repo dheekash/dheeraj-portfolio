@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { caseStudies, getStudy } from "@/data/work";
+import { caseStudies, getStudy, metaOf } from "@/data/work";
 import { OG, OG_SIZE, OgFrame, OgTopBar } from "@/lib/og";
 
 export const size = OG_SIZE;
@@ -22,7 +22,7 @@ export default async function CaseStudyImage({ params }: { params: Promise<{ slu
 
         <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
           <div style={{ display: "flex", fontSize: "22px", letterSpacing: "3px", textTransform: "uppercase", color: OG.gold }}>
-            {s.domain} · {s.type}
+            {metaOf(s)}
           </div>
           <div style={{ display: "flex", fontSize: s.title.length > 40 ? "60px" : "70px", fontWeight: 800, letterSpacing: "-2px", lineHeight: 1.04, maxWidth: "1020px" }}>
             {s.title}

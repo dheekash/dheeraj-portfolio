@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 };
 
 export default function NotFound() {
-  const featured = caseStudies.filter((s) => s.featured).slice(0, 4);
   return (
     <section className="nf" aria-labelledby="nf-title">
       <div className="container nf-inner">
@@ -28,7 +27,7 @@ export default function NotFound() {
           <Link href="/#contact" className="btn btn-secondary">Contact me</Link>
         </p>
         <ul className="nf-links">
-          {featured.map((s) => (
+          {caseStudies.map((s) => (
             <li key={s.slug}>
               <Link href={`/work/${s.slug}`} className="inline-link">{s.title}</Link>
             </li>

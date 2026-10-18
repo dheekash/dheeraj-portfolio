@@ -3,14 +3,14 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { profile } from "@/data/profile";
 import { resume } from "@/data/resume";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, pageMeta } from "@/lib/site";
 import { PrintButton } from "@/components/common/PrintButton";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "CV",
   description: "Dheeraj Kashyap, Senior BI & Analytics Engineer: summary, skills, experience, projects, certifications and education, ready to print or save as PDF.",
-  alternates: { canonical: "/cv" },
-};
+  path: "/cv",
+});
 
 const host = SITE_URL.replace(/^https?:\/\//, "");
 const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
@@ -32,7 +32,12 @@ export default function CvPage() {
         <header className="cv-head">
           <div>
             <h1 className="cv-name">{profile.name}</h1>
-            <p className="cv-role">{resume.headline} · {resume.tools.join(" · ")}</p>
+            {/* Each name stays whole; lines break only at the separators. */}
+            <p className="cv-role">
+              {[resume.headline, ...resume.tools].map((t, i) => (
+                <span key={t}>{i > 0 && " · "}<span className="cv-nb">{t}</span></span>
+              ))}
+            </p>
           </div>
           <ul className="cv-contact">
             <li>{resume.location}</li>

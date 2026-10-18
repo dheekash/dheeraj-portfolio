@@ -28,7 +28,7 @@ export function AboutSection() {
               deliver reporting systems for finance, operations, sales and executive teams.
             </p>
             <p>
-              Over 7+ years I&rsquo;ve moved from support-floor reporting, to risk and fraud analytics
+              In 7+ years I&rsquo;ve moved from support-floor reporting, to risk and fraud analytics
               at Amazon, to Fabric lakehouse platforms for clients across 15 countries.
               One question drives every project: <strong>&ldquo;Does this help people make better
               decisions?&rdquo;</strong>

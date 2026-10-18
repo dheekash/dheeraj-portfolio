@@ -48,7 +48,7 @@ export function Technologies() {
                 </ul>
                 <span className="sk-foot">
                   <span className="sk-see">
-                    See it in <span translate="no">{c.study.title.replace(/, (Amazon|Rockwool)$/, "")}</span>
+                    See it in <span translate="no">{c.study.title}</span>
                   </span>
                   <span className="sk-arrow" aria-hidden><ArrowRight size={16} /></span>
                 </span>
