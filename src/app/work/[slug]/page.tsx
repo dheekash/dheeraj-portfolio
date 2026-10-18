@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { caseStudies, getStudy, type CaseStudy } from "@/data/work";
 import { ArchitectureDiagram, WorkImage } from "@/components/work/ArchitectureFlow";
+import { CaseToc } from "@/components/work/CaseToc";
+import { Figure } from "@/components/common/Figure";
 import { Mark, hasMark } from "@/components/common/Mark";
 import { leadOf, ratioOf } from "@/lib/results";
 import { SITE_URL } from "@/lib/site";
@@ -42,7 +44,7 @@ function Headline({ value, label }: { value: string; label: string }) {
   const r = ratioOf(value);
   return (
     <div className="cs2-headline">
-      <span className="cs2-headline-value">{value}</span>
+      <span className="cs2-headline-value"><Figure value={value} /></span>
       <span className="cs2-headline-label">{label}</span>
       {r !== null && (
         <span className="pg-bars cs2-bars" style={{ "--r": Math.max(r, 0.02) } as React.CSSProperties} aria-hidden>
@@ -67,7 +69,7 @@ function ProjectLink({ study, dir }: { study: CaseStudy; dir: "prev" | "next" })
         <span className="cs2-pn-mark"><Mark name={leadOf[study.slug]} size={24} /></span>
         <span>
           <span className="cs2-pn-title">{study.title}</span>
-          <span className="cs2-pn-meta">{study.impact[0].value} {study.impact[0].label.toLowerCase()}</span>
+          <span className="cs2-pn-meta"><Figure value={study.impact[0].value} /> {study.impact[0].label.toLowerCase()}</span>
         </span>
       </span>
     </Link>
@@ -156,7 +158,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               <div key={m.label} className="cs2-result">
                 <dt className="sr-only">{m.label}</dt>
                 <dd>
-                  <span className="cs2-result-value">{m.value}</span>
+                  <span className="cs2-result-value"><Figure value={m.value} /></span>
                   <span className="cs2-result-label">{m.label}</span>
                 </dd>
               </div>
@@ -166,14 +168,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       </header>
 
       <div className="container cs2-body">
-        <nav className="cs2-toc" aria-label="On this page">
-          <span className="label">On this page</span>
-          <ol>
-            {story.map((b) => (
-              <li key={b.id}><a href={`#${b.id}`}>{b.title}</a></li>
-            ))}
-          </ol>
-        </nav>
+        <CaseToc items={story.map(({ id, title }) => ({ id, title }))} />
 
         <div className="cs2-story">
           <section id="challenge" className="cs2-section reveal" aria-labelledby="h-challenge">

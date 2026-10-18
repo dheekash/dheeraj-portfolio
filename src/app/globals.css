@@ -2515,6 +2515,27 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
   .pc-album { background: color-mix(in srgb, var(--d-bg) 72%, transparent); }
 }
 
+/* ═══ UX polish ═════════════════════════════════════════════════════════ */
+/* Result figures: "<" and ">" in Inter; Manrope's read as "‹". */
+.fig-sym { font-family: var(--font-sans); }
+
+/* Hero facts: the real figure rises out of its own mask (desktop only,
+   via .hx-rise), never counting through wrong numbers. */
+.hx-fact-clip { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: 0.06em; margin-bottom: -0.06em; }
+
+/* Case study: the section being read, in the "On this page" list. */
+.cs2-toc a[aria-current="location"] { color: var(--ink); font-weight: 600; border-left-color: var(--sage); }
+
+/* Hero actions on phones: a tidy 2×2 grid. LinkedIn and GitHub get their
+   names, so no button sits alone on a second row. */
+.hx-icon-label { display: none; }
+@media (max-width: 767.98px) {
+  .hx-actions { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); width: 100%; }
+  .hx-actions .btn, .hx-actions .sx-icon-btn { width: 100%; padding-inline: 14px; }
+  .hx-actions .sx-icon-btn { gap: 8px; border-radius: var(--r-md); font-size: var(--fs-sm); font-weight: 600; }
+  .hx-icon-label { display: inline; }
+}
+
 /* ═══ Palettes ══════════════════════════════════════════════════════════
    Every palette colour above reads a --p-* (light) or --d-* (dark)
    variable. Timeless Luxury is the default; the switcher in the nav sets

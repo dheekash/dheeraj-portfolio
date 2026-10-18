@@ -4,6 +4,7 @@ import { caseStudies } from "@/data/work";
 import { Mark, hasMark } from "@/components/common/Mark";
 import { ProjectShowcase } from "@/components/sections/ProjectShowcase";
 import { leadOf, ratioOf } from "@/lib/results";
+import { Figure } from "@/components/common/Figure";
 
 /**
  * Selected projects as one product-style showcase card: the coloured panel
@@ -22,7 +23,7 @@ export function Projects() {
       <>
         <span className="pc-num">{String(i + 1).padStart(2, "0")} / {String(shown.length).padStart(2, "0")}</span>
         <span className="pc-logo"><Mark name={leadOf[s.slug]} size={44} /></span>
-        <span className="pc-value">{m.value}</span>
+        <span className="pc-value"><Figure value={m.value} /></span>
         <span className="pc-label">{m.label}</span>
         {ratio !== null && (
           <span className="pg-bars pc-bars" style={{ "--r": Math.max(ratio, 0.02) } as React.CSSProperties}>
@@ -68,7 +69,7 @@ export function Projects() {
           <h4>Impact</h4>
           <ul className="pc-results">
             {rest.map((r) => (
-              <li key={r.label}><strong>{r.value}</strong> {r.label}</li>
+              <li key={r.label}><strong><Figure value={r.value} /></strong> {r.label}</li>
             ))}
           </ul>
         </div>
