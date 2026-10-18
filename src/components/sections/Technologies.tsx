@@ -3,8 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Mark } from "@/components/common/Mark";
 import { caseStudies } from "@/data/work";
 import { layers } from "@/data/skills";
-
-
+import { TriangleField } from "@/components/common/TriangleField";
 
 /* Each card links to a case study that used its tools: the one sharing the
    most of them, preferring featured studies and ones no earlier card took. */
@@ -36,6 +35,8 @@ export function Technologies() {
           {cards.map((c, i) => (
             <li key={c.tag} style={{ "--n": i } as React.CSSProperties}>
               <Link href={`/work/${c.study.slug}`} className="sk-card">
+                {/* Void theme only: a small constellation in the layer's colour */}
+                <TriangleField seed={11 + i * 7} count={22} width={140} height={90} cx={0.62} cy={0.45} main={i + 1} className="sk-tf" />
                 <span className="sk-visual" aria-hidden>
                   {c.items.map((t) => (
                     <span key={t} className="sk-logo" title={t}><Mark name={t} size={22} /></span>
