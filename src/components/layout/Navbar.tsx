@@ -169,8 +169,8 @@ export function Navbar() {
               <a href={href("contact")} className="btn btn-primary" onClick={() => setOpen(false)}>
                 Let&rsquo;s talk
               </a>
-              <a href="/api/resume" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                Download résumé<span className="sr-only"> (opens in a new tab)</span>
+              <a href="/cv" className="btn btn-secondary" onClick={() => setOpen(false)}>
+                View CV
               </a>
             </div>
           </nav>

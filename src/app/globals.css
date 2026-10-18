@@ -2457,7 +2457,15 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 .cv-cols { display: grid; gap: 0 32px; }
 @media (min-width: 700px) { .cv-cols { grid-template-columns: 1fr 1fr; } }
 .cv-skills { margin: 0; display: grid; gap: 6px; }
-.cv-skills div { display: grid; grid-template-columns: 96px 1fr; gap: 8px; }
+.cv-skills div { display: grid; grid-template-columns: 170px 1fr; gap: 12px; }
+@media (max-width: 599.98px) { .cv-skills div { grid-template-columns: 1fr; gap: 0; } }
+.cv-org { margin: 1px 0 4px !important; font-size: var(--fs-xs); font-weight: 600; color: var(--muted-ink); }
+.cv-bullets { list-style: disc; }
+.cv-bullets li::marker { color: var(--sage); }
+.cv-kv { margin: 2px 0 0; display: grid; gap: 2px; }
+.cv-kv div { display: grid; grid-template-columns: 56px 1fr; gap: 8px; }
+.cv-kv dt { padding-top: 2px; font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sage); }
+.cv-kv dd { margin: 0; }
 .cv-skills dt { font-weight: 700; }
 .cv-skills dd { margin: 0; }
 .cv-certs { list-style: none; padding: 0 !important; }
@@ -2485,7 +2493,13 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
   .cv-skills { gap: 3pt; }
   .cv-row h3 { font-size: 10.5pt; }
   .cv-cols { grid-template-columns: 1fr 1fr; gap: 0 18pt; }
-  .cv-skills div { grid-template-columns: 70pt 1fr; }
+  .cv-skills div { grid-template-columns: 118pt 1fr; gap: 8pt; }
+  .cv-org { margin: 0 0 2pt !important; font-size: 8.6pt; }
+  .cv-kv div { grid-template-columns: 40pt 1fr; gap: 6pt; }
+  .cv-kv dt { color: #000000 !important; font-size: 7.4pt; padding-top: 1pt; }
+  .cv-bullets li::marker { color: #111111; }
+  .cv-section h2 { break-after: avoid; }
+  .cv ul { padding-left: 12pt; }
   main { animation: none !important; }
 }
 
