@@ -39,7 +39,7 @@ export const credentialGroups: { category: string; items: Credential[] }[] = [
   {
     category: "Orchestration",
     items: [
-      { name: "DAG Authoring for Apache Airflow 3", code: "Airflow 3", issuer: "Astronomer", earned: "Oct 2026", flagship: 7 },
+      { name: "DAG Authoring for Apache Airflow 3", code: "Airflow 3", issuer: "Astronomer", earned: "Oct 2026", flagship: 7, url: "https://www.astronomer.io/certification/" },
     ],
   },
   {

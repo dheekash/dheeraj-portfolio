@@ -2536,6 +2536,10 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
   .hx-icon-label { display: inline; }
 }
 
+/* ═══ Content fixes ═════════════════════════════════════════════════════ */
+/* CV header: names never split ("Power / BI"); lines break at the dots. */
+.cv-nb { white-space: nowrap; }
+
 /* ═══ Palettes ══════════════════════════════════════════════════════════
    Every palette colour above reads a --p-* (light) or --d-* (dark)
    variable. Timeless Luxury is the default; the switcher in the nav sets

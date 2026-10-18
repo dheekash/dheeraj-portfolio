@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { caseStudies } from "@/data/work";
+import { caseStudies, metaOf } from "@/data/work";
 import { Mark, hasMark } from "@/components/common/Mark";
 import { ProjectShowcase } from "@/components/sections/ProjectShowcase";
 import { leadOf, ratioOf } from "@/lib/results";
@@ -48,7 +48,7 @@ export function Projects() {
       <>
         <div className="pc-title">
           <h3>{s.title}</h3>
-          <p>{s.domain} · {s.type}</p>
+          <p>{metaOf(s)}</p>
         </div>
         <dl className="pc-story">
           <div><dt>Problem</dt><dd>{s.problem}</dd></div>
@@ -106,7 +106,7 @@ export function Projects() {
             <p>More case studies</p>
             {others.map((s) => (
               <Link key={s.slug} href={`/work/${s.slug}`} className="btn btn-secondary btn-sm">
-                {s.title.replace(/, (Amazon|Rockwool)$/, "")} <ArrowRight size={14} aria-hidden />
+                {s.title} <ArrowRight size={14} aria-hidden />
               </Link>
             ))}
           </div>

@@ -99,9 +99,9 @@ export function Footer() {
           <nav aria-labelledby="fcol-work">
             <h2 id="fcol-work">Case studies</h2>
             <ul>
-              {caseStudies.filter((s) => s.featured).map((s) => (
+              {caseStudies.map((s) => (
                 <li key={s.slug}>
-                  <Link href={`/work/${s.slug}`}>{s.title.replace(/, (Amazon|Rockwool)$/, "").replace(/ Platform$/, "")}</Link>
+                  <Link href={`/work/${s.slug}`}>{s.title}</Link>
                 </li>
               ))}
             </ul>

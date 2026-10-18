@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
-import { caseStudies, getStudy, type CaseStudy } from "@/data/work";
+import { caseStudies, getStudy, metaOf, type CaseStudy } from "@/data/work";
 import { ArchitectureDiagram, WorkImage } from "@/components/work/ArchitectureFlow";
 import { CaseToc } from "@/components/work/CaseToc";
 import { Figure } from "@/components/common/Figure";
 import { Mark, hasMark } from "@/components/common/Mark";
 import { leadOf, ratioOf } from "@/lib/results";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, pageMeta } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -20,12 +20,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const s = getStudy(slug);
   if (!s) return {};
-  return {
-    title: s.title,
-    description: `${s.summary} ${s.outcome}`.slice(0, 300),
-    alternates: { canonical: `/work/${s.slug}` },
-  };
+  return pageMeta({ title: s.title, description: describe(s), path: `/work/${s.slug}` });
 }
+
+/* Search and link-preview description: the summary, plus the first result
+   sentence when both fit in about 170 characters. */
+const describe = (s: CaseStudy) => {
+  const first = s.outcome.match(/^[^.]+\./)?.[0];
+  const both = first ? `${s.summary} ${first}` : s.summary;
+  return first && both.length <= 170 ? both : s.summary;
+};
 
 /* The story sections, in reading order. Each one is built only from the
    study's own fields; a section with no material is left out. */
@@ -119,7 +123,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <Link href="/#work" className="link-arrow cs-back">
               <ArrowLeft size={16} aria-hidden /> All projects
             </Link>
-            <p className="label">{s.domain} · {s.type}</p>
+            <p className="label">{metaOf(s)}</p>
             <h1 className="display-1">{s.title}</h1>
             <p className="cs2-lead">{s.summary}</p>
           </div>

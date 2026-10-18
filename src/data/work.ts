@@ -23,6 +23,9 @@ export type CaseStudy = {
   domain: string;
   type: string;
   title: string;
+  /** The company the work was for, when the portfolio names it. Shown
+      beside domain and type, never folded into the title. */
+  client?: string;
   /** One-line summary of the build. */
   summary: string;
   /** Card: the problem, in one sentence. */
@@ -121,7 +124,8 @@ WHERE event_ts >= @start_ds
     slug: "seller-analytics-platform",
     domain: "Global e-commerce",
     type: "Self-serve analytics platform",
-    title: "Seller Analytics Self-Serve Platform, Amazon",
+    title: "Seller Analytics Self-Serve Platform",
+    client: "Amazon",
     summary:
       "Snowflake Gold layer aggregating 100M+ daily records across 10 marketplaces, backed by 100+ DAX measures for fully self-serve analysis.",
     problem:
@@ -197,7 +201,8 @@ RETURN
     slug: "manufacturing-analytics-suite",
     domain: "Manufacturing",
     type: "Enterprise BI",
-    title: "Global Manufacturing Analytics Suite, Rockwool",
+    title: "Global Manufacturing Analytics Suite",
+    client: "Rockwool",
     summary:
       "ADF pipelines chained with dbt SCD Type 2 transforms and Power BI incremental refresh. Full ISO audit trail from source to report.",
     problem:
@@ -393,6 +398,9 @@ scored = model.transform(
 ];
 
 export const getStudy = (slug: string) => caseStudies.find((s) => s.slug === slug);
+
+/** "Client · domain · type", the line shown above or under a study's title. */
+export const metaOf = (s: CaseStudy) => [s.client, s.domain, s.type].filter(Boolean).join(" · ");
 
 /**
  * Colour role of an impact figure. Improvements read as "positive"; money
