@@ -6,6 +6,7 @@ import { caseStudies, getStudy, type CaseStudy } from "@/data/work";
 import { ArchitectureDiagram, WorkImage } from "@/components/work/ArchitectureFlow";
 import { Mark, hasMark } from "@/components/common/Mark";
 import { leadOf, ratioOf } from "@/lib/results";
+import { SITE_URL } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -84,8 +85,31 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const next = caseStudies[(i + 1) % caseStudies.length];
   const [headline, ...rest] = s.impact;
 
+  /* Search engines: the page as an article by Dheeraj, and its place in the site. */
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: s.title,
+      description: s.summary,
+      about: s.stack,
+      author: { "@type": "Person", name: "Dheeraj Kashyap", url: SITE_URL },
+      mainEntityOfPage: `${SITE_URL}/work/${s.slug}`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: "Projects", item: `${SITE_URL}/#work` },
+        { "@type": "ListItem", position: 3, name: s.title, item: `${SITE_URL}/work/${s.slug}` },
+      ],
+    },
+  ];
+
   return (
     <article className="cs2">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Overview: who it was for and what it was, beside the facts */}
       <header className="cs2-hero">
         <div className="container cs2-hero-grid">

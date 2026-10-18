@@ -7,6 +7,14 @@ import { SiteChrome } from "@/components/layout/SiteChrome";
 import { Footer } from "@/components/layout/Footer";
 import { SITE_URL } from "@/lib/site";
 import { allCredentials, issuerList } from "@/data/credentials";
+import { layers } from "@/data/skills";
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+/** "Oct 2026" as "2026-10". */
+const isoMonth = (earned: string) => {
+  const [m, y] = earned.split(" ");
+  return `${y}-${String(MONTHS.indexOf(m) + 1).padStart(2, "0")}`;
+};
 import "./globals.css";
 
 /* Three roles, three faces:
@@ -124,20 +132,18 @@ const jsonLd = {
     "https://linkedin.com/in/kashyap-dheeraj",
     "https://github.com/dheekash",
   ],
-  knowsAbout: [
-    "Microsoft Fabric",
-    "Databricks",
-    "Snowflake",
-    "Power BI",
-    "Lakehouse Architecture",
-    "Data Engineering",
-    "Analytics Engineering",
-    "Business Intelligence",
-    "dbt",
-    "PySpark",
-    "Python",
-    "SQL",
-  ],
+  /* Every tool on the site, from the same data as the Technologies section. */
+  knowsAbout: [...new Set(["Business Intelligence", "Analytics Engineering", "Lakehouse Architecture", ...layers.flatMap((l) => l.items)])],
+  /* Each certification, with the month earned and the issuer. */
+  hasCredential: allCredentials.map((c) => ({
+    "@type": "EducationalOccupationalCredential",
+    name: c.name,
+    credentialCategory: "certification",
+    identifier: c.code,
+    dateCreated: isoMonth(c.earned),
+    recognizedBy: { "@type": "Organization", name: c.issuer },
+    ...(c.url ? { url: c.url } : {}),
+  })),
   alumniOf: [
     { "@type": "CollegeOrUniversity", name: "Deakin University" },
     { "@type": "CollegeOrUniversity", name: "The University of Texas at Austin" },

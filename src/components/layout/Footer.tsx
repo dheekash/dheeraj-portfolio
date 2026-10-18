@@ -33,9 +33,16 @@ export function Footer() {
               <span className="sx-dot">.</span>
             </h2>
             <p className="cf-intro">
-              Open to full-time BI roles and consulting. Let&rsquo;s talk about the architecture, the
-              dashboard, or everything in between. I usually reply within 24 hours.
+              Let&rsquo;s talk about the architecture, the dashboard, or everything in between.
             </p>
+
+            {/* The facts a recruiter checks first, all from the site's own copy. */}
+            <dl className="cf-hire">
+              <div><dt>Open to</dt><dd>Full-time BI roles and consulting</dd></div>
+              <div><dt>Based in</dt><dd>Bengaluru, India · IST (UTC+5:30)</dd></div>
+              <div><dt>Works</dt><dd>Remote</dd></div>
+              <div><dt>Replies</dt><dd>Usually within 24 hours</dd></div>
+            </dl>
 
             {/* Email first, with its copy action beside it; profiles below. */}
             <div className="contact-email cf-email">
@@ -86,6 +93,7 @@ export function Footer() {
               <li><Link href="/#skills">Technologies</Link></li>
               <li><Link href="/#work">Projects</Link></li>
               <li><Link href="/certifications">Certifications</Link></li>
+              <li><Link href="/cv">One-page CV</Link></li>
             </ul>
           </nav>
 
