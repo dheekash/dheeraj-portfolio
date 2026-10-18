@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { roles } from "@/data/roles";
 import { ArrowRight, Briefcase, ChartColumnBig, Database, Headset, ShieldCheck, type LucideIcon } from "lucide-react";
+import { Figure } from "@/components/common/Figure";
 
 
 
@@ -52,7 +53,7 @@ export function Experience() {
                       <div key={m.label}>
                         <dt className="sr-only">{m.label}</dt>
                         <dd>
-                          <span className="ht-impact-value">{m.value}</span>{" "}
+                          <span className="ht-impact-value"><Figure value={m.value} /></span>{" "}
                           <span aria-hidden>{m.label}</span>
                         </dd>
                       </div>

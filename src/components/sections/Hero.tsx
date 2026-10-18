@@ -6,7 +6,6 @@ import { ArrowRight, FileText } from "lucide-react";
 import { profile } from "@/data/profile";
 import { Mark } from "@/components/common/Mark";
 import { LinkedinIcon } from "@/components/common/SocialIcons";
-import { CountUp } from "@/components/common/CountUp";
 import { allCredentials } from "@/data/credentials";
 import { HeroFlow } from "@/components/sections/HeroFlow";
 
@@ -58,9 +57,11 @@ export function Hero() {
             </Link>
             <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="sx-icon-btn" aria-label="LinkedIn profile (opens in a new tab)" title="LinkedIn">
               <LinkedinIcon size={20} />
+              <span className="hx-icon-label">LinkedIn</span>
             </a>
             <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="sx-icon-btn" aria-label="GitHub profile (opens in a new tab)" title="GitHub">
               <Mark name="GitHub" size={20} />
+              <span className="hx-icon-label">GitHub</span>
             </a>
           </div>
         </div>
@@ -81,7 +82,9 @@ export function Hero() {
           {facts.map((f, i) => (
             <div key={f.label} className="hx-fact">
               <dt>{f.label}</dt>
-              <dd><CountUp value={f.value} delay={400 + i * 120} /></dd>
+              {/* The real figure from the first frame; it rises out of a mask
+                  on desktop instead of counting up through wrong numbers. */}
+              <dd><span className="hx-fact-clip"><span className="hx-rise" style={{ "--d": 8 + i } as React.CSSProperties}>{f.value}</span></span></dd>
             </div>
           ))}
         </dl>
