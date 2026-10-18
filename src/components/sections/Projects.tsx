@@ -3,33 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { caseStudies } from "@/data/work";
 import { Mark, hasMark } from "@/components/common/Mark";
 import { ProjectShowcase } from "@/components/sections/ProjectShowcase";
-
-/* Lead technology for each cover. No screenshots exist yet, so each cover
-   shows the project's real headline result rather than a mock image. */
-const leadOf: Record<string, string> = {
-  "fabric-lakehouse-migration": "Microsoft Fabric",
-  "seller-analytics-platform": "Power BI",
-  "manufacturing-analytics-suite": "Power BI",
-  "real-time-fraud-monitoring": "Databricks",
-  "sales-intelligence-platform": "Databricks",
-  "customer-churn-platform": "Snowflake",
-};
-
-/* Turns a headline result into an after/before ratio for the cover chart,
-   straight from its own figures: "12% → <1%" is 1/12, "4 hrs → 15 min" is
-   15/240, "−70%" is 30/100. Anything else gets no chart. */
-const toMinutes = (n: number, unit = "") => (/^hr/.test(unit) ? n * 60 : n);
-function ratioOf(value: string): number | null {
-  const v = value.replace(/−/g, "-").trim();
-  const ft = v.match(/^([\d.]+)\s*(%|hrs?|min)?\s*→\s*<?\s*([\d.]+)\s*(%|hrs?|min)?$/);
-  if (ft) {
-    const from = toMinutes(parseFloat(ft[1]), ft[2]);
-    const to = toMinutes(parseFloat(ft[3]), ft[4] ?? ft[2]);
-    return from > 0 ? to / from : null;
-  }
-  const cut = v.match(/^-([\d.]+)%$/);
-  return cut ? 1 - parseFloat(cut[1]) / 100 : null;
-}
+import { leadOf, ratioOf } from "@/lib/results";
 
 /**
  * Selected projects as one product-style showcase card: the coloured panel
