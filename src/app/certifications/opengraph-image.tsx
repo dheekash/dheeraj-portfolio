@@ -15,7 +15,7 @@ export default function CertificationsImage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: "24px" }}>
-            <div style={{ display: "flex", fontSize: "150px", fontWeight: 800, letterSpacing: "-6px", lineHeight: 0.9, color: OG.gold }}>{allCredentials.length}</div>
+            <div style={{ display: "flex", fontSize: "150px", fontWeight: 800, letterSpacing: "-6px", lineHeight: 0.9, color: OG.amber }}>{allCredentials.length}</div>
             <div style={{ display: "flex", fontSize: "56px", fontWeight: 800, letterSpacing: "-2px" }}>certifications</div>
           </div>
           <div style={{ display: "flex", fontSize: "30px", color: OG.soft }}>From {issuerList}.</div>

@@ -63,7 +63,7 @@ const siteUrl = SITE_URL;
    Dark is the default theme; ThemeProvider keeps this in sync when the
    visitor switches. */
 export const viewport: Viewport = {
-  themeColor: "#160B0E",
+  themeColor: "#000000",
 };
 
 export const metadata: Metadata = {
@@ -176,16 +176,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-palette="void"
       suppressHydrationWarning
       className={`dark ${manrope.variable} ${inter.variable} ${plexMono.variable} ${dmSans.variable} ${geist.variable}`}
     >
       <head>
-        {/* Dark is the default (set on <html>). Light is applied before
-            paint only when the visitor chose it on an earlier visit. */}
+        {/* Dark and the Void palette are the defaults (set on <html>). Light
+            and Dusk are applied before paint only when the visitor chose them
+            on an earlier visit. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var d=document.documentElement;if(localStorage.getItem('theme')==='light'){d.classList.remove('dark')}var p=localStorage.getItem('palette');if(p==='midnight'||p==='sage'||p==='regal'||p==='void'||p==='dusk'){d.setAttribute('data-palette',p)}}catch(e){}})()",
+              "(function(){try{var d=document.documentElement;if(localStorage.getItem('theme')==='light'){d.classList.remove('dark')}if(localStorage.getItem('palette')==='dusk'){d.setAttribute('data-palette','dusk')}}catch(e){}})()",
           }}
         />
         <script
