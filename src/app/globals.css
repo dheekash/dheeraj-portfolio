@@ -2503,6 +2503,18 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
   main { animation: none !important; }
 }
 
+/* ═══ Phones and tablets: no backdrop blur ══════════════════════════════
+   Frosted-glass blur on the floating nav, the sticky contact bar and the
+   project thumbnail strip more than doubled the first layout on phones
+   (measured ~1.1s → ~0.4s on a 4× throttled CPU). Below 1024px those
+   surfaces use a solid fill instead; desktop keeps the blur. */
+@media (max-width: 1023.98px) {
+  .glass, .nav-inner.glass, .contact-bar, .pc-album, .nav-sheet-panel { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  .glass, .nav-inner.glass, .nav-sheet-panel, .contact-bar { background: var(--sheet); }
+  .nav.is-on-dark .nav-inner.glass { background: var(--band-sheet); }
+  .pc-album { background: color-mix(in srgb, var(--d-bg) 72%, transparent); }
+}
+
 /* ═══ Palettes ══════════════════════════════════════════════════════════
    Every palette colour above reads a --p-* (light) or --d-* (dark)
    variable. Timeless Luxury is the default; the switcher in the nav sets
