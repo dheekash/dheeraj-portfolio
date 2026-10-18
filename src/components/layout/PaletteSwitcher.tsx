@@ -2,24 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Check, Palette } from "lucide-react";
+import { syncThemeColor } from "@/components/providers/ThemeProvider";
 
 /* The palettes in globals.css (":root[data-palette=…]"). Swatches are the
    page, text and accent colours, for the menu only. */
 export const PALETTES = [
-  { id: "luxury", name: "Timeless luxury", swatch: ["#FFF9F2", "#800020", "#D9B061"] },
-  { id: "midnight", name: "Midnight and gold", swatch: ["#0D1C42", "#22396F", "#F4AE52"] },
-  { id: "sage", name: "Editorial sage", swatch: ["#FEFAF3", "#6A795D", "#B2BD7E"] },
-  { id: "regal", name: "Regal purple and teal", swatch: ["#4C2365", "#7F5D99", "#B4E4D6"] },
   { id: "void", name: "Void and iris", swatch: ["#000000", "#8052FF", "#FFB829"] },
   { id: "dusk", name: "Dusk and glass", swatch: ["#0A0A0A", "#E0855A", "#2F52D6"] },
 ] as const;
 type PaletteId = (typeof PALETTES)[number]["id"];
 
-/** Applies a palette to <html> and remembers it. Timeless luxury is the default and needs no attribute. */
+/** Applies a palette to <html> and remembers it. Void is the default. */
 function applyPalette(id: PaletteId) {
-  const root = document.documentElement;
-  if (id === "luxury") root.removeAttribute("data-palette");
-  else root.setAttribute("data-palette", id);
+  document.documentElement.setAttribute("data-palette", id);
+  syncThemeColor(document.documentElement.classList.contains("dark") ? "dark" : "light");
   try {
     localStorage.setItem("palette", id);
   } catch {}
@@ -32,7 +28,7 @@ function applyPalette(id: PaletteId) {
  */
 export function PaletteSwitcher() {
   const [open, setOpen] = useState(false);
-  const [current, setCurrent] = useState<PaletteId>("luxury");
+  const [current, setCurrent] = useState<PaletteId>("void");
   const wrap = useRef<HTMLDivElement>(null);
   const button = useRef<HTMLButtonElement>(null);
   const options = useRef<(HTMLButtonElement | null)[]>([]);

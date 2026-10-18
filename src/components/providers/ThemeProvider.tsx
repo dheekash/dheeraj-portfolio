@@ -5,17 +5,19 @@ import { createContext, useContext, useEffect, useState } from "react";
 type Theme = "light" | "dark";
 
 /* Keeps <meta name="theme-color"> on the page background so browser chrome
-   matches the page. Values mirror --paper in globals.css. */
-const THEME_COLOR: Record<Theme, string> = { light: "#FFF9F2", dark: "#160B0E" };
+   matches the page: reads --paper (palette- and theme-aware), with the Void
+   palette's values as a fallback. */
+const THEME_COLOR: Record<Theme, string> = { light: "#FFFFFF", dark: "#000000" };
 
-function syncThemeColor(theme: Theme) {
+export function syncThemeColor(theme: Theme) {
   let tag = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
   if (!tag) {
     tag = document.createElement("meta");
     tag.name = "theme-color";
     document.head.appendChild(tag);
   }
-  tag.content = THEME_COLOR[theme];
+  const paper = getComputedStyle(document.documentElement).getPropertyValue("--paper").trim();
+  tag.content = /^#[0-9a-f]{3,8}$/i.test(paper) ? paper : THEME_COLOR[theme];
 }
 
 const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({

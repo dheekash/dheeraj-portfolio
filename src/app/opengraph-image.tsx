@@ -26,9 +26,9 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "64px 72px",
-          background: "linear-gradient(160deg, #2A1519 0%, #160B0E 70%)",
+          background: "#000000",
           fontFamily: "system-ui, sans-serif",
-          color: "#FFF4E6",
+          color: "#FFFFFF",
           position: "relative",
         }}
       >
@@ -40,7 +40,7 @@ export default function OpengraphImage() {
             width: "720px",
             height: "620px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(128, 0, 32,0.6) 0%, rgba(128, 0, 32,0) 70%)",
+            background: "radial-gradient(circle, rgba(128, 82, 255,0.38) 0%, rgba(128, 82, 255,0) 70%)",
             display: "flex",
           }}
         />
@@ -52,7 +52,7 @@ export default function OpengraphImage() {
             width: "520px",
             height: "520px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(128, 0, 32,0.22) 0%, rgba(128, 0, 32,0) 70%)",
+            background: "radial-gradient(circle, rgba(128, 82, 255,0.18) 0%, rgba(128, 82, 255,0) 70%)",
             display: "flex",
           }}
         />
@@ -61,7 +61,7 @@ export default function OpengraphImage() {
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={LOGO_SRC} width={165} height={56} alt="" />
-            <div style={{ display: "flex", fontSize: "22px", color: "#C9B8AE" }}>{host}</div>
+            <div style={{ display: "flex", fontSize: "22px", color: "#BDBDBD" }}>{host}</div>
           </div>
           <div
             style={{
@@ -70,7 +70,7 @@ export default function OpengraphImage() {
               gap: "10px",
               padding: "8px 16px",
               borderRadius: "999px",
-              border: "1px solid rgba(201,184,174,0.35)",
+              border: "1px solid rgba(255,255,255,0.25)",
               fontSize: "20px",
             }}
           >
@@ -81,9 +81,9 @@ export default function OpengraphImage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
           <div style={{ display: "flex", fontSize: "84px", fontWeight: 800, letterSpacing: "-3px", lineHeight: 1 }}>
-            Dheeraj Kashyap<span style={{ color: "#800020" }}>.</span>
+            Dheeraj Kashyap<span style={{ color: "#8052FF" }}>.</span>
           </div>
-          <div style={{ display: "flex", fontSize: "34px", color: "#F3E6D5", maxWidth: "980px", lineHeight: 1.3 }}>
+          <div style={{ display: "flex", fontSize: "34px", color: "#EDEDED", maxWidth: "980px", lineHeight: 1.3 }}>
             BI &amp; Analytics Engineer building Power BI and Microsoft Fabric systems that cut reporting from hours to minutes.
           </div>
         </div>
@@ -98,14 +98,14 @@ export default function OpengraphImage() {
                 gap: "4px",
                 padding: "18px 22px",
                 borderRadius: "16px",
-                border: "1px solid rgba(217, 176, 97,0.3)",
-                background: "rgba(36,18,23,0.78)",
+                border: "1px solid rgba(255,255,255,0.14)",
+                background: "rgba(255,255,255,0.05)",
                 width: "300px",
               }}
             >
-              <div style={{ display: "flex", fontSize: "40px", fontWeight: 800, color: "#D9B061", letterSpacing: "-1px" }}>{r.value}</div>
-              <div style={{ display: "flex", fontSize: "20px", color: "#FFF4E6" }}>{r.label}</div>
-              <div style={{ display: "flex", fontSize: "17px", color: "#C9B8AE" }}>{r.from}</div>
+              <div style={{ display: "flex", fontSize: "40px", fontWeight: 800, color: "#FFB829", letterSpacing: "-1px" }}>{r.value}</div>
+              <div style={{ display: "flex", fontSize: "20px", color: "#FFFFFF" }}>{r.label}</div>
+              <div style={{ display: "flex", fontSize: "17px", color: "#BDBDBD" }}>{r.from}</div>
             </div>
           ))}
         </div>
