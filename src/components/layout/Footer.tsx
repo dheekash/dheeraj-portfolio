@@ -61,10 +61,9 @@ export function Footer() {
                 <Mark name="GitHub" size={16} /> GitHub <ArrowUpRight size={14} aria-hidden />
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
-              <a href="/api/resume" target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
-                <FileText size={16} aria-hidden className="mark" /> CV <ArrowUpRight size={14} aria-hidden />
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
+              <Link href="/cv" className="btn btn-secondary icon-btn">
+                <FileText size={16} aria-hidden className="mark" /> CV
+              </Link>
             </div>
           </div>
 
@@ -93,7 +92,7 @@ export function Footer() {
               <li><Link href="/#skills">Technologies</Link></li>
               <li><Link href="/#work">Projects</Link></li>
               <li><Link href="/certifications">Certifications</Link></li>
-              <li><Link href="/cv">One-page CV</Link></li>
+              <li><Link href="/cv">CV</Link></li>
             </ul>
           </nav>
 

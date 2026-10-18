@@ -6,7 +6,6 @@ export interface Profile {
   email: string;
   phone?: string;
   avatar: string;
-  resumeUrl: string;
   calendlyUrl: string;
   linkedinUrl: string;
   githubUrl: string;

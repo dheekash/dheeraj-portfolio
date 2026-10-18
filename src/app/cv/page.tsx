@@ -2,16 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { profile } from "@/data/profile";
-import { roles } from "@/data/roles";
-import { layers } from "@/data/skills";
-import { caseStudies } from "@/data/work";
-import { allCredentials, flagshipCredentials } from "@/data/credentials";
+import { resume } from "@/data/resume";
 import { SITE_URL } from "@/lib/site";
 import { PrintButton } from "@/components/common/PrintButton";
 
 export const metadata: Metadata = {
   title: "CV",
-  description: "Dheeraj Kashyap, BI & Analytics Engineer: experience, selected projects, skills and certifications on one printable page.",
+  description: "Dheeraj Kashyap, Senior BI & Analytics Engineer: summary, skills, experience, projects, certifications and education, ready to print or save as PDF.",
   alternates: { canonical: "/cv" },
 };
 
@@ -19,12 +16,11 @@ const host = SITE_URL.replace(/^https?:\/\//, "");
 const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
 
 /**
- * A printable CV built from the same data as the site, so it never drifts
- * from the portfolio. On screen it is a document card with a print button;
- * printed (or saved as PDF) it is a plain A4 page with no site chrome.
+ * The résumé as a web page (src/data/resume.ts). On screen it is a document
+ * card with a print button; printed or saved as PDF it is a plain A4
+ * document with no site chrome.
  */
 export default function CvPage() {
-  const projects = caseStudies.filter((s) => s.featured);
   return (
     <div className="cv-wrap">
       <div className="container cv-tools">
@@ -36,10 +32,10 @@ export default function CvPage() {
         <header className="cv-head">
           <div>
             <h1 className="cv-name">{profile.name}</h1>
-            <p className="cv-role">BI &amp; Analytics Engineer · Power BI · Microsoft Fabric</p>
+            <p className="cv-role">{resume.headline} · {resume.tools.join(" · ")}</p>
           </div>
           <ul className="cv-contact">
-            <li>Bengaluru, India · Remote</li>
+            <li>{resume.location}</li>
             <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
             <li><a href={profile.linkedinUrl}>{strip(profile.linkedinUrl)}</a></li>
             <li><a href={profile.githubUrl}>{strip(profile.githubUrl)}</a></li>
@@ -48,66 +44,68 @@ export default function CvPage() {
         </header>
 
         <section className="cv-section">
-          <h2>Profile</h2>
-          <p>
-            BI &amp; Analytics Engineer with 7+ years in enterprise reporting, semantic modelling and modern
-            data platforms. I design semantic models, build data pipelines and deliver reporting systems for
-            finance, operations, sales and executive teams, from support-floor reporting, to risk and fraud
-            analytics at Amazon, to Fabric lakehouse platforms for clients across 15 countries.
-            {" "}{allCredentials.length} certifications across Microsoft, Databricks, Snowflake and Astronomer.
-          </p>
+          <h2>Summary</h2>
+          <p>{resume.summary}</p>
+        </section>
+
+        <section className="cv-section">
+          <h2>Skills</h2>
+          <dl className="cv-skills">
+            {resume.skills.map((s) => (
+              <div key={s.area}><dt>{s.area}</dt><dd>{s.items}</dd></div>
+            ))}
+          </dl>
         </section>
 
         <section className="cv-section">
           <h2>Experience</h2>
-          {roles.map((r) => (
-            <div key={r.company} className="cv-role-block">
+          {resume.experience.map((r) => (
+            <div key={r.title + r.start} className="cv-role-block">
               <div className="cv-row">
-                <h3>{r.title} · <span>{r.company}</span></h3>
-                <p className="cv-when">{r.start} – {r.end} · {r.location}</p>
+                <h3>{r.title}</h3>
+                <p className="cv-when">{r.start} – {r.end}</p>
               </div>
-              <p className="cv-summary">{r.summary}</p>
-              <p className="cv-impact">
-                {r.impact.map((m, k) => (
-                  <span key={m.label}>{k > 0 && " · "}<strong>{m.value}</strong> {m.label}</span>
-                ))}
-              </p>
+              <p className="cv-org">{r.company} · {r.where}</p>
+              <ul className="cv-bullets">
+                {r.bullets.map((b) => <li key={b}>{b}</li>)}
+              </ul>
             </div>
           ))}
         </section>
 
         <section className="cv-section">
-          <h2>Selected projects</h2>
-          <ul className="cv-projects">
-            {projects.map((s) => (
-              <li key={s.slug}>
-                <strong>{s.title}</strong>: {s.impact[0].value} {s.impact[0].label.toLowerCase()}.{" "}
-                <span className="cv-muted">{s.stack.slice(0, 4).join(", ")}.</span>
-              </li>
-            ))}
-          </ul>
+          <h2>Projects</h2>
+          {resume.projects.map((p) => (
+            <div key={p.name} className="cv-role-block">
+              <div className="cv-row">
+                <h3>{p.name} · <span>{p.client}</span></h3>
+                <p className="cv-when">{p.year}</p>
+              </div>
+              <dl className="cv-kv">
+                <div><dt>Tech</dt><dd>{p.tech}</dd></div>
+                <div><dt>Impact</dt><dd>{p.impact}</dd></div>
+              </dl>
+            </div>
+          ))}
         </section>
 
         <div className="cv-cols">
           <section className="cv-section">
-            <h2>Skills</h2>
-            <dl className="cv-skills">
-              {layers.map((l) => (
-                <div key={l.tag}><dt>{l.tag}</dt><dd>{l.items.join(", ")}</dd></div>
+            <h2>Certifications</h2>
+            <ul className="cv-certs">
+              {resume.certifications.map((c) => (
+                <li key={c.name}>{c.name} <span className="cv-muted">· {c.issuer}, {c.year}</span></li>
               ))}
-            </dl>
+            </ul>
           </section>
 
           <section className="cv-section">
-            <h2>Certifications</h2>
+            <h2>Education</h2>
             <ul className="cv-certs">
-              {flagshipCredentials.map((c) => (
-                <li key={c.code}><strong>{c.code}</strong> {c.name} <span className="cv-muted">· {c.issuer}, {c.earned}</span></li>
+              {resume.education.map((e) => (
+                <li key={e.degree}><strong>{e.degree}</strong><br /><span className="cv-muted">{e.school} · {e.years}</span></li>
               ))}
             </ul>
-            <p className="cv-muted cv-more">
-              Plus {allCredentials.length - flagshipCredentials.length} more: {allCredentials.filter((c) => !c.flagship).map((c) => c.code).join(", ")}.
-            </p>
           </section>
         </div>
       </article>
