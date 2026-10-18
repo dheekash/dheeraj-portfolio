@@ -2770,3 +2770,133 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
   --d-btn-hover: #6C4F82;
   --d-on: #FFFFFF;
 }
+
+:root[data-palette="void"] {
+  --p-bg: #FFFFFF;
+  --p-bg2: #F6F6F7;
+  --p-raised: #FFFFFF;
+  --p-ink: #000000;
+  --p-mut: #4A4A4F;
+  --p-soft: #5C5C61;
+  --p-faint: #8A8A8F;
+  --p-faint2: #7E7E83;
+  --p-line: #E7E7EA;
+  --p-line-sub: #F1F1F3;
+  --p-line-strong: #CFCFD4;
+  --p-acc: #5B2EE0;
+  --p-acc-deep: #4A22C2;
+  --p-acc-deep2: #5228D2;
+  --p-acc-mid: #9C7BFF;
+  --p-acc-mid2: #8E68FF;
+  --p-acc-tint2: #E7DFFF;
+  --p-acc-tint: #F4F0FF;
+  --p-band-sheet: #0B0B0D;
+  --p-band-line: #222226;
+  --p-band-input: #2E2E33;
+  --p-grey1: #8C8C91;
+  --p-grey2: #707075;
+  --p-grey3: #4A4A4F;
+  --p-ink-acc: #1E1240;
+  --p-btn: #8052FF;
+  --p-btn-hover: #6B3CF0;
+  --p-on: #FFFFFF;
+  --d-bg: #000000;
+  --d-bg2: #000000;
+  --d-sheet: #000000;
+  --d-raised: #0C0C0E;
+  --d-band: #000000;
+  --d-ink: #FFFFFF;
+  --d-mut: #BDBDBD;
+  --d-line: #1C1C20;
+  --d-line-sub: #141417;
+  --d-line-strong: #2C2C31;
+  --d-acc: #FFB829;
+  --d-acc-hi: #FFCB63;
+  --d-acc-hi2: #FFE0A3;
+  --d-acc-tint2: #1F1708;
+  --d-acc-tint: #140E04;
+  --d-acc-tint3: #1A1306;
+  --d-grey-hi: #EDEDED;
+  --d-grey-hi2: #D6D6D6;
+  --d-grey-mid: #5A5A5F;
+  --d-btn: #8052FF;
+  --d-btn-hover: #6B3CF0;
+  --d-on: #FFFFFF;
+}
+
+/* ═══ Void theme: constellation on black velvet ═════════════════════════
+   Everything below applies only with data-palette="void". Display type is
+   Inter at 400 with tight tracking (scale, not weight, makes hierarchy);
+   body copy is light; surfaces are flat on the page colour, without
+   shadows or card boxes; one violet pill per view. The hero carries the
+   star-schema constellation (components/sections/HeroConstellation). */
+.hx-constellation { display: none; }
+:root[data-palette="void"] {
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --fs-hero: clamp(3.25rem, 1rem + 7.4vw, 7.5rem);
+  --fs-3xl: clamp(2.5rem, 1.4rem + 3.6vw, 4.5rem);
+  --fs-4xl: clamp(2.75rem, 1.4rem + 4.4vw, 5.25rem);
+  --depth-1: none; --depth-2: none; --depth-3: none; --depth-in: none;
+  --surface-low: var(--paper); --surface-top: var(--paper);
+}
+
+/* Constellation layer behind the hero copy and portrait */
+:root[data-palette="void"] .fx-hero,
+:root[data-palette="void"]:not(.dark) .fx-hero { background: var(--paper); }
+:root[data-palette="void"] .hx-constellation { display: block; position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+:root[data-palette="void"] .hx > :not(.hx-constellation) { position: relative; z-index: 1; }
+
+/* Sculptural headlines: weight 400, tight tracking, sentence case */
+:root[data-palette="void"] :is(h1, .sx-title, .fx-name, .display-1, .display-2, .cs2-section h2, .cf-title, .nf-title) {
+  font-weight: 400; letter-spacing: -0.04em;
+}
+:root[data-palette="void"] .fx-name { text-transform: none; line-height: 0.9; letter-spacing: -0.05em; }
+:root[data-palette="void"] :is(h3, .pc-title h3, .sk-title, .ht-role, .cs2-pn-title) { font-weight: 500; letter-spacing: -0.02em; }
+:root[data-palette="void"] :is(.sx-stat-value, .ht-impact-value, .cs2-result-value, .cs2-headline-value, .pc-value, .hx-fact dd) { font-weight: 400; letter-spacing: -0.04em; }
+:root[data-palette="void"] .sx-dot { color: var(--btn); }
+
+/* Airy body copy */
+:root[data-palette="void"] body { font-weight: 300; }
+:root[data-palette="void"] :is(strong, b) { font-weight: 600; }
+
+/* One violet pill per view; secondary actions are outlined ghosts */
+:root[data-palette="void"] :is(.btn, .sx-icon-btn, .copy-btn, .nav-link-cta) { border-radius: 999px; }
+:root[data-palette="void"] :is(.btn-secondary, .fx-actions .btn-secondary, .sx-icon-btn, .copy-btn) { background: transparent; border-color: var(--line-strong); }
+
+/* Nav: no capsule edge or shadow, just the page colour behind it */
+:root[data-palette="void"] { --glass-bg: color-mix(in srgb, var(--paper) 78%, transparent); --glass-edge: transparent; --glass-spec: transparent; --glass-under: transparent; --glass-shadow: transparent; --glass-sheen: transparent; }
+:root[data-palette="void"] .nav.is-on-dark { --glass-bg: rgba(0, 0, 0, 0.78); }
+
+/* Violet is for actions, never a surface: featured covers and lead results
+   become a soft iris nebula on the page colour. */
+:root[data-palette="void"] .pc-photo {
+  color: var(--ink);
+  background: radial-gradient(60% 70% at 50% 42%, color-mix(in srgb, #8052FF 26%, transparent), transparent 72%), var(--paper);
+}
+:root[data-palette="void"] .pc-album { background: transparent; border-top: 0; }
+:root[data-palette="void"] .cs2-result dd { background: transparent; }
+:root[data-palette="void"] .cs2-result.is-lead dd {
+  color: var(--ink); box-shadow: none;
+  background: radial-gradient(80% 120% at 20% 30%, color-mix(in srgb, #8052FF 24%, transparent), transparent 70%);
+}
+
+/* Form fields: an underline, clearly visible (3:1) on the page colour */
+:root[data-palette="void"] .field input, :root[data-palette="void"] .field textarea {
+  background: transparent; border: 0; border-bottom: 1px solid var(--void-field); border-radius: 0; box-shadow: none; padding-inline: 2px;
+}
+:root[data-palette="void"] { --void-field: #8A8A90; }
+:root.dark[data-palette="void"] { --void-field: #6A6A70; }
+:root[data-palette="void"] .field input:focus-visible, :root[data-palette="void"] .field textarea:focus-visible { border-bottom-color: var(--btn); outline-offset: 4px; }
+
+/* Cover labels follow the theme (they were white for the old dark cover) */
+:root[data-palette="void"] :is(.pc-label, .pc-num, .pc-photo .pg-bar) { color: var(--muted-ink); }
+:root[data-palette="void"] .pc-photo .pg-bar::after { background: color-mix(in srgb, var(--ink) 22%, transparent); }
+:root[data-palette="void"] .pc-photo .pg-bar.is-after::after { background: var(--ink); }
+
+/* Dark band in light mode: flat too, and the nav keeps no capsule edge over it */
+:root[data-palette="void"] { --p-band-sheet: #000000; }
+:root[data-palette="void"] .nav.is-on-dark { --glass-edge: transparent; --glass-spec: transparent; --glass-under: transparent; --glass-shadow: transparent; --glass-sheen: transparent; }
+:root[data-palette="void"] .cf-form .card { background: transparent; border-color: transparent; box-shadow: none; }
+
+/* Case-study header: no tinted glow, just the page */
+:root[data-palette="void"] .cs2-hero { background: none; }
