@@ -13,5 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: s.featured ? 0.8 : 0.6,
     })),
     { url: `${siteUrl}/certifications`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
+    { url: `${siteUrl}/cv`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
   ];
 }
