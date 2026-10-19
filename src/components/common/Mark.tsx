@@ -19,11 +19,16 @@ import {
   ChartColumnBig,
   Cloud,
   Database,
+  Activity,
+  Files,
   Funnel,
+  HardDrive,
   Layers,
   Network,
+  RadioTower,
   Sheet,
   Sigma,
+  Waves,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
@@ -72,6 +77,11 @@ const neutral: Record<string, LucideIcon> = {
   "delta-lake": Layers,
   dbt: Blocks,
   sqlmesh: Network,
+  onelake: Waves,
+  "adls-gen2": HardDrive,
+  "azure-event-hubs": RadioTower,
+  "delta-live-tables": Activity,
+  sharepoint: Files,
 };
 
 export const slugOf = (name: string) =>
