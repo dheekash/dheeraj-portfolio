@@ -2942,3 +2942,11 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
   :root[data-palette="void"] .nf-tf .tf-g2 { animation: tf-drift 22s ease-in-out infinite alternate-reverse; }
   :root[data-palette="void"] .nf-tf .tf-g3 { animation: tf-drift-b 28s ease-in-out infinite alternate; }
 }
+
+/* CV page: download the PDF, or print the web version */
+.cv-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+/* Phones: LinkedIn and GitHub side by side, the CV download full width */
+@media (max-width: 767.98px) {
+  .cf-ctas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cf-ctas a[download] { grid-column: 1 / -1; }
+}

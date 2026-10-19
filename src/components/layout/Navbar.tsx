@@ -6,6 +6,7 @@ import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { Logo } from "@/components/common/Logo";
 import { PaletteSwitcher } from "@/components/layout/PaletteSwitcher";
+import { CV_PDF, CV_PDF_NAME } from "@/lib/site";
 
 /* Four destinations. Platform judgment and certifications sit inside
    Expertise's reach on the page; Contact is the primary button. */
@@ -169,8 +170,8 @@ export function Navbar() {
               <a href={href("contact")} className="btn btn-primary" onClick={() => setOpen(false)}>
                 Let&rsquo;s talk
               </a>
-              <a href="/cv" className="btn btn-secondary" onClick={() => setOpen(false)}>
-                View CV
+              <a href={CV_PDF} download={CV_PDF_NAME} className="btn btn-secondary" onClick={() => setOpen(false)}>
+                Download CV
               </a>
             </div>
           </nav>

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Download } from "lucide-react";
 import { profile } from "@/data/profile";
 import { resume } from "@/data/resume";
-import { SITE_URL, pageMeta } from "@/lib/site";
+import { CV_PDF, CV_PDF_NAME, SITE_URL, pageMeta } from "@/lib/site";
 import { PrintButton } from "@/components/common/PrintButton";
 
 export const metadata: Metadata = pageMeta({
@@ -17,15 +17,20 @@ const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
 
 /**
  * The résumé as a web page (src/data/resume.ts). On screen it is a document
- * card with a print button; printed or saved as PDF it is a plain A4
- * document with no site chrome.
+ * card with a download for the résumé PDF and a print button; printed, it
+ * is a plain A4 document with no site chrome.
  */
 export default function CvPage() {
   return (
     <div className="cv-wrap">
       <div className="container cv-tools">
         <Link href="/" className="link-arrow cs-back"><ArrowLeft size={16} aria-hidden /> Back to the site</Link>
-        <PrintButton />
+        <span className="cv-actions">
+          <a href={CV_PDF} download={CV_PDF_NAME} className="btn btn-primary">
+            <Download size={16} aria-hidden /> Download PDF
+          </a>
+          <PrintButton />
+        </span>
       </div>
 
       <article className="cv" aria-label="Curriculum vitae">
