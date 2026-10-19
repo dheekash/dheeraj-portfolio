@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { Footer } from "@/components/layout/Footer";
 import { SITE_URL } from "@/lib/site";
-import { allCredentials, issuerList } from "@/data/credentials";
+import { allCredentials } from "@/data/credentials";
 import { layers } from "@/data/skills";
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     template: "%s | Dheeraj Kashyap",
   },
   description:
-    `Dheeraj Kashyap, BI & Analytics Engineer in Bengaluru with 7+ years building Power BI semantic models and Microsoft Fabric lakehouses that cut reporting from hours to minutes. Open to opportunities; ${allCredentials.length} certifications across ${issuerList}.`,
+    `BI & Analytics Engineer in Bengaluru with 7+ years building Power BI semantic models and Microsoft Fabric lakehouses. ${allCredentials.length} certifications. Open to opportunities.`,
   keywords: [
     "Microsoft Certified BI Engineer",
     "BI & Analytics Engineer",

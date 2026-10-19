@@ -6,6 +6,7 @@ import { caseStudies, getStudy, metaOf, type CaseStudy } from "@/data/work";
 import { ArchitectureDiagram, WorkImage } from "@/components/work/ArchitectureFlow";
 import { CaseToc } from "@/components/work/CaseToc";
 import { Figure } from "@/components/common/Figure";
+import { TriangleField } from "@/components/common/TriangleField";
 import { Mark, hasMark } from "@/components/common/Mark";
 import { leadOf, ratioOf } from "@/lib/results";
 import { SITE_URL, pageMeta } from "@/lib/site";
@@ -22,6 +23,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!s) return {};
   return pageMeta({ title: s.title, description: describe(s), path: `/work/${s.slug}` });
 }
+
+/* A stable number from a slug, so each study gets its own triangle field. */
+const seedOf = (slug: string) => [...slug].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
 
 /* Search and link-preview description: the summary, plus the first result
    sentence when both fit in about 170 characters. */
@@ -118,6 +122,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Overview: who it was for and what it was, beside the facts */}
       <header className="cs2-hero">
+        {/* Void only: a faint constellation behind the facts side, unique per study */}
+        <TriangleField seed={seedOf(s.slug)} count={90} width={900} height={520} shape="field" className="cs2-tf" />
         <div className="container cs2-hero-grid">
           <div className="cs2-intro">
             <Link href="/#work" className="link-arrow cs-back">

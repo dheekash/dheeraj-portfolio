@@ -1986,22 +1986,8 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 #work .sx-more { margin-top: 22px; }
 
 /* ═══ Palette switcher ═════════════════════════════════════════════════ */
-.pal { position: relative; }
 .pal-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-strong); color: var(--ink); }
-.pal-btn:hover, .pal-btn[aria-expanded="true"] { border-color: var(--sage); color: var(--sage); }
-.pal-menu { position: absolute; top: calc(100% + 10px); right: 0; z-index: 60; display: grid; gap: 2px; width: 236px; padding: 6px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--sheet); box-shadow: 0 18px 40px -18px color-mix(in srgb, var(--p-ink) 45%, transparent); }
-.pal-opt { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 40px; padding: 6px 10px; border-radius: var(--r-md); font-size: var(--fs-sm); font-weight: 500; color: var(--ink); text-align: left; cursor: pointer; }
-.pal-opt:hover, .pal-opt:focus-visible { background: color-mix(in srgb, var(--ink) 7%, transparent); outline: none; }
-.pal-opt:focus-visible { box-shadow: inset 0 0 0 2px var(--sage); }
-
-.pal-sw { display: inline-flex; flex: none; }
-.pal-sw span { width: 16px; height: 16px; border-radius: 50%; box-shadow: 0 0 0 1.5px var(--sheet), 0 0 0 2px var(--line); }
-.pal-sw span + span { margin-left: -5px; }
-.pal-check { margin-left: auto; color: var(--sage); }
-@media (prefers-reduced-motion: no-preference) {
-  .pal-menu { animation: pal-in 160ms var(--ease); }
-}
-@keyframes pal-in { from { opacity: 0; transform: translateY(-4px); } }
+.pal-btn:hover { border-color: var(--sage); color: var(--sage); }
 
 /* ═══ Motion system ═════════════════════════════════════════════════════
    One set of durations and curves for the whole site. Colours are the
@@ -2071,11 +2057,11 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 .nav-link:not(.nav-link-cta) { color: color-mix(in srgb, var(--ink) 72%, transparent); transition: color var(--m-ui) ease; }
 .nav-link:not(.nav-link-cta):hover, .nav-link:not(.nav-link-cta)[aria-current="true"] { color: var(--ink); }
 .nav-inner { transition: background-color var(--m-card) ease, box-shadow var(--m-card) ease, border-color var(--m-card) ease; }
-/* Theme and palette icons turn in when they change; the menu sheet settles in */
+/* Theme and palette icons turn when they change; the menu sheet settles in */
 @media (prefers-reduced-motion: no-preference) {
   .theme-btn svg { animation: icon-turn 360ms var(--e-out); }
   .pal-btn svg { transition: transform var(--m-card) var(--e-out); }
-  .pal-btn[aria-expanded="true"] svg { transform: rotate(-20deg); }
+  .pal-btn[data-to="void"] svg { transform: rotate(180deg); }
   .nav-sheet-panel { animation: sheet-in 280ms var(--e-out) both; }
 }
 @keyframes icon-turn { from { opacity: 0; transform: rotate(-90deg) scale(0.6); } }
@@ -2165,7 +2151,7 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 .band { --surface-high: var(--band-sheet); --surface-top: color-mix(in srgb, var(--band-sheet) 80%, #FFFFFF); }
 
 /* Raised surfaces: lighter shade, small two-layer shadow, faint ring */
-.card, .sk-card, .pc, .hx-facts, .sx-stat dd, .pal-menu, .hflow-node {
+.card, .sk-card, .pc, .hx-facts, .sx-stat dd, .hflow-node {
   border-color: transparent;
   background-color: var(--surface-high);
   box-shadow: var(--depth-1);
@@ -2192,7 +2178,6 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 
 /* Selected states lift: the chosen project thumbnail, palette and tag */
 .pc-thumb[aria-selected="true"] { box-shadow: inset 0 1px 0 #FFFFFF, 0 4px 10px -2px rgba(0, 0, 0, 0.45); }
-.pal-opt[aria-pressed="true"] { background: var(--surface-top); box-shadow: inset 0 1px 0 var(--hi), 0 0 0 1px var(--ring), 0 2px 5px -2px var(--sh); }
 
 /* Buttons: the primary gets light from above (same colour, a touch
    lighter at the top, a bright top edge); the secondary becomes a raised
@@ -2473,7 +2458,7 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 
 @page { size: A4; margin: 10mm 12mm; }
 @media print {
-  .nav, .site-footer, footer#contact, .contact-bar, .scroll-progress, .skip-link, .cv-tools, .pal-menu { display: none !important; }
+  .nav, .site-footer, footer#contact, .contact-bar, .scroll-progress, .skip-link, .cv-tools { display: none !important; }
   :root, :root.dark, html, body, main, .cv-wrap { background: #FFFFFF !important; color-scheme: light !important; }
   .cv-wrap { padding: 0; }
   .cv { width: auto; margin: 0; padding: 0; border-radius: 0; box-shadow: none; background: transparent; font-size: 9.2pt; line-height: 1.38; }
@@ -2900,3 +2885,60 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 }
 :root[data-palette="dusk"] :is(.btn-secondary, .sx-icon-btn, .copy-btn):hover { border-color: var(--ink); background: color-mix(in srgb, var(--ink) 6%, transparent); }
 @media screen { :root[data-palette="dusk"] .cv { background: var(--surface-high); box-shadow: 0 0 0 1px var(--hairline) inset; } }
+
+/* ═══ Void polish ═══════════════════════════════════════════════════════ */
+/* Cover: the headline figure stays clear of triangles; fewer on phones */
+:root[data-palette="void"] .pc-tf {
+  -webkit-mask-image: radial-gradient(ellipse 38% 32% at 50% 40%, transparent 55%, #000 100%);
+  mask-image: radial-gradient(ellipse 38% 32% at 50% 40%, transparent 55%, #000 100%);
+}
+@media (max-width: 767.98px) { :root[data-palette="void"] .pc-tf :is(.tf-g2, .tf-g3) { display: none; } }
+
+/* Experience chevrons: a dark fill inside a 1px edge, so no grey panels
+   remain; the current role keeps its solid violet. The inner chevron is the
+   outer one inset by about a pixel, with or without the notch. */
+:root[data-palette="void"] { --void-edge: #CFCFD4; }
+:root.dark[data-palette="void"] { --void-edge: #3A3A40; }
+:root[data-palette="void"] .ht-item:not(.is-current) .ht-bar { position: relative; isolation: isolate; background: var(--void-edge); color: var(--muted-ink); }
+:root[data-palette="void"] .ht-item:not(.is-current) .ht-bar::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--paper);
+  clip-path: polygon(1px 1px, calc(100% - var(--tip) - 0.5px) 1px, calc(100% - 1.5px) 50%, calc(100% - var(--tip) - 0.5px) calc(100% - 1px), 1px calc(100% - 1px), calc(var(--tip) + 1.5px) 50%);
+}
+:root[data-palette="void"] .ht-item:first-child:not(.is-current) .ht-bar::before {
+  clip-path: polygon(1px 1px, calc(100% - var(--tip) - 0.5px) 1px, calc(100% - 1.5px) 50%, calc(100% - var(--tip) - 0.5px) calc(100% - 1px), 1px calc(100% - 1px));
+}
+@media (max-width: 899.98px) {
+  :root[data-palette="void"] .ht-item:not(.is-current) .ht-bar::before {
+    clip-path: polygon(1px 1px, calc(100% - var(--tip) - 0.5px) 1px, calc(100% - 1.5px) 50%, calc(100% - var(--tip) - 0.5px) calc(100% - 1px), 1px calc(100% - 1px));
+  }
+}
+:root[data-palette="void"] .ht-item:not(.is-current) .ht-icon { background: var(--paper); color: var(--muted-ink); box-shadow: 0 0 0 1px var(--void-edge); }
+:root[data-palette="void"] .ht-item:not(.is-current) .ht-icon::before { background: var(--void-edge); }
+
+/* Case-study facts: the stack logo sits inside the (borderless) card */
+:root[data-palette="void"] .cs2-facts-mark { position: static; width: 48px; height: 48px; margin: 0 0 16px; box-shadow: 0 0 0 1px var(--line-strong); }
+
+/* Case-study header: a faint constellation on the facts side */
+:root[data-palette="void"] .cs2-hero { position: relative; isolation: isolate; overflow: hidden; }
+:root[data-palette="void"] .cs2-tf {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1;
+  /* Right of the title, and above the results row */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0 46%, #000 72%), linear-gradient(180deg, #000 0 50%, transparent 62%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent 0 46%, #000 72%), linear-gradient(180deg, #000 0 50%, transparent 62%);
+  mask-composite: intersect;
+}
+@media (max-width: 999.98px) { :root[data-palette="void"] .cs2-tf { display: none; } }
+
+/* 404: a drifting constellation fills the empty half */
+:root[data-palette="void"] .nf { position: relative; isolation: isolate; overflow: hidden; }
+:root[data-palette="void"] .nf-tf {
+  position: absolute; top: 50%; right: max(2vw, calc(50% - 660px)); z-index: -1;
+  width: min(46vw, 640px); height: auto; aspect-ratio: 640 / 560; transform: translateY(-50%);
+}
+@media (max-width: 899.98px) { :root[data-palette="void"] .nf-tf { display: none; } }
+@media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+  :root[data-palette="void"] .nf-tf .tf-g1 { animation: tf-drift 16s ease-in-out infinite alternate; }
+  :root[data-palette="void"] .nf-tf .tf-g2 { animation: tf-drift 22s ease-in-out infinite alternate-reverse; }
+  :root[data-palette="void"] .nf-tf .tf-g3 { animation: tf-drift-b 28s ease-in-out infinite alternate; }
+}

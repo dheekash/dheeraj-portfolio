@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { caseStudies } from "@/data/work";
+import { TriangleField } from "@/components/common/TriangleField";
 
 export const metadata: Metadata = {
   title: "Page not found",
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <section className="nf" aria-labelledby="nf-title">
+      {/* Void only: a drifting constellation in the empty half of the page */}
+      <TriangleField seed={404} count={150} width={640} height={560} className="nf-tf" />
       <div className="container nf-inner">
         <p className="sx-eyebrow">Error 404</p>
         <h1 id="nf-title" className="sx-title nf-title">
