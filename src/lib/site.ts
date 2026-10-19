@@ -3,6 +3,11 @@
  * robots.txt and the sitemap. Set NEXT_PUBLIC_SITE_URL in Vercel when a
  * custom domain is connected; until then this is the live Vercel address.
  */
+/** The downloadable résumé (public/Dheeraj_Kashyap_Resume.pdf), and the
+    file name browsers save it as. */
+export const CV_PDF = "/Dheeraj_Kashyap_Resume.pdf";
+export const CV_PDF_NAME = "Dheeraj_Kashyap_Resume.pdf";
+
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://the-data-guy-dheeraj-portfolio.vercel.app").replace(/\/$/, "");
 
 /**

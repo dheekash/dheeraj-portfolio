@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, FileText } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
+import { CV_PDF, CV_PDF_NAME } from "@/lib/site";
 import { profile } from "@/data/profile";
 import { Mark } from "@/components/common/Mark";
 import { LinkedinIcon } from "@/components/common/SocialIcons";
@@ -54,9 +54,9 @@ export function Hero() {
             <a href="#contact" className="btn btn-primary">
               Contact me <ArrowRight size={16} aria-hidden />
             </a>
-            <Link href="/cv" className="btn btn-secondary">
-              <FileText size={16} aria-hidden /> View CV
-            </Link>
+            <a href={CV_PDF} download={CV_PDF_NAME} className="btn btn-secondary">
+              <Download size={16} aria-hidden /> Download CV
+            </a>
             <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="sx-icon-btn" aria-label="LinkedIn profile (opens in a new tab)" title="LinkedIn">
               <LinkedinIcon size={20} />
               <span className="hx-icon-label">LinkedIn</span>

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowUpRight, FileText, Mail } from "lucide-react";
+import { ArrowUpRight, Download, Mail } from "lucide-react";
+import { CV_PDF, CV_PDF_NAME } from "@/lib/site";
 import { LinkedinIcon } from "@/components/common/SocialIcons";
 import { Mark } from "@/components/common/Mark";
 import { Logo } from "@/components/common/Logo";
@@ -61,9 +62,10 @@ export function Footer() {
                 <Mark name="GitHub" size={16} /> GitHub <ArrowUpRight size={14} aria-hidden />
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
-              <Link href="/cv" className="btn btn-secondary icon-btn">
-                <FileText size={16} aria-hidden className="mark" /> CV
-              </Link>
+              <a href={CV_PDF} download={CV_PDF_NAME} className="btn btn-secondary icon-btn">
+                <Download size={16} aria-hidden className="mark" /> Download CV
+                <span className="sr-only">(PDF)</span>
+              </a>
             </div>
           </div>
 
