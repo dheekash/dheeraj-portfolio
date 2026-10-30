@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Geist, IBM_Plex_Mono, Inter, Manrope } from "next/font/google";
+import { Archivo, DM_Sans, Geist, IBM_Plex_Mono, Inter, Manrope } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
@@ -34,6 +34,15 @@ const inter = Inter({
   display: "swap",
 });
 
+/* Mercury (the default palette) headings: Archivo with its width axis, set
+   wide at weight 480. */
+const archivo = Archivo({
+  subsets: ["latin"],
+  axes: ["wdth"],
+  variable: "--font-archivo",
+  display: "swap",
+});
+
 /* The Dusk palette's faces. Not preloaded: the files download only when
    Dusk is chosen and text actually uses them. */
 const dmSans = DM_Sans({
@@ -63,7 +72,7 @@ const siteUrl = SITE_URL;
    Dark is the default theme; ThemeProvider keeps this in sync when the
    visitor switches. */
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#171721",
 };
 
 export const metadata: Metadata = {
@@ -176,18 +185,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      data-palette="void"
+      data-palette="mercury"
       suppressHydrationWarning
-      className={`dark ${manrope.variable} ${inter.variable} ${plexMono.variable} ${dmSans.variable} ${geist.variable}`}
+      className={`dark ${manrope.variable} ${inter.variable} ${plexMono.variable} ${dmSans.variable} ${geist.variable} ${archivo.variable}`}
     >
       <head>
-        {/* Dark and the Void palette are the defaults (set on <html>). Light
-            and Dusk are applied before paint only when the visitor chose them
-            on an earlier visit. */}
+        {/* Dark and the Mercury palette are the defaults (set on <html>).
+            Light, Void and Dusk are applied before paint only when the
+            visitor chose them on an earlier visit. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var d=document.documentElement;if(localStorage.getItem('theme')==='light'){d.classList.remove('dark')}if(localStorage.getItem('palette')==='dusk'){d.setAttribute('data-palette','dusk')}}catch(e){}})()",
+              "(function(){try{var d=document.documentElement;if(localStorage.getItem('theme')==='light'){d.classList.remove('dark')}var p=localStorage.getItem('palette');if(p==='void'||p==='dusk'){d.setAttribute('data-palette',p)}}catch(e){}})()",
           }}
         />
         <script

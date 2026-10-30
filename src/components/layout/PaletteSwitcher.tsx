@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { Palette } from "lucide-react";
 import { syncThemeColor } from "@/components/providers/ThemeProvider";
 
-/* The two palettes in globals.css (":root[data-palette=…]"). Void is the
-   default and is rendered on <html> by the server. */
+/* The palettes in globals.css (":root[data-palette=…]"), in the order the
+   button cycles through them. Mercury is the default and is rendered on
+   <html> by the server. */
 export const PALETTES = [
+  { id: "mercury", name: "Mercury" },
   { id: "void", name: "Void" },
   { id: "dusk", name: "Dusk" },
 ] as const;
@@ -22,24 +24,28 @@ function applyPalette(id: PaletteId) {
 }
 
 /**
- * One-click palette button for the nav: switches between Void and Dusk.
- * Like the theme button, its label names the palette it switches to.
+ * One-click palette button for the nav: steps to the next palette
+ * (Mercury → Void → Dusk → Mercury). Like the theme button, its label
+ * names the palette it switches to.
  */
 export function PaletteSwitcher() {
-  const [current, setCurrent] = useState<PaletteId>("void");
+  const [current, setCurrent] = useState<PaletteId>("mercury");
 
   // Follow <html data-palette>: set before paint, and changed by either copy
   // of this button (the nav renders one for wide and one for narrow screens).
   useEffect(() => {
     const root = document.documentElement;
-    const sync = () => setCurrent(root.getAttribute("data-palette") === "dusk" ? "dusk" : "void");
+    const sync = () => {
+      const id = root.getAttribute("data-palette");
+      setCurrent(PALETTES.find((p) => p.id === id)?.id ?? "mercury");
+    };
     sync();
     const mo = new MutationObserver(sync);
     mo.observe(root, { attributes: true, attributeFilter: ["data-palette"] });
     return () => mo.disconnect();
   }, []);
 
-  const next = PALETTES.find((p) => p.id !== current)!;
+  const next = PALETTES[(PALETTES.findIndex((p) => p.id === current) + 1) % PALETTES.length];
 
   return (
     <button

@@ -5,9 +5,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 type Theme = "light" | "dark";
 
 /* Keeps <meta name="theme-color"> on the page background so browser chrome
-   matches the page: reads --paper (palette- and theme-aware), with the Void
+   matches the page: reads --paper (palette- and theme-aware), with the Mercury
    palette's values as a fallback. */
-const THEME_COLOR: Record<Theme, string> = { light: "#FFFFFF", dark: "#000000" };
+const THEME_COLOR: Record<Theme, string> = { light: "#F6F6F9", dark: "#171721" };
 
 export function syncThemeColor(theme: Theme) {
   let tag = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
