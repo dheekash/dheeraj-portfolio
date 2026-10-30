@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { Logo } from "@/components/common/Logo";
-import { PaletteSwitcher } from "@/components/layout/PaletteSwitcher";
 import { CV_PDF, CV_PDF_NAME } from "@/lib/site";
 
 /* Four destinations. Platform judgment and certifications sit inside
@@ -133,12 +132,10 @@ export function Navbar() {
         </nav>
 
         <div className="nav-actions">
-          <PaletteSwitcher />
           <ThemeButton />
         </div>
 
         <div className="nav-mobile">
-          <PaletteSwitcher />
           <ThemeButton />
           <button
             type="button"

@@ -8,7 +8,6 @@ import { Mark } from "@/components/common/Mark";
 import { LinkedinIcon } from "@/components/common/SocialIcons";
 import { allCredentials } from "@/data/credentials";
 import { HeroFlow } from "@/components/sections/HeroFlow";
-import { HeroConstellation } from "@/components/sections/HeroConstellation";
 import { HeroMountains } from "@/components/sections/HeroMountains";
 
 /* Headshot sits beside the availability line once public/images/avatar.jpg exists. */
@@ -30,7 +29,6 @@ const facts = [
 export function Hero() {
   return (
     <section id="top" className="fx-hero hx" aria-labelledby="hero-title">
-      <HeroConstellation />
       <HeroMountains />
       <div className="container hx-grid">
         <div className="hx-copy">
