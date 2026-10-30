@@ -1,8 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import Image from "next/image";
-import { ArrowRight, Download } from "lucide-react";
-import { CV_PDF, CV_PDF_NAME } from "@/lib/site";
+import { ArrowRight } from "lucide-react";
+import { DownloadButton } from "@/components/common/DownloadButton";
+import { RotatingWords } from "@/components/common/RotatingWords";
 import { profile } from "@/data/profile";
 import { Mark } from "@/components/common/Mark";
 import { LinkedinIcon } from "@/components/common/SocialIcons";
@@ -45,7 +46,7 @@ export function Hero() {
           </h1>
           <p className="fx-lede hx-lede hero-anim" style={{ "--d": 4 } as React.CSSProperties}>
             I build BI systems that cut reporting from hours to minutes, with{" "}
-            <span className="hl">Power BI</span> and <span className="hl">Microsoft Fabric</span>.
+            <RotatingWords words={["Power BI", "Microsoft Fabric", "Snowflake", "Databricks"]} suffix="." className="hl" />
           </p>
           <p className="fx-cred hero-anim" style={{ "--d": 5 } as React.CSSProperties}>
             BI &amp; Analytics Engineer · 7+ years · {allCredentials.length} certifications incl. Microsoft DP-600 &amp; DP-700
@@ -54,9 +55,7 @@ export function Hero() {
             <a href="#contact" className="btn btn-primary">
               Contact me <ArrowRight size={16} aria-hidden />
             </a>
-            <a href={CV_PDF} download={CV_PDF_NAME} className="btn btn-secondary">
-              <Download size={16} aria-hidden /> Download CV
-            </a>
+            <DownloadButton />
             <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="sx-icon-btn" aria-label="LinkedIn profile (opens in a new tab)" title="LinkedIn">
               <LinkedinIcon size={20} />
               <span className="hx-icon-label">LinkedIn</span>

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Download } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { DownloadButton } from "@/components/common/DownloadButton";
 import { profile } from "@/data/profile";
 import { resume } from "@/data/resume";
-import { CV_PDF, CV_PDF_NAME, SITE_URL, pageMeta } from "@/lib/site";
+import { SITE_URL, pageMeta } from "@/lib/site";
 import { PrintButton } from "@/components/common/PrintButton";
 
 export const metadata: Metadata = pageMeta({
@@ -26,9 +27,7 @@ export default function CvPage() {
       <div className="container cv-tools">
         <Link href="/" className="link-arrow cs-back"><ArrowLeft size={16} aria-hidden /> Back to the site</Link>
         <span className="cv-actions">
-          <a href={CV_PDF} download={CV_PDF_NAME} className="btn btn-primary">
-            <Download size={16} aria-hidden /> Download PDF
-          </a>
+          <DownloadButton label="Download PDF" className="is-primary" />
           <PrintButton />
         </span>
       </div>
