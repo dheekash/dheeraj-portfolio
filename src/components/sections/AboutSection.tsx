@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Building2, MapPin, Network, Target, Users, Workflow, Wrench } from "lucide-react";
 
 /* Figures from the current role in the experience section. Years of
@@ -39,6 +40,11 @@ export function AboutSection() {
             </p>
           </div>
 
+          <div className="sx-about-side">
+            {/* Mercury: the portrait lives here instead of the (centred) hero */}
+            <div className="sx-portrait">
+              <Image src="/images/portrait.webp" alt="Dheeraj Kashyap" width={1000} height={1340} sizes="(min-width: 1000px) 360px, 80vw" />
+            </div>
           <dl className="sx-stats">
             {stats.map(({ Icon, value, label }) => (
               <div key={label} className="sx-stat">
@@ -51,6 +57,7 @@ export function AboutSection() {
               </div>
             ))}
           </dl>
+          </div>
         </div>
 
         <dl className="sx-facts reveal">

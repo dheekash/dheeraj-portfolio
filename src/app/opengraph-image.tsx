@@ -26,9 +26,9 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "64px 72px",
-          background: "#000000",
+          background: "#171721",
           fontFamily: "system-ui, sans-serif",
-          color: "#FFFFFF",
+          color: "#EDEDF3",
           position: "relative",
         }}
       >
@@ -40,7 +40,7 @@ export default function OpengraphImage() {
             width: "720px",
             height: "620px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(128, 82, 255,0.38) 0%, rgba(128, 82, 255,0) 70%)",
+            background: "radial-gradient(circle, rgba(82, 102, 235,0.32) 0%, rgba(82, 102, 235,0) 70%)",
             display: "flex",
           }}
         />
@@ -52,7 +52,7 @@ export default function OpengraphImage() {
             width: "520px",
             height: "520px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(128, 82, 255,0.18) 0%, rgba(128, 82, 255,0) 70%)",
+            background: "radial-gradient(circle, rgba(82, 102, 235,0.16) 0%, rgba(82, 102, 235,0) 70%)",
             display: "flex",
           }}
         />
@@ -61,7 +61,7 @@ export default function OpengraphImage() {
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={LOGO_SRC} width={165} height={56} alt="" />
-            <div style={{ display: "flex", fontSize: "22px", color: "#BDBDBD" }}>{host}</div>
+            <div style={{ display: "flex", fontSize: "22px", color: "#C3C3CC" }}>{host}</div>
           </div>
           <div
             style={{
@@ -81,9 +81,9 @@ export default function OpengraphImage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
           <div style={{ display: "flex", fontSize: "84px", fontWeight: 800, letterSpacing: "-3px", lineHeight: 1 }}>
-            Dheeraj Kashyap<span style={{ color: "#8052FF" }}>.</span>
+            Dheeraj Kashyap<span style={{ color: "#5266EB" }}>.</span>
           </div>
-          <div style={{ display: "flex", fontSize: "34px", color: "#EDEDED", maxWidth: "980px", lineHeight: 1.3 }}>
+          <div style={{ display: "flex", fontSize: "34px", color: "#C3C3CC", maxWidth: "980px", lineHeight: 1.3 }}>
             BI &amp; Analytics Engineer building Power BI and Microsoft Fabric systems that cut reporting from hours to minutes.
           </div>
         </div>
@@ -98,14 +98,14 @@ export default function OpengraphImage() {
                 gap: "4px",
                 padding: "18px 22px",
                 borderRadius: "16px",
-                border: "1px solid rgba(255,255,255,0.14)",
-                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(237,237,243,0.12)",
+                background: "#1E1E2A",
                 width: "300px",
               }}
             >
-              <div style={{ display: "flex", fontSize: "40px", fontWeight: 800, color: "#FFB829", letterSpacing: "-1px" }}>{r.value}</div>
-              <div style={{ display: "flex", fontSize: "20px", color: "#FFFFFF" }}>{r.label}</div>
-              <div style={{ display: "flex", fontSize: "17px", color: "#BDBDBD" }}>{r.from}</div>
+              <div style={{ display: "flex", fontSize: "40px", fontWeight: 800, color: "#C7CDF6", letterSpacing: "-1px" }}>{r.value}</div>
+              <div style={{ display: "flex", fontSize: "20px", color: "#EDEDF3" }}>{r.label}</div>
+              <div style={{ display: "flex", fontSize: "17px", color: "#C3C3CC" }}>{r.from}</div>
             </div>
           ))}
         </div>

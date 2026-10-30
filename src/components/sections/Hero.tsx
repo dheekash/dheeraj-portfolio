@@ -9,6 +9,7 @@ import { LinkedinIcon } from "@/components/common/SocialIcons";
 import { allCredentials } from "@/data/credentials";
 import { HeroFlow } from "@/components/sections/HeroFlow";
 import { HeroConstellation } from "@/components/sections/HeroConstellation";
+import { HeroMountains } from "@/components/sections/HeroMountains";
 
 /* Headshot sits beside the availability line once public/images/avatar.jpg exists. */
 const PHOTO = "/images/avatar.jpg";
@@ -30,6 +31,7 @@ export function Hero() {
   return (
     <section id="top" className="fx-hero hx" aria-labelledby="hero-title">
       <HeroConstellation />
+      <HeroMountains />
       <div className="container hx-grid">
         <div className="hx-copy">
           <p className="fx-status hero-anim" style={{ "--d": 0 } as React.CSSProperties}>
@@ -76,7 +78,6 @@ export function Hero() {
               alt="Dheeraj Kashyap"
               width={1000}
               height={1340}
-              priority
               sizes="(min-width: 1024px) 340px, 68vw"
             />
           </div>
