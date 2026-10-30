@@ -1986,8 +1986,6 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 #work .sx-more { margin-top: 22px; }
 
 /* ═══ Palette switcher ═════════════════════════════════════════════════ */
-.pal-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-strong); color: var(--ink); }
-.pal-btn:hover { border-color: var(--sage); color: var(--sage); }
 
 /* ═══ Motion system ═════════════════════════════════════════════════════
    One set of durations and curves for the whole site. Colours are the
@@ -2057,11 +2055,9 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 .nav-link:not(.nav-link-cta) { color: color-mix(in srgb, var(--ink) 72%, transparent); transition: color var(--m-ui) ease; }
 .nav-link:not(.nav-link-cta):hover, .nav-link:not(.nav-link-cta)[aria-current="true"] { color: var(--ink); }
 .nav-inner { transition: background-color var(--m-card) ease, box-shadow var(--m-card) ease, border-color var(--m-card) ease; }
-/* Theme and palette icons turn when they change; the menu sheet settles in */
+/* The theme icon turns when it changes; the menu sheet settles in */
 @media (prefers-reduced-motion: no-preference) {
   .theme-btn svg { animation: icon-turn 360ms var(--e-out); }
-  .pal-btn svg { transition: transform var(--m-card) var(--e-out); }
-  .pal-btn[data-to="void"] svg { transform: rotate(180deg); }
   .nav-sheet-panel { animation: sheet-in 280ms var(--e-out) both; }
 }
 @keyframes icon-turn { from { opacity: 0; transform: rotate(-90deg) scale(0.6); } }
@@ -2186,7 +2182,7 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
   background-image: linear-gradient(to bottom, color-mix(in srgb, #FFFFFF 14%, transparent), transparent 60%);
   box-shadow: inset 0 1px 0 color-mix(in srgb, #FFFFFF 30%, transparent), 0 1px 2px var(--sh), 0 4px 10px -4px var(--sh);
 }
-.btn-secondary, .fx-actions .btn-secondary, .sx-icon-btn, .copy-btn, .theme-btn, .pal-btn {
+.btn-secondary, .fx-actions .btn-secondary, .sx-icon-btn, .copy-btn, .theme-btn {
   background-color: var(--surface-high);
   border-color: transparent;
   box-shadow: var(--depth-1);
@@ -2337,7 +2333,7 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
    with tap targets kept at 40px or more. */
 
 /* Nav buttons stay readable when the bar sits over the dark contact band */
-.nav.is-on-dark .theme-btn, .nav.is-on-dark .pal-btn { background-color: rgba(255, 255, 255, 0.08); color: #F4F2EC; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.12); }
+.nav.is-on-dark .theme-btn { background-color: rgba(255, 255, 255, 0.08); color: #F4F2EC; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.12); }
 
 /* Certifications register: long codes sit on their own line instead of running into the name */
 .register .r-code { white-space: normal; }
@@ -2525,12 +2521,11 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 /* CV header: names never split ("Power / BI"); lines break at the dots. */
 .cv-nb { white-space: nowrap; }
 
-/* ═══ Palettes ══════════════════════════════════════════════════════════
-   Every palette colour above reads a --p-* (light) or --d-* (dark)
-   variable. Three palettes: Mercury (the default, also the base :root
-   values below), Void and Dusk; <html> always carries data-palette, set on
-   the server to "mercury" and stepped through by the nav's palette button. --btn / --on-btn carry the button fill and its
-   text, so a palette can use dark text on a light button. */
+/* ═══ Palette ═══════════════════════════════════════════════════════════
+   Every colour above reads a --p-* (light) or --d-* (dark) variable. The
+   site has one palette, Mercury, whose values are the :root block below;
+   <html data-palette="mercury"> scopes the Mercury-specific rules. --btn /
+   --on-btn carry the button fill and its text. */
 
 :root { --btn: var(--p-btn); --btn-hover: var(--p-btn-hover); --on-btn: var(--p-on); }
 .dark { --btn: var(--d-btn); --btn-hover: var(--d-btn-hover); --on-btn: var(--d-on); }
@@ -2544,7 +2539,7 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 .dark, .band, .nav.is-on-dark { --logo-d: var(--d-btn); }
 .dark .hflow-step:last-child .hflow-dot { background: var(--d-acc); }
 
-/* Mercury: the default palette, so its values are also the base :root. */
+/* Mercury: the site palette. */
 :root,
 :root[data-palette="mercury"] {
   --p-bg: #F6F6F9;
@@ -2597,404 +2592,6 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
   --d-btn: #5266EB;
   --d-btn-hover: #4558D6;
   --d-on: #FFFFFF;
-}
-
-:root[data-palette="void"] {
-  --p-bg: #FFFFFF;
-  --p-bg2: #F6F6F7;
-  --p-raised: #FFFFFF;
-  --p-ink: #000000;
-  --p-mut: #4A4A4F;
-  --p-soft: #5C5C61;
-  --p-faint: #8A8A8F;
-  --p-faint2: #7E7E83;
-  --p-line: #E7E7EA;
-  --p-line-sub: #F1F1F3;
-  --p-line-strong: #CFCFD4;
-  --p-acc: #5B2EE0;
-  --p-acc-deep: #4A22C2;
-  --p-acc-deep2: #5228D2;
-  --p-acc-mid: #9C7BFF;
-  --p-acc-mid2: #8E68FF;
-  --p-acc-tint2: #E7DFFF;
-  --p-acc-tint: #F4F0FF;
-  --p-band-sheet: #0B0B0D;
-  --p-band-line: #222226;
-  --p-band-input: #2E2E33;
-  --p-grey1: #8C8C91;
-  --p-grey2: #707075;
-  --p-grey3: #4A4A4F;
-  --p-ink-acc: #1E1240;
-  --p-btn: #8052FF;
-  --p-btn-hover: #6B3CF0;
-  --p-on: #FFFFFF;
-  --d-bg: #000000;
-  --d-bg2: #000000;
-  --d-sheet: #000000;
-  --d-raised: #0C0C0E;
-  --d-band: #000000;
-  --d-ink: #FFFFFF;
-  --d-mut: #BDBDBD;
-  --d-line: #1C1C20;
-  --d-line-sub: #141417;
-  --d-line-strong: #2C2C31;
-  --d-acc: #FFB829;
-  --d-acc-hi: #FFCB63;
-  --d-acc-hi2: #FFE0A3;
-  --d-acc-tint2: #1F1708;
-  --d-acc-tint: #140E04;
-  --d-acc-tint3: #1A1306;
-  --d-grey-hi: #EDEDED;
-  --d-grey-hi2: #D6D6D6;
-  --d-grey-mid: #5A5A5F;
-  --d-btn: #8052FF;
-  --d-btn-hover: #6B3CF0;
-  --d-on: #FFFFFF;
-}
-
-/* ═══ Void theme: constellation on black velvet ═════════════════════════
-   Everything below applies only with data-palette="void". Display type is
-   Inter at 400 with tight tracking (scale, not weight, makes hierarchy);
-   body copy is light; surfaces are flat on the page colour, without
-   shadows or card boxes; one violet pill per view. The hero carries the
-   star-schema constellation (components/sections/HeroConstellation). */
-.hx-constellation { display: none; }
-:root[data-palette="void"] {
-  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --fs-hero: clamp(3.25rem, 1rem + 7.4vw, 7.5rem);
-  --fs-3xl: clamp(2.5rem, 1.4rem + 3.6vw, 4.5rem);
-  --fs-4xl: clamp(2.75rem, 1.4rem + 4.4vw, 5.25rem);
-  --depth-1: none; --depth-2: none; --depth-3: none; --depth-in: none;
-  --surface-low: var(--paper); --surface-top: var(--paper);
-}
-
-/* Constellation layer behind the hero copy and portrait */
-:root[data-palette="void"] .fx-hero,
-:root[data-palette="void"]:not(.dark) .fx-hero { background: var(--paper); }
-:root[data-palette="void"] .hx-constellation { display: block; position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-:root[data-palette="void"] .hx > :not(.hx-constellation) { position: relative; z-index: 1; }
-
-/* Sculptural headlines: weight 400, tight tracking, sentence case */
-:root[data-palette="void"] :is(h1, .sx-title, .fx-name, .display-1, .display-2, .cs2-section h2, .cf-title, .nf-title) {
-  font-weight: 400; letter-spacing: -0.04em;
-}
-:root[data-palette="void"] .fx-name { text-transform: none; line-height: 0.9; letter-spacing: -0.05em; }
-:root[data-palette="void"] :is(h3, .pc-title h3, .sk-title, .ht-role, .cs2-pn-title) { font-weight: 500; letter-spacing: -0.02em; }
-:root[data-palette="void"] :is(.sx-stat-value, .ht-impact-value, .cs2-result-value, .cs2-headline-value, .pc-value, .hx-fact dd) { font-weight: 400; letter-spacing: -0.04em; }
-:root[data-palette="void"] .sx-dot { color: var(--btn); }
-
-/* Airy body copy */
-:root[data-palette="void"] body { font-weight: 300; }
-:root[data-palette="void"] :is(strong, b) { font-weight: 600; }
-
-/* One violet pill per view; secondary actions are outlined ghosts */
-:root[data-palette="void"] :is(.btn, .sx-icon-btn, .copy-btn, .nav-link-cta) { border-radius: 999px; }
-:root[data-palette="void"] :is(.btn-secondary, .fx-actions .btn-secondary, .sx-icon-btn, .copy-btn) { background: transparent; border-color: var(--line-strong); }
-
-/* Nav: no capsule edge or shadow, just the page colour behind it */
-:root[data-palette="void"] { --glass-bg: color-mix(in srgb, var(--paper) 78%, transparent); --glass-edge: transparent; --glass-spec: transparent; --glass-under: transparent; --glass-shadow: transparent; --glass-sheen: transparent; }
-:root[data-palette="void"] .nav.is-on-dark { --glass-bg: rgba(0, 0, 0, 0.78); }
-
-/* Violet is for actions, never a surface: featured covers and lead results
-   become a soft iris nebula on the page colour. */
-:root[data-palette="void"] .pc-photo {
-  color: var(--ink);
-  background: radial-gradient(60% 70% at 50% 42%, color-mix(in srgb, #8052FF 26%, transparent), transparent 72%), var(--paper);
-}
-:root[data-palette="void"] .pc-album { background: transparent; border-top: 0; }
-:root[data-palette="void"] .cs2-result dd { background: transparent; }
-:root[data-palette="void"] .cs2-result.is-lead dd {
-  color: var(--ink); box-shadow: none;
-  background: radial-gradient(80% 120% at 20% 30%, color-mix(in srgb, #8052FF 24%, transparent), transparent 70%);
-}
-
-/* Form fields: an underline, clearly visible (3:1) on the page colour */
-:root[data-palette="void"] .field input, :root[data-palette="void"] .field textarea {
-  background: transparent; border: 0; border-bottom: 1px solid var(--void-field); border-radius: 0; box-shadow: none; padding-inline: 2px;
-}
-:root[data-palette="void"] { --void-field: #8A8A90; }
-:root.dark[data-palette="void"] { --void-field: #6A6A70; }
-:root[data-palette="void"] .field input:focus-visible, :root[data-palette="void"] .field textarea:focus-visible { border-bottom-color: var(--btn); outline-offset: 4px; }
-
-/* Cover labels follow the theme (they were white for the old dark cover) */
-:root[data-palette="void"] :is(.pc-label, .pc-num, .pc-photo .pg-bar) { color: var(--muted-ink); }
-:root[data-palette="void"] .pc-photo .pg-bar::after { background: color-mix(in srgb, var(--ink) 22%, transparent); }
-:root[data-palette="void"] .pc-photo .pg-bar.is-after::after { background: var(--ink); }
-
-/* Dark band in light mode: flat too, and the nav keeps no capsule edge over it */
-:root[data-palette="void"] { --p-band-sheet: #000000; }
-:root[data-palette="void"] .nav.is-on-dark { --glass-edge: transparent; --glass-spec: transparent; --glass-under: transparent; --glass-shadow: transparent; --glass-sheen: transparent; }
-:root[data-palette="void"] .cf-form .card { background: transparent; border-color: transparent; box-shadow: none; }
-
-/* Case-study header: no tinted glow, just the page */
-:root[data-palette="void"] .cs2-hero { background: none; }
-
-/* ═══ Void: chromatic layers ════════════════════════════════════════════
-   Triangle fields (components/common/TriangleField) only show in Void.
-   t1–t6 are the constellation colours; --lc is each stack layer's text
-   colour, darker in light mode so it passes 4.5:1. */
-.tf { display: none; }
-:root[data-palette="void"] .tf { display: block; pointer-events: none; }
-.tf polygon { fill: none; stroke-width: 1.1; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-:root[data-palette="void"] { --t1: #6A3DF0; --t2: #D99400; --t3: #149A82; --t4: #C8307F; --t5: #3462E0; --t6: #8C6CF0; }
-:root.dark[data-palette="void"] { --t1: #9B7BFF; --t2: #FFB829; --t3: #2EC4A6; --t4: #E0479E; --t5: #4D7CFF; --t6: #B69CFF; }
-.tf .t1 { stroke: var(--t1); } .tf .t2 { stroke: var(--t2); } .tf .t3 { stroke: var(--t3); }
-.tf .t4 { stroke: var(--t4); } .tf .t5 { stroke: var(--t5); } .tf .t6 { stroke: var(--t6); }
-
-:root[data-palette="void"] .sk > li { --lc: #5B2EE0; }
-:root[data-palette="void"] .sk > li:nth-child(2) { --lc: #8A5A00; }
-:root[data-palette="void"] .sk > li:nth-child(3) { --lc: #0B7461; }
-:root[data-palette="void"] .sk > li:nth-child(4) { --lc: #B0246F; }
-:root[data-palette="void"] .sk > li:nth-child(5) { --lc: #2B55C8; }
-:root[data-palette="void"] .sk > li:nth-child(6) { --lc: #6E4ED6; }
-:root.dark[data-palette="void"] .sk > li { --lc: #A68BFF; }
-:root.dark[data-palette="void"] .sk > li:nth-child(2) { --lc: #FFB829; }
-:root.dark[data-palette="void"] .sk > li:nth-child(3) { --lc: #3DD6B5; }
-:root.dark[data-palette="void"] .sk > li:nth-child(4) { --lc: #F070B5; }
-:root.dark[data-palette="void"] .sk > li:nth-child(5) { --lc: #7C9EFF; }
-:root.dark[data-palette="void"] .sk > li:nth-child(6) { --lc: #C9B6FF; }
-
-:root[data-palette="void"] .sk-card {
-  position: relative; isolation: isolate; overflow: hidden; border-radius: 24px; border-color: transparent; background: transparent;
-  transition: background-color var(--m-card) var(--e-out);
-}
-/* Hover: the layer's colour glows in from the constellation's corner */
-:root[data-palette="void"] .sk-card::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; opacity: 0;
-  background: radial-gradient(120% 110% at 100% 0%, color-mix(in srgb, var(--lc) 16%, transparent), transparent 62%);
-  transition: opacity var(--m-card) var(--e-out);
-}
-:root[data-palette="void"] .sk-card:hover::before, :root[data-palette="void"] .sk-card:focus-visible::before { opacity: 1; }
-:root[data-palette="void"] .sk-card:hover { transform: none; }
-:root[data-palette="void"] .sk-tf { position: absolute; top: 4px; right: 4px; width: 150px; height: 96px; z-index: -1; transition: transform 0.6s var(--e-out); }
-:root[data-palette="void"] .sk-card:hover .sk-tf { transform: scale(1.08) rotate(-4deg); }
-/* The layer name: large, thin, in its colour */
-:root[data-palette="void"] .sk-tag {
-  padding: 0; background: none; border: 0; color: var(--lc);
-  font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 400; letter-spacing: -0.03em; line-height: 1.1;
-}
-:root[data-palette="void"] .sk-title { font-weight: 400; }
-:root[data-palette="void"] .sk-card:hover .sk-arrow, :root[data-palette="void"] .sk-card:focus-visible .sk-arrow { background: var(--lc); border-color: var(--lc); color: var(--paper); }
-
-/* Project cover: a deeper nebula with drifting triangles, echoing the hero */
-:root[data-palette="void"] .pc-photo {
-  position: relative; isolation: isolate; overflow: hidden;
-  background:
-    radial-gradient(55% 65% at 50% 40%, color-mix(in srgb, #8052FF 38%, transparent), transparent 70%),
-    radial-gradient(30% 35% at 84% 80%, color-mix(in srgb, #FFB829 16%, transparent), transparent 70%),
-    radial-gradient(30% 35% at 14% 86%, color-mix(in srgb, #2EC4A6 14%, transparent), transparent 70%),
-    var(--paper);
-}
-:root.dark[data-palette="void"] .pc-photo {
-  background:
-    radial-gradient(55% 65% at 50% 40%, color-mix(in srgb, #8052FF 34%, transparent), transparent 70%),
-    radial-gradient(30% 35% at 84% 80%, color-mix(in srgb, #FFB829 10%, transparent), transparent 70%),
-    radial-gradient(30% 35% at 14% 86%, color-mix(in srgb, #2EC4A6 10%, transparent), transparent 70%),
-    var(--paper);
-}
-:root[data-palette="void"] .pc-tf { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
-:root[data-palette="void"] .pc-album { position: relative; }
-@media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
-  :root[data-palette="void"] .pc-tf .tf-g1 { animation: tf-drift 16s ease-in-out infinite alternate; }
-  :root[data-palette="void"] .pc-tf .tf-g2 { animation: tf-drift 22s ease-in-out infinite alternate-reverse; }
-  :root[data-palette="void"] .pc-tf .tf-g3 { animation: tf-drift-b 28s ease-in-out infinite alternate; }
-}
-@keyframes tf-drift { to { transform: translate(14px, -10px); } }
-@keyframes tf-drift-b { to { transform: translate(-12px, 8px); } }
-/* The icon strip is see-through, so the constellation shows behind it */
-:root[data-palette="void"] .sk-visual { background: transparent; box-shadow: none; border-color: transparent; }
-
-:root[data-palette="dusk"] {
-  --p-bg: #FAFAF9;
-  --p-bg2: #F3F3F1;
-  --p-raised: #FFFFFF;
-  --p-ink: #161616;
-  --p-mut: #555555;
-  --p-soft: #646464;
-  --p-faint: #8A8A8A;
-  --p-faint2: #7E7E7E;
-  --p-line: #E5E5E5;
-  --p-line-sub: #EFEFEF;
-  --p-line-strong: #D0D0D0;
-  --p-acc: #A84D17;
-  --p-acc-deep: #8A3E12;
-  --p-acc-deep2: #964414;
-  --p-acc-mid: #E8A27A;
-  --p-acc-mid2: #E0915F;
-  --p-acc-tint2: #F8E1D3;
-  --p-acc-tint: #FCF1EA;
-  --p-band-sheet: #161616;
-  --p-band-line: #2A2A2A;
-  --p-band-input: #333333;
-  --p-grey1: #8C8C8C;
-  --p-grey2: #707070;
-  --p-grey3: #4A4A4A;
-  --p-ink-acc: #2A1A10;
-  --p-btn: #161616;
-  --p-btn-hover: #2C2C2C;
-  --p-on: #FFFFFF;
-  --d-bg: #0A0A0A;
-  --d-bg2: #0D0D0D;
-  --d-sheet: #161616;
-  --d-raised: #1D1D1D;
-  --d-band: #0A0A0A;
-  --d-ink: #EDEDED;
-  --d-mut: #C2C2C2;
-  --d-line: #262626;
-  --d-line-sub: #1C1C1C;
-  --d-line-strong: #383838;
-  --d-acc: #F2B48A;
-  --d-acc-hi: #F6C7A6;
-  --d-acc-hi2: #FADBC6;
-  --d-acc-tint2: #241A14;
-  --d-acc-tint: #1A1410;
-  --d-acc-tint3: #1F1712;
-  --d-grey-hi: #EDEDED;
-  --d-grey-hi2: #D6D6D6;
-  --d-grey-mid: #5A5A5A;
-  --d-btn: #FFFFFF;
-  --d-btn-hover: #E4E4E4;
-  --d-on: #161616;
-}
-
-/* ═══ Dusk theme: frosted glass at dusk ═════════════════════════════════
-   Everything below applies only with data-palette="dusk". Near-black and
-   graphite, warm greys, a sunset hero (amber → cobalt), translucent panels
-   with hairline edges and 24px corners and no shadows, DM Sans / Geist at
-   medium weights, and a white pill (dark in light mode) as the one filled
-   action. */
-:root[data-palette="dusk"] {
-  --font-sans: var(--font-dmsans), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-dmsans), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --fs-hero: clamp(3rem, 1.4rem + 5vw, 5.5rem);
-  --r-lg: 24px;
-  --r-md: 12px;
-  /* Hairline edges instead of shadows */
-  --hairline: rgba(22, 22, 22, 0.1);
-  --depth-1: 0 0 0 1px var(--hairline) inset; --depth-2: 0 0 0 1px var(--hairline) inset; --depth-3: 0 0 0 1px var(--hairline) inset;
-  --depth-in: 0 0 0 1px var(--hairline) inset;
-  --surface-low: color-mix(in srgb, var(--p-ink) 4%, var(--paper));
-  --surface-high: rgba(255, 255, 255, 0.72);
-  --surface-top: rgba(255, 255, 255, 0.9);
-  --logo-d: #C2612F;
-  --glass-bg: rgba(255, 255, 255, 0.78); --glass-edge: var(--hairline); --glass-spec: transparent; --glass-under: transparent; --glass-sheen: transparent;
-  --glass-shadow: rgba(0, 0, 0, 0.08);
-}
-:root.dark[data-palette="dusk"] {
-  --hairline: rgba(255, 255, 255, 0.1);
-  --surface-low: rgba(212, 212, 212, 0.05);
-  --surface-high: rgba(212, 212, 212, 0.07);
-  --surface-top: rgba(212, 212, 212, 0.1);
-  --logo-d: #F0A070;
-  --glass-bg: rgba(22, 22, 22, 0.82); --glass-shadow: rgba(0, 0, 0, 0.4);
-}
-:root[data-palette="dusk"] .band { --surface-high: rgba(212, 212, 212, 0.07); --surface-top: rgba(212, 212, 212, 0.1); --hairline: rgba(255, 255, 255, 0.1); }
-:root[data-palette="dusk"] .nav.is-on-dark { --glass-bg: rgba(22, 22, 22, 0.82); --glass-edge: rgba(255, 255, 255, 0.1); --glass-spec: transparent; --glass-under: transparent; --glass-sheen: transparent; --logo-d: #F0A070; }
-
-/* Sunset hero: deep enough at every stop that white text passes 4.5:1,
-   fading into the page at the bottom. Light mode is a pale daylight wash. */
-:root[data-palette="dusk"] .fx-hero {
-  background:
-    linear-gradient(180deg, transparent 62%, var(--paper) 100%),
-    linear-gradient(100deg, #FBE2D1 0%, #F8D9D6 30%, #E4DDF4 62%, #D3E1FA 100%);
-}
-:root.dark[data-palette="dusk"] .fx-hero {
-  --ink: #FFFFFF; --muted-ink: rgba(255, 255, 255, 0.86); --sage: #FFDDBF; --line: rgba(255, 255, 255, 0.22);
-  --surface-high: rgba(255, 255, 255, 0.1); --hairline: rgba(255, 255, 255, 0.18);
-  background:
-    linear-gradient(180deg, transparent 58%, var(--paper) 100%),
-    linear-gradient(100deg, #7A3A22 0%, #A04A2C 22%, #8A3F5C 46%, #3C3C9A 72%, #1D3A9C 100%);
-}
-
-/* Medium-weight type: DM Sans 500 display, Geist for section headings */
-:root[data-palette="dusk"] :is(h1, .fx-name, .display-1, .display-2) { font-weight: 500; letter-spacing: -0.035em; }
-:root[data-palette="dusk"] .fx-name { text-transform: none; line-height: 0.95; }
-:root[data-palette="dusk"] :is(.sx-title, .cs2-section h2, .cf-title, .nf-title) { font-family: var(--font-geist), var(--font-inter), sans-serif; font-weight: 500; letter-spacing: -0.035em; }
-:root[data-palette="dusk"] :is(h3, .pc-title h3, .sk-title, .ht-role, .cs2-pn-title) { font-family: var(--font-geist), var(--font-inter), sans-serif; font-weight: 500; letter-spacing: -0.01em; }
-:root[data-palette="dusk"] :is(.sx-stat-value, .ht-impact-value, .cs2-result-value, .cs2-headline-value, .pc-value, .hx-fact dd) { font-weight: 500; letter-spacing: -0.035em; }
-:root[data-palette="dusk"] .sx-dot { color: var(--sage); }
-
-/* Frosted panels: translucent fill, hairline edge, 24px corners */
-:root[data-palette="dusk"] :is(.sk-card, .pc, .cf-form .card, .cs2-facts, .cs2-result dd, .cs2-pn, .hx-fact, .sx-stat dd) {
-  background: var(--surface-high); border: 1px solid var(--hairline); box-shadow: none;
-}
-:root[data-palette="dusk"] .sk-card:hover { border-color: color-mix(in srgb, var(--ink) 30%, transparent); box-shadow: none; }
-:root[data-palette="dusk"] .sk-visual { border: 1px solid var(--hairline); box-shadow: none; }
-@media (min-width: 1024px) {
-  :root[data-palette="dusk"] .fx-hero :is(.hx-fact, .hx-facts, .fx-status, .btn-secondary, .sx-icon-btn) { -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-}
-/* The featured cover keeps one quiet sunset glow instead of a solid block */
-:root[data-palette="dusk"] .pc-photo { color: var(--ink); background: radial-gradient(70% 80% at 50% 35%, color-mix(in srgb, #E0855A 22%, transparent), transparent 70%), radial-gradient(60% 70% at 80% 90%, color-mix(in srgb, #2F52D6 18%, transparent), transparent 70%), var(--surface-low); }
-:root[data-palette="dusk"] :is(.pc-label, .pc-num, .pc-photo .pg-bar) { color: var(--muted-ink); }
-:root[data-palette="dusk"] .pc-photo .pg-bar::after { background: color-mix(in srgb, var(--ink) 22%, transparent); }
-:root[data-palette="dusk"] .pc-photo .pg-bar.is-after::after { background: var(--ink); }
-:root[data-palette="dusk"] .pc-album { background: transparent; border-top: 1px solid var(--hairline); }
-/* The lead result is the one inverted card: white on dark, ink on light */
-:root[data-palette="dusk"] .cs2-result.is-lead dd { color: var(--on-btn); background: var(--btn); border-color: var(--btn); }
-
-/* One white pill; everything else is a hairline ghost pill */
-:root[data-palette="dusk"] :is(.btn, .sx-icon-btn, .copy-btn, .nav-link-cta) { border-radius: 999px; }
-:root[data-palette="dusk"] :is(.btn-secondary, .fx-actions .btn-secondary, .sx-icon-btn, .copy-btn) {
-  background: transparent; border: 1px solid color-mix(in srgb, var(--ink) 30%, transparent); box-shadow: none;
-}
-:root[data-palette="dusk"] :is(.btn-secondary, .sx-icon-btn, .copy-btn):hover { border-color: var(--ink); background: color-mix(in srgb, var(--ink) 6%, transparent); }
-@media screen { :root[data-palette="dusk"] .cv { background: var(--surface-high); box-shadow: 0 0 0 1px var(--hairline) inset; } }
-
-/* ═══ Void polish ═══════════════════════════════════════════════════════ */
-/* Cover: the headline figure stays clear of triangles; fewer on phones */
-:root[data-palette="void"] .pc-tf {
-  -webkit-mask-image: radial-gradient(ellipse 38% 32% at 50% 40%, transparent 55%, #000 100%);
-  mask-image: radial-gradient(ellipse 38% 32% at 50% 40%, transparent 55%, #000 100%);
-}
-@media (max-width: 767.98px) { :root[data-palette="void"] .pc-tf :is(.tf-g2, .tf-g3) { display: none; } }
-
-/* Experience chevrons: a dark fill inside a 1px edge, so no grey panels
-   remain; the current role keeps its solid violet. The inner chevron is the
-   outer one inset by about a pixel, with or without the notch. */
-:root[data-palette="void"] { --void-edge: #CFCFD4; }
-:root.dark[data-palette="void"] { --void-edge: #3A3A40; }
-:root[data-palette="void"] .ht-item:not(.is-current) .ht-bar { position: relative; isolation: isolate; background: var(--void-edge); color: var(--muted-ink); }
-:root[data-palette="void"] .ht-item:not(.is-current) .ht-bar::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--paper);
-  clip-path: polygon(1px 1px, calc(100% - var(--tip) - 0.5px) 1px, calc(100% - 1.5px) 50%, calc(100% - var(--tip) - 0.5px) calc(100% - 1px), 1px calc(100% - 1px), calc(var(--tip) + 1.5px) 50%);
-}
-:root[data-palette="void"] .ht-item:first-child:not(.is-current) .ht-bar::before {
-  clip-path: polygon(1px 1px, calc(100% - var(--tip) - 0.5px) 1px, calc(100% - 1.5px) 50%, calc(100% - var(--tip) - 0.5px) calc(100% - 1px), 1px calc(100% - 1px));
-}
-@media (max-width: 899.98px) {
-  :root[data-palette="void"] .ht-item:not(.is-current) .ht-bar::before {
-    clip-path: polygon(1px 1px, calc(100% - var(--tip) - 0.5px) 1px, calc(100% - 1.5px) 50%, calc(100% - var(--tip) - 0.5px) calc(100% - 1px), 1px calc(100% - 1px));
-  }
-}
-:root[data-palette="void"] .ht-item:not(.is-current) .ht-icon { background: var(--paper); color: var(--muted-ink); box-shadow: 0 0 0 1px var(--void-edge); }
-:root[data-palette="void"] .ht-item:not(.is-current) .ht-icon::before { background: var(--void-edge); }
-
-/* Case-study facts: the stack logo sits inside the (borderless) card */
-:root[data-palette="void"] .cs2-facts-mark { position: static; width: 48px; height: 48px; margin: 0 0 16px; box-shadow: 0 0 0 1px var(--line-strong); }
-
-/* Case-study header: a faint constellation on the facts side */
-:root[data-palette="void"] .cs2-hero { position: relative; isolation: isolate; overflow: hidden; }
-:root[data-palette="void"] .cs2-tf {
-  position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1;
-  /* Right of the title, and above the results row */
-  -webkit-mask-image: linear-gradient(90deg, transparent 0 46%, #000 72%), linear-gradient(180deg, #000 0 50%, transparent 62%);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(90deg, transparent 0 46%, #000 72%), linear-gradient(180deg, #000 0 50%, transparent 62%);
-  mask-composite: intersect;
-}
-@media (max-width: 999.98px) { :root[data-palette="void"] .cs2-tf { display: none; } }
-
-/* 404: a drifting constellation fills the empty half */
-:root[data-palette="void"] .nf { position: relative; isolation: isolate; overflow: hidden; }
-:root[data-palette="void"] .nf-tf {
-  position: absolute; top: 50%; right: max(2vw, calc(50% - 660px)); z-index: -1;
-  width: min(46vw, 640px); height: auto; aspect-ratio: 640 / 560; transform: translateY(-50%);
-}
-@media (max-width: 899.98px) { :root[data-palette="void"] .nf-tf { display: none; } }
-@media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
-  :root[data-palette="void"] .nf-tf .tf-g1 { animation: tf-drift 16s ease-in-out infinite alternate; }
-  :root[data-palette="void"] .nf-tf .tf-g2 { animation: tf-drift 22s ease-in-out infinite alternate-reverse; }
-  :root[data-palette="void"] .nf-tf .tf-g3 { animation: tf-drift-b 28s ease-in-out infinite alternate; }
 }
 
 /* CV page: download the PDF, or print the web version */
@@ -3108,7 +2705,7 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 :root[data-palette="mercury"] .xt-current { background: var(--ink); color: var(--paper); }
 
 /* Pills: ivory ghost outlines; cobalt only on the primary action */
-:root[data-palette="mercury"] :is(.btn, .sx-icon-btn, .copy-btn, .nav-link-cta, .theme-btn, .pal-btn) { border-radius: 999px; }
+:root[data-palette="mercury"] :is(.btn, .sx-icon-btn, .copy-btn, .nav-link-cta, .theme-btn) { border-radius: 999px; }
 :root[data-palette="mercury"] :is(.btn-secondary, .fx-actions .btn-secondary, .sx-icon-btn, .copy-btn) {
   background: transparent; border: 1px solid color-mix(in srgb, var(--ink) 75%, transparent); box-shadow: none; color: var(--ink);
 }

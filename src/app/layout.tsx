@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, DM_Sans, Geist, IBM_Plex_Mono, Inter, Manrope } from "next/font/google";
+import { Archivo, IBM_Plex_Mono, Inter, Manrope } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
@@ -41,22 +41,6 @@ const archivo = Archivo({
   axes: ["wdth"],
   variable: "--font-archivo",
   display: "swap",
-});
-
-/* The Dusk palette's faces. Not preloaded: the files download only when
-   Dusk is chosen and text actually uses them. */
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dmsans",
-  display: "swap",
-  preload: false,
-});
-
-const geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
-  display: "swap",
-  preload: false,
 });
 
 const plexMono = IBM_Plex_Mono({
@@ -187,16 +171,16 @@ export default function RootLayout({
       lang="en"
       data-palette="mercury"
       suppressHydrationWarning
-      className={`dark ${manrope.variable} ${inter.variable} ${plexMono.variable} ${dmSans.variable} ${geist.variable} ${archivo.variable}`}
+      className={`dark ${manrope.variable} ${inter.variable} ${plexMono.variable} ${archivo.variable}`}
     >
       <head>
-        {/* Dark and the Mercury palette are the defaults (set on <html>).
-            Light, Void and Dusk are applied before paint only when the
-            visitor chose them on an earlier visit. */}
+        {/* Dark is the default (set on <html>, with the Mercury palette).
+            Light is applied before paint only when the visitor chose it on
+            an earlier visit. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var d=document.documentElement;if(localStorage.getItem('theme')==='light'){d.classList.remove('dark')}var p=localStorage.getItem('palette');if(p==='void'||p==='dusk'){d.setAttribute('data-palette',p)}}catch(e){}})()",
+              "(function(){try{var d=document.documentElement;if(localStorage.getItem('theme')==='light'){d.classList.remove('dark')}}catch(e){}})()",
           }}
         />
         <script

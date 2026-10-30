@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { TriangleField } from "@/components/common/TriangleField";
 
 /**
  * Product-card showcase: the coloured panel and the details on the right
@@ -40,8 +39,6 @@ export function ProjectShowcase({
   return (
     <div className="pc">
       <div className="pc-photo">
-        {/* Void theme only: drifting triangles in the cover's nebula */}
-        <TriangleField seed={2026} count={70} width={600} height={420} shape="field" className="pc-tf" />
         {covers.map((c, i) => (
           <div key={i} className="pc-main" hidden={i !== active} aria-hidden>
             {c}

@@ -9,7 +9,7 @@ type Theme = "light" | "dark";
    palette's values as a fallback. */
 const THEME_COLOR: Record<Theme, string> = { light: "#F6F6F9", dark: "#171721" };
 
-export function syncThemeColor(theme: Theme) {
+function syncThemeColor(theme: Theme) {
   let tag = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
   if (!tag) {
     tag = document.createElement("meta");
