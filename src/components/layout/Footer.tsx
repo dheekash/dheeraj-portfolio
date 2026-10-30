@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { ArrowUpRight, Download, Mail } from "lucide-react";
-import { CV_PDF, CV_PDF_NAME } from "@/lib/site";
-import { LinkedinIcon } from "@/components/common/SocialIcons";
-import { Mark } from "@/components/common/Mark";
+import { Mail } from "lucide-react";
+import { SocialCards } from "@/components/common/SocialCards";
 import { Logo } from "@/components/common/Logo";
 import { profile } from "@/data/profile";
 import { caseStudies } from "@/data/work";
@@ -53,20 +51,7 @@ export function Footer() {
               <CopyEmail email={profile.email} />
             </div>
 
-            <div className="contact-ctas cf-ctas">
-              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
-                <LinkedinIcon size={16} className="mark" /> LinkedIn <ArrowUpRight size={14} aria-hidden />
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-              <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary icon-btn">
-                <Mark name="GitHub" size={16} /> GitHub <ArrowUpRight size={14} aria-hidden />
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-              <a href={CV_PDF} download={CV_PDF_NAME} className="btn btn-secondary icon-btn">
-                <Download size={16} aria-hidden className="mark" /> Download CV
-                <span className="sr-only">(PDF)</span>
-              </a>
-            </div>
+            <SocialCards />
           </div>
 
           <div className="cf-form reveal">

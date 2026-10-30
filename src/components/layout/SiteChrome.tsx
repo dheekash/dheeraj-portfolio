@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Navbar } from "./Navbar";
 import { ScrollProgress } from "@/components/common/ScrollProgress";
 import { Logo } from "@/components/common/Logo";
+import { BackToTop } from "@/components/common/BackToTop";
 
 /**
  * Fades each `.reveal` block up once as it enters the viewport. Content is
@@ -102,6 +103,7 @@ export function SiteChrome({ children, footer }: { children: React.ReactNode; fo
       </main>
       {footer}
       <MobileContactBar />
+      <BackToTop />
       <ScrollProgress />
     </>
   );

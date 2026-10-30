@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
-import { useTheme } from "@/components/providers/ThemeProvider";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ThemeSwitch } from "@/components/common/ThemeSwitch";
 import { Logo } from "@/components/common/Logo";
 import { CV_PDF, CV_PDF_NAME } from "@/lib/site";
 
@@ -19,22 +19,6 @@ const links = [
 
 /* Minimal theme toggle: a round button, sized like the nav links, showing
    the theme it switches to. */
-function ThemeButton() {
-  const { theme, toggle } = useTheme();
-  const dark = theme === "dark";
-  return (
-    <button
-      type="button"
-      onClick={toggle}
-      className="nav-icon-btn theme-btn"
-      aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
-      title={dark ? "Light theme" : "Dark theme"}
-    >
-      {dark ? <Sun size={18} aria-hidden /> : <Moon size={18} aria-hidden />}
-    </button>
-  );
-}
-
 export function Navbar() {
   const pathname = usePathname();
   const onHome = pathname === "/";
@@ -132,11 +116,11 @@ export function Navbar() {
         </nav>
 
         <div className="nav-actions">
-          <ThemeButton />
+          <ThemeSwitch />
         </div>
 
         <div className="nav-mobile">
-          <ThemeButton />
+          <ThemeSwitch />
           <button
             type="button"
             className="nav-icon-btn"
