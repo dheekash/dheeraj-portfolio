@@ -12,7 +12,12 @@ export function BackToTop() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.9);
+    // Shown after the first screen; hidden again at the very end, where the
+    // footer has its own "Back to top" link.
+    const onScroll = () => {
+      const nearEnd = window.innerHeight + window.scrollY > document.documentElement.scrollHeight - 160;
+      setShow(window.scrollY > window.innerHeight * 0.9 && !nearEnd);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);

@@ -33,13 +33,9 @@ export function CertificationsSection() {
   const timeline = [...flagshipCredentials].sort((a, b) => monthIndex(a.earned) - monthIndex(b.earned));
 
   return (
-    <section id="certifications" className="section sx" aria-labelledby="certs-title">
-      <div className="container">
-        <header className="sx-head reveal">
-          <p className="sx-eyebrow">Credentials</p>
-          <h2 id="certs-title" className="sx-title">
-            Certifications<span className="sx-dot">.</span>
-          </h2>
+    <div id="certifications" className="sk-certs" aria-labelledby="certs-title">
+        <header className="sk-certs-head reveal">
+          <h3 id="certs-title" className="sk-certs-title">Certifications</h3>
           <p className="sx-intro">
             {allCredentials.length} certifications from {issuers} vendors. These seven matter most for
             BI and data-platform work.
@@ -65,7 +61,7 @@ export function CertificationsSection() {
                   </span>
                 )}
                 <p className="ct-code" translate="no">{c.code}</p>
-                <h3 className="ct-name">{c.name}</h3>
+                <h4 className="ct-name">{c.name}</h4>
                 <p className="ct-issuer">{c.issuer}</p>
                 {c.url && (
                   <a href={c.url} target="_blank" rel="noopener noreferrer" className="ct-link">
@@ -83,7 +79,6 @@ export function CertificationsSection() {
             View all {allCredentials.length} credentials <ArrowRight size={16} className="arrow" aria-hidden />
           </Link>
         </div>
-      </div>
-    </section>
+    </div>
   );
 }

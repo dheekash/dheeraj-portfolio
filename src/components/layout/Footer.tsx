@@ -74,10 +74,10 @@ export function Footer() {
           <nav aria-labelledby="fcol-site">
             <h2 id="fcol-site">Site</h2>
             <ul>
-              <li><Link href="/#about">About</Link></li>
-              <li><Link href="/#experience">Experience</Link></li>
-              <li><Link href="/#skills">Technologies</Link></li>
               <li><Link href="/#work">Projects</Link></li>
+              <li><Link href="/#experience">Experience</Link></li>
+              <li><Link href="/#skills">Skills</Link></li>
+              <li><Link href="/#about">About</Link></li>
               <li><Link href="/certifications">Certifications</Link></li>
               <li><Link href="/cv">CV</Link></li>
             </ul>

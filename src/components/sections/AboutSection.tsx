@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Building2, MapPin, Network, Target, Users, Workflow, Wrench } from "lucide-react";
+import { Network, Users, Workflow } from "lucide-react";
 
 /* Figures from the current role in the experience section. Years of
    experience are shown once, in the hero. */
@@ -60,12 +60,6 @@ export function AboutSection() {
           </div>
         </div>
 
-        <dl className="sx-facts reveal">
-          <div><dt><MapPin size={14} aria-hidden /> Based in</dt><dd>Bengaluru, India · IST (UTC+5:30)</dd></div>
-          <div><dt><Target size={14} aria-hidden /> Focus</dt><dd>Semantic models, lakehouses, pipelines, executive reporting</dd></div>
-          <div><dt><Wrench size={14} aria-hidden /> Core tools</dt><dd translate="no">Power BI, Fabric, SQL, Azure, Python, Databricks, Snowflake</dd></div>
-          <div><dt><Building2 size={14} aria-hidden /> Industries</dt><dd>Manufacturing, sales, risk &amp; fraud, retail, customer analytics</dd></div>
-        </dl>
       </div>
     </section>
   );

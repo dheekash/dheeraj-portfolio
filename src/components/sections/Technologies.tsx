@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Mark } from "@/components/common/Mark";
 import { caseStudies } from "@/data/work";
 import { layers } from "@/data/skills";
+import { CertificationsSection } from "@/components/sections/CertificationsSection";
 
 /* Each card links to a case study that used its tools: the one sharing the
    most of them, preferring featured studies and ones no earlier card took. */
@@ -24,9 +25,9 @@ export function Technologies() {
     <section id="skills" className="section sx" aria-labelledby="skills-title">
       <div className="container">
         <header className="sx-head reveal">
-          <p className="sx-eyebrow">My skills</p>
+          <p className="sx-eyebrow">Skills</p>
           <h2 id="skills-title" className="sx-title">
-            Technologies<span className="sx-dot">.</span>
+            Skills &amp; certifications<span className="sx-dot">.</span>
           </h2>
         </header>
 
@@ -54,6 +55,8 @@ export function Technologies() {
             </li>
           ))}
         </ul>
+
+        <CertificationsSection />
       </div>
     </section>
   );
