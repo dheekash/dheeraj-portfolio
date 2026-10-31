@@ -1,57 +1,69 @@
-import fs from "node:fs";
-import path from "node:path";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { DownloadButton } from "@/components/common/DownloadButton";
 import { RotatingWords } from "@/components/common/RotatingWords";
-import { profile } from "@/data/profile";
 import { Mark } from "@/components/common/Mark";
 import { LinkedinIcon } from "@/components/common/SocialIcons";
+import { profile } from "@/data/profile";
 import { allCredentials } from "@/data/credentials";
-import { HeroFlow } from "@/components/sections/HeroFlow";
-import { HeroMountains } from "@/components/sections/HeroMountains";
+import { caseStudies, metaOf } from "@/data/work";
+import { leadOf, ratioOf } from "@/lib/results";
+import { ReportCanvas, type ReportStudy } from "@/components/sections/ReportCanvas";
 
-/* Headshot sits beside the availability line once public/images/avatar.jpg exists. */
-const PHOTO = "/images/avatar.jpg";
-const hasPhoto = fs.existsSync(path.join(process.cwd(), "public", PHOTO));
-/* Portrait shown beside the name. */
-const PORTRAIT = "/images/portrait.webp";
+/* Short slicer labels for the featured studies. */
+const TAB: Record<string, string> = {
+  "fabric-lakehouse-migration": "Fabric migration",
+  "seller-analytics-platform": "Seller analytics",
+  "manufacturing-analytics-suite": "Rockwool",
+  "real-time-fraud-monitoring": "Fraud monitoring",
+};
 
-/* Two facts under the portrait. Project results live on the project cards. */
-const facts = [
-  { value: "7+", label: "Years experience" },
+const kpis = [
+  { value: "7+", label: "Years" },
   { value: String(allCredentials.length), label: "Certifications" },
+  { value: "15", label: "Markets" },
+  { value: String(caseStudies.length), label: "Case studies" },
 ];
 
+const studies: ReportStudy[] = caseStudies
+  .filter((s) => s.featured)
+  .slice(0, 4)
+  .map((s) => {
+    const [lead, ...more] = s.impact;
+    return {
+      slug: s.slug,
+      tab: TAB[s.slug] ?? s.title,
+      title: s.title,
+      meta: metaOf(s),
+      lead: { ...lead, ratio: ratioOf(lead.value) },
+      more: more.slice(0, 2),
+      mark: <Mark name={leadOf[s.slug]} size={18} />,
+    };
+  });
+
 /**
- * Compact hero: who and what on the left, the proof on the right, both in
- * the first screen. Tools are shown once, further down, in Technologies.
+ * The hero as a report page: who and what on the left; on the right a live
+ * "impact report" built from the portfolio's own figures, with a slicer
+ * across the featured case studies. It shows the work instead of
+ * describing it.
  */
 export function Hero() {
   return (
-    <section id="top" className="fx-hero hx" aria-labelledby="hero-title">
-      <HeroMountains />
-      <div className="container hx-grid">
-        <div className="hx-copy">
-          <p className="fx-status hero-anim" style={{ "--d": 0 } as React.CSSProperties}>
-            {hasPhoto && <Image src={PHOTO} alt="" width={36} height={36} className="fx-avatar" />}
+    <section id="top" className="rh" aria-labelledby="hero-title">
+      <div className="container rh-grid">
+        <div className="rh-copy">
+          <p className="rh-status">
             <span className="fx-status-dot" aria-hidden />
-            Open to opportunities<span className="fx-status-loc"> · Bengaluru · Remote</span>
+            Open to opportunities<span className="rh-status-loc"> · Bengaluru · Remote</span>
           </p>
-          <p className="fx-hello hero-anim" style={{ "--d": 1 } as React.CSSProperties}>Hi, I&rsquo;m</p>
-          {/* Each line rises out of its own mask, one after the other. */}
-          <h1 id="hero-title" className="fx-name hx-name">
-            <span className="fx-name-line"><span className="hx-rise" style={{ "--d": 2 } as React.CSSProperties}>Dheeraj</span></span>
-            <span className="fx-name-line"><span className="hx-rise" style={{ "--d": 3 } as React.CSSProperties}>Kashyap</span></span>
+          <h1 id="hero-title" className="rh-name">
+            Dheeraj Kashyap
           </h1>
-          <p className="fx-lede hx-lede hero-anim" style={{ "--d": 4 } as React.CSSProperties}>
-            I build BI systems that cut reporting from hours to minutes, with{" "}
+          <p className="rh-role">BI &amp; Analytics Engineer</p>
+          <p className="rh-lede">
+            I build reporting that cuts hours to minutes, with{" "}
             <RotatingWords words={["Power BI", "Microsoft Fabric", "Snowflake", "Databricks"]} suffix="." className="hl" />
           </p>
-          <p className="fx-cred hero-anim" style={{ "--d": 5 } as React.CSSProperties}>
-            BI &amp; Analytics Engineer · 7+ years · {allCredentials.length} certifications incl. Microsoft DP-600 &amp; DP-700
-          </p>
-          <div className="fx-actions hx-actions hero-anim" style={{ "--d": 6 } as React.CSSProperties}>
+          <div className="rh-actions">
             <a href="#contact" className="btn btn-primary">
               Contact me <ArrowRight size={16} aria-hidden />
             </a>
@@ -67,30 +79,8 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Portrait, with two facts in aligned cards beneath it. */}
-        <div className="hx-visual">
-          <div className="hx-photo" style={{ "--d": 3 } as React.CSSProperties}>
-            <Image
-              src={PORTRAIT}
-              alt="Dheeraj Kashyap"
-              width={1000}
-              height={1340}
-              sizes="(min-width: 1024px) 340px, 68vw"
-            />
-          </div>
-        <dl className="hx-facts hero-anim" style={{ "--d": 7 } as React.CSSProperties}>
-          {facts.map((f, i) => (
-            <div key={f.label} className="hx-fact">
-              <dt>{f.label}</dt>
-              {/* The real figure from the first frame; it rises out of a mask
-                  on desktop instead of counting up through wrong numbers. */}
-              <dd><span className="hx-fact-clip"><span className="hx-rise" style={{ "--d": 8 + i } as React.CSSProperties}>{f.value}</span></span></dd>
-            </div>
-          ))}
-        </dl>
-        </div>
+        <ReportCanvas kpis={kpis} studies={studies} />
       </div>
-      <HeroFlow />
     </section>
   );
 }

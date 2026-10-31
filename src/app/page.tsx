@@ -1,14 +1,13 @@
 import { Hero } from "@/components/sections/Hero";
-import { AboutSection } from "@/components/sections/AboutSection";
+import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
 import { Technologies } from "@/components/sections/Technologies";
-import { Projects } from "@/components/sections/Projects";
-import { CertificationsSection } from "@/components/sections/CertificationsSection";
+import { AboutSection } from "@/components/sections/AboutSection";
 
 /**
- * A short, single-scroll portfolio:
- *   Hero → About → Work Experience → Technologies → Projects →
- *   Certifications → Contact (in the footer band).
+ * A short, single-scroll portfolio, results first:
+ *   Hero (live impact report) → Projects → Work Experience →
+ *   Skills & certifications → About → Contact (in the footer band).
  * Detail lives one click away: case-study pages and the full
  * certifications register.
  */
@@ -16,11 +15,10 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <AboutSection />
+      <Projects />
       <Experience />
       <Technologies />
-      <Projects />
-      <CertificationsSection />
+      <AboutSection />
     </>
   );
 }
