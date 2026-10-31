@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, GraduationCap } from "lucide-react";
+import { resume } from "@/data/resume";
 import { allCredentials, flagshipCredentials } from "@/data/credentials";
 import { Mark } from "@/components/common/Mark";
 
@@ -33,9 +34,13 @@ export function CertificationsSection() {
   const timeline = [...flagshipCredentials].sort((a, b) => monthIndex(a.earned) - monthIndex(b.earned));
 
   return (
-    <div id="certifications" className="sk-certs" aria-labelledby="certs-title">
-        <header className="sk-certs-head reveal">
-          <h3 id="certs-title" className="sk-certs-title">Certifications</h3>
+    <section id="certifications" className="section sx" aria-labelledby="certs-title">
+      <div className="container">
+        <header className="sx-head reveal">
+          <p className="sx-eyebrow">Credentials</p>
+          <h2 id="certs-title" className="sx-title">
+            Certifications &amp; education<span className="sx-dot">.</span>
+          </h2>
           <p className="sx-intro">
             {allCredentials.length} certifications from {issuers} vendors. These seven matter most for
             BI and data-platform work.
@@ -61,7 +66,7 @@ export function CertificationsSection() {
                   </span>
                 )}
                 <p className="ct-code" translate="no">{c.code}</p>
-                <h4 className="ct-name">{c.name}</h4>
+                <h3 className="ct-name">{c.name}</h3>
                 <p className="ct-issuer">{c.issuer}</p>
                 {c.url && (
                   <a href={c.url} target="_blank" rel="noopener noreferrer" className="ct-link">
@@ -79,6 +84,22 @@ export function CertificationsSection() {
             View all {allCredentials.length} credentials <ArrowRight size={16} className="arrow" aria-hidden />
           </Link>
         </div>
-    </div>
+
+        <div className="edu reveal">
+          <h3 className="edu-title">Education</h3>
+          <ul className="edu-list">
+            {resume.education.map((e) => (
+              <li key={e.degree} className="edu-card">
+                <span className="edu-icon" aria-hidden><GraduationCap size={20} strokeWidth={1.8} /></span>
+                <span className="edu-body">
+                  <span className="edu-degree">{e.degree}</span>
+                  <span className="edu-school">{e.school} · {e.years}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
   );
 }
