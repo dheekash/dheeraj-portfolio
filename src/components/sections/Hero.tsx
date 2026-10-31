@@ -1,52 +1,19 @@
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { DownloadButton } from "@/components/common/DownloadButton";
 import { RotatingWords } from "@/components/common/RotatingWords";
 import { Mark } from "@/components/common/Mark";
 import { LinkedinIcon } from "@/components/common/SocialIcons";
 import { profile } from "@/data/profile";
-import { allCredentials } from "@/data/credentials";
-import { caseStudies, metaOf } from "@/data/work";
-import { leadOf, ratioOf } from "@/lib/results";
-import { ReportCanvas, type ReportStudy } from "@/components/sections/ReportCanvas";
-
-/* Short slicer labels for the featured studies. */
-const TAB: Record<string, string> = {
-  "fabric-lakehouse-migration": "Fabric migration",
-  "seller-analytics-platform": "Seller analytics",
-  "manufacturing-analytics-suite": "Rockwool",
-  "real-time-fraud-monitoring": "Fraud monitoring",
-};
-
-const kpis = [
-  { value: "7+", label: "Years" },
-  { value: String(allCredentials.length), label: "Certifications" },
-  { value: "15", label: "Markets" },
-  { value: String(caseStudies.length), label: "Case studies" },
-];
-
-const studies: ReportStudy[] = caseStudies
-  .filter((s) => s.featured)
-  .slice(0, 4)
-  .map((s) => {
-    const [lead, ...more] = s.impact;
-    return {
-      slug: s.slug,
-      tab: TAB[s.slug] ?? s.title,
-      title: s.title,
-      meta: metaOf(s),
-      lead: { ...lead, ratio: ratioOf(lead.value) },
-      more: more.slice(0, 2),
-      mark: <Mark name={leadOf[s.slug]} size={18} />,
-    };
-  });
+import { allCredentials, flagshipCredentials } from "@/data/credentials";
 
 /**
- * The hero as a report page: who and what on the left; on the right a live
- * "impact report" built from the portfolio's own figures, with a slicer
- * across the featured case studies. It shows the work instead of
- * describing it.
+ * First impression: name, headline, experience, the key certifications and
+ * the actions, with the portrait beside them. Numbers and results follow in
+ * the Impact section below.
  */
 export function Hero() {
+  const keyCerts = flagshipCredentials.slice(0, 5);
   return (
     <section id="top" className="rh" aria-labelledby="hero-title">
       <div className="container rh-grid">
@@ -58,11 +25,24 @@ export function Hero() {
           <h1 id="hero-title" className="rh-name">
             Dheeraj Kashyap
           </h1>
-          <p className="rh-role">BI &amp; Analytics Engineer</p>
+          <p className="rh-role">
+            BI &amp; Analytics Engineer <span className="rh-sep" aria-hidden>·</span> 7+ years
+          </p>
           <p className="rh-lede">
             I build reporting that cuts hours to minutes, with{" "}
             <RotatingWords words={["Power BI", "Microsoft Fabric", "Snowflake", "Databricks"]} suffix="." className="hl" />
           </p>
+          <div className="rh-certs">
+            <p className="rh-certs-label">{allCredentials.length} certifications, including</p>
+            <ul className="rh-cert-list" aria-label="Key certifications">
+              {keyCerts.map((c) => (
+                <li key={c.code} className="rh-cert" title={c.name}>
+                  <span translate="no">{c.code}</span>
+                  <span className="sr-only"> {c.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
           <div className="rh-actions">
             <a href="#contact" className="btn btn-primary">
               Contact me <ArrowRight size={16} aria-hidden />
@@ -79,7 +59,16 @@ export function Hero() {
           </div>
         </div>
 
-        <ReportCanvas kpis={kpis} studies={studies} />
+        <div className="rh-photo">
+          <Image
+            src="/images/portrait.webp"
+            alt="Dheeraj Kashyap"
+            width={1000}
+            height={1340}
+            priority
+            sizes="(min-width: 1024px) 420px, 90vw"
+          />
+        </div>
       </div>
     </section>
   );

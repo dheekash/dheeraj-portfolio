@@ -1477,13 +1477,13 @@ span.mark {
 @media (min-width: 1024px) and (min-height: 600px) {
   /* the hero is pulled up 12px under the nav, so it adds that back */
   #top { min-height: calc(100svh + 12px); display: flex; flex-direction: column; justify-content: center; }
-  :is(#about, #experience, #skills, #work, #certifications) {
+  :is(#about, #impact, #experience, #skills, #work, #certifications) {
     min-height: calc(100svh - var(--nav-h) - 16px);
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  :is(#top, #about, #experience, #skills, #work, #certifications) > .container { width: 100%; }
+  :is(#top, #about, #impact, #experience, #skills, #work, #certifications) > .container { width: 100%; }
 }
 
 /* {DK} wordmark: no tile, so no radius or ring; braces follow the theme */
@@ -2608,7 +2608,6 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
    value alone, no borders or shadows), wide-set Archivo headings at 480,
    Inter body, ivory ghost pills, cobalt only on the primary action. The
    portrait lives in About. */
-.sx-portrait { display: none; }
 :root[data-palette="mercury"] {
   --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --fs-hero: clamp(2.75rem, 1rem + 5.4vw, 4.9rem);
@@ -2650,9 +2649,6 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 :root[data-palette="mercury"] .pc-photo .pg-bar.is-after::after { background: var(--ink); }
 :root[data-palette="mercury"] .pc-album { background: transparent; border-top: 1px solid var(--line); }
 
-/* About: the portrait sits above the figures */
-:root[data-palette="mercury"] .sx-portrait { display: block; margin: 0 0 16px; }
-:root[data-palette="mercury"] .sx-portrait img { display: block; width: 100%; height: auto; max-height: 440px; object-fit: cover; object-position: 50% 20%; border-radius: 12px; }
 
 /* Experience: monochrome chevrons; the current role in solid ivory (ink in light mode) */
 :root[data-palette="mercury"] .ht-item { --c: var(--sheet-raised); }
@@ -2902,10 +2898,6 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 @keyframes rc-in { from { opacity: 0.001; transform: translateY(6px); } }
 @keyframes rc-grow { from { transform: scaleX(0); } }
 
-/* ═══ Skills & certifications: one section ════════════════════════════ */
-.sk-certs { margin-top: clamp(56px, 7vw, 96px); }
-.sk-certs-head { display: grid; gap: 8px; max-width: 46rem; }
-.sk-certs-title { margin: 0; font-family: var(--font-display); font-size: var(--fs-2xl); font-weight: 480; font-stretch: 112%; letter-spacing: 0.01em; color: var(--ink); }
 
 /* The rolling tool name gets its own line, one lede line tall, so it
    never sits off the baseline or shows two words at once. */
@@ -2916,11 +2908,37 @@ h1, h2, h3, .sx-title, .fx-name, .fx-hello, .pc-title h3, .sk-title, .ht-role { 
 .rc-kpi, .rc-main, .rc-tile { background: color-mix(in srgb, var(--ink) 5%, var(--sheet)); }
 /* Phones: LinkedIn and GitHub show their names in the 2×2 grid */
 @media (max-width: 767.98px) { .rh-actions .sx-icon-btn { gap: 8px; border-radius: 999px; font-size: var(--fs-sm); font-weight: 600; } }
-/* About (shorter now): portrait and figures side by side on wide screens */
-@media (min-width: 1000px) {
-  :root[data-palette="mercury"] .sx-about-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; align-items: stretch; }
-  :root[data-palette="mercury"] .sx-portrait { margin: 0; }
-  :root[data-palette="mercury"] .sx-portrait img { height: 100%; max-height: 300px; }
-  :root[data-palette="mercury"] .sx-about-side .sx-stats { align-content: space-between; }
-  :root[data-palette="mercury"] .sx-about-side .sx-stat dd { flex-wrap: wrap; row-gap: 2px; }
+
+/* ═══ Hero: portrait, key certifications ═════════════════════════════ */
+@media (min-width: 1024px) { .rh-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); } }
+.rh-sep { margin: 0 6px; color: var(--line-strong); }
+.rh-certs { margin-top: 24px; }
+.rh-certs-label { margin: 0 0 10px; font-size: var(--fs-sm); color: var(--muted-ink); }
+.rh-cert-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.rh-cert {
+  display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 6%, var(--sheet)); font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 600; color: var(--ink);
 }
+.rh-photo { justify-self: end; width: min(100%, 420px); }
+.rh-photo img { display: block; width: 100%; height: auto; max-height: min(70svh, 560px); object-fit: cover; object-position: 50% 18%; border-radius: 20px; }
+@media (max-width: 1023.98px) {
+  .rh-photo { justify-self: start; width: min(100%, 360px); }
+  .rh-photo img { max-height: 420px; }
+}
+
+/* Impact: five KPIs across on wide screens */
+#impact .rc-kpis { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+@media (max-width: 759.98px) { #impact .rc-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+#impact .rc-visual { padding-bottom: 20px; }
+
+/* Education, under the certifications timeline */
+.edu { margin-top: clamp(40px, 5vw, 64px); }
+.edu-title { margin: 0 0 16px; font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 480; font-stretch: 112%; color: var(--ink); }
+.edu-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+.edu-card { display: flex; gap: 14px; align-items: flex-start; padding: 20px; border-radius: 12px; background: var(--sheet); }
+.edu-icon { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: color-mix(in srgb, var(--ink) 7%, var(--sheet)); color: var(--ink); }
+.edu-body { display: grid; gap: 4px; }
+.edu-degree { font-weight: 600; color: var(--ink); line-height: 1.35; }
+.edu-school { font-size: var(--fs-sm); color: var(--muted-ink); }
+/* About runs straight into Contact: one closing "About & contact" stretch */
+#about { min-height: 0; padding-bottom: clamp(32px, 4vw, 56px); }

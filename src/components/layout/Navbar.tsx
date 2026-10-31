@@ -10,9 +10,11 @@ import { CV_PDF, CV_PDF_NAME } from "@/lib/site";
 /* Four destinations. Platform judgment and certifications sit inside
    Expertise's reach on the page; Contact is the primary button. */
 const links = [
+  { id: "impact", label: "Impact", sections: ["impact"] },
   { id: "work", label: "Projects", sections: ["work"] },
   { id: "experience", label: "Experience", sections: ["experience"] },
-  { id: "skills", label: "Skills", sections: ["skills", "certifications"] },
+  { id: "skills", label: "Skills", sections: ["skills"] },
+  { id: "certifications", label: "Certifications", sections: ["certifications"] },
   { id: "about", label: "About", sections: ["about"] },
   { id: "contact", label: "Contact", sections: ["contact"] },
 ];
